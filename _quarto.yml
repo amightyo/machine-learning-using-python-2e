@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research"
+  author: "Norah Jones"
+  date: "8/19/2026"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+
