@@ -13,3 +13,5 @@ Thumbs.db
 !.env.example
 *.tmp
 *.log
+
+**/*.quarto_ipynb
