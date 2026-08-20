@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this book or its accompanying materials, please cite it using the metadata below."
+title: "Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research"
+type: book
+authors:
+  - family-names: "Itauma"
+    given-names: "Itauma"
+version: "2.0.0-dev"
+repository-code: "https://github.com/amightyo/machine-learning-using-python-2e"
+url: "https://github.com/amightyo/machine-learning-using-python-2e"
+license: "CC-BY-4.0"
+keywords:
+  - machine learning
+  - Python
+  - data science
+  - reproducible research
+  - artificial intelligence
+  - health analytics
+  - education analytics

@@ -1,2 +1,15 @@
 /.quarto/
-**/*.quarto_ipynb
+/_book/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+*.tmp
+*.log
