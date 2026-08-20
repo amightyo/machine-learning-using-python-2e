@@ -1,0 +1,75 @@
+# Decision Trees and Random Forests
+
+## Learning Objectives
+- Explain recursive partitioning.
+- Calculate and interpret impurity measures.
+- Control tree complexity.
+- Explain bagging and random forests.
+- Evaluate feature importance cautiously.
+
+## Why This Matters
+Tree-based models capture nonlinearities and interactions with relatively little preprocessing and form the foundation of many powerful ensemble methods.
+
+## Real-World Problem
+Can nonlinear combinations of demographic and behavioral variables improve prediction beyond a linear baseline?
+
+## Decision Trees
+### Recursive Partitioning
+### Splits and Leaves
+### Gini Impurity
+$$
+G = 1 - \sum_k p_k^2
+$$
+### Entropy
+$$
+H = -\sum_k p_k\log_2(p_k)
+$$
+### Tree Depth and Pruning
+
+## Random Forests
+### Bootstrap Aggregation
+### Random Feature Selection
+### Out-of-Bag Samples
+### Bias-Variance Intuition
+
+## Interpretation
+### Impurity-Based Importance
+### Permutation Importance
+### Limits of Feature Importance
+
+## Python Implementation
+### DecisionTreeClassifier and Regressor
+### RandomForestClassifier and Regressor
+
+## Hands-On Practice
+Compare a decision tree and random forest with a linear baseline.
+
+## Common Mistakes
+- Allowing unrestricted tree growth.
+- Treating feature importance as causality.
+- Ignoring correlated predictors.
+- Comparing models on different splits.
+
+## Knowledge Check
+1. What does Gini impurity measure?
+2. Why do random forests decorrelate trees?
+3. What is bagging?
+4. Why can feature importance be misleading?
+
+## Real-World Case Study
+### Predicting an Education Outcome
+Compare interpretable and ensemble tree models using public education data.
+
+## Professor's Challenge
+A random forest outperforms logistic regression by one percentage point but is much harder to explain. Which model should be used?
+
+## Research Extension
+Test whether performance differences persist under repeated or external validation.
+
+## Reproducibility Check
+Record seeds, split rules, hyperparameters, feature definitions, and evaluation protocol.
+
+## Key Takeaways
+- Trees model nonlinear decision boundaries naturally.
+- Ensembles reduce instability but increase complexity.
+- Importance measures require careful interpretation.

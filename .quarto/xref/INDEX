@@ -10,5 +10,59 @@
   },
   "references.qmd": {
     "references.html": "fde54e06"
+  },
+  "part-01-foundations/01-machine-learning.qmd": {
+    "01-machine-learning.html": "9a17489b"
+  },
+  "part-01-foundations/02-python.qmd": {
+    "02-python.html": "a826aa61"
+  },
+  "part-01-foundations/03-statistics-mathematics.qmd": {
+    "03-statistics-mathematics.html": "fd788f0d"
+  },
+  "part-02-workflow/04-ml-problems.qmd": {
+    "04-ml-problems.html": "8efbae69"
+  },
+  "part-02-workflow/05-data-preparation.qmd": {
+    "05-data-preparation.html": "2d3c7b92"
+  },
+  "part-03-supervised/06-linear-regression.qmd": {
+    "06-linear-regression.html": "e6db9394"
+  },
+  "part-03-supervised/07-classification.qmd": {
+    "07-classification.html": "f0ac8bee"
+  },
+  "part-03-supervised/08-trees-random-forests.qmd": {
+    "08-trees-random-forests.html": "e2227a70"
+  },
+  "part-03-supervised/09-support-vector-machines.qmd": {
+    "09-support-vector-machines.html": "ad50bb76"
+  },
+  "part-03-supervised/10-ensemble-learning.qmd": {
+    "10-ensemble-learning.html": "eae952d3"
+  },
+  "part-04-unsupervised/11-clustering.qmd": {
+    "11-clustering.html": "7773fccf"
+  },
+  "part-04-unsupervised/12-dimensionality-reduction.qmd": {
+    "12-dimensionality-reduction.html": "65e2fd5f"
+  },
+  "part-05-modern-ml/13-neural-networks.qmd": {
+    "13-neural-networks.html": "a14028cb"
+  },
+  "part-05-modern-ml/14-natural-language-processing.qmd": {
+    "14-natural-language-processing.html": "1b85b9b4"
+  },
+  "part-05-modern-ml/15-generative-ai.qmd": {
+    "15-generative-ai.html": "660da70b"
+  },
+  "part-06-research/16-model-evaluation.qmd": {
+    "16-model-evaluation.html": "754844bb"
+  },
+  "part-06-research/17-responsible-ml.qmd": {
+    "17-responsible-ml.html": "4916182b"
+  },
+  "part-06-research/18-reproducible-ml.qmd": {
+    "18-reproducible-ml.html": "cb63dfdd"
   }
 }

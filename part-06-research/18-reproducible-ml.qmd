@@ -1,0 +1,87 @@
+# Reproducible Machine Learning and Research Communication
+
+## Learning Objectives
+- Build a reproducible ML project from raw data to publication.
+- Use Git, GitHub, Quarto, and environment specifications.
+- Document data and model provenance.
+- Archive scholarly releases with persistent identifiers.
+- Translate a machine learning analysis into research communication.
+
+## Why This Matters
+A result that cannot be traced, audited, or reproduced is difficult to trust and difficult to build upon.
+
+## Real-World Problem
+Six months after publication, can another researcher reproduce every table, figure, metric, and modeling decision in your study?
+
+## Reproducible Project Design
+### Project Structure
+### Raw Versus Derived Data
+### Scripts and Notebooks
+### Quarto
+### Git and GitHub
+### Environments and Dependencies
+### Randomness and Seeds
+
+## Data Provenance
+### Data Sources
+### Data Dictionaries
+### Licensing
+### Versioning
+### Sensitive Data
+
+## Model Provenance
+### Training Configuration
+### Hyperparameters
+### Evaluation Protocol
+### Artifacts and Model Cards
+
+## Scholarly Communication
+### Tables and Figures
+### Methods Reporting
+### Limitations
+### Repositories
+### CITATION.cff
+### Releases
+### Archiving and DOIs
+
+## From Class Project to Research Product
+### Replication
+### Extension
+### Benchmarking
+### Methodological Contribution
+### Substantive Contribution
+
+## Hands-On Practice
+Package one analysis from the book as a fully reproducible research repository.
+
+## Common Mistakes
+- Manually editing outputs.
+- Losing track of data versions.
+- Failing to capture dependencies.
+- Publishing only a notebook without execution instructions.
+- Confusing an open repository with an archived scholarly release.
+
+## Knowledge Check
+1. What is computational reproducibility?
+2. Why separate raw and derived data?
+3. What role does a software environment play?
+4. Why create tagged releases?
+5. What does a DOI contribute?
+
+## Real-World Case Study
+### From Notebook to Citable Research Artifact
+Transform a chapter project into a documented, versioned, archived research output.
+
+## Professor's Challenge
+A paper's repository contains code but the analysis no longer runs. Is the research reproducible?
+
+## Research Extension
+Develop a replication or reproducibility study around a published machine learning analysis.
+
+## Reproducibility Check
+Clone the project into a clean location and reproduce the complete analysis using only documented instructions.
+
+## Key Takeaways
+- Reproducibility is a design principle, not a final checklist.
+- Version control and environment capture make analytical decisions auditable.
+- Scholarly archiving turns computational work into a persistent research artifact.

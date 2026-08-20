@@ -1,0 +1,73 @@
+# Model Evaluation, Validation, and Hyperparameter Optimization
+
+## Learning Objectives
+- Distinguish training, validation, and test data.
+- Apply cross-validation appropriately.
+- Explain nested cross-validation.
+- Tune hyperparameters without contaminating final evaluation.
+- Quantify uncertainty in model performance.
+
+## Why This Matters
+A sophisticated model evaluated incorrectly can produce less credible evidence than a simple model evaluated rigorously.
+
+## Real-World Problem
+After trying dozens of models, an analyst reports only the best test-set result. Why is that result no longer a trustworthy estimate of generalization?
+
+## Evaluation Foundations
+### Generalization Error
+### Train, Validation, and Test Sets
+### K-Fold Cross-Validation
+### Stratification
+### Grouped and Time-Based Splits
+### Repeated Cross-Validation
+### Nested Cross-Validation
+
+## Hyperparameter Optimization
+### Grid Search
+### Randomized Search
+### Bayesian Optimization
+### Search Budgets
+
+## Comparing Models
+### Baselines
+### Performance Distributions
+### Confidence Intervals
+### Practical Versus Statistical Differences
+### External Validation
+
+## Learning Curves
+### Diagnosing Bias
+### Diagnosing Variance
+
+## Hands-On Practice
+Compare several models under identical repeated cross-validation and preserve an untouched final test set.
+
+## Common Mistakes
+- Repeatedly checking test performance.
+- Selecting folds that violate the data structure.
+- Reporting only the winning configuration.
+- Ignoring uncertainty around metrics.
+
+## Knowledge Check
+1. What is the purpose of a validation set?
+2. Why use nested cross-validation?
+3. When is random K-fold inappropriate?
+4. Why should model comparisons include uncertainty?
+
+## Real-World Case Study
+### A Reproducible Model Benchmark
+Benchmark models on a public dataset using a preregistered evaluation protocol.
+
+## Professor's Challenge
+Model A's mean AUC is 0.842 and Model B's is 0.845. Is Model B meaningfully better?
+
+## Research Extension
+Design a benchmarking paper with robust validation, uncertainty, and external replication.
+
+## Reproducibility Check
+Freeze split logic, folds, search spaces, metrics, seeds, and the final evaluation protocol before inspecting final results.
+
+## Key Takeaways
+- Evaluation design determines the credibility of performance claims.
+- The test set should approximate genuinely unseen data.
+- Hyperparameter optimization must occur inside validation.

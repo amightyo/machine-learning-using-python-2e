@@ -1,0 +1,74 @@
+# Neural Networks and Deep Learning
+
+## Learning Objectives
+- Explain neurons, layers, activations, and loss functions.
+- Describe forward propagation and backpropagation.
+- Explain gradient-based optimization.
+- Build a small neural network.
+- Diagnose overfitting and apply regularization.
+
+## Why This Matters
+Deep learning powers many modern AI systems and provides a foundation for understanding computer vision, NLP, and foundation models.
+
+## Real-World Problem
+When does a neural network offer enough representational advantage to justify greater complexity than classical ML?
+
+## Mathematical Foundations
+### The Artificial Neuron
+$$
+z=w^Tx+b
+$$
+### Activation Functions
+### Network Layers
+### Loss Functions
+### Gradient Descent
+$$
+\theta_{t+1}=\theta_t-\eta\nabla_\theta L(\theta_t)
+$$
+### Backpropagation
+
+## Deep Learning Practice
+### Training and Validation
+### Epochs and Batches
+### Learning Rates
+### Regularization
+### Dropout
+### Early Stopping
+
+## Python Implementation
+### Building a Small Network
+### Training Curves
+### Evaluating Generalization
+
+## Hands-On Practice
+Train a small neural network and compare it with a classical baseline.
+
+## Common Mistakes
+- Using deep learning because it is fashionable.
+- Ignoring baseline models.
+- Evaluating repeatedly on the test set.
+- Failing to monitor validation loss.
+
+## Knowledge Check
+1. What does an activation function do?
+2. What is backpropagation?
+3. What does the learning rate control?
+4. Why can early stopping improve generalization?
+
+## Real-World Case Study
+### Classical ML Versus Neural Networks
+Compare model families on a structured dataset and justify the preferred model.
+
+## Professor's Challenge
+A neural network improves accuracy by 0.5% but requires 50 times more computation. Is it better?
+
+## Research Extension
+Investigate architecture, regularization, or transferability under a rigorous experimental design.
+
+## Reproducibility Check
+Record architecture, initialization, seeds, hardware, software versions, epochs, and stopping criteria.
+
+## Key Takeaways
+- Neural networks learn layered representations through optimization.
+- Deep learning is powerful but not automatically superior.
+- Reproducible training requires unusually careful documentation.

@@ -1,0 +1,69 @@
+# From Research Question to Machine Learning Problem
+
+## Learning Objectives
+- Translate substantive questions into well-defined ML tasks.
+- Define units of analysis, targets, features, and prediction horizons.
+- Distinguish predictive, inferential, descriptive, and causal questions.
+- Develop defensible baseline and evaluation strategies.
+- Identify leakage and target-definition problems before modeling.
+
+## Why This Matters
+Many failed ML projects begin with an algorithm instead of a clearly defined problem.
+
+## Real-World Problem
+A university asks: “Which students will struggle?” Convert this vague request into a precise, ethical, and evaluable machine learning problem.
+
+## Problem Formulation
+### Start With the Decision
+### Define the Unit of Analysis
+### Define the Target
+### Define the Prediction Time
+### Identify Available Features
+### Establish a Baseline
+### Choose Evaluation Criteria
+### Consider Consequences of Errors
+
+## Prediction, Inference, and Causation
+### Predictive Questions
+### Explanatory Questions
+### Causal Questions
+### Descriptive and Exploratory Questions
+
+## Research Design Connection
+### Research Questions
+### Hypotheses
+### Theory and Feature Selection
+### External Validity
+
+## Hands-On Practice
+Rewrite five vague analytics requests as formal ML problem statements.
+
+## Common Mistakes
+- Predicting information that is already known at prediction time.
+- Using future information as a feature.
+- Defining targets inconsistently.
+- Optimizing a metric unrelated to the actual decision.
+
+## Knowledge Check
+1. What is the unit of analysis?
+2. What is a prediction horizon?
+3. How can target leakage occur?
+4. Why should a baseline be established before complex modeling?
+
+## Real-World Case Study
+### Predicting Institutional Retention Outcomes
+Formulate an education analytics problem using public institutional data.
+
+## Professor's Challenge
+A feature dramatically improves performance but is only observed after the outcome occurs. Can it be used?
+
+## Research Extension
+Develop a research question and contribution statement around the case study.
+
+## Reproducibility Check
+Version the problem statement and document target, features, exclusions, timing, and evaluation plan.
+
+## Key Takeaways
+- Problem formulation precedes algorithm selection.
+- Time and data availability determine whether a prediction is legitimate.
+- Evaluation metrics must reflect the decision context.

@@ -1,0 +1,75 @@
+# Data Preparation and Feature Engineering
+
+## Learning Objectives
+- Diagnose data-quality problems.
+- Handle missing, categorical, and scaled features appropriately.
+- Explain data leakage and prevent it with pipelines.
+- Engineer features using substantive knowledge.
+- Build preprocessing workflows with scikit-learn.
+
+## Why This Matters
+Model quality is constrained by data quality, and seemingly harmless preprocessing can invalidate an evaluation if information leaks across data partitions.
+
+## Real-World Problem
+A preprocessing workflow standardizes the entire dataset before the train-test split. Why is the resulting performance estimate potentially optimistic?
+
+## Data Quality
+### Data Types
+### Missing Data
+### Duplicates
+### Outliers
+### Inconsistent Coding
+
+## Feature Engineering
+### Transformations
+### Categorical Encoding
+### Scaling
+### Interaction Features
+### Domain-Informed Features
+### Date and Time Features
+
+## Leakage-Free Preprocessing
+### Train-Test Separation
+### ColumnTransformer
+### Pipelines
+### Fit Versus Transform
+
+## Python Implementation
+### Numeric and Categorical Pipelines
+### Missing-Value Imputation
+### One-Hot Encoding
+### Standardization
+### Integrated Modeling Pipelines
+
+## Hands-On Practice
+Construct a preprocessing pipeline for mixed numeric and categorical data.
+
+## Common Mistakes
+- Preprocessing before splitting.
+- Imputing using information from the test set.
+- Encoding identifiers as meaningful numeric features.
+- Feature engineering using future information.
+
+## Knowledge Check
+1. Why can scaling cause leakage?
+2. When is one-hot encoding appropriate?
+3. What does a Pipeline protect against?
+4. Why should identifiers usually be excluded?
+
+## Real-World Case Study
+### Preparing Public Education Data for Modeling
+Develop a documented feature matrix from an institutional dataset.
+
+## Professor's Challenge
+Two analysts obtain different model results from the same raw data. How would you audit their preprocessing pipelines?
+
+## Research Extension
+Compare alternative missing-data or feature-engineering strategies using nested evaluation.
+
+## Reproducibility Check
+Preserve raw data, script transformations, document exclusions, and keep preprocessing inside the modeling workflow.
+
+## Key Takeaways
+- Preprocessing is part of the model.
+- Leakage can invalidate otherwise sophisticated analyses.
+- Feature engineering should combine technical and domain knowledge.

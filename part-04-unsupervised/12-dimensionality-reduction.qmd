@@ -1,0 +1,67 @@
+# Dimensionality Reduction
+
+## Learning Objectives
+- Explain why dimensionality reduction is useful.
+- Derive the intuition behind PCA.
+- Interpret explained variance and component loadings.
+- Distinguish PCA, factor analysis, t-SNE, and UMAP.
+- Recognize when low-dimensional visualizations can mislead.
+
+## Why This Matters
+High-dimensional data can be redundant, noisy, and difficult to visualize. Dimensionality reduction creates compact representations while introducing important interpretive tradeoffs.
+
+## Real-World Problem
+A dataset contains dozens of correlated indicators. Can a smaller representation preserve the dominant structure?
+
+## PCA Foundations
+### Variance and Covariance
+### Eigenvalues and Eigenvectors
+### Principal Components
+### Explained Variance
+### Loadings and Scores
+### Scaling Before PCA
+
+## Related Methods
+### Factor Analysis
+### t-SNE
+### UMAP
+### Visualization Versus Modeling
+
+## Python Implementation
+### StandardScaler
+### PCA
+### Explained Variance Plots
+### Component Interpretation
+
+## Hands-On Practice
+Reduce a multivariate health or education dataset and compare models before and after reduction.
+
+## Common Mistakes
+- Applying PCA without scaling when scales differ.
+- Interpreting components as causal constructs.
+- Using t-SNE coordinates as ordinary quantitative variables.
+- Choosing dimensions only because a plot looks attractive.
+
+## Knowledge Check
+1. What does the first principal component maximize?
+2. What is explained variance?
+3. How does PCA differ from factor analysis?
+4. Why should t-SNE be interpreted cautiously?
+
+## Real-World Case Study
+### Reducing Correlated Institutional Indicators
+Use PCA to summarize institutional characteristics and examine downstream predictive performance.
+
+## Professor's Challenge
+PCA improves computational efficiency but makes stakeholder interpretation harder. Should it be retained?
+
+## Research Extension
+Evaluate whether latent representations are stable across populations or time.
+
+## Reproducibility Check
+Document preprocessing, component-selection criteria, random seeds for stochastic methods, and interpretation rules.
+
+## Key Takeaways
+- Dimensionality reduction trades original-variable interpretability for compact representation.
+- PCA is grounded in variance and linear algebra.
+- Visualization embeddings require cautious interpretation.

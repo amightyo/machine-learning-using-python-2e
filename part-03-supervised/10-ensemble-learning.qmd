@@ -1,0 +1,66 @@
+# Ensemble Learning and Gradient Boosting
+
+## Learning Objectives
+- Explain why combining models can improve prediction.
+- Distinguish bagging, boosting, and stacking.
+- Describe gradient boosting conceptually.
+- Tune ensemble models responsibly.
+- Compare predictive gains with complexity and interpretability costs.
+
+## Why This Matters
+Ensemble methods are among the strongest general-purpose approaches for structured/tabular data.
+
+## Real-World Problem
+A baseline model performs reasonably well, but stakeholders want better predictions. How much complexity is justified for an incremental performance gain?
+
+## Ensemble Foundations
+### Wisdom of Multiple Models
+### Bagging
+### Boosting
+### Stacking
+
+## Gradient Boosting
+### Sequential Error Correction
+### Learning Rate
+### Number of Estimators
+### Tree Depth
+### Regularization
+### XGBoost, LightGBM, and Related Approaches
+
+## Python Implementation
+### GradientBoosting
+### HistGradientBoosting
+### Comparing Ensembles
+
+## Hands-On Practice
+Benchmark linear, random forest, and gradient-boosting models using identical validation folds.
+
+## Common Mistakes
+- Comparing models under different evaluation protocols.
+- Excessive hyperparameter searching.
+- Reporting only the best result.
+- Ignoring computational cost.
+
+## Knowledge Check
+1. How does boosting differ from bagging?
+2. What does the learning rate control?
+3. Why can boosting overfit?
+4. What is stacking?
+
+## Real-World Case Study
+### Benchmarking Tabular Models
+Conduct a transparent benchmark on a public health or education dataset.
+
+## Professor's Challenge
+After testing 100 model configurations, one improves AUC by 0.003. Is this evidence of a better model?
+
+## Research Extension
+Design a rigorous benchmarking study with repeated or nested validation and uncertainty around performance differences.
+
+## Reproducibility Check
+Preserve all candidate models, search spaces, folds, seeds, runtimes, and selection rules.
+
+## Key Takeaways
+- Ensembles can substantially improve tabular prediction.
+- Fair benchmarking requires identical evaluation conditions.
+- Small gains must be interpreted in context.

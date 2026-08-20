@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Itauma Itauma">
-<meta name="dcterms.date" content="2026-08-19">
 
-<title>Machine Learning Using Python</title>
+<title>12&nbsp; Dimensionality Reduction – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,25 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./part-01-foundations/01-machine-learning.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ef4d8e9faa04af36b84e1866e7343808.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../part-05-modern-ml/13-neural-networks.html" rel="next">
+<link href="../part-04-unsupervised/11-clustering.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ef4d8e9faa04af36b84e1866e7343808.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/12-dimensionality-reduction.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Machine Learning Using Python</a> 
+      <a href="../">Machine Learning Using Python</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -111,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -126,19 +125,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-01-foundations/01-machine-learning.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-01-foundations/01-machine-learning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Machine Learning in the Age of Data and AI</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-01-foundations/02-python.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-01-foundations/02-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Python for Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-01-foundations/03-statistics-mathematics.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-01-foundations/03-statistics-mathematics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistics and Mathematics for Machine Learning</span></span></a>
   </div>
 </li>
@@ -155,13 +154,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-02-workflow/05-data-preparation.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-02-workflow/05-data-preparation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Preparation and Feature Engineering</span></span></a>
   </div>
 </li>
@@ -178,31 +177,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
   </div>
 </li>
@@ -219,13 +218,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
   </div>
 </li>
@@ -242,19 +241,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
   </div>
 </li>
@@ -271,19 +270,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
   </div>
 </li>
@@ -291,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -305,41 +304,59 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">12.1</span> Learning Objectives</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">12.2</span> Why This Matters</a></li>
+  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">12.3</span> Real-World Problem</a></li>
+  <li><a href="#pca-foundations" id="toc-pca-foundations" class="nav-link" data-scroll-target="#pca-foundations"><span class="header-section-number">12.4</span> PCA Foundations</a>
   <ul class="collapse">
-  <li><a href="#about-this-book" id="toc-about-this-book" class="nav-link" data-scroll-target="#about-this-book">About This Book</a></li>
-  <li><a href="#who-this-book-is-for" id="toc-who-this-book-is-for" class="nav-link" data-scroll-target="#who-this-book-is-for">Who This Book Is For</a></li>
-  <li><a href="#second-edition" id="toc-second-edition" class="nav-link" data-scroll-target="#second-edition">Second Edition</a></li>
+  <li><a href="#variance-and-covariance" id="toc-variance-and-covariance" class="nav-link" data-scroll-target="#variance-and-covariance"><span class="header-section-number">12.4.1</span> Variance and Covariance</a></li>
+  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#eigenvalues-and-eigenvectors"><span class="header-section-number">12.4.2</span> Eigenvalues and Eigenvectors</a></li>
+  <li><a href="#principal-components" id="toc-principal-components" class="nav-link" data-scroll-target="#principal-components"><span class="header-section-number">12.4.3</span> Principal Components</a></li>
+  <li><a href="#explained-variance" id="toc-explained-variance" class="nav-link" data-scroll-target="#explained-variance"><span class="header-section-number">12.4.4</span> Explained Variance</a></li>
+  <li><a href="#loadings-and-scores" id="toc-loadings-and-scores" class="nav-link" data-scroll-target="#loadings-and-scores"><span class="header-section-number">12.4.5</span> Loadings and Scores</a></li>
+  <li><a href="#scaling-before-pca" id="toc-scaling-before-pca" class="nav-link" data-scroll-target="#scaling-before-pca"><span class="header-section-number">12.4.6</span> Scaling Before PCA</a></li>
   </ul></li>
+  <li><a href="#related-methods" id="toc-related-methods" class="nav-link" data-scroll-target="#related-methods"><span class="header-section-number">12.5</span> Related Methods</a>
+  <ul class="collapse">
+  <li><a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"><span class="header-section-number">12.5.1</span> Factor Analysis</a></li>
+  <li><a href="#t-sne" id="toc-t-sne" class="nav-link" data-scroll-target="#t-sne"><span class="header-section-number">12.5.2</span> t-SNE</a></li>
+  <li><a href="#umap" id="toc-umap" class="nav-link" data-scroll-target="#umap"><span class="header-section-number">12.5.3</span> UMAP</a></li>
+  <li><a href="#visualization-versus-modeling" id="toc-visualization-versus-modeling" class="nav-link" data-scroll-target="#visualization-versus-modeling"><span class="header-section-number">12.5.4</span> Visualization Versus Modeling</a></li>
+  </ul></li>
+  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">12.6</span> Python Implementation</a>
+  <ul class="collapse">
+  <li><a href="#standardscaler" id="toc-standardscaler" class="nav-link" data-scroll-target="#standardscaler"><span class="header-section-number">12.6.1</span> StandardScaler</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">12.6.2</span> PCA</a></li>
+  <li><a href="#explained-variance-plots" id="toc-explained-variance-plots" class="nav-link" data-scroll-target="#explained-variance-plots"><span class="header-section-number">12.6.3</span> Explained Variance Plots</a></li>
+  <li><a href="#component-interpretation" id="toc-component-interpretation" class="nav-link" data-scroll-target="#component-interpretation"><span class="header-section-number">12.6.4</span> Component Interpretation</a></li>
+  </ul></li>
+  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">12.7</span> Hands-On Practice</a></li>
+  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">12.8</span> Common Mistakes</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">12.9</span> Knowledge Check</a></li>
+  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">12.10</span> Real-World Case Study</a>
+  <ul class="collapse">
+  <li><a href="#reducing-correlated-institutional-indicators" id="toc-reducing-correlated-institutional-indicators" class="nav-link" data-scroll-target="#reducing-correlated-institutional-indicators"><span class="header-section-number">12.10.1</span> Reducing Correlated Institutional Indicators</a></li>
+  </ul></li>
+  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">12.11</span> Professor’s Challenge</a></li>
+  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">12.12</span> Research Extension</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">12.13</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.14</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/12-dimensionality-reduction.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Machine Learning Using Python</h1>
-<p class="subtitle lead">Foundations, Algorithms, Applications, and Reproducible Research</p>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Itauma Itauma </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 19, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -349,23 +366,125 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<section id="about-this-book" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-book">About This Book</h2>
-<p><em>Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research</em> is designed for data enthusiasts, analysts, students, researchers, and professionals who want to develop a deeper understanding of machine learning using Python.</p>
-<p>This Second Edition integrates conceptual foundations, mathematical reasoning, practical programming, real-world applications, responsible machine learning, and reproducible research.</p>
+<section id="learning-objectives" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">12.1</span> Learning Objectives</h2>
+<ul>
+<li>Explain why dimensionality reduction is useful.</li>
+<li>Derive the intuition behind PCA.</li>
+<li>Interpret explained variance and component loadings.</li>
+<li>Distinguish PCA, factor analysis, t-SNE, and UMAP.</li>
+<li>Recognize when low-dimensional visualizations can mislead.</li>
+</ul>
 </section>
-<section id="who-this-book-is-for" class="level2">
-<h2 class="anchored" data-anchor-id="who-this-book-is-for">Who This Book Is For</h2>
-<p>This book is intended for readers who want to move beyond simply fitting machine learning models toward understanding how algorithms work, how models should be evaluated, and how machine learning can be applied responsibly to meaningful real-world problems.</p>
+<section id="why-this-matters" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">12.2</span> Why This Matters</h2>
+<p>High-dimensional data can be redundant, noisy, and difficult to visualize. Dimensionality reduction creates compact representations while introducing important interpretive tradeoffs.</p>
 </section>
-<section id="second-edition" class="level2">
-<h2 class="anchored" data-anchor-id="second-edition">Second Edition</h2>
-<p>This edition substantially expands the first edition with greater emphasis on mathematical foundations, modern machine learning methods, hands-on practice, health and education applications, research design, reproducibility, and responsible artificial intelligence.</p>
+<section id="real-world-problem" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">12.3</span> Real-World Problem</h2>
+<p>A dataset contains dozens of correlated indicators. Can a smaller representation preserve the dominant structure?</p>
+</section>
+<section id="pca-foundations" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="pca-foundations"><span class="header-section-number">12.4</span> PCA Foundations</h2>
+<section id="variance-and-covariance" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="variance-and-covariance"><span class="header-section-number">12.4.1</span> Variance and Covariance</h3>
+</section>
+<section id="eigenvalues-and-eigenvectors" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="eigenvalues-and-eigenvectors"><span class="header-section-number">12.4.2</span> Eigenvalues and Eigenvectors</h3>
+</section>
+<section id="principal-components" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="principal-components"><span class="header-section-number">12.4.3</span> Principal Components</h3>
+</section>
+<section id="explained-variance" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="explained-variance"><span class="header-section-number">12.4.4</span> Explained Variance</h3>
+</section>
+<section id="loadings-and-scores" class="level3" data-number="12.4.5">
+<h3 data-number="12.4.5" class="anchored" data-anchor-id="loadings-and-scores"><span class="header-section-number">12.4.5</span> Loadings and Scores</h3>
+</section>
+<section id="scaling-before-pca" class="level3" data-number="12.4.6">
+<h3 data-number="12.4.6" class="anchored" data-anchor-id="scaling-before-pca"><span class="header-section-number">12.4.6</span> Scaling Before PCA</h3>
+</section>
+</section>
+<section id="related-methods" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="related-methods"><span class="header-section-number">12.5</span> Related Methods</h2>
+<section id="factor-analysis" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="factor-analysis"><span class="header-section-number">12.5.1</span> Factor Analysis</h3>
+</section>
+<section id="t-sne" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="t-sne"><span class="header-section-number">12.5.2</span> t-SNE</h3>
+</section>
+<section id="umap" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="umap"><span class="header-section-number">12.5.3</span> UMAP</h3>
+</section>
+<section id="visualization-versus-modeling" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="visualization-versus-modeling"><span class="header-section-number">12.5.4</span> Visualization Versus Modeling</h3>
+</section>
+</section>
+<section id="python-implementation" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">12.6</span> Python Implementation</h2>
+<section id="standardscaler" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="standardscaler"><span class="header-section-number">12.6.1</span> StandardScaler</h3>
+</section>
+<section id="pca" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">12.6.2</span> PCA</h3>
+</section>
+<section id="explained-variance-plots" class="level3" data-number="12.6.3">
+<h3 data-number="12.6.3" class="anchored" data-anchor-id="explained-variance-plots"><span class="header-section-number">12.6.3</span> Explained Variance Plots</h3>
+</section>
+<section id="component-interpretation" class="level3" data-number="12.6.4">
+<h3 data-number="12.6.4" class="anchored" data-anchor-id="component-interpretation"><span class="header-section-number">12.6.4</span> Component Interpretation</h3>
+</section>
+</section>
+<section id="hands-on-practice" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">12.7</span> Hands-On Practice</h2>
+<p>Reduce a multivariate health or education dataset and compare models before and after reduction.</p>
+</section>
+<section id="common-mistakes" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">12.8</span> Common Mistakes</h2>
+<ul>
+<li>Applying PCA without scaling when scales differ.</li>
+<li>Interpreting components as causal constructs.</li>
+<li>Using t-SNE coordinates as ordinary quantitative variables.</li>
+<li>Choosing dimensions only because a plot looks attractive.</li>
+</ul>
+</section>
+<section id="knowledge-check" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">12.9</span> Knowledge Check</h2>
+<ol type="1">
+<li>What does the first principal component maximize?</li>
+<li>What is explained variance?</li>
+<li>How does PCA differ from factor analysis?</li>
+<li>Why should t-SNE be interpreted cautiously?</li>
+</ol>
+</section>
+<section id="real-world-case-study" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">12.10</span> Real-World Case Study</h2>
+<section id="reducing-correlated-institutional-indicators" class="level3" data-number="12.10.1">
+<h3 data-number="12.10.1" class="anchored" data-anchor-id="reducing-correlated-institutional-indicators"><span class="header-section-number">12.10.1</span> Reducing Correlated Institutional Indicators</h3>
+<p>Use PCA to summarize institutional characteristics and examine downstream predictive performance.</p>
+</section>
+</section>
+<section id="professors-challenge" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">12.11</span> Professor’s Challenge</h2>
+<p>PCA improves computational efficiency but makes stakeholder interpretation harder. Should it be retained?</p>
+</section>
+<section id="research-extension" class="level2" data-number="12.12">
+<h2 data-number="12.12" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">12.12</span> Research Extension</h2>
+<p>Evaluate whether latent representations are stable across populations or time.</p>
+</section>
+<section id="reproducibility-check" class="level2" data-number="12.13">
+<h2 data-number="12.13" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">12.13</span> Reproducibility Check</h2>
+<p>Document preprocessing, component-selection criteria, random seeds for stochastic methods, and interpretation rules.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="12.14">
+<h2 data-number="12.14" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.14</span> Key Takeaways</h2>
+<ul>
+<li>Dimensionality reduction trades original-variable interpretability for compact representation.</li>
+<li>PCA is grounded in variance and linear algebra.</li>
+<li>Visualization embeddings require cautious interpretation.</li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -771,10 +890,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../part-04-unsupervised/11-clustering.html" class="pagination-link" aria-label="Clustering">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./part-01-foundations/01-machine-learning.html" class="pagination-link" aria-label="Machine Learning in the Age of Data and AI">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Machine Learning in the Age of Data and AI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-05-modern-ml/13-neural-networks.html" class="pagination-link" aria-label="Neural Networks and Deep Learning">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

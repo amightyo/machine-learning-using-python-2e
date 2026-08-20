@@ -1,5 +1,15 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+## About This Book
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+*Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research* is designed for data enthusiasts, analysts, students, researchers, and professionals who want to develop a deeper understanding of machine learning using Python.
+
+This Second Edition integrates conceptual foundations, mathematical reasoning, practical programming, real-world applications, responsible machine learning, and reproducible research.
+
+## Who This Book Is For
+
+This book is intended for readers who want to move beyond simply fitting machine learning models toward understanding how algorithms work, how models should be evaluated, and how machine learning can be applied responsibly to meaningful real-world problems.
+
+## Second Edition
+
+This edition substantially expands the first edition with greater emphasis on mathematical foundations, modern machine learning methods, hands-on practice, health and education applications, research design, reproducibility, and responsible artificial intelligence.

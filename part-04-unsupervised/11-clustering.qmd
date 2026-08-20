@@ -1,0 +1,76 @@
+# Clustering
+
+## Learning Objectives
+- Explain the purpose and limitations of clustering.
+- Apply K-means, hierarchical clustering, and DBSCAN.
+- Select and interpret distance measures.
+- Evaluate cluster stability and usefulness.
+- Avoid treating discovered clusters as objective natural categories.
+
+## Why This Matters
+Clustering can reveal structure in unlabeled data, but the resulting groups depend heavily on representation, scaling, distance, and algorithmic assumptions.
+
+## Real-World Problem
+Can institutions, patients, or students be grouped into meaningful profiles without predefined labels?
+
+## Foundations
+### What Is a Cluster?
+### Distance and Similarity
+### Euclidean Distance
+### Feature Scaling
+
+## K-Means
+### Centroids
+### Objective Function
+$$
+J = \sum_{k=1}^{K}\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert^2
+$$
+### Choosing K
+
+## Hierarchical Clustering
+### Linkage
+### Dendrograms
+
+## DBSCAN
+### Density
+### Epsilon and Minimum Samples
+### Noise Points
+
+## Cluster Evaluation
+### Inertia
+### Silhouette Score
+### Stability
+### External and Substantive Validation
+
+## Hands-On Practice
+Cluster institutions or health profiles using multiple algorithms and compare solutions.
+
+## Common Mistakes
+- Clustering unscaled variables.
+- Treating an elbow plot as definitive.
+- Naming clusters without substantive validation.
+- Assuming clusters are stable across samples.
+
+## Knowledge Check
+1. What objective does K-means minimize?
+2. Why does scaling matter?
+3. How does DBSCAN differ from K-means?
+4. What does silhouette score measure?
+
+## Real-World Case Study
+### Institutional Profiles
+Cluster higher-education institutions using public IPEDS or College Scorecard features.
+
+## Professor's Challenge
+Two clustering algorithms produce very different groups. Which result is “correct”?
+
+## Research Extension
+Assess cluster stability across years, samples, or alternative feature representations.
+
+## Reproducibility Check
+Document scaling, distance metrics, algorithm parameters, feature selection, and stability analysis.
+
+## Key Takeaways
+- Clusters are model-dependent representations of structure.
+- Validation must go beyond visual appeal.
+- Substantive interpretation is essential.

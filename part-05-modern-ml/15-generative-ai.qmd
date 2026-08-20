@@ -1,0 +1,78 @@
+# Generative AI and Foundation Models
+
+## Learning Objectives
+- Explain how generative models differ from conventional predictive models.
+- Describe the transformer and next-token prediction at a conceptual level.
+- Explain prompting, embeddings, retrieval, and fine-tuning.
+- Evaluate generative systems beyond anecdotal examples.
+- Identify risks involving hallucination, bias, privacy, and reproducibility.
+
+## Why This Matters
+Foundation models have changed how data scientists write code, analyze text, build interfaces, and design intelligent systems. Their outputs remain probabilistic and require systematic evaluation.
+
+## Real-World Problem
+A university wants to use an LLM to provide research feedback to students. How should usefulness, factuality, consistency, bias, and educational consequences be evaluated?
+
+## Foundations
+### Generative Versus Discriminative Modeling
+### Language Modeling
+### Tokens and Context
+### Transformers and Attention
+### Next-Token Prediction
+### Foundation Models
+
+## Working With Foundation Models
+### Prompting
+### Structured Outputs
+### Embeddings
+### Retrieval-Augmented Generation
+### Fine-Tuning
+### Tool Use and Agents
+
+## Evaluation
+### Factuality
+### Reliability
+### Human Evaluation
+### Task-Based Evaluation
+### Reproducibility
+### Cost and Latency
+
+## Responsible Use
+### Hallucination
+### Bias
+### Privacy
+### Academic Integrity
+### AI-Assisted Coding
+
+## Hands-On Practice
+Design an evaluation framework for a generative-AI application rather than judging it from a few demonstrations.
+
+## Common Mistakes
+- Treating fluent output as factual output.
+- Reporting cherry-picked prompts.
+- Failing to preserve model/version information.
+- Using sensitive data without appropriate safeguards.
+
+## Knowledge Check
+1. What is next-token prediction?
+2. What is retrieval-augmented generation?
+3. Why is generative-AI evaluation difficult?
+4. How can model updates affect reproducibility?
+
+## Real-World Case Study
+### AI-Assisted Research Feedback
+Develop an experimental protocol for evaluating LLM-generated feedback.
+
+## Professor's Challenge
+Two evaluators strongly prefer an LLM's answers, but factual-error rates are higher. Which result should matter more?
+
+## Research Extension
+Develop a controlled study suitable for education, HCI, or applied AI research.
+
+## Reproducibility Check
+Record model provider, model identifier, date, prompts, parameters, retrieval corpus, evaluation rubric, and outputs where permissible.
+
+## Key Takeaways
+- Generative AI requires evaluation as a system, not just a model.
+- Fluency and correctness are different.
+- Reproducibility and responsible use require new documentation practices.

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Itauma Itauma">
-<meta name="dcterms.date" content="2026-08-19">
 
-<title>Machine Learning Using Python</title>
+<title>17&nbsp; Explainable, Fair, and Responsible Machine Learning – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,25 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./part-01-foundations/01-machine-learning.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ef4d8e9faa04af36b84e1866e7343808.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../part-06-research/18-reproducible-ml.html" rel="next">
+<link href="../part-06-research/16-model-evaluation.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ef4d8e9faa04af36b84e1866e7343808.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/17-responsible-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Machine Learning Using Python</a> 
+      <a href="../">Machine Learning Using Python</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -111,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -126,19 +125,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-01-foundations/01-machine-learning.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-01-foundations/01-machine-learning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Machine Learning in the Age of Data and AI</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-01-foundations/02-python.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-01-foundations/02-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Python for Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-01-foundations/03-statistics-mathematics.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-01-foundations/03-statistics-mathematics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistics and Mathematics for Machine Learning</span></span></a>
   </div>
 </li>
@@ -155,13 +154,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-02-workflow/05-data-preparation.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-02-workflow/05-data-preparation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Preparation and Feature Engineering</span></span></a>
   </div>
 </li>
@@ -178,31 +177,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
   </div>
 </li>
@@ -219,13 +218,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
   </div>
 </li>
@@ -242,19 +241,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
   </div>
 </li>
@@ -271,19 +270,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
+  <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
   </div>
 </li>
@@ -291,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -305,41 +304,69 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">17.1</span> Learning Objectives</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">17.2</span> Why This Matters</a></li>
+  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">17.3</span> Real-World Problem</a></li>
+  <li><a href="#explainability" id="toc-explainability" class="nav-link" data-scroll-target="#explainability"><span class="header-section-number">17.4</span> Explainability</a>
   <ul class="collapse">
-  <li><a href="#about-this-book" id="toc-about-this-book" class="nav-link" data-scroll-target="#about-this-book">About This Book</a></li>
-  <li><a href="#who-this-book-is-for" id="toc-who-this-book-is-for" class="nav-link" data-scroll-target="#who-this-book-is-for">Who This Book Is For</a></li>
-  <li><a href="#second-edition" id="toc-second-edition" class="nav-link" data-scroll-target="#second-edition">Second Edition</a></li>
+  <li><a href="#model-transparency" id="toc-model-transparency" class="nav-link" data-scroll-target="#model-transparency"><span class="header-section-number">17.4.1</span> Model Transparency</a></li>
+  <li><a href="#global-versus-local-explanations" id="toc-global-versus-local-explanations" class="nav-link" data-scroll-target="#global-versus-local-explanations"><span class="header-section-number">17.4.2</span> Global Versus Local Explanations</a></li>
+  <li><a href="#permutation-importance" id="toc-permutation-importance" class="nav-link" data-scroll-target="#permutation-importance"><span class="header-section-number">17.4.3</span> Permutation Importance</a></li>
+  <li><a href="#partial-dependence" id="toc-partial-dependence" class="nav-link" data-scroll-target="#partial-dependence"><span class="header-section-number">17.4.4</span> Partial Dependence</a></li>
+  <li><a href="#shap" id="toc-shap" class="nav-link" data-scroll-target="#shap"><span class="header-section-number">17.4.5</span> SHAP</a></li>
+  <li><a href="#limits-of-post-hoc-explanation" id="toc-limits-of-post-hoc-explanation" class="nav-link" data-scroll-target="#limits-of-post-hoc-explanation"><span class="header-section-number">17.4.6</span> Limits of Post-Hoc Explanation</a></li>
   </ul></li>
+  <li><a href="#calibration-and-reliability" id="toc-calibration-and-reliability" class="nav-link" data-scroll-target="#calibration-and-reliability"><span class="header-section-number">17.5</span> Calibration and Reliability</a>
+  <ul class="collapse">
+  <li><a href="#predicted-probability-versus-observed-frequency" id="toc-predicted-probability-versus-observed-frequency" class="nav-link" data-scroll-target="#predicted-probability-versus-observed-frequency"><span class="header-section-number">17.5.1</span> Predicted Probability Versus Observed Frequency</a></li>
+  <li><a href="#calibration-curves" id="toc-calibration-curves" class="nav-link" data-scroll-target="#calibration-curves"><span class="header-section-number">17.5.2</span> Calibration Curves</a></li>
+  <li><a href="#brier-score" id="toc-brier-score" class="nav-link" data-scroll-target="#brier-score"><span class="header-section-number">17.5.3</span> Brier Score</a></li>
+  </ul></li>
+  <li><a href="#fairness" id="toc-fairness" class="nav-link" data-scroll-target="#fairness"><span class="header-section-number">17.6</span> Fairness</a>
+  <ul class="collapse">
+  <li><a href="#subgroup-performance" id="toc-subgroup-performance" class="nav-link" data-scroll-target="#subgroup-performance"><span class="header-section-number">17.6.1</span> Subgroup Performance</a></li>
+  <li><a href="#demographic-parity" id="toc-demographic-parity" class="nav-link" data-scroll-target="#demographic-parity"><span class="header-section-number">17.6.2</span> Demographic Parity</a></li>
+  <li><a href="#equal-opportunity" id="toc-equal-opportunity" class="nav-link" data-scroll-target="#equal-opportunity"><span class="header-section-number">17.6.3</span> Equal Opportunity</a></li>
+  <li><a href="#equalized-odds" id="toc-equalized-odds" class="nav-link" data-scroll-target="#equalized-odds"><span class="header-section-number">17.6.4</span> Equalized Odds</a></li>
+  <li><a href="#calibration-across-groups" id="toc-calibration-across-groups" class="nav-link" data-scroll-target="#calibration-across-groups"><span class="header-section-number">17.6.5</span> Calibration Across Groups</a></li>
+  <li><a href="#fairness-tradeoffs" id="toc-fairness-tradeoffs" class="nav-link" data-scroll-target="#fairness-tradeoffs"><span class="header-section-number">17.6.6</span> Fairness Tradeoffs</a></li>
+  </ul></li>
+  <li><a href="#responsible-ml" id="toc-responsible-ml" class="nav-link" data-scroll-target="#responsible-ml"><span class="header-section-number">17.7</span> Responsible ML</a>
+  <ul class="collapse">
+  <li><a href="#intended-use" id="toc-intended-use" class="nav-link" data-scroll-target="#intended-use"><span class="header-section-number">17.7.1</span> Intended Use</a></li>
+  <li><a href="#misuse" id="toc-misuse" class="nav-link" data-scroll-target="#misuse"><span class="header-section-number">17.7.2</span> Misuse</a></li>
+  <li><a href="#human-oversight" id="toc-human-oversight" class="nav-link" data-scroll-target="#human-oversight"><span class="header-section-number">17.7.3</span> Human Oversight</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation"><span class="header-section-number">17.7.4</span> Documentation</a></li>
+  <li><a href="#model-cards" id="toc-model-cards" class="nav-link" data-scroll-target="#model-cards"><span class="header-section-number">17.7.5</span> Model Cards</a></li>
+  <li><a href="#monitoring-and-drift" id="toc-monitoring-and-drift" class="nav-link" data-scroll-target="#monitoring-and-drift"><span class="header-section-number">17.7.6</span> Monitoring and Drift</a></li>
+  </ul></li>
+  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">17.8</span> Hands-On Practice</a></li>
+  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">17.9</span> Common Mistakes</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">17.10</span> Knowledge Check</a></li>
+  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">17.11</span> Real-World Case Study</a>
+  <ul class="collapse">
+  <li><a href="#responsible-prediction-in-health-or-education" id="toc-responsible-prediction-in-health-or-education" class="nav-link" data-scroll-target="#responsible-prediction-in-health-or-education"><span class="header-section-number">17.11.1</span> Responsible Prediction in Health or Education</a></li>
+  </ul></li>
+  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">17.12</span> Professor’s Challenge</a></li>
+  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">17.13</span> Research Extension</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">17.14</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">17.15</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/17-responsible-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Machine Learning Using Python</h1>
-<p class="subtitle lead">Foundations, Algorithms, Applications, and Reproducible Research</p>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Itauma Itauma </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 19, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -349,23 +376,149 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<section id="about-this-book" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-book">About This Book</h2>
-<p><em>Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research</em> is designed for data enthusiasts, analysts, students, researchers, and professionals who want to develop a deeper understanding of machine learning using Python.</p>
-<p>This Second Edition integrates conceptual foundations, mathematical reasoning, practical programming, real-world applications, responsible machine learning, and reproducible research.</p>
+<section id="learning-objectives" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">17.1</span> Learning Objectives</h2>
+<ul>
+<li>Distinguish global and local explanations.</li>
+<li>Apply feature-importance and explanation methods cautiously.</li>
+<li>Evaluate calibration and subgroup performance.</li>
+<li>Explain common fairness criteria and their tradeoffs.</li>
+<li>Conduct a model-risk assessment appropriate to the application.</li>
+</ul>
 </section>
-<section id="who-this-book-is-for" class="level2">
-<h2 class="anchored" data-anchor-id="who-this-book-is-for">Who This Book Is For</h2>
-<p>This book is intended for readers who want to move beyond simply fitting machine learning models toward understanding how algorithms work, how models should be evaluated, and how machine learning can be applied responsibly to meaningful real-world problems.</p>
+<section id="why-this-matters" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">17.2</span> Why This Matters</h2>
+<p>A model can be accurate overall while failing important populations, providing misleading explanations, or being inappropriate for the decision in which it is embedded.</p>
 </section>
-<section id="second-edition" class="level2">
-<h2 class="anchored" data-anchor-id="second-edition">Second Edition</h2>
-<p>This edition substantially expands the first edition with greater emphasis on mathematical foundations, modern machine learning methods, hands-on practice, health and education applications, research design, reproducibility, and responsible artificial intelligence.</p>
+<section id="real-world-problem" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">17.3</span> Real-World Problem</h2>
+<p>A health model performs well overall but systematically underpredicts risk for one subgroup. Should it be deployed?</p>
+</section>
+<section id="explainability" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="explainability"><span class="header-section-number">17.4</span> Explainability</h2>
+<section id="model-transparency" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="model-transparency"><span class="header-section-number">17.4.1</span> Model Transparency</h3>
+</section>
+<section id="global-versus-local-explanations" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="global-versus-local-explanations"><span class="header-section-number">17.4.2</span> Global Versus Local Explanations</h3>
+</section>
+<section id="permutation-importance" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="permutation-importance"><span class="header-section-number">17.4.3</span> Permutation Importance</h3>
+</section>
+<section id="partial-dependence" class="level3" data-number="17.4.4">
+<h3 data-number="17.4.4" class="anchored" data-anchor-id="partial-dependence"><span class="header-section-number">17.4.4</span> Partial Dependence</h3>
+</section>
+<section id="shap" class="level3" data-number="17.4.5">
+<h3 data-number="17.4.5" class="anchored" data-anchor-id="shap"><span class="header-section-number">17.4.5</span> SHAP</h3>
+</section>
+<section id="limits-of-post-hoc-explanation" class="level3" data-number="17.4.6">
+<h3 data-number="17.4.6" class="anchored" data-anchor-id="limits-of-post-hoc-explanation"><span class="header-section-number">17.4.6</span> Limits of Post-Hoc Explanation</h3>
+</section>
+</section>
+<section id="calibration-and-reliability" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="calibration-and-reliability"><span class="header-section-number">17.5</span> Calibration and Reliability</h2>
+<section id="predicted-probability-versus-observed-frequency" class="level3" data-number="17.5.1">
+<h3 data-number="17.5.1" class="anchored" data-anchor-id="predicted-probability-versus-observed-frequency"><span class="header-section-number">17.5.1</span> Predicted Probability Versus Observed Frequency</h3>
+</section>
+<section id="calibration-curves" class="level3" data-number="17.5.2">
+<h3 data-number="17.5.2" class="anchored" data-anchor-id="calibration-curves"><span class="header-section-number">17.5.2</span> Calibration Curves</h3>
+</section>
+<section id="brier-score" class="level3" data-number="17.5.3">
+<h3 data-number="17.5.3" class="anchored" data-anchor-id="brier-score"><span class="header-section-number">17.5.3</span> Brier Score</h3>
+</section>
+</section>
+<section id="fairness" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="fairness"><span class="header-section-number">17.6</span> Fairness</h2>
+<section id="subgroup-performance" class="level3" data-number="17.6.1">
+<h3 data-number="17.6.1" class="anchored" data-anchor-id="subgroup-performance"><span class="header-section-number">17.6.1</span> Subgroup Performance</h3>
+</section>
+<section id="demographic-parity" class="level3" data-number="17.6.2">
+<h3 data-number="17.6.2" class="anchored" data-anchor-id="demographic-parity"><span class="header-section-number">17.6.2</span> Demographic Parity</h3>
+</section>
+<section id="equal-opportunity" class="level3" data-number="17.6.3">
+<h3 data-number="17.6.3" class="anchored" data-anchor-id="equal-opportunity"><span class="header-section-number">17.6.3</span> Equal Opportunity</h3>
+</section>
+<section id="equalized-odds" class="level3" data-number="17.6.4">
+<h3 data-number="17.6.4" class="anchored" data-anchor-id="equalized-odds"><span class="header-section-number">17.6.4</span> Equalized Odds</h3>
+</section>
+<section id="calibration-across-groups" class="level3" data-number="17.6.5">
+<h3 data-number="17.6.5" class="anchored" data-anchor-id="calibration-across-groups"><span class="header-section-number">17.6.5</span> Calibration Across Groups</h3>
+</section>
+<section id="fairness-tradeoffs" class="level3" data-number="17.6.6">
+<h3 data-number="17.6.6" class="anchored" data-anchor-id="fairness-tradeoffs"><span class="header-section-number">17.6.6</span> Fairness Tradeoffs</h3>
+</section>
+</section>
+<section id="responsible-ml" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="responsible-ml"><span class="header-section-number">17.7</span> Responsible ML</h2>
+<section id="intended-use" class="level3" data-number="17.7.1">
+<h3 data-number="17.7.1" class="anchored" data-anchor-id="intended-use"><span class="header-section-number">17.7.1</span> Intended Use</h3>
+</section>
+<section id="misuse" class="level3" data-number="17.7.2">
+<h3 data-number="17.7.2" class="anchored" data-anchor-id="misuse"><span class="header-section-number">17.7.2</span> Misuse</h3>
+</section>
+<section id="human-oversight" class="level3" data-number="17.7.3">
+<h3 data-number="17.7.3" class="anchored" data-anchor-id="human-oversight"><span class="header-section-number">17.7.3</span> Human Oversight</h3>
+</section>
+<section id="documentation" class="level3" data-number="17.7.4">
+<h3 data-number="17.7.4" class="anchored" data-anchor-id="documentation"><span class="header-section-number">17.7.4</span> Documentation</h3>
+</section>
+<section id="model-cards" class="level3" data-number="17.7.5">
+<h3 data-number="17.7.5" class="anchored" data-anchor-id="model-cards"><span class="header-section-number">17.7.5</span> Model Cards</h3>
+</section>
+<section id="monitoring-and-drift" class="level3" data-number="17.7.6">
+<h3 data-number="17.7.6" class="anchored" data-anchor-id="monitoring-and-drift"><span class="header-section-number">17.7.6</span> Monitoring and Drift</h3>
+</section>
+</section>
+<section id="hands-on-practice" class="level2" data-number="17.8">
+<h2 data-number="17.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">17.8</span> Hands-On Practice</h2>
+<p>Audit a classifier for calibration, subgroup performance, and explanation stability.</p>
+</section>
+<section id="common-mistakes" class="level2" data-number="17.9">
+<h2 data-number="17.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">17.9</span> Common Mistakes</h2>
+<ul>
+<li>Treating SHAP values as causal effects.</li>
+<li>Reporting only aggregate performance.</li>
+<li>Assuming removing protected variables removes bias.</li>
+<li>Choosing a fairness metric without considering context.</li>
+</ul>
+</section>
+<section id="knowledge-check" class="level2" data-number="17.10">
+<h2 data-number="17.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">17.10</span> Knowledge Check</h2>
+<ol type="1">
+<li>How do global and local explanations differ?</li>
+<li>What is calibration?</li>
+<li>Why can fairness criteria conflict?</li>
+<li>Why does removing a protected attribute not guarantee fairness?</li>
+</ol>
+</section>
+<section id="real-world-case-study" class="level2" data-number="17.11">
+<h2 data-number="17.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">17.11</span> Real-World Case Study</h2>
+<section id="responsible-prediction-in-health-or-education" class="level3" data-number="17.11.1">
+<h3 data-number="17.11.1" class="anchored" data-anchor-id="responsible-prediction-in-health-or-education"><span class="header-section-number">17.11.1</span> Responsible Prediction in Health or Education</h3>
+<p>Conduct a structured model audit and document intended use and limitations.</p>
+</section>
+</section>
+<section id="professors-challenge" class="level2" data-number="17.12">
+<h2 data-number="17.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">17.12</span> Professor’s Challenge</h2>
+<p>The most accurate model has the largest subgroup disparity. What evidence and stakeholder input are needed to decide what to do?</p>
+</section>
+<section id="research-extension" class="level2" data-number="17.13">
+<h2 data-number="17.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">17.13</span> Research Extension</h2>
+<p>Develop a fairness, calibration, or explainability study with substantive domain relevance.</p>
+</section>
+<section id="reproducibility-check" class="level2" data-number="17.14">
+<h2 data-number="17.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">17.14</span> Reproducibility Check</h2>
+<p>Document group definitions, metrics, thresholds, explanation settings, software versions, and all audit decisions.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="17.15">
+<h2 data-number="17.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">17.15</span> Key Takeaways</h2>
+<ul>
+<li>Accuracy is necessary but not sufficient for responsible ML.</li>
+<li>Explanations are model-dependent and not automatically causal.</li>
+<li>Fairness requires explicit normative and technical choices.</li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -771,10 +924,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../part-06-research/16-model-evaluation.html" class="pagination-link" aria-label="Model Evaluation, Validation, and Hyperparameter Optimization">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./part-01-foundations/01-machine-learning.html" class="pagination-link" aria-label="Machine Learning in the Age of Data and AI">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Machine Learning in the Age of Data and AI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-06-research/18-reproducible-ml.html" class="pagination-link" aria-label="Reproducible Machine Learning and Research Communication">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

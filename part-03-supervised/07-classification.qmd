@@ -1,0 +1,79 @@
+# Classification and Logistic Regression
+
+## Learning Objectives
+- Formulate binary and multiclass classification problems.
+- Explain logistic regression mathematically.
+- Interpret predicted probabilities and odds.
+- Evaluate classifiers using threshold-dependent and threshold-independent metrics.
+- Select decision thresholds based on real-world costs.
+
+## Why This Matters
+Classification models frequently influence high-stakes decisions. Accuracy alone rarely captures whether those decisions are useful or safe.
+
+## Real-World Problem
+A health screening model identifies individuals at elevated risk. Which is more consequential: a false positive or a false negative?
+
+## Conceptual Foundations
+### Classification Problems
+### Probabilities, Classes, and Thresholds
+### Logistic Regression
+
+## Mathematical Foundations
+### The Logistic Function
+$$
+P(Y=1|X)=\frac{1}{1+e^{-z}}
+$$
+### Log-Odds
+$$
+\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1x_1+\cdots+\beta_px_p
+$$
+### Maximum Likelihood and Log Loss
+
+## Evaluation
+### Confusion Matrix
+### Accuracy
+### Sensitivity and Specificity
+### Precision and Recall
+### F1 Score
+### ROC and AUC
+### Precision-Recall Curves
+### Calibration
+### Threshold Selection
+
+## Python Implementation
+### LogisticRegression
+### Predicted Probabilities
+### Classification Metrics
+
+## Hands-On Practice
+Build and evaluate a binary classifier using a public health dataset.
+
+## Common Mistakes
+- Using accuracy with severe class imbalance.
+- Treating 0.50 as an automatically optimal threshold.
+- Interpreting predicted probabilities as causal effects.
+- Evaluating on data used for model selection.
+
+## Knowledge Check
+1. What does logistic regression model?
+2. How do sensitivity and specificity differ?
+3. When is PR-AUC especially useful?
+4. Why does threshold choice depend on context?
+
+## Real-World Case Study
+### Health Risk Classification
+Compare logistic regression with a nonlinear classifier and assess discrimination and calibration.
+
+## Professor's Challenge
+Model A has higher ROC-AUC, but Model B is better calibrated and identifies more true cases at the operational threshold. Which model should be deployed?
+
+## Research Extension
+Investigate subgroup performance or temporal validation as a publishable extension.
+
+## Reproducibility Check
+Document class definitions, prevalence, splits, thresholds, metrics, and calibration methods.
+
+## Key Takeaways
+- Classification is fundamentally about uncertainty and decisions.
+- No single metric is sufficient for every classification problem.
+- Thresholds should reflect consequences, not convenience.

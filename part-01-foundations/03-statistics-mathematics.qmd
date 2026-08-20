@@ -1,0 +1,79 @@
+# Statistics and Mathematics for Machine Learning
+
+## Learning Objectives
+- Explain the statistical concepts most frequently used in machine learning.
+- Work with vectors, matrices, probabilities, expectations, and variance.
+- Interpret covariance and correlation.
+- Explain derivatives, gradients, and optimization conceptually.
+- Connect probability and linear algebra to ML algorithms.
+
+## Why This Matters
+Machine learning algorithms encode mathematical assumptions. Understanding those assumptions makes it easier to diagnose models, choose methods, and interpret results.
+
+## Real-World Problem
+Two predictors are strongly correlated and a model's coefficients become unstable. What mathematical and statistical concepts explain the problem?
+
+## Probability and Statistics
+### Random Variables
+### Probability Distributions
+### Expected Value
+### Variance and Standard Deviation
+### Covariance and Correlation
+### Conditional Probability
+### Bayes' Theorem
+### Sampling and Sampling Variability
+### Confidence Intervals and Hypothesis Tests
+### Association Versus Causation
+
+## Linear Algebra
+### Scalars, Vectors, and Matrices
+### Dot Products
+### Matrix Multiplication
+### Transpose and Inverse
+### Eigenvalues and Eigenvectors
+
+## Calculus and Optimization
+### Functions and Slopes
+### Derivatives
+### Partial Derivatives
+### Gradients
+### Gradient Descent
+
+## Mathematical Connection to Machine Learning
+### Loss Functions
+### Maximum Likelihood
+### Regularization
+
+## Hands-On Practice
+Use Python to calculate descriptive statistics, correlations, matrix operations, and a simple gradient-descent update.
+
+## Common Mistakes
+- Treating correlation as causation.
+- Assuming statistical significance implies predictive usefulness.
+- Ignoring scale when distance is important.
+- Applying formulas without understanding assumptions.
+
+## Knowledge Check
+1. What does covariance measure?
+2. How is correlation different from covariance?
+3. What does a gradient represent?
+4. Why are eigenvectors important in PCA?
+5. What is conditional probability?
+
+## Real-World Case Study
+### Understanding Health Risk Variables
+Explore relationships among demographic, behavioral, and biometric variables in a public health dataset.
+
+## Professor's Challenge
+A variable is statistically significant but adds almost no out-of-sample predictive performance. Should it remain in a predictive model?
+
+## Research Extension
+Formulate a study comparing inferential and predictive conclusions from the same dataset.
+
+## Reproducibility Check
+Record transformations, statistical assumptions, and all computational choices.
+
+## Key Takeaways
+- Statistics, linear algebra, probability, and optimization form the language of machine learning.
+- Mathematical understanding improves model selection and diagnosis.
+- Predictive and inferential usefulness are not identical.

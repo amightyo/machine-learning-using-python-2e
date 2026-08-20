@@ -1,0 +1,353 @@
+# Linear Regression
+
+## Learning Objectives
+
+By the end of this chapter, you should be able to:
+
+- Explain the role of linear regression in predictive modeling.
+- Distinguish simple linear regression from multiple linear regression.
+- Interpret regression coefficients in context.
+- Explain the assumptions underlying ordinary least squares regression.
+- Derive and interpret common regression evaluation metrics.
+- Build a reproducible regression workflow in Python.
+- Diagnose common modeling problems such as nonlinearity, multicollinearity, heteroscedasticity, and influential observations.
+- Compare predictive performance across alternative regression models.
+- Connect regression modeling to real-world research questions.
+
+## Why This Matters
+
+Linear regression is one of the foundational algorithms in statistics and machine learning. Although modern machine learning includes highly complex models, linear regression remains valuable because it is interpretable, computationally efficient, and useful as a benchmark against which more complex models can be evaluated.
+
+## Real-World Problem
+
+Suppose a public health researcher wants to predict systolic blood pressure using demographic, behavioral, and anthropometric characteristics.
+
+Questions might include:
+
+- Which variables are most strongly associated with systolic blood pressure?
+- How accurately can blood pressure be predicted?
+- Does a more complex model substantially outperform linear regression?
+- Are prediction errors larger for some population subgroups than others?
+
+Throughout this chapter, we will use problems like this to connect mathematical foundations with machine learning practice.
+
+## Conceptual Foundations
+
+### What Is Regression?
+
+### Prediction Versus Explanation
+
+### Simple Linear Regression
+
+### Multiple Linear Regression
+
+## Mathematical Foundations
+
+### The Linear Regression Model
+
+For a single predictor:
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \epsilon_i
+$$
+
+For multiple predictors:
+
+$$
+y_i =
+\beta_0
++
+\beta_1x_{i1}
++
+\beta_2x_{i2}
++
+\cdots
++
+\beta_px_{ip}
++
+\epsilon_i
+$$
+
+where:
+
+- $y_i$ is the observed outcome,
+- $\beta_0$ is the intercept,
+- $\beta_j$ represents the effect associated with predictor $j$,
+- $x_{ij}$ is the value of predictor $j$ for observation $i$,
+- $\epsilon_i$ represents unexplained variation.
+
+### Ordinary Least Squares
+
+The ordinary least squares estimator minimizes the residual sum of squares:
+
+$$
+RSS =
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+$$
+
+In matrix notation:
+
+$$
+\hat{\boldsymbol{\beta}}
+=
+(X^\top X)^{-1}X^\top y
+$$
+
+### Loss Functions
+
+#### Mean Squared Error
+
+$$
+MSE =
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+$$
+
+#### Root Mean Squared Error
+
+$$
+RMSE =
+\sqrt{
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+}
+$$
+
+#### Mean Absolute Error
+
+$$
+MAE =
+\frac{1}{n}
+\sum_{i=1}^{n}
+|y_i-\hat{y}_i|
+$$
+
+#### Coefficient of Determination
+
+$$
+R^2
+=
+1-
+\frac{
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2
+}{
+\sum_{i=1}^{n}
+(y_i-\bar{y})^2
+}
+$$
+
+## Assumptions and Statistical Foundations
+
+### Linearity
+
+### Independence
+
+### Constant Variance
+
+### Normally Distributed Errors
+
+### Multicollinearity
+
+### Statistical Inference Versus Predictive Modeling
+
+## Python Implementation
+
+### Required Libraries
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+```
+
+### Loading the Data
+
+### Exploratory Data Analysis
+
+### Creating Training and Test Sets
+
+### Fitting the Model
+
+### Generating Predictions
+
+## Understanding the Output
+
+### Interpreting the Intercept
+
+### Interpreting Regression Coefficients
+
+### Interpreting Prediction Error
+
+## Model Diagnostics
+
+### Residual Analysis
+
+### Outliers and Influential Observations
+
+### Multicollinearity
+
+### Data Leakage
+
+## Improving the Model
+
+### Polynomial Features
+
+### Ridge Regression
+
+### Lasso Regression
+
+### Elastic Net
+
+## Evaluating Predictive Performance
+
+### Training Error Versus Test Error
+
+### Cross-Validation
+
+### Benchmark Models
+
+## Practitioner Track
+
+Focus on:
+
+- fitting the model,
+- generating predictions,
+- evaluating test-set performance,
+- building reproducible pipelines,
+- comparing linear regression with stronger predictive models.
+
+## Researcher Track
+
+Focus additionally on:
+
+- assumptions,
+- sampling,
+- coefficient uncertainty,
+- variable selection,
+- model specification,
+- subgroup performance,
+- interpretation of findings,
+- reproducibility.
+
+## Hands-On Practice
+
+### Practice 1 — Build a Baseline Model
+
+Fit a linear regression model using a real dataset and report:
+
+- MAE,
+- RMSE,
+- $R^2$,
+- residual behavior,
+- the strongest predictors.
+
+### Practice 2 — Compare Models
+
+Compare:
+
+1. ordinary least squares,
+2. Ridge regression,
+3. Lasso regression.
+
+Use cross-validation to determine whether regularization improves predictive performance.
+
+## Common Mistakes
+
+- Evaluating the model only on training data.
+- Interpreting association as causation.
+- Ignoring nonlinearity.
+- Performing preprocessing before separating training and test data.
+- Using $R^2$ as the only evaluation metric.
+- Removing outliers without substantive justification.
+- Selecting predictors solely because they are statistically significant.
+
+## Knowledge Check
+
+1. What does the slope coefficient represent in a simple linear regression model?
+2. Why can training-set performance provide an overly optimistic assessment of a model?
+3. What is the difference between RMSE and MAE?
+4. What does an $R^2$ value of 0.70 mean?
+5. Why can multicollinearity make coefficient interpretation difficult?
+6. Why does strong predictive performance not establish causation?
+
+## Real-World Case Study
+
+### Predicting a Health Outcome
+
+Develop a regression model using a publicly available health dataset.
+
+Your analysis should include:
+
+1. a clearly stated prediction problem,
+2. data preparation,
+3. exploratory analysis,
+4. model development,
+5. test-set evaluation,
+6. interpretation,
+7. diagnostics,
+8. reproducibility documentation.
+
+## Professor's Challenge
+
+A linear regression model produces:
+
+$$
+R^2 = 0.81
+$$
+
+on the training data but:
+
+$$
+R^2 = 0.54
+$$
+
+on the test data.
+
+A colleague claims:
+
+> “The model explains 81% of the variation, so it is an excellent model.”
+
+Critically evaluate this claim.
+
+What additional evidence would you require before recommending the model for decision-making?
+
+## Research Extension
+
+Transform the chapter case study into a potential research project.
+
+Consider:
+
+- What is the substantive research gap?
+- What population is being studied?
+- Which predictors are theoretically justified?
+- What alternative algorithms should be benchmarked?
+- How will predictive uncertainty be evaluated?
+- Will model performance differ across demographic groups?
+- What contribution could make the study publishable?
+
+## Reproducibility Check
+
+Before completing this chapter, verify that:
+
+- the analysis runs from beginning to end,
+- random seeds are documented,
+- data sources are cited,
+- preprocessing occurs inside the modeling workflow where appropriate,
+- the test set has not influenced model development,
+- software dependencies are documented.
+
+## Key Takeaways
+
+- Linear regression remains an important baseline machine learning algorithm.
+- Prediction and statistical inference are related but distinct objectives.
+- Model evaluation should focus on unseen data.
+- Mathematical understanding helps identify when a model is inappropriate.
+- Reproducible workflows are essential for credible machine learning research.

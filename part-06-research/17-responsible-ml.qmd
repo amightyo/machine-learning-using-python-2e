@@ -1,0 +1,76 @@
+# Explainable, Fair, and Responsible Machine Learning
+
+## Learning Objectives
+- Distinguish global and local explanations.
+- Apply feature-importance and explanation methods cautiously.
+- Evaluate calibration and subgroup performance.
+- Explain common fairness criteria and their tradeoffs.
+- Conduct a model-risk assessment appropriate to the application.
+
+## Why This Matters
+A model can be accurate overall while failing important populations, providing misleading explanations, or being inappropriate for the decision in which it is embedded.
+
+## Real-World Problem
+A health model performs well overall but systematically underpredicts risk for one subgroup. Should it be deployed?
+
+## Explainability
+### Model Transparency
+### Global Versus Local Explanations
+### Permutation Importance
+### Partial Dependence
+### SHAP
+### Limits of Post-Hoc Explanation
+
+## Calibration and Reliability
+### Predicted Probability Versus Observed Frequency
+### Calibration Curves
+### Brier Score
+
+## Fairness
+### Subgroup Performance
+### Demographic Parity
+### Equal Opportunity
+### Equalized Odds
+### Calibration Across Groups
+### Fairness Tradeoffs
+
+## Responsible ML
+### Intended Use
+### Misuse
+### Human Oversight
+### Documentation
+### Model Cards
+### Monitoring and Drift
+
+## Hands-On Practice
+Audit a classifier for calibration, subgroup performance, and explanation stability.
+
+## Common Mistakes
+- Treating SHAP values as causal effects.
+- Reporting only aggregate performance.
+- Assuming removing protected variables removes bias.
+- Choosing a fairness metric without considering context.
+
+## Knowledge Check
+1. How do global and local explanations differ?
+2. What is calibration?
+3. Why can fairness criteria conflict?
+4. Why does removing a protected attribute not guarantee fairness?
+
+## Real-World Case Study
+### Responsible Prediction in Health or Education
+Conduct a structured model audit and document intended use and limitations.
+
+## Professor's Challenge
+The most accurate model has the largest subgroup disparity. What evidence and stakeholder input are needed to decide what to do?
+
+## Research Extension
+Develop a fairness, calibration, or explainability study with substantive domain relevance.
+
+## Reproducibility Check
+Document group definitions, metrics, thresholds, explanation settings, software versions, and all audit decisions.
+
+## Key Takeaways
+- Accuracy is necessary but not sufficient for responsible ML.
+- Explanations are model-dependent and not automatically causal.
+- Fairness requires explicit normative and technical choices.

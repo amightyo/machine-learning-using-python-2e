@@ -2,24 +2,61 @@ project:
   type: book
 
 book:
-  title: "Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research"
-  author: "Norah Jones"
-  date: "8/19/2026"
+  title: "Machine Learning Using Python"
+  subtitle: "Foundations, Algorithms, Applications, and Reproducible Research"
+  author: "Itauma Itauma"
+  date: today
+
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+
+    - part: "Part I — Foundations"
+      chapters:
+        - part-01-foundations/01-machine-learning.qmd
+        - part-01-foundations/02-python.qmd
+        - part-01-foundations/03-statistics-mathematics.qmd
+
+    - part: "Part II — The Machine Learning Workflow"
+      chapters:
+        - part-02-workflow/04-ml-problems.qmd
+        - part-02-workflow/05-data-preparation.qmd
+
+    - part: "Part III — Supervised Learning"
+      chapters:
+        - part-03-supervised/06-linear-regression.qmd
+        - part-03-supervised/07-classification.qmd
+        - part-03-supervised/08-trees-random-forests.qmd
+        - part-03-supervised/09-support-vector-machines.qmd
+        - part-03-supervised/10-ensemble-learning.qmd
+
+    - part: "Part IV — Unsupervised Learning"
+      chapters:
+        - part-04-unsupervised/11-clustering.qmd
+        - part-04-unsupervised/12-dimensionality-reduction.qmd
+
+    - part: "Part V — Modern Machine Learning"
+      chapters:
+        - part-05-modern-ml/13-neural-networks.qmd
+        - part-05-modern-ml/14-natural-language-processing.qmd
+        - part-05-modern-ml/15-generative-ai.qmd
+
+    - part: "Part VI — Reliable and Research-Ready Machine Learning"
+      chapters:
+        - part-06-research/16-model-evaluation.qmd
+        - part-06-research/17-responsible-ml.qmd
+        - part-06-research/18-reproducible-ml.qmd
+
     - references.qmd
 
 bibliography: references.bib
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: cosmo
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+    number-sections: true
+
   pdf:
     documentclass: scrreprt
-
-
-

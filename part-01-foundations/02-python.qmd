@@ -1,0 +1,72 @@
+# Python for Machine Learning
+
+## Learning Objectives
+- Configure a reproducible Python environment for machine learning.
+- Work with NumPy arrays and pandas DataFrames.
+- Visualize data for exploratory analysis.
+- Use scikit-learn's estimator and pipeline APIs.
+- Organize machine learning code for reproducibility.
+
+## Why This Matters
+Reliable machine learning depends on reliable computational workflows. Python provides a mature ecosystem for data manipulation, visualization, statistical modeling, machine learning, and deep learning.
+
+## Real-World Problem
+A colleague sends you a notebook that worked six months ago but no longer runs. How can environments, dependency management, version control, and reproducible code prevent this problem?
+
+## Conceptual Foundations
+### Python as a Data Science Language
+### Scripts, Notebooks, and Quarto
+### Objects, Functions, and Modules
+### NumPy
+### pandas
+### Visualization
+### scikit-learn
+### Environments and Dependencies
+### Git and GitHub
+
+## Python Implementation
+### Inspecting the Environment
+### Loading and Inspecting Data
+### Selecting and Transforming Variables
+### Visualization
+### A Minimal scikit-learn Model
+### Pipelines
+
+## Practitioner Track
+Develop fluency with the core tools needed to build ML workflows.
+
+## Researcher Track
+Emphasize computational provenance, environment capture, deterministic execution, and auditable analysis.
+
+## Hands-On Practice
+Create a small reproducible analysis that loads a public dataset, summarizes it, visualizes key variables, and fits a baseline model.
+
+## Common Mistakes
+- Installing packages into uncontrolled environments.
+- Hard-coding local file paths.
+- Mixing data cleaning and modeling without documentation.
+- Failing to record package versions.
+
+## Knowledge Check
+1. What problem does a virtual environment solve?
+2. Why are pipelines useful?
+3. How do NumPy and pandas differ?
+4. Why should file paths be portable?
+
+## Real-World Case Study
+### Reproducing an Analysis on Another Computer
+Package an analysis so that another researcher can clone the repository and reproduce the results.
+
+## Professor's Challenge
+Your model gives different results on two computers. Develop a systematic debugging plan.
+
+## Research Extension
+Evaluate reproducibility practices in a published open-source machine learning project.
+
+## Reproducibility Check
+Verify relative paths, dependencies, seeds, data provenance, and a clean end-to-end render.
+
+## Key Takeaways
+- Reproducibility is part of technical competence.
+- Python's ML ecosystem is strongest when tools are integrated into a disciplined workflow.
+- Portable code reduces dependence on individual analysts.

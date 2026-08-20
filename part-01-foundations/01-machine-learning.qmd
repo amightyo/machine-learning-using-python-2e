@@ -1,0 +1,76 @@
+# Machine Learning in the Age of Data and AI
+
+## Learning Objectives
+- Define machine learning and distinguish it from related areas of artificial intelligence.
+- Differentiate supervised, unsupervised, semi-supervised, and reinforcement learning.
+- Distinguish prediction, explanation, inference, and decision-making objectives.
+- Describe the end-to-end machine learning lifecycle.
+- Identify opportunities and limitations of machine learning in real-world settings.
+
+## Why This Matters
+Machine learning now supports decisions across health, education, finance, science, business, and public policy. Effective data scientists need more than the ability to call an algorithm: they must understand what problem is being solved, what evidence a model provides, and when machine learning is inappropriate.
+
+## Real-World Problem
+Consider a university seeking to identify students who may need additional academic support. What can a predictive model legitimately tell decision-makers, and what can it not tell them?
+
+## Conceptual Foundations
+### Artificial Intelligence, Machine Learning, and Data Science
+### What Does It Mean for a Machine to Learn?
+### Supervised Learning
+### Unsupervised Learning
+### Semi-Supervised and Self-Supervised Learning
+### Reinforcement Learning
+### Deep Learning and Foundation Models
+### Prediction Versus Explanation
+### Machine Learning as an Experimental Process
+
+## Mathematical and Statistical Foundations
+### Inputs, Outputs, Features, and Targets
+### Functions and Models
+### Loss and Objective Functions
+### Generalization
+### Bias and Variance
+
+## Python Connection
+### The Python Machine Learning Ecosystem
+### A First scikit-learn Workflow
+
+## Practitioner Track
+Focus on recognizing ML problem types, selecting appropriate workflows, and interpreting model outputs.
+
+## Researcher Track
+Focus additionally on research questions, generalization, benchmarking, uncertainty, reproducibility, and scientific contribution.
+
+## Hands-On Practice
+Classify a collection of real-world problems by learning type, target, unit of analysis, and appropriate evaluation strategy.
+
+## Common Mistakes
+- Treating every data problem as a machine learning problem.
+- Confusing prediction with causation.
+- Choosing an algorithm before defining the problem.
+- Reporting accuracy without considering the decision context.
+
+## Knowledge Check
+1. How does supervised learning differ from unsupervised learning?
+2. What is generalization?
+3. Why does prediction not establish causation?
+4. When might a simple model be preferable to a complex model?
+
+## Real-World Case Study
+### Student Success as a Machine Learning Problem
+Formulate a student-success problem using a public education dataset and identify the target, predictors, unit of analysis, risks, and evaluation strategy.
+
+## Professor's Challenge
+A model predicts student non-retention with 90% accuracy. Is that enough evidence to deploy it? Explain what else you would need to know.
+
+## Research Extension
+Identify a substantive gap that could transform the case study from a classroom prediction exercise into a research contribution.
+
+## Reproducibility Check
+Document the problem definition, data source, target definition, assumptions, and intended use before modeling begins.
+
+## Key Takeaways
+- Machine learning is a problem-solving framework, not merely a collection of algorithms.
+- Prediction, inference, and causation answer different questions.
+- Generalization to unseen data is central to machine learning.
+- Responsible modeling begins before code is written.

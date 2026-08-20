@@ -1,0 +1,72 @@
+# Natural Language Processing
+
+## Learning Objectives
+- Explain how text can be represented computationally.
+- Build text-classification pipelines.
+- Compare bag-of-words, TF-IDF, and embeddings.
+- Explain the intuition behind transformers.
+- Evaluate NLP models responsibly.
+
+## Why This Matters
+A large share of human knowledge is stored as text. NLP enables machine learning with documents, responses, reports, and other unstructured language data.
+
+## Real-World Problem
+Can open-ended student responses or health narratives be analyzed reliably without reducing nuanced language to misleading labels?
+
+## Text Representation
+### Tokenization
+### Bag of Words
+### TF-IDF
+### N-Grams
+### Word and Document Embeddings
+
+## Modeling Text
+### Naive Bayes
+### Logistic Regression
+### Linear SVM
+### Neural Representations
+
+## Transformers
+### Attention
+### Contextual Embeddings
+### Pretrained Language Models
+### Fine-Tuning and Retrieval
+
+## Evaluation
+### Classification Metrics
+### Data Leakage in Text
+### Domain Shift
+### Human Evaluation
+
+## Hands-On Practice
+Build a reproducible text classifier and compare sparse and embedding-based representations.
+
+## Common Mistakes
+- Leakage from duplicated or related documents.
+- Random splitting when time or source matters.
+- Ignoring class and language imbalance.
+- Treating model-generated labels as ground truth.
+
+## Knowledge Check
+1. What does TF-IDF represent?
+2. How are contextual embeddings different from bag-of-words features?
+3. What problem does attention address?
+4. Why can random splitting inflate NLP performance?
+
+## Real-World Case Study
+### Analyzing Educational Text
+Develop a research-safe NLP workflow using a publicly available text corpus.
+
+## Professor's Challenge
+An automated text classifier agrees with human coders 85% of the time. Is that sufficient for research use?
+
+## Research Extension
+Compare human and machine coding, domain transfer, or robustness across populations.
+
+## Reproducibility Check
+Version corpora, document preprocessing, preserve split logic, and record model/checkpoint identifiers.
+
+## Key Takeaways
+- Text representation strongly shapes NLP performance.
+- Transformers provide contextual representations but introduce new reproducibility challenges.
+- Human validation remains important.

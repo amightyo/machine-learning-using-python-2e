@@ -1,0 +1,69 @@
+# Support Vector Machines and Kernel Methods
+
+## Learning Objectives
+- Explain margins and support vectors.
+- Describe hard- and soft-margin classification.
+- Explain the kernel trick conceptually.
+- Tune SVM hyperparameters using validation.
+- Recognize when feature scaling is essential.
+
+## Why This Matters
+Support vector machines illustrate how geometry, optimization, and nonlinear feature spaces combine to produce powerful predictive models.
+
+## Real-World Problem
+Can a nonlinear boundary separate complex patient or student profiles better than a linear classifier?
+
+## Mathematical Foundations
+### Hyperplanes
+### Margins
+### Support Vectors
+### Maximum-Margin Optimization
+$$
+\min_{w,b} \frac{1}{2}\lVert w\rVert^2
+$$
+subject to
+$$
+y_i(w^Tx_i+b) \ge 1
+$$
+### Soft Margins
+### Kernels
+### Linear, Polynomial, and RBF Kernels
+
+## Python Implementation
+### Scaling
+### SVC
+### Hyperparameter Tuning
+### Probability Estimates
+
+## Hands-On Practice
+Compare linear and RBF SVMs using cross-validation.
+
+## Common Mistakes
+- Failing to scale features.
+- Tuning on the test set.
+- Using complex kernels without justification.
+- Treating SVM scores as calibrated probabilities.
+
+## Knowledge Check
+1. What is a support vector?
+2. What does the margin represent?
+3. Why is scaling important?
+4. What does the kernel trick accomplish?
+
+## Real-World Case Study
+### Nonlinear Classification
+Benchmark SVM against logistic regression and a tree-based method.
+
+## Professor's Challenge
+An RBF SVM wins cross-validation by a small margin but requires much more computation. Is the gain meaningful?
+
+## Research Extension
+Study performance, calibration, and computational tradeoffs across kernels.
+
+## Reproducibility Check
+Document scaling, search spaces, validation folds, seeds, and final untouched test evaluation.
+
+## Key Takeaways
+- SVMs connect geometry and optimization.
+- Kernel methods enable nonlinear decision boundaries.
+- Proper scaling and validation are essential.
