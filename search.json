@@ -1,0 +1,3243 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Machine Learning Using Python",
+    "section": "",
+    "text": "Preface",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#about-this-book",
+    "href": "index.html#about-this-book",
+    "title": "Machine Learning Using Python",
+    "section": "About This Book",
+    "text": "About This Book\nMachine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research is designed for data enthusiasts, analysts, students, researchers, and professionals who want to develop a deeper understanding of machine learning using Python.\nThis Second Edition integrates conceptual foundations, mathematical reasoning, practical programming, real-world applications, responsible machine learning, and reproducible research.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#who-this-book-is-for",
+    "href": "index.html#who-this-book-is-for",
+    "title": "Machine Learning Using Python",
+    "section": "Who This Book Is For",
+    "text": "Who This Book Is For\nThis book is intended for readers who want to move beyond simply fitting machine learning models toward understanding how algorithms work, how models should be evaluated, and how machine learning can be applied responsibly to meaningful real-world problems.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#second-edition",
+    "href": "index.html#second-edition",
+    "title": "Machine Learning Using Python",
+    "section": "Second Edition",
+    "text": "Second Edition\nThis edition substantially expands the first edition with greater emphasis on mathematical foundations, modern machine learning methods, hands-on practice, health and education applications, research design, reproducibility, and responsible artificial intelligence.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html",
+    "href": "part-01-foundations/01-machine-learning.html",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "",
+    "text": "1.1 Learning Objectives",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#learning-objectives",
+    "href": "part-01-foundations/01-machine-learning.html#learning-objectives",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "",
+    "text": "Define machine learning and distinguish it from related areas of artificial intelligence.\nDifferentiate supervised, unsupervised, semi-supervised, and reinforcement learning.\nDistinguish prediction, explanation, inference, and decision-making objectives.\nDescribe the end-to-end machine learning lifecycle.\nIdentify opportunities and limitations of machine learning in real-world settings.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#why-this-matters",
+    "href": "part-01-foundations/01-machine-learning.html#why-this-matters",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.2 Why This Matters",
+    "text": "1.2 Why This Matters\nMachine learning now supports decisions across health, education, finance, science, business, and public policy. Effective data scientists need more than the ability to call an algorithm: they must understand what problem is being solved, what evidence a model provides, and when machine learning is inappropriate.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#real-world-problem",
+    "href": "part-01-foundations/01-machine-learning.html#real-world-problem",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.3 Real-World Problem",
+    "text": "1.3 Real-World Problem\nConsider a university seeking to identify students who may need additional academic support. What can a predictive model legitimately tell decision-makers, and what can it not tell them?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#conceptual-foundations",
+    "href": "part-01-foundations/01-machine-learning.html#conceptual-foundations",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.4 Conceptual Foundations",
+    "text": "1.4 Conceptual Foundations\n\n1.4.1 Artificial Intelligence, Machine Learning, and Data Science\n\n\n1.4.2 What Does It Mean for a Machine to Learn?\n\n\n1.4.3 Supervised Learning\n\n\n1.4.4 Unsupervised Learning\n\n\n1.4.5 Semi-Supervised and Self-Supervised Learning\n\n\n1.4.6 Reinforcement Learning\n\n\n1.4.7 Deep Learning and Foundation Models\n\n\n1.4.8 Prediction Versus Explanation\n\n\n1.4.9 Machine Learning as an Experimental Process",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#mathematical-and-statistical-foundations",
+    "href": "part-01-foundations/01-machine-learning.html#mathematical-and-statistical-foundations",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.5 Mathematical and Statistical Foundations",
+    "text": "1.5 Mathematical and Statistical Foundations\n\n1.5.1 Inputs, Outputs, Features, and Targets\n\n\n1.5.2 Functions and Models\n\n\n1.5.3 Loss and Objective Functions\n\n\n1.5.4 Generalization\n\n\n1.5.5 Bias and Variance",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#python-connection",
+    "href": "part-01-foundations/01-machine-learning.html#python-connection",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.6 Python Connection",
+    "text": "1.6 Python Connection\n\n1.6.1 The Python Machine Learning Ecosystem\n\n\n1.6.2 A First scikit-learn Workflow",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#practitioner-track",
+    "href": "part-01-foundations/01-machine-learning.html#practitioner-track",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.7 Practitioner Track",
+    "text": "1.7 Practitioner Track\nFocus on recognizing ML problem types, selecting appropriate workflows, and interpreting model outputs.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#researcher-track",
+    "href": "part-01-foundations/01-machine-learning.html#researcher-track",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.8 Researcher Track",
+    "text": "1.8 Researcher Track\nFocus additionally on research questions, generalization, benchmarking, uncertainty, reproducibility, and scientific contribution.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#hands-on-practice",
+    "href": "part-01-foundations/01-machine-learning.html#hands-on-practice",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.9 Hands-On Practice",
+    "text": "1.9 Hands-On Practice\nClassify a collection of real-world problems by learning type, target, unit of analysis, and appropriate evaluation strategy.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#common-mistakes",
+    "href": "part-01-foundations/01-machine-learning.html#common-mistakes",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.10 Common Mistakes",
+    "text": "1.10 Common Mistakes\n\nTreating every data problem as a machine learning problem.\nConfusing prediction with causation.\nChoosing an algorithm before defining the problem.\nReporting accuracy without considering the decision context.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#knowledge-check",
+    "href": "part-01-foundations/01-machine-learning.html#knowledge-check",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.11 Knowledge Check",
+    "text": "1.11 Knowledge Check\n\nHow does supervised learning differ from unsupervised learning?\nWhat is generalization?\nWhy does prediction not establish causation?\nWhen might a simple model be preferable to a complex model?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#real-world-case-study",
+    "href": "part-01-foundations/01-machine-learning.html#real-world-case-study",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.12 Real-World Case Study",
+    "text": "1.12 Real-World Case Study\n\n1.12.1 Student Success as a Machine Learning Problem\nFormulate a student-success problem using a public education dataset and identify the target, predictors, unit of analysis, risks, and evaluation strategy.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#professors-challenge",
+    "href": "part-01-foundations/01-machine-learning.html#professors-challenge",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.13 Professor’s Challenge",
+    "text": "1.13 Professor’s Challenge\nA model predicts student non-retention with 90% accuracy. Is that enough evidence to deploy it? Explain what else you would need to know.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#research-extension",
+    "href": "part-01-foundations/01-machine-learning.html#research-extension",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.14 Research Extension",
+    "text": "1.14 Research Extension\nIdentify a substantive gap that could transform the case study from a classroom prediction exercise into a research contribution.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#reproducibility-check",
+    "href": "part-01-foundations/01-machine-learning.html#reproducibility-check",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.15 Reproducibility Check",
+    "text": "1.15 Reproducibility Check\nDocument the problem definition, data source, target definition, assumptions, and intended use before modeling begins.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/01-machine-learning.html#key-takeaways",
+    "href": "part-01-foundations/01-machine-learning.html#key-takeaways",
+    "title": "1  Machine Learning in the Age of Data and AI",
+    "section": "1.16 Key Takeaways",
+    "text": "1.16 Key Takeaways\n\nMachine learning is a problem-solving framework, not merely a collection of algorithms.\nPrediction, inference, and causation answer different questions.\nGeneralization to unseen data is central to machine learning.\nResponsible modeling begins before code is written.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Machine Learning in the Age of Data and AI</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html",
+    "href": "part-01-foundations/02-python.html",
+    "title": "2  Python for Machine Learning",
+    "section": "",
+    "text": "2.1 Learning Objectives",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#learning-objectives",
+    "href": "part-01-foundations/02-python.html#learning-objectives",
+    "title": "2  Python for Machine Learning",
+    "section": "",
+    "text": "Configure a reproducible Python environment for machine learning.\nWork with NumPy arrays and pandas DataFrames.\nVisualize data for exploratory analysis.\nUse scikit-learn’s estimator and pipeline APIs.\nOrganize machine learning code for reproducibility.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#why-this-matters",
+    "href": "part-01-foundations/02-python.html#why-this-matters",
+    "title": "2  Python for Machine Learning",
+    "section": "2.2 Why This Matters",
+    "text": "2.2 Why This Matters\nReliable machine learning depends on reliable computational workflows. Python provides a mature ecosystem for data manipulation, visualization, statistical modeling, machine learning, and deep learning.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#real-world-problem",
+    "href": "part-01-foundations/02-python.html#real-world-problem",
+    "title": "2  Python for Machine Learning",
+    "section": "2.3 Real-World Problem",
+    "text": "2.3 Real-World Problem\nA colleague sends you a notebook that worked six months ago but no longer runs. How can environments, dependency management, version control, and reproducible code prevent this problem?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#conceptual-foundations",
+    "href": "part-01-foundations/02-python.html#conceptual-foundations",
+    "title": "2  Python for Machine Learning",
+    "section": "2.4 Conceptual Foundations",
+    "text": "2.4 Conceptual Foundations\n\n2.4.1 Python as a Data Science Language\n\n\n2.4.2 Scripts, Notebooks, and Quarto\n\n\n2.4.3 Objects, Functions, and Modules\n\n\n2.4.4 NumPy\n\n\n2.4.5 pandas\n\n\n2.4.6 Visualization\n\n\n2.4.7 scikit-learn\n\n\n2.4.8 Environments and Dependencies\n\n\n2.4.9 Git and GitHub",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#python-implementation",
+    "href": "part-01-foundations/02-python.html#python-implementation",
+    "title": "2  Python for Machine Learning",
+    "section": "2.5 Python Implementation",
+    "text": "2.5 Python Implementation\n\n2.5.1 Inspecting the Environment\n\n\n2.5.2 Loading and Inspecting Data\n\n\n2.5.3 Selecting and Transforming Variables\n\n\n2.5.4 Visualization\n\n\n2.5.5 A Minimal scikit-learn Model\n\n\n2.5.6 Pipelines",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#practitioner-track",
+    "href": "part-01-foundations/02-python.html#practitioner-track",
+    "title": "2  Python for Machine Learning",
+    "section": "2.6 Practitioner Track",
+    "text": "2.6 Practitioner Track\nDevelop fluency with the core tools needed to build ML workflows.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#researcher-track",
+    "href": "part-01-foundations/02-python.html#researcher-track",
+    "title": "2  Python for Machine Learning",
+    "section": "2.7 Researcher Track",
+    "text": "2.7 Researcher Track\nEmphasize computational provenance, environment capture, deterministic execution, and auditable analysis.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#hands-on-practice",
+    "href": "part-01-foundations/02-python.html#hands-on-practice",
+    "title": "2  Python for Machine Learning",
+    "section": "2.8 Hands-On Practice",
+    "text": "2.8 Hands-On Practice\nCreate a small reproducible analysis that loads a public dataset, summarizes it, visualizes key variables, and fits a baseline model.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#common-mistakes",
+    "href": "part-01-foundations/02-python.html#common-mistakes",
+    "title": "2  Python for Machine Learning",
+    "section": "2.9 Common Mistakes",
+    "text": "2.9 Common Mistakes\n\nInstalling packages into uncontrolled environments.\nHard-coding local file paths.\nMixing data cleaning and modeling without documentation.\nFailing to record package versions.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#knowledge-check",
+    "href": "part-01-foundations/02-python.html#knowledge-check",
+    "title": "2  Python for Machine Learning",
+    "section": "2.10 Knowledge Check",
+    "text": "2.10 Knowledge Check\n\nWhat problem does a virtual environment solve?\nWhy are pipelines useful?\nHow do NumPy and pandas differ?\nWhy should file paths be portable?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#real-world-case-study",
+    "href": "part-01-foundations/02-python.html#real-world-case-study",
+    "title": "2  Python for Machine Learning",
+    "section": "2.11 Real-World Case Study",
+    "text": "2.11 Real-World Case Study\n\n2.11.1 Reproducing an Analysis on Another Computer\nPackage an analysis so that another researcher can clone the repository and reproduce the results.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#professors-challenge",
+    "href": "part-01-foundations/02-python.html#professors-challenge",
+    "title": "2  Python for Machine Learning",
+    "section": "2.12 Professor’s Challenge",
+    "text": "2.12 Professor’s Challenge\nYour model gives different results on two computers. Develop a systematic debugging plan.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#research-extension",
+    "href": "part-01-foundations/02-python.html#research-extension",
+    "title": "2  Python for Machine Learning",
+    "section": "2.13 Research Extension",
+    "text": "2.13 Research Extension\nEvaluate reproducibility practices in a published open-source machine learning project.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#reproducibility-check",
+    "href": "part-01-foundations/02-python.html#reproducibility-check",
+    "title": "2  Python for Machine Learning",
+    "section": "2.14 Reproducibility Check",
+    "text": "2.14 Reproducibility Check\nVerify relative paths, dependencies, seeds, data provenance, and a clean end-to-end render.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/02-python.html#key-takeaways",
+    "href": "part-01-foundations/02-python.html#key-takeaways",
+    "title": "2  Python for Machine Learning",
+    "section": "2.15 Key Takeaways",
+    "text": "2.15 Key Takeaways\n\nReproducibility is part of technical competence.\nPython’s ML ecosystem is strongest when tools are integrated into a disciplined workflow.\nPortable code reduces dependence on individual analysts.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Python for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html",
+    "href": "part-01-foundations/03-statistics-mathematics.html",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "",
+    "text": "3.1 Learning Objectives",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#learning-objectives",
+    "href": "part-01-foundations/03-statistics-mathematics.html#learning-objectives",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "",
+    "text": "Explain the statistical concepts most frequently used in machine learning.\nWork with vectors, matrices, probabilities, expectations, and variance.\nInterpret covariance and correlation.\nExplain derivatives, gradients, and optimization conceptually.\nConnect probability and linear algebra to ML algorithms.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#why-this-matters",
+    "href": "part-01-foundations/03-statistics-mathematics.html#why-this-matters",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.2 Why This Matters",
+    "text": "3.2 Why This Matters\nMachine learning algorithms encode mathematical assumptions. Understanding those assumptions makes it easier to diagnose models, choose methods, and interpret results.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#real-world-problem",
+    "href": "part-01-foundations/03-statistics-mathematics.html#real-world-problem",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.3 Real-World Problem",
+    "text": "3.3 Real-World Problem\nTwo predictors are strongly correlated and a model’s coefficients become unstable. What mathematical and statistical concepts explain the problem?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#probability-and-statistics",
+    "href": "part-01-foundations/03-statistics-mathematics.html#probability-and-statistics",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.4 Probability and Statistics",
+    "text": "3.4 Probability and Statistics\n\n3.4.1 Random Variables\n\n\n3.4.2 Probability Distributions\n\n\n3.4.3 Expected Value\n\n\n3.4.4 Variance and Standard Deviation\n\n\n3.4.5 Covariance and Correlation\n\n\n3.4.6 Conditional Probability\n\n\n3.4.7 Bayes’ Theorem\n\n\n3.4.8 Sampling and Sampling Variability\n\n\n3.4.9 Confidence Intervals and Hypothesis Tests\n\n\n3.4.10 Association Versus Causation",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#linear-algebra",
+    "href": "part-01-foundations/03-statistics-mathematics.html#linear-algebra",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.5 Linear Algebra",
+    "text": "3.5 Linear Algebra\n\n3.5.1 Scalars, Vectors, and Matrices\n\n\n3.5.2 Dot Products\n\n\n3.5.3 Matrix Multiplication\n\n\n3.5.4 Transpose and Inverse\n\n\n3.5.5 Eigenvalues and Eigenvectors",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#calculus-and-optimization",
+    "href": "part-01-foundations/03-statistics-mathematics.html#calculus-and-optimization",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.6 Calculus and Optimization",
+    "text": "3.6 Calculus and Optimization\n\n3.6.1 Functions and Slopes\n\n\n3.6.2 Derivatives\n\n\n3.6.3 Partial Derivatives\n\n\n3.6.4 Gradients\n\n\n3.6.5 Gradient Descent",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#mathematical-connection-to-machine-learning",
+    "href": "part-01-foundations/03-statistics-mathematics.html#mathematical-connection-to-machine-learning",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.7 Mathematical Connection to Machine Learning",
+    "text": "3.7 Mathematical Connection to Machine Learning\n\n3.7.1 Loss Functions\n\n\n3.7.2 Maximum Likelihood\n\n\n3.7.3 Regularization",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#hands-on-practice",
+    "href": "part-01-foundations/03-statistics-mathematics.html#hands-on-practice",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.8 Hands-On Practice",
+    "text": "3.8 Hands-On Practice\nUse Python to calculate descriptive statistics, correlations, matrix operations, and a simple gradient-descent update.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#common-mistakes",
+    "href": "part-01-foundations/03-statistics-mathematics.html#common-mistakes",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.9 Common Mistakes",
+    "text": "3.9 Common Mistakes\n\nTreating correlation as causation.\nAssuming statistical significance implies predictive usefulness.\nIgnoring scale when distance is important.\nApplying formulas without understanding assumptions.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#knowledge-check",
+    "href": "part-01-foundations/03-statistics-mathematics.html#knowledge-check",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.10 Knowledge Check",
+    "text": "3.10 Knowledge Check\n\nWhat does covariance measure?\nHow is correlation different from covariance?\nWhat does a gradient represent?\nWhy are eigenvectors important in PCA?\nWhat is conditional probability?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#real-world-case-study",
+    "href": "part-01-foundations/03-statistics-mathematics.html#real-world-case-study",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.11 Real-World Case Study",
+    "text": "3.11 Real-World Case Study\n\n3.11.1 Understanding Health Risk Variables\nExplore relationships among demographic, behavioral, and biometric variables in a public health dataset.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#professors-challenge",
+    "href": "part-01-foundations/03-statistics-mathematics.html#professors-challenge",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.12 Professor’s Challenge",
+    "text": "3.12 Professor’s Challenge\nA variable is statistically significant but adds almost no out-of-sample predictive performance. Should it remain in a predictive model?",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#research-extension",
+    "href": "part-01-foundations/03-statistics-mathematics.html#research-extension",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.13 Research Extension",
+    "text": "3.13 Research Extension\nFormulate a study comparing inferential and predictive conclusions from the same dataset.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#reproducibility-check",
+    "href": "part-01-foundations/03-statistics-mathematics.html#reproducibility-check",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.14 Reproducibility Check",
+    "text": "3.14 Reproducibility Check\nRecord transformations, statistical assumptions, and all computational choices.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-01-foundations/03-statistics-mathematics.html#key-takeaways",
+    "href": "part-01-foundations/03-statistics-mathematics.html#key-takeaways",
+    "title": "3  Statistics and Mathematics for Machine Learning",
+    "section": "3.15 Key Takeaways",
+    "text": "3.15 Key Takeaways\n\nStatistics, linear algebra, probability, and optimization form the language of machine learning.\nMathematical understanding improves model selection and diagnosis.\nPredictive and inferential usefulness are not identical.",
+    "crumbs": [
+      "Part I — Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics and Mathematics for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html",
+    "href": "part-02-workflow/04-ml-problems.html",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "",
+    "text": "4.1 Learning Objectives",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#learning-objectives",
+    "href": "part-02-workflow/04-ml-problems.html#learning-objectives",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "",
+    "text": "Translate substantive questions into well-defined ML tasks.\nDefine units of analysis, targets, features, and prediction horizons.\nDistinguish predictive, inferential, descriptive, and causal questions.\nDevelop defensible baseline and evaluation strategies.\nIdentify leakage and target-definition problems before modeling.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#why-this-matters",
+    "href": "part-02-workflow/04-ml-problems.html#why-this-matters",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.2 Why This Matters",
+    "text": "4.2 Why This Matters\nMany failed ML projects begin with an algorithm instead of a clearly defined problem.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#real-world-problem",
+    "href": "part-02-workflow/04-ml-problems.html#real-world-problem",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.3 Real-World Problem",
+    "text": "4.3 Real-World Problem\nA university asks: “Which students will struggle?” Convert this vague request into a precise, ethical, and evaluable machine learning problem.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#problem-formulation",
+    "href": "part-02-workflow/04-ml-problems.html#problem-formulation",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.4 Problem Formulation",
+    "text": "4.4 Problem Formulation\n\n4.4.1 Start With the Decision\n\n\n4.4.2 Define the Unit of Analysis\n\n\n4.4.3 Define the Target\n\n\n4.4.4 Define the Prediction Time\n\n\n4.4.5 Identify Available Features\n\n\n4.4.6 Establish a Baseline\n\n\n4.4.7 Choose Evaluation Criteria\n\n\n4.4.8 Consider Consequences of Errors",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#prediction-inference-and-causation",
+    "href": "part-02-workflow/04-ml-problems.html#prediction-inference-and-causation",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.5 Prediction, Inference, and Causation",
+    "text": "4.5 Prediction, Inference, and Causation\n\n4.5.1 Predictive Questions\n\n\n4.5.2 Explanatory Questions\n\n\n4.5.3 Causal Questions\n\n\n4.5.4 Descriptive and Exploratory Questions",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#research-design-connection",
+    "href": "part-02-workflow/04-ml-problems.html#research-design-connection",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.6 Research Design Connection",
+    "text": "4.6 Research Design Connection\n\n4.6.1 Research Questions\n\n\n4.6.2 Hypotheses\n\n\n4.6.3 Theory and Feature Selection\n\n\n4.6.4 External Validity",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#hands-on-practice",
+    "href": "part-02-workflow/04-ml-problems.html#hands-on-practice",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.7 Hands-On Practice",
+    "text": "4.7 Hands-On Practice\nRewrite five vague analytics requests as formal ML problem statements.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#common-mistakes",
+    "href": "part-02-workflow/04-ml-problems.html#common-mistakes",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.8 Common Mistakes",
+    "text": "4.8 Common Mistakes\n\nPredicting information that is already known at prediction time.\nUsing future information as a feature.\nDefining targets inconsistently.\nOptimizing a metric unrelated to the actual decision.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#knowledge-check",
+    "href": "part-02-workflow/04-ml-problems.html#knowledge-check",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.9 Knowledge Check",
+    "text": "4.9 Knowledge Check\n\nWhat is the unit of analysis?\nWhat is a prediction horizon?\nHow can target leakage occur?\nWhy should a baseline be established before complex modeling?",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#real-world-case-study",
+    "href": "part-02-workflow/04-ml-problems.html#real-world-case-study",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.10 Real-World Case Study",
+    "text": "4.10 Real-World Case Study\n\n4.10.1 Predicting Institutional Retention Outcomes\nFormulate an education analytics problem using public institutional data.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#professors-challenge",
+    "href": "part-02-workflow/04-ml-problems.html#professors-challenge",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.11 Professor’s Challenge",
+    "text": "4.11 Professor’s Challenge\nA feature dramatically improves performance but is only observed after the outcome occurs. Can it be used?",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#research-extension",
+    "href": "part-02-workflow/04-ml-problems.html#research-extension",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.12 Research Extension",
+    "text": "4.12 Research Extension\nDevelop a research question and contribution statement around the case study.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#reproducibility-check",
+    "href": "part-02-workflow/04-ml-problems.html#reproducibility-check",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.13 Reproducibility Check",
+    "text": "4.13 Reproducibility Check\nVersion the problem statement and document target, features, exclusions, timing, and evaluation plan.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/04-ml-problems.html#key-takeaways",
+    "href": "part-02-workflow/04-ml-problems.html#key-takeaways",
+    "title": "4  From Research Question to Machine Learning Problem",
+    "section": "4.14 Key Takeaways",
+    "text": "4.14 Key Takeaways\n\nProblem formulation precedes algorithm selection.\nTime and data availability determine whether a prediction is legitimate.\nEvaluation metrics must reflect the decision context.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>From Research Question to Machine Learning Problem</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html",
+    "href": "part-02-workflow/05-data-preparation.html",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "",
+    "text": "5.1 Learning Objectives",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#learning-objectives",
+    "href": "part-02-workflow/05-data-preparation.html#learning-objectives",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "",
+    "text": "Diagnose data-quality problems.\nHandle missing, categorical, and scaled features appropriately.\nExplain data leakage and prevent it with pipelines.\nEngineer features using substantive knowledge.\nBuild preprocessing workflows with scikit-learn.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#why-this-matters",
+    "href": "part-02-workflow/05-data-preparation.html#why-this-matters",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.2 Why This Matters",
+    "text": "5.2 Why This Matters\nModel quality is constrained by data quality, and seemingly harmless preprocessing can invalidate an evaluation if information leaks across data partitions.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#real-world-problem",
+    "href": "part-02-workflow/05-data-preparation.html#real-world-problem",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.3 Real-World Problem",
+    "text": "5.3 Real-World Problem\nA preprocessing workflow standardizes the entire dataset before the train-test split. Why is the resulting performance estimate potentially optimistic?",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#data-quality",
+    "href": "part-02-workflow/05-data-preparation.html#data-quality",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.4 Data Quality",
+    "text": "5.4 Data Quality\n\n5.4.1 Data Types\n\n\n5.4.2 Missing Data\n\n\n5.4.3 Duplicates\n\n\n5.4.4 Outliers\n\n\n5.4.5 Inconsistent Coding",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#feature-engineering",
+    "href": "part-02-workflow/05-data-preparation.html#feature-engineering",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.5 Feature Engineering",
+    "text": "5.5 Feature Engineering\n\n5.5.1 Transformations\n\n\n5.5.2 Categorical Encoding\n\n\n5.5.3 Scaling\n\n\n5.5.4 Interaction Features\n\n\n5.5.5 Domain-Informed Features\n\n\n5.5.6 Date and Time Features",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#leakage-free-preprocessing",
+    "href": "part-02-workflow/05-data-preparation.html#leakage-free-preprocessing",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.6 Leakage-Free Preprocessing",
+    "text": "5.6 Leakage-Free Preprocessing\n\n5.6.1 Train-Test Separation\n\n\n5.6.2 ColumnTransformer\n\n\n5.6.3 Pipelines\n\n\n5.6.4 Fit Versus Transform",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#python-implementation",
+    "href": "part-02-workflow/05-data-preparation.html#python-implementation",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.7 Python Implementation",
+    "text": "5.7 Python Implementation\n\n5.7.1 Numeric and Categorical Pipelines\n\n\n5.7.2 Missing-Value Imputation\n\n\n5.7.3 One-Hot Encoding\n\n\n5.7.4 Standardization\n\n\n5.7.5 Integrated Modeling Pipelines",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#hands-on-practice",
+    "href": "part-02-workflow/05-data-preparation.html#hands-on-practice",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.8 Hands-On Practice",
+    "text": "5.8 Hands-On Practice\nConstruct a preprocessing pipeline for mixed numeric and categorical data.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#common-mistakes",
+    "href": "part-02-workflow/05-data-preparation.html#common-mistakes",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.9 Common Mistakes",
+    "text": "5.9 Common Mistakes\n\nPreprocessing before splitting.\nImputing using information from the test set.\nEncoding identifiers as meaningful numeric features.\nFeature engineering using future information.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#knowledge-check",
+    "href": "part-02-workflow/05-data-preparation.html#knowledge-check",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.10 Knowledge Check",
+    "text": "5.10 Knowledge Check\n\nWhy can scaling cause leakage?\nWhen is one-hot encoding appropriate?\nWhat does a Pipeline protect against?\nWhy should identifiers usually be excluded?",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#real-world-case-study",
+    "href": "part-02-workflow/05-data-preparation.html#real-world-case-study",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.11 Real-World Case Study",
+    "text": "5.11 Real-World Case Study\n\n5.11.1 Preparing Public Education Data for Modeling\nDevelop a documented feature matrix from an institutional dataset.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#professors-challenge",
+    "href": "part-02-workflow/05-data-preparation.html#professors-challenge",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.12 Professor’s Challenge",
+    "text": "5.12 Professor’s Challenge\nTwo analysts obtain different model results from the same raw data. How would you audit their preprocessing pipelines?",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#research-extension",
+    "href": "part-02-workflow/05-data-preparation.html#research-extension",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.13 Research Extension",
+    "text": "5.13 Research Extension\nCompare alternative missing-data or feature-engineering strategies using nested evaluation.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#reproducibility-check",
+    "href": "part-02-workflow/05-data-preparation.html#reproducibility-check",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.14 Reproducibility Check",
+    "text": "5.14 Reproducibility Check\nPreserve raw data, script transformations, document exclusions, and keep preprocessing inside the modeling workflow.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-02-workflow/05-data-preparation.html#key-takeaways",
+    "href": "part-02-workflow/05-data-preparation.html#key-takeaways",
+    "title": "5  Data Preparation and Feature Engineering",
+    "section": "5.15 Key Takeaways",
+    "text": "5.15 Key Takeaways\n\nPreprocessing is part of the model.\nLeakage can invalidate otherwise sophisticated analyses.\nFeature engineering should combine technical and domain knowledge.",
+    "crumbs": [
+      "Part II — The Machine Learning Workflow",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Preparation and Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html",
+    "href": "part-03-supervised/06-linear-regression.html",
+    "title": "6  Linear Regression",
+    "section": "",
+    "text": "6.1 Learning Objectives\nBy the end of this chapter, you should be able to:",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#learning-objectives",
+    "href": "part-03-supervised/06-linear-regression.html#learning-objectives",
+    "title": "6  Linear Regression",
+    "section": "",
+    "text": "Explain the role of linear regression in predictive modeling.\nDistinguish simple linear regression from multiple linear regression.\nInterpret regression coefficients in context.\nExplain the assumptions underlying ordinary least squares regression.\nDerive and interpret common regression evaluation metrics.\nBuild a reproducible regression workflow in Python.\nDiagnose common modeling problems such as nonlinearity, multicollinearity, heteroscedasticity, and influential observations.\nCompare predictive performance across alternative regression models.\nConnect regression modeling to real-world research questions.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#why-this-matters",
+    "href": "part-03-supervised/06-linear-regression.html#why-this-matters",
+    "title": "6  Linear Regression",
+    "section": "6.2 Why This Matters",
+    "text": "6.2 Why This Matters\nLinear regression is one of the foundational algorithms in statistics and machine learning. Although modern machine learning includes highly complex models, linear regression remains valuable because it is interpretable, computationally efficient, and useful as a benchmark against which more complex models can be evaluated.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#real-world-problem",
+    "href": "part-03-supervised/06-linear-regression.html#real-world-problem",
+    "title": "6  Linear Regression",
+    "section": "6.3 Real-World Problem",
+    "text": "6.3 Real-World Problem\nSuppose a public health researcher wants to predict systolic blood pressure using demographic, behavioral, and anthropometric characteristics.\nQuestions might include:\n\nWhich variables are most strongly associated with systolic blood pressure?\nHow accurately can blood pressure be predicted?\nDoes a more complex model substantially outperform linear regression?\nAre prediction errors larger for some population subgroups than others?\n\nThroughout this chapter, we will use problems like this to connect mathematical foundations with machine learning practice.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#conceptual-foundations",
+    "href": "part-03-supervised/06-linear-regression.html#conceptual-foundations",
+    "title": "6  Linear Regression",
+    "section": "6.4 Conceptual Foundations",
+    "text": "6.4 Conceptual Foundations\n\n6.4.1 What Is Regression?\n\n\n6.4.2 Prediction Versus Explanation\n\n\n6.4.3 Simple Linear Regression\n\n\n6.4.4 Multiple Linear Regression",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#mathematical-foundations",
+    "href": "part-03-supervised/06-linear-regression.html#mathematical-foundations",
+    "title": "6  Linear Regression",
+    "section": "6.5 Mathematical Foundations",
+    "text": "6.5 Mathematical Foundations\n\n6.5.1 The Linear Regression Model\nFor a single predictor:\n\\[\ny_i = \\beta_0 + \\beta_1 x_i + \\epsilon_i\n\\]\nFor multiple predictors:\n\\[\ny_i =\n\\beta_0\n+\n\\beta_1x_{i1}\n+\n\\beta_2x_{i2}\n+\n\\cdots\n+\n\\beta_px_{ip}\n+\n\\epsilon_i\n\\]\nwhere:\n\n\\(y_i\\) is the observed outcome,\n\\(\\beta_0\\) is the intercept,\n\\(\\beta_j\\) represents the effect associated with predictor \\(j\\),\n\\(x_{ij}\\) is the value of predictor \\(j\\) for observation \\(i\\),\n\\(\\epsilon_i\\) represents unexplained variation.\n\n\n\n6.5.2 Ordinary Least Squares\nThe ordinary least squares estimator minimizes the residual sum of squares:\n\\[\nRSS =\n\\sum_{i=1}^{n}\n(y_i-\\hat{y}_i)^2\n\\]\nIn matrix notation:\n\\[\n\\hat{\\boldsymbol{\\beta}}\n=\n(X^\\top X)^{-1}X^\\top y\n\\]\n\n\n6.5.3 Loss Functions\n\n6.5.3.1 Mean Squared Error\n\\[\nMSE =\n\\frac{1}{n}\n\\sum_{i=1}^{n}\n(y_i-\\hat{y}_i)^2\n\\]\n\n\n6.5.3.2 Root Mean Squared Error\n\\[\nRMSE =\n\\sqrt{\n\\frac{1}{n}\n\\sum_{i=1}^{n}\n(y_i-\\hat{y}_i)^2\n}\n\\]\n\n\n6.5.3.3 Mean Absolute Error\n\\[\nMAE =\n\\frac{1}{n}\n\\sum_{i=1}^{n}\n|y_i-\\hat{y}_i|\n\\]\n\n\n6.5.3.4 Coefficient of Determination\n\\[\nR^2\n=\n1-\n\\frac{\n\\sum_{i=1}^{n}\n(y_i-\\hat{y}_i)^2\n}{\n\\sum_{i=1}^{n}\n(y_i-\\bar{y})^2\n}\n\\]",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#assumptions-and-statistical-foundations",
+    "href": "part-03-supervised/06-linear-regression.html#assumptions-and-statistical-foundations",
+    "title": "6  Linear Regression",
+    "section": "6.6 Assumptions and Statistical Foundations",
+    "text": "6.6 Assumptions and Statistical Foundations\n\n6.6.1 Linearity\n\n\n6.6.2 Independence\n\n\n6.6.3 Constant Variance\n\n\n6.6.4 Normally Distributed Errors\n\n\n6.6.5 Multicollinearity\n\n\n6.6.6 Statistical Inference Versus Predictive Modeling",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#python-implementation",
+    "href": "part-03-supervised/06-linear-regression.html#python-implementation",
+    "title": "6  Linear Regression",
+    "section": "6.7 Python Implementation",
+    "text": "6.7 Python Implementation\n\n6.7.1 Required Libraries\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n\n\n\n6.7.2 Loading the Data\n\n\n6.7.3 Exploratory Data Analysis\n\n\n6.7.4 Creating Training and Test Sets\n\n\n6.7.5 Fitting the Model\n\n\n6.7.6 Generating Predictions",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#understanding-the-output",
+    "href": "part-03-supervised/06-linear-regression.html#understanding-the-output",
+    "title": "6  Linear Regression",
+    "section": "6.8 Understanding the Output",
+    "text": "6.8 Understanding the Output\n\n6.8.1 Interpreting the Intercept\n\n\n6.8.2 Interpreting Regression Coefficients\n\n\n6.8.3 Interpreting Prediction Error",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#model-diagnostics",
+    "href": "part-03-supervised/06-linear-regression.html#model-diagnostics",
+    "title": "6  Linear Regression",
+    "section": "6.9 Model Diagnostics",
+    "text": "6.9 Model Diagnostics\n\n6.9.1 Residual Analysis\n\n\n6.9.2 Outliers and Influential Observations\n\n\n6.9.3 Multicollinearity\n\n\n6.9.4 Data Leakage",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#improving-the-model",
+    "href": "part-03-supervised/06-linear-regression.html#improving-the-model",
+    "title": "6  Linear Regression",
+    "section": "6.10 Improving the Model",
+    "text": "6.10 Improving the Model\n\n6.10.1 Polynomial Features\n\n\n6.10.2 Ridge Regression\n\n\n6.10.3 Lasso Regression\n\n\n6.10.4 Elastic Net",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#evaluating-predictive-performance",
+    "href": "part-03-supervised/06-linear-regression.html#evaluating-predictive-performance",
+    "title": "6  Linear Regression",
+    "section": "6.11 Evaluating Predictive Performance",
+    "text": "6.11 Evaluating Predictive Performance\n\n6.11.1 Training Error Versus Test Error\n\n\n6.11.2 Cross-Validation\n\n\n6.11.3 Benchmark Models",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#practitioner-track",
+    "href": "part-03-supervised/06-linear-regression.html#practitioner-track",
+    "title": "6  Linear Regression",
+    "section": "6.12 Practitioner Track",
+    "text": "6.12 Practitioner Track\nFocus on:\n\nfitting the model,\ngenerating predictions,\nevaluating test-set performance,\nbuilding reproducible pipelines,\ncomparing linear regression with stronger predictive models.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#researcher-track",
+    "href": "part-03-supervised/06-linear-regression.html#researcher-track",
+    "title": "6  Linear Regression",
+    "section": "6.13 Researcher Track",
+    "text": "6.13 Researcher Track\nFocus additionally on:\n\nassumptions,\nsampling,\ncoefficient uncertainty,\nvariable selection,\nmodel specification,\nsubgroup performance,\ninterpretation of findings,\nreproducibility.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#hands-on-practice",
+    "href": "part-03-supervised/06-linear-regression.html#hands-on-practice",
+    "title": "6  Linear Regression",
+    "section": "6.14 Hands-On Practice",
+    "text": "6.14 Hands-On Practice\n\n6.14.1 Practice 1 — Build a Baseline Model\nFit a linear regression model using a real dataset and report:\n\nMAE,\nRMSE,\n\\(R^2\\),\nresidual behavior,\nthe strongest predictors.\n\n\n\n6.14.2 Practice 2 — Compare Models\nCompare:\n\nordinary least squares,\nRidge regression,\nLasso regression.\n\nUse cross-validation to determine whether regularization improves predictive performance.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#common-mistakes",
+    "href": "part-03-supervised/06-linear-regression.html#common-mistakes",
+    "title": "6  Linear Regression",
+    "section": "6.15 Common Mistakes",
+    "text": "6.15 Common Mistakes\n\nEvaluating the model only on training data.\nInterpreting association as causation.\nIgnoring nonlinearity.\nPerforming preprocessing before separating training and test data.\nUsing \\(R^2\\) as the only evaluation metric.\nRemoving outliers without substantive justification.\nSelecting predictors solely because they are statistically significant.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#knowledge-check",
+    "href": "part-03-supervised/06-linear-regression.html#knowledge-check",
+    "title": "6  Linear Regression",
+    "section": "6.16 Knowledge Check",
+    "text": "6.16 Knowledge Check\n\nWhat does the slope coefficient represent in a simple linear regression model?\nWhy can training-set performance provide an overly optimistic assessment of a model?\nWhat is the difference between RMSE and MAE?\nWhat does an \\(R^2\\) value of 0.70 mean?\nWhy can multicollinearity make coefficient interpretation difficult?\nWhy does strong predictive performance not establish causation?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#real-world-case-study",
+    "href": "part-03-supervised/06-linear-regression.html#real-world-case-study",
+    "title": "6  Linear Regression",
+    "section": "6.17 Real-World Case Study",
+    "text": "6.17 Real-World Case Study\n\n6.17.1 Predicting a Health Outcome\nDevelop a regression model using a publicly available health dataset.\nYour analysis should include:\n\na clearly stated prediction problem,\ndata preparation,\nexploratory analysis,\nmodel development,\ntest-set evaluation,\ninterpretation,\ndiagnostics,\nreproducibility documentation.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#professors-challenge",
+    "href": "part-03-supervised/06-linear-regression.html#professors-challenge",
+    "title": "6  Linear Regression",
+    "section": "6.18 Professor’s Challenge",
+    "text": "6.18 Professor’s Challenge\nA linear regression model produces:\n\\[\nR^2 = 0.81\n\\]\non the training data but:\n\\[\nR^2 = 0.54\n\\]\non the test data.\nA colleague claims:\n\n“The model explains 81% of the variation, so it is an excellent model.”\n\nCritically evaluate this claim.\nWhat additional evidence would you require before recommending the model for decision-making?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#research-extension",
+    "href": "part-03-supervised/06-linear-regression.html#research-extension",
+    "title": "6  Linear Regression",
+    "section": "6.19 Research Extension",
+    "text": "6.19 Research Extension\nTransform the chapter case study into a potential research project.\nConsider:\n\nWhat is the substantive research gap?\nWhat population is being studied?\nWhich predictors are theoretically justified?\nWhat alternative algorithms should be benchmarked?\nHow will predictive uncertainty be evaluated?\nWill model performance differ across demographic groups?\nWhat contribution could make the study publishable?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#reproducibility-check",
+    "href": "part-03-supervised/06-linear-regression.html#reproducibility-check",
+    "title": "6  Linear Regression",
+    "section": "6.20 Reproducibility Check",
+    "text": "6.20 Reproducibility Check\nBefore completing this chapter, verify that:\n\nthe analysis runs from beginning to end,\nrandom seeds are documented,\ndata sources are cited,\npreprocessing occurs inside the modeling workflow where appropriate,\nthe test set has not influenced model development,\nsoftware dependencies are documented.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/06-linear-regression.html#key-takeaways",
+    "href": "part-03-supervised/06-linear-regression.html#key-takeaways",
+    "title": "6  Linear Regression",
+    "section": "6.21 Key Takeaways",
+    "text": "6.21 Key Takeaways\n\nLinear regression remains an important baseline machine learning algorithm.\nPrediction and statistical inference are related but distinct objectives.\nModel evaluation should focus on unseen data.\nMathematical understanding helps identify when a model is inappropriate.\nReproducible workflows are essential for credible machine learning research.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html",
+    "href": "part-03-supervised/07-classification.html",
+    "title": "7  Classification and Logistic Regression",
+    "section": "",
+    "text": "7.1 Learning Objectives",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#learning-objectives",
+    "href": "part-03-supervised/07-classification.html#learning-objectives",
+    "title": "7  Classification and Logistic Regression",
+    "section": "",
+    "text": "Formulate binary and multiclass classification problems.\nExplain logistic regression mathematically.\nInterpret predicted probabilities and odds.\nEvaluate classifiers using threshold-dependent and threshold-independent metrics.\nSelect decision thresholds based on real-world costs.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#why-this-matters",
+    "href": "part-03-supervised/07-classification.html#why-this-matters",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.2 Why This Matters",
+    "text": "7.2 Why This Matters\nClassification models frequently influence high-stakes decisions. Accuracy alone rarely captures whether those decisions are useful or safe.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#real-world-problem",
+    "href": "part-03-supervised/07-classification.html#real-world-problem",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.3 Real-World Problem",
+    "text": "7.3 Real-World Problem\nA health screening model identifies individuals at elevated risk. Which is more consequential: a false positive or a false negative?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#conceptual-foundations",
+    "href": "part-03-supervised/07-classification.html#conceptual-foundations",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.4 Conceptual Foundations",
+    "text": "7.4 Conceptual Foundations\n\n7.4.1 Classification Problems\n\n\n7.4.2 Probabilities, Classes, and Thresholds\n\n\n7.4.3 Logistic Regression",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#mathematical-foundations",
+    "href": "part-03-supervised/07-classification.html#mathematical-foundations",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.5 Mathematical Foundations",
+    "text": "7.5 Mathematical Foundations\n\n7.5.1 The Logistic Function\n\\[\nP(Y=1|X)=\\frac{1}{1+e^{-z}}\n\\] ### Log-Odds \\[\n\\log\\left(\\frac{p}{1-p}\\right)=\\beta_0+\\beta_1x_1+\\cdots+\\beta_px_p\n\\] ### Maximum Likelihood and Log Loss",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#evaluation",
+    "href": "part-03-supervised/07-classification.html#evaluation",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.6 Evaluation",
+    "text": "7.6 Evaluation\n\n7.6.1 Confusion Matrix\n\n\n7.6.2 Accuracy\n\n\n7.6.3 Sensitivity and Specificity\n\n\n7.6.4 Precision and Recall\n\n\n7.6.5 F1 Score\n\n\n7.6.6 ROC and AUC\n\n\n7.6.7 Precision-Recall Curves\n\n\n7.6.8 Calibration\n\n\n7.6.9 Threshold Selection",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#python-implementation",
+    "href": "part-03-supervised/07-classification.html#python-implementation",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.7 Python Implementation",
+    "text": "7.7 Python Implementation\n\n7.7.1 LogisticRegression\n\n\n7.7.2 Predicted Probabilities\n\n\n7.7.3 Classification Metrics",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#hands-on-practice",
+    "href": "part-03-supervised/07-classification.html#hands-on-practice",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.8 Hands-On Practice",
+    "text": "7.8 Hands-On Practice\nBuild and evaluate a binary classifier using a public health dataset.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#common-mistakes",
+    "href": "part-03-supervised/07-classification.html#common-mistakes",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.9 Common Mistakes",
+    "text": "7.9 Common Mistakes\n\nUsing accuracy with severe class imbalance.\nTreating 0.50 as an automatically optimal threshold.\nInterpreting predicted probabilities as causal effects.\nEvaluating on data used for model selection.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#knowledge-check",
+    "href": "part-03-supervised/07-classification.html#knowledge-check",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.10 Knowledge Check",
+    "text": "7.10 Knowledge Check\n\nWhat does logistic regression model?\nHow do sensitivity and specificity differ?\nWhen is PR-AUC especially useful?\nWhy does threshold choice depend on context?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#real-world-case-study",
+    "href": "part-03-supervised/07-classification.html#real-world-case-study",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.11 Real-World Case Study",
+    "text": "7.11 Real-World Case Study\n\n7.11.1 Health Risk Classification\nCompare logistic regression with a nonlinear classifier and assess discrimination and calibration.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#professors-challenge",
+    "href": "part-03-supervised/07-classification.html#professors-challenge",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.12 Professor’s Challenge",
+    "text": "7.12 Professor’s Challenge\nModel A has higher ROC-AUC, but Model B is better calibrated and identifies more true cases at the operational threshold. Which model should be deployed?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#research-extension",
+    "href": "part-03-supervised/07-classification.html#research-extension",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.13 Research Extension",
+    "text": "7.13 Research Extension\nInvestigate subgroup performance or temporal validation as a publishable extension.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#reproducibility-check",
+    "href": "part-03-supervised/07-classification.html#reproducibility-check",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.14 Reproducibility Check",
+    "text": "7.14 Reproducibility Check\nDocument class definitions, prevalence, splits, thresholds, metrics, and calibration methods.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/07-classification.html#key-takeaways",
+    "href": "part-03-supervised/07-classification.html#key-takeaways",
+    "title": "7  Classification and Logistic Regression",
+    "section": "7.15 Key Takeaways",
+    "text": "7.15 Key Takeaways\n\nClassification is fundamentally about uncertainty and decisions.\nNo single metric is sufficient for every classification problem.\nThresholds should reflect consequences, not convenience.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Classification and Logistic Regression</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html",
+    "href": "part-03-supervised/08-trees-random-forests.html",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "",
+    "text": "8.1 Learning Objectives",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#learning-objectives",
+    "href": "part-03-supervised/08-trees-random-forests.html#learning-objectives",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "",
+    "text": "Explain recursive partitioning.\nCalculate and interpret impurity measures.\nControl tree complexity.\nExplain bagging and random forests.\nEvaluate feature importance cautiously.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#why-this-matters",
+    "href": "part-03-supervised/08-trees-random-forests.html#why-this-matters",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.2 Why This Matters",
+    "text": "8.2 Why This Matters\nTree-based models capture nonlinearities and interactions with relatively little preprocessing and form the foundation of many powerful ensemble methods.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#real-world-problem",
+    "href": "part-03-supervised/08-trees-random-forests.html#real-world-problem",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.3 Real-World Problem",
+    "text": "8.3 Real-World Problem\nCan nonlinear combinations of demographic and behavioral variables improve prediction beyond a linear baseline?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#decision-trees",
+    "href": "part-03-supervised/08-trees-random-forests.html#decision-trees",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.4 Decision Trees",
+    "text": "8.4 Decision Trees\n\n8.4.1 Recursive Partitioning\n\n\n8.4.2 Splits and Leaves\n\n\n8.4.3 Gini Impurity\n\\[\nG = 1 - \\sum_k p_k^2\n\\] ### Entropy \\[\nH = -\\sum_k p_k\\log_2(p_k)\n\\] ### Tree Depth and Pruning",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#random-forests",
+    "href": "part-03-supervised/08-trees-random-forests.html#random-forests",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.5 Random Forests",
+    "text": "8.5 Random Forests\n\n8.5.1 Bootstrap Aggregation\n\n\n8.5.2 Random Feature Selection\n\n\n8.5.3 Out-of-Bag Samples\n\n\n8.5.4 Bias-Variance Intuition",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#interpretation",
+    "href": "part-03-supervised/08-trees-random-forests.html#interpretation",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.6 Interpretation",
+    "text": "8.6 Interpretation\n\n8.6.1 Impurity-Based Importance\n\n\n8.6.2 Permutation Importance\n\n\n8.6.3 Limits of Feature Importance",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#python-implementation",
+    "href": "part-03-supervised/08-trees-random-forests.html#python-implementation",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.7 Python Implementation",
+    "text": "8.7 Python Implementation\n\n8.7.1 DecisionTreeClassifier and Regressor\n\n\n8.7.2 RandomForestClassifier and Regressor",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#hands-on-practice",
+    "href": "part-03-supervised/08-trees-random-forests.html#hands-on-practice",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.8 Hands-On Practice",
+    "text": "8.8 Hands-On Practice\nCompare a decision tree and random forest with a linear baseline.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#common-mistakes",
+    "href": "part-03-supervised/08-trees-random-forests.html#common-mistakes",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.9 Common Mistakes",
+    "text": "8.9 Common Mistakes\n\nAllowing unrestricted tree growth.\nTreating feature importance as causality.\nIgnoring correlated predictors.\nComparing models on different splits.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#knowledge-check",
+    "href": "part-03-supervised/08-trees-random-forests.html#knowledge-check",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.10 Knowledge Check",
+    "text": "8.10 Knowledge Check\n\nWhat does Gini impurity measure?\nWhy do random forests decorrelate trees?\nWhat is bagging?\nWhy can feature importance be misleading?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#real-world-case-study",
+    "href": "part-03-supervised/08-trees-random-forests.html#real-world-case-study",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.11 Real-World Case Study",
+    "text": "8.11 Real-World Case Study\n\n8.11.1 Predicting an Education Outcome\nCompare interpretable and ensemble tree models using public education data.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#professors-challenge",
+    "href": "part-03-supervised/08-trees-random-forests.html#professors-challenge",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.12 Professor’s Challenge",
+    "text": "8.12 Professor’s Challenge\nA random forest outperforms logistic regression by one percentage point but is much harder to explain. Which model should be used?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#research-extension",
+    "href": "part-03-supervised/08-trees-random-forests.html#research-extension",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.13 Research Extension",
+    "text": "8.13 Research Extension\nTest whether performance differences persist under repeated or external validation.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#reproducibility-check",
+    "href": "part-03-supervised/08-trees-random-forests.html#reproducibility-check",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.14 Reproducibility Check",
+    "text": "8.14 Reproducibility Check\nRecord seeds, split rules, hyperparameters, feature definitions, and evaluation protocol.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/08-trees-random-forests.html#key-takeaways",
+    "href": "part-03-supervised/08-trees-random-forests.html#key-takeaways",
+    "title": "8  Decision Trees and Random Forests",
+    "section": "8.15 Key Takeaways",
+    "text": "8.15 Key Takeaways\n\nTrees model nonlinear decision boundaries naturally.\nEnsembles reduce instability but increase complexity.\nImportance measures require careful interpretation.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Decision Trees and Random Forests</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html",
+    "href": "part-03-supervised/09-support-vector-machines.html",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "",
+    "text": "9.1 Learning Objectives",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#learning-objectives",
+    "href": "part-03-supervised/09-support-vector-machines.html#learning-objectives",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "",
+    "text": "Explain margins and support vectors.\nDescribe hard- and soft-margin classification.\nExplain the kernel trick conceptually.\nTune SVM hyperparameters using validation.\nRecognize when feature scaling is essential.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#why-this-matters",
+    "href": "part-03-supervised/09-support-vector-machines.html#why-this-matters",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.2 Why This Matters",
+    "text": "9.2 Why This Matters\nSupport vector machines illustrate how geometry, optimization, and nonlinear feature spaces combine to produce powerful predictive models.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#real-world-problem",
+    "href": "part-03-supervised/09-support-vector-machines.html#real-world-problem",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.3 Real-World Problem",
+    "text": "9.3 Real-World Problem\nCan a nonlinear boundary separate complex patient or student profiles better than a linear classifier?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#mathematical-foundations",
+    "href": "part-03-supervised/09-support-vector-machines.html#mathematical-foundations",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.4 Mathematical Foundations",
+    "text": "9.4 Mathematical Foundations\n\n9.4.1 Hyperplanes\n\n\n9.4.2 Margins\n\n\n9.4.3 Support Vectors\n\n\n9.4.4 Maximum-Margin Optimization\n\\[\n\\min_{w,b} \\frac{1}{2}\\lVert w\\rVert^2\n\\] subject to \\[\ny_i(w^Tx_i+b) \\ge 1\n\\] ### Soft Margins ### Kernels ### Linear, Polynomial, and RBF Kernels",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#python-implementation",
+    "href": "part-03-supervised/09-support-vector-machines.html#python-implementation",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.5 Python Implementation",
+    "text": "9.5 Python Implementation\n\n9.5.1 Scaling\n\n\n9.5.2 SVC\n\n\n9.5.3 Hyperparameter Tuning\n\n\n9.5.4 Probability Estimates",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#hands-on-practice",
+    "href": "part-03-supervised/09-support-vector-machines.html#hands-on-practice",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.6 Hands-On Practice",
+    "text": "9.6 Hands-On Practice\nCompare linear and RBF SVMs using cross-validation.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#common-mistakes",
+    "href": "part-03-supervised/09-support-vector-machines.html#common-mistakes",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.7 Common Mistakes",
+    "text": "9.7 Common Mistakes\n\nFailing to scale features.\nTuning on the test set.\nUsing complex kernels without justification.\nTreating SVM scores as calibrated probabilities.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#knowledge-check",
+    "href": "part-03-supervised/09-support-vector-machines.html#knowledge-check",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.8 Knowledge Check",
+    "text": "9.8 Knowledge Check\n\nWhat is a support vector?\nWhat does the margin represent?\nWhy is scaling important?\nWhat does the kernel trick accomplish?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#real-world-case-study",
+    "href": "part-03-supervised/09-support-vector-machines.html#real-world-case-study",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.9 Real-World Case Study",
+    "text": "9.9 Real-World Case Study\n\n9.9.1 Nonlinear Classification\nBenchmark SVM against logistic regression and a tree-based method.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#professors-challenge",
+    "href": "part-03-supervised/09-support-vector-machines.html#professors-challenge",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.10 Professor’s Challenge",
+    "text": "9.10 Professor’s Challenge\nAn RBF SVM wins cross-validation by a small margin but requires much more computation. Is the gain meaningful?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#research-extension",
+    "href": "part-03-supervised/09-support-vector-machines.html#research-extension",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.11 Research Extension",
+    "text": "9.11 Research Extension\nStudy performance, calibration, and computational tradeoffs across kernels.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#reproducibility-check",
+    "href": "part-03-supervised/09-support-vector-machines.html#reproducibility-check",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.12 Reproducibility Check",
+    "text": "9.12 Reproducibility Check\nDocument scaling, search spaces, validation folds, seeds, and final untouched test evaluation.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/09-support-vector-machines.html#key-takeaways",
+    "href": "part-03-supervised/09-support-vector-machines.html#key-takeaways",
+    "title": "9  Support Vector Machines and Kernel Methods",
+    "section": "9.13 Key Takeaways",
+    "text": "9.13 Key Takeaways\n\nSVMs connect geometry and optimization.\nKernel methods enable nonlinear decision boundaries.\nProper scaling and validation are essential.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Support Vector Machines and Kernel Methods</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html",
+    "href": "part-03-supervised/10-ensemble-learning.html",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "",
+    "text": "10.1 Learning Objectives",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#learning-objectives",
+    "href": "part-03-supervised/10-ensemble-learning.html#learning-objectives",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "",
+    "text": "Explain why combining models can improve prediction.\nDistinguish bagging, boosting, and stacking.\nDescribe gradient boosting conceptually.\nTune ensemble models responsibly.\nCompare predictive gains with complexity and interpretability costs.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#why-this-matters",
+    "href": "part-03-supervised/10-ensemble-learning.html#why-this-matters",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.2 Why This Matters",
+    "text": "10.2 Why This Matters\nEnsemble methods are among the strongest general-purpose approaches for structured/tabular data.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#real-world-problem",
+    "href": "part-03-supervised/10-ensemble-learning.html#real-world-problem",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.3 Real-World Problem",
+    "text": "10.3 Real-World Problem\nA baseline model performs reasonably well, but stakeholders want better predictions. How much complexity is justified for an incremental performance gain?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#ensemble-foundations",
+    "href": "part-03-supervised/10-ensemble-learning.html#ensemble-foundations",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.4 Ensemble Foundations",
+    "text": "10.4 Ensemble Foundations\n\n10.4.1 Wisdom of Multiple Models\n\n\n10.4.2 Bagging\n\n\n10.4.3 Boosting\n\n\n10.4.4 Stacking",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#gradient-boosting",
+    "href": "part-03-supervised/10-ensemble-learning.html#gradient-boosting",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.5 Gradient Boosting",
+    "text": "10.5 Gradient Boosting\n\n10.5.1 Sequential Error Correction\n\n\n10.5.2 Learning Rate\n\n\n10.5.3 Number of Estimators\n\n\n10.5.4 Tree Depth\n\n\n10.5.5 Regularization\n\n\n10.5.6 XGBoost, LightGBM, and Related Approaches",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#python-implementation",
+    "href": "part-03-supervised/10-ensemble-learning.html#python-implementation",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.6 Python Implementation",
+    "text": "10.6 Python Implementation\n\n10.6.1 GradientBoosting\n\n\n10.6.2 HistGradientBoosting\n\n\n10.6.3 Comparing Ensembles",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#hands-on-practice",
+    "href": "part-03-supervised/10-ensemble-learning.html#hands-on-practice",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.7 Hands-On Practice",
+    "text": "10.7 Hands-On Practice\nBenchmark linear, random forest, and gradient-boosting models using identical validation folds.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#common-mistakes",
+    "href": "part-03-supervised/10-ensemble-learning.html#common-mistakes",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.8 Common Mistakes",
+    "text": "10.8 Common Mistakes\n\nComparing models under different evaluation protocols.\nExcessive hyperparameter searching.\nReporting only the best result.\nIgnoring computational cost.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#knowledge-check",
+    "href": "part-03-supervised/10-ensemble-learning.html#knowledge-check",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.9 Knowledge Check",
+    "text": "10.9 Knowledge Check\n\nHow does boosting differ from bagging?\nWhat does the learning rate control?\nWhy can boosting overfit?\nWhat is stacking?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#real-world-case-study",
+    "href": "part-03-supervised/10-ensemble-learning.html#real-world-case-study",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.10 Real-World Case Study",
+    "text": "10.10 Real-World Case Study\n\n10.10.1 Benchmarking Tabular Models\nConduct a transparent benchmark on a public health or education dataset.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#professors-challenge",
+    "href": "part-03-supervised/10-ensemble-learning.html#professors-challenge",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.11 Professor’s Challenge",
+    "text": "10.11 Professor’s Challenge\nAfter testing 100 model configurations, one improves AUC by 0.003. Is this evidence of a better model?",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#research-extension",
+    "href": "part-03-supervised/10-ensemble-learning.html#research-extension",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.12 Research Extension",
+    "text": "10.12 Research Extension\nDesign a rigorous benchmarking study with repeated or nested validation and uncertainty around performance differences.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#reproducibility-check",
+    "href": "part-03-supervised/10-ensemble-learning.html#reproducibility-check",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.13 Reproducibility Check",
+    "text": "10.13 Reproducibility Check\nPreserve all candidate models, search spaces, folds, seeds, runtimes, and selection rules.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-03-supervised/10-ensemble-learning.html#key-takeaways",
+    "href": "part-03-supervised/10-ensemble-learning.html#key-takeaways",
+    "title": "10  Ensemble Learning and Gradient Boosting",
+    "section": "10.14 Key Takeaways",
+    "text": "10.14 Key Takeaways\n\nEnsembles can substantially improve tabular prediction.\nFair benchmarking requires identical evaluation conditions.\nSmall gains must be interpreted in context.",
+    "crumbs": [
+      "Part III — Supervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Ensemble Learning and Gradient Boosting</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html",
+    "href": "part-04-unsupervised/11-clustering.html",
+    "title": "11  Clustering",
+    "section": "",
+    "text": "11.1 Learning Objectives",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#learning-objectives",
+    "href": "part-04-unsupervised/11-clustering.html#learning-objectives",
+    "title": "11  Clustering",
+    "section": "",
+    "text": "Explain the purpose and limitations of clustering.\nApply K-means, hierarchical clustering, and DBSCAN.\nSelect and interpret distance measures.\nEvaluate cluster stability and usefulness.\nAvoid treating discovered clusters as objective natural categories.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#why-this-matters",
+    "href": "part-04-unsupervised/11-clustering.html#why-this-matters",
+    "title": "11  Clustering",
+    "section": "11.2 Why This Matters",
+    "text": "11.2 Why This Matters\nClustering can reveal structure in unlabeled data, but the resulting groups depend heavily on representation, scaling, distance, and algorithmic assumptions.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#real-world-problem",
+    "href": "part-04-unsupervised/11-clustering.html#real-world-problem",
+    "title": "11  Clustering",
+    "section": "11.3 Real-World Problem",
+    "text": "11.3 Real-World Problem\nCan institutions, patients, or students be grouped into meaningful profiles without predefined labels?",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#foundations",
+    "href": "part-04-unsupervised/11-clustering.html#foundations",
+    "title": "11  Clustering",
+    "section": "11.4 Foundations",
+    "text": "11.4 Foundations\n\n11.4.1 What Is a Cluster?\n\n\n11.4.2 Distance and Similarity\n\n\n11.4.3 Euclidean Distance\n\n\n11.4.4 Feature Scaling",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#k-means",
+    "href": "part-04-unsupervised/11-clustering.html#k-means",
+    "title": "11  Clustering",
+    "section": "11.5 K-Means",
+    "text": "11.5 K-Means\n\n11.5.1 Centroids\n\n\n11.5.2 Objective Function\n\\[\nJ = \\sum_{k=1}^{K}\\sum_{x_i\\in C_k}\\lVert x_i-\\mu_k\\rVert^2\n\\] ### Choosing K",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#hierarchical-clustering",
+    "href": "part-04-unsupervised/11-clustering.html#hierarchical-clustering",
+    "title": "11  Clustering",
+    "section": "11.6 Hierarchical Clustering",
+    "text": "11.6 Hierarchical Clustering\n\n11.6.1 Linkage\n\n\n11.6.2 Dendrograms",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#dbscan",
+    "href": "part-04-unsupervised/11-clustering.html#dbscan",
+    "title": "11  Clustering",
+    "section": "11.7 DBSCAN",
+    "text": "11.7 DBSCAN\n\n11.7.1 Density\n\n\n11.7.2 Epsilon and Minimum Samples\n\n\n11.7.3 Noise Points",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#cluster-evaluation",
+    "href": "part-04-unsupervised/11-clustering.html#cluster-evaluation",
+    "title": "11  Clustering",
+    "section": "11.8 Cluster Evaluation",
+    "text": "11.8 Cluster Evaluation\n\n11.8.1 Inertia\n\n\n11.8.2 Silhouette Score\n\n\n11.8.3 Stability\n\n\n11.8.4 External and Substantive Validation",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#hands-on-practice",
+    "href": "part-04-unsupervised/11-clustering.html#hands-on-practice",
+    "title": "11  Clustering",
+    "section": "11.9 Hands-On Practice",
+    "text": "11.9 Hands-On Practice\nCluster institutions or health profiles using multiple algorithms and compare solutions.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#common-mistakes",
+    "href": "part-04-unsupervised/11-clustering.html#common-mistakes",
+    "title": "11  Clustering",
+    "section": "11.10 Common Mistakes",
+    "text": "11.10 Common Mistakes\n\nClustering unscaled variables.\nTreating an elbow plot as definitive.\nNaming clusters without substantive validation.\nAssuming clusters are stable across samples.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#knowledge-check",
+    "href": "part-04-unsupervised/11-clustering.html#knowledge-check",
+    "title": "11  Clustering",
+    "section": "11.11 Knowledge Check",
+    "text": "11.11 Knowledge Check\n\nWhat objective does K-means minimize?\nWhy does scaling matter?\nHow does DBSCAN differ from K-means?\nWhat does silhouette score measure?",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#real-world-case-study",
+    "href": "part-04-unsupervised/11-clustering.html#real-world-case-study",
+    "title": "11  Clustering",
+    "section": "11.12 Real-World Case Study",
+    "text": "11.12 Real-World Case Study\n\n11.12.1 Institutional Profiles\nCluster higher-education institutions using public IPEDS or College Scorecard features.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#professors-challenge",
+    "href": "part-04-unsupervised/11-clustering.html#professors-challenge",
+    "title": "11  Clustering",
+    "section": "11.13 Professor’s Challenge",
+    "text": "11.13 Professor’s Challenge\nTwo clustering algorithms produce very different groups. Which result is “correct”?",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#research-extension",
+    "href": "part-04-unsupervised/11-clustering.html#research-extension",
+    "title": "11  Clustering",
+    "section": "11.14 Research Extension",
+    "text": "11.14 Research Extension\nAssess cluster stability across years, samples, or alternative feature representations.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#reproducibility-check",
+    "href": "part-04-unsupervised/11-clustering.html#reproducibility-check",
+    "title": "11  Clustering",
+    "section": "11.15 Reproducibility Check",
+    "text": "11.15 Reproducibility Check\nDocument scaling, distance metrics, algorithm parameters, feature selection, and stability analysis.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/11-clustering.html#key-takeaways",
+    "href": "part-04-unsupervised/11-clustering.html#key-takeaways",
+    "title": "11  Clustering",
+    "section": "11.16 Key Takeaways",
+    "text": "11.16 Key Takeaways\n\nClusters are model-dependent representations of structure.\nValidation must go beyond visual appeal.\nSubstantive interpretation is essential.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Clustering</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html",
+    "title": "12  Dimensionality Reduction",
+    "section": "",
+    "text": "12.1 Learning Objectives",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#learning-objectives",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#learning-objectives",
+    "title": "12  Dimensionality Reduction",
+    "section": "",
+    "text": "Explain why dimensionality reduction is useful.\nDerive the intuition behind PCA.\nInterpret explained variance and component loadings.\nDistinguish PCA, factor analysis, t-SNE, and UMAP.\nRecognize when low-dimensional visualizations can mislead.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#why-this-matters",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#why-this-matters",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.2 Why This Matters",
+    "text": "12.2 Why This Matters\nHigh-dimensional data can be redundant, noisy, and difficult to visualize. Dimensionality reduction creates compact representations while introducing important interpretive tradeoffs.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#real-world-problem",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#real-world-problem",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.3 Real-World Problem",
+    "text": "12.3 Real-World Problem\nA dataset contains dozens of correlated indicators. Can a smaller representation preserve the dominant structure?",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#pca-foundations",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#pca-foundations",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.4 PCA Foundations",
+    "text": "12.4 PCA Foundations\n\n12.4.1 Variance and Covariance\n\n\n12.4.2 Eigenvalues and Eigenvectors\n\n\n12.4.3 Principal Components\n\n\n12.4.4 Explained Variance\n\n\n12.4.5 Loadings and Scores\n\n\n12.4.6 Scaling Before PCA",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#related-methods",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#related-methods",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.5 Related Methods",
+    "text": "12.5 Related Methods\n\n12.5.1 Factor Analysis\n\n\n12.5.2 t-SNE\n\n\n12.5.3 UMAP\n\n\n12.5.4 Visualization Versus Modeling",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#python-implementation",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#python-implementation",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.6 Python Implementation",
+    "text": "12.6 Python Implementation\n\n12.6.1 StandardScaler\n\n\n12.6.2 PCA\n\n\n12.6.3 Explained Variance Plots\n\n\n12.6.4 Component Interpretation",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#hands-on-practice",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#hands-on-practice",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.7 Hands-On Practice",
+    "text": "12.7 Hands-On Practice\nReduce a multivariate health or education dataset and compare models before and after reduction.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#common-mistakes",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#common-mistakes",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.8 Common Mistakes",
+    "text": "12.8 Common Mistakes\n\nApplying PCA without scaling when scales differ.\nInterpreting components as causal constructs.\nUsing t-SNE coordinates as ordinary quantitative variables.\nChoosing dimensions only because a plot looks attractive.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#knowledge-check",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#knowledge-check",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.9 Knowledge Check",
+    "text": "12.9 Knowledge Check\n\nWhat does the first principal component maximize?\nWhat is explained variance?\nHow does PCA differ from factor analysis?\nWhy should t-SNE be interpreted cautiously?",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#real-world-case-study",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#real-world-case-study",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.10 Real-World Case Study",
+    "text": "12.10 Real-World Case Study\n\n12.10.1 Reducing Correlated Institutional Indicators\nUse PCA to summarize institutional characteristics and examine downstream predictive performance.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#professors-challenge",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#professors-challenge",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.11 Professor’s Challenge",
+    "text": "12.11 Professor’s Challenge\nPCA improves computational efficiency but makes stakeholder interpretation harder. Should it be retained?",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#research-extension",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#research-extension",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.12 Research Extension",
+    "text": "12.12 Research Extension\nEvaluate whether latent representations are stable across populations or time.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#reproducibility-check",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#reproducibility-check",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.13 Reproducibility Check",
+    "text": "12.13 Reproducibility Check\nDocument preprocessing, component-selection criteria, random seeds for stochastic methods, and interpretation rules.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-04-unsupervised/12-dimensionality-reduction.html#key-takeaways",
+    "href": "part-04-unsupervised/12-dimensionality-reduction.html#key-takeaways",
+    "title": "12  Dimensionality Reduction",
+    "section": "12.14 Key Takeaways",
+    "text": "12.14 Key Takeaways\n\nDimensionality reduction trades original-variable interpretability for compact representation.\nPCA is grounded in variance and linear algebra.\nVisualization embeddings require cautious interpretation.",
+    "crumbs": [
+      "Part IV — Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Dimensionality Reduction</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html",
+    "href": "part-05-modern-ml/13-neural-networks.html",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "",
+    "text": "13.1 Learning Objectives",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#learning-objectives",
+    "href": "part-05-modern-ml/13-neural-networks.html#learning-objectives",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "",
+    "text": "Explain neurons, layers, activations, and loss functions.\nDescribe forward propagation and backpropagation.\nExplain gradient-based optimization.\nBuild a small neural network.\nDiagnose overfitting and apply regularization.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#why-this-matters",
+    "href": "part-05-modern-ml/13-neural-networks.html#why-this-matters",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.2 Why This Matters",
+    "text": "13.2 Why This Matters\nDeep learning powers many modern AI systems and provides a foundation for understanding computer vision, NLP, and foundation models.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#real-world-problem",
+    "href": "part-05-modern-ml/13-neural-networks.html#real-world-problem",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.3 Real-World Problem",
+    "text": "13.3 Real-World Problem\nWhen does a neural network offer enough representational advantage to justify greater complexity than classical ML?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#mathematical-foundations",
+    "href": "part-05-modern-ml/13-neural-networks.html#mathematical-foundations",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.4 Mathematical Foundations",
+    "text": "13.4 Mathematical Foundations\n\n13.4.1 The Artificial Neuron\n\\[\nz=w^Tx+b\n\\] ### Activation Functions ### Network Layers ### Loss Functions ### Gradient Descent \\[\n\\theta_{t+1}=\\theta_t-\\eta\\nabla_\\theta L(\\theta_t)\n\\] ### Backpropagation",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#deep-learning-practice",
+    "href": "part-05-modern-ml/13-neural-networks.html#deep-learning-practice",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.5 Deep Learning Practice",
+    "text": "13.5 Deep Learning Practice\n\n13.5.1 Training and Validation\n\n\n13.5.2 Epochs and Batches\n\n\n13.5.3 Learning Rates\n\n\n13.5.4 Regularization\n\n\n13.5.5 Dropout\n\n\n13.5.6 Early Stopping",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#python-implementation",
+    "href": "part-05-modern-ml/13-neural-networks.html#python-implementation",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.6 Python Implementation",
+    "text": "13.6 Python Implementation\n\n13.6.1 Building a Small Network\n\n\n13.6.2 Training Curves\n\n\n13.6.3 Evaluating Generalization",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#hands-on-practice",
+    "href": "part-05-modern-ml/13-neural-networks.html#hands-on-practice",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.7 Hands-On Practice",
+    "text": "13.7 Hands-On Practice\nTrain a small neural network and compare it with a classical baseline.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#common-mistakes",
+    "href": "part-05-modern-ml/13-neural-networks.html#common-mistakes",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.8 Common Mistakes",
+    "text": "13.8 Common Mistakes\n\nUsing deep learning because it is fashionable.\nIgnoring baseline models.\nEvaluating repeatedly on the test set.\nFailing to monitor validation loss.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#knowledge-check",
+    "href": "part-05-modern-ml/13-neural-networks.html#knowledge-check",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.9 Knowledge Check",
+    "text": "13.9 Knowledge Check\n\nWhat does an activation function do?\nWhat is backpropagation?\nWhat does the learning rate control?\nWhy can early stopping improve generalization?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#real-world-case-study",
+    "href": "part-05-modern-ml/13-neural-networks.html#real-world-case-study",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.10 Real-World Case Study",
+    "text": "13.10 Real-World Case Study\n\n13.10.1 Classical ML Versus Neural Networks\nCompare model families on a structured dataset and justify the preferred model.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#professors-challenge",
+    "href": "part-05-modern-ml/13-neural-networks.html#professors-challenge",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.11 Professor’s Challenge",
+    "text": "13.11 Professor’s Challenge\nA neural network improves accuracy by 0.5% but requires 50 times more computation. Is it better?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#research-extension",
+    "href": "part-05-modern-ml/13-neural-networks.html#research-extension",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.12 Research Extension",
+    "text": "13.12 Research Extension\nInvestigate architecture, regularization, or transferability under a rigorous experimental design.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#reproducibility-check",
+    "href": "part-05-modern-ml/13-neural-networks.html#reproducibility-check",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.13 Reproducibility Check",
+    "text": "13.13 Reproducibility Check\nRecord architecture, initialization, seeds, hardware, software versions, epochs, and stopping criteria.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/13-neural-networks.html#key-takeaways",
+    "href": "part-05-modern-ml/13-neural-networks.html#key-takeaways",
+    "title": "13  Neural Networks and Deep Learning",
+    "section": "13.14 Key Takeaways",
+    "text": "13.14 Key Takeaways\n\nNeural networks learn layered representations through optimization.\nDeep learning is powerful but not automatically superior.\nReproducible training requires unusually careful documentation.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks and Deep Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html",
+    "href": "part-05-modern-ml/14-natural-language-processing.html",
+    "title": "14  Natural Language Processing",
+    "section": "",
+    "text": "14.1 Learning Objectives",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#learning-objectives",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#learning-objectives",
+    "title": "14  Natural Language Processing",
+    "section": "",
+    "text": "Explain how text can be represented computationally.\nBuild text-classification pipelines.\nCompare bag-of-words, TF-IDF, and embeddings.\nExplain the intuition behind transformers.\nEvaluate NLP models responsibly.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#why-this-matters",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#why-this-matters",
+    "title": "14  Natural Language Processing",
+    "section": "14.2 Why This Matters",
+    "text": "14.2 Why This Matters\nA large share of human knowledge is stored as text. NLP enables machine learning with documents, responses, reports, and other unstructured language data.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#real-world-problem",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#real-world-problem",
+    "title": "14  Natural Language Processing",
+    "section": "14.3 Real-World Problem",
+    "text": "14.3 Real-World Problem\nCan open-ended student responses or health narratives be analyzed reliably without reducing nuanced language to misleading labels?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#text-representation",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#text-representation",
+    "title": "14  Natural Language Processing",
+    "section": "14.4 Text Representation",
+    "text": "14.4 Text Representation\n\n14.4.1 Tokenization\n\n\n14.4.2 Bag of Words\n\n\n14.4.3 TF-IDF\n\n\n14.4.4 N-Grams\n\n\n14.4.5 Word and Document Embeddings",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#modeling-text",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#modeling-text",
+    "title": "14  Natural Language Processing",
+    "section": "14.5 Modeling Text",
+    "text": "14.5 Modeling Text\n\n14.5.1 Naive Bayes\n\n\n14.5.2 Logistic Regression\n\n\n14.5.3 Linear SVM\n\n\n14.5.4 Neural Representations",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#transformers",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#transformers",
+    "title": "14  Natural Language Processing",
+    "section": "14.6 Transformers",
+    "text": "14.6 Transformers\n\n14.6.1 Attention\n\n\n14.6.2 Contextual Embeddings\n\n\n14.6.3 Pretrained Language Models\n\n\n14.6.4 Fine-Tuning and Retrieval",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#evaluation",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#evaluation",
+    "title": "14  Natural Language Processing",
+    "section": "14.7 Evaluation",
+    "text": "14.7 Evaluation\n\n14.7.1 Classification Metrics\n\n\n14.7.2 Data Leakage in Text\n\n\n14.7.3 Domain Shift\n\n\n14.7.4 Human Evaluation",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#hands-on-practice",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#hands-on-practice",
+    "title": "14  Natural Language Processing",
+    "section": "14.8 Hands-On Practice",
+    "text": "14.8 Hands-On Practice\nBuild a reproducible text classifier and compare sparse and embedding-based representations.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#common-mistakes",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#common-mistakes",
+    "title": "14  Natural Language Processing",
+    "section": "14.9 Common Mistakes",
+    "text": "14.9 Common Mistakes\n\nLeakage from duplicated or related documents.\nRandom splitting when time or source matters.\nIgnoring class and language imbalance.\nTreating model-generated labels as ground truth.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#knowledge-check",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#knowledge-check",
+    "title": "14  Natural Language Processing",
+    "section": "14.10 Knowledge Check",
+    "text": "14.10 Knowledge Check\n\nWhat does TF-IDF represent?\nHow are contextual embeddings different from bag-of-words features?\nWhat problem does attention address?\nWhy can random splitting inflate NLP performance?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#real-world-case-study",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#real-world-case-study",
+    "title": "14  Natural Language Processing",
+    "section": "14.11 Real-World Case Study",
+    "text": "14.11 Real-World Case Study\n\n14.11.1 Analyzing Educational Text\nDevelop a research-safe NLP workflow using a publicly available text corpus.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#professors-challenge",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#professors-challenge",
+    "title": "14  Natural Language Processing",
+    "section": "14.12 Professor’s Challenge",
+    "text": "14.12 Professor’s Challenge\nAn automated text classifier agrees with human coders 85% of the time. Is that sufficient for research use?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#research-extension",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#research-extension",
+    "title": "14  Natural Language Processing",
+    "section": "14.13 Research Extension",
+    "text": "14.13 Research Extension\nCompare human and machine coding, domain transfer, or robustness across populations.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#reproducibility-check",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#reproducibility-check",
+    "title": "14  Natural Language Processing",
+    "section": "14.14 Reproducibility Check",
+    "text": "14.14 Reproducibility Check\nVersion corpora, document preprocessing, preserve split logic, and record model/checkpoint identifiers.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/14-natural-language-processing.html#key-takeaways",
+    "href": "part-05-modern-ml/14-natural-language-processing.html#key-takeaways",
+    "title": "14  Natural Language Processing",
+    "section": "14.15 Key Takeaways",
+    "text": "14.15 Key Takeaways\n\nText representation strongly shapes NLP performance.\nTransformers provide contextual representations but introduce new reproducibility challenges.\nHuman validation remains important.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Natural Language Processing</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html",
+    "href": "part-05-modern-ml/15-generative-ai.html",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "",
+    "text": "15.1 Learning Objectives",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#learning-objectives",
+    "href": "part-05-modern-ml/15-generative-ai.html#learning-objectives",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "",
+    "text": "Explain how generative models differ from conventional predictive models.\nDescribe the transformer and next-token prediction at a conceptual level.\nExplain prompting, embeddings, retrieval, and fine-tuning.\nEvaluate generative systems beyond anecdotal examples.\nIdentify risks involving hallucination, bias, privacy, and reproducibility.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#why-this-matters",
+    "href": "part-05-modern-ml/15-generative-ai.html#why-this-matters",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.2 Why This Matters",
+    "text": "15.2 Why This Matters\nFoundation models have changed how data scientists write code, analyze text, build interfaces, and design intelligent systems. Their outputs remain probabilistic and require systematic evaluation.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#real-world-problem",
+    "href": "part-05-modern-ml/15-generative-ai.html#real-world-problem",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.3 Real-World Problem",
+    "text": "15.3 Real-World Problem\nA university wants to use an LLM to provide research feedback to students. How should usefulness, factuality, consistency, bias, and educational consequences be evaluated?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#foundations",
+    "href": "part-05-modern-ml/15-generative-ai.html#foundations",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.4 Foundations",
+    "text": "15.4 Foundations\n\n15.4.1 Generative Versus Discriminative Modeling\n\n\n15.4.2 Language Modeling\n\n\n15.4.3 Tokens and Context\n\n\n15.4.4 Transformers and Attention\n\n\n15.4.5 Next-Token Prediction\n\n\n15.4.6 Foundation Models",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#working-with-foundation-models",
+    "href": "part-05-modern-ml/15-generative-ai.html#working-with-foundation-models",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.5 Working With Foundation Models",
+    "text": "15.5 Working With Foundation Models\n\n15.5.1 Prompting\n\n\n15.5.2 Structured Outputs\n\n\n15.5.3 Embeddings\n\n\n15.5.4 Retrieval-Augmented Generation\n\n\n15.5.5 Fine-Tuning\n\n\n15.5.6 Tool Use and Agents",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#evaluation",
+    "href": "part-05-modern-ml/15-generative-ai.html#evaluation",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.6 Evaluation",
+    "text": "15.6 Evaluation\n\n15.6.1 Factuality\n\n\n15.6.2 Reliability\n\n\n15.6.3 Human Evaluation\n\n\n15.6.4 Task-Based Evaluation\n\n\n15.6.5 Reproducibility\n\n\n15.6.6 Cost and Latency",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#responsible-use",
+    "href": "part-05-modern-ml/15-generative-ai.html#responsible-use",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.7 Responsible Use",
+    "text": "15.7 Responsible Use\n\n15.7.1 Hallucination\n\n\n15.7.2 Bias\n\n\n15.7.3 Privacy\n\n\n15.7.4 Academic Integrity\n\n\n15.7.5 AI-Assisted Coding",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#hands-on-practice",
+    "href": "part-05-modern-ml/15-generative-ai.html#hands-on-practice",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.8 Hands-On Practice",
+    "text": "15.8 Hands-On Practice\nDesign an evaluation framework for a generative-AI application rather than judging it from a few demonstrations.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#common-mistakes",
+    "href": "part-05-modern-ml/15-generative-ai.html#common-mistakes",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.9 Common Mistakes",
+    "text": "15.9 Common Mistakes\n\nTreating fluent output as factual output.\nReporting cherry-picked prompts.\nFailing to preserve model/version information.\nUsing sensitive data without appropriate safeguards.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#knowledge-check",
+    "href": "part-05-modern-ml/15-generative-ai.html#knowledge-check",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.10 Knowledge Check",
+    "text": "15.10 Knowledge Check\n\nWhat is next-token prediction?\nWhat is retrieval-augmented generation?\nWhy is generative-AI evaluation difficult?\nHow can model updates affect reproducibility?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#real-world-case-study",
+    "href": "part-05-modern-ml/15-generative-ai.html#real-world-case-study",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.11 Real-World Case Study",
+    "text": "15.11 Real-World Case Study\n\n15.11.1 AI-Assisted Research Feedback\nDevelop an experimental protocol for evaluating LLM-generated feedback.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#professors-challenge",
+    "href": "part-05-modern-ml/15-generative-ai.html#professors-challenge",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.12 Professor’s Challenge",
+    "text": "15.12 Professor’s Challenge\nTwo evaluators strongly prefer an LLM’s answers, but factual-error rates are higher. Which result should matter more?",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#research-extension",
+    "href": "part-05-modern-ml/15-generative-ai.html#research-extension",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.13 Research Extension",
+    "text": "15.13 Research Extension\nDevelop a controlled study suitable for education, HCI, or applied AI research.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#reproducibility-check",
+    "href": "part-05-modern-ml/15-generative-ai.html#reproducibility-check",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.14 Reproducibility Check",
+    "text": "15.14 Reproducibility Check\nRecord model provider, model identifier, date, prompts, parameters, retrieval corpus, evaluation rubric, and outputs where permissible.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-05-modern-ml/15-generative-ai.html#key-takeaways",
+    "href": "part-05-modern-ml/15-generative-ai.html#key-takeaways",
+    "title": "15  Generative AI and Foundation Models",
+    "section": "15.15 Key Takeaways",
+    "text": "15.15 Key Takeaways\n\nGenerative AI requires evaluation as a system, not just a model.\nFluency and correctness are different.\nReproducibility and responsible use require new documentation practices.",
+    "crumbs": [
+      "Part V — Modern Machine Learning",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Generative AI and Foundation Models</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html",
+    "href": "part-06-research/16-model-evaluation.html",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "",
+    "text": "16.1 Learning Objectives",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#learning-objectives",
+    "href": "part-06-research/16-model-evaluation.html#learning-objectives",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "",
+    "text": "Distinguish training, validation, and test data.\nApply cross-validation appropriately.\nExplain nested cross-validation.\nTune hyperparameters without contaminating final evaluation.\nQuantify uncertainty in model performance.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#why-this-matters",
+    "href": "part-06-research/16-model-evaluation.html#why-this-matters",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.2 Why This Matters",
+    "text": "16.2 Why This Matters\nA sophisticated model evaluated incorrectly can produce less credible evidence than a simple model evaluated rigorously.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#real-world-problem",
+    "href": "part-06-research/16-model-evaluation.html#real-world-problem",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.3 Real-World Problem",
+    "text": "16.3 Real-World Problem\nAfter trying dozens of models, an analyst reports only the best test-set result. Why is that result no longer a trustworthy estimate of generalization?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#evaluation-foundations",
+    "href": "part-06-research/16-model-evaluation.html#evaluation-foundations",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.4 Evaluation Foundations",
+    "text": "16.4 Evaluation Foundations\n\n16.4.1 Generalization Error\n\n\n16.4.2 Train, Validation, and Test Sets\n\n\n16.4.3 K-Fold Cross-Validation\n\n\n16.4.4 Stratification\n\n\n16.4.5 Grouped and Time-Based Splits\n\n\n16.4.6 Repeated Cross-Validation\n\n\n16.4.7 Nested Cross-Validation",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#hyperparameter-optimization",
+    "href": "part-06-research/16-model-evaluation.html#hyperparameter-optimization",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.5 Hyperparameter Optimization",
+    "text": "16.5 Hyperparameter Optimization\n\n16.5.1 Grid Search\n\n\n16.5.2 Randomized Search\n\n\n16.5.3 Bayesian Optimization\n\n\n16.5.4 Search Budgets",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#comparing-models",
+    "href": "part-06-research/16-model-evaluation.html#comparing-models",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.6 Comparing Models",
+    "text": "16.6 Comparing Models\n\n16.6.1 Baselines\n\n\n16.6.2 Performance Distributions\n\n\n16.6.3 Confidence Intervals\n\n\n16.6.4 Practical Versus Statistical Differences\n\n\n16.6.5 External Validation",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#learning-curves",
+    "href": "part-06-research/16-model-evaluation.html#learning-curves",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.7 Learning Curves",
+    "text": "16.7 Learning Curves\n\n16.7.1 Diagnosing Bias\n\n\n16.7.2 Diagnosing Variance",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#hands-on-practice",
+    "href": "part-06-research/16-model-evaluation.html#hands-on-practice",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.8 Hands-On Practice",
+    "text": "16.8 Hands-On Practice\nCompare several models under identical repeated cross-validation and preserve an untouched final test set.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#common-mistakes",
+    "href": "part-06-research/16-model-evaluation.html#common-mistakes",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.9 Common Mistakes",
+    "text": "16.9 Common Mistakes\n\nRepeatedly checking test performance.\nSelecting folds that violate the data structure.\nReporting only the winning configuration.\nIgnoring uncertainty around metrics.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#knowledge-check",
+    "href": "part-06-research/16-model-evaluation.html#knowledge-check",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.10 Knowledge Check",
+    "text": "16.10 Knowledge Check\n\nWhat is the purpose of a validation set?\nWhy use nested cross-validation?\nWhen is random K-fold inappropriate?\nWhy should model comparisons include uncertainty?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#real-world-case-study",
+    "href": "part-06-research/16-model-evaluation.html#real-world-case-study",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.11 Real-World Case Study",
+    "text": "16.11 Real-World Case Study\n\n16.11.1 A Reproducible Model Benchmark\nBenchmark models on a public dataset using a preregistered evaluation protocol.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#professors-challenge",
+    "href": "part-06-research/16-model-evaluation.html#professors-challenge",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.12 Professor’s Challenge",
+    "text": "16.12 Professor’s Challenge\nModel A’s mean AUC is 0.842 and Model B’s is 0.845. Is Model B meaningfully better?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#research-extension",
+    "href": "part-06-research/16-model-evaluation.html#research-extension",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.13 Research Extension",
+    "text": "16.13 Research Extension\nDesign a benchmarking paper with robust validation, uncertainty, and external replication.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#reproducibility-check",
+    "href": "part-06-research/16-model-evaluation.html#reproducibility-check",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.14 Reproducibility Check",
+    "text": "16.14 Reproducibility Check\nFreeze split logic, folds, search spaces, metrics, seeds, and the final evaluation protocol before inspecting final results.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/16-model-evaluation.html#key-takeaways",
+    "href": "part-06-research/16-model-evaluation.html#key-takeaways",
+    "title": "16  Model Evaluation, Validation, and Hyperparameter Optimization",
+    "section": "16.15 Key Takeaways",
+    "text": "16.15 Key Takeaways\n\nEvaluation design determines the credibility of performance claims.\nThe test set should approximate genuinely unseen data.\nHyperparameter optimization must occur inside validation.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Model Evaluation, Validation, and Hyperparameter Optimization</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html",
+    "href": "part-06-research/17-responsible-ml.html",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "",
+    "text": "17.1 Learning Objectives",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#learning-objectives",
+    "href": "part-06-research/17-responsible-ml.html#learning-objectives",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "",
+    "text": "Distinguish global and local explanations.\nApply feature-importance and explanation methods cautiously.\nEvaluate calibration and subgroup performance.\nExplain common fairness criteria and their tradeoffs.\nConduct a model-risk assessment appropriate to the application.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#why-this-matters",
+    "href": "part-06-research/17-responsible-ml.html#why-this-matters",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.2 Why This Matters",
+    "text": "17.2 Why This Matters\nA model can be accurate overall while failing important populations, providing misleading explanations, or being inappropriate for the decision in which it is embedded.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#real-world-problem",
+    "href": "part-06-research/17-responsible-ml.html#real-world-problem",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.3 Real-World Problem",
+    "text": "17.3 Real-World Problem\nA health model performs well overall but systematically underpredicts risk for one subgroup. Should it be deployed?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#explainability",
+    "href": "part-06-research/17-responsible-ml.html#explainability",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.4 Explainability",
+    "text": "17.4 Explainability\n\n17.4.1 Model Transparency\n\n\n17.4.2 Global Versus Local Explanations\n\n\n17.4.3 Permutation Importance\n\n\n17.4.4 Partial Dependence\n\n\n17.4.5 SHAP\n\n\n17.4.6 Limits of Post-Hoc Explanation",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#calibration-and-reliability",
+    "href": "part-06-research/17-responsible-ml.html#calibration-and-reliability",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.5 Calibration and Reliability",
+    "text": "17.5 Calibration and Reliability\n\n17.5.1 Predicted Probability Versus Observed Frequency\n\n\n17.5.2 Calibration Curves\n\n\n17.5.3 Brier Score",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#fairness",
+    "href": "part-06-research/17-responsible-ml.html#fairness",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.6 Fairness",
+    "text": "17.6 Fairness\n\n17.6.1 Subgroup Performance\n\n\n17.6.2 Demographic Parity\n\n\n17.6.3 Equal Opportunity\n\n\n17.6.4 Equalized Odds\n\n\n17.6.5 Calibration Across Groups\n\n\n17.6.6 Fairness Tradeoffs",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#responsible-ml",
+    "href": "part-06-research/17-responsible-ml.html#responsible-ml",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.7 Responsible ML",
+    "text": "17.7 Responsible ML\n\n17.7.1 Intended Use\n\n\n17.7.2 Misuse\n\n\n17.7.3 Human Oversight\n\n\n17.7.4 Documentation\n\n\n17.7.5 Model Cards\n\n\n17.7.6 Monitoring and Drift",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#hands-on-practice",
+    "href": "part-06-research/17-responsible-ml.html#hands-on-practice",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.8 Hands-On Practice",
+    "text": "17.8 Hands-On Practice\nAudit a classifier for calibration, subgroup performance, and explanation stability.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#common-mistakes",
+    "href": "part-06-research/17-responsible-ml.html#common-mistakes",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.9 Common Mistakes",
+    "text": "17.9 Common Mistakes\n\nTreating SHAP values as causal effects.\nReporting only aggregate performance.\nAssuming removing protected variables removes bias.\nChoosing a fairness metric without considering context.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#knowledge-check",
+    "href": "part-06-research/17-responsible-ml.html#knowledge-check",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.10 Knowledge Check",
+    "text": "17.10 Knowledge Check\n\nHow do global and local explanations differ?\nWhat is calibration?\nWhy can fairness criteria conflict?\nWhy does removing a protected attribute not guarantee fairness?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#real-world-case-study",
+    "href": "part-06-research/17-responsible-ml.html#real-world-case-study",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.11 Real-World Case Study",
+    "text": "17.11 Real-World Case Study\n\n17.11.1 Responsible Prediction in Health or Education\nConduct a structured model audit and document intended use and limitations.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#professors-challenge",
+    "href": "part-06-research/17-responsible-ml.html#professors-challenge",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.12 Professor’s Challenge",
+    "text": "17.12 Professor’s Challenge\nThe most accurate model has the largest subgroup disparity. What evidence and stakeholder input are needed to decide what to do?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#research-extension",
+    "href": "part-06-research/17-responsible-ml.html#research-extension",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.13 Research Extension",
+    "text": "17.13 Research Extension\nDevelop a fairness, calibration, or explainability study with substantive domain relevance.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#reproducibility-check",
+    "href": "part-06-research/17-responsible-ml.html#reproducibility-check",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.14 Reproducibility Check",
+    "text": "17.14 Reproducibility Check\nDocument group definitions, metrics, thresholds, explanation settings, software versions, and all audit decisions.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/17-responsible-ml.html#key-takeaways",
+    "href": "part-06-research/17-responsible-ml.html#key-takeaways",
+    "title": "17  Explainable, Fair, and Responsible Machine Learning",
+    "section": "17.15 Key Takeaways",
+    "text": "17.15 Key Takeaways\n\nAccuracy is necessary but not sufficient for responsible ML.\nExplanations are model-dependent and not automatically causal.\nFairness requires explicit normative and technical choices.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Explainable, Fair, and Responsible Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html",
+    "href": "part-06-research/18-reproducible-ml.html",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "",
+    "text": "18.1 Learning Objectives",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#learning-objectives",
+    "href": "part-06-research/18-reproducible-ml.html#learning-objectives",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "",
+    "text": "Build a reproducible ML project from raw data to publication.\nUse Git, GitHub, Quarto, and environment specifications.\nDocument data and model provenance.\nArchive scholarly releases with persistent identifiers.\nTranslate a machine learning analysis into research communication.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#why-this-matters",
+    "href": "part-06-research/18-reproducible-ml.html#why-this-matters",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.2 Why This Matters",
+    "text": "18.2 Why This Matters\nA result that cannot be traced, audited, or reproduced is difficult to trust and difficult to build upon.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#real-world-problem",
+    "href": "part-06-research/18-reproducible-ml.html#real-world-problem",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.3 Real-World Problem",
+    "text": "18.3 Real-World Problem\nSix months after publication, can another researcher reproduce every table, figure, metric, and modeling decision in your study?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#reproducible-project-design",
+    "href": "part-06-research/18-reproducible-ml.html#reproducible-project-design",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.4 Reproducible Project Design",
+    "text": "18.4 Reproducible Project Design\n\n18.4.1 Project Structure\n\n\n18.4.2 Raw Versus Derived Data\n\n\n18.4.3 Scripts and Notebooks\n\n\n18.4.4 Quarto\n\n\n18.4.5 Git and GitHub\n\n\n18.4.6 Environments and Dependencies\n\n\n18.4.7 Randomness and Seeds",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#data-provenance",
+    "href": "part-06-research/18-reproducible-ml.html#data-provenance",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.5 Data Provenance",
+    "text": "18.5 Data Provenance\n\n18.5.1 Data Sources\n\n\n18.5.2 Data Dictionaries\n\n\n18.5.3 Licensing\n\n\n18.5.4 Versioning\n\n\n18.5.5 Sensitive Data",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#model-provenance",
+    "href": "part-06-research/18-reproducible-ml.html#model-provenance",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.6 Model Provenance",
+    "text": "18.6 Model Provenance\n\n18.6.1 Training Configuration\n\n\n18.6.2 Hyperparameters\n\n\n18.6.3 Evaluation Protocol\n\n\n18.6.4 Artifacts and Model Cards",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#scholarly-communication",
+    "href": "part-06-research/18-reproducible-ml.html#scholarly-communication",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.7 Scholarly Communication",
+    "text": "18.7 Scholarly Communication\n\n18.7.1 Tables and Figures\n\n\n18.7.2 Methods Reporting\n\n\n18.7.3 Limitations\n\n\n18.7.4 Repositories\n\n\n18.7.5 CITATION.cff\n\n\n18.7.6 Releases\n\n\n18.7.7 Archiving and DOIs",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#from-class-project-to-research-product",
+    "href": "part-06-research/18-reproducible-ml.html#from-class-project-to-research-product",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.8 From Class Project to Research Product",
+    "text": "18.8 From Class Project to Research Product\n\n18.8.1 Replication\n\n\n18.8.2 Extension\n\n\n18.8.3 Benchmarking\n\n\n18.8.4 Methodological Contribution\n\n\n18.8.5 Substantive Contribution",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#hands-on-practice",
+    "href": "part-06-research/18-reproducible-ml.html#hands-on-practice",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.9 Hands-On Practice",
+    "text": "18.9 Hands-On Practice\nPackage one analysis from the book as a fully reproducible research repository.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#common-mistakes",
+    "href": "part-06-research/18-reproducible-ml.html#common-mistakes",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.10 Common Mistakes",
+    "text": "18.10 Common Mistakes\n\nManually editing outputs.\nLosing track of data versions.\nFailing to capture dependencies.\nPublishing only a notebook without execution instructions.\nConfusing an open repository with an archived scholarly release.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#knowledge-check",
+    "href": "part-06-research/18-reproducible-ml.html#knowledge-check",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.11 Knowledge Check",
+    "text": "18.11 Knowledge Check\n\nWhat is computational reproducibility?\nWhy separate raw and derived data?\nWhat role does a software environment play?\nWhy create tagged releases?\nWhat does a DOI contribute?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#real-world-case-study",
+    "href": "part-06-research/18-reproducible-ml.html#real-world-case-study",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.12 Real-World Case Study",
+    "text": "18.12 Real-World Case Study\n\n18.12.1 From Notebook to Citable Research Artifact\nTransform a chapter project into a documented, versioned, archived research output.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#professors-challenge",
+    "href": "part-06-research/18-reproducible-ml.html#professors-challenge",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.13 Professor’s Challenge",
+    "text": "18.13 Professor’s Challenge\nA paper’s repository contains code but the analysis no longer runs. Is the research reproducible?",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#research-extension",
+    "href": "part-06-research/18-reproducible-ml.html#research-extension",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.14 Research Extension",
+    "text": "18.14 Research Extension\nDevelop a replication or reproducibility study around a published machine learning analysis.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#reproducibility-check",
+    "href": "part-06-research/18-reproducible-ml.html#reproducibility-check",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.15 Reproducibility Check",
+    "text": "18.15 Reproducibility Check\nClone the project into a clean location and reproduce the complete analysis using only documented instructions.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  },
+  {
+    "objectID": "part-06-research/18-reproducible-ml.html#key-takeaways",
+    "href": "part-06-research/18-reproducible-ml.html#key-takeaways",
+    "title": "18  Reproducible Machine Learning and Research Communication",
+    "section": "18.16 Key Takeaways",
+    "text": "18.16 Key Takeaways\n\nReproducibility is a design principle, not a final checklist.\nVersion control and environment capture make analytical decisions auditable.\nScholarly archiving turns computational work into a persistent research artifact.",
+    "crumbs": [
+      "Part VI — Reliable and Research-Ready Machine Learning",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reproducible Machine Learning and Research Communication</span>"
+    ]
+  }
+]
