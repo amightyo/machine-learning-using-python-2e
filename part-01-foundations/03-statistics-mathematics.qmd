@@ -1,79 +1,812 @@
 # Statistics and Mathematics for Machine Learning
 
 ## Learning Objectives
-- Explain the statistical concepts most frequently used in machine learning.
-- Work with vectors, matrices, probabilities, expectations, and variance.
-- Interpret covariance and correlation.
-- Explain derivatives, gradients, and optimization conceptually.
-- Connect probability and linear algebra to ML algorithms.
+
+By the end of this chapter, you should be able to:
+
+- explain how descriptive statistics summarize a sample without fully describing its data-generating process;
+- interpret probability as a language for uncertainty;
+- distinguish population quantities, sample statistics, parameters, and estimates;
+- explain why sampling variation matters for machine learning;
+- calculate and interpret mean, variance, standard deviation, covariance, and correlation;
+- standardize features and explain why scaling matters for selected algorithms;
+- represent observations, features, and model coefficients as vectors and matrices;
+- calculate and interpret common distance measures and dot products;
+- explain a loss function as a mathematical representation of model error;
+- interpret derivatives and gradients as information about local change;
+- implement gradient descent for a simple optimization problem;
+- connect statistical and mathematical abstractions to machine-learning decisions;
+- recognize that mathematical precision does not eliminate measurement, sampling, or modeling assumptions.
 
 ## Why This Matters
-Machine learning algorithms encode mathematical assumptions. Understanding those assumptions makes it easier to diagnose models, choose methods, and interpret results.
 
-## Real-World Problem
-Two predictors are strongly correlated and a model's coefficients become unstable. What mathematical and statistical concepts explain the problem?
+Machine learning can be used by calling library functions without understanding the mathematics underneath them. But technical fluency becomes much deeper when we can explain **why** an algorithm behaves as it does.
 
-## Probability and Statistics
-### Random Variables
-### Probability Distributions
-### Expected Value
+Statistics helps us reason about variation, uncertainty, sampling, and relationships. Linear algebra gives us a compact language for representing many observations and features at once. Calculus helps us understand how model parameters can be adjusted to reduce error. Optimization connects those ideas to learning.
+
+This chapter is therefore not a detached mathematics review. Every concept will follow a recurring path:
+
+$$
+\boxed{\text{Intuition}}
+\rightarrow
+\boxed{\text{Equation}}
+\rightarrow
+\boxed{\text{Python}}
+\rightarrow
+\boxed{\text{Machine Learning Application}}.
+$$
+
+::: {.callout-important icon=false}
+## Central Question
+
+**What mathematical and statistical ideas allow us to understand what a machine-learning algorithm is actually doing?**
+:::
+
+## From Data to Mathematical Representation
+
+Suppose our data contain $n$ observations and $p$ features. We can represent the feature matrix as
+
+$$
+X =
+\begin{bmatrix}
+x_{11} & x_{12} & \cdots & x_{1p}\\
+x_{21} & x_{22} & \cdots & x_{2p}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{n1} & x_{n2} & \cdots & x_{np}
+\end{bmatrix}
+\in \mathbb{R}^{n \times p}.
+$$
+
+The target can be represented as
+
+$$
+y =
+\begin{bmatrix}
+y_1\\
+y_2\\
+\vdots\\
+y_n
+\end{bmatrix}.
+$$
+
+This notation is not merely decorative. It allows us to describe entire learning algorithms compactly.
+
+## Describing Data: Center and Spread
+
+Consider a sample $x_1,\ldots,x_n$.
+
+### Mean
+
+The sample mean is
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i.
+$$
+
+```{python}
+import numpy as np
+
+scores = np.array([72, 75, 81, 84, 88, 90, 95])
+scores.mean()
+```
+
+The mean is a useful summary, but it does not reveal the entire distribution.
+
 ### Variance and Standard Deviation
-### Covariance and Correlation
-### Conditional Probability
-### Bayes' Theorem
-### Sampling and Sampling Variability
-### Confidence Intervals and Hypothesis Tests
-### Association Versus Causation
 
-## Linear Algebra
-### Scalars, Vectors, and Matrices
-### Dot Products
-### Matrix Multiplication
-### Transpose and Inverse
-### Eigenvalues and Eigenvectors
+Sample variance is
 
-## Calculus and Optimization
-### Functions and Slopes
-### Derivatives
-### Partial Derivatives
-### Gradients
-### Gradient Descent
+$$
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2.
+$$
 
-## Mathematical Connection to Machine Learning
-### Loss Functions
-### Maximum Likelihood
-### Regularization
+The sample standard deviation is
 
-## Hands-On Practice
-Use Python to calculate descriptive statistics, correlations, matrix operations, and a simple gradient-descent update.
+$$
+s = \sqrt{s^2}.
+$$
 
-## Common Mistakes
-- Treating correlation as causation.
-- Assuming statistical significance implies predictive usefulness.
-- Ignoring scale when distance is important.
-- Applying formulas without understanding assumptions.
+```{python}
+sample_variance = np.var(scores, ddof=1)
+sample_sd = np.std(scores, ddof=1)
+
+sample_variance, sample_sd
+```
+
+Variance measures squared dispersion; standard deviation returns that dispersion to the original measurement units.
+
+::: {.callout-note icon=false}
+## Same Mean, Different Data
+
+Two datasets can have the same mean and dramatically different variability, shape, outliers, and relationships. Summary statistics compress information. Compression is useful—but never neutral.
+:::
+
+## Visual Intuition: Distribution and Variation
+
+```{python}
+#| label: fig-distributions
+#| fig-cap: "Two samples can have similar centers while differing substantially in spread."
+#| warning: false
+
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(42)
+narrow = rng.normal(loc=0, scale=1, size=1000)
+wide = rng.normal(loc=0, scale=3, size=1000)
+
+plt.figure(figsize=(8, 5))
+plt.hist(narrow, bins=35, alpha=0.55, label="SD ≈ 1")
+plt.hist(wide, bins=35, alpha=0.45, label="SD ≈ 3")
+plt.xlabel("Value")
+plt.ylabel("Frequency")
+plt.title("Similar Centers, Different Variation")
+plt.legend()
+plt.show()
+```
+
+Variation matters in ML because algorithms respond not only to where variables are centered but also to their scales and distributions.
+
+## Probability: A Language for Uncertainty
+
+For an event $A$,
+
+$$
+0 \le P(A) \le 1.
+$$
+
+If $A$ and $B$ are events, conditional probability is
+
+$$
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+\qquad P(B)>0.
+$$
+
+Conditional reasoning appears throughout machine learning. A classifier may estimate a probability such as
+
+$$
+P(Y=1\mid X=x).
+$$
+
+That is a statement about uncertainty conditional on the information represented by $x$.
+
+### Expected Value
+
+For a discrete random variable $X$,
+
+$$
+E[X] = \sum_x xP(X=x).
+$$
+
+Expected value is a probability-weighted average. Many machine-learning objectives can be interpreted as attempts to minimize expected loss.
+
+## Probability Distributions
+
+A probability distribution describes how probability is allocated across possible values of a random variable. SciPy provides extensive tools for continuous and discrete probability distributions as well as sample statistics and statistical tests [@scipyStats2026].
+
+Common distributions we will encounter include:
+
+- Bernoulli — binary outcomes;
+- Binomial — counts of successes across trials;
+- Normal — continuous measurements and error models;
+- Poisson — event counts;
+- empirical distributions — distributions represented directly by observed data.
+
+### A Normal Distribution in Python
+
+```{python}
+from scipy.stats import norm
+
+probability = norm.cdf(1.96) - norm.cdf(-1.96)
+probability
+```
+
+The code computes the probability that a standard normal random variable falls between -1.96 and 1.96.
+
+The important lesson is not memorizing 1.96. It is understanding that probability models provide mathematical representations of uncertainty.
+
+## Population, Sample, Parameter, Statistic
+
+Suppose we want to know the mean sleep duration of a target population.
+
+The **population** is the full set of units about which we want to make a statement.
+
+A **sample** is the subset observed.
+
+A **parameter** is a population quantity such as $\mu$.
+
+A **statistic** is a sample quantity such as $\bar{x}$.
+
+We use statistics to learn about parameters, but the statistic changes from sample to sample.
+
+### Sampling Variation by Simulation
+
+```{python}
+#| label: fig-sampling-distribution
+#| fig-cap: "Sampling distribution of the mean across repeated samples."
+#| warning: false
+
+rng = np.random.default_rng(42)
+
+population = rng.normal(loc=7.0, scale=1.5, size=100_000)
+sample_means = []
+
+for _ in range(2000):
+    sample = rng.choice(population, size=100, replace=True)
+    sample_means.append(sample.mean())
+
+plt.figure(figsize=(8, 5))
+plt.hist(sample_means, bins=35)
+plt.axvline(np.mean(population), linestyle="--", label="Population mean")
+plt.xlabel("Sample mean")
+plt.ylabel("Frequency")
+plt.title("Repeated Samples Produce Different Estimates")
+plt.legend()
+plt.show()
+```
+
+The same sampling process does not produce exactly the same estimate every time.
+
+::: {.callout-tip icon=false}
+## Connection to Machine Learning
+
+Training data are samples. Model performance, fitted parameters, feature importance, and selected hyperparameters can therefore vary with the sample.
+
+A single train/test split is one realization—not a law of nature.
+:::
+
+## Standard Error and Uncertainty
+
+For an independent sample, the estimated standard error of the mean is commonly written
+
+$$
+SE(\bar{x}) = \frac{s}{\sqrt{n}}.
+$$
+
+As $n$ grows, the standard error generally becomes smaller, all else equal.
+
+But large samples do not automatically solve poor measurement, biased sampling, leakage, confounding, or dataset shift.
+
+## Covariance and Correlation
+
+Covariance describes how two variables vary together:
+
+$$
+\operatorname{Cov}(X,Y)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}
+(x_i-\bar{x})(y_i-\bar{y}).
+$$
+
+Correlation standardizes covariance:
+
+$$
+r_{XY}
+=
+\frac{\operatorname{Cov}(X,Y)}{s_Xs_Y}.
+$$
+
+For Pearson correlation,
+
+$$
+-1 \le r \le 1.
+$$
+
+```{python}
+study_hours = np.array([2, 3, 5, 6, 8, 9])
+exam_score = np.array([61, 66, 74, 78, 88, 92])
+
+np.corrcoef(study_hours, exam_score)[0, 1]
+```
+
+Correlation can be useful for exploration, feature analysis, and understanding redundancy. It does not establish causation.
+
+## Standardization: Putting Features on Comparable Scales
+
+A standard score is
+
+$$
+z_i=\frac{x_i-\bar{x}}{s}.
+$$
+
+In machine-learning implementations, scaling statistics should be learned from the **training data** and then applied to later data. scikit-learn's `StandardScaler` centers features and scales them using statistics learned during `fit` [@sklearnStandardScaler2026].
+
+```{python}
+from sklearn.preprocessing import StandardScaler
+
+X_scale_demo = np.array([
+    [18, 22000],
+    [25, 48000],
+    [40, 76000],
+    [55, 110000]
+])
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_scale_demo)
+
+X_scaled
+```
+
+Why can scaling matter? Many learning objectives depend on distances, dot products, gradients, or regularization. A feature whose numerical scale is orders of magnitude larger than another can disproportionately influence such calculations. scikit-learn explicitly notes this issue for algorithms involving RBF kernels and L1/L2 regularization [@sklearnStandardScaler2026].
+
+::: {.callout-warning icon=false}
+## Statistical Calculation Can Become Leakage
+
+Do **not** compute scaling parameters using the entire dataset before evaluation. The test set must not influence training-time preprocessing.
+
+We will solve this systematically with pipelines in Chapter 5.
+:::
+
+## Linear Algebra: The Language of Many Models
+
+NumPy provides operations for dot products, matrix multiplication, norms, decompositions, and other linear-algebra routines [@numpyLinearAlgebra2026].
+
+### Vectors
+
+A feature vector for one observation might be
+
+$$
+x =
+\begin{bmatrix}
+x_1\\x_2\\x_3
+\end{bmatrix}.
+$$
+
+A coefficient vector might be
+
+$$
+\beta =
+\begin{bmatrix}
+\beta_1\\\beta_2\\\beta_3
+\end{bmatrix}.
+$$
+
+Their dot product is
+
+$$
+x^\top\beta
+=
+\sum_{j=1}^{p}x_j\beta_j.
+$$
+
+```{python}
+x = np.array([2.0, 5.0, 1.5])
+beta = np.array([0.8, -0.2, 1.1])
+
+np.dot(x, beta)
+```
+
+This operation appears throughout linear models, neural networks, similarity calculations, and many other methods.
+
+### Matrix-Vector Multiplication
+
+For many observations,
+
+$$
+\hat{y}=X\beta.
+$$
+
+```{python}
+X_demo = np.array([
+    [1.0, 2.0],
+    [1.0, 4.0],
+    [1.0, 6.0]
+])
+
+beta = np.array([3.0, 1.5])
+
+X_demo @ beta
+```
+
+The same equation produces predictions for all observations at once.
+
+## Distance and Similarity
+
+For vectors $x$ and $z$, Euclidean distance is
+
+$$
+d(x,z)
+=
+\sqrt{\sum_{j=1}^{p}(x_j-z_j)^2}.
+$$
+
+```{python}
+x = np.array([1.0, 2.0])
+z = np.array([4.0, 6.0])
+
+np.linalg.norm(x - z)
+```
+
+Distance is central to methods such as nearest neighbors, clustering, and some anomaly-detection approaches.
+
+### Why Scaling Changes Distance
+
+```{python}
+person_a = np.array([20, 30_000])
+person_b = np.array([50, 31_000])
+
+np.linalg.norm(person_a - person_b)
+```
+
+The income difference dominates the age difference numerically. This does not necessarily mean income is substantively more important.
+
+::: {.callout-note icon=false}
+## Distance Is a Modeling Choice
+
+Before asking which observations are “close,” ask:
+
+**Close according to which representation, scale, and metric?**
+:::
+
+## Functions, Loss, and Learning
+
+A supervised model can be written as
+
+$$
+\hat{y}=f_\theta(x).
+$$
+
+To learn $\theta$, we need a way to quantify error.
+
+For regression, mean squared error is
+
+$$
+\operatorname{MSE}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2.
+$$
+
+```{python}
+y_true = np.array([3.0, 5.0, 7.0])
+y_pred = np.array([2.5, 5.5, 8.0])
+
+mse = np.mean((y_true - y_pred) ** 2)
+mse
+```
+
+The loss function translates the vague instruction “fit the data well” into a mathematical objective.
+
+That translation has consequences. Different loss functions value errors differently.
+
+## Derivatives: Measuring Local Change
+
+For a function $f(\theta)$, the derivative
+
+$$
+\frac{df}{d\theta}
+$$
+
+describes how the function changes locally as $\theta$ changes.
+
+Consider
+
+$$
+J(\theta)=(\theta-3)^2.
+$$
+
+Then
+
+$$
+\frac{dJ}{d\theta}=2(\theta-3).
+$$
+
+If $\theta>3$, the derivative is positive. If $\theta<3$, it is negative. At $\theta=3$, the derivative is zero.
+
+## Gradients: Change in Multiple Dimensions
+
+For parameters
+
+$$
+\theta =
+\begin{bmatrix}
+\theta_1\\
+\theta_2\\
+\vdots\\
+\theta_p
+\end{bmatrix},
+$$
+
+the gradient is
+
+$$
+\nabla J(\theta)
+=
+\begin{bmatrix}
+\frac{\partial J}{\partial\theta_1}\\
+\frac{\partial J}{\partial\theta_2}\\
+\vdots\\
+\frac{\partial J}{\partial\theta_p}
+\end{bmatrix}.
+$$
+
+The gradient points in the direction of steepest local increase. To reduce a differentiable objective, we move in the opposite direction.
+
+## Gradient Descent
+
+A basic update is
+
+$$
+\theta_{t+1}
+=
+\theta_t
+-
+\eta\nabla J(\theta_t),
+$$
+
+where $\eta$ is the **learning rate**.
+
+### Watch Optimization Happen
+
+```{python}
+#| label: fig-gradient-descent
+#| fig-cap: "Gradient descent iteratively approaches the minimum of a simple loss function."
+#| warning: false
+
+theta = -4.0
+learning_rate = 0.15
+history = [theta]
+
+for _ in range(20):
+    gradient = 2 * (theta - 3)
+    theta = theta - learning_rate * gradient
+    history.append(theta)
+
+grid = np.linspace(-5, 7, 300)
+loss = (grid - 3) ** 2
+
+plt.figure(figsize=(8, 5))
+plt.plot(grid, loss, label=r"$J(\theta)=(\theta-3)^2$")
+plt.scatter(history, [(h - 3) ** 2 for h in history], label="Gradient descent steps")
+plt.xlabel(r"$\theta$")
+plt.ylabel("Loss")
+plt.title("Learning by Following the Gradient")
+plt.legend()
+plt.show()
+```
+
+The algorithm does not “know” that the answer is 3. It repeatedly uses local information about the slope to update the parameter.
+
+### Learning Rate
+
+If $\eta$ is too small, learning can be slow. If it is too large, updates may overshoot or diverge.
+
+This simple idea will reappear in neural networks and other optimization-based methods.
+
+## From Intuition to Equation to Python to ML
+
+Consider feature standardization.
+
+**Intuition:** features measured on very different scales may distort distance- or optimization-based learning.
+
+**Equation:**
+
+$$
+z=\frac{x-\mu}{\sigma}.
+$$
+
+**Python:**
+
+```{python}
+scaler = StandardScaler()
+```
+
+**ML application:** support vector machines, regularized linear models, nearest-neighbor methods, neural networks, and other methods can be sensitive to feature scale.
+
+This four-part pattern is how we will use mathematics throughout the book.
+
+## Beyond the Algorithm: The Map Is Not the Territory
+
+::: {.callout-note icon=false}
+## Mathematical Precision and Substantive Truth
+
+A model can be mathematically precise and still represent the world poorly.
+
+When we write a person as a vector,
+
+$$
+x=[x_1,x_2,\ldots,x_p],
+$$
+
+we have not represented the person. We have represented selected measurements about that person.
+
+When we minimize a loss function, we have not defined everything society or a scientific discipline values. We have defined a mathematical criterion.
+
+Abstraction is one of the great powers of data science because it allows complex phenomena to become computationally tractable. But abstraction also removes information.
+
+The disciplined data scientist therefore asks two questions:
+
+1. **Is the mathematics correct?**
+2. **Is the mathematical representation appropriate for the phenomenon and decision?**
+
+The first question concerns computation. The second requires domain knowledge, measurement, judgment, and sometimes ethics.
+
+**The map can be extraordinarily useful without becoming the territory.**
+:::
+
+## Three Tracks: Same Mathematics, Different Meaning
+
+### Health Track
+
+Suppose systolic blood pressure and age are positively correlated in a sample. The correlation summarizes an observed relationship. It does not establish that changing age would cause blood pressure to change in an intervention-like sense.
+
+Scaling biomarkers may help an algorithm computationally, but it does not make different biomarkers substantively equivalent.
+
+### Education Track
+
+Institutional tuition, enrollment, retention, and completion may have dramatically different scales. Standardization can help certain algorithms, but the meaning of a one-standard-deviation difference depends on the variable and population.
+
+### Open ML Benchmark Track
+
+Benchmark datasets are useful for isolating mathematical behavior. We can intentionally rescale one feature and observe how a distance-based algorithm changes. This makes benchmark data especially useful for controlled learning experiments.
+
+## Try It
+
+For the vector
+
+$$
+x=[2,4,6,8,10],
+$$
+
+1. calculate the mean;
+2. calculate the sample variance;
+3. calculate the sample standard deviation;
+4. standardize each value;
+5. verify that the standardized values have mean approximately zero;
+6. explain why this transformation changes units but not ordering.
+
+Then reproduce your calculations with NumPy.
+
+## Hands-On Lab: Mathematics You Can See
+
+Use a public or built-in dataset with several numeric features.
+
+1. inspect feature means and standard deviations;
+2. create distributions for two features;
+3. calculate a correlation matrix;
+4. select two observations and calculate Euclidean distance;
+5. standardize the features using **training data only**;
+6. recalculate the distance;
+7. explain why it changed;
+8. fit a simple k-nearest-neighbors classifier before and after scaling;
+9. compare performance;
+10. explain why the result is algorithm-dependent rather than proof that scaling always improves ML.
+
+## AI Pair Programmer
+
+Ask an AI assistant:
+
+> “Explain why standardization improves every machine-learning algorithm.”
+
+The premise is intentionally flawed.
+
+Audit the response:
+
+- Does it challenge the word **every**?
+- Does it distinguish distance/gradient-sensitive models from tree-based models?
+- Does it explain why scaling must be learned from training data?
+- Does it confuse standardization with normalization?
+- Does it claim that standardized features become normally distributed?
+- Which claims require verification?
+
+::: {.callout-warning icon=false}
+## Mathematical Language Can Make Wrong Answers Sound More Convincing
+
+Equations and technical vocabulary do not substitute for valid reasoning.
+:::
+
+## Practitioner Track
+
+A practitioner should be able to:
+
+- summarize distributions and relationships;
+- identify when scale matters;
+- reason about vectors, matrices, and distances;
+- interpret loss functions;
+- understand optimization at a conceptual level;
+- recognize sampling variability in model results.
+
+## Researcher Track
+
+A researcher should additionally be able to:
+
+- distinguish samples from target populations;
+- reason about uncertainty and sampling;
+- separate association from causation;
+- connect mathematical representations to measurement assumptions;
+- recognize that estimates and model metrics vary across samples;
+- justify mathematical choices in relation to the research question.
+
+## Professor's Challenge: When Mathematics Misleads
+
+A research team compares two classifiers for predicting a health outcome.
+
+Model A has an accuracy of 0.91.
+
+Model B has an accuracy of 0.88.
+
+The team concludes:
+
+> “Model A is mathematically superior and should therefore be used.”
+
+Critique the conclusion.
+
+Your analysis should address:
+
+- outcome prevalence;
+- sampling variation;
+- uncertainty in the performance estimates;
+- sensitivity and specificity;
+- calibration;
+- asymmetric error costs;
+- subgroup performance;
+- external validity;
+- whether the same test observations were used for both models;
+- whether preprocessing was fitted only on training data;
+- whether a three-percentage-point difference is practically meaningful;
+- whether mathematical superiority can be defined by a single metric.
+
+Conclude by explaining what additional evidence is required before choosing between the models.
+
+## Research Studio
+
+Choose one of the three tracks.
+
+Identify a candidate research problem and write a mathematical specification containing:
+
+1. unit of analysis;
+2. target variable;
+3. feature matrix $X$;
+4. target vector $y$;
+5. at least three numeric features and their units;
+6. at least one potential scaling issue;
+7. one expected association;
+8. one association that should **not** be interpreted causally;
+9. a candidate loss or evaluation function;
+10. the target population to which you hope the result will generalize;
+11. one source of sampling uncertainty;
+12. one way the mathematical representation simplifies the real phenomenon.
 
 ## Knowledge Check
-1. What does covariance measure?
-2. How is correlation different from covariance?
-3. What does a gradient represent?
-4. Why are eigenvectors important in PCA?
-5. What is conditional probability?
 
-## Real-World Case Study
-### Understanding Health Risk Variables
-Explore relationships among demographic, behavioral, and biometric variables in a public health dataset.
-
-## Professor's Challenge
-A variable is statistically significant but adds almost no out-of-sample predictive performance. Should it remain in a predictive model?
-
-## Research Extension
-Formulate a study comparing inferential and predictive conclusions from the same dataset.
+1. What is the difference between a parameter and a statistic?
+2. Why does sample variance use squared deviations?
+3. What does standard deviation communicate that variance does not?
+4. What does $P(Y=1\mid X=x)$ represent?
+5. Why do repeated samples produce different estimates?
+6. What does correlation fail to establish?
+7. Why can feature scaling matter for Euclidean distance?
+8. What does a dot product do?
+9. What does a loss function contribute to machine learning?
+10. What information does a derivative provide?
+11. Why does gradient descent move opposite the gradient?
+12. Why can a mathematically correct model still support a poor substantive conclusion?
 
 ## Reproducibility Check
-Record transformations, statistical assumptions, and all computational choices.
+
+Before leaving this chapter, verify that your analysis records:
+
+- whether statistics use population or sample conventions;
+- random seeds for simulations;
+- feature units;
+- scaling procedures;
+- which data were used to estimate scaling parameters;
+- distance metrics;
+- loss functions;
+- optimization settings such as learning rate;
+- code used to produce mathematical figures and numerical results.
 
 ## Key Takeaways
-- Statistics, linear algebra, probability, and optimization form the language of machine learning.
-- Mathematical understanding improves model selection and diagnosis.
-- Predictive and inferential usefulness are not identical.
+
+- Statistics provides a language for variation, relationships, sampling, and uncertainty.
+- Probability represents uncertainty mathematically.
+- Samples provide imperfect information about populations.
+- Correlation measures association, not causation.
+- Scaling changes numerical representation and can materially affect some algorithms.
+- Linear algebra compactly represents observations, features, parameters, and predictions.
+- Distance depends on representation, scale, and metric.
+- Loss functions translate modeling goals into mathematical objectives.
+- Derivatives and gradients describe local change.
+- Gradient descent uses local information to iteratively reduce a loss.
+- Mathematical correctness is necessary but not sufficient for scientific or practical validity.
