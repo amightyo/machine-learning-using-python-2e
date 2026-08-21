@@ -1,72 +1,516 @@
 # Python for Machine Learning
 
 ## Learning Objectives
-- Configure a reproducible Python environment for machine learning.
-- Work with NumPy arrays and pandas DataFrames.
-- Visualize data for exploratory analysis.
-- Use scikit-learn's estimator and pipeline APIs.
-- Organize machine learning code for reproducibility.
+
+By the end of this chapter, you should be able to:
+
+- configure a reproducible Python workspace for machine learning;
+- use the Python language features most relevant to data science;
+- work with NumPy arrays and pandas DataFrames;
+- move from a DataFrame to feature matrix $X$ and target vector $y$;
+- distinguish storage types from measurement meaning;
+- create purposeful exploratory visualizations;
+- write reusable functions and debug systematically;
+- document data provenance and transformations;
+- use Git, GitHub, Quarto, and AI assistance as parts of a reproducible workflow;
+- audit code that runs successfully but is analytically questionable.
 
 ## Why This Matters
-Reliable machine learning depends on reliable computational workflows. Python provides a mature ecosystem for data manipulation, visualization, statistical modeling, machine learning, and deep learning.
 
-## Real-World Problem
-A colleague sends you a notebook that worked six months ago but no longer runs. How can environments, dependency management, version control, and reproducible code prevent this problem?
+A machine learning model is only as trustworthy as the computational process that produced it.
 
-## Conceptual Foundations
-### Python as a Data Science Language
-### Scripts, Notebooks, and Quarto
-### Objects, Functions, and Modules
-### NumPy
-### pandas
-### Visualization
-### scikit-learn
-### Environments and Dependencies
-### Git and GitHub
+Python makes it easy to move from an idea to executable analysis. That speed is valuable, but code can run successfully while embodying poor assumptions, undocumented transformations, leakage, fragile paths, or irreproducible dependencies.
 
-## Python Implementation
-### Inspecting the Environment
-### Loading and Inspecting Data
-### Selecting and Transforming Variables
-### Visualization
-### A Minimal scikit-learn Model
-### Pipelines
+::: {.callout-important icon=false}
+## Central Question
+
+**How do we move from exploratory Python code to a trustworthy, reproducible computational workflow for machine learning?**
+:::
+
+## Why Python?
+
+Python combines a readable general-purpose language with a large scientific-computing ecosystem.
+
+| Library | Primary role |
+|---|---|
+| NumPy | numerical arrays and vectorized computation |
+| pandas | tabular data manipulation |
+| Matplotlib | foundational plotting |
+| Plotly | interactive visualization when interactivity adds value |
+| scikit-learn | preprocessing, modeling, evaluation, pipelines |
+| SciPy | scientific and numerical routines |
+| statsmodels | statistical modeling and inference in selected applications |
+
+The goal is not to memorize library names. It is to understand how the tools participate in a coherent analytical workflow.
+
+## Your Machine Learning Workspace
+
+Our primary workflow uses **VS Code**, **Python**, **Quarto**, **Git**, and **GitHub**. Quarto can execute Python code embedded in Markdown so generating code remains connected to tables, figures, and interpretation [@quartoPython2026].
+
+A small project might look like:
+
+```text
+my-ml-project/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── figures/
+├── src/
+│   └── prepare_data.py
+├── analysis.qmd
+├── README.md
+├── requirements.txt
+└── .gitignore
+```
+
+::: {.callout-note icon=false}
+## Preserve the Evidence
+
+**Raw data should normally remain raw.** Write code that transforms source data into processed data rather than manually editing the source.
+:::
+
+## Reproducible Python Environments
+
+Different projects can require different package versions. Python's `venv` module creates isolated environments [@pythonVenv2026].
+
+```bash
+python -m venv .venv
+```
+
+Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Install packages:
+
+```bash
+python -m pip install numpy pandas matplotlib scikit-learn jupyter
+```
+
+Record dependencies:
+
+```bash
+python -m pip freeze > requirements.txt
+```
+
+Recreate them:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+A project should not depend silently on whatever happens to be installed on one computer.
+
+## Python You Actually Need
+
+### Variables and Objects
+
+```{python}
+course = "Machine Learning"
+edition = 2
+threshold = 0.80
+is_reproducible = True
+type(course), type(edition), type(threshold), type(is_reproducible)
+```
+
+### Lists and Dictionaries
+
+```{python}
+features = ["age", "bmi", "sleep_hours", "activity_minutes"]
+
+study = {
+    "dataset": "NHANES",
+    "unit_of_analysis": "participant",
+    "target": "systolic_blood_pressure"
+}
+```
+
+### Conditions
+
+```{python}
+score = 0.87
+interpretation = "meets illustrative threshold" if score >= 0.80 else "below threshold"
+interpretation
+```
+
+### Functions
+
+```{python}
+def mean_absolute_error_manual(actual, predicted):
+    errors = [abs(a - p) for a, p in zip(actual, predicted)]
+    return sum(errors) / len(errors)
+
+mean_absolute_error_manual([10, 12, 14], [11, 10, 15])
+```
+
+Functions convert repeated analytical logic into reusable, auditable units.
+
+## NumPy: Thinking in Arrays
+
+```{python}
+import numpy as np
+
+x = np.array([2.0, 4.0, 6.0, 8.0])
+2 * x
+```
+
+Vectorized operations allow us to operate on arrays as mathematical objects.
+
+```{python}
+X_demo = np.array([
+    [1.2, 3.1],
+    [2.4, 1.8],
+    [3.0, 4.2]
+])
+
+X_demo.shape
+```
+
+This connects to
+
+$$
+X \in \mathbb{R}^{n \times p},
+$$
+
+where $n$ is the number of observations and $p$ the number of features.
+
+::: {.callout-tip icon=false}
+## Code and Mathematics Describe the Same Object
+
+If `X.shape` returns `(800, 12)`, your feature matrix has $n=800$ observations and $p=12$ features.
+:::
+
+## pandas: Working with Tabular Data
+
+pandas provides labeled tabular data structures for data manipulation and analysis [@pandasUserGuide2026].
+
+```{python}
+import pandas as pd
+
+students = pd.DataFrame({
+    "study_hours": [4, 7, 2, 9, 6],
+    "attendance": [0.82, 0.94, 0.71, 0.97, 0.88],
+    "exam_score": [72, 91, 65, 95, 84]
+})
+
+students
+```
+
+Inspect before transforming:
+
+```{python}
+students.shape
+```
+
+```{python}
+students.dtypes
+```
+
+```{python}
+students.describe()
+```
+
+Ask what one row represents, which columns are identifiers, which variable is the target, whether units are documented, and whether missingness has meaning.
+
+### Selecting and Filtering
+
+```{python}
+students[["study_hours", "exam_score"]]
+```
+
+```{python}
+students.loc[students["attendance"] >= 0.90]
+```
+
+## From a DataFrame to \(X\) and \(y\)
+
+```{python}
+X = students[["study_hours", "attendance"]]
+y = students["exam_score"]
+
+print("X shape:", X.shape)
+print("y shape:", y.shape)
+```
+
+Construct these intentionally. Leaving the target—or a post-outcome proxy—inside $X$ can create leakage.
+
+## Data Types Are Analytical Decisions
+
+A ZIP code can be stored as an integer without being a quantitative measurement. The same distinction applies to IDs, diagnosis codes, ordinal responses, dates, and text.
+
+::: {.callout-warning icon=false}
+## Storage Type ≠ Measurement Meaning
+
+Never decide how to model a variable solely from `df.dtypes`. Ask what the variable **represents**.
+:::
+
+## Missing Data
+
+```{python}
+example = pd.DataFrame({
+    "age": [22, 35, np.nan, 51],
+    "income": [42000, np.nan, 61000, 79000]
+})
+
+example.isna().sum()
+```
+
+Deleting every incomplete row or replacing every missing value with a mean is not automatically defensible. Later chapters will treat imputation within pipelines. Here, develop the habit of inspecting and documenting missingness before acting.
+
+## Exploratory Visualization
+
+Your current course material uses Plotly with Gapminder, Iris, and Tips to introduce bar, line, scatter, and histogram graphics. We retain the pedagogical value while shifting the emphasis from **making charts** to **answering questions**.
+
+```{python}
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(7, 4))
+plt.scatter(students["study_hours"], students["exam_score"])
+plt.xlabel("Study hours")
+plt.ylabel("Exam score")
+plt.title("Study Hours and Exam Score")
+plt.show()
+```
+
+Ask:
+
+> **What feature of the data am I trying to understand?**
+
+Interactive Plotly graphics are valuable when interaction materially improves understanding. Stable static figures are often preferable for publication artifacts.
+
+## Data Provenance
+
+A line such as `pd.read_csv("data.csv")` conceals the dataset's history.
+
+Record at least:
+
+| Field | What to record |
+|---|---|
+| Source | authoritative provider |
+| Dataset | official dataset name |
+| Location/API | source endpoint |
+| Retrieval date | when acquired |
+| Version/cycle | release or survey cycle |
+| Unit of analysis | what one row represents |
+| Transformations | raw-to-processed steps |
+| License/terms | applicable use conditions |
+
+::: {.callout-important icon=false}
+## Provenance Principle
+
+**If an analytical decision can change the result, that decision belongs in the reproducible record.**
+:::
+
+## Three Data Tracks in Practice
+
+### Open ML Benchmark Track
+
+```{python}
+from sklearn.datasets import load_wine
+
+wine = load_wine(as_frame=True)
+wine.frame.head()
+```
+
+Benchmark data are excellent for learning workflows and algorithms. Convenience alone does not create research novelty.
+
+### Health Track
+
+NHANES provides public demographic, examination, laboratory, behavioral, and other health data [@cdcNHANES2024]. Researchers must understand survey cycles, variable documentation, units, eligibility, missing codes, and the intended population.
+
+### Education Track
+
+IPEDS and related public postsecondary data support institutional analyses involving enrollment, completions, graduation, finances, staffing, and other characteristics [@ncesIPEDS2026]. The unit of analysis may be an institution or institution-year rather than a person.
+
+The Python syntax can be similar across tracks. The scientific meaning is not.
+
+## Beyond the Algorithm: Code as Evidence
+
+::: {.callout-note icon=false}
+## What Does Code Allow Us to Know?
+
+In data science, code is not merely a set of instructions to a computer. It becomes part of the argument supporting an analytical claim.
+
+If a paper reports that a model achieved an AUC of 0.87, that statement depends on decisions embedded in code: exclusions, missing-data treatment, preprocessing order, data splitting, feature construction, and evaluation.
+
+Reproducible code does not guarantee a correct conclusion. But without a transparent computational record, it becomes harder to determine why the conclusion should be trusted.
+
+**Could another knowledgeable analyst reconstruct the path from raw evidence to reported claim?**
+:::
+
+## Writing Reusable Analytical Code
+
+```{python}
+def summarize_numeric_column(df, column):
+    return {
+        "n": df[column].notna().sum(),
+        "missing": df[column].isna().sum(),
+        "mean": df[column].mean(),
+        "median": df[column].median()
+    }
+
+summarize_numeric_column(students, "exam_score")
+```
+
+As an analysis stabilizes, repeated logic should migrate into functions.
+
+## Debugging: Read the Evidence
+
+A disciplined process is:
+
+1. read the final error message;
+2. identify the line that failed;
+3. inspect the relevant object;
+4. form a hypothesis;
+5. test the smallest correction;
+6. verify that the correction solves the analytical problem, not merely the syntax.
+
+::: {.callout-tip icon=false}
+## A Traceback Is Evidence
+
+Do not treat an error message as noise to paste immediately into an AI assistant. Read it first.
+:::
+
+## Git and GitHub
+
+A minimal workflow:
+
+```bash
+git status
+git add .
+git commit -m "Document Chapter 2 analysis workflow"
+git push
+```
+
+Do not commit credentials, private data, or `.venv`.
+
+## Quarto: Narrative + Computation + Evidence
+
+Quarto can execute Python within Markdown so code, output, prose, equations, and citations remain connected [@quartoPython2026].
+
+```text
+#| label: fig-example
+#| fig-cap: "A meaningful caption"
+#| warning: false
+```
+
+The goal is to generate outputs reproducibly rather than copy them manually into a report.
+
+## Try It
+
+Using the Wine dataset:
+
+1. determine the number of observations and variables;
+2. identify the target;
+3. inspect data types;
+4. calculate descriptive statistics for three features;
+5. create one plot that answers a specific question;
+6. interpret it without making a causal claim.
+
+## Hands-On Lab: Build a Reproducible Mini-Project
+
+Create:
+
+```text
+chapter02-lab/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── figures/
+├── src/
+├── analysis.qmd
+├── README.md
+├── requirements.txt
+└── .gitignore
+```
+
+Then create `.venv`, install packages, load a dataset, document provenance, inspect it, define $X$ and $y$, create purposeful figures, move one repeated transformation into a function, render the Quarto analysis, and commit the project.
+
+The goal is not yet the best predictive model. It is a workflow another analyst can understand and reproduce.
+
+## AI Pair Programmer
+
+Ask an AI coding assistant to generate a function that summarizes missing values in a DataFrame. Audit whether it reports counts and percentages correctly, handles edge cases, mutates data, and makes claims consistent with the code.
+
+::: {.callout-warning icon=false}
+## AI-Generated Code Can Run and Still Be Wrong
+
+Successful execution is not validation.
+:::
 
 ## Practitioner Track
-Develop fluency with the core tools needed to build ML workflows.
+
+Focus on environments, project structure, arrays, DataFrames, visualization, feature/target construction, reusable functions, debugging, and version control.
 
 ## Researcher Track
-Emphasize computational provenance, environment capture, deterministic execution, and auditable analysis.
 
-## Hands-On Practice
-Create a small reproducible analysis that loads a public dataset, summarizes it, visualizes key variables, and fits a baseline model.
+Focus additionally on provenance, measurement meaning, preservation of raw data, auditable transformations, and a reproducible path from source evidence to reported output.
 
-## Common Mistakes
-- Installing packages into uncontrolled environments.
-- Hard-coding local file paths.
-- Mixing data cleaning and modeling without documentation.
-- Failing to record package versions.
+## Professor's Challenge: Audit the Analysis
+
+Consider:
+
+```python
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv("student_data.csv")
+df = df.dropna()
+
+X = df.drop(columns=["student_id"])
+y = df["retained"]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+print(model.score(X_test, y_test))
+```
+
+The code may run. Audit it before rewriting it.
+
+Consider target leakage, undocumented row deletion, class imbalance, random vs stratified/grouped/temporal splitting, random seeds, post-outcome predictors, categorical representation, the meaning of `score()`, reliance on one split, provenance, population, and environment reproducibility.
+
+## Research Studio
+
+Choose one track and create a data-intake memo containing dataset/source, analytical purpose, unit of analysis, target, feature families, measurement concerns, missingness, provenance, raw/processed structure, reproducible transformations, one leakage risk, and one question the dataset alone cannot answer.
 
 ## Knowledge Check
-1. What problem does a virtual environment solve?
-2. Why are pipelines useful?
-3. How do NumPy and pandas differ?
-4. Why should file paths be portable?
 
-## Real-World Case Study
-### Reproducing an Analysis on Another Computer
-Package an analysis so that another researcher can clone the repository and reproduce the results.
-
-## Professor's Challenge
-Your model gives different results on two computers. Develop a systematic debugging plan.
-
-## Research Extension
-Evaluate reproducibility practices in a published open-source machine learning project.
+1. Why use a virtual environment?
+2. What does `X.shape == (500, 12)` mean?
+3. How do NumPy arrays and pandas DataFrames differ conceptually?
+4. Why can an integer column represent a category?
+5. Why should raw data usually remain unchanged?
+6. What is data provenance?
+7. Why is `dropna()` not automatically defensible?
+8. Why use functions for repeated analytical logic?
+9. What does Quarto contribute to reproducibility?
+10. Why is code that executes without error not necessarily analytically correct?
 
 ## Reproducibility Check
-Verify relative paths, dependencies, seeds, data provenance, and a clean end-to-end render.
+
+Verify that your project reveals the Python environment, dependencies, data source, raw/processed distinction, transformations, construction of $X$ and $y$, figure-generation code, result-generation code, and version history.
 
 ## Key Takeaways
-- Reproducibility is part of technical competence.
-- Python's ML ecosystem is strongest when tools are integrated into a disciplined workflow.
-- Portable code reduces dependence on individual analysts.
+
+- Python is most useful within a disciplined analytical workflow.
+- Virtual environments isolate dependencies.
+- NumPy and pandas provide complementary data representations.
+- Variable meaning matters more than storage type.
+- Data provenance is part of analytical evidence.
+- Visualization should answer questions rather than decorate reports.
+- Functions, debugging, Git, and Quarto improve transparency.
+- AI coding assistance should be audited rather than trusted by default.
+- Code that runs is not necessarily code that supports a valid conclusion.
+- The computational path from evidence to claim matters.
