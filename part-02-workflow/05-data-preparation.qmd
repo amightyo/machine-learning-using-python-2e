@@ -1,75 +1,577 @@
 # Data Preparation and Feature Engineering
 
 ## Learning Objectives
-- Diagnose data-quality problems.
-- Handle missing, categorical, and scaled features appropriately.
-- Explain data leakage and prevent it with pipelines.
-- Engineer features using substantive knowledge.
-- Build preprocessing workflows with scikit-learn.
+
+By the end of this chapter, you should be able to:
+
+- distinguish raw, analytical, training, validation, and test data;
+- explain why preprocessing must respect the evaluation boundary;
+- diagnose missingness, duplicates, invalid values, and inconsistent representations;
+- distinguish numerical, nominal, ordinal, datetime, text, and identifier variables;
+- apply scaling, imputation, and categorical encoding appropriately;
+- explain feature engineering as the construction of model representations;
+- use `Pipeline` and `ColumnTransformer` to prevent common forms of leakage;
+- explain why preprocessing choices should be learned from training data;
+- evaluate whether an engineered feature would actually exist at prediction time;
+- build reproducible transformations rather than manually modifying source data;
+- connect domain knowledge to health, education, and benchmark feature design;
+- audit AI-generated preprocessing code for technically subtle errors.
 
 ## Why This Matters
-Model quality is constrained by data quality, and seemingly harmless preprocessing can invalidate an evaluation if information leaks across data partitions.
 
-## Real-World Problem
-A preprocessing workflow standardizes the entire dataset before the train-test split. Why is the resulting performance estimate potentially optimistic?
+Most machine-learning algorithms do not receive “reality.” They receive a representation of reality produced by a data pipeline.
 
-## Data Quality
-### Data Types
-### Missing Data
-### Duplicates
-### Outliers
-### Inconsistent Coding
+That representation may contain missing values, inconsistent categories, measurement artifacts, duplicated records, inappropriate identifiers, post-outcome information, or transformations learned from the wrong observations.
 
-## Feature Engineering
-### Transformations
-### Categorical Encoding
-### Scaling
-### Interaction Features
-### Domain-Informed Features
-### Date and Time Features
+A model can therefore fail before the algorithm itself has done anything wrong.
 
-## Leakage-Free Preprocessing
-### Train-Test Separation
-### ColumnTransformer
-### Pipelines
-### Fit Versus Transform
+::: {.callout-important icon=false}
+## Central Question
 
-## Python Implementation
-### Numeric and Categorical Pipelines
-### Missing-Value Imputation
+**How do we transform raw data into model-ready evidence without contaminating the evaluation or distorting the meaning of the variables?**
+:::
+
+## From Problem Specification to Data Pipeline
+
+Chapter 4 defined the problem as
+
+$$
+\mathcal{P}=(U,Y,X_t,t,H,L,E,C).
+$$
+
+Chapter 5 operationalizes $X_t$.
+
+The critical subscript is $t$: features must be legitimately available when the prediction is made.
+
+A useful conceptual pipeline is
+
+$$
+D_{\text{raw}}
+\rightarrow
+D_{\text{validated}}
+\rightarrow
+D_{\text{split}}
+\rightarrow
+T_{\text{train}}
+\rightarrow
+X_{\text{model}}.
+$$
+
+Transformations $T$ that learn from data are estimated using the training portion rather than the complete dataset.
+
+## Preserve Raw Data
+
+Raw data should normally remain immutable within the analytical workflow.
+
+```text
+data/
+├── raw/
+├── interim/
+└── processed/
+```
+
+Instead of manually changing cells, write transformations that can be rerun.
+
+::: {.callout-note icon=false}
+## Reproducibility Principle
+
+**A transformation that matters to the analysis should exist as code, not as an undocumented manual edit.**
+:::
+
+## Inspect Before Cleaning
+
+```{python}
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame({
+    "age": [22, 35, 35, np.nan, 51, 64],
+    "program": ["MS", "PhD", "PhD", "MS", "DBA", "DBA"],
+    "study_hours": [6, 8, 8, 4, np.nan, 10],
+    "retained": [1, 1, 1, 0, 0, 1]
+})
+
+df
+```
+
+Start with structure, missingness, duplicates, and summaries.
+
+```{python}
+df.shape, df.dtypes
+```
+
+```{python}
+df.isna().sum()
+```
+
+```{python}
+df.duplicated().sum()
+```
+
+```{python}
+df.describe(include="all")
+```
+
+The goal is not to “clean everything.” The goal is to understand which observations and variables are credible for the specified problem.
+
+## Data Quality Is Contextual
+
+A value can be syntactically valid and substantively impossible: negative age, 25 hours of sleep per day, graduation before enrollment, an identifier treated as a continuous quantity, inconsistent laboratory units, or categories whose definitions changed across years.
+
+Validation therefore combines computational checks with domain knowledge.
+
+## Missing Data
+
+Missing values may arise because a variable was not measured, not applicable, refused, structurally unavailable, lost, or recorded under a special code.
+
+Before imputation, ask:
+
+1. How much is missing?
+2. For which variables?
+3. For which observations or groups?
+4. Why might it be missing?
+5. Is missingness itself informative?
+6. Would this variable be available at deployment?
+
+### Why `dropna()` Is Not a Strategy
+
+```python
+df = df.dropna()
+```
+
+This can change the analytical sample and therefore the population represented by the analysis.
+
+### Imputation
+
+For a numerical feature, simple median imputation can be written
+
+$$
+x_i^{*}=
+\begin{cases}
+x_i, & x_i \text{ observed}\\
+\tilde{x}_{\text{train}}, & x_i \text{ missing}.
+\end{cases}
+$$
+
+The training subscript matters.
+
+## The Evaluation Boundary
+
+Suppose
+
+$$
+D=D_{\text{train}}\cup D_{\text{test}}.
+$$
+
+The test set approximates unseen data. Preprocessing statistics should not be learned from it.
+
+Incorrect:
+
+```python
+X_scaled = scaler.fit_transform(X)
+X_train, X_test = train_test_split(X_scaled, y)
+```
+
+Better:
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+scaler.fit(X_train)
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+```
+
+Best for repeatable workflows: place learned preprocessing and modeling inside a pipeline.
+
+::: {.callout-warning icon=false}
+## Leakage Can Be Quiet
+
+The target does not need to appear explicitly in the training features for leakage to occur. Test-set information used to estimate preprocessing parameters also contaminates evaluation.
+:::
+
+## Train/Test Splitting
+
+For demonstration, create a slightly larger mixed-type dataset so stratification is stable.
+
+```{python}
+rng = np.random.default_rng(42)
+n = 120
+
+ml_df = pd.DataFrame({
+    "age": rng.integers(20, 66, size=n).astype(float),
+    "program": rng.choice(["MS", "PhD", "DBA"], size=n),
+    "study_hours": rng.normal(7, 2, size=n).clip(0),
+})
+
+ml_df.loc[rng.choice(n, 8, replace=False), "age"] = np.nan
+ml_df.loc[rng.choice(n, 10, replace=False), "study_hours"] = np.nan
+
+signal = (
+    ml_df["age"].fillna(40) * -0.015
+    + ml_df["study_hours"].fillna(7) * 0.35
+    + (ml_df["program"] == "PhD") * 0.4
+)
+prob = 1 / (1 + np.exp(-(signal - 1.5)))
+ml_df["retained"] = rng.binomial(1, prob)
+
+X = ml_df[["age", "program", "study_hours"]]
+y = ml_df["retained"]
+```
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.25,
+    random_state=42,
+    stratify=y
+)
+
+X_train.shape, X_test.shape
+```
+
+A random stratified split is pedagogically convenient here. Chapter 4 established that grouped, temporal, geographic, or external validation may be required by the actual problem.
+
+## Numerical Features
+
+Common transformations include imputation, standardization, robust scaling, transformations, interaction terms, and substantively justified rates or ratios.
+
+Standardization is
+
+$$
+z=\frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
+$$
+
+## Categorical Features
+
+Many algorithms require numeric representations of categories.
+
 ### One-Hot Encoding
-### Standardization
-### Integrated Modeling Pipelines
 
-## Hands-On Practice
-Construct a preprocessing pipeline for mixed numeric and categorical data.
+```{python}
+pd.get_dummies(ml_df["program"], dtype=int).head()
+```
 
-## Common Mistakes
-- Preprocessing before splitting.
-- Imputing using information from the test set.
-- Encoding identifiers as meaningful numeric features.
-- Feature engineering using future information.
+For a fitted ML workflow, `OneHotEncoder` can learn category structure from training data and handle later unknown categories.
+
+### Ordinal Variables
+
+An ordinal variable has order but not necessarily equal intervals:
+
+$$
+\text{Never}<\text{Sometimes}<\text{Often}<\text{Always}.
+$$
+
+Encoding these as 0, 1, 2, 3 imposes numerical structure. That is an analytical assumption, not merely a formatting decision.
+
+## Identifiers Are Not Ordinary Features
+
+Student IDs, patient IDs, account numbers, and institution IDs may look numeric but usually function as identifiers.
+
+They may still be needed for grouping, joins, longitudinal linkage, split design, and auditing. The question is whether they belong in the predictive feature matrix.
+
+## Datetime Features
+
+Timestamps may be transformed into day of week, month, elapsed time, age at event, time since prior event, or academic term.
+
+Datetime engineering must still pass the Chapter 4 availability test.
+
+## Feature Engineering: Representation as Modeling
+
+For height $h$ and weight $w$,
+
+$$
+BMI=\frac{w}{h^2},
+$$
+
+with appropriate units.
+
+An education study might construct
+
+$$
+\text{credit completion ratio}
+=
+\frac{\text{credits completed}}{\text{credits attempted}}.
+$$
+
+::: {.callout-note icon=false}
+## A Feature Is an Argument
+
+An engineered feature says:
+
+> “I believe this representation may contain information relevant to the target.”
+
+Feature engineering is therefore computational and conceptual.
+:::
+
+## Interactions and Nonlinearity
+
+An interaction can be written
+
+$$
+x_3=x_1x_2.
+$$
+
+Polynomial expansion may include
+
+$$
+x,\quad x^2,\quad x^3.
+$$
+
+Additional flexibility can reveal structure but also increase dimensionality and overfitting.
+
+## Outliers: Error, Rarity, or Signal?
+
+An extreme value may be a data-entry error, unit mismatch, valid rare observation, subgroup member, or exactly the event we need to detect.
+
+> **Outlier treatment should begin with interpretation, not automatic deletion.**
+
+## ColumnTransformer: Different Columns, Different Transformations
+
+```{python}
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+numeric_features = ["age", "study_hours"]
+categorical_features = ["program"]
+
+numeric_pipeline = Pipeline(steps=[
+    ("imputer", SimpleImputer(strategy="median")),
+    ("scaler", StandardScaler())
+])
+
+categorical_pipeline = Pipeline(steps=[
+    ("imputer", SimpleImputer(strategy="most_frequent")),
+    ("onehot", OneHotEncoder(handle_unknown="ignore"))
+])
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", numeric_pipeline, numeric_features),
+        ("cat", categorical_pipeline, categorical_features)
+    ]
+)
+
+preprocessor
+```
+
+The preprocessing logic exists, but training statistics have not yet been learned.
+
+## Pipeline: Preprocessing and Model as One Workflow
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+
+model = Pipeline(steps=[
+    ("preprocessor", preprocessor),
+    ("classifier", LogisticRegression(max_iter=1000))
+])
+
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+```
+
+This becomes especially important during cross-validation because each training fold should learn its own preprocessing parameters.
+
+::: {.callout-important icon=false}
+## Pipeline Principle
+
+**Anything that learns from data and affects the model should usually live inside the evaluation workflow.**
+:::
+
+## Visual Experiment: Leakage Inflates Performance
+
+```{python}
+#| label: fig-leakage
+#| fig-cap: "A leaked feature can create spectacular but meaningless test performance."
+
+from sklearn.datasets import make_classification
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
+
+X_syn, y_syn = make_classification(
+    n_samples=1200,
+    n_features=8,
+    n_informative=4,
+    class_sep=0.8,
+    random_state=42
+)
+
+X_leaked = np.column_stack([X_syn, y_syn])
+
+def evaluate(features):
+    Xtr, Xte, ytr, yte = train_test_split(
+        features, y_syn, test_size=0.3,
+        random_state=42, stratify=y_syn
+    )
+    clf = LogisticRegression(max_iter=1000)
+    clf.fit(Xtr, ytr)
+    return accuracy_score(yte, clf.predict(Xte))
+
+scores = [evaluate(X_syn), evaluate(X_leaked)]
+
+plt.figure(figsize=(7, 4))
+plt.bar(["Legitimate features", "Target leaked into X"], scores)
+plt.ylabel("Test accuracy")
+plt.ylim(0, 1.05)
+plt.title("Leakage Can Make a Model Look Brilliant")
+plt.show()
+```
+
+The leaked model is not more intelligent. The experiment has been corrupted.
+
+## Three Data Tracks
+
+### Health Track
+
+Ask whether measurements were available at prediction time, whether special missing codes exist, whether units are consistent, whether a derived clinical feature partly defines the target, and whether complex survey design affects the intended inference.
+
+### Education Track
+
+Ask whether variables align temporally with the outcome, whether lagged features are needed, whether definitions changed across years, whether IDs are used only for linkage/grouping, and whether rates have comparable denominator reliability.
+
+### Open ML Benchmark Track
+
+Benchmark data let us deliberately alter scale, inject missingness, or add irrelevant features to study preprocessing behavior under controlled conditions.
+
+## Beyond the Algorithm: Data Are Made, Not Merely Found
+
+::: {.callout-note icon=false}
+## The Dataset Is Already an Interpretation
+
+Before the first model is fitted, choices have already determined what was measured, who was included, how categories were defined, which instruments were used, when measurements occurred, how missingness was encoded, and which observations survived collection.
+
+Feature engineering adds another layer.
+
+The model does not learn directly from the world. It learns from a **representation produced through measurement and transformation**.
+
+This does not make quantitative analysis arbitrary. It makes documentation, domain knowledge, validation, and humility essential.
+
+Ask:
+
+**What had to happen for this phenomenon to become this column?**
+:::
+
+## AI Pair Programmer: Audit the Preprocessing
+
+Ask an AI assistant to preprocess a mixed-type classification dataset.
+
+Audit whether it:
+
+- imputes before or after splitting;
+- scales the complete dataset;
+- encodes before cross-validation;
+- silently drops missing rows;
+- includes identifiers;
+- uses post-outcome variables;
+- handles unseen categories;
+- documents transformations;
+- places learned transformations inside a pipeline.
+
+Do not judge the answer merely by whether the code runs.
+
+## Hands-On Lab: Build a Leakage-Safe Pipeline
+
+Choose a dataset with numeric and categorical features.
+
+1. document provenance and unit of analysis;
+2. identify target and prediction time;
+3. classify variables by analytical type;
+4. identify IDs and leakage risks;
+5. inspect missingness and unusual values;
+6. split according to the Chapter 4 evaluation design;
+7. build numeric and categorical preprocessing pipelines;
+8. combine them with `ColumnTransformer`;
+9. attach a simple estimator;
+10. evaluate without independently preprocessing the test set;
+11. inspect transformed feature names;
+12. document each transformation and rationale.
+
+## Practitioner Track
+
+Build robust preprocessing workflows that handle missing values, categorical variables, scaling, unknown categories, and repeated evaluation without manual intervention.
+
+## Researcher Track
+
+Additionally justify preprocessing decisions in relation to measurement, sampling, timing, validity, reproducibility, and the scientific claim.
+
+## Research Studio: Build a Data Dictionary and Feature Ledger
+
+Create a feature ledger containing:
+
+| Field | Description |
+|---|---|
+| Variable | source variable |
+| Construct | what it represents |
+| Unit/type | measurement scale |
+| Availability time | when known |
+| Missing codes | documented meanings |
+| Transformation | proposed preprocessing |
+| Derived feature | if applicable |
+| Leakage risk | yes/no + rationale |
+| Inclusion rationale | why it belongs |
+| Provenance | authoritative source |
+
+Identify at least three candidate engineered features and explain the substantive theory behind each.
+
+## Professor's Challenge: The Perfect Preprocessing Notebook
+
+A team reports excellent cross-validation performance:
+
+```python
+df = pd.read_csv("data.csv")
+df = df.dropna()
+
+X = pd.get_dummies(df.drop(columns="target"))
+X = StandardScaler().fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, df["target"], random_state=42
+)
+```
+
+They then cross-validate on `X_train`.
+
+Critique complete-case deletion, encoding before splitting, scaling before splitting, preprocessing before cross-validation, possible IDs, feature availability, unseen categories, provenance, whether all variables should be scaled, and whether the split matches deployment.
+
+Redesign the workflow with `ColumnTransformer` and `Pipeline`.
 
 ## Knowledge Check
-1. Why can scaling cause leakage?
-2. When is one-hot encoding appropriate?
-3. What does a Pipeline protect against?
-4. Why should identifiers usually be excluded?
 
-## Real-World Case Study
-### Preparing Public Education Data for Modeling
-Develop a documented feature matrix from an institutional dataset.
-
-## Professor's Challenge
-Two analysts obtain different model results from the same raw data. How would you audit their preprocessing pipelines?
-
-## Research Extension
-Compare alternative missing-data or feature-engineering strategies using nested evaluation.
+1. Why preserve raw data?
+2. Why is `dropna()` not a complete strategy?
+3. What is the evaluation boundary?
+4. Why learn scaling parameters from training data?
+5. How can preprocessing cause leakage?
+6. When is one-hot encoding appropriate?
+7. Why is an integer not necessarily quantitative?
+8. Why exclude identifiers from the model matrix?
+9. What is feature engineering?
+10. Why can outlier removal destroy signal?
+11. What does `ColumnTransformer` solve?
+12. Why are pipelines important during cross-validation?
+13. Why should engineered features pass the availability test?
+14. What does it mean to say data are “made” rather than merely found?
 
 ## Reproducibility Check
-Preserve raw data, script transformations, document exclusions, and keep preprocessing inside the modeling workflow.
+
+Record raw-data provenance, validation rules, exclusions, missing-value strategy, variable types, split strategy, random seed where applicable, feature lists, encoding, scaling, engineered features, fitted preprocessing objects, software dependencies, and code producing processed data.
 
 ## Key Takeaways
-- Preprocessing is part of the model.
-- Leakage can invalidate otherwise sophisticated analyses.
-- Feature engineering should combine technical and domain knowledge.
+
+- ML algorithms learn from representations, not directly from reality.
+- Raw data should remain recoverable and transformations should be scripted.
+- Cleaning decisions require substantive reasoning.
+- Preprocessing learned from test data contaminates evaluation.
+- Missingness should be understood before imputation or deletion.
+- Variable meaning matters more than storage type.
+- Feature engineering embeds domain assumptions.
+- Outliers can be error, rarity, or signal.
+- `ColumnTransformer` handles heterogeneous feature types.
+- `Pipeline` keeps learned preprocessing inside the modeling workflow.
+- Leakage can make a weak model appear extraordinary.
+- A trustworthy feature should be meaningful, available at prediction time, reproducibly constructed, and evaluated without contamination.

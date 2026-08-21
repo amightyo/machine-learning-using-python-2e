@@ -1,69 +1,316 @@
-# From Research Question to Machine Learning Problem
+# Framing Machine Learning Problems
 
 ## Learning Objectives
-- Translate substantive questions into well-defined ML tasks.
-- Define units of analysis, targets, features, and prediction horizons.
-- Distinguish predictive, inferential, descriptive, and causal questions.
-- Develop defensible baseline and evaluation strategies.
-- Identify leakage and target-definition problems before modeling.
+
+By the end of this chapter, you should be able to:
+
+- translate a substantive problem into a machine-learning specification;
+- distinguish a prediction target from the broader construct it represents;
+- define unit of analysis, prediction time, prediction horizon, and target population;
+- identify features legitimately available at prediction time;
+- distinguish prediction, forecasting, ranking, explanation, and causal questions;
+- select meaningful baselines and evaluation criteria;
+- reason about asymmetric errors and decision thresholds;
+- identify target leakage before model development;
+- distinguish predictive performance from decision usefulness.
 
 ## Why This Matters
-Many failed ML projects begin with an algorithm instead of a clearly defined problem.
 
-## Real-World Problem
-A university asks: “Which students will struggle?” Convert this vague request into a precise, ethical, and evaluable machine learning problem.
+A sophisticated algorithm cannot rescue a poorly framed problem.
 
-## Problem Formulation
-### Start With the Decision
-### Define the Unit of Analysis
-### Define the Target
-### Define the Prediction Time
-### Identify Available Features
-### Establish a Baseline
-### Choose Evaluation Criteria
-### Consider Consequences of Errors
+Projects often begin too late: “Which model should we use?” A stronger project asks: **What problem exists? What decision or knowledge need does it create? What exactly should be predicted, for whom, at what point in time, using which information, and how will success be judged?**
 
-## Prediction, Inference, and Causation
-### Predictive Questions
-### Explanatory Questions
-### Causal Questions
-### Descriptive and Exploratory Questions
+::: {.callout-important icon=false}
+## Central Question
+**Before choosing an algorithm, how do we translate a real-world problem into a machine-learning problem that is actually worth solving?**
+:::
 
-## Research Design Connection
-### Research Questions
-### Hypotheses
-### Theory and Feature Selection
-### External Validity
+## Start With the Problem, Not the Algorithm
 
-## Hands-On Practice
-Rewrite five vague analytics requests as formal ML problem statements.
+Compare:
 
-## Common Mistakes
-- Predicting information that is already known at prediction time.
-- Using future information as a feature.
-- Defining targets inconsistently.
-- Optimizing a metric unrelated to the actual decision.
+> “I want to use Random Forest to study student retention.”
+
+with:
+
+> “At the end of a student's second week, can we identify students at elevated risk of not returning the following term using only information available by that prediction time?”
+
+The second formulation exposes unit, target, timing, horizon, information availability, intervention context, error costs, and generalization.
+
+## A Machine Learning Problem Specification
+
+We will use
+
+$$
+\mathcal{P}=(U,Y,X_t,t,H,L,E,C),
+$$
+
+where $U$ is unit of analysis; $Y$ the target; $X_t$ information legitimately available at prediction time $t$; $H$ the horizon; $L$ the loss/utility objective; $E$ the evaluation design; and $C$ constraints and context.
+
+This is a pedagogical framework, not a universal mathematical law.
+
+::: {.callout-note icon=false}
+## Problem Specification Before Model Specification
+Do not begin with $f_\theta(X)$. Begin by deciding what $X$ and $Y$ are allowed to mean.
+:::
+
+## Unit of Analysis
+
+One row might represent a patient, student, university, transaction, document, institution-year, patient-visit, or student-course enrollment. Changing the unit can change the question.
+
+### Try It: Find the Unit
+
+Identify the defensible unit for:
+
+1. 30-day patient readmission;
+2. next-year university enrollment;
+3. news-topic classification;
+4. fraudulent transactions;
+5. course-level student passing.
+
+## Defining the Target
+
+“Student success” is not yet a target. Operationalizations might include next-term retention, six-year graduation, first-year credits earned, or course completion.
+
+::: {.callout-warning icon=false}
+## Target ≠ Construct
+A measurable target is often a proxy for something broader. Predicting the proxy accurately does not prove that the full construct has been captured.
+:::
+
+| Target form | Example | Typical task |
+|---|---|---|
+| continuous | systolic blood pressure | regression |
+| binary | retained/not retained | classification |
+| multiclass | diagnostic category | multiclass classification |
+| count | emergency visits | count/regression |
+| time-to-event | time until readmission | survival analysis |
+| ordered category | risk level | ordinal modeling |
+
+## Prediction Time and Horizon
+
+Let $t$ be when a prediction is produced and $H$ how far beyond $t$ the outcome occurs.
+
+$$
+t=\text{end of Week 2}, \qquad H=\text{retention to next term}.
+$$
+
+### The Availability Test
+
+> **Would I actually know this value at the moment the model is supposed to make its prediction?**
+
+If not, it may create leakage.
+
+## Leakage Begins With Framing
+
+Predicting course completion using prior GPA and first-week attendance may be legitimate. Using final course grade for an early-warning model is not.
+
+::: {.callout-important icon=false}
+## Temporal Integrity
+**A model should not learn from information that arrives after the decision point it is meant to support.**
+:::
+
+## Prediction Is Not Intervention
+
+A high predicted attrition risk does not identify which intervention will help. A health risk predictor does not prove that modifying an important feature will cause risk to fall.
+
+Prediction concerns $P(Y\mid X)$. Intervention requires different causal reasoning.
+
+::: {.callout-warning icon=false}
+## Risk Factor ≠ Treatment Recommendation
+A predictor can identify risk without identifying an effective intervention.
+:::
+
+## Different Analytical Purposes
+
+**Prediction** estimates unknown outcomes. **Forecasting** predicts future values with temporal structure. **Classification** estimates categories/probabilities. **Ranking** orders observations. **Discovery** characterizes structure. **Explanation** investigates relationships or mechanisms. **Causal estimation** asks what would happen under alternative interventions.
+
+## Baselines: What Must the Model Beat?
+
+```{python}
+import numpy as np
+y = np.array([0] * 90 + [1] * 10)
+max(np.mean(y == 0), np.mean(y == 1))
+```
+
+Always predicting the majority class already achieves 90% accuracy here.
+
+::: {.callout-tip icon=false}
+## Baselines Create Meaning
+“Accuracy = 0.91” is incomplete. “Accuracy = 0.91 versus a 0.90 naive baseline” tells a different story.
+:::
+
+## Error Costs and Thresholds
+
+A predicted probability becomes an action only after a decision rule is applied. A default threshold such as 0.50 is not automatically appropriate.
+
+A simple expected-cost representation is
+
+$$
+\text{Expected Cost}=C_{FP}P(FP)+C_{FN}P(FN).
+$$
+
+This does not imply every consequence should be monetized. It makes explicit that errors can matter differently.
+
+## Evaluation Must Match Intended Use
+
+Evaluation may require random, stratified, grouped, temporal, geographic, or external validation. Random splitting can mislead when people repeat, institutions repeat across years, future prediction is the goal, or deployment occurs elsewhere.
+
+Ask:
+
+> **To whom, where, and when do we hope this model will generalize?**
+
+## The Problem Framing Canvas
+
+| Element | Question |
+|---|---|
+| Substantive problem | What real-world problem exists? |
+| Stakeholder | Who needs the evidence? |
+| Decision/use | What could happen because of the output? |
+| Unit | What does one row represent? |
+| Target | What exactly is predicted? |
+| Prediction time | When is prediction made? |
+| Horizon | How far ahead is the outcome? |
+| Available features | What is known then? |
+| Baseline | What simple strategy must be beaten? |
+| Error costs | Which mistakes matter? |
+| Evaluation | How will generalization be tested? |
+| Target population | To whom should results generalize? |
+| Constraints | Privacy, fairness, latency, resources? |
+| Intended use | What is the model designed to support? |
+| Unsupported claims | What must not be concluded? |
+
+## Three Tracks
+
+### Health
+Rather than “use NHANES to predict diabetes,” specify population, operational diabetes criterion, information available at the analytical time point, validation design, and intended claim.
+
+### Education
+Rather than “use IPEDS to predict retention,” specify institution-level unit, outcome period, prediction time, available prior-period features, and temporal validation.
+
+### Open Benchmark
+Rather than “compare five classifiers on Wine,” specify a common evaluation protocol and a pedagogical question such as how scaling and model family affect out-of-sample performance.
+
+## A Small Framing Experiment
+
+```{python}
+#| label: fig-prevalence-accuracy
+#| fig-cap: "Majority-class accuracy increases as the positive outcome becomes rarer."
+import matplotlib.pyplot as plt
+
+positive_prevalence = np.linspace(0.01, 0.50, 50)
+majority_accuracy = 1 - positive_prevalence
+
+plt.figure(figsize=(8, 5))
+plt.plot(positive_prevalence, majority_accuracy)
+plt.xlabel("Positive-class prevalence")
+plt.ylabel("Accuracy of always predicting negative")
+plt.title("A Naive Classifier Can Look Accurate")
+plt.ylim(0.45, 1.01)
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+A rare outcome can make a useless classifier appear impressive. Evaluation metrics must be chosen in context.
+
+## Beyond the Algorithm: What Should We Choose to Predict?
+
+::: {.callout-note icon=false}
+## Predictability Is Not Permission
+
+Machine learning encourages us to ask what can be predicted. A more mature question is whether the target is appropriate to predict for the intended purpose.
+
+A target is a choice. When we operationalize “risk,” “success,” “quality,” “readiness,” or “potential,” that choice can influence who receives resources, scrutiny, attention, or opportunity.
+
+Ask:
+
+1. **Can this be predicted?**
+2. **Can it be predicted reliably?**
+3. **Should it be predicted for this purpose?**
+4. **What decisions should—and should not—follow?**
+
+The algorithm enters only after these questions begin to have defensible answers.
+:::
+
+## Responsible Framing
+
+Responsible AI considerations belong in design, development, deployment, use, and evaluation [@nistAIRMF2023]. Consider legitimacy, problematic historical targets, sensitive proxies, uneven error consequences, over-trust, scope creep, and whether a simpler non-ML solution is preferable.
+
+::: {.callout-tip icon=false}
+## Sometimes the Best ML Decision Is Not to Build an ML Model
+A rule, descriptive analysis, experiment, process redesign, or policy change may be more appropriate than prediction.
+:::
+
+## AI Pair Programmer
+
+Prompt an AI assistant: “Build a machine-learning model to predict college student success.”
+
+Audit whether it clarifies success, unit, prediction time, horizon, decision, population, feature availability, leakage, baseline, error costs, evaluation, ethics, and causal versus predictive claims. Rewrite the prompt so model selection cannot sensibly begin before framing is complete.
+
+## Hands-On Lab: Build an ML Problem Specification
+
+Choose one track and express it as
+
+$$
+\mathcal{P}=(U,Y,X_t,t,H,L,E,C).
+$$
+
+Include substantive problem, stakeholder, unit, target, prediction time/horizon, feature-availability rules, leakage example, baseline, metrics, error costs, validation design, target population, constraints, and at least three unsupported claims. **No model fitting is required.**
+
+## Practitioner Track
+
+Define the operational decision; specify target, timing, horizon, and information; identify leakage; choose baselines; align evaluation with deployment; reason about error costs; document intended use.
+
+## Researcher Track
+
+Additionally distinguish constructs from targets, define generalization populations, separate predictive from causal claims, justify evaluation as research design, and explain contribution beyond model comparison.
+
+## Research Studio: From Topic to Research Question
+
+Transform a broad topic such as cardiovascular health, student retention, institutional outcomes, or classifier benchmarking into a substantive gap/decision problem, population, unit, target, timing, research question, evaluation design, contribution, and unsupported causal claim.
+
+A useful predictive template is:
+
+> **Among [population/unit], how well can [information available at time \(t\)] predict [target] over [horizon], and how well does performance generalize across [time/group/site/context]?**
+
+Use this to expose assumptions, not as a mandatory formula.
+
+## Professor's Challenge: The 95% Accurate Model
+
+A university reports 95% dropout-prediction accuracy and recommends automatic mandatory interventions. Only 6% dropped out; `final_term_status` is in the data; repeated student records may cross a random split; no baseline is reported; 0.50 is used as the default threshold; error costs and subgroup performance are ignored; years are randomly mixed; and feature importance is called “causes.”
+
+Critique accuracy, leakage, unit ambiguity, temporal validity, baseline, threshold, error costs, subgroup evaluation, causation, intervention logic, evaluation design, and the problem statement.
 
 ## Knowledge Check
-1. What is the unit of analysis?
-2. What is a prediction horizon?
-3. How can target leakage occur?
-4. Why should a baseline be established before complex modeling?
 
-## Real-World Case Study
-### Predicting Institutional Retention Outcomes
-Formulate an education analytics problem using public institutional data.
-
-## Professor's Challenge
-A feature dramatically improves performance but is only observed after the outcome occurs. Can it be used?
-
-## Research Extension
-Develop a research question and contribution statement around the case study.
+1. Why frame before selecting an algorithm?
+2. What is a unit of analysis?
+3. Construct versus operational target?
+4. Prediction time versus horizon?
+5. What is the availability test?
+6. Why is post-outcome information leakage?
+7. Why does prediction not identify intervention effects?
+8. Why use a baseline?
+9. How can prevalence make accuracy misleading?
+10. Why might 0.50 be inappropriate?
+11. What does deployment-aligned evaluation mean?
+12. Why might framing end with no ML model?
 
 ## Reproducibility Check
-Version the problem statement and document target, features, exclusions, timing, and evaluation plan.
+
+Version the substantive problem, stakeholder, intended use, unit, target, prediction time, horizon, feature-availability rule, exclusions, baseline, error assumptions, metrics, validation design, target population, constraints, and unsupported claims.
+
+If framing changes, document **what changed and why**.
 
 ## Key Takeaways
-- Problem formulation precedes algorithm selection.
-- Time and data availability determine whether a prediction is legitimate.
-- Evaluation metrics must reflect the decision context.
+
+- A sophisticated algorithm cannot rescue a poorly framed problem.
+- Targets operationalize constructs; they are not the constructs themselves.
+- Prediction time determines legitimate information.
+- Leakage can often be identified before coding.
+- Prediction does not establish causation or intervention effectiveness.
+- Baselines contextualize metrics.
+- Thresholds and error costs should reflect use.
+- Evaluation design is part of problem formulation.
+- Generalization must be defined across people, places, times, or settings.
+- Technical predictability does not determine whether something should be predicted.
+- Sometimes the best decision is not to build an ML model.
