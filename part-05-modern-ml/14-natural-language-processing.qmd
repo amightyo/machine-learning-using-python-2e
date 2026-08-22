@@ -1,72 +1,1431 @@
-# Natural Language Processing
+# Natural Language Processing: From Words to Meaningful Representations
+
+```{python}
+#| label: chapter-14-setup
+#| include: false
+
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+```
 
 ## Learning Objectives
-- Explain how text can be represented computationally.
-- Build text-classification pipelines.
-- Compare bag-of-words, TF-IDF, and embeddings.
-- Explain the intuition behind transformers.
-- Evaluate NLP models responsibly.
 
-## Why This Matters
-A large share of human knowledge is stored as text. NLP enables machine learning with documents, responses, reports, and other unstructured language data.
+By the end of this chapter, you should be able to:
 
-## Real-World Problem
-Can open-ended student responses or health narratives be analyzed reliably without reducing nuanced language to misleading labels?
+- explain why human language creates unusual machine-learning challenges;
+- define corpus, document, token, vocabulary, n-gram, and document-term matrix;
+- distinguish tokenization from normalization;
+- explain the tradeoffs of stop-word removal, stemming, and lemmatization;
+- construct bag-of-words and TF-IDF representations;
+- derive and interpret term frequency and inverse document frequency;
+- explain sparsity and high dimensionality in text data;
+- use cosine similarity to compare document vectors;
+- build leakage-safe text-classification pipelines;
+- evaluate text classifiers with metrics appropriate to the task;
+- inspect model coefficients to understand lexical signals;
+- distinguish lexical association from semantic understanding;
+- explain distributed word embeddings conceptually;
+- connect embeddings to representation learning from Chapter 13;
+- explain contextual embeddings and why a word can require different representations in different sentences;
+- derive the intuition behind self-attention;
+- explain queries, keys, values, and attention weights;
+- describe the role of positional information in transformer models;
+- distinguish encoder-style, decoder-style, and sequence-to-sequence transformer objectives at a high level;
+- recognize data leakage, spurious lexical cues, subgroup harms, and construct-validity problems in NLP;
+- design reproducible NLP studies using health, education, or public benchmark text.
 
-## Text Representation
-### Tokenization
-### Bag of Words
-### TF-IDF
-### N-Grams
-### Word and Document Embeddings
+## Why Language Is Different
 
-## Modeling Text
-### Naive Bayes
-### Logistic Regression
-### Linear SVM
-### Neural Representations
+Most earlier chapters assumed that observations were already represented as columns of numbers.
+
+Language does not arrive that way.
+
+A student writes:
+
+> “I understand the material, but I still feel lost when I try to apply it.”
+
+A patient writes:
+
+> “The medication helped the pain, but I have been exhausted since Tuesday.”
+
+A scientific abstract contains arguments, terminology, uncertainty, relationships, and context.
+
+Before a machine-learning algorithm can operate on these texts, we must construct a numerical representation.
+
+The NLP pipeline therefore begins with a profound design problem:
+
+$$
+\text{language}
+\longrightarrow
+\text{representation}
+\longrightarrow
+\text{model}.
+$$
+
+::: {.callout-important icon=false}
+## Central Question
+
+**When language becomes numbers, which aspects of meaning survive the transformation—and which disappear?**
+:::
+
+## The Unit of Analysis
+
+Before tokenizing anything, identify the analytical unit.
+
+Possible units include:
+
+- an entire document;
+- a paragraph;
+- a sentence;
+- an utterance;
+- a social-media post;
+- a clinical note;
+- a discussion-board contribution;
+- a token.
+
+The unit must align with the research question.
+
+Predicting a document-level label from sentence fragments changes the problem.
+
+## Core Vocabulary
+
+A **corpus** is a collection of text documents.
+
+A **document** is one analytical text unit.
+
+A **token** is a unit produced by tokenization.
+
+A **vocabulary** is the set of distinct tokens/features represented by the model.
+
+An **n-gram** is a contiguous sequence of $n$ tokens.
+
+Examples:
+
+- unigram: `machine`
+- bigram: `machine learning`
+- trigram: `machine learning model`
+
+## Tokenization
+
+Tokenization divides text into units.
+
+A simple whitespace tokenizer might turn:
+
+```text
+Machine learning changes research.
+```
+
+into:
+
+```text
+Machine
+learning
+changes
+research.
+```
+
+But real tokenization must confront:
+
+- punctuation;
+- contractions;
+- hyphenation;
+- URLs;
+- emojis;
+- hashtags;
+- numbers;
+- abbreviations;
+- multilingual text;
+- domain terminology.
+
+Modern subword tokenizers go further by representing words through reusable pieces.
+
+Tokenization is therefore not clerical preprocessing. It defines the symbols available to the model.
+
+## A Simple Tokenization Demonstration
+
+```{python}
+import re
+
+text = """
+Machine learning can support research,
+but representation choices matter.
+"""
+
+tokens = re.findall(
+    r"\b[\w'-]+\b",
+    text.lower()
+)
+
+tokens
+```
+
+This tokenizer is intentionally simple. Production NLP systems often require more sophisticated rules or learned subword tokenizers.
+
+## Text Normalization
+
+Common transformations include:
+
+- lowercasing;
+- punctuation handling;
+- number normalization;
+- spelling normalization;
+- stop-word removal;
+- stemming;
+- lemmatization.
+
+Each transformation changes the information available to the model.
+
+For example, removing the word `not` could reverse sentiment.
+
+Aggressive normalization can improve statistical efficiency while destroying useful meaning.
+
+## Stop Words
+
+Stop words are frequently occurring function words such as `the`, `and`, or `is`.
+
+Removing them can reduce dimensionality in some lexical models.
+
+But consider:
+
+> “The treatment was effective.”
+
+versus
+
+> “The treatment was **not** effective.”
+
+A generic stop-word list that removes negation could be disastrous.
+
+Domain context matters.
+
+## Stemming and Lemmatization
+
+**Stemming** applies heuristic rules to reduce words to stems.
+
+**Lemmatization** attempts to map inflected words to linguistically meaningful base forms.
+
+For example:
+
+$$
+\{\text{learn},\text{learned},\text{learning}\}
+\rightarrow
+\text{learn}
+$$
+
+may be useful in some applications.
+
+But modern contextual models often operate without traditional stemming or lemmatization.
+
+Preprocessing should follow the representation and task.
+
+## Bag-of-Words Foundations
+
+## From Documents to Counts
+
+Suppose our corpus contains:
+
+1. `machine learning supports research`
+2. `research supports learning`
+3. `machine learning requires data`
+
+A bag-of-words representation records token counts while largely ignoring order.
+
+If the vocabulary is
+
+$$
+V=
+\{
+\text{machine},
+\text{learning},
+\text{supports},
+\text{research},
+\text{requires},
+\text{data}
+\},
+$$
+
+each document becomes a numerical vector.
+
+## CountVectorizer
+
+```{python}
+from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
+
+documents = [
+    "machine learning supports research",
+    "research supports learning",
+    "machine learning requires data"
+]
+
+count_vectorizer = CountVectorizer()
+X_count = count_vectorizer.fit_transform(
+    documents
+)
+
+count_df = pd.DataFrame(
+    X_count.toarray(),
+    columns=count_vectorizer.get_feature_names_out()
+)
+
+count_df
+```
+
+This is a **document-term matrix**.
+
+Rows represent documents.
+
+Columns represent vocabulary features.
+
+## Sparsity
+
+Real vocabularies can contain tens or hundreds of thousands of features.
+
+Any individual document uses only a small fraction of them.
+
+The resulting matrix is sparse.
+
+If
+
+$$
+X\in\mathbb{R}^{n\times p},
+$$
+
+$p$ may be enormous while most entries equal zero.
+
+Sparse matrix representations avoid storing every zero explicitly.
+
+This is one reason we should generally avoid converting large text matrices with `.toarray()`.
+
+We did so above only because the teaching example is tiny.
+
+## What Bag of Words Forgets
+
+Compare:
+
+> `student understands model`
+
+and
+
+> `model understands student`
+
+A unigram bag-of-words representation can treat them identically.
+
+Thus:
+
+$$
+\boxed{\text{same token counts}}
+\not\Rightarrow
+\boxed{\text{same meaning}}.
+$$
+
+## N-Grams Restore Some Local Order
+
+```{python}
+bigram_vectorizer = CountVectorizer(
+    ngram_range=(1, 2)
+)
+
+X_bigram = bigram_vectorizer.fit_transform(
+    documents
+)
+
+bigram_vectorizer.get_feature_names_out()
+```
+
+Bigrams can preserve phrases such as `machine learning`.
+
+But vocabulary size grows rapidly.
+
+This creates a tradeoff between richer local context and dimensionality/sparsity.
+
+## TF-IDF
+
+## Why Counts Are Not Enough
+
+A term appearing frequently in every document may be less discriminating than a term concentrated in a smaller subset.
+
+TF-IDF combines:
+
+- **term frequency** — importance within a document;
+- **inverse document frequency** — rarity across documents.
+
+## Term Frequency
+
+A simple term frequency is
+
+$$
+TF(t,d)
+=
+\text{count of term }t\text{ in document }d.
+$$
+
+Variants normalize by document length or use sublinear scaling.
+
+## Inverse Document Frequency
+
+A common smoothed form is
+
+$$
+IDF(t)
+=
+\log
+\left(
+\frac{1+n}
+{1+df(t)}
+\right)
++1,
+$$
+
+where:
+
+- $n$ is the number of documents;
+- $df(t)$ is the number of documents containing term $t$.
+
+Terms appearing in fewer documents receive greater IDF weight.
+
+## TF-IDF Weight
+
+$$
+TFIDF(t,d)
+=
+TF(t,d)\times IDF(t).
+$$
+
+The exact implementation can vary, so reproducible research should document the software and parameterization.
+
+## TF-IDF in Python
+
+```{python}
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf = TfidfVectorizer()
+
+X_tfidf = tfidf.fit_transform(
+    documents
+)
+
+tfidf_df = pd.DataFrame(
+    X_tfidf.toarray(),
+    columns=tfidf.get_feature_names_out()
+)
+
+tfidf_df.round(3)
+```
+
+## Cosine Similarity
+
+Text vectors are often compared using cosine similarity.
+
+For vectors $x$ and $y$,
+
+$$
+\cos(\theta)
+=
+\frac{x^\top y}
+{\|x\|_2\|y\|_2}.
+$$
+
+Cosine similarity focuses on orientation rather than raw vector magnitude.
+
+## Document Similarity
+
+```{python}
+from sklearn.metrics.pairwise import cosine_similarity
+
+similarities = cosine_similarity(
+    X_tfidf
+)
+
+pd.DataFrame(
+    similarities,
+    index=["Doc 1", "Doc 2", "Doc 3"],
+    columns=["Doc 1", "Doc 2", "Doc 3"]
+).round(3)
+```
+
+A high cosine similarity means the documents have similar vector directions under the chosen representation.
+
+It does not prove that humans would judge the documents semantically equivalent.
+
+## Text Classification
+
+## A Public Benchmark
+
+For an executable classification example, we use the scikit-learn 20 Newsgroups dataset.
+
+Because it is downloaded from the internet when first used, the main book should avoid requiring the download during every render.
+
+Instead, we will create a small synthetic corpus for guaranteed rendering and provide the public benchmark workflow as a research extension.
+
+## A Reproducible Teaching Corpus
+
+```{python}
+texts = [
+    "the course examples were clear and helpful",
+    "I understood the lecture and enjoyed the project",
+    "the assignment instructions were confusing",
+    "I could not understand the coding exercise",
+    "excellent explanations and useful examples",
+    "the project helped me apply machine learning",
+    "the lecture moved too quickly and was unclear",
+    "I struggled with the assignment requirements",
+    "the examples made the concept easy to understand",
+    "the instructions were vague and frustrating",
+    "helpful feedback improved my final project",
+    "I was confused by the explanation of the model",
+    "the hands on exercise was valuable",
+    "the activity did not explain the concept well",
+    "clear examples helped me understand regression",
+    "I could not follow the instructions for the lab",
+    "the project was engaging and practical",
+    "the lesson was difficult to follow",
+    "the coding demonstration was very useful",
+    "the assignment description was unclear"
+]
+
+labels = [
+    1,1,0,0,1,
+    1,0,0,1,0,
+    1,0,1,0,1,
+    0,1,0,1,0
+]
+```
+
+Here `1` indicates broadly positive/clear feedback and `0` indicates broadly negative/confusing feedback.
+
+This corpus is for workflow demonstration, not substantive research.
+
+## Leakage-Safe NLP Pipeline
+
+The vectorizer must learn vocabulary and IDF weights from the training data only.
+
+```{python}
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+
+X_train, X_test, y_train, y_test = train_test_split(
+    texts,
+    labels,
+    test_size=.30,
+    random_state=42,
+    stratify=labels
+)
+
+text_model = Pipeline([
+    (
+        "tfidf",
+        TfidfVectorizer(
+            ngram_range=(1, 2),
+            min_df=1
+        )
+    ),
+    (
+        "model",
+        LogisticRegression(
+            max_iter=2000
+        )
+    )
+])
+
+text_model.fit(
+    X_train,
+    y_train
+)
+
+text_prob = text_model.predict_proba(
+    X_test
+)[:, 1]
+
+text_pred = text_model.predict(
+    X_test
+)
+```
+
+This is the text equivalent of the leakage-safe pipelines developed earlier.
+
+## Evaluate the Classifier
+
+```{python}
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score
+)
+
+{
+    "Accuracy": accuracy_score(
+        y_test,
+        text_pred
+    ),
+    "Precision": precision_score(
+        y_test,
+        text_pred
+    ),
+    "Recall": recall_score(
+        y_test,
+        text_pred
+    ),
+    "F1": f1_score(
+        y_test,
+        text_pred
+    ),
+    "ROC-AUC": roc_auc_score(
+        y_test,
+        text_prob
+    )
+}
+```
+
+With a tiny synthetic corpus, these metrics are unstable.
+
+That instability is itself instructive: impressive percentages from small text samples should not be overinterpreted.
+
+## Inspect Lexical Signals
+
+Linear models provide a useful window into which features are associated with predictions.
+
+```{python}
+feature_names = (
+    text_model
+    .named_steps["tfidf"]
+    .get_feature_names_out()
+)
+
+coefficients = (
+    text_model
+    .named_steps["model"]
+    .coef_[0]
+)
+
+coef_df = pd.DataFrame({
+    "feature": feature_names,
+    "coefficient": coefficients
+})
+
+coef_df.sort_values(
+    "coefficient",
+    ascending=False
+).head(10)
+```
+
+And features associated with the opposite class:
+
+```{python}
+coef_df.sort_values(
+    "coefficient"
+).head(10)
+```
+
+A coefficient indicates predictive association under this fitted model.
+
+It does not establish that a word caused the outcome or that the model “understands” the concept represented by the word.
+
+## Spurious Lexical Cues
+
+Suppose all essays receiving low scores happened to contain a particular course code because one instructor used a different prompt.
+
+A classifier might learn the course code rather than writing quality.
+
+Text models are especially vulnerable to shortcuts involving:
+
+- source;
+- author;
+- template;
+- timestamp;
+- institution;
+- formatting;
+- demographic proxies;
+- label artifacts.
+
+High predictive accuracy can coexist with invalid measurement.
+
+## Distributed Representations
+
+## From Sparse Counts to Dense Vectors
+
+Bag-of-words and TF-IDF create sparse vectors whose dimensions correspond to vocabulary features.
+
+Distributed embeddings instead represent tokens using dense vectors:
+
+$$
+w
+\longrightarrow
+e_w\in\mathbb{R}^{d},
+$$
+
+where typically
+
+$$
+d\ll |V|.
+$$
+
+Words appearing in similar linguistic contexts can acquire nearby representations.
+
+## The Distributional Idea
+
+A foundational intuition is:
+
+> words used in similar contexts often have related meanings.
+
+Rather than manually defining semantic categories, representation learning can infer statistical regularities from large corpora.
+
+This changes the representation from:
+
+$$
+\text{word identity}
+$$
+
+toward:
+
+$$
+\text{position in a learned semantic space}.
+$$
+
+## One-Hot Versus Dense Representation
+
+For a vocabulary of size $V$, a one-hot vector contains one 1 and $V-1$ zeros.
+
+For example:
+
+$$
+\text{data}
+\rightarrow
+[0,0,1,0,\ldots,0].
+$$
+
+The one-hot representation does not encode similarity directly.
+
+An embedding might instead be:
+
+$$
+\text{data}
+\rightarrow
+[0.18,-0.42,0.73,\ldots].
+$$
+
+The coordinates are learned rather than manually assigned.
+
+## Word2Vec Intuition
+
+Two classic Word2Vec objectives are:
+
+- Continuous Bag of Words (CBOW): predict a target word from surrounding context;
+- Skip-Gram: predict surrounding context from a target word.
+
+The training task is instrumental.
+
+The learned embedding matrix becomes the useful artifact.
+
+This is an important pattern in modern machine learning:
+
+> **A model can learn a representation through a prediction task different from the downstream task we ultimately care about.**
+
+## Static Embeddings Have a Limitation
+
+Consider:
+
+> “She deposited money at the **bank**.”
+
+and
+
+> “They sat on the **bank** of the river.”
+
+A static embedding assigns one vector to `bank`.
+
+But meaning depends on context.
+
+We therefore want:
+
+$$
+e(\text{bank}\mid\text{sentence 1})
+\neq
+e(\text{bank}\mid\text{sentence 2}).
+$$
+
+This motivates **contextual embeddings**.
+
+## Attention
+
+## Why Context Requires Interaction
+
+To represent a word contextually, the model needs a mechanism through which tokens can influence one another.
+
+Attention provides such a mechanism.
+
+For each token representation, a model constructs:
+
+- a **query**;
+- a **key**;
+- a **value**.
+
+For matrix $X$:
+
+$$
+Q=XW_Q,
+$$
+
+$$
+K=XW_K,
+$$
+
+$$
+V=XW_V.
+$$
+
+## Scaled Dot-Product Attention
+
+Attention is commonly written as
+
+$$
+Attention(Q,K,V)
+=
+softmax
+\left(
+\frac{QK^\top}{\sqrt{d_k}}
+\right)V.
+$$
+
+This compact equation is central to modern NLP.
+
+Let's unpack it.
+
+## Step 1: Compare Queries and Keys
+
+The matrix
+
+$$
+QK^\top
+$$
+
+contains compatibility scores between token queries and token keys.
+
+A large dot product suggests a stronger relationship under the learned projections.
+
+## Step 2: Scale
+
+Divide by
+
+$$
+\sqrt{d_k}.
+$$
+
+Without scaling, dot products can become large as dimensionality increases, pushing softmax toward extreme values and making optimization less stable.
+
+## Step 3: Softmax
+
+For each query, softmax converts scores into weights:
+
+$$
+\alpha_{ij}
+=
+\frac{
+\exp(s_{ij})
+}{
+\sum_m\exp(s_{im})
+}.
+$$
+
+The weights sum to one across the attended positions.
+
+## Step 4: Weighted Values
+
+The contextual output for token $i$ is
+
+$$
+h_i
+=
+\sum_j
+\alpha_{ij}v_j.
+$$
+
+A token's representation is therefore updated using information from other tokens.
+
+## Attention by Hand
+
+```{python}
+#| label: fig-attention-matrix
+#| fig-cap: "A toy attention matrix shows how each token can assign different weights to other tokens."
+
+tokens = [
+    "student",
+    "understood",
+    "the",
+    "model"
+]
+
+scores = np.array([
+    [2.2, 1.0, 0.2, 0.8],
+    [0.7, 2.1, 0.1, 1.8],
+    [0.4, 0.5, 1.4, 0.6],
+    [0.9, 1.7, 0.2, 2.3]
+])
+
+def row_softmax(matrix):
+    shifted = matrix - matrix.max(
+        axis=1,
+        keepdims=True
+    )
+    exp_values = np.exp(shifted)
+    return exp_values / exp_values.sum(
+        axis=1,
+        keepdims=True
+    )
+
+attention_weights = row_softmax(
+    scores
+)
+
+plt.figure(figsize=(7, 5))
+plt.imshow(
+    attention_weights,
+    aspect="auto"
+)
+plt.xticks(
+    range(len(tokens)),
+    tokens,
+    rotation=30
+)
+plt.yticks(
+    range(len(tokens)),
+    tokens
+)
+plt.xlabel("Key token")
+plt.ylabel("Query token")
+plt.title("Toy Attention Weights")
+plt.colorbar(label="Attention weight")
+plt.show()
+```
+
+These weights are constructed for teaching rather than learned from a trained language model.
+
+## Attention Is Not Automatically Explanation
+
+An attention weight tells us something about a model's internal computation.
+
+It should not automatically be interpreted as:
+
+- human reasoning;
+- causal importance;
+- psychological attention;
+- a complete explanation of a prediction.
+
+Model internals and scientific explanations are different objects.
 
 ## Transformers
-### Attention
-### Contextual Embeddings
-### Pretrained Language Models
-### Fine-Tuning and Retrieval
 
-## Evaluation
-### Classification Metrics
-### Data Leakage in Text
-### Domain Shift
-### Human Evaluation
+## The Transformer Idea
 
-## Hands-On Practice
-Build a reproducible text classifier and compare sparse and embedding-based representations.
+The transformer architecture builds representations using attention rather than relying exclusively on recurrence.
 
-## Common Mistakes
-- Leakage from duplicated or related documents.
-- Random splitting when time or source matters.
-- Ignoring class and language imbalance.
-- Treating model-generated labels as ground truth.
+A simplified transformer block includes:
+
+$$
+\text{token representations}
+\rightarrow
+\text{multi-head attention}
+\rightarrow
+\text{feed-forward network}
+\rightarrow
+\text{updated representations}.
+$$
+
+Residual connections and normalization support optimization.
+
+## Multi-Head Attention
+
+Instead of computing one attention pattern, transformers can compute multiple heads:
+
+$$
+head_i
+=
+Attention(
+QW_i^Q,
+KW_i^K,
+VW_i^V
+).
+$$
+
+The heads are combined:
+
+$$
+MultiHead(Q,K,V)
+=
+Concat(head_1,\ldots,head_h)W^O.
+$$
+
+Different heads can learn different interaction patterns.
+
+We should be cautious about assigning simple linguistic meanings to individual heads without evidence.
+
+## Positional Information
+
+Self-attention alone does not inherently encode token order in the same way recurrence does.
+
+Transformers therefore incorporate positional information.
+
+Conceptually:
+
+$$
+\text{input representation}
+=
+\text{token embedding}
++
+\text{position representation}.
+$$
+
+Modern architectures implement positional information in several ways.
+
+## Encoder-Style Models
+
+Encoder-style transformers are especially suited to constructing contextual representations from an input sequence.
+
+Typical applications include:
+
+- classification;
+- token labeling;
+- semantic similarity;
+- information extraction.
+
+BERT is a historically important example of this family [@devlin2019bert].
+
+## Decoder-Style Models
+
+Decoder-style transformers predict tokens autoregressively:
+
+$$
+P(x_1,\ldots,x_T)
+=
+\prod_{t=1}^{T}
+P(
+x_t
+\mid
+x_1,\ldots,x_{t-1}
+).
+$$
+
+This next-token-prediction structure forms a foundation for many modern generative language models.
+
+We develop that much more deeply in Chapter 15.
+
+## Encoder-Decoder Models
+
+Sequence-to-sequence transformers can use an encoder to represent an input and a decoder to generate an output.
+
+Applications include:
+
+- translation;
+- summarization;
+- structured generation.
+
+## From NLP to Foundation Models
+
+The progression across this chapter can now be seen as a history of increasingly expressive representations:
+
+$$
+\text{counts}
+\rightarrow
+\text{TF-IDF}
+\rightarrow
+\text{static embeddings}
+\rightarrow
+\text{contextual embeddings}
+\rightarrow
+\text{transformers}.
+$$
+
+Each step preserves different information and introduces new assumptions, computational costs, and opportunities.
+
+## Research-Grade NLP
+
+## Split by the Real Generalization Boundary
+
+Randomly splitting documents is not always appropriate.
+
+Suppose several notes come from the same patient, essays from the same student, or posts from the same author.
+
+If documents from one person occur in both train and test sets, performance may partly reflect recognition of the person rather than generalization to new people.
+
+Possible split boundaries include:
+
+- person;
+- institution;
+- course;
+- instructor;
+- time;
+- geographic site;
+- publication venue.
+
+The split should emulate the deployment or scientific generalization claim.
+
+## Duplicate and Near-Duplicate Text
+
+Copied templates, boilerplate, repeated prompts, quoted material, and duplicated documents can inflate performance.
+
+Text research should inspect overlap before modeling.
+
+## Temporal Leakage
+
+Language changes over time.
+
+A model may exploit information unavailable at the intended prediction time.
+
+Examples include:
+
+- later clinical diagnoses appearing in notes;
+- instructor feedback written after grading;
+- references to final outcomes;
+- retrospective summaries.
+
+Define the prediction timestamp before selecting text.
+
+## Construct Validity
+
+Suppose a researcher predicts “student engagement” from discussion posts.
+
+What exactly is the label?
+
+Attendance?
+
+Instructor rating?
+
+Post frequency?
+
+Self-report?
+
+Course completion?
+
+The sophistication of the language model cannot repair a weak construct definition.
+
+## Fairness and Language Variation
+
+Language reflects:
+
+- culture;
+- dialect;
+- educational experience;
+- profession;
+- age;
+- geography;
+- disability-related communication patterns;
+- multilingual backgrounds.
+
+A text model may interpret legitimate language variation as predictive signal.
+
+Responsible evaluation should examine relevant subgroups and avoid treating one linguistic norm as inherently superior.
+
+## Three Tracks
+
+### Health Track
+
+Potential sources include public health narratives, biomedical abstracts, clinical text where access and governance permit, patient-generated text, and public datasets such as PubMed-derived corpora.
+
+Research questions might include:
+
+- classifying biomedical abstracts;
+- extracting health concepts;
+- analyzing patient-reported experiences;
+- predicting document categories;
+- studying semantic change in health literature.
+
+Protected health information and clinical deployment require substantially stronger governance than public teaching datasets.
+
+### Education Track
+
+Potential sources include:
+
+- public educational datasets;
+- course discussion text where ethically approved;
+- open-ended survey responses;
+- student writing;
+- published abstracts from education research;
+- publicly available institutional documents.
+
+Research possibilities include feedback classification, discourse analysis, semantic similarity, topic evolution, and responsible learning analytics.
+
+### Open ML Benchmark Track
+
+Useful public benchmarks include 20 Newsgroups and other openly licensed text-classification corpora.
+
+Benchmark work can compare:
+
+$$
+\text{TF-IDF + linear model}
+$$
+
+against
+
+$$
+\text{embedding-based models}
+$$
+
+and eventually transformer-based approaches.
+
+## Public Research Dataset Studio
+
+For publishable research, students should not merely download a famous dataset and chase accuracy.
+
+A stronger workflow is:
+
+1. identify a substantive research question;
+2. establish the unit of analysis;
+3. document dataset provenance and license;
+4. define the construct and target;
+5. specify the real generalization boundary;
+6. create a transparent baseline;
+7. compare representations;
+8. conduct error analysis;
+9. examine robustness;
+10. evaluate subgroup performance where justified;
+11. quantify uncertainty;
+12. document computational resources;
+13. make code and derived artifacts reproducible where permitted.
+
+This creates a path from classroom NLP to conference-quality research.
+
+## Beyond the Algorithm: Does a Vector Understand a Word?
+
+::: {.callout-note icon=false}
+## Representation and Meaning
+
+Suppose a model places two words close together in a 768-dimensional space.
+
+What has been demonstrated?
+
+At minimum, the model has learned a statistical representation in which the words behave similarly according to its training objective and data.
+
+That can be extraordinarily useful.
+
+But usefulness does not settle the philosophical question of understanding.
+
+Human language is connected to:
+
+- embodied experience;
+- intention;
+- culture;
+- social relationships;
+- history;
+- goals;
+- consequences.
+
+A machine representation can encode remarkable linguistic regularities without giving us a simple answer to whether the system “understands” in the human sense.
+
+For data science, the practical lesson is not to resolve centuries of philosophy of language.
+
+It is to maintain conceptual discipline:
+
+$$
+\boxed{
+\text{successful representation}
+\neq
+\text{proof of human-like understanding}
+}
+$$
+
+A model should be credited for what evidence demonstrates—not for metaphysical properties we inferred from impressive output.
+:::
+
+## AI Pair Programmer: The Model Understands Students
+
+An AI assistant analyzes open-ended student comments and produces a classifier with high accuracy.
+
+It concludes:
+
+> “The model understands how students feel about the course.”
+
+Audit the statement.
+
+Ask:
+
+- What was the target?
+- How was sentiment or experience operationalized?
+- Who labeled the data?
+- Could the model exploit lexical shortcuts?
+- Were multiple comments from the same student separated across train and test?
+- Are dialect and multilingual variation represented?
+- Was performance evaluated by subgroup?
+- Were probabilities calibrated?
+- What errors matter most?
+- Does predictive success establish understanding?
+
+Rewrite the conclusion into defensible scientific language.
+
+## Hands-On Lab: Build a Text Classifier
+
+Using a public or ethically approved text dataset:
+
+1. define the unit of analysis;
+2. define the target;
+3. audit class balance;
+4. inspect duplicates;
+5. establish the correct split boundary;
+6. tokenize/normalize only as justified;
+7. build a unigram count baseline;
+8. build a TF-IDF baseline;
+9. add bigrams;
+10. compare logistic regression or another linear classifier;
+11. evaluate task-relevant metrics;
+12. inspect influential lexical features;
+13. conduct manual error analysis;
+14. identify possible shortcut features;
+15. test sensitivity to preprocessing;
+16. document limitations;
+17. propose an embedding or transformer extension.
+
+## Practitioner Track
+
+A practitioner should be able to build leakage-safe lexical NLP pipelines, choose basic representations, evaluate classifiers, inspect lexical signals, and recognize when a modern transformer is warranted.
+
+## Researcher Track
+
+A researcher should additionally justify the unit of analysis and split boundary, examine duplicate contamination, establish construct validity, conduct error and subgroup analyses, compare strong baselines, document data provenance, and distinguish predictive performance from claims about meaning or cognition.
+
+## Research Studio
+
+Design an NLP study suitable for a conference or journal paper.
+
+Specify:
+
+1. substantive problem;
+2. corpus provenance;
+3. license/ethical constraints;
+4. unit of analysis;
+5. construct and target;
+6. labeling procedure;
+7. sample size;
+8. language(s);
+9. preprocessing;
+10. baseline representation;
+11. baseline model;
+12. advanced representation;
+13. train/validation/test boundary;
+14. duplicate control;
+15. temporal leakage controls;
+16. evaluation metrics;
+17. uncertainty;
+18. error analysis;
+19. subgroup analysis;
+20. robustness/sensitivity;
+21. compute;
+22. reproducibility plan;
+23. interpretive limits;
+24. scholarly contribution.
+
+## Professor's Challenge: Predicting Student Success From Essays
+
+Researchers collect admissions essays from 12,000 students and predict first-year retention.
+
+A transformer reaches ROC-AUC = 0.84.
+
+The researchers conclude:
+
+> “The language model detects motivation, resilience, and academic potential directly from student writing and can improve admissions decisions.”
+
+Critique:
+
+- target definition;
+- admissions-selection effects;
+- essay coaching;
+- socioeconomic proxies;
+- language background;
+- disability-related variation;
+- demographic proxies;
+- institutional context;
+- train/test split;
+- temporal validation;
+- construct validity;
+- calibration;
+- subgroup performance;
+- causal interpretation;
+- consequences of deployment;
+- whether retention should be treated as student potential.
+
+Design a scientifically and ethically stronger study.
 
 ## Knowledge Check
-1. What does TF-IDF represent?
-2. How are contextual embeddings different from bag-of-words features?
-3. What problem does attention address?
-4. Why can random splitting inflate NLP performance?
 
-## Real-World Case Study
-### Analyzing Educational Text
-Develop a research-safe NLP workflow using a publicly available text corpus.
-
-## Professor's Challenge
-An automated text classifier agrees with human coders 85% of the time. Is that sufficient for research use?
-
-## Research Extension
-Compare human and machine coding, domain transfer, or robustness across populations.
+1. What is a corpus?
+2. What is a token?
+3. Why is tokenization a modeling choice?
+4. What information can stop-word removal destroy?
+5. How do stemming and lemmatization differ?
+6. What is a document-term matrix?
+7. Why are text matrices sparse?
+8. What does bag of words discard?
+9. What is an n-gram?
+10. What does term frequency measure?
+11. Why does IDF downweight common terms?
+12. What is TF-IDF?
+13. What does cosine similarity measure?
+14. Why must a vectorizer be fitted inside the training pipeline?
+15. Why do lexical coefficients not establish causality?
+16. What is a distributed word representation?
+17. How does a dense embedding differ from one-hot encoding?
+18. What limitation do static embeddings have?
+19. What is a contextual embedding?
+20. What are queries, keys, and values in attention?
+21. Why is attention scaled by $\sqrt{d_k}$?
+22. What does softmax do to attention scores?
+23. Why do transformers need positional information?
+24. What is multi-head attention?
+25. How do encoder- and decoder-style language models differ conceptually?
+26. Why can random document splitting create leakage?
+27. Why is construct validity still essential with transformers?
+28. Why does predictive language modeling not by itself prove human-like understanding?
 
 ## Reproducibility Check
-Version corpora, document preprocessing, preserve split logic, and record model/checkpoint identifiers.
+
+Record:
+
+- corpus source/version;
+- license;
+- collection dates;
+- unit of analysis;
+- inclusion/exclusion criteria;
+- labels and annotators;
+- annotation agreement where applicable;
+- language(s);
+- duplicate handling;
+- preprocessing;
+- tokenizer;
+- vocabulary settings;
+- n-gram range;
+- TF-IDF settings;
+- split boundary;
+- random seeds;
+- baseline models;
+- advanced models;
+- pretrained model/version if used;
+- fine-tuning settings;
+- evaluation metrics;
+- confidence intervals;
+- calibration;
+- error analysis;
+- subgroup analyses;
+- hardware/compute;
+- package versions;
+- code and artifact availability.
 
 ## Key Takeaways
-- Text representation strongly shapes NLP performance.
-- Transformers provide contextual representations but introduce new reproducibility challenges.
-- Human validation remains important.
+
+- NLP begins by converting language into numerical representations.
+- Tokenization and normalization determine what information becomes available to a model.
+- Bag-of-words models are simple, sparse, and surprisingly strong baselines.
+- TF-IDF balances within-document frequency against corpus-wide prevalence.
+- Cosine similarity compares vector orientation rather than raw magnitude.
+- Text vectorization belongs inside leakage-safe pipelines.
+- High accuracy can arise from spurious lexical shortcuts.
+- Dense embeddings learn distributed representations from statistical context.
+- Contextual embeddings allow the representation of a token to depend on surrounding language.
+- Self-attention uses learned query-key relationships to combine value representations.
+- Transformers build contextual representations through attention and feed-forward transformations.
+- Attention weights are not automatically explanations.
+- NLP studies require careful unit-of-analysis, split-boundary, construct-validity, and duplicate-contamination decisions.
+- Language variation creates important fairness considerations.
+- Successful linguistic representation does not by itself establish human-like understanding.

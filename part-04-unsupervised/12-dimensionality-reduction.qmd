@@ -1,67 +1,1060 @@
-# Dimensionality Reduction
+# Dimensionality Reduction: Compressing Data Without Losing the Story
+
+```{python}
+#| label: chapter-12-setup
+#| include: false
+
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+```
 
 ## Learning Objectives
-- Explain why dimensionality reduction is useful.
-- Derive the intuition behind PCA.
-- Interpret explained variance and component loadings.
-- Distinguish PCA, factor analysis, t-SNE, and UMAP.
-- Recognize when low-dimensional visualizations can mislead.
+
+By the end of this chapter, you should be able to:
+
+- explain the curse of dimensionality and why high-dimensional data create statistical and computational challenges;
+- distinguish feature selection from feature extraction;
+- explain dimensionality reduction as a change of representation;
+- calculate variance, covariance, and standardized features;
+- explain eigenvectors and eigenvalues in the context of Principal Component Analysis (PCA);
+- derive the PCA optimization objective conceptually;
+- interpret principal-component scores, loadings, and explained variance;
+- distinguish explained variance from predictive or substantive importance;
+- use scree plots and cumulative explained variance critically;
+- reconstruct data from a reduced PCA representation and interpret reconstruction error;
+- explain why scaling can radically change PCA;
+- use PCA inside a leakage-safe machine-learning pipeline;
+- compare PCA for visualization with PCA for predictive modeling;
+- explain the purpose and limitations of t-SNE;
+- explain the neighborhood-preserving intuition of UMAP;
+- recognize why two-dimensional embeddings can create visually compelling but misleading apparent clusters;
+- compare PCA, t-SNE, and UMAP based on purpose rather than visual appeal;
+- apply dimensionality reduction responsibly in health, education, and research workflows.
 
 ## Why This Matters
-High-dimensional data can be redundant, noisy, and difficult to visualize. Dimensionality reduction creates compact representations while introducing important interpretive tradeoffs.
 
-## Real-World Problem
-A dataset contains dozens of correlated indicators. Can a smaller representation preserve the dominant structure?
+Modern datasets can contain hundreds, thousands, or even millions of features.
 
-## PCA Foundations
-### Variance and Covariance
-### Eigenvalues and Eigenvectors
-### Principal Components
-### Explained Variance
-### Loadings and Scores
-### Scaling Before PCA
+A document can be represented by thousands of terms. An image can contain millions of pixel values. Genomic data may contain tens of thousands of measurements. Learning-management systems can generate hundreds of behavioral indicators.
 
-## Related Methods
-### Factor Analysis
+More variables can contain more information.
+
+But more dimensions can also create:
+
+- redundancy;
+- noise;
+- multicollinearity;
+- computational burden;
+- unstable models;
+- difficult visualization;
+- distance concentration;
+- interpretive overload.
+
+Dimensionality reduction asks whether we can construct a smaller representation
+
+$$
+X\in\mathbb{R}^{n\times p}
+\quad\longrightarrow\quad
+Z\in\mathbb{R}^{n\times k},
+\qquad k\ll p,
+$$
+
+while retaining information useful for our purpose.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**When we compress a high-dimensional world into fewer dimensions, what information are we preserving—and what are we choosing to forget?**
+:::
+
+## Feature Selection Versus Feature Extraction
+
+These approaches reduce dimensionality differently.
+
+### Feature Selection
+
+Choose a subset of the original variables:
+
+$$
+(x_1,x_2,\ldots,x_p)
+\rightarrow
+(x_2,x_5,x_9).
+$$
+
+The retained variables preserve their original meaning.
+
+### Feature Extraction
+
+Construct new variables from combinations of the originals:
+
+$$
+(x_1,x_2,\ldots,x_p)
+\rightarrow
+(z_1,z_2,\ldots,z_k).
+$$
+
+PCA is a feature-extraction method.
+
+The new dimensions are not usually identical to familiar substantive variables.
+
+## Why High Dimensions Become Difficult
+
+Imagine uniformly distributed points in increasingly high-dimensional spaces.
+
+As dimensionality grows, data become sparse relative to the volume of the space.
+
+Distance-based intuition can also weaken because nearest and farthest observations may become less distinct under some high-dimensional distributions.
+
+This family of problems is often called the **curse of dimensionality**.
+
+It does not mean that high-dimensional data are unusable. It means that methods, sample sizes, representations, and regularization must respond to the geometry.
+
+## A Representation Problem
+
+Suppose three variables measure related aspects of academic engagement:
+
+- LMS logins;
+- assignment activity;
+- discussion participation.
+
+They may share substantial information.
+
+Could a smaller set of latent numerical directions summarize much of their variation?
+
+PCA answers this geometrically.
+
+## Principal Component Analysis
+
+### Begin With Variance
+
+For a variable $X$ with mean $\bar{x}$, sample variance is
+
+$$
+s^2
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}(x_i-\bar{x})^2.
+$$
+
+Variance describes spread around the mean.
+
+PCA seeks directions through multivariate space along which projected observations have large variance.
+
+### Covariance
+
+For variables $X_j$ and $X_k$,
+
+$$
+\operatorname{Cov}(X_j,X_k)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}
+(x_{ij}-\bar{x}_j)
+(x_{ik}-\bar{x}_k).
+$$
+
+Positive covariance indicates that the variables tend to increase together.
+
+Negative covariance indicates opposing movement.
+
+The covariance matrix is
+
+$$
+\Sigma
+=
+\begin{bmatrix}
+Var(X_1) & Cov(X_1,X_2) & \cdots\\
+Cov(X_2,X_1) & Var(X_2) & \cdots\\
+\vdots & \vdots & \ddots
+\end{bmatrix}.
+$$
+
+### Covariance by Hand
+
+```{python}
+import numpy as np
+
+X_small = np.array([
+    [2.0, 3.0],
+    [3.0, 5.0],
+    [4.0, 4.0],
+    [5.0, 7.0],
+    [6.0, 8.0]
+])
+
+np.cov(X_small, rowvar=False)
+```
+
+### PCA as a Rotation of the Coordinate System
+
+Consider centered observations
+
+$$
+x_i-\bar{x}.
+$$
+
+PCA finds a unit vector $w_1$ such that the projected values
+
+$$
+z_{i1}=w_1^\top(x_i-\bar{x})
+$$
+
+have maximum variance.
+
+The first principal component solves
+
+$$
+\max_{\|w_1\|=1}
+Var(Xw_1).
+$$
+
+The second component finds the direction of greatest remaining variance subject to being orthogonal to the first.
+
+Thus,
+
+$$
+PC_1\perp PC_2\perp\cdots\perp PC_p.
+$$
+
+PCA does not simply delete dimensions.
+
+It **rotates the coordinate system and then allows us to retain selected directions**.
+
+### Eigenvectors and Eigenvalues
+
+For covariance matrix $\Sigma$, an eigenvector $v$ satisfies
+
+$$
+\Sigma v=\lambda v.
+$$
+
+Here:
+
+- $v$ gives a principal direction;
+- $\lambda$ gives the variance associated with that direction.
+
+Sorting eigenvalues from largest to smallest gives the principal components in decreasing order of explained variance.
+
+If
+
+$$
+\lambda_1\ge\lambda_2\ge\cdots\ge\lambda_p,
+$$
+
+then the explained-variance ratio of component $j$ is
+
+$$
+EVR_j
+=
+\frac{\lambda_j}
+{\sum_{k=1}^{p}\lambda_k}.
+$$
+
+### A Geometric PCA Example
+
+```{python}
+#| label: fig-pca-geometry
+#| fig-cap: "PCA identifies orthogonal directions aligned with decreasing variance in the data."
+
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+rng = np.random.default_rng(42)
+
+cov = np.array([
+    [3.0, 2.4],
+    [2.4, 2.2]
+])
+
+X_geom = rng.multivariate_normal(
+    mean=[0, 0],
+    cov=cov,
+    size=300
+)
+
+pca_geom = PCA(n_components=2)
+pca_geom.fit(X_geom)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(
+    X_geom[:, 0],
+    X_geom[:, 1],
+    alpha=.45,
+    s=22
+)
+
+mean = pca_geom.mean_
+
+for component, variance in zip(
+    pca_geom.components_,
+    pca_geom.explained_variance_
+):
+    endpoint = mean + component * np.sqrt(variance) * 2
+    plt.annotate(
+        "",
+        xy=endpoint,
+        xytext=mean,
+        arrowprops=dict(arrowstyle="->", linewidth=2)
+    )
+
+plt.xlabel("Original Feature 1")
+plt.ylabel("Original Feature 2")
+plt.title("Principal Directions of Variation")
+plt.axis("equal")
+plt.show()
+```
+
+The arrows show directions of variation, not causal effects.
+
+### Principal Component Scores
+
+Once the directions are estimated, observations can be transformed:
+
+$$
+Z=X_cW,
+$$
+
+where $X_c$ is centered data and columns of $W$ contain selected principal directions.
+
+Each row of $Z$ contains the **component scores** for an observation.
+
+```{python}
+Z_geom = pca_geom.transform(X_geom)
+
+Z_geom[:5]
+```
+
+### Loadings
+
+The component coefficients describe how original variables contribute to each principal direction.
+
+In scikit-learn, `components_` contains the principal axes.
+
+```{python}
+pca_geom.components_
+```
+
+The sign of a principal component is arbitrary: multiplying an eigenvector by $-1$ describes the same axis.
+
+Therefore, do not attach meaning to component sign without considering the full loading pattern.
+
+### Scaling Can Change the Answer
+
+PCA based on the covariance matrix is sensitive to measurement scale.
+
+Consider a variable measured in dollars and another measured on a 1-to-5 scale. The variable with much larger numerical variance may dominate the first components.
+
+For many applications, we therefore standardize:
+
+$$
+z_{ij}
+=
+\frac{x_{ij}-\mu_j}{\sigma_j}.
+$$
+
+PCA on standardized variables is closely related to performing PCA on a correlation matrix.
+
+But scaling should be justified rather than automatic.
+
+### PCA on a Real Dataset
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import StandardScaler
+
+cancer = load_breast_cancer(as_frame=True)
+X = cancer.data
+y = cancer.target
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+pca = PCA()
+X_pca = pca.fit_transform(X_scaled)
+
+pca.explained_variance_ratio_[:10]
+```
+
+This full-data transformation is used here for **exploratory demonstration**. When PCA is part of predictive modeling, preprocessing must be learned only from training data.
+
+### Scree Plot
+
+```{python}
+#| label: fig-pca-scree
+#| fig-cap: "A scree plot displays the proportion of variance associated with successive principal components."
+
+components = np.arange(
+    1,
+    len(pca.explained_variance_ratio_) + 1
+)
+
+plt.figure(figsize=(9, 5))
+plt.plot(
+    components,
+    pca.explained_variance_ratio_,
+    marker="o"
+)
+plt.xlabel("Principal component")
+plt.ylabel("Explained variance ratio")
+plt.title("PCA Scree Plot")
+plt.show()
+```
+
+A scree plot can help identify diminishing returns, but it does not provide a universally correct number of components.
+
+### Cumulative Explained Variance
+
+```{python}
+#| label: fig-pca-cumulative
+#| fig-cap: "Cumulative explained variance shows how much total variance is retained as components are added."
+
+cumulative = np.cumsum(
+    pca.explained_variance_ratio_
+)
+
+plt.figure(figsize=(9, 5))
+plt.plot(
+    components,
+    cumulative,
+    marker="o"
+)
+plt.axhline(.90, linestyle="--")
+plt.axhline(.95, linestyle="--")
+plt.xlabel("Number of principal components")
+plt.ylabel("Cumulative explained variance")
+plt.title("Cumulative Explained Variance")
+plt.show()
+```
+
+Thresholds such as 90% or 95% are conventions, not laws.
+
+The right amount of retained variance depends on purpose.
+
+### Explained Variance Is Not Importance
+
+A principal component explaining substantial variance captures a direction along which predictors vary.
+
+It does not necessarily capture:
+
+- the features most predictive of an outcome;
+- the variables most scientifically important;
+- the variables most actionable;
+- causal mechanisms.
+
+A low-variance direction can sometimes contain strong predictive signal.
+
+Thus,
+
+$$
+\boxed{\text{explained predictor variance}}
+\neq
+\boxed{\text{outcome relevance}}.
+$$
+
+### Visualizing Observations With PCA
+
+```{python}
+#| label: fig-pca-two-components
+#| fig-cap: "The first two principal components provide a two-dimensional projection of the standardized feature space."
+
+plt.figure(figsize=(8, 6))
+plt.scatter(
+    X_pca[:, 0],
+    X_pca[:, 1],
+    c=y,
+    cmap="coolwarm",
+    alpha=.65,
+    s=25
+)
+plt.xlabel(
+    f"PC1 ({pca.explained_variance_ratio_[0]:.1%})"
+)
+plt.ylabel(
+    f"PC2 ({pca.explained_variance_ratio_[1]:.1%})"
+)
+plt.title("PCA Projection")
+plt.show()
+```
+
+The class labels are used only for coloring after the unsupervised PCA transformation.
+
+PCA itself did not use $y$.
+
+### Interpreting Loadings
+
+```{python}
+import pandas as pd
+
+loading_df = pd.DataFrame(
+    pca.components_[:3].T,
+    index=X.columns,
+    columns=["PC1", "PC2", "PC3"]
+)
+
+loading_df.loc[
+    loading_df["PC1"].abs().sort_values(
+        ascending=False
+    ).index
+].head(10)
+```
+
+A component may combine many correlated measurements.
+
+Interpretation should consider:
+
+- magnitude;
+- sign pattern;
+- measurement meaning;
+- whether variables were standardized;
+- whether the component is stable across samples.
+
+### Reconstruction
+
+If we retain only $k<p$ components,
+
+$$
+Z_k=X_cW_k.
+$$
+
+An approximation to the original centered data is
+
+$$
+\hat X_c=Z_kW_k^\top.
+$$
+
+Information outside the retained subspace is lost.
+
+```{python}
+pca_5 = PCA(n_components=5)
+Z_5 = pca_5.fit_transform(X_scaled)
+
+X_reconstructed = pca_5.inverse_transform(Z_5)
+
+reconstruction_mse = np.mean(
+    (X_scaled - X_reconstructed) ** 2
+)
+
+reconstruction_mse
+```
+
+This gives dimensionality reduction a concrete interpretation:
+
+> compression trades representational detail for simplicity.
+
+### Reconstruction Error Across Dimensions
+
+```{python}
+#| label: fig-reconstruction-error
+#| fig-cap: "Reconstruction error decreases as more principal components are retained."
+
+component_counts = range(1, 16)
+errors = []
+
+for k in component_counts:
+    pca_k = PCA(n_components=k)
+    z_k = pca_k.fit_transform(X_scaled)
+    x_hat = pca_k.inverse_transform(z_k)
+
+    errors.append(
+        np.mean((X_scaled - x_hat) ** 2)
+    )
+
+plt.figure(figsize=(8, 5))
+plt.plot(
+    list(component_counts),
+    errors,
+    marker="o"
+)
+plt.xlabel("Number of retained components")
+plt.ylabel("Reconstruction MSE")
+plt.title("Compression Versus Reconstruction")
+plt.show()
+```
+
+### PCA in Predictive Modeling
+
+If PCA is part of a supervised-learning workflow, both scaling and PCA must be fitted inside the training pipeline.
+
+```{python}
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=.25,
+    random_state=42,
+    stratify=y
+)
+
+pca_logit = Pipeline([
+    ("scale", StandardScaler()),
+    ("pca", PCA(n_components=.95)),
+    ("model", LogisticRegression(max_iter=2000))
+])
+
+pca_logit.fit(X_train, y_train)
+
+pca_prob = pca_logit.predict_proba(
+    X_test
+)[:, 1]
+
+roc_auc_score(y_test, pca_prob)
+```
+
+The test data did not influence the scaling parameters or principal directions.
+
+### Does PCA Improve Prediction?
+
+Not necessarily.
+
+Compare a logistic model with and without PCA.
+
+```{python}
+plain_logit = Pipeline([
+    ("scale", StandardScaler()),
+    ("model", LogisticRegression(max_iter=2000))
+])
+
+plain_logit.fit(X_train, y_train)
+
+plain_prob = plain_logit.predict_proba(
+    X_test
+)[:, 1]
+
+{
+    "Logistic regression":
+        roc_auc_score(y_test, plain_prob),
+    "PCA + logistic regression":
+        roc_auc_score(y_test, pca_prob)
+}
+```
+
+PCA can improve computational efficiency, reduce collinearity, or regularize a representation.
+
+It can also discard predictive information.
+
+It must earn its place empirically.
+
+## Nonlinear Embeddings
+
+PCA is linear.
+
+Many high-dimensional datasets may contain nonlinear structure.
+
+Methods such as t-SNE and UMAP are especially popular for producing low-dimensional visualizations.
+
+Their beautiful plots require careful interpretation.
+
 ### t-SNE
+
+t-distributed Stochastic Neighbor Embedding (t-SNE) seeks a low-dimensional representation that preserves local neighborhood relationships probabilistically.
+
+At a high level:
+
+1. convert high-dimensional pairwise relationships into neighborhood probabilities;
+2. create corresponding low-dimensional relationships;
+3. optimize the embedding so these neighborhood structures are similar.
+
+A common objective is based on Kullback-Leibler divergence:
+
+$$
+KL(P\|Q)
+=
+\sum_{i\neq j}
+p_{ij}
+\log
+\left(
+\frac{p_{ij}}{q_{ij}}
+\right).
+$$
+
+The goal is not to preserve every original distance.
+
+### t-SNE Example
+
+```{python}
+#| label: fig-tsne
+#| fig-cap: "t-SNE can reveal local neighborhood structure, but distances and apparent gaps in the two-dimensional embedding require cautious interpretation."
+
+#| warning: false
+
+from sklearn.manifold import TSNE
+
+X_scaled_tsne = StandardScaler().fit_transform(X)
+
+tsne = TSNE(
+    n_components=2,
+    perplexity=30,
+    init="pca",
+    learning_rate="auto",
+    random_state=42
+)
+
+X_tsne = tsne.fit_transform(X_scaled_tsne)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(
+    X_tsne[:, 0],
+    X_tsne[:, 1],
+    c=y,
+    cmap="coolwarm",
+    alpha=.65,
+    s=25
+)
+plt.xlabel("t-SNE dimension 1")
+plt.ylabel("t-SNE dimension 2")
+plt.title("t-SNE Embedding")
+plt.show()
+```
+
+The axes do not have the same direct interpretation as PCA axes.
+
+### Perplexity
+
+Perplexity influences the effective neighborhood scale considered by t-SNE.
+
+Different perplexity values can produce different visual structures.
+
+Therefore, a responsible t-SNE analysis should examine sensitivity rather than presenting one attractive embedding as definitive.
+
+### t-SNE Is Primarily a Visualization Tool
+
+A common misuse is:
+
+1. run t-SNE;
+2. see islands;
+3. declare that natural clusters have been discovered.
+
+That conclusion does not follow automatically.
+
+The embedding itself was optimized to represent neighborhood relationships in a low-dimensional display.
+
+Apparent visual clusters may depend on:
+
+- preprocessing;
+- perplexity;
+- initialization;
+- random seed;
+- sample composition;
+- other optimization settings.
+
 ### UMAP
-### Visualization Versus Modeling
 
-## Python Implementation
-### StandardScaler
-### PCA
-### Explained Variance Plots
-### Component Interpretation
+Uniform Manifold Approximation and Projection (UMAP) is another nonlinear dimensionality-reduction method widely used for visualization and representation learning.
 
-## Hands-On Practice
-Reduce a multivariate health or education dataset and compare models before and after reduction.
+Conceptually, UMAP attempts to construct a graph representing local high-dimensional relationships and optimize a lower-dimensional graph-like representation [@umap2026].
 
-## Common Mistakes
-- Applying PCA without scaling when scales differ.
-- Interpreting components as causal constructs.
-- Using t-SNE coordinates as ordinary quantitative variables.
-- Choosing dimensions only because a plot looks attractive.
+Two widely discussed parameters are:
+
+- `n_neighbors` — neighborhood scale;
+- `min_dist` — how tightly observations may be packed in the embedding.
+
+UMAP is provided by the optional `umap-learn` package rather than core scikit-learn.
+
+::: {.callout-note icon=false}
+## Optional Modern Extension
+
+The core chapter does not require `umap-learn`, keeping the main book environment lightweight.
+
+Students who install it can run:
+
+```python
+from umap import UMAP
+
+umap_model = UMAP(
+    n_neighbors=15,
+    min_dist=0.1,
+    n_components=2,
+    random_state=42
+)
+
+X_umap = umap_model.fit_transform(X_scaled)
+```
+
+As with t-SNE, a visually separated embedding is not by itself evidence of natural categories.
+:::
+
+## PCA, t-SNE, or UMAP?
+
+| Method | Main strength | Global geometry | Interpretability | Typical role |
+|---|---|---|---|---|
+| PCA | linear compression | relatively strong | comparatively high | compression, preprocessing, visualization |
+| t-SNE | local visualization | weak | low | exploratory visualization |
+| UMAP | local/manifold representation | partial | low | visualization, nonlinear representation |
+
+No method dominates for every purpose.
+
+The correct question is not:
+
+> **Which one makes the prettiest plot?**
+
+It is:
+
+> **Which representation preserves the information relevant to the analytical task?**
+
+## A Visualization Can Manufacture Confidence
+
+Two-dimensional plots are cognitively powerful.
+
+Humans readily see:
+
+- islands;
+- boundaries;
+- gradients;
+- outliers;
+- apparent categories.
+
+But a 2D embedding is a transformation of a much larger space.
+
+Visual clarity can exceed evidential clarity.
+
+This is especially dangerous when an embedding is colored by known outcomes after the fact.
+
+## Stress-Test the Representation
+
+A responsible dimensionality-reduction workflow should ask:
+
+- Does the structure persist under different preprocessing?
+- Does it persist under different seeds?
+- Does it persist across plausible parameter values?
+- Does it replicate in another sample?
+- Is the pattern also visible through other methods?
+- Does the low-dimensional representation preserve what the application needs?
+- Are conclusions based on visualization alone?
+
+## Three Tracks
+
+### Health Track
+
+PCA can summarize correlated biomarkers or physiological measurements. Nonlinear embeddings can visualize patient heterogeneity. But a visual patient subgroup is not a diagnosis. External clinical validity, stability, calibration of downstream models, and population transportability remain necessary.
+
+### Education Track
+
+Dimensionality reduction can summarize correlated engagement indicators, survey scales, or learning behaviors. A two-dimensional student map can support exploration, but spatial proximity does not automatically imply equivalent learning needs or justify intervention.
+
+### Open ML Benchmark Track
+
+High-dimensional benchmark datasets allow controlled comparison of retained variance, reconstruction, predictive performance, neighborhood preservation, runtime, and sensitivity to embedding parameters.
+
+## Beyond the Algorithm: What Must Be Forgotten?
+
+::: {.callout-note icon=false}
+## Compression Is a Choice About Memory
+
+Dimensionality reduction is often described as removing unnecessary information.
+
+But the algorithm does not know what humanity considers unnecessary.
+
+PCA preserves directions of variance.
+
+t-SNE emphasizes local neighborhoods.
+
+UMAP encodes another geometric view of neighborhood structure.
+
+Each method remembers some relationships more faithfully than others.
+
+This suggests a broader principle:
+
+> **Every representation is simultaneously a way of seeing and a way of not seeing.**
+
+A map leaves out details so that geography becomes comprehensible.
+
+A statistical model leaves out variation so that structure becomes estimable.
+
+A scientific theory leaves out parts of reality so that explanation becomes possible.
+
+The intellectual question is therefore not whether we simplify.
+
+We must.
+
+The question is:
+
+**Did we discard information that mattered for the claim we eventually made?**
+:::
+
+## AI Pair Programmer: I Found Three Patient Types
+
+Give an AI assistant a two-dimensional t-SNE plot containing three visually separated regions.
+
+Tell it:
+
+> “The t-SNE plot clearly proves that our population consists of three biologically distinct patient types.”
+
+Audit the response.
+
+A strong critique should ask about:
+
+- preprocessing;
+- dimensionality;
+- perplexity;
+- random seed;
+- visual versus quantitative evidence;
+- stability;
+- clustering performed independently of the embedding;
+- external biological validation;
+- replication;
+- continuous alternatives;
+- whether t-SNE preserved relevant global relationships.
+
+Rewrite the claim into defensible scientific language.
+
+## Hands-On Lab: Compress, Visualize, Predict
+
+Using a health, education, or benchmark dataset:
+
+1. define the analytical purpose;
+2. complete the Feature Ledger;
+3. examine feature scales and correlations;
+4. standardize where justified;
+5. fit PCA;
+6. inspect eigenvalue/explained-variance behavior;
+7. create scree and cumulative-variance plots;
+8. inspect component loadings;
+9. reconstruct the data using several values of $k$;
+10. quantify reconstruction error;
+11. create a two-component PCA visualization;
+12. fit a supervised baseline without PCA;
+13. fit the same model with leakage-safe PCA;
+14. compare predictive performance and dimensionality;
+15. create a t-SNE visualization;
+16. vary at least one t-SNE parameter;
+17. optionally create a UMAP visualization;
+18. compare the stories told by the representations;
+19. document what each representation cannot establish.
+
+## Practitioner Track
+
+A practitioner should be able to use PCA for compression and preprocessing, select dimensionality based on task requirements, build leakage-safe pipelines, and treat nonlinear embeddings primarily as exploratory representations.
+
+## Researcher Track
+
+A researcher should additionally examine loading stability, sensitivity to scaling, reconstruction, parameter sensitivity, replication, downstream inferential consequences, and whether visual structures support substantive claims.
+
+## Research Studio
+
+Design a dimensionality-reduction study suitable for a conference or journal paper.
+
+Specify:
+
+1. substantive problem;
+2. high-dimensional feature source;
+3. unit of analysis;
+4. preprocessing;
+5. scaling rationale;
+6. PCA or alternative method;
+7. dimensionality-selection strategy;
+8. loading interpretation;
+9. reconstruction assessment;
+10. downstream prediction task if applicable;
+11. leakage-safe pipeline;
+12. nonlinear visualization strategy;
+13. sensitivity analyses;
+14. stability assessment;
+15. external validation;
+16. interpretive limitations;
+17. reproducibility plan;
+18. potential scholarly contribution.
+
+## Professor's Challenge: The Two-Dimensional Truth
+
+Researchers collect 150 behavioral variables from 8,000 university students.
+
+They standardize the variables, run t-SNE once using default settings, and obtain four visually separated islands.
+
+They name the islands:
+
+1. Deep Learners
+2. Strategic Learners
+3. Passive Learners
+4. At-Risk Learners
+
+They report:
+
+> “Machine learning discovered four naturally occurring student learning styles.”
+
+The university proposes assigning students to different curricula based on the visualization.
+
+Critique:
+
+- representation choices;
+- standardization;
+- use of t-SNE;
+- parameter sensitivity;
+- stochasticity;
+- visual cluster inference;
+- absence of an independent clustering analysis;
+- cluster stability;
+- labeling;
+- construct validity;
+- continuous alternatives;
+- external validation;
+- intervention evidence;
+- ethical consequences.
+
+Design a stronger research program before any curricular assignment.
 
 ## Knowledge Check
-1. What does the first principal component maximize?
-2. What is explained variance?
-3. How does PCA differ from factor analysis?
-4. Why should t-SNE be interpreted cautiously?
 
-## Real-World Case Study
-### Reducing Correlated Institutional Indicators
-Use PCA to summarize institutional characteristics and examine downstream predictive performance.
-
-## Professor's Challenge
-PCA improves computational efficiency but makes stakeholder interpretation harder. Should it be retained?
-
-## Research Extension
-Evaluate whether latent representations are stable across populations or time.
+1. What is dimensionality reduction?
+2. How does feature extraction differ from feature selection?
+3. What is the curse of dimensionality?
+4. What does covariance measure?
+5. What does PCA optimize?
+6. What is an eigenvector in PCA?
+7. What does its eigenvalue represent?
+8. Why are principal components orthogonal?
+9. What is a component score?
+10. What are PCA loadings?
+11. Why can scaling radically change PCA?
+12. What does explained-variance ratio measure?
+13. Why is explained variance not equivalent to predictive importance?
+14. What is reconstruction error?
+15. Why must PCA be inside a predictive pipeline?
+16. What does t-SNE attempt to preserve?
+17. What does perplexity influence?
+18. Why should distances between t-SNE islands be interpreted cautiously?
+19. What is UMAP used for?
+20. Why can a compelling 2D visualization support an unjustified scientific claim?
 
 ## Reproducibility Check
-Document preprocessing, component-selection criteria, random seeds for stochastic methods, and interpretation rules.
+
+Record:
+
+- analytical purpose;
+- sample;
+- feature inclusion/exclusion;
+- missing-data treatment;
+- transformations;
+- scaling;
+- covariance/correlation choice;
+- PCA component count;
+- explained-variance criterion;
+- loading calculations;
+- reconstruction analysis;
+- pipeline placement;
+- predictive validation design;
+- t-SNE parameters;
+- UMAP parameters if used;
+- random seeds;
+- sensitivity analyses;
+- software/package versions;
+- code producing every figure and table.
 
 ## Key Takeaways
-- Dimensionality reduction trades original-variable interpretability for compact representation.
-- PCA is grounded in variance and linear algebra.
-- Visualization embeddings require cautious interpretation.
+
+- Dimensionality reduction constructs a smaller representation of high-dimensional data.
+- Feature selection retains original variables; feature extraction creates new dimensions.
+- PCA identifies orthogonal directions of decreasing variance.
+- Eigenvectors define principal directions and eigenvalues quantify their variance.
+- Scaling changes PCA geometry and must be justified.
+- Explained variance does not equal predictive, causal, or substantive importance.
+- Reconstruction makes information loss measurable.
+- PCA used for prediction must be fitted within the training pipeline.
+- t-SNE emphasizes local neighborhood visualization rather than faithful preservation of all distances.
+- UMAP offers a modern nonlinear representation based on neighborhood structure.
+- Attractive embeddings can create unjustified confidence in apparent categories.
+- Representation sensitivity and external validation matter.
+- Compression is not merely technical: it determines what information remains available for subsequent reasoning.

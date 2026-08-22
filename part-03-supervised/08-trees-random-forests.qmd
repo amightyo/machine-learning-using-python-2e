@@ -1,75 +1,723 @@
-# Decision Trees and Random Forests
+# Decision Trees and Random Forests: Learning by Partitioning
 
 ## Learning Objectives
-- Explain recursive partitioning.
-- Calculate and interpret impurity measures.
-- Control tree complexity.
-- Explain bagging and random forests.
-- Evaluate feature importance cautiously.
+
+By the end of this chapter, you should be able to:
+
+- explain recursive partitioning as a supervised-learning strategy;
+- distinguish root nodes, internal nodes, branches, and leaves;
+- calculate and interpret Gini impurity and entropy;
+- explain information gain and regression split criteria;
+- fit classification and regression trees with scikit-learn;
+- explain why unrestricted trees overfit;
+- control tree complexity through depth, leaf-size, and pruning parameters;
+- explain cost-complexity pruning;
+- describe bootstrap aggregation (bagging);
+- explain how Random Forests decorrelate trees through feature subsampling;
+- interpret out-of-bag evaluation conceptually;
+- distinguish impurity-based from permutation feature importance;
+- explain why feature importance does not imply causal importance;
+- use partial dependence cautiously as a model-behavior tool;
+- compare single trees and forests using out-of-sample evidence;
+- connect tree models to health, education, and benchmark research problems.
 
 ## Why This Matters
-Tree-based models capture nonlinearities and interactions with relatively little preprocessing and form the foundation of many powerful ensemble methods.
 
-## Real-World Problem
-Can nonlinear combinations of demographic and behavioral variables improve prediction beyond a linear baseline?
+Linear and logistic regression represent outcomes through weighted combinations of features. Decision trees take a different approach: they repeatedly divide the feature space into regions.
 
-## Decision Trees
-### Recursive Partitioning
-### Splits and Leaves
+A tree asks a sequence of questions:
+
+> Is $x_j \le s$?
+
+Each answer routes an observation toward another question or a terminal prediction.
+
+This makes trees intuitive, nonlinear, and capable of discovering interactions without requiring us to specify every interaction in advance.
+
+But that flexibility comes with a cost: a deep tree can memorize noise.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**How can recursive partitioning discover nonlinear structure while avoiding the temptation to memorize the training data?**
+:::
+
+## From Linear Boundaries to Partitions
+
+A logistic-regression classifier may separate classes using a linear boundary in the represented feature space.
+
+A decision tree instead partitions the space into rectangles or regions.
+
+For a split on feature $x_j$ at threshold $s$,
+
+$$
+R_1(j,s)=\{X:x_j\le s\},
+$$
+
+$$
+R_2(j,s)=\{X:x_j>s\}.
+$$
+
+The algorithm searches for a feature and threshold that improve the purity or predictive quality of the resulting regions.
+
+## Anatomy of a Tree
+
+A decision tree contains:
+
+- **root node** — the first split;
+- **internal nodes** — subsequent decision rules;
+- **branches** — outcomes of those rules;
+- **leaves** — terminal predictions.
+
+A path from root to leaf can be read as a conditional rule.
+
+For example:
+
+$$
+\text{if age}\le 45
+\quad\text{and}\quad
+\text{measure}>12.7
+\quad\Rightarrow\quad
+\hat Y=1.
+$$
+
+A tree therefore represents prediction as a hierarchy of conditional partitions.
+
+## Classification Impurity
+
+A classification tree needs a way to measure how mixed the classes are within a node.
+
 ### Gini Impurity
+
+For $K$ classes,
+
 $$
-G = 1 - \sum_k p_k^2
+Gini=1-\sum_{k=1}^{K}p_k^2,
 $$
+
+where $p_k$ is the proportion of observations in class $k$.
+
+For a binary node with 50% positive and 50% negative,
+
+$$
+Gini=1-(0.5^2+0.5^2)=0.5.
+$$
+
+A pure node has Gini impurity 0.
+
 ### Entropy
+
+Entropy is
+
 $$
-H = -\sum_k p_k\log_2(p_k)
+H=-\sum_{k=1}^{K}p_k\log_2(p_k).
 $$
-### Tree Depth and Pruning
+
+A pure node has entropy 0. Greater class mixture produces greater entropy.
+
+## Split Improvement
+
+A candidate split can be evaluated through the weighted impurity after splitting:
+
+$$
+I_{\text{split}}
+=
+\frac{n_L}{n}I_L+
+\frac{n_R}{n}I_R.
+$$
+
+The impurity reduction is
+
+$$
+\Delta I
+=
+I_{\text{parent}}-I_{\text{split}}.
+$$
+
+The algorithm seeks splits that produce useful reductions.
+
+::: {.callout-note icon=false}
+## Greedy Does Not Mean Globally Optimal
+
+Standard tree construction is greedy: at each node, it chooses a locally favorable split. It does not generally search every possible complete tree and prove that the final tree is globally optimal.
+:::
+
+## Calculate Impurity
+
+```{python}
+import numpy as np
+
+def gini(proportions):
+    p=np.asarray(proportions)
+    return 1-np.sum(p**2)
+
+def entropy(proportions):
+    p=np.asarray(proportions)
+    p=p[p>0]
+    return -np.sum(p*np.log2(p))
+
+gini([0.5,0.5]), entropy([0.5,0.5])
+```
+
+```{python}
+gini([0.9,0.1]), entropy([0.9,0.1])
+```
+
+Both measures recognize that a 90/10 node is purer than a 50/50 node.
+
+## Fit a Classification Tree
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+
+data=load_breast_cancer(as_frame=True)
+X=data.data
+y=(data.target==0).astype(int)  # malignant = 1
+
+X_train,X_test,y_train,y_test=train_test_split(
+    X,y,test_size=.25,random_state=42,stratify=y
+)
+
+tree=DecisionTreeClassifier(
+    max_depth=3,
+    random_state=42
+)
+tree.fit(X_train,y_train)
+
+tree.score(X_train,y_train), tree.score(X_test,y_test)
+```
+
+Unlike logistic regression, ordinary decision trees generally do not require standardization because splits depend on ordering and thresholds rather than Euclidean scale.
+
+## Visualize the Tree
+
+```{python}
+#| label: fig-tree
+#| fig-cap: "A shallow decision tree exposes the hierarchy of learned splits."
+
+import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
+
+plt.figure(figsize=(16,8))
+plot_tree(
+    tree,
+    feature_names=X.columns,
+    class_names=["Benign","Malignant"],
+    filled=False,
+    rounded=True,
+    fontsize=8
+)
+plt.title("A Shallow Classification Tree")
+plt.show()
+```
+
+The tree is readable partly because we constrained its depth. Interpretability can disappear quickly as trees grow.
+
+## Regression Trees
+
+Trees also predict continuous outcomes.
+
+Within a terminal region $R_m$, a regression tree commonly predicts the mean:
+
+$$
+\hat y_{R_m}
+=
+\frac{1}{|R_m|}
+\sum_{i:x_i\in R_m}y_i.
+$$
+
+Splits can be chosen to reduce squared error:
+
+$$
+\sum_{i:x_i\in R_1}(y_i-\bar y_{R_1})^2
++
+\sum_{i:x_i\in R_2}(y_i-\bar y_{R_2})^2.
+$$
+
+The resulting function is piecewise constant.
+
+## Why Trees Overfit
+
+An unrestricted tree can keep splitting until leaves contain very few observations.
+
+Training error may fall dramatically:
+
+$$
+\text{complexity}\uparrow
+\Rightarrow
+\text{training error}\downarrow,
+$$
+
+but test error need not continue falling.
+
+```{python}
+#| label: fig-depth-overfit
+#| fig-cap: "Increasing tree depth can reduce training error while eventually harming generalization."
+
+from sklearn.metrics import accuracy_score
+
+depths=range(1,16)
+train_scores=[]
+test_scores=[]
+
+for depth in depths:
+    m=DecisionTreeClassifier(max_depth=depth,random_state=42)
+    m.fit(X_train,y_train)
+    train_scores.append(accuracy_score(y_train,m.predict(X_train)))
+    test_scores.append(accuracy_score(y_test,m.predict(X_test)))
+
+plt.figure(figsize=(8,5))
+plt.plot(depths,train_scores,marker="o",label="Training accuracy")
+plt.plot(depths,test_scores,marker="o",label="Test accuracy")
+plt.xlabel("Maximum tree depth")
+plt.ylabel("Accuracy")
+plt.title("Tree Complexity and Generalization")
+plt.legend()
+plt.show()
+```
+
+This is a concrete bias–variance lesson: flexibility can reduce bias while increasing variance.
+
+## Controlling Tree Complexity
+
+Important parameters include:
+
+- `max_depth`;
+- `min_samples_split`;
+- `min_samples_leaf`;
+- `max_leaf_nodes`;
+- `ccp_alpha`.
+
+These are not merely tuning knobs. They define how much structure the tree is allowed to learn.
+
+## Cost-Complexity Pruning
+
+A large tree can be pruned by balancing fit against complexity.
+
+A conceptual objective is
+
+$$
+R_\alpha(T)
+=
+R(T)+\alpha|T|,
+$$
+
+where $R(T)$ measures tree error, $|T|$ represents the number of terminal leaves, and $\alpha$ penalizes complexity.
+
+Larger $\alpha$ favors smaller trees.
+
+```{python}
+path=DecisionTreeClassifier(random_state=42).cost_complexity_pruning_path(
+    X_train,y_train
+)
+
+path.ccp_alphas[:5]
+```
+
+Hyperparameter selection should occur within resampling rather than by repeatedly checking the final test set. Chapter 16 will formalize that workflow.
+
+## Instability: A Tree's Hidden Weakness
+
+A small change in training observations can sometimes produce a substantially different tree.
+
+This happens because early split choices affect every split below them.
+
+Single trees can therefore have relatively high variance.
+
+This weakness motivates ensemble methods.
+
+## Bagging: Many Unstable Models Can Become Stable Together
+
+Bootstrap aggregation, or **bagging**, repeatedly samples training observations with replacement, fits a model to each bootstrap sample, and aggregates predictions.
+
+For regression,
+
+$$
+\hat f_{\text{bag}}(x)
+=
+\frac{1}{B}
+\sum_{b=1}^{B}\hat f^{(b)}(x).
+$$
+
+For classification, aggregation may use majority vote or averaged class probabilities.
+
+The central idea is that averaging can reduce variance.
 
 ## Random Forests
-### Bootstrap Aggregation
-### Random Feature Selection
-### Out-of-Bag Samples
-### Bias-Variance Intuition
 
-## Interpretation
-### Impurity-Based Importance
-### Permutation Importance
-### Limits of Feature Importance
+Random Forests extend bagging by adding **feature randomness**.
 
-## Python Implementation
-### DecisionTreeClassifier and Regressor
-### RandomForestClassifier and Regressor
+At each candidate split, a tree considers only a random subset of predictors rather than all predictors.
 
-## Hands-On Practice
-Compare a decision tree and random forest with a linear baseline.
+Why?
 
-## Common Mistakes
-- Allowing unrestricted tree growth.
-- Treating feature importance as causality.
-- Ignoring correlated predictors.
-- Comparing models on different splits.
+If one predictor is overwhelmingly strong, ordinary bagged trees may repeatedly choose similar early splits. Their errors become correlated.
+
+Random feature selection encourages diversity.
+
+Conceptually,
+
+$$
+\text{Forest quality}
+\approx
+\text{strong individual trees}
++
+\text{low correlation among trees}.
+$$
+
+The exact tradeoff depends on the problem.
+
+## Fit a Random Forest
+
+```{python}
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import roc_auc_score
+
+forest=RandomForestClassifier(
+    n_estimators=500,
+    random_state=42,
+    n_jobs=-1
+)
+
+forest.fit(X_train,y_train)
+
+forest_prob=forest.predict_proba(X_test)[:,1]
+forest_auc=roc_auc_score(y_test,forest_prob)
+
+forest.score(X_test,y_test), forest_auc
+```
+
+Random Forest implementations and tree parameters are documented in scikit-learn's ensemble and tree modules [@sklearnForests2026; @sklearnTrees2026].
+
+## Why a Forest Can Generalize Better
+
+Suppose individual tree errors have variance $\sigma^2$ and pairwise correlation $\rho$. A useful intuition for the variance of an average of $B$ similarly distributed estimators is
+
+$$
+Var(\bar f)
+\approx
+\rho\sigma^2+
+\frac{1-\rho}{B}\sigma^2.
+$$
+
+As $B$ grows, the second term shrinks. But highly correlated trees limit the benefit.
+
+Random feature selection helps attack $\rho$.
+
+## Out-of-Bag Evaluation
+
+Each bootstrap tree is trained on a sample drawn with replacement. Some training observations are omitted from that tree's bootstrap sample.
+
+These **out-of-bag (OOB)** observations can be predicted by trees that did not train on them.
+
+```{python}
+forest_oob=RandomForestClassifier(
+    n_estimators=500,
+    oob_score=True,
+    random_state=42,
+    n_jobs=-1
+)
+forest_oob.fit(X_train,y_train)
+forest_oob.oob_score_
+```
+
+OOB evaluation is useful, but it does not eliminate the need to think carefully about temporal, grouped, external, or final held-out validation.
+
+## Feature Importance: Important in What Sense?
+
+Random Forests commonly expose impurity-based feature importance.
+
+```{python}
+import pandas as pd
+
+importance=pd.Series(
+    forest.feature_importances_,
+    index=X.columns
+).sort_values(ascending=False)
+
+importance.head(10)
+```
+
+This answers something like:
+
+> Which features contributed strongly to impurity reduction across this fitted forest?
+
+It does **not** automatically answer:
+
+- Which variable causes the outcome?
+- Which variable should we intervene on?
+- Which variable is scientifically most important?
+- Which variable will remain important in another population?
+
+## Permutation Importance
+
+Permutation importance asks how much predictive performance deteriorates when a feature's values are shuffled.
+
+```{python}
+from sklearn.inspection import permutation_importance
+
+perm=permutation_importance(
+    forest,
+    X_test,
+    y_test,
+    n_repeats=10,
+    random_state=42,
+    scoring="roc_auc"
+)
+
+perm_importance=pd.Series(
+    perm.importances_mean,
+    index=X.columns
+).sort_values(ascending=False)
+
+perm_importance.head(10)
+```
+
+This is closer to:
+
+> How much does this fitted model's predictive performance depend on this feature under this evaluation setup?
+
+Even this is not causal importance. Correlated predictors can also complicate interpretation because information may be shared across features.
+
+## Compare Importance Measures
+
+```{python}
+#| label: fig-feature-importance
+#| fig-cap: "Impurity-based and permutation importance can tell different stories about model dependence."
+
+compare=pd.DataFrame({
+    "Impurity importance": importance,
+    "Permutation importance": perm_importance
+}).dropna().head(10)
+
+compare.sort_values("Permutation importance").plot(
+    kind="barh",
+    figsize=(9,6)
+)
+plt.xlabel("Importance")
+plt.title("Two Meanings of Feature Importance")
+plt.show()
+```
+
+Different importance methods answer different questions.
+
+## Partial Dependence: Model Behavior, Not Causal Effect
+
+Partial dependence can summarize how model predictions change as a feature varies while averaging over the observed distribution of other features.
+
+```{python}
+from sklearn.inspection import PartialDependenceDisplay
+
+top_feature=perm_importance.index[0]
+
+PartialDependenceDisplay.from_estimator(
+    forest,
+    X_test,
+    [top_feature]
+)
+plt.suptitle(f"Partial Dependence: {top_feature}")
+plt.tight_layout()
+plt.show()
+```
+
+Interpret this as a description of the fitted model's behavior—not automatically as the effect of changing the feature in the real world.
+
+## Single Tree Versus Forest
+
+| Property | Single Tree | Random Forest |
+|---|---|---|
+| nonlinear relationships | yes | yes |
+| interactions | automatic | automatic |
+| scaling usually required | no | no |
+| easy global visualization | often, if shallow | no |
+| variance | often high | reduced by averaging |
+| predictive strength | useful baseline | often stronger |
+| individual decision path | easy to inspect | distributed across trees |
+| feature importance | available | available, but interpret cautiously |
+
+A forest often gains predictive stability by sacrificing the simplicity of a single visible tree.
+
+## Three Tracks
+
+### Health Track
+
+Tree models can discover nonlinear risk structure and interactions among measurements. But an “important” biomarker is not automatically a treatment target. Validate across relevant populations and inspect calibration and subgroup behavior when probabilities drive decisions.
+
+### Education Track
+
+Trees can identify combinations of prior academic or institutional characteristics associated with retention or completion. Avoid turning predictive rules into deterministic labels about students. Prediction timing and intervention consequences remain central.
+
+### Open ML Benchmark Track
+
+Benchmark datasets are ideal for comparing tree depth, pruning, instability, bagging, and Random Forests under controlled changes in noise and feature relevance.
+
+## Beyond the Algorithm: What Does “Important” Mean?
+
+::: {.callout-note icon=false}
+## Importance Is Always Relative to a Question
+
+Suppose a Random Forest reports that Feature A has the highest importance.
+
+It is tempting to conclude:
+
+> “Feature A is the most important determinant of the outcome.”
+
+But importance can mean many things:
+
+- frequently used for impurity reduction;
+- strongly relied upon for prediction;
+- useful because it proxies another variable;
+- useful only in interactions;
+- useful only in this sample;
+- useful because of how the variable was measured.
+
+None of these definitions automatically means **causal influence**.
+
+A feature can be highly predictive precisely because it records the consequences of a process rather than its causes.
+
+The deeper question is:
+
+**Important for what—prediction, explanation, intervention, measurement, or policy?**
+
+Machine learning becomes more intellectually rigorous when the word “importance” is never allowed to stand alone.
+:::
+
+## AI Pair Programmer: Explain My Forest
+
+Ask an AI assistant to interpret the top five Random Forest feature importances.
+
+Audit whether it:
+
+- names the importance method;
+- distinguishes predictive from causal importance;
+- notices correlated features;
+- acknowledges sample and model dependence;
+- treats ranks as exact scientific truths;
+- recommends interventions from predictive importance alone.
+
+Then rewrite the interpretation.
+
+## Hands-On Lab: From One Tree to a Forest
+
+Using a classification dataset:
+
+1. complete the Problem Framing Canvas and Feature Ledger;
+2. establish a baseline;
+3. fit a shallow decision tree;
+4. visualize the tree;
+5. compare training and held-out performance;
+6. increase tree depth and observe overfitting;
+7. examine a cost-complexity pruning path;
+8. fit a Random Forest;
+9. compare tree and forest discrimination;
+10. obtain OOB performance;
+11. compare impurity and permutation importance;
+12. inspect partial dependence for one feature;
+13. explain why none of these results establishes causality;
+14. document reproducibility decisions.
+
+## Practitioner Track
+
+A practitioner should be able to control tree complexity, compare a single tree with a forest, use OOB information appropriately, and communicate feature importance without overclaiming.
+
+## Researcher Track
+
+A researcher should additionally justify the validation design, examine model stability, treat importance measures as model-dependent quantities, investigate correlated predictors, and distinguish predictive discovery from explanatory or causal inference.
+
+## Research Studio
+
+Design a health, education, or benchmark study comparing a linear/logistic model with tree-based models.
+
+Specify:
+
+1. substantive rationale;
+2. target and timing;
+3. baseline;
+4. expected nonlinearities/interactions;
+5. single-tree specification;
+6. Random Forest specification;
+7. validation strategy;
+8. performance metrics;
+9. stability analysis;
+10. importance method;
+11. interpretive limitations;
+12. potential scholarly contribution.
+
+## Professor's Challenge: The Most Important Predictor
+
+A research team fits a Random Forest and reports:
+
+> “Attendance is the most important cause of student retention because it has the highest Random Forest feature importance. Therefore, requiring more attendance will increase retention.”
+
+The model has strong test-set AUC. Attendance is correlated with prior achievement, course engagement, and financial stability. Importance is based only on impurity reduction. No permutation analysis, uncertainty assessment, causal design, or external validation is reported.
+
+Critique:
+
+- the meaning of impurity importance;
+- correlation and shared predictive information;
+- predictive versus causal claims;
+- intervention logic;
+- model dependence;
+- stability of the importance ranking;
+- external validity;
+- whether strong AUC strengthens the causal conclusion.
+
+Design a stronger predictive analysis and explain what additional research design would be needed for a causal intervention claim.
 
 ## Knowledge Check
-1. What does Gini impurity measure?
-2. Why do random forests decorrelate trees?
-3. What is bagging?
-4. Why can feature importance be misleading?
 
-## Real-World Case Study
-### Predicting an Education Outcome
-Compare interpretable and ensemble tree models using public education data.
-
-## Professor's Challenge
-A random forest outperforms logistic regression by one percentage point but is much harder to explain. Which model should be used?
-
-## Research Extension
-Test whether performance differences persist under repeated or external validation.
+1. What is recursive partitioning?
+2. What does Gini impurity measure?
+3. What does entropy measure?
+4. What is impurity reduction?
+5. Why is tree construction described as greedy?
+6. How does a regression tree produce leaf predictions?
+7. Why do deep trees overfit?
+8. What does cost-complexity pruning do?
+9. Why can a single tree be unstable?
+10. What is bagging?
+11. How does a Random Forest differ from ordinary bagging?
+12. Why does reducing correlation among trees matter?
+13. What are out-of-bag observations?
+14. What does impurity-based importance measure?
+15. What does permutation importance measure?
+16. Why does feature importance not imply causation?
+17. What does partial dependence describe?
+18. Why might a forest outperform a single tree while being less globally interpretable?
 
 ## Reproducibility Check
-Record seeds, split rules, hyperparameters, feature definitions, and evaluation protocol.
+
+Record:
+
+- problem specification;
+- feature ledger;
+- train/validation/test design;
+- baseline;
+- tree criterion;
+- depth and leaf constraints;
+- pruning parameters;
+- forest tree count;
+- feature-subsampling settings;
+- bootstrap/OOB settings;
+- random seeds;
+- evaluation metrics;
+- feature-importance method;
+- permutation scoring metric and repeats;
+- software versions;
+- all code producing figures and tables.
 
 ## Key Takeaways
-- Trees model nonlinear decision boundaries naturally.
-- Ensembles reduce instability but increase complexity.
-- Importance measures require careful interpretation.
+
+- Trees learn nonlinear decision rules through recursive partitioning.
+- Gini impurity and entropy quantify class mixture.
+- Greedy splitting produces locally useful decisions but not guaranteed globally optimal trees.
+- Deep trees can memorize training noise.
+- Pruning and structural constraints manage complexity.
+- Bagging reduces variance by averaging models trained on bootstrap samples.
+- Random Forests add feature randomness to reduce correlation among trees.
+- OOB predictions provide useful internal performance information.
+- Impurity and permutation importance answer different questions.
+- Feature importance is model-dependent and is not causal importance.
+- Partial dependence describes fitted-model behavior, not intervention effects.
+- Predictive complexity should be justified by improved generalization.

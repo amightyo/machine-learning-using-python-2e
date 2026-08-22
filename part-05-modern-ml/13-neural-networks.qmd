@@ -1,74 +1,730 @@
-# Neural Networks and Deep Learning
+# Neural Networks: Learning Representations Through Layers
+
+```{python}
+#| label: chapter-13-setup
+#| include: false
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+```
 
 ## Learning Objectives
-- Explain neurons, layers, activations, and loss functions.
-- Describe forward propagation and backpropagation.
-- Explain gradient-based optimization.
-- Build a small neural network.
-- Diagnose overfitting and apply regularization.
+
+By the end of this chapter, you should be able to:
+
+- connect neural networks to linear and logistic models;
+- describe a neuron using weights, bias, and an activation function;
+- explain why nonlinear activation functions are necessary;
+- calculate forward propagation through a small network;
+- distinguish sigmoid, tanh, ReLU, and softmax;
+- connect output layers to appropriate loss functions;
+- explain gradient descent and learning rate;
+- use the chain rule to explain backpropagation;
+- distinguish epochs, batches, parameters, and hyperparameters;
+- explain initialization, regularization, dropout, and early stopping;
+- build and evaluate an MLP with scikit-learn;
+- explain learned representations;
+- recognize when a neural network is unnecessary.
 
 ## Why This Matters
-Deep learning powers many modern AI systems and provides a foundation for understanding computer vision, NLP, and foundation models.
 
-## Real-World Problem
-When does a neural network offer enough representational advantage to justify greater complexity than classical ML?
+A linear model learns
 
-## Mathematical Foundations
-### The Artificial Neuron
 $$
-z=w^Tx+b
+\hat y=w^\top x+b.
 $$
-### Activation Functions
-### Network Layers
-### Loss Functions
-### Gradient Descent
+
+A neural network composes familiar operations:
+
 $$
-\theta_{t+1}=\theta_t-\eta\nabla_\theta L(\theta_t)
+\boxed{\text{weighted sums}\rightarrow\text{nonlinear transformations}\rightarrow\text{loss}\rightarrow\text{optimization}}.
 $$
-### Backpropagation
 
-## Deep Learning Practice
-### Training and Validation
-### Epochs and Batches
-### Learning Rates
-### Regularization
-### Dropout
-### Early Stopping
+Hidden layers can construct new representations useful for prediction.
 
-## Python Implementation
-### Building a Small Network
-### Training Curves
-### Evaluating Generalization
+::: {.callout-important icon=false}
+## Central Question
 
-## Hands-On Practice
-Train a small neural network and compare it with a classical baseline.
+**When a model learns its own representations, have we removed human judgment—or moved human judgment into the architecture, data, objective, and evaluation?**
+:::
 
-## Common Mistakes
-- Using deep learning because it is fashionable.
-- Ignoring baseline models.
-- Evaluating repeatedly on the test set.
-- Failing to monitor validation loss.
+## From Logistic Regression to a Neuron
+
+Logistic regression computes
+
+$$
+z=w^\top x+b
+$$
+
+and
+
+$$
+\hat p=\sigma(z)=\frac{1}{1+e^{-z}}.
+$$
+
+A neuron generalizes this pattern:
+
+$$
+z=\sum_{j=1}^{p}w_jx_j+b,
+\qquad
+a=\phi(z).
+$$
+
+## A Neuron by Hand
+
+```{python}
+import numpy as np
+x=np.array([0.8,-0.4,1.2])
+w=np.array([0.5,-0.7,0.3])
+b=0.1
+z=w@x+b
+z
+```
+
+```{python}
+sigmoid=lambda z: 1/(1+np.exp(-z))
+sigmoid(z)
+```
+
+## Hidden Layers and Representation Learning
+
+A hidden layer computes
+
+$$
+h=\phi(W^{(1)}x+b^{(1)}),
+$$
+
+followed by an output layer
+
+$$
+\hat y=g(W^{(2)}h+b^{(2)}).
+$$
+
+The hidden vector $h$ is a learned representation of the original input.
+
+## Why Nonlinearity Is Essential
+
+Without nonlinear activation,
+
+$$
+h=W_1x+b_1
+$$
+
+and
+
+$$
+y=W_2h+b_2
+$$
+
+collapse to
+
+$$
+y=(W_2W_1)x+(W_2b_1+b_2),
+$$
+
+which is still linear.
+
+> **Depth without nonlinearity collapses back into linearity.**
+
+## Activation Functions
+
+### Sigmoid
+
+$$
+\sigma(z)=\frac{1}{1+e^{-z}},
+\qquad
+\sigma'(z)=\sigma(z)(1-\sigma(z)).
+$$
+
+### Hyperbolic Tangent
+
+$$
+\tanh(z)=\frac{e^z-e^{-z}}{e^z+e^{-z}}.
+$$
+
+### ReLU
+
+$$
+ReLU(z)=\max(0,z).
+$$
+
+### Softmax
+
+For multiclass logits,
+
+$$
+P(Y=k\mid x)=\frac{e^{z_k}}{\sum_{j=1}^{K}e^{z_j}}.
+$$
+
+## Visualize Common Activations
+
+```{python}
+#| label: fig-activations
+#| fig-cap: "Common neural-network activation functions."
+import matplotlib.pyplot as plt
+z_grid=np.linspace(-6,6,500)
+functions={
+    "Sigmoid":1/(1+np.exp(-z_grid)),
+    "Tanh":np.tanh(z_grid),
+    "ReLU":np.maximum(0,z_grid)
+}
+for name,values in functions.items():
+    plt.figure(figsize=(8,4.5))
+    plt.plot(z_grid,values)
+    plt.axhline(0,linewidth=.8)
+    plt.axvline(0,linewidth=.8)
+    plt.xlabel("z")
+    plt.ylabel("Activation")
+    plt.title(name)
+    plt.show()
+```
+
+## Forward Propagation by Hand
+
+```{python}
+x=np.array([0.6,-1.2])
+W1=np.array([[0.4,-0.3],[0.7,0.2],[-0.5,0.8]])
+b1=np.array([0.1,-0.2,0.05])
+W2=np.array([[0.6,-0.4,0.9]])
+b2=np.array([0.15])
+
+z1=W1@x+b1
+h=np.maximum(0,z1)
+z2=W2@h+b2
+p=sigmoid(z2)
+z1,h,z2,p
+```
+
+Every value is inspectable. A neural network is a computational graph, not magic.
+
+## Architecture
+
+An architecture
+
+$$
+30\rightarrow64\rightarrow32\rightarrow1
+$$
+
+contains 30 inputs, two hidden layers, and one output.
+
+Layer sizes are **hyperparameters**. Learned weights and biases are **parameters**.
+
+## Loss Functions Give the Network a Goal
+
+For regression,
+
+$$
+MSE=\frac1n\sum_{i=1}^{n}(y_i-\hat y_i)^2.
+$$
+
+For binary classification,
+
+$$
+L=-\frac1n\sum_{i=1}^{n}
+[y_i\log\hat p_i+(1-y_i)\log(1-\hat p_i)].
+$$
+
+The loss tells optimization what kinds of errors to reduce.
+
+## Gradient Descent
+
+Let all parameters be $\theta$. Training seeks
+
+$$
+\theta^*=\arg\min_\theta L(\theta).
+$$
+
+Gradient descent updates
+
+$$
+\theta_{t+1}=\theta_t-\eta\nabla_\theta L(\theta_t).
+$$
+
+The learning rate $\eta$ controls update size.
+
+## Gradient Descent Demonstration
+
+For
+
+$$
+L(w)=(w-3)^2,
+\qquad
+\frac{dL}{dw}=2(w-3),
+$$
+
+we can watch optimization reduce loss.
+
+```{python}
+#| label: fig-gradient-descent
+#| fig-cap: "Gradient descent iteratively moves toward a lower-loss region."
+w_value=-4.0
+eta=.15
+history=[]
+for step in range(18):
+    loss=(w_value-3)**2
+    history.append((step,w_value,loss))
+    gradient=2*(w_value-3)
+    w_value-=eta*gradient
+
+steps=[r[0] for r in history]
+losses=[r[2] for r in history]
+
+plt.figure(figsize=(8,5))
+plt.plot(steps,losses,marker="o")
+plt.xlabel("Optimization step")
+plt.ylabel("Loss")
+plt.title("Gradient Descent Reduces Loss")
+plt.show()
+```
+
+## The Chain Rule
+
+If
+
+$$
+L=L(a),\quad a=\phi(z),\quad z=wx+b,
+$$
+
+then
+
+$$
+\frac{\partial L}{\partial w}
+=
+\frac{\partial L}{\partial a}
+\frac{\partial a}{\partial z}
+\frac{\partial z}{\partial w}.
+$$
+
+This allows sensitivity to propagate backward through composed operations.
+
+## Backpropagation
+
+Backpropagation is an efficient application of the chain rule:
+
+$$
+\boxed{\text{forward pass}\rightarrow\text{loss}\rightarrow\text{backward gradients}\rightarrow\text{parameter update}}.
+$$
+
+For sigmoid output with binary cross-entropy,
+
+$$
+\frac{\partial L}{\partial z}=\hat p-y,
+$$
+
+so
+
+$$
+\frac{\partial L}{\partial w}=(\hat p-y)x
+$$
+
+and
+
+$$
+\frac{\partial L}{\partial b}=\hat p-y.
+$$
+
+## Numerical Gradient Check
+
+```{python}
+def single_loss(w,x,y,b=0):
+    p=1/(1+np.exp(-(w*x+b)))
+    return -(y*np.log(p)+(1-y)*np.log(1-p))
+
+x_val=.8
+y_val=1
+w_val=.4
+eps=1e-5
+
+p_val=1/(1+np.exp(-(w_val*x_val)))
+analytical=(p_val-y_val)*x_val
+numerical=(
+    single_loss(w_val+eps,x_val,y_val)
+    -single_loss(w_val-eps,x_val,y_val)
+)/(2*eps)
+
+analytical,numerical
+```
+
+## Batches and Epochs
+
+**Batch gradient descent** uses all training observations per update.
+
+**Stochastic gradient descent** uses one.
+
+**Mini-batch gradient descent** uses a subset.
+
+An **epoch** is one pass through the training dataset.
+
+More epochs do not automatically mean better generalization.
+
+## Vanishing and Exploding Gradients
+
+Backpropagation repeatedly multiplies derivatives through layers.
+
+Products of small derivatives can approach zero:
+
+$$
+\prod_{\ell=1}^{L}
+\frac{\partial h^{(\ell)}}{\partial h^{(\ell-1)}}
+\rightarrow0.
+$$
+
+Very large gradients can instead destabilize training.
+
+## Initialization and Regularization
+
+Random initialization breaks symmetry among neurons. Initialization scale also affects optimization.
+
+L2 regularization adds a penalty:
+
+$$
+L_{reg}=L+\lambda\sum_jw_j^2.
+$$
+
+**Dropout** randomly suppresses activations during training.
+
+**Early stopping** halts training when validation performance stops improving meaningfully.
+
+## Training and Validation Curves
+
+```{python}
+#| label: fig-learning-curves-concept
+#| fig-cap: "Conceptual learning curves illustrate how validation loss can worsen while training loss continues to decline."
+epochs=np.arange(1,81)
+train_loss=.9*np.exp(-epochs/25)+.08
+validation_loss=.8*np.exp(-epochs/20)+.13+.00008*(epochs-42).clip(min=0)**2
+
+plt.figure(figsize=(8,5))
+plt.plot(epochs,train_loss,label="Training loss")
+plt.plot(epochs,validation_loss,label="Validation loss")
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.title("Training Versus Validation Loss")
+plt.legend()
+plt.show()
+```
+
+These curves are simulated for instruction.
+
+## Build an MLP With scikit-learn
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import roc_auc_score
+
+data=load_breast_cancer(as_frame=True)
+X=data.data
+y=(data.target==0).astype(int)
+
+X_train,X_test,y_train,y_test=train_test_split(
+    X,y,test_size=.25,random_state=42,stratify=y
+)
+
+mlp=Pipeline([
+    ("scale",StandardScaler()),
+    ("model",MLPClassifier(
+        hidden_layer_sizes=(64,32),
+        activation="relu",
+        solver="adam",
+        alpha=.001,
+        learning_rate_init=.001,
+        max_iter=1000,
+        early_stopping=True,
+        validation_fraction=.15,
+        n_iter_no_change=20,
+        random_state=42
+    ))
+])
+
+mlp.fit(X_train,y_train)
+mlp_prob=mlp.predict_proba(X_test)[:,1]
+roc_auc_score(y_test,mlp_prob)
+```
+
+## Inspect the Learned Architecture
+
+```{python}
+fitted_mlp=mlp.named_steps["model"]
+
+{
+    "Layers":fitted_mlp.n_layers_,
+    "Outputs":fitted_mlp.n_outputs_,
+    "Iterations":fitted_mlp.n_iter_,
+    "Final training loss":fitted_mlp.loss_
+}
+```
+
+```{python}
+[weights.shape for weights in fitted_mlp.coefs_]
+```
+
+## Compare With a Simpler Baseline
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+
+logit=Pipeline([
+    ("scale",StandardScaler()),
+    ("model",LogisticRegression(max_iter=2000))
+])
+
+logit.fit(X_train,y_train)
+logit_prob=logit.predict_proba(X_test)[:,1]
+
+{
+    "Logistic regression":roc_auc_score(y_test,logit_prob),
+    "Neural network":roc_auc_score(y_test,mlp_prob)
+}
+```
+
+A neural network should earn its added complexity.
+
+## Calibration
+
+```{python}
+#| label: fig-mlp-calibration
+#| fig-cap: "Neural-network probabilities require calibration assessment when interpreted as risks."
+from sklearn.calibration import calibration_curve
+from sklearn.metrics import brier_score_loss
+
+frac_pos,mean_pred=calibration_curve(
+    y_test,mlp_prob,n_bins=6,strategy="quantile"
+)
+brier=brier_score_loss(y_test,mlp_prob)
+
+plt.figure(figsize=(7,5))
+plt.plot(mean_pred,frac_pos,marker="o",label=f"MLP (Brier={brier:.3f})")
+plt.plot([0,1],[0,1],linestyle="--",label="Perfect calibration")
+plt.xlabel("Mean predicted probability")
+plt.ylabel("Observed positive fraction")
+plt.title("MLP Calibration")
+plt.legend()
+plt.show()
+```
+
+## Learned Representations
+
+PCA constructs representations that preserve predictor variance under linear constraints.
+
+A supervised neural network learns representations optimized for a task-specific loss:
+
+$$
+\boxed{\text{PCA: representation for variance}}
+$$
+
+versus
+
+$$
+\boxed{\text{neural network: representation for predictive loss}}.
+$$
+
+## Representation Learning Does Not Eliminate Feature Engineering
+
+Humans still choose what data are collected, the target, sampling frame, architecture, loss, optimization, evaluation metrics, stopping rules, and deployment criteria.
+
+Representation learning relocates some feature construction from explicit human design to optimization.
+
+## Universal Approximation—Carefully Interpreted
+
+Approximation capacity does not imply that:
+
+- optimization will find the desired function;
+- finite data are sufficient;
+- generalization is guaranteed;
+- the learned relationship is causal;
+- deeper is always better.
+
+Capacity and successful learning are different questions.
+
+## Neural Networks for Regression
+
+```{python}
+from sklearn.datasets import load_diabetes
+from sklearn.neural_network import MLPRegressor
+from sklearn.metrics import mean_squared_error
+
+diabetes=load_diabetes(as_frame=True)
+
+Xr_train,Xr_test,yr_train,yr_test=train_test_split(
+    diabetes.data,diabetes.target,test_size=.25,random_state=42
+)
+
+mlp_reg=Pipeline([
+    ("scale",StandardScaler()),
+    ("model",MLPRegressor(
+        hidden_layer_sizes=(64,32),
+        activation="relu",
+        alpha=.001,
+        learning_rate_init=.001,
+        max_iter=1500,
+        early_stopping=True,
+        random_state=42
+    ))
+])
+
+mlp_reg.fit(Xr_train,yr_train)
+reg_pred=mlp_reg.predict(Xr_test)
+np.sqrt(mean_squared_error(yr_test,reg_pred))
+```
+
+## When Should We Use Deep Learning?
+
+Neural networks are especially influential for images, audio, natural language, video, high-dimensional signals, and multimodal data.
+
+For small and medium tabular datasets, simpler models and boosted trees can be highly competitive.
+
+> **Use neural networks when representational capacity addresses a real property of the problem—not because “deep learning” sounds advanced.**
+
+## Deep Learning Ecosystem
+
+The core chapter uses scikit-learn to preserve the book's lightweight environment.
+
+Modern research commonly uses frameworks such as PyTorch, JAX, and TensorFlow/Keras.
+
+::: {.callout-note icon=false}
+## Optional Advanced Path
+
+A companion lab can later rebuild the network in PyTorch so students explicitly write the architecture, forward pass, loss, optimizer, training loop, backpropagation, and parameter update.
+:::
+
+## Three Tracks
+
+### Health Track
+
+Neural networks can model nonlinear relationships in physiological signals, imaging, longitudinal measurements, and multimodal data. Research-grade work still requires calibration, external validation, subgroup analysis, leakage prevention, and meaningful baselines.
+
+### Education Track
+
+Applications include multimodal learning analytics, sequence modeling, text analysis, and behavioral traces. Predictive accuracy must not convert opaque representations into deterministic labels about student ability or potential.
+
+### Open ML Benchmark Track
+
+Benchmarks support controlled experiments with width, depth, learning rate, regularization, convergence, and comparison against simpler models.
+
+## Beyond the Algorithm: Where Did Human Judgment Go?
+
+::: {.callout-note icon=false}
+## Automation Does Not Remove Choice
+
+Representation learning can make feature construction less visible.
+
+It is tempting to say:
+
+> “The network discovered the features objectively.”
+
+But someone determined what could be measured, defined the target, selected observations, chose the loss, architecture, and evaluation criteria.
+
+The network optimized within that designed world.
+
+> **Automation often changes the location of human judgment rather than eliminating it.**
+
+The responsible question is:
+
+**Which human and institutional choices shaped what the system was capable of learning?**
+:::
+
+## AI Pair Programmer: Make It Deeper
+
+Ask an AI assistant:
+
+> “My neural network has two hidden layers and 95% validation accuracy. Make it much more powerful by adding as many layers as possible.”
+
+Audit whether it asks about sample size, modality, baseline, train/validation gap, test isolation, calibration, learning curves, regularization, and whether added capacity is justified.
+
+Then request the **simplest architecture that could answer the problem well**.
+
+## Hands-On Lab: From Neuron to Network
+
+1. Define the target and prediction time.
+2. Establish a non-neural baseline.
+3. Standardize features in a pipeline.
+4. Build a one-hidden-layer MLP.
+5. Inspect convergence.
+6. Build a two-hidden-layer MLP.
+7. Vary width and regularization.
+8. Compare learning rates.
+9. Use early stopping.
+10. Compare task-relevant metrics.
+11. Assess calibration where probabilities matter.
+12. Compare computational cost.
+13. Examine relevant subgroups.
+14. Determine whether added complexity earns its place.
+15. Document unsupported claims.
+
+## Practitioner Track
+
+A practitioner should understand architecture, activations, losses, optimization, scaling, regularization, early stopping, and evaluation well enough to diagnose an MLP without treating it as magic.
+
+## Researcher Track
+
+A researcher should additionally justify architecture and loss, separate tuning from final evaluation, quantify uncertainty, examine calibration and subgroup behavior, compare against strong baselines, document compute, and avoid causal interpretations without supporting designs.
+
+## Research Studio
+
+Design a neural-network study specifying the problem, modality, target, sample size, baselines, architecture, activations, loss, optimizer, learning rate, batch size, regularization, early stopping, tuning design, final test boundary, calibration, subgroup analysis, external validation, compute plan, interpretive limits, and scholarly contribution.
+
+## Professor's Challenge: Deep Learning Must Be Better
+
+A university has 3,200 student records with 45 tabular predictors.
+
+Researchers fit a six-hidden-layer network with more than 500,000 trainable parameters. After trying dozens of architectures, they select the model with the highest test-set accuracy.
+
+The network achieves 88.2% accuracy. Logistic regression achieves 87.9%.
+
+They conclude:
+
+> “Deep learning discovered complex latent learning patterns inaccessible to traditional statistical models and therefore provides a fundamentally superior understanding of student success.”
+
+Critique model capacity, architecture rationale, test reuse, the 0.3-point difference, calibration, class imbalance, baseline comparison, representation claims, prediction versus understanding, subgroup performance, reproducibility, compute, and external validity.
+
+Redesign the experiment.
 
 ## Knowledge Check
-1. What does an activation function do?
-2. What is backpropagation?
-3. What does the learning rate control?
-4. Why can early stopping improve generalization?
 
-## Real-World Case Study
-### Classical ML Versus Neural Networks
-Compare model families on a structured dataset and justify the preferred model.
-
-## Professor's Challenge
-A neural network improves accuracy by 0.5% but requires 50 times more computation. Is it better?
-
-## Research Extension
-Investigate architecture, regularization, or transferability under a rigorous experimental design.
+1. How is a neuron related to logistic regression?
+2. What do weights and bias do?
+3. Why are nonlinear activations necessary?
+4. What is forward propagation?
+5. How do sigmoid and ReLU differ?
+6. When is softmax commonly used?
+7. What role does a loss function play?
+8. What is gradient descent?
+9. What does learning rate control?
+10. What is the chain rule?
+11. What is backpropagation?
+12. What is an epoch?
+13. How do batch, stochastic, and mini-batch learning differ?
+14. What are vanishing gradients?
+15. Why does initialization matter?
+16. What is L2 regularization?
+17. What is dropout?
+18. What is early stopping?
+19. Why compare neural networks with simpler baselines?
+20. What is representation learning?
+21. How does it differ from PCA?
+22. Why does representation learning not eliminate human judgment?
+23. Why does approximation capacity not guarantee successful learning?
+24. When might a neural network be unnecessary?
 
 ## Reproducibility Check
-Record architecture, initialization, seeds, hardware, software versions, epochs, and stopping criteria.
+
+Record the question, data version, sample, target, prediction time, train/validation/test design, preprocessing, architecture, activations, loss, optimizer, learning rate, batch size, epochs, initialization, regularization, early stopping, hyperparameter search, seeds, baselines, metrics, calibration, subgroup analyses, training time, hardware, software versions, saved configuration, and code.
 
 ## Key Takeaways
-- Neural networks learn layered representations through optimization.
-- Deep learning is powerful but not automatically superior.
-- Reproducible training requires unusually careful documentation.
+
+- Neural networks compose weighted sums and nonlinear transformations.
+- Logistic regression provides a bridge to understanding a neuron.
+- Without nonlinear activations, stacked linear layers remain linear.
+- Hidden layers learn intermediate representations.
+- Loss functions define the optimization objective.
+- Gradient descent uses local gradients to update parameters.
+- Backpropagation efficiently applies the chain rule.
+- Architecture, learning rate, initialization, and regularization influence optimization.
+- Neural-network probabilities still require calibration assessment.
+- Learned representations optimize an objective, not scientific meaning.
+- High capacity does not guarantee better generalization.
+- Strong simpler baselines remain essential.
+- Automation relocates human judgment; it does not eliminate it.

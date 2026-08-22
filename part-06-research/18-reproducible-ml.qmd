@@ -1,87 +1,1346 @@
-# Reproducible Machine Learning and Research Communication
+# Reproducible Machine Learning: From Analysis to Scientific Knowledge
+
+```{python}
+#| label: chapter-18-setup
+#| include: false
+
+import os
+import sys
+import json
+import platform
+from pathlib import Path
+
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import sklearn
+```
 
 ## Learning Objectives
-- Build a reproducible ML project from raw data to publication.
-- Use Git, GitHub, Quarto, and environment specifications.
-- Document data and model provenance.
-- Archive scholarly releases with persistent identifiers.
-- Translate a machine learning analysis into research communication.
 
-## Why This Matters
-A result that cannot be traced, audited, or reproduced is difficult to trust and difficult to build upon.
+By the end of this chapter, you should be able to:
 
-## Real-World Problem
-Six months after publication, can another researcher reproduce every table, figure, metric, and modeling decision in your study?
+- distinguish reproducibility, replicability, robustness, and generalizability;
+- explain why reproducibility is a property of a complete computational workflow rather than code alone;
+- organize a machine-learning project so another researcher can understand and rerun it;
+- document data provenance and transformations;
+- control randomness and explain the limits of random seeds;
+- record software and computational environments;
+- distinguish source data, derived data, code, models, results, and publication artifacts;
+- use Git conceptually to preserve project history;
+- explain the role of GitHub or another remote repository in collaborative research;
+- use Quarto to combine narrative, equations, code, figures, tables, and citations;
+- design leakage-safe pipelines whose preprocessing is part of the reproducible model;
+- save and reload fitted model artifacts appropriately;
+- record experimental configurations and metrics;
+- distinguish computational reproducibility from scientific validity;
+- use persistent repositories such as Zenodo or OSF to archive research outputs;
+- explain how DOIs support persistent citation and scholarly provenance;
+- create a reproducibility checklist for health, education, and open ML research;
+- design a research compendium that supports conference or journal submission;
+- recognize when sharing data or models would be irresponsible or legally prohibited;
+- treat reproducibility as part of scientific reasoning rather than an administrative task.
 
-## Reproducible Project Design
-### Project Structure
-### Raw Versus Derived Data
-### Scripts and Notebooks
-### Quarto
-### Git and GitHub
-### Environments and Dependencies
-### Randomness and Seeds
+## A Result Is More Than a Number
+
+Suppose a paper reports:
+
+$$
+ROC\text{-}AUC=0.91.
+$$
+
+A reader may reasonably ask:
+
+- Which data version?
+- Which inclusion criteria?
+- Which preprocessing steps?
+- Which random split?
+- Which software versions?
+- Which hyperparameters?
+- Which metric implementation?
+- Which code produced the result?
+- Can the analysis be rerun?
+- Can the result be reproduced independently?
+
+A number without provenance is difficult to interrogate scientifically.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**What must we preserve so that a machine-learning result can become inspectable, repeatable, and cumulative scientific knowledge?**
+:::
+
+## Reproducibility Is a Chain
+
+A useful mental model is:
+
+$$
+\text{Question}
+\rightarrow
+\text{Data}
+\rightarrow
+\text{Environment}
+\rightarrow
+\text{Code}
+\rightarrow
+\text{Experiment}
+\rightarrow
+\text{Model}
+\rightarrow
+\text{Result}
+\rightarrow
+\text{Artifact}
+\rightarrow
+\text{Archive}.
+$$
+
+If an important link is missing, reproducing the result becomes harder.
+
+## Four Related Ideas
+
+### Reproducibility
+
+A useful operational definition is the ability to obtain consistent results using the same underlying data, computational procedures, and analysis.
+
+### Replicability
+
+Replication asks whether a finding can be obtained through a new study, new sample, or independently implemented investigation.
+
+### Robustness
+
+Robustness asks whether conclusions survive reasonable analytical choices or perturbations.
+
+### Generalizability
+
+Generalizability asks whether conclusions extend beyond the studied sample, setting, time, or population.
+
+These ideas overlap, but they are not synonyms.
+
+A computationally reproducible result can still fail to replicate or generalize.
+
+## The Research Compendium
+
+## Organize the Project Around the Research Process
+
+A project might use:
+
+```text
+machine-learning-study/
+├── README.md
+├── _quarto.yml
+├── environment/
+│   └── requirements.txt
+├── data/
+│   ├── README.md
+│   ├── raw/
+│   └── processed/
+├── src/
+│   ├── prepare.py
+│   ├── features.py
+│   ├── train.py
+│   └── evaluate.py
+├── notebooks/
+│   └── exploration.ipynb
+├── models/
+├── results/
+│   ├── figures/
+│   └── tables/
+├── manuscript/
+│   └── paper.qmd
+└── CITATION.cff
+```
+
+The exact structure can vary.
+
+The important principle is that another person should be able to infer where inputs, transformations, outputs, and documentation belong.
+
+## Separate Source From Derived Artifacts
+
+A useful distinction is:
+
+$$
+\boxed{\text{source data}}
+\rightarrow
+\boxed{\text{derived data}}
+\rightarrow
+\boxed{\text{analysis outputs}}.
+$$
+
+Do not silently overwrite the original source data.
+
+Derived files should be reproducible from documented inputs and code whenever possible.
 
 ## Data Provenance
-### Data Sources
-### Data Dictionaries
-### Licensing
-### Versioning
-### Sensitive Data
 
-## Model Provenance
-### Training Configuration
-### Hyperparameters
-### Evaluation Protocol
-### Artifacts and Model Cards
+## Every Dataset Has a History
 
-## Scholarly Communication
-### Tables and Figures
-### Methods Reporting
-### Limitations
-### Repositories
-### CITATION.cff
-### Releases
-### Archiving and DOIs
+Record:
 
-## From Class Project to Research Product
-### Replication
-### Extension
-### Benchmarking
-### Methodological Contribution
-### Substantive Contribution
+- source;
+- access date;
+- version or release;
+- persistent identifier when available;
+- license;
+- inclusion/exclusion criteria;
+- variable definitions;
+- transformations;
+- missing-data decisions;
+- known limitations.
 
-## Hands-On Practice
-Package one analysis from the book as a fully reproducible research repository.
+## Create a Data README
 
-## Common Mistakes
-- Manually editing outputs.
-- Losing track of data versions.
-- Failing to capture dependencies.
-- Publishing only a notebook without execution instructions.
-- Confusing an open repository with an archived scholarly release.
+A `data/README.md` can explain:
+
+```text
+Dataset:
+Source:
+Version:
+Access date:
+License:
+Unit of analysis:
+Outcome:
+Predictors:
+Inclusion criteria:
+Exclusion criteria:
+Missingness:
+Transformations:
+Files not shared:
+Reason not shared:
+Reproduction instructions:
+```
+
+## Hashes Can Identify File Versions
+
+A cryptographic hash can help detect whether a file changed.
+
+```{python}
+import hashlib
+
+example_bytes = b"machine learning reproducibility"
+
+sha256 = hashlib.sha256(
+    example_bytes
+).hexdigest()
+
+sha256
+```
+
+A hash does not explain what changed or whether the data are correct.
+
+It provides a useful fingerprint for a particular byte sequence.
+
+## Randomness and Determinism
+
+## Random Seeds Improve Repeatability
+
+Many ML procedures contain randomness:
+
+- train/test splitting;
+- bootstrapping;
+- random forests;
+- stochastic optimization;
+- initialization;
+- augmentation.
+
+A fixed seed can make a computational path easier to reproduce.
+
+```{python}
+rng = np.random.default_rng(
+    42
+)
+
+rng.normal(
+    size=5
+)
+```
+
+## A Seed Is Not a Reproducibility Guarantee
+
+Results can still differ because of:
+
+- software versions;
+- hardware;
+- parallel execution;
+- nondeterministic libraries;
+- numerical precision;
+- operating systems;
+- changed data;
+- changed defaults.
+
+Therefore:
+
+$$
+\boxed{\text{random seed}}
+\neq
+\boxed{\text{complete reproducibility}}.
+$$
+
+## Record the Computational Environment
+
+## Software Is Part of the Method
+
+The computational environment can affect results.
+
+Record at least:
+
+- operating system;
+- Python version;
+- package versions;
+- major external libraries;
+- hardware when relevant.
+
+## Inspect the Current Environment
+
+```{python}
+environment_info = {
+    "python": sys.version.split()[0],
+    "platform": platform.platform(),
+    "numpy": np.__version__,
+    "pandas": pd.__version__,
+    "scikit-learn": sklearn.__version__
+}
+
+pd.Series(
+    environment_info,
+    name="version"
+)
+```
+
+## Dependency Files
+
+Common approaches include:
+
+- `requirements.txt`;
+- `pyproject.toml`;
+- Conda environment files;
+- lock files;
+- containers.
+
+A plain package list improves documentation, while a lock file or container can provide stronger control over dependency resolution.
+
+## Do Not Confuse Environment Capture With Scientific Validity
+
+A perfectly preserved environment can reproduce a flawed analysis exactly.
+
+Reproducibility enables scrutiny.
+
+It does not certify correctness.
+
+## Pipelines as Reproducible Methods
+
+## Preprocessing Is Part of the Model
+
+Suppose standardization is performed before cross-validation using the full dataset.
+
+That creates leakage.
+
+A reproducible workflow should preserve the transformation boundary.
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+data = load_breast_cancer(
+    as_frame=True
+)
+
+X = data.data
+y = (data.target == 0).astype(int)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=.30,
+    random_state=42,
+    stratify=y
+)
+
+pipeline = Pipeline([
+    (
+        "scale",
+        StandardScaler()
+    ),
+    (
+        "model",
+        LogisticRegression(
+            max_iter=2000
+        )
+    )
+])
+
+pipeline.fit(
+    X_train,
+    y_train
+)
+
+prob = pipeline.predict_proba(
+    X_test
+)[:, 1]
+
+roc_auc_score(
+    y_test,
+    prob
+)
+```
+
+The pipeline preserves the order:
+
+$$
+\text{training data}
+\rightarrow
+\text{fit preprocessing}
+\rightarrow
+\text{fit model}.
+$$
+
+New data receive the transformations learned from training data.
+
+## Experiment Configuration
+
+## Separate Configuration From Results
+
+An experiment should record the settings that produced the result.
+
+```{python}
+experiment = {
+    "experiment_id": "logistic-baseline-v1",
+    "random_state": 42,
+    "test_size": 0.30,
+    "model": "LogisticRegression",
+    "max_iter": 2000,
+    "scaling": "StandardScaler",
+    "primary_metric": "roc_auc"
+}
+
+experiment
+```
+
+## Store Machine-Readable Metadata
+
+```{python}
+experiment_json = json.dumps(
+    experiment,
+    indent=2
+)
+
+print(
+    experiment_json
+)
+```
+
+Machine-readable metadata can support automated experiment tracking and auditing.
+
+## Results Should Point Back to Configuration
+
+A result table should not contain only:
+
+| Model | ROC-AUC |
+|---|---:|
+| Logistic Regression | 0.98 |
+
+It should also be possible to identify:
+
+- experiment ID;
+- code version;
+- data version;
+- configuration;
+- environment;
+- evaluation split.
+
+## Version Control With Git
+
+## Git Preserves Project History
+
+Git records snapshots of a project over time.
+
+A basic workflow is:
+
+```text
+edit
+↓
+git status
+↓
+git add
+↓
+git commit
+↓
+git push
+```
+
+## A Commit Should Represent a Meaningful Change
+
+Useful commit messages might be:
+
+```text
+Add leakage-safe preprocessing pipeline
+Add external validation analysis
+Correct outcome coding
+Revise calibration figure
+Document dataset release
+```
+
+Avoid treating version control as a periodic backup of mysterious changes.
+
+## Git Does Not Replace Documentation
+
+A repository with 500 commits but no README may still be difficult to reproduce.
+
+Version history and scientific documentation solve different problems.
+
+## GitHub and Remote Repositories
+
+## Why Use a Remote Repository?
+
+A remote repository can support:
+
+- collaboration;
+- issue tracking;
+- code review;
+- version history;
+- public dissemination;
+- integration with archival services.
+
+But GitHub itself should not automatically be treated as the permanent scholarly archive.
+
+For a citable release, archive a stable version in an appropriate preservation repository.
+
+## Do Not Commit Secrets
+
+Never commit:
+
+- passwords;
+- API keys;
+- access tokens;
+- private credentials;
+- restricted data.
+
+Use environment variables or secure secret-management systems.
+
+If a secret is committed, deleting the visible line may not remove it from Git history.
+
+## Quarto as a Reproducible Publishing System
+
+## Narrative and Computation Belong Together
+
+Quarto can combine:
+
+- prose;
+- equations;
+- executable code;
+- figures;
+- tables;
+- citations;
+- cross-references;
+- multiple output formats.
+
+This reduces the distance between analysis and publication.
+
+## Literate Programming
+
+The principle is:
+
+> Explain the reasoning alongside the computation that implements it.
+
+Instead of manually copying a result from a notebook into a manuscript, generate the result from code when practical.
+
+## A Figure Should Have Provenance
+
+```{python}
+#| label: fig-reproducible-example
+#| fig-cap: "A reproducible figure is generated from code rather than manually reconstructed."
+
+x = np.linspace(
+    0,
+    10,
+    100
+)
+
+y_demo = np.sin(
+    x
+)
+
+plt.figure(figsize=(8, 4))
+plt.plot(
+    x,
+    y_demo
+)
+plt.xlabel("x")
+plt.ylabel("sin(x)")
+plt.title("A Code-Generated Figure")
+plt.show()
+```
+
+The figure's provenance is visible in the document source.
+
+## Notebooks Versus Scripts
+
+## Exploration and Production Serve Different Purposes
+
+Notebooks are valuable for:
+
+- exploration;
+- teaching;
+- visualization;
+- iterative reasoning.
+
+Scripts and modules are often useful for:
+
+- reusable transformations;
+- testing;
+- automation;
+- pipelines;
+- production workflows.
+
+A strong project can use both.
+
+## Beware Hidden Notebook State
+
+A notebook may run successfully only because cells were executed out of order.
+
+A useful test is:
+
+> Restart the kernel and run everything from the beginning.
+
+If the analysis fails, the computational narrative is incomplete.
+
+## Saving Model Artifacts
+
+## Models Are Derived Artifacts
+
+A fitted model can be saved for reuse.
+
+```{python}
+import pickle
+from tempfile import TemporaryDirectory
+
+with TemporaryDirectory() as tmp:
+    model_path = Path(
+        tmp
+    ) / "model.pkl"
+
+    with open(
+        model_path,
+        "wb"
+    ) as file:
+        pickle.dump(
+            pipeline,
+            file
+        )
+
+    with open(
+        model_path,
+        "rb"
+    ) as file:
+        reloaded_pipeline = pickle.load(
+            file
+        )
+
+    reloaded_prob = reloaded_pipeline.predict_proba(
+        X_test
+    )[:, 1]
+
+    maximum_difference = np.max(
+        np.abs(
+            prob
+            - reloaded_prob
+        )
+    )
+
+maximum_difference
+```
+
+## Serialization Has Limits
+
+Serialized model artifacts can be:
+
+- version-dependent;
+- unsafe to load from untrusted sources;
+- incomplete without preprocessing and metadata;
+- incompatible across environments.
+
+Never load an untrusted pickle file.
+
+A model artifact should be accompanied by provenance and environment information.
+
+## Automated Workflows
+
+## Reproducibility Improves When Steps Are Explicit
+
+A workflow might define:
+
+$$
+\text{download}
+\rightarrow
+\text{validate}
+\rightarrow
+\text{prepare}
+\rightarrow
+\text{train}
+\rightarrow
+\text{evaluate}
+\rightarrow
+\text{render}.
+$$
+
+The more these dependencies are automated, the less the workflow depends on undocumented memory.
+
+## One-Command Reproduction
+
+An aspirational standard is that a documented command can regenerate major outputs from permitted inputs.
+
+Examples might include:
+
+```text
+quarto render
+```
+
+or a project-specific workflow command.
+
+The exact tooling matters less than the principle: reduce hidden manual steps.
+
+## Testing Data and ML Pipelines
+
+## Tests Are Not Only for Software Engineers
+
+Research code can test assumptions such as:
+
+- IDs are unique;
+- expected columns exist;
+- impossible values are absent;
+- train/test groups do not overlap;
+- outcome coding is valid;
+- row counts fall within expected ranges.
+
+## Example Data Assertions
+
+```{python}
+assert X.shape[0] == y.shape[0]
+assert y.isin([0, 1]).all()
+assert not X.columns.duplicated().any()
+assert X_train.index.intersection(
+    X_test.index
+).empty
+```
+
+These checks turn assumptions into executable statements.
+
+## Tests Cannot Prove the Research Question Is Good
+
+Automated tests can verify that code behaves as specified.
+
+They cannot determine whether:
+
+- the construct is valid;
+- the causal claim is justified;
+- the intervention is ethical;
+- the research question matters.
+
+Again, computational rigor and scientific judgment are complementary.
+
+## Provenance of Figures, Tables, and Claims
+
+## Every Result Should Be Traceable
+
+For a reported number, ask:
+
+> Which code produced it?
+
+For a figure:
+
+> Which data and transformation produced it?
+
+For a model:
+
+> Which configuration and training sample produced it?
+
+For a claim:
+
+> Which evidence supports it?
+
+This creates a provenance graph:
+
+$$
+\text{claim}
+\leftarrow
+\text{result}
+\leftarrow
+\text{code}
+\leftarrow
+\text{data}.
+$$
+
+## Archiving and Persistent Identifiers
+
+## A Repository Is Living; A Release Is Fixed
+
+Active Git repositories evolve.
+
+Scholarly citation often requires a stable snapshot.
+
+A release can freeze a version of:
+
+- code;
+- documentation;
+- configuration;
+- figures;
+- supplementary materials.
+
+## Zenodo and DOI Archiving
+
+A common workflow is:
+
+```text
+GitHub repository
+↓
+versioned release
+↓
+Zenodo archive
+↓
+DOI
+```
+
+A DOI provides a persistent identifier for the archived scholarly object.
+
+## Concept DOI and Version DOI
+
+When supported by the repository, individual releases can receive version-specific identifiers while the overall project can have a persistent concept-level identifier.
+
+This supports both:
+
+- citing the project generally;
+- citing the exact version used in a study.
+
+## OSF as a Research Hub
+
+OSF can support:
+
+- project organization;
+- registrations;
+- preregistration;
+- files;
+- collaboration;
+- links to other research services.
+
+The best repository depends on the artifact and research workflow.
+
+## DOI Does Not Mean Peer Reviewed
+
+A DOI establishes persistent identification.
+
+It does not automatically imply:
+
+- peer review;
+- methodological quality;
+- correctness;
+- journal publication.
+
+Persistent citation and scientific validation are different functions.
+
+## Citation and Credit
+
+## Make Software and Data Citable
+
+A project can include citation metadata such as:
+
+```text
+CITATION.cff
+```
+
+Document:
+
+- authors;
+- title;
+- version;
+- release date;
+- DOI;
+- repository;
+- preferred citation.
+
+## Cite Data as Research Objects
+
+Datasets should be cited when possible using their official citation or persistent identifier.
+
+Data provenance is part of scholarly credit.
+
+## Reproducibility and Restricted Data
+
+## Open Science Does Not Mean “Upload Everything”
+
+Health, education, financial, and institutional data may contain sensitive or restricted information.
+
+Responsible reproducibility can use:
+
+- data dictionaries;
+- synthetic examples;
+- access instructions;
+- transformation code;
+- controlled repositories;
+- metadata;
+- documented eligibility procedures.
+
+The goal is **as open as possible, as restricted as necessary**.
+
+## Never Publish Data Merely to Satisfy a Reproducibility Checklist
+
+Legal, ethical, contractual, and privacy obligations take priority.
+
+A reproducible workflow can document why an artifact cannot be public.
+
+## Robustness and Multiverse Thinking
+
+## One Analysis Path Is Rarely the Only Reasonable Path
+
+Researchers make choices about:
+
+- exclusions;
+- transformations;
+- missing data;
+- features;
+- models;
+- hyperparameters;
+- thresholds;
+- metrics.
+
+A robustness analysis asks whether conclusions depend heavily on one defensible choice.
+
+## Specification Curves and Multiverse Analyses
+
+For some research questions, researchers can examine many reasonable analytical specifications.
+
+Conceptually:
+
+$$
+\mathcal{S}
+=
+\{
+s_1,s_2,\ldots,s_m
+\}.
+$$
+
+For each specification:
+
+$$
+\hat\theta_j
+=
+f(D,s_j).
+$$
+
+The distribution of results reveals sensitivity to analytical decisions.
+
+This is particularly valuable when the scientific conclusion—not merely predictive performance—is the primary outcome.
+
+## Reproducibility Is Not Replication
+
+## The Distinction Matters
+
+Imagine that another researcher obtains exactly the same ROC-AUC by running your code on your data.
+
+That supports computational reproducibility.
+
+Now imagine they collect a new sample from another university and obtain similar results.
+
+That supports replication and potentially transportability more strongly.
+
+The second claim requires new evidence.
+
+## Three Tracks
+
+## Health Track
+
+A reproducible health ML study should document:
+
+- cohort construction;
+- diagnostic definitions;
+- coding systems;
+- data release;
+- temporal boundaries;
+- missingness;
+- preprocessing;
+- patient-level splitting;
+- calibration;
+- external validation;
+- software environment;
+- restricted-data access procedures.
+
+Sensitive patient-level data may remain protected while code and metadata are shared.
+
+## Education Track
+
+A reproducible education study should document:
+
+- institution and term boundaries;
+- student-level identifiers and deidentification;
+- outcome definitions;
+- LMS extraction logic;
+- course/instructor effects;
+- repeated-student handling;
+- intervention timing;
+- FERPA or institutional restrictions where applicable;
+- code and synthetic examples when raw data cannot be released.
+
+A reproducible early-warning model must make clear exactly **when** each predictor becomes available.
+
+## Open ML Benchmark Track
+
+A benchmark study should preserve:
+
+- dataset version;
+- split;
+- preprocessing;
+- seeds;
+- hyperparameter search space;
+- compute environment;
+- evaluation code;
+- model configuration;
+- final metrics;
+- uncertainty;
+- runtime or compute information;
+- exact release used for the paper.
+
+Benchmark reproducibility is strengthened when another researcher can rerun the comparison without reconstructing undocumented decisions.
+
+## Beyond the Algorithm: Reproducibility as Intellectual Humility
+
+::: {.callout-note icon=false}
+## A Scientific Result Should Be Able to Survive Its Author
+
+A researcher remembers why a row was removed.
+
+A collaborator remembers which file is current.
+
+A student remembers which notebook cell must run first.
+
+Then time passes.
+
+Memory is not an archival system.
+
+Reproducibility asks us to move knowledge from the researcher's memory into inspectable artifacts.
+
+That is partly an engineering practice.
+
+It is also a philosophical commitment.
+
+To make a workflow reproducible is to accept that our work should be open to:
+
+- inspection;
+- criticism;
+- correction;
+- extension;
+- replication.
+
+The purpose is not to prove that we were right.
+
+The purpose is to make it possible for knowledge to advance even when we were wrong.
+
+In that sense:
+
+$$
+\boxed{
+\text{reproducibility}
+=
+\text{an infrastructure for scientific self-correction}
+}
+$$
+
+A result becomes more valuable when others can understand how it came to exist.
+:::
+
+## AI Pair Programmer: Make My Study Reproducible
+
+Ask an AI assistant:
+
+> “I set random_state=42, so my machine-learning study is fully reproducible. Write a sentence confirming this for my paper.”
+
+Audit the response.
+
+A rigorous answer should distinguish the random seed from:
+
+- data version;
+- software environment;
+- preprocessing;
+- split logic;
+- package defaults;
+- hardware;
+- parallelism;
+- code version;
+- experiment configuration;
+- provenance.
+
+Rewrite the statement so it accurately describes what the seed contributes.
+
+## Hands-On Lab: Build a Research Compendium
+
+Create a small reproducible ML project.
+
+1. define a research question;
+2. create a project README;
+3. create a data README;
+4. record dataset provenance;
+5. preserve source and derived data separately;
+6. create a leakage-safe pipeline;
+7. set and document random seeds;
+8. record package versions;
+9. create an experiment configuration;
+10. fit a baseline;
+11. evaluate the model;
+12. generate one figure from code;
+13. generate one table from code;
+14. add executable data checks;
+15. place reusable code in `src/`;
+16. render the report with Quarto;
+17. initialize Git;
+18. make meaningful commits;
+19. push to a remote repository when appropriate;
+20. add citation metadata;
+21. create a versioned release;
+22. archive the release in a persistent repository when appropriate;
+23. record its persistent identifier;
+24. document any files that cannot be shared;
+25. ask another person to reproduce the workflow from the README.
+
+## Practitioner Track
+
+A practitioner should be able to structure a project, preserve provenance, control randomness, record environments, build pipelines, version code, generate reports from computation, test assumptions, and archive stable releases.
+
+## Researcher Track
+
+A researcher should additionally distinguish reproducibility from replication, preregister analytical decisions when appropriate, conduct robustness analyses, preserve research provenance, document deviations, archive citable artifacts, design workflows for independent verification, and distinguish open science from indiscriminate data sharing.
+
+## Research Studio
+
+Design a reproducibility plan suitable for a conference or journal submission.
+
+Specify:
+
+1. research question;
+2. hypotheses or predictive claims;
+3. data source;
+4. dataset version;
+5. access date;
+6. license or restrictions;
+7. cohort/sample construction;
+8. unit of analysis;
+9. target definition;
+10. preprocessing;
+11. feature engineering;
+12. split logic;
+13. random seeds;
+14. environment specification;
+15. model configurations;
+16. hyperparameter search;
+17. evaluation protocol;
+18. robustness analyses;
+19. generated tables;
+20. generated figures;
+21. model artifacts;
+22. code repository;
+23. documentation;
+24. citation metadata;
+25. preregistration/registration where appropriate;
+26. archival repository;
+27. persistent identifier;
+28. restricted-data reproduction pathway;
+29. independent reproduction test;
+30. scholarly contribution.
+
+## Professor's Challenge: The Irreproducible Breakthrough
+
+A research team reports a new model for predicting college persistence.
+
+The paper claims:
+
+$$
+ROC\text{-}AUC=0.94,
+$$
+
+substantially exceeding previous studies.
+
+The authors provide a GitHub repository containing one notebook.
+
+However:
+
+- the dataset is called `final_data_v7_REAL.csv`;
+- no data source or release is documented;
+- preprocessing was partly performed manually in Excel;
+- notebook cells must be run in an undocumented order;
+- no random seeds are reported;
+- package versions are absent;
+- the train/test split file is missing;
+- hyperparameter search results are unavailable;
+- the manuscript figure was manually recreated in PowerPoint;
+- the repository changed after publication;
+- no versioned release was archived;
+- the raw student data cannot legally be shared.
+
+Evaluate the claim that the study is “open and reproducible because the code is on GitHub.”
+
+Redesign the project without violating student privacy.
+
+Your solution should address:
+
+- provenance;
+- manual transformations;
+- environment capture;
+- split preservation;
+- experiment tracking;
+- executable figures;
+- version control;
+- release archiving;
+- DOI assignment;
+- restricted-data documentation;
+- synthetic or simulated examples;
+- independent verification.
+
+## Capstone: From Machine Learning Project to Research Artifact
+
+Choose one of the book's three tracks.
+
+## Health
+
+Develop a reproducible prediction study using a public or appropriately accessible health dataset.
+
+## Education
+
+Develop a reproducible study of a learning, persistence, achievement, or institutional outcome.
+
+## Open ML
+
+Develop a reproducible benchmark, methodological comparison, or robustness study using a public dataset.
+
+For your chosen project, produce:
+
+1. research question;
+2. literature-grounded motivation;
+3. data provenance;
+4. exploratory analysis;
+5. preprocessing pipeline;
+6. baseline;
+7. candidate models;
+8. tuning;
+9. model evaluation;
+10. calibration where appropriate;
+11. uncertainty;
+12. responsible-ML audit;
+13. robustness analysis;
+14. reproducible Quarto manuscript;
+15. Git repository;
+16. README;
+17. environment specification;
+18. citation metadata;
+19. versioned release;
+20. archival plan;
+21. conference or journal positioning statement.
+
+The objective is not merely to train a model.
+
+It is to produce a defensible **research artifact**.
 
 ## Knowledge Check
-1. What is computational reproducibility?
-2. Why separate raw and derived data?
-3. What role does a software environment play?
-4. Why create tagged releases?
-5. What does a DOI contribute?
 
-## Real-World Case Study
-### From Notebook to Citable Research Artifact
-Transform a chapter project into a documented, versioned, archived research output.
-
-## Professor's Challenge
-A paper's repository contains code but the analysis no longer runs. Is the research reproducible?
-
-## Research Extension
-Develop a replication or reproducibility study around a published machine learning analysis.
+1. How does reproducibility differ from replication?
+2. How does robustness differ from generalizability?
+3. Why is reproducibility a workflow property rather than a code property?
+4. Why should source data not be silently overwritten?
+5. What information belongs in a data README?
+6. What does a cryptographic hash provide?
+7. Why is a random seed insufficient for complete reproducibility?
+8. Why are software versions part of the method?
+9. How do lock files differ conceptually from simple dependency lists?
+10. Why should preprocessing be included inside an ML pipeline?
+11. What should an experiment configuration record?
+12. What is the purpose of Git?
+13. Why does Git not replace scientific documentation?
+14. Why should secrets never be committed to a repository?
+15. What is literate programming?
+16. Why can notebooks contain hidden state?
+17. Why should untrusted pickle files never be loaded?
+18. What is the benefit of automating a workflow?
+19. What kinds of assumptions can executable tests check?
+20. What is research provenance?
+21. Why is a versioned release useful?
+22. What role can Zenodo play in an ML project?
+23. What is a DOI?
+24. Why does a DOI not imply peer review?
+25. What role can OSF play in a research workflow?
+26. Why should datasets be cited?
+27. Why does open science not require publishing restricted data?
+28. What is a robustness analysis?
+29. What is a multiverse analysis?
+30. Why can a perfectly reproducible analysis still be scientifically wrong?
+31. What additional evidence does replication provide?
+32. Why should figures and tables be generated from code when practical?
+33. What should be preserved so another researcher can reproduce an ML result?
+34. Why is reproducibility an infrastructure for scientific self-correction?
 
 ## Reproducibility Check
-Clone the project into a clean location and reproduce the complete analysis using only documented instructions.
+
+Before releasing a project, verify:
+
+- README;
+- research question;
+- data README;
+- data source;
+- dataset version;
+- access date;
+- license;
+- restrictions;
+- data dictionary;
+- inclusion/exclusion logic;
+- source/derived-data separation;
+- preprocessing code;
+- feature-engineering code;
+- split logic;
+- seeds;
+- environment specification;
+- package versions;
+- hardware notes where relevant;
+- experiment configurations;
+- hyperparameter search;
+- evaluation code;
+- uncertainty analysis;
+- robustness analysis;
+- generated figures;
+- generated tables;
+- executable checks/tests;
+- model artifacts;
+- model metadata;
+- Git history;
+- remote repository;
+- meaningful release tag;
+- citation metadata;
+- archive;
+- persistent identifier;
+- restricted-data pathway;
+- known limitations;
+- independent reproduction instructions.
 
 ## Key Takeaways
-- Reproducibility is a design principle, not a final checklist.
-- Version control and environment capture make analytical decisions auditable.
-- Scholarly archiving turns computational work into a persistent research artifact.
+
+- Reproducibility, replication, robustness, and generalizability answer different questions.
+- Reproducibility belongs to the complete research workflow.
+- Data provenance is part of the scientific method.
+- Source data and derived artifacts should be distinguishable.
+- Random seeds help repeat computational paths but do not guarantee reproducibility.
+- Software environments are part of computational methodology.
+- Leakage-safe preprocessing should be preserved inside the modeling workflow.
+- Experiment configurations connect results to the procedures that generated them.
+- Git preserves project history; documentation explains the science.
+- Quarto can connect narrative, computation, equations, figures, tables, and citations.
+- Hidden notebook state is a reproducibility risk.
+- Automated checks make assumptions inspectable.
+- Figures, tables, models, and claims should have traceable provenance.
+- A living repository and a stable scholarly release serve different purposes.
+- Persistent archives and DOIs improve citation and preservation.
+- A DOI does not certify scientific quality.
+- Open science does not require irresponsible disclosure of restricted data.
+- Robustness analysis asks whether conclusions depend on reasonable analytical choices.
+- A reproducible analysis can still be wrong.
+- Replication requires new evidence.
+- Reproducibility enables criticism, correction, extension, and cumulative knowledge.
+- A mature ML project should end not merely as a fitted model, but as a defensible research artifact.

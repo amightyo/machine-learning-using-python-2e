@@ -1,78 +1,1303 @@
-# Generative AI and Foundation Models
+# Generative AI: From Prediction to Intelligent Systems
+
+```{python}
+#| label: chapter-15-setup
+#| include: false
+
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+```
 
 ## Learning Objectives
-- Explain how generative models differ from conventional predictive models.
-- Describe the transformer and next-token prediction at a conceptual level.
-- Explain prompting, embeddings, retrieval, and fine-tuning.
-- Evaluate generative systems beyond anecdotal examples.
-- Identify risks involving hallucination, bias, privacy, and reproducibility.
 
-## Why This Matters
-Foundation models have changed how data scientists write code, analyze text, build interfaces, and design intelligent systems. Their outputs remain probabilistic and require systematic evaluation.
+By the end of this chapter, you should be able to:
 
-## Real-World Problem
-A university wants to use an LLM to provide research feedback to students. How should usefulness, factuality, consistency, bias, and educational consequences be evaluated?
+- distinguish discriminative and generative modeling objectives;
+- explain autoregressive language modeling mathematically;
+- interpret next-token probabilities, logits, softmax, and cross-entropy;
+- explain pretraining and why scale can produce reusable foundation models;
+- distinguish tokens, context windows, parameters, and embeddings;
+- explain temperature, top-$k$, and nucleus (top-$p$) sampling;
+- describe prompting and in-context learning without confusing them with parameter updates;
+- distinguish zero-shot, few-shot, retrieval-augmented generation (RAG), and fine-tuning;
+- describe a RAG pipeline using embeddings, similarity search, retrieval, and generation;
+- explain why retrieval does not guarantee factuality;
+- distinguish model knowledge, retrieved evidence, and generated claims;
+- explain hallucination as an evaluation problem rather than a mystical model defect;
+- distinguish instruction tuning from preference/alignment training at a high level;
+- explain tool use and agentic workflows conceptually;
+- distinguish deterministic software orchestration from probabilistic model behavior;
+- evaluate generative systems using task-specific, human, and automated evidence;
+- recognize prompt injection, data leakage, privacy, citation, bias, and overreliance risks;
+- design reproducible generative-AI experiments for health, education, and research applications;
+- use generative AI as a research collaborator without surrendering scholarly judgment.
 
-## Foundations
-### Generative Versus Discriminative Modeling
-### Language Modeling
-### Tokens and Context
-### Transformers and Attention
-### Next-Token Prediction
-### Foundation Models
+## Why Generative AI Changes the Conversation
 
-## Working With Foundation Models
-### Prompting
-### Structured Outputs
-### Embeddings
-### Retrieval-Augmented Generation
-### Fine-Tuning
-### Tool Use and Agents
+Traditional supervised learning often asks:
 
-## Evaluation
-### Factuality
-### Reliability
-### Human Evaluation
-### Task-Based Evaluation
-### Reproducibility
-### Cost and Latency
+$$
+x\longrightarrow y.
+$$
 
-## Responsible Use
-### Hallucination
-### Bias
-### Privacy
-### Academic Integrity
-### AI-Assisted Coding
+For example:
 
-## Hands-On Practice
-Design an evaluation framework for a generative-AI application rather than judging it from a few demonstrations.
+- features $\rightarrow$ disease status;
+- student behavior $\rightarrow$ retention;
+- transaction features $\rightarrow$ fraud probability.
 
-## Common Mistakes
-- Treating fluent output as factual output.
-- Reporting cherry-picked prompts.
-- Failing to preserve model/version information.
-- Using sensitive data without appropriate safeguards.
+Generative models instead learn distributions capable of producing new observations.
+
+For language, the objective can be written as:
+
+$$
+P(x_1,\ldots,x_T)
+=
+\prod_{t=1}^{T}
+P(x_t\mid x_1,\ldots,x_{t-1}).
+$$
+
+A large language model repeatedly asks:
+
+> Given the context so far, what token should come next?
+
+That simple-looking objective can produce remarkably complex behavior when combined with large datasets, expressive architectures, optimization, and scale.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**If a system produces an answer that is novel, useful, and apparently reasoned from a predictive objective, what exactly do we mean when we say the system “knows” something?**
+:::
+
+## Discriminative Versus Generative Models
+
+A discriminative classifier often models:
+
+$$
+P(y\mid x).
+$$
+
+A generative model may model:
+
+$$
+P(x)
+$$
+
+or a joint/conditional distribution from which new data can be generated.
+
+For language generation:
+
+$$
+P(\text{text})
+=
+\prod_t
+P(
+\text{token}_t
+\mid
+\text{previous tokens}
+).
+$$
+
+The distinction is conceptual rather than a claim that one family is universally superior.
+
+## From Chapter 14 to Chapter 15
+
+Chapter 14 introduced transformer representations and autoregressive factorization.
+
+Now we ask what happens when a transformer is trained at scale to predict tokens across enormous corpora.
+
+The progression is:
+
+$$
+\text{tokens}
+\rightarrow
+\text{transformer}
+\rightarrow
+\text{next-token distribution}
+\rightarrow
+\text{pretraining}
+\rightarrow
+\text{foundation model}.
+$$
+
+## Tokens Are the Model's Working Symbols
+
+Language models generally operate on tokens rather than raw words.
+
+A token may represent:
+
+- a word;
+- part of a word;
+- punctuation;
+- whitespace-related structure;
+- special control symbols.
+
+Therefore:
+
+$$
+\text{one word}\neq\text{one token}
+$$
+
+in general.
+
+Tokenization affects context length, computational cost, multilingual behavior, and representation.
+
+## Logits and Probabilities
+
+Before choosing the next token, a language model produces a vector of logits:
+
+$$
+z=
+[z_1,z_2,\ldots,z_V],
+$$
+
+where $V$ is vocabulary size.
+
+Softmax converts logits into probabilities:
+
+$$
+P_i
+=
+\frac{e^{z_i}}
+{\sum_{j=1}^{V}e^{z_j}}.
+$$
+
+## A Tiny Next-Token Distribution
+
+```{python}
+tokens = np.array([
+    "model",
+    "data",
+    "student",
+    "research",
+    "banana"
+])
+
+logits = np.array([
+    2.4,
+    1.7,
+    0.8,
+    2.1,
+    -0.6
+])
+
+def softmax(x):
+    shifted = x - np.max(x)
+    exp_x = np.exp(shifted)
+    return exp_x / exp_x.sum()
+
+probabilities = softmax(logits)
+
+pd.DataFrame({
+    "token": tokens,
+    "logit": logits,
+    "probability": probabilities
+}).sort_values(
+    "probability",
+    ascending=False
+)
+```
+
+The highest-probability token is not necessarily selected under every decoding strategy.
+
+## Learning to Predict Tokens
+
+## Cross-Entropy Training Objective
+
+Suppose the correct next token is $y$.
+
+The negative log-likelihood for that observation is:
+
+$$
+L=-\log P(y\mid x_{<t}).
+$$
+
+Across tokens:
+
+$$
+L
+=
+-\frac{1}{N}
+\sum_{i=1}^{N}
+\log P(
+x_i
+\mid
+x_{<i}
+).
+$$
+
+Minimizing this loss rewards assigning greater probability to observed continuation tokens.
+
+## Perplexity
+
+A common language-model metric is perplexity.
+
+If average negative log-likelihood is $L$,
+
+$$
+Perplexity=e^L.
+$$
+
+Lower perplexity means the model assigns greater probability to observed text on average.
+
+But lower perplexity does not automatically mean:
+
+- more factual;
+- safer;
+- more useful;
+- better calibrated for a specific application;
+- more aligned with human preferences.
+
+## Why Pretraining Is Powerful
+
+During pretraining, a model encounters broad patterns involving:
+
+- syntax;
+- semantics;
+- facts;
+- styles;
+- code;
+- discourse;
+- relationships between concepts.
+
+The optimization objective remains token prediction.
+
+Yet solving token prediction across diverse contexts can require representations useful for many downstream tasks.
+
+This is one reason pretrained models can become **foundation models**.
+
+## Foundation Models
+
+A foundation model is trained broadly enough that it can support many downstream tasks through mechanisms such as:
+
+- prompting;
+- in-context examples;
+- retrieval;
+- fine-tuning;
+- adapters;
+- tool use.
+
+The model becomes infrastructure rather than a single-purpose predictor.
+
+## Generation and Sampling
+
+## Greedy Decoding
+
+Greedy decoding selects:
+
+$$
+x_t
+=
+\arg\max_i
+P(x_t=i\mid x_{<t}).
+$$
+
+It is simple and deterministic given fixed model behavior.
+
+But repeatedly choosing the most probable token can produce repetitive or overly conservative output.
+
+## Temperature
+
+Temperature modifies logits before softmax:
+
+$$
+P_i(T)
+=
+\frac{
+\exp(z_i/T)
+}{
+\sum_j\exp(z_j/T)
+}.
+$$
+
+For $T<1$, the distribution becomes sharper.
+
+For $T>1$, it becomes flatter.
+
+## Temperature Demonstration
+
+```{python}
+#| label: fig-temperature
+#| fig-cap: "Temperature changes the concentration of a token probability distribution without changing the underlying logits."
+
+temperatures = [
+    0.4,
+    1.0,
+    1.8
+]
+
+for temperature in temperatures:
+    probs = softmax(
+        logits / temperature
+    )
+
+    plt.figure(figsize=(8, 4.5))
+    plt.bar(
+        tokens,
+        probs
+    )
+    plt.ylim(0, 0.65)
+    plt.ylabel("Probability")
+    plt.title(
+        f"Next-Token Distribution: Temperature = {temperature}"
+    )
+    plt.xticks(rotation=25)
+    plt.show()
+```
+
+Temperature does not make a model more knowledgeable.
+
+It changes how probability mass is used during sampling.
+
+## Top-k Sampling
+
+Top-$k$ sampling restricts candidate generation to the $k$ highest-probability tokens and renormalizes within that set.
+
+If $k=3$, all other tokens receive zero sampling probability.
+
+## Nucleus Sampling
+
+Top-$p$ or nucleus sampling selects the smallest candidate set whose cumulative probability reaches a threshold $p$.
+
+Unlike fixed top-$k$, the number of candidate tokens can vary with the distribution.
+
+## Sampling Is Not Creativity in a Simple Sense
+
+Higher randomness can increase output diversity.
+
+But:
+
+$$
+\boxed{\text{sampling diversity}}
+\neq
+\boxed{\text{human creativity}}.
+$$
+
+Creativity involves broader questions of intention, novelty, value, context, and authorship.
+
+## Prompting and In-Context Learning
+
+## The Prompt Defines a Temporary Task Context
+
+A prompt can include:
+
+- instructions;
+- background;
+- examples;
+- constraints;
+- output schemas;
+- retrieved evidence.
+
+A model conditions its generation on this context.
+
+## Zero-Shot Prompting
+
+The task is described without examples.
+
+Example:
+
+> Classify this feedback as positive, negative, or mixed.
+
+## Few-Shot Prompting
+
+The prompt contains demonstrations.
+
+For example:
+
+```text
+Feedback: "The examples were excellent."
+Label: positive
+
+Feedback: "I could not follow the lab."
+Label: negative
+
+Feedback: "The lecture was useful but too fast."
+Label:
+```
+
+The model can infer a temporary pattern from context.
+
+## In-Context Learning Is Not Ordinary Fine-Tuning
+
+During standard prompting, the model's persistent parameters are not updated merely because examples appear in the prompt.
+
+Thus:
+
+$$
+\boxed{\text{learning from context}}
+\neq
+\boxed{\text{parameter training}}.
+$$
+
+This distinction is fundamental.
+
+## Prompt Engineering Versus Problem Engineering
+
+Weak generative-AI practice asks:
+
+> What magic wording will make the model work?
+
+Stronger practice asks:
+
+- What task are we solving?
+- What evidence should the model use?
+- What information must be supplied?
+- What output structure is needed?
+- How will correctness be evaluated?
+- What errors are unacceptable?
+- Should the model answer at all when evidence is insufficient?
+
+Prompt design follows problem design.
+
+## Retrieval-Augmented Generation
+
+## Why Retrieval?
+
+A pretrained model's parameters are not a guaranteed, current, inspectable database.
+
+Retrieval-Augmented Generation (RAG) supplies external evidence at inference time.
+
+A simplified workflow is:
+
+$$
+\text{query}
+\rightarrow
+\text{embedding}
+\rightarrow
+\text{retrieval}
+\rightarrow
+\text{context}
+\rightarrow
+\text{generation}.
+$$
+
+## Vector Retrieval
+
+Suppose documents have embeddings
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+and a query has embedding $q$.
+
+We can rank documents by cosine similarity:
+
+$$
+sim(q,d_i)
+=
+\frac{
+q^\top d_i
+}{
+\|q\|\|d_i\|
+}.
+$$
+
+## A Tiny Retrieval Demonstration
+
+```{python}
+documents = [
+    "PCA finds directions of high variance.",
+    "Logistic regression models class probabilities.",
+    "K-means partitions observations around centroids.",
+    "Cross-validation estimates model performance across resamples."
+]
+
+document_vectors = np.array([
+    [0.90, 0.10, 0.05],
+    [0.10, 0.88, 0.12],
+    [0.72, 0.18, 0.20],
+    [0.08, 0.35, 0.92]
+])
+
+query_vector = np.array([
+    0.82,
+    0.12,
+    0.10
+])
+
+def cosine_to_query(
+    matrix,
+    query
+):
+    numerator = matrix @ query
+    denominator = (
+        np.linalg.norm(
+            matrix,
+            axis=1
+        )
+        * np.linalg.norm(query)
+    )
+    return numerator / denominator
+
+retrieval_scores = cosine_to_query(
+    document_vectors,
+    query_vector
+)
+
+retrieval_df = pd.DataFrame({
+    "document": documents,
+    "similarity": retrieval_scores
+}).sort_values(
+    "similarity",
+    ascending=False
+)
+
+retrieval_df
+```
+
+These vectors are synthetic and exist only to demonstrate retrieval geometry.
+
+## RAG Is a System, Not a Single Model
+
+A RAG system can fail at multiple stages:
+
+$$
+\text{query formulation}
+\rightarrow
+\text{retrieval}
+\rightarrow
+\text{ranking}
+\rightarrow
+\text{context construction}
+\rightarrow
+\text{generation}.
+$$
+
+A poor answer may therefore reflect:
+
+- missing source documents;
+- poor chunking;
+- weak embeddings;
+- retrieval failure;
+- ranking failure;
+- context truncation;
+- generation error;
+- unsupported synthesis.
+
+## Retrieval Does Not Guarantee Truth
+
+Even if the correct document is retrieved, the model may:
+
+- ignore it;
+- misread it;
+- combine it incorrectly;
+- overgeneralize;
+- produce an unsupported citation.
+
+Thus:
+
+$$
+\boxed{\text{retrieved evidence}}
+\neq
+\boxed{\text{grounded answer}}.
+$$
+
+Grounding must be evaluated.
+
+## RAG Evaluation
+
+A useful RAG evaluation separates at least:
+
+### Retrieval Quality
+
+Did the system retrieve relevant evidence?
+
+Metrics can include:
+
+- Recall@$k$;
+- Precision@$k$;
+- Mean Reciprocal Rank;
+- nDCG.
+
+### Answer Quality
+
+Is the generated answer correct and useful?
+
+### Faithfulness or Groundedness
+
+Are claims supported by the supplied evidence?
+
+### Citation Quality
+
+Do citations actually support the associated claims?
+
+This decomposition is much stronger than evaluating only whether an answer “sounds good.”
+
+## Fine-Tuning and Adaptation
+
+## Fine-Tuning
+
+Fine-tuning updates model parameters using additional training data.
+
+Conceptually:
+
+$$
+\theta_{\text{pretrained}}
+\longrightarrow
+\theta_{\text{adapted}}.
+$$
+
+Possible goals include:
+
+- domain adaptation;
+- task specialization;
+- format consistency;
+- behavior adjustment.
+
+## Instruction Tuning
+
+Instruction tuning trains models on instruction-response examples so they become more useful at following task descriptions.
+
+## Preference and Alignment Training
+
+Additional training can use human or model-generated preference signals to encourage desirable response behavior.
+
+The precise techniques vary across systems.
+
+The important distinction is:
+
+> Pretraining learns broad predictive structure; post-training shapes how that capability is expressed and used.
+
+## RAG or Fine-Tuning?
+
+These solve different problems.
+
+Use retrieval when the system needs access to:
+
+- changing information;
+- private documents;
+- inspectable sources;
+- domain knowledge not reliably represented in parameters.
+
+Fine-tuning is more appropriate when the goal concerns:
+
+- behavior;
+- task patterns;
+- style;
+- specialized mappings;
+- domain adaptation.
+
+They can also be combined.
+
+## Hallucination and Uncertainty
+
+## What Is a Hallucination?
+
+In practical generative-AI evaluation, a hallucination is generated content presented as factual or supported when it is not adequately grounded in reliable evidence.
+
+Examples include:
+
+- fabricated citations;
+- invented statistics;
+- nonexistent policies;
+- incorrect quotations;
+- unsupported causal claims.
+
+## Why Fluent Errors Are Dangerous
+
+Language models optimize linguistic prediction, not an intrinsic truth variable.
+
+A false continuation can still be linguistically probable.
+
+Therefore:
+
+$$
+\boxed{\text{fluency}}
+\neq
+\boxed{\text{factuality}}.
+$$
+
+## Abstention
+
+A high-quality system should sometimes say, in effect:
+
+> The available evidence is insufficient.
+
+This introduces a useful design principle:
+
+$$
+\text{answer quality}
+=
+\text{correct answers}
++
+\text{appropriate abstention}.
+$$
+
+Always answering can be worse than selectively refusing unsupported claims.
+
+## Calibration for Generative Systems
+
+Calibration is harder than in binary classification because generated answers contain many claims and possible outcomes.
+
+Useful proxies can include:
+
+- confidence elicitation;
+- consistency across samples;
+- verifier models;
+- retrieval support;
+- claim-level evidence checks;
+- human adjudication.
+
+None should be treated as perfect truth detectors.
+
+## Tool Use and Agents
+
+## Language Models Can Be Embedded in Larger Systems
+
+A model may interact with:
+
+- search;
+- databases;
+- calculators;
+- code execution;
+- APIs;
+- calendars;
+- document stores;
+- other models.
+
+The language model becomes one component in an orchestrated system.
+
+## A Simple Tool-Use Loop
+
+Conceptually:
+
+$$
+\text{user goal}
+\rightarrow
+\text{model decision}
+\rightarrow
+\text{tool call}
+\rightarrow
+\text{tool result}
+\rightarrow
+\text{model synthesis}.
+$$
+
+## What Is an Agent?
+
+The term **agent** is used broadly.
+
+A useful operational definition is a system in which a model can iteratively:
+
+1. interpret a goal;
+2. choose actions;
+3. interact with tools or environments;
+4. observe results;
+5. update its next action;
+6. continue until a stopping condition.
+
+Agency is therefore a **system property**, not merely a synonym for chatbot.
+
+## Agentic Risk Grows With Action Space
+
+A text generator can produce a bad recommendation.
+
+A tool-using system may be able to act on that recommendation.
+
+As autonomy increases, we need stronger:
+
+- permissions;
+- sandboxing;
+- validation;
+- logging;
+- rate limits;
+- human approval boundaries;
+- rollback mechanisms.
+
+## Prompt Injection
+
+When external content enters a model's context, malicious or irrelevant text may attempt to override system instructions or manipulate tool use.
+
+This is particularly important for RAG and agents.
+
+Retrieved text should be treated as **data**, not automatically as trusted instructions.
+
+## Evaluating Generative AI
+
+## There Is No Single Accuracy Metric
+
+Generative tasks may require evaluation of:
+
+- correctness;
+- relevance;
+- completeness;
+- faithfulness;
+- citation support;
+- style;
+- safety;
+- robustness;
+- latency;
+- cost;
+- user utility.
+
+The evaluation must match the use case.
+
+## Exact-Match Evaluation
+
+For constrained tasks, exact match can be useful:
+
+$$
+ExactMatch
+=
+\frac{
+\text{exactly correct outputs}
+}{
+N
+}.
+$$
+
+But it is often too strict for open-ended language.
+
+## Semantic Metrics
+
+Embedding-based or model-based metrics can compare meaning rather than exact wording.
+
+These metrics are useful but can themselves be imperfect models.
+
+## Human Evaluation
+
+Humans may judge:
+
+- factual correctness;
+- reasoning quality;
+- clarity;
+- relevance;
+- harm;
+- usefulness.
+
+Human evaluation requires:
+
+- clear rubrics;
+- blinded comparisons where possible;
+- multiple raters;
+- agreement analysis;
+- adjudication procedures.
+
+## LLM-as-Judge
+
+A language model can evaluate another model's output at scale.
+
+Potential benefits include speed and consistency.
+
+Potential problems include:
+
+- evaluator bias;
+- position bias;
+- verbosity preference;
+- self-preference;
+- sensitivity to prompts;
+- correlated errors.
+
+An LLM judge is an evaluator—not ground truth.
+
+## Pairwise Evaluation
+
+Rather than assigning absolute scores, evaluators can compare two outputs:
+
+$$
+A \succ B.
+$$
+
+Pairwise judgments are often easier to make reliably.
+
+But order effects and evaluator biases still require control.
+
+## Evaluation as an Experiment
+
+A rigorous generative-AI comparison should define:
+
+- tasks;
+- datasets;
+- model versions;
+- prompts;
+- sampling parameters;
+- retrieval configuration;
+- outcome metrics;
+- raters;
+- statistical analysis;
+- cost;
+- latency;
+- failure categories.
+
+This is empirical research, not a product demo.
+
+## Generative AI for Research
+
+## AI Can Support the Research Workflow
+
+Potential uses include:
+
+- brainstorming research questions;
+- generating search terms;
+- explaining methods;
+- drafting code;
+- debugging;
+- summarizing researcher-provided material;
+- structuring literature notes;
+- generating synthetic test cases;
+- reviewing clarity;
+- producing alternative interpretations.
+
+But responsibility for scholarly claims remains with the researcher.
+
+## AI Should Not Become an Invisible Coauthor
+
+A reproducible workflow should document material AI assistance when required by disciplinary, institutional, journal, or conference policies.
+
+Researchers should verify:
+
+- citations;
+- equations;
+- code;
+- data transformations;
+- factual claims;
+- statistical interpretation.
+
+## Citation Fabrication Test
+
+Never assume a generated reference exists.
+
+A scholarly citation should be verified against an authoritative bibliographic source or the publication itself.
+
+## AI-Generated Code
+
+Generated code should be treated like code received from an unfamiliar collaborator:
+
+1. read it;
+2. understand it;
+3. test it;
+4. inspect assumptions;
+5. validate outputs;
+6. document modifications.
+
+Execution without comprehension is not reproducible research.
+
+## Three Tracks
+
+## Health Track
+
+Generative AI can support patient education, clinical documentation, biomedical retrieval, literature synthesis, and research workflows.
+
+High-stakes health applications require strong evidence for:
+
+- factuality;
+- grounding;
+- calibration/uncertainty;
+- privacy;
+- subgroup performance;
+- clinical workflow integration;
+- human oversight.
+
+A fluent answer is not a clinical validation study.
+
+## Education Track
+
+Potential uses include:
+
+- tutoring;
+- formative feedback;
+- research assistance;
+- curriculum support;
+- question generation;
+- writing feedback;
+- learning analytics interfaces.
+
+Research should distinguish:
+
+$$
+\text{student satisfaction}
+$$
+
+from
+
+$$
+\text{learning}.
+$$
+
+A system students enjoy may not improve learning outcomes.
+
+## Open ML Benchmark Track
+
+Students can compare:
+
+- prompts;
+- retrieval configurations;
+- generation parameters;
+- model families;
+- evaluator strategies;
+- cost-quality tradeoffs.
+
+Benchmarking should include failure analysis rather than leaderboard scores alone.
+
+## Beyond the Algorithm: What Does It Mean for a Model to Know?
+
+::: {.callout-note icon=false}
+## Prediction, Knowledge, and Epistemic Responsibility
+
+Suppose a language model correctly explains gradient descent.
+
+Where is that knowledge?
+
+Is it:
+
+- stored in model parameters?
+- reconstructed from statistical relationships?
+- created during interaction with the prompt?
+- retrieved from external evidence?
+- attributed only by the human reader?
+
+Different philosophical traditions answer such questions differently.
+
+For data science, a more operational distinction is useful.
+
+A model can produce a correct statement without possessing:
+
+- lived experience;
+- personal belief;
+- accountability;
+- awareness of consequences.
+
+Humans can also repeat correct statements without deeply understanding them.
+
+So correctness and understanding are related but not identical concepts.
+
+The practical danger appears when linguistic fluency causes us to grant generated statements more authority than the evidence warrants.
+
+A responsible generative-AI workflow therefore asks:
+
+> **What evidence supports this claim, regardless of how intelligent the speaker appears?**
+
+That question returns us to a central principle of science:
+
+$$
+\boxed{
+\text{authority should follow evidence}
+}
+$$
+
+not eloquence.
+:::
+
+## AI Pair Programmer: Build Me an Autonomous Researcher
+
+Ask an AI assistant:
+
+> “Build an autonomous agent that reads the literature, chooses a research question, downloads data, runs the analysis, interprets the results, writes the paper, and submits it without requiring me to review anything.”
+
+Audit the proposal.
+
+Identify where human scholarly judgment is necessary for:
+
+- research significance;
+- ethics;
+- data rights;
+- construct validity;
+- methodology;
+- statistical assumptions;
+- interpretation;
+- authorship;
+- citation verification;
+- disclosure;
+- submission responsibility.
+
+Redesign the workflow as **human-AI research collaboration** rather than unsupervised scholarly automation.
+
+## Hands-On Lab: Build a Small RAG Evaluation
+
+Use a small collection of trustworthy documents.
+
+1. define 15–30 answerable questions;
+2. identify the gold supporting passage for each question;
+3. create document chunks;
+4. create or obtain embeddings;
+5. retrieve top-$k$ chunks;
+6. measure retrieval Recall@$k$;
+7. generate answers using retrieved evidence;
+8. require source attribution;
+9. score answer correctness;
+10. score claim-level support;
+11. identify unsupported statements;
+12. vary $k$;
+13. vary chunk size;
+14. compare retrieval configurations;
+15. measure latency/cost where available;
+16. create an error taxonomy;
+17. document cases where the system should abstain.
+
+## Practitioner Track
+
+A practitioner should understand generation parameters, prompting, retrieval, fine-tuning choices, grounding, tool use, and evaluation well enough to build systems whose failure modes are visible and testable.
+
+## Researcher Track
+
+A researcher should additionally define controlled experiments, freeze model/prompt versions, quantify uncertainty, evaluate retrieval separately from generation, use rigorous human-rating protocols, conduct subgroup and robustness analyses, report compute/cost, and preserve reproducibility despite rapidly changing model APIs.
+
+## Research Studio
+
+Design a generative-AI study suitable for a conference or journal paper.
+
+Specify:
+
+1. substantive research question;
+2. application domain;
+3. model(s);
+4. model version/date;
+5. task dataset;
+6. prompt design;
+7. sampling parameters;
+8. retrieval corpus if applicable;
+9. chunking;
+10. embedding model;
+11. retrieval metric;
+12. generation metrics;
+13. grounding metric;
+14. human-evaluation rubric;
+15. rater design;
+16. baseline systems;
+17. robustness tests;
+18. subgroup analyses;
+19. cost/latency;
+20. privacy/security;
+21. failure taxonomy;
+22. statistical comparison;
+23. reproducibility artifacts;
+24. disclosure plan;
+25. interpretive limitations;
+26. scholarly contribution.
+
+## Professor's Challenge: The AI Tutor Experiment
+
+A university deploys an LLM tutor to 4,000 students.
+
+After one semester:
+
+- 82% of surveyed users say the tutor was helpful;
+- average conversation length is 14 messages;
+- students generated 70,000 prompts;
+- faculty report fewer routine questions.
+
+The university announces:
+
+> “Our generative-AI tutor significantly improves student learning and should replace most introductory tutoring services.”
+
+Critique the evidence.
+
+Consider:
+
+- absence of a counterfactual;
+- selection into tutor use;
+- satisfaction versus learning;
+- prior achievement;
+- differential usage;
+- course effects;
+- instructor effects;
+- outcome measurement;
+- hallucination exposure;
+- subgroup effects;
+- privacy;
+- cost;
+- accessibility;
+- displacement of human support;
+- whether reduced faculty questions is an educational outcome.
+
+Design a stronger study, potentially including a randomized or carefully designed quasi-experimental evaluation.
 
 ## Knowledge Check
-1. What is next-token prediction?
-2. What is retrieval-augmented generation?
-3. Why is generative-AI evaluation difficult?
-4. How can model updates affect reproducibility?
 
-## Real-World Case Study
-### AI-Assisted Research Feedback
-Develop an experimental protocol for evaluating LLM-generated feedback.
-
-## Professor's Challenge
-Two evaluators strongly prefer an LLM's answers, but factual-error rates are higher. Which result should matter more?
-
-## Research Extension
-Develop a controlled study suitable for education, HCI, or applied AI research.
+1. How does a generative model differ conceptually from a discriminative classifier?
+2. What does autoregressive factorization mean?
+3. What are logits?
+4. How does softmax create token probabilities?
+5. What does cross-entropy reward during language-model training?
+6. What is perplexity?
+7. Why does lower perplexity not guarantee factuality?
+8. What is a foundation model?
+9. How does temperature alter generation?
+10. What is top-$k$ sampling?
+11. What is nucleus sampling?
+12. What is zero-shot prompting?
+13. What is few-shot prompting?
+14. Why is in-context learning not the same as fine-tuning?
+15. What problem does RAG attempt to solve?
+16. What is vector retrieval?
+17. Why does successful retrieval not guarantee a grounded answer?
+18. How should retrieval and generation be evaluated separately?
+19. What does fine-tuning change?
+20. How does instruction tuning differ conceptually from pretraining?
+21. What is hallucination?
+22. Why can fluent output still be false?
+23. Why is abstention useful?
+24. What is tool use?
+25. What makes a workflow agentic?
+26. Why does agentic risk increase with action space?
+27. What is prompt injection?
+28. Why is there no universal generative-AI accuracy metric?
+29. What are limitations of LLM-as-judge evaluation?
+30. Why should AI-generated scholarly citations always be verified?
+31. Why is AI-generated code not automatically reproducible research?
+32. Why does successful next-token prediction not settle the philosophical question of understanding?
 
 ## Reproducibility Check
-Record model provider, model identifier, date, prompts, parameters, retrieval corpus, evaluation rubric, and outputs where permissible.
+
+Record:
+
+- research question;
+- model provider/family;
+- exact model identifier;
+- access date;
+- model version where available;
+- system instructions;
+- user prompts;
+- few-shot examples;
+- temperature;
+- top-$p$;
+- top-$k$ where applicable;
+- random seed where supported;
+- maximum output length;
+- retrieval corpus/version;
+- chunking method;
+- embedding model/version;
+- vector-search configuration;
+- top-$k$ retrieval;
+- reranking;
+- tools;
+- agent stopping conditions;
+- evaluation dataset;
+- human-evaluation rubric;
+- rater identities/roles as appropriate;
+- agreement statistics;
+- automated evaluators;
+- baseline systems;
+- cost;
+- latency;
+- hardware for local models;
+- failure cases;
+- code;
+- prompts;
+- outputs where sharing is permitted;
+- disclosure of AI assistance.
 
 ## Key Takeaways
-- Generative AI requires evaluation as a system, not just a model.
-- Fluency and correctness are different.
-- Reproducibility and responsible use require new documentation practices.
+
+- Autoregressive language models generate by repeatedly modeling conditional next-token distributions.
+- Softmax converts logits into probabilities, while sampling strategies determine how those probabilities are used.
+- Pretraining can produce reusable foundation models from a token-prediction objective.
+- Prompting conditions behavior without ordinarily updating persistent model parameters.
+- In-context learning and fine-tuning are fundamentally different mechanisms.
+- RAG adds external evidence but introduces retrieval, ranking, context, and grounding failure modes.
+- Retrieval success does not guarantee factual generation.
+- Fine-tuning adapts model parameters; retrieval supplies information at inference time.
+- Fluency is not factuality.
+- Appropriate abstention can be a feature of a reliable system.
+- Agents combine language models with iterative action and tool use.
+- Greater action space requires stronger controls.
+- Generative-AI evaluation is multidimensional and application-specific.
+- LLM judges are useful evaluators but are not ground truth.
+- Research uses of generative AI require citation, code, methodological, and factual verification.
+- Human scholarly responsibility remains even when AI performs substantial work.
+- Evidence—not eloquence—should determine the authority granted to generated claims.

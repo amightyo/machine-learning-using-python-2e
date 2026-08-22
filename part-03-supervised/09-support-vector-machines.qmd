@@ -1,69 +1,906 @@
-# Support Vector Machines and Kernel Methods
+# Support Vector Machines: Margins, Geometry, and Kernels
 
 ## Learning Objectives
-- Explain margins and support vectors.
-- Describe hard- and soft-margin classification.
-- Explain the kernel trick conceptually.
-- Tune SVM hyperparameters using validation.
-- Recognize when feature scaling is essential.
+
+By the end of this chapter, you should be able to:
+
+- express a linear decision boundary as a hyperplane;
+- explain why the margin matters in support vector classification;
+- identify support vectors and explain their special role;
+- distinguish hard-margin and soft-margin classification;
+- interpret slack variables and the regularization parameter $C$;
+- explain hinge loss conceptually and mathematically;
+- explain why feature scaling is especially important for SVMs;
+- fit linear and nonlinear SVM classifiers with leakage-safe pipelines;
+- explain the kernel trick without explicitly constructing every transformed feature;
+- distinguish linear, polynomial, and radial basis function kernels;
+- interpret the role of $\gamma$ in an RBF kernel;
+- visualize nonlinear decision boundaries;
+- compare SVMs with logistic regression and tree-based models;
+- explain why probability estimates from an SVM require additional modeling;
+- apply SVM reasoning to classification and regression problems;
+- distinguish geometric separability from scientific explanation.
 
 ## Why This Matters
-Support vector machines illustrate how geometry, optimization, and nonlinear feature spaces combine to produce powerful predictive models.
 
-## Real-World Problem
-Can a nonlinear boundary separate complex patient or student profiles better than a linear classifier?
+Earlier chapters introduced two very different ways of learning.
 
-## Mathematical Foundations
-### Hyperplanes
-### Margins
-### Support Vectors
-### Maximum-Margin Optimization
+Linear and logistic regression estimate weighted combinations of features. Decision trees recursively partition the feature space.
+
+Support Vector Machines (SVMs) introduce a third perspective:
+
+> **Find a boundary that separates observations while maximizing geometric separation from the nearest cases.**
+
+The observations closest to the boundary become especially important. These are the **support vectors**.
+
+Even more strikingly, when a straight boundary is inadequate, kernels allow us to solve a nonlinear problem by working with similarities corresponding to a richer feature space.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**What if the difficulty of a classification problem depends not only on the algorithm, but on the geometry of the space in which we represent it?**
+:::
+
+## Classification as Geometry
+
+For two features, a linear decision boundary can be written
+
 $$
-\min_{w,b} \frac{1}{2}\lVert w\rVert^2
+w_1x_1+w_2x_2+b=0.
 $$
+
+More generally,
+
+$$
+w^\top x+b=0.
+$$
+
+The vector $w$ determines the orientation of the hyperplane, while $b$ shifts its location.
+
+A classifier may use the sign of
+
+$$
+f(x)=w^\top x+b
+$$
+
+to assign classes.
+
+For labels $y_i\in\{-1,+1\}$,
+
+$$
+\hat y_i=\operatorname{sign}(w^\top x_i+b).
+$$
+
+## Many Boundaries Can Separate the Same Data
+
+Suppose a dataset is linearly separable. There may be many hyperplanes that classify every training observation correctly.
+
+Which one should we choose?
+
+SVMs prefer a boundary with a **large margin**: a wide region between the classes and the decision boundary.
+
+For the canonical SVM scaling, the two supporting hyperplanes are
+
+$$
+w^\top x+b=1
+$$
+
+and
+
+$$
+w^\top x+b=-1.
+$$
+
+The distance between them is
+
+$$
+\frac{2}{\|w\|}.
+$$
+
+Maximizing the margin is therefore equivalent to minimizing $\|w\|$.
+
+## Hard-Margin SVM
+
+For perfectly separable data, the optimization can be written
+
+$$
+\min_{w,b}\frac{1}{2}\|w\|^2
+$$
+
 subject to
+
 $$
-y_i(w^Tx_i+b) \ge 1
+y_i(w^\top x_i+b)\ge 1
+\qquad
+\text{for all }i.
 $$
-### Soft Margins
-### Kernels
-### Linear, Polynomial, and RBF Kernels
 
-## Python Implementation
-### Scaling
-### SVC
-### Hyperparameter Tuning
-### Probability Estimates
+This demands perfect separation with the required margin.
 
-## Hands-On Practice
-Compare linear and RBF SVMs using cross-validation.
+Real datasets rarely behave so politely.
 
-## Common Mistakes
-- Failing to scale features.
-- Tuning on the test set.
-- Using complex kernels without justification.
-- Treating SVM scores as calibrated probabilities.
+## Support Vectors
+
+The observations nearest the separating boundary determine the margin.
+
+These observations are the **support vectors**.
+
+Moving a distant observation slightly may not change the fitted boundary at all. Moving a support vector may change it substantially.
+
+This is one of the most distinctive ideas in SVMs:
+
+> **Not every training observation plays an equal geometric role in defining the final boundary.**
+
+## Visual Experiment: Maximum-Margin Classification
+
+```{python}
+#| label: fig-linear-svm
+#| fig-cap: "A linear SVM chooses a separating hyperplane whose margin is determined by support vectors."
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.svm import SVC
+
+X_demo, y_demo = make_blobs(
+    n_samples=70,
+    centers=2,
+    cluster_std=1.0,
+    random_state=7
+)
+
+linear_svm = SVC(kernel="linear", C=1000)
+linear_svm.fit(X_demo, y_demo)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(
+    X_demo[:, 0],
+    X_demo[:, 1],
+    c=y_demo,
+    cmap="coolwarm",
+    edgecolors="k"
+)
+
+ax = plt.gca()
+xlim = ax.get_xlim()
+ylim = ax.get_ylim()
+
+xx = np.linspace(xlim[0], xlim[1], 200)
+yy = np.linspace(ylim[0], ylim[1], 200)
+YY, XX = np.meshgrid(yy, xx)
+grid = np.c_[XX.ravel(), YY.ravel()]
+Z = linear_svm.decision_function(grid).reshape(XX.shape)
+
+ax.contour(
+    XX, YY, Z,
+    levels=[-1, 0, 1],
+    linestyles=["--", "-", "--"]
+)
+
+ax.scatter(
+    linear_svm.support_vectors_[:, 0],
+    linear_svm.support_vectors_[:, 1],
+    s=180,
+    facecolors="none",
+    edgecolors="black",
+    linewidths=1.5,
+    label="Support vectors"
+)
+
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("Maximum-Margin Linear Classifier")
+plt.legend()
+plt.show()
+```
+
+## Soft Margins: Allowing Imperfection
+
+Perfect separation can be undesirable or impossible.
+
+Soft-margin SVM introduces slack variables $\xi_i\ge0$:
+
+$$
+y_i(w^\top x_i+b)\ge1-\xi_i.
+$$
+
+The optimization becomes
+
+$$
+\min_{w,b,\xi}
+\frac{1}{2}\|w\|^2
++
+C\sum_{i=1}^{n}\xi_i
+$$
+
+subject to the soft-margin constraints.
+
+The parameter $C$ controls the penalty for margin violations.
+
+### Intuition for $C$
+
+A **large $C$** penalizes violations strongly and pushes the model to fit training observations more aggressively.
+
+A **small $C$** allows more violations in exchange for a wider, more regularized margin.
+
+Thus,
+
+$$
+C\uparrow
+\Rightarrow
+\text{less tolerance for violations},
+$$
+
+while
+
+$$
+C\downarrow
+\Rightarrow
+\text{stronger regularization}.
+$$
+
+The exact effect depends on the data and kernel.
+
+## Hinge Loss
+
+Soft-margin classification can also be understood through hinge loss:
+
+$$
+L_{\text{hinge}}
+=
+\max(0,1-yf(x)).
+$$
+
+where
+
+$$
+f(x)=w^\top x+b.
+$$
+
+If an observation is correctly classified and sufficiently far beyond the margin, hinge loss is zero.
+
+Observations inside the margin or on the wrong side incur loss.
+
+```{python}
+#| label: fig-hinge-loss
+#| fig-cap: "Hinge loss becomes zero once the signed margin reaches one."
+
+margin = np.linspace(-2, 3, 400)
+hinge = np.maximum(0, 1 - margin)
+
+plt.figure(figsize=(8, 5))
+plt.plot(margin, hinge)
+plt.axvline(1, linestyle="--", alpha=0.6)
+plt.xlabel("Signed margin: y f(x)")
+plt.ylabel("Hinge loss")
+plt.title("Hinge Loss")
+plt.show()
+```
+
+## Why Scaling Matters
+
+SVM geometry depends on distances and inner products.
+
+Suppose one feature ranges from 0 to 1 and another from 0 to 100,000. Without scaling, the larger-scale feature can dominate the geometry.
+
+Standardization,
+
+$$
+z_j=
+\frac{x_j-\mu_{j,\text{train}}}
+{\sigma_{j,\text{train}}},
+$$
+
+places features on more comparable scales.
+
+As in earlier chapters, scaling parameters must be learned from training data.
+
+## Leakage-Safe SVM Pipeline
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.metrics import roc_auc_score
+
+data = load_breast_cancer(as_frame=True)
+X = data.data
+y = (data.target == 0).astype(int)  # malignant = 1
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.25,
+    random_state=42,
+    stratify=y
+)
+
+svm_linear = Pipeline([
+    ("scale", StandardScaler()),
+    ("svc", SVC(kernel="linear", C=1.0))
+])
+
+svm_linear.fit(X_train, y_train)
+
+decision_scores = svm_linear.decision_function(X_test)
+linear_auc = roc_auc_score(y_test, decision_scores)
+
+linear_auc
+```
+
+Notice that ROC-AUC can use the decision scores. We do not need calibrated probabilities merely to evaluate ranking.
+
+## The Decision Function Is Not a Probability
+
+An SVM naturally produces a signed decision score:
+
+$$
+f(x)=w^\top x+b
+$$
+
+for the linear case.
+
+The sign indicates the predicted side of the boundary, while magnitude relates to geometric position relative to the boundary under the model.
+
+But
+
+$$
+f(x)=2.1
+$$
+
+does **not** mean a 210% probability or a 0.21 probability.
+
+If probability estimates are requested from `SVC`, additional probability estimation is performed and adds computational cost [@sklearnSVM2026].
+
+::: {.callout-warning icon=false}
+## Score ≠ Probability
+
+Do not interpret `decision_function()` output as a probability.
+
+When calibrated probabilities are required for decisions, evaluate their calibration explicitly.
+:::
+
+## When a Straight Boundary Is Not Enough
+
+Consider a dataset in which one class forms an inner region and another surrounds it.
+
+No straight line can separate the classes well in the original two-dimensional space.
+
+```{python}
+#| label: fig-circles
+#| fig-cap: "Some classification problems are not linearly separable in their original representation."
+
+from sklearn.datasets import make_circles
+
+X_circle, y_circle = make_circles(
+    n_samples=400,
+    factor=0.35,
+    noise=0.08,
+    random_state=42
+)
+
+plt.figure(figsize=(7, 6))
+plt.scatter(
+    X_circle[:, 0],
+    X_circle[:, 1],
+    c=y_circle,
+    cmap="coolwarm",
+    edgecolors="k",
+    alpha=0.8
+)
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("A Nonlinear Classification Problem")
+plt.show()
+```
+
+One possibility is to construct nonlinear features explicitly.
+
+For example,
+
+$$
+z=x_1^2+x_2^2.
+$$
+
+In the transformed representation, the classes may become much easier to separate.
+
+This leads to one of the central ideas in machine learning: **representation can change difficulty**.
+
+## Feature Maps
+
+Suppose we map an observation through
+
+$$
+\phi(x).
+$$
+
+A linear classifier in the transformed feature space has the form
+
+$$
+f(x)=w^\top\phi(x)+b.
+$$
+
+The transformed space may be much higher-dimensional than the original one.
+
+Computing $\phi(x)$ explicitly can be expensive.
+
+## The Kernel Trick
+
+SVM optimization depends heavily on inner products between observations.
+
+A kernel function computes
+
+$$
+K(x_i,x_j)
+=
+\langle
+\phi(x_i),
+\phi(x_j)
+\rangle
+$$
+
+without requiring us to explicitly construct every transformed coordinate.
+
+This is the **kernel trick**.
+
+It allows a linear separator in a transformed feature space to correspond to a nonlinear boundary in the original feature space.
+
+::: {.callout-note icon=false}
+## The Important Idea
+
+The kernel does not magically make the data “nonlinear.”
+
+It changes the similarity representation used by the algorithm so that a linear solution in the induced feature space can represent nonlinear structure in the original space.
+:::
+
+## Common Kernels
+
+### Linear Kernel
+
+$$
+K(x,z)=x^\top z.
+$$
+
+Useful when a linear boundary is appropriate, especially in high-dimensional settings.
+
+### Polynomial Kernel
+
+$$
+K(x,z)
+=
+(\gamma x^\top z+r)^d.
+$$
+
+The degree $d$ controls polynomial complexity.
+
+### Radial Basis Function Kernel
+
+The RBF kernel is
+
+$$
+K(x,z)
+=
+\exp\left(-\gamma\|x-z\|^2\right).
+$$
+
+Nearby observations have similarity closer to 1; distant observations have similarity closer to 0.
+
+## Understanding $\gamma$
+
+For the RBF kernel, $\gamma$ controls how rapidly similarity decays with distance.
+
+A **small $\gamma$** gives each observation a broad region of influence and often produces smoother boundaries.
+
+A **large $\gamma$** gives each observation a narrow region of influence and can create highly flexible boundaries.
+
+Conceptually,
+
+$$
+\gamma\uparrow
+\Rightarrow
+\text{more local influence},
+$$
+
+while
+
+$$
+\gamma\downarrow
+\Rightarrow
+\text{broader influence}.
+$$
+
+The interaction between $C$ and $\gamma$ is crucial.
+
+## Visual Experiment: The Kernel Changes the Boundary
+
+```{python}
+#| label: fig-kernel-boundaries
+#| fig-cap: "A linear kernel cannot represent the circular structure, while an RBF kernel can create a nonlinear decision boundary."
+
+from sklearn.pipeline import make_pipeline
+
+linear_circle = make_pipeline(
+    StandardScaler(),
+    SVC(kernel="linear", C=1.0)
+)
+
+rbf_circle = make_pipeline(
+    StandardScaler(),
+    SVC(kernel="rbf", C=1.0, gamma="scale")
+)
+
+linear_circle.fit(X_circle, y_circle)
+rbf_circle.fit(X_circle, y_circle)
+
+x1_min, x1_max = X_circle[:, 0].min() - 0.4, X_circle[:, 0].max() + 0.4
+x2_min, x2_max = X_circle[:, 1].min() - 0.4, X_circle[:, 1].max() + 0.4
+
+xx, yy = np.meshgrid(
+    np.linspace(x1_min, x1_max, 350),
+    np.linspace(x2_min, x2_max, 350)
+)
+grid = np.c_[xx.ravel(), yy.ravel()]
+
+for fitted_model, title in [
+    (linear_circle, "Linear SVM"),
+    (rbf_circle, "RBF-Kernel SVM")
+]:
+    zz = fitted_model.decision_function(grid).reshape(xx.shape)
+
+    plt.figure(figsize=(7, 6))
+    plt.contourf(xx, yy, zz > 0, alpha=0.2, cmap="coolwarm")
+    plt.contour(xx, yy, zz, levels=[0], linewidths=2)
+    plt.scatter(
+        X_circle[:, 0],
+        X_circle[:, 1],
+        c=y_circle,
+        cmap="coolwarm",
+        edgecolors="k",
+        s=30
+    )
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
+    plt.title(title)
+    plt.show()
+```
+
+The RBF model does not prove that the underlying scientific mechanism is radial. It demonstrates that this similarity representation can fit the observed decision structure.
+
+## Visual Experiment: $C$ and $\gamma$
+
+```{python}
+#| label: fig-c-gamma
+#| fig-cap: "C and gamma jointly control the flexibility of an RBF SVM."
+
+settings = [
+    (0.1, 0.5),
+    (100, 0.5),
+    (1, 0.05),
+    (1, 20)
+]
+
+for C_value, gamma_value in settings:
+    m = make_pipeline(
+        StandardScaler(),
+        SVC(kernel="rbf", C=C_value, gamma=gamma_value)
+    )
+    m.fit(X_circle, y_circle)
+    zz = m.decision_function(grid).reshape(xx.shape)
+
+    plt.figure(figsize=(7, 6))
+    plt.contourf(xx, yy, zz > 0, alpha=0.2, cmap="coolwarm")
+    plt.contour(xx, yy, zz, levels=[0], linewidths=2)
+    plt.scatter(
+        X_circle[:, 0],
+        X_circle[:, 1],
+        c=y_circle,
+        cmap="coolwarm",
+        edgecolors="k",
+        s=28
+    )
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
+    plt.title(f"RBF SVM: C={C_value}, gamma={gamma_value}")
+    plt.show()
+```
+
+Do not choose these values by looking at final test performance repeatedly. Hyperparameter selection belongs inside the resampling workflow developed fully in Chapter 16.
+
+## Compare Logistic Regression, Linear SVM, and RBF SVM
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+models = {
+    "Logistic regression": Pipeline([
+        ("scale", StandardScaler()),
+        ("model", LogisticRegression(max_iter=2000))
+    ]),
+    "Linear SVM": Pipeline([
+        ("scale", StandardScaler()),
+        ("model", SVC(kernel="linear", C=1.0))
+    ]),
+    "RBF SVM": Pipeline([
+        ("scale", StandardScaler()),
+        ("model", SVC(kernel="rbf", C=1.0, gamma="scale"))
+    ])
+}
+
+comparison = {}
+
+for name, m in models.items():
+    m.fit(X_train, y_train)
+
+    if hasattr(m[-1], "predict_proba"):
+        score = m.predict_proba(X_test)[:, 1]
+    else:
+        score = m.decision_function(X_test)
+
+    comparison[name] = roc_auc_score(y_test, score)
+
+comparison
+```
+
+A model family should not be selected because it sounds more sophisticated. It should earn its complexity through appropriate validation and practical usefulness.
+
+## Computational Considerations
+
+Kernel SVMs can become computationally demanding as the number of observations grows because training depends on relationships among training cases.
+
+For large datasets, alternatives may include:
+
+- linear SVM formulations;
+- stochastic optimization;
+- approximate kernel methods;
+- tree ensembles;
+- neural networks;
+- other scalable estimators.
+
+The right model depends on dimensionality, sample size, sparsity, deployment requirements, and validation evidence.
+
+## SVM for Regression
+
+Support Vector Regression (SVR) extends margin-based reasoning to continuous outcomes.
+
+Instead of demanding that predictions match every observation exactly, SVR can use an $\epsilon$-insensitive region.
+
+Conceptually, errors within an $\epsilon$-tube are not penalized:
+
+$$
+L_\epsilon(y,f(x))
+=
+\max(0,|y-f(x)|-\epsilon).
+$$
+
+This produces a regression formulation focused on deviations outside a tolerance band.
+
+```{python}
+from sklearn.datasets import load_diabetes
+from sklearn.svm import SVR
+from sklearn.metrics import mean_squared_error
+
+diabetes = load_diabetes(as_frame=True)
+Xr = diabetes.data
+yr = diabetes.target
+
+Xr_train, Xr_test, yr_train, yr_test = train_test_split(
+    Xr, yr, test_size=0.25, random_state=42
+)
+
+svr = Pipeline([
+    ("scale", StandardScaler()),
+    ("model", SVR(kernel="rbf", C=10, epsilon=0.1))
+])
+
+svr.fit(Xr_train, yr_train)
+svr_pred = svr.predict(Xr_test)
+
+np.sqrt(mean_squared_error(yr_test, svr_pred))
+```
+
+The values above are demonstrations, not tuned recommendations.
+
+## Three Tracks
+
+### Health Track
+
+An SVM might classify a health outcome using many correlated measurements or high-dimensional features. Scaling, calibration, external validation, subgroup performance, and clinical action remain more important than the sophistication of the kernel.
+
+### Education Track
+
+An SVM may identify complex boundaries among academic, engagement, and institutional features. A nonlinear boundary can improve prediction without yielding an easily interpretable explanation of why a student experiences an outcome.
+
+### Open ML Benchmark Track
+
+Benchmark datasets allow controlled experiments with class overlap, nonlinear geometry, scaling, $C$, $\gamma$, kernels, and support-vector counts.
+
+This track is especially useful for understanding **algorithmic geometry**.
+
+## Beyond the Algorithm: Change the Representation, Change the Problem
+
+::: {.callout-note icon=false}
+## A Problem Can Look Different in Another Space
+
+Two classes may appear hopelessly intertwined in the variables we initially observe.
+
+A transformation may reveal structure.
+
+This raises a broader intellectual question:
+
+**When we say a problem is difficult, are we describing the phenomenon—or our current representation of it?**
+
+Machine learning repeatedly teaches us that representation matters.
+
+A useful coordinate system can make a complex pattern simple. A poor representation can make a simple phenomenon look complicated.
+
+But representation also changes interpretation.
+
+A high-dimensional kernel space may improve prediction while making the learned reasoning harder to explain in substantive terms.
+
+So the goal is not:
+
+> “Transform until the model wins.”
+
+The deeper goal is:
+
+> **Choose representations that improve useful generalization while remaining defensible for the scientific or operational purpose.**
+
+The geometry we choose influences the patterns the algorithm is capable of seeing.
+:::
+
+## AI Pair Programmer: The Kernel Made It True
+
+Ask an AI assistant to interpret an RBF SVM that substantially outperforms logistic regression.
+
+Give it this claim:
+
+> “Because the RBF SVM has higher test AUC, the true relationship between the predictors and outcome must be nonlinear and the RBF kernel has discovered the underlying mechanism.”
+
+Audit the response.
+
+A strong critique should distinguish:
+
+- predictive performance from mechanism;
+- nonlinear predictive structure from causal structure;
+- kernel representation from scientific theory;
+- one test sample from external validity;
+- hyperparameter selection from final evaluation;
+- discrimination from calibration.
+
+## Hands-On Lab: From Hyperplane to Kernel
+
+Using a classification dataset:
+
+1. complete the Problem Framing Canvas;
+2. complete the Feature Ledger;
+3. establish a baseline;
+4. fit logistic regression;
+5. fit a linear SVM inside a scaling pipeline;
+6. compare held-out discrimination;
+7. inspect the number of support vectors;
+8. fit an RBF SVM;
+9. examine several $C$ and $\gamma$ combinations using training/resampling data;
+10. compare linear and nonlinear decision behavior;
+11. evaluate whether probabilities are actually needed;
+12. if probabilities are used, inspect calibration;
+13. compare SVM results with the tree/forest results from Chapter 8;
+14. document computational cost;
+15. state what the model cannot establish scientifically.
+
+## Practitioner Track
+
+A practitioner should be able to build scaling-safe SVM pipelines, choose between linear and kernel formulations, understand $C$ and $\gamma$, evaluate decision scores, and recognize computational constraints.
+
+## Researcher Track
+
+A researcher should additionally justify the representation, separate predictive geometry from scientific mechanism, validate hyperparameters without test contamination, evaluate calibration when probabilities matter, and examine generalization across relevant populations.
+
+## Research Studio
+
+Design a study in which SVMs are plausible because of high dimensionality or nonlinear structure.
+
+Specify:
+
+1. research or operational problem;
+2. target and prediction time;
+3. baseline;
+4. feature representation;
+5. reason scaling matters;
+6. linear SVM;
+7. candidate kernel;
+8. $C$ and $\gamma$ search strategy;
+9. validation design;
+10. discrimination metric;
+11. calibration requirement;
+12. computational constraints;
+13. comparison model;
+14. interpretive limitations;
+15. potential scholarly contribution.
+
+## Professor's Challenge: The Perfect Kernel
+
+A research team tries 40 combinations of $C$ and $\gamma$ on the test set. They select the combination with the highest test AUC and report that AUC as final performance.
+
+They then write:
+
+> “The RBF SVM significantly outperformed logistic regression, proving that the true data-generating process is nonlinear. The most difficult observations are the support vectors, which represent the most scientifically important cases.”
+
+Critique:
+
+- test-set tuning;
+- optimistic performance estimation;
+- the meaning of “significantly”;
+- nonlinear prediction versus data-generating mechanism;
+- support vectors versus scientific importance;
+- scaling;
+- calibration;
+- uncertainty;
+- external validation;
+- computational reproducibility.
+
+Redesign the experiment using nested or otherwise properly separated model selection and final evaluation.
 
 ## Knowledge Check
-1. What is a support vector?
-2. What does the margin represent?
-3. Why is scaling important?
-4. What does the kernel trick accomplish?
 
-## Real-World Case Study
-### Nonlinear Classification
-Benchmark SVM against logistic regression and a tree-based method.
-
-## Professor's Challenge
-An RBF SVM wins cross-validation by a small margin but requires much more computation. Is the gain meaningful?
-
-## Research Extension
-Study performance, calibration, and computational tradeoffs across kernels.
+1. What is a hyperplane?
+2. What is the SVM margin?
+3. Why does minimizing $\|w\|$ relate to maximizing margin?
+4. What are support vectors?
+5. Why is hard-margin classification often unrealistic?
+6. What do slack variables represent?
+7. What does $C$ control?
+8. What is hinge loss?
+9. Why does feature scaling matter for SVMs?
+10. Why is an SVM decision score not automatically a probability?
+11. What is a feature map?
+12. What does a kernel compute?
+13. What is the kernel trick?
+14. How does the RBF kernel use distance?
+15. What does $\gamma$ control?
+16. Why can large $\gamma$ create highly flexible boundaries?
+17. What is SVR's $\epsilon$-insensitive idea?
+18. Why does better RBF performance not prove the true scientific mechanism is nonlinear?
 
 ## Reproducibility Check
-Document scaling, search spaces, validation folds, seeds, and final untouched test evaluation.
+
+Record:
+
+- problem specification;
+- feature ledger;
+- preprocessing/scaling pipeline;
+- split and resampling design;
+- baseline;
+- kernel;
+- $C$;
+- $\gamma$ where applicable;
+- polynomial degree where applicable;
+- class weighting if used;
+- probability-estimation method if used;
+- calibration assessment;
+- support-vector counts;
+- evaluation metrics;
+- computational environment;
+- random seeds where applicable;
+- package versions;
+- all model-selection boundaries;
+- code generating every result.
 
 ## Key Takeaways
-- SVMs connect geometry and optimization.
-- Kernel methods enable nonlinear decision boundaries.
-- Proper scaling and validation are essential.
+
+- SVMs frame classification as a geometric separation problem.
+- The maximum-margin principle favors boundaries separated from nearby observations.
+- Support vectors play a special role in defining the boundary.
+- Soft margins balance margin width against violations.
+- $C$ controls the strength of the penalty for violations.
+- Hinge loss penalizes observations that fail to achieve sufficient signed margin.
+- Scaling is essential because SVM geometry depends on feature representation.
+- Kernels allow nonlinear decision boundaries through implicit feature-space similarities.
+- $\gamma$ controls the locality of RBF influence.
+- Decision scores are not automatically probabilities.
+- Kernel SVMs can be computationally expensive on large datasets.
+- SVR extends margin-based reasoning to continuous outcomes.
+- Better nonlinear prediction does not establish a nonlinear causal mechanism.
+- Changing the representation can change the apparent difficulty of a problem.

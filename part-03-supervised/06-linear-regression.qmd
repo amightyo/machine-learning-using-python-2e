@@ -1,353 +1,624 @@
-# Linear Regression
+# Linear Regression: From Relationship to Prediction
 
 ## Learning Objectives
 
 By the end of this chapter, you should be able to:
 
-- Explain the role of linear regression in predictive modeling.
-- Distinguish simple linear regression from multiple linear regression.
-- Interpret regression coefficients in context.
-- Explain the assumptions underlying ordinary least squares regression.
-- Derive and interpret common regression evaluation metrics.
-- Build a reproducible regression workflow in Python.
-- Diagnose common modeling problems such as nonlinearity, multicollinearity, heteroscedasticity, and influential observations.
-- Compare predictive performance across alternative regression models.
-- Connect regression modeling to real-world research questions.
+- express simple and multiple linear regression mathematically;
+- interpret intercepts and coefficients in context;
+- explain ordinary least squares as loss minimization;
+- connect residuals, MSE, RMSE, MAE, and $R^2$ to model behavior;
+- fit regression models with scikit-learn and statsmodels;
+- distinguish predictive modeling from statistical inference;
+- diagnose nonlinearity, heteroscedasticity, influential observations, and multicollinearity;
+- explain why association coefficients should not automatically be interpreted causally;
+- use transformations and interactions when substantively justified;
+- explain the bias–variance motivation for regularization;
+- fit and compare OLS, Ridge, and Lasso within leakage-safe pipelines;
+- evaluate regression using held-out data and appropriate baselines.
 
 ## Why This Matters
 
-Linear regression is one of the foundational algorithms in statistics and machine learning. Although modern machine learning includes highly complex models, linear regression remains valuable because it is interpretable, computationally efficient, and useful as a benchmark against which more complex models can be evaluated.
+Linear regression is one of the most important models in statistics and machine learning. Its value is not that every relationship in the world is linear. Its value is that it gives us a transparent mathematical laboratory for understanding prediction, loss, coefficients, residuals, assumptions, generalization, and regularization.
 
-## Real-World Problem
+::: {.callout-important icon=false}
+## Central Question
 
-Suppose a public health researcher wants to predict systolic blood pressure using demographic, behavioral, and anthropometric characteristics.
+**How can a linear model transform observed relationships into useful predictions—and what must be true before we trust its coefficients or predictions?**
+:::
 
-Questions might include:
+## The Simple Linear Model
 
-- Which variables are most strongly associated with systolic blood pressure?
-- How accurately can blood pressure be predicted?
-- Does a more complex model substantially outperform linear regression?
-- Are prediction errors larger for some population subgroups than others?
-
-Throughout this chapter, we will use problems like this to connect mathematical foundations with machine learning practice.
-
-## Conceptual Foundations
-
-### What Is Regression?
-
-### Prediction Versus Explanation
-
-### Simple Linear Regression
-
-### Multiple Linear Regression
-
-## Mathematical Foundations
-
-### The Linear Regression Model
-
-For a single predictor:
+For one predictor,
 
 $$
-y_i = \beta_0 + \beta_1 x_i + \epsilon_i
+y_i=\beta_0+\beta_1x_i+\epsilon_i,
 $$
 
-For multiple predictors:
+where $\beta_0$ is the intercept, $\beta_1$ the slope, and $\epsilon_i$ the unexplained component.
+
+The fitted prediction is
 
 $$
-y_i =
-\beta_0
-+
-\beta_1x_{i1}
-+
-\beta_2x_{i2}
-+
-\cdots
-+
-\beta_px_{ip}
-+
-\epsilon_i
+\hat y_i=\hat\beta_0+\hat\beta_1x_i.
 $$
 
-where:
-
-- $y_i$ is the observed outcome,
-- $\beta_0$ is the intercept,
-- $\beta_j$ represents the effect associated with predictor $j$,
-- $x_{ij}$ is the value of predictor $j$ for observation $i$,
-- $\epsilon_i$ represents unexplained variation.
-
-### Ordinary Least Squares
-
-The ordinary least squares estimator minimizes the residual sum of squares:
+The residual is
 
 $$
-RSS =
-\sum_{i=1}^{n}
-(y_i-\hat{y}_i)^2
+e_i=y_i-\hat y_i.
 $$
 
-In matrix notation:
+A slope of 2.4 means that a one-unit increase in $x$ is associated with an expected 2.4-unit increase in the fitted outcome, holding nothing else constant in a one-predictor model. It does **not**, by itself, establish causation.
+
+## See the Line
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+rng = np.random.default_rng(42)
+x = rng.uniform(0, 10, 80)
+y = 4 + 2.5*x + rng.normal(0, 3, 80)
+
+X = x.reshape(-1, 1)
+model = LinearRegression().fit(X, y)
+y_hat = model.predict(X)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(x, y, alpha=0.7)
+order = np.argsort(x)
+plt.plot(x[order], y_hat[order])
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Observed Data and Fitted Linear Relationship")
+plt.show()
+
+model.intercept_, model.coef_[0]
+```
+
+## Ordinary Least Squares
+
+OLS chooses coefficients that minimize the residual sum of squares:
 
 $$
-\hat{\boldsymbol{\beta}}
+RSS(\beta_0,\beta_1)
 =
-(X^\top X)^{-1}X^\top y
-$$
-
-### Loss Functions
-
-#### Mean Squared Error
-
-$$
-MSE =
-\frac{1}{n}
 \sum_{i=1}^{n}
-(y_i-\hat{y}_i)^2
+\left(y_i-\beta_0-\beta_1x_i\right)^2.
 $$
 
-#### Root Mean Squared Error
+Equivalently, minimizing mean squared error gives
 
 $$
-RMSE =
+MSE=
+\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat y_i)^2.
+$$
+
+Squaring makes negative and positive residuals contribute positively and penalizes large errors strongly.
+
+### Why the Estimate Is a Minimizer
+
+For simple regression,
+
+$$
+\hat\beta_1=
+\frac{\sum_i(x_i-\bar x)(y_i-\bar y)}
+{\sum_i(x_i-\bar x)^2},
+$$
+
+and
+
+$$
+\hat\beta_0=\bar y-\hat\beta_1\bar x.
+$$
+
+This reveals a connection to Chapter 3: the slope depends on how $x$ and $y$ vary together relative to the variation in $x$.
+
+## Matrix Form
+
+For multiple predictors,
+
+$$
+y=X\beta+\epsilon.
+$$
+
+Under the usual full-rank conditions, the OLS solution can be written
+
+$$
+\hat\beta=(X^\top X)^{-1}X^\top y.
+$$
+
+This expression is conceptually useful, but numerical software generally does **not** need us to calculate an explicit matrix inverse. Stable numerical methods are preferred.
+
+## Multiple Linear Regression
+
+With $p$ predictors,
+
+$$
+y_i=
+\beta_0+
+\beta_1x_{i1}+
+\cdots+
+\beta_px_{ip}
++\epsilon_i.
+$$
+
+A coefficient $\beta_j$ represents the expected difference in the fitted outcome for a one-unit difference in $x_j$, **holding the other included predictors constant**, under the model specification.
+
+That interpretation depends on units, coding, interactions, transformations, and which variables are included.
+
+## A Complete Predictive Workflow
+
+```{python}
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+data = load_diabetes(as_frame=True)
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42
+)
+
+reg = LinearRegression()
+reg.fit(X_train, y_train)
+pred = reg.predict(X_test)
+
+mae = mean_absolute_error(y_test, pred)
+rmse = np.sqrt(mean_squared_error(y_test, pred))
+r2 = r2_score(y_test, pred)
+
+mae, rmse, r2
+```
+
+## Regression Metrics
+
+### Mean Absolute Error
+
+$$
+MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat y_i|.
+$$
+
+MAE remains in the target's units and weights absolute errors linearly.
+
+### Root Mean Squared Error
+
+$$
+RMSE=
 \sqrt{
-\frac{1}{n}
-\sum_{i=1}^{n}
-(y_i-\hat{y}_i)^2
-}
+\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat y_i)^2
+}.
 $$
 
-#### Mean Absolute Error
+RMSE is more sensitive to large errors.
 
-$$
-MAE =
-\frac{1}{n}
-\sum_{i=1}^{n}
-|y_i-\hat{y}_i|
-$$
-
-#### Coefficient of Determination
+### Coefficient of Determination
 
 $$
 R^2
 =
 1-
-\frac{
-\sum_{i=1}^{n}
-(y_i-\hat{y}_i)^2
-}{
-\sum_{i=1}^{n}
-(y_i-\bar{y})^2
-}
+\frac{\sum_i(y_i-\hat y_i)^2}
+{\sum_i(y_i-\bar y)^2}.
 $$
 
-## Assumptions and Statistical Foundations
+$R^2$ compares squared error with a mean-prediction reference. On unseen data it can be negative.
 
-### Linearity
+::: {.callout-note icon=false}
+## No Metric Is “The” Truth
 
-### Independence
+Metric choice expresses what kinds of error matter. A model can rank differently under MAE and RMSE.
+:::
 
-### Constant Variance
-
-### Normally Distributed Errors
-
-### Multicollinearity
-
-### Statistical Inference Versus Predictive Modeling
-
-## Python Implementation
-
-### Required Libraries
+## Always Compare With a Baseline
 
 ```{python}
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+from sklearn.dummy import DummyRegressor
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+baseline = DummyRegressor(strategy="mean")
+baseline.fit(X_train, y_train)
+baseline_pred = baseline.predict(X_test)
+
+np.sqrt(mean_squared_error(y_test, baseline_pred))
 ```
 
-### Loading the Data
+A regression model should demonstrate value relative to a meaningful simple strategy.
 
-### Exploratory Data Analysis
+## Residuals: What the Model Failed to Explain
 
-### Creating Training and Test Sets
+```{python}
+#| label: fig-residuals
+#| fig-cap: "Residuals plotted against fitted values can reveal systematic model failure."
 
-### Fitting the Model
+residuals = y_test - pred
 
-### Generating Predictions
+plt.figure(figsize=(8, 5))
+plt.scatter(pred, residuals, alpha=0.7)
+plt.axhline(0, linestyle="--")
+plt.xlabel("Fitted value")
+plt.ylabel("Residual")
+plt.title("Residuals vs. Fitted Values")
+plt.show()
+```
 
-## Understanding the Output
+A useful residual plot should not show obvious systematic structure. Patterns can suggest nonlinearity, changing variance, omitted structure, unusual observations, or other specification problems.
 
-### Interpreting the Intercept
+## Statistical Assumptions and Predictive Goals
 
-### Interpreting Regression Coefficients
+Classical linear-model inference commonly considers assumptions involving linearity, error structure, independence, constant conditional variance, and distributional assumptions for particular inferential procedures.
 
-### Interpreting Prediction Error
+Machine-learning prediction asks a related but different question:
 
-## Model Diagnostics
+> **Does the fitted model generalize well to unseen data drawn from the intended deployment population?**
 
-### Residual Analysis
+A violation may damage inference, prediction, or both—but not necessarily in identical ways.
 
-### Outliers and Influential Observations
+## Inference With statsmodels
 
-### Multicollinearity
+scikit-learn emphasizes predictive estimators. When coefficient inference is central, statsmodels provides statistical-model estimation and diagnostic tools [@statsmodelsOLS2026].
 
-### Data Leakage
+```{python}
+import statsmodels.api as sm
 
-## Improving the Model
+X_sm = sm.add_constant(X_train)
+ols = sm.OLS(y_train, X_sm).fit()
+print(ols.summary().tables[1])
+```
 
-### Polynomial Features
+Confidence intervals and p-values answer inferential questions under model assumptions. They do not substitute for out-of-sample predictive evaluation.
 
-### Ridge Regression
+::: {.callout-important icon=false}
+## Two Questions, Two Toolkits
 
-### Lasso Regression
+**Inference:** What do the estimated relationships suggest, with uncertainty, under stated assumptions?
 
-### Elastic Net
+**Prediction:** How accurately does the fitted function generalize to unseen observations?
 
-## Evaluating Predictive Performance
+A strong analysis may need one, the other, or both.
+:::
 
-### Training Error Versus Test Error
+## Nonlinearity
 
-### Cross-Validation
+A linear model can be linear in its parameters while using transformed features.
 
-### Benchmark Models
+For example,
+
+$$
+y=\beta_0+\beta_1x+\beta_2x^2+\epsilon.
+$$
+
+```{python}
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+
+poly_model = Pipeline([
+    ("poly", PolynomialFeatures(degree=2, include_bias=False)),
+    ("reg", LinearRegression())
+])
+```
+
+The purpose is not to add complexity automatically. It is to represent structure supported by the problem and validation evidence.
+
+## Interactions
+
+Suppose
+
+$$
+y=\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_1x_2+\epsilon.
+$$
+
+When $\beta_3\neq0$, the relationship involving $x_1$ depends on $x_2$.
+
+Interactions should have substantive meaning rather than being generated indiscriminately.
+
+## Multicollinearity
+
+When predictors contain overlapping information, coefficient estimates can become unstable.
+
+For two highly related predictors, the model may predict adequately while individual coefficients vary substantially across samples.
+
+This is an important distinction:
+
+> **Coefficient instability and predictive failure are not the same thing.**
+
+Multicollinearity motivates careful feature reasoning and, in predictive settings, regularization.
+
+## Ridge Regression
+
+Ridge adds an $L_2$ penalty:
+
+$$
+\hat\beta^{ridge}
+=
+\arg\min_\beta
+\left[
+\sum_{i=1}^{n}(y_i-\hat y_i)^2
++
+\lambda\sum_{j=1}^{p}\beta_j^2
+\right].
+$$
+
+As $\lambda$ increases, coefficients are increasingly shrunk toward zero.
+
+## Lasso Regression
+
+Lasso uses an $L_1$ penalty:
+
+$$
+\hat\beta^{lasso}
+=
+\arg\min_\beta
+\left[
+\sum_{i=1}^{n}(y_i-\hat y_i)^2
++
+\lambda\sum_{j=1}^{p}|\beta_j|
+\right].
+$$
+
+Lasso can shrink some coefficients exactly to zero.
+
+In scikit-learn, regularized linear estimators are available through Ridge, Lasso, ElasticNet, and related estimators [@sklearnLinearModels2026].
+
+## Why Scaling Matters for Regularization
+
+Penalty terms act directly on coefficient magnitudes. If features have very different scales, coefficients are not penalized comparably.
+
+Use a pipeline:
+
+```{python}
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Ridge
+
+ridge_model = Pipeline([
+    ("scale", StandardScaler()),
+    ("ridge", Ridge(alpha=1.0))
+])
+
+ridge_model.fit(X_train, y_train)
+ridge_pred = ridge_model.predict(X_test)
+np.sqrt(mean_squared_error(y_test, ridge_pred))
+```
+
+The scaler learns only from training data.
+
+## Bias–Variance Intuition
+
+A very flexible model may fit training data extremely well but respond strongly to sample-specific noise. A constrained model may introduce bias while reducing variance.
+
+Regularization deliberately trades some fitting freedom for stability.
+
+Conceptually,
+
+$$
+\text{Expected Prediction Error}
+\approx
+\text{Bias}^2+\text{Variance}+\text{Irreducible Error}.
+$$
+
+This decomposition is an intuition under particular conditions, not a universal observable partition for every fitted model.
+
+## Visual Experiment: Coefficient Shrinkage
+
+```{python}
+#| label: fig-ridge-path
+#| fig-cap: "Ridge regularization progressively shrinks standardized coefficients."
+
+from sklearn.linear_model import Ridge
+
+alphas = np.logspace(-3, 3, 60)
+coef_path = []
+
+X_scaled = StandardScaler().fit_transform(X_train)
+
+for alpha in alphas:
+    ridge = Ridge(alpha=alpha)
+    ridge.fit(X_scaled, y_train)
+    coef_path.append(ridge.coef_)
+
+coef_path = np.array(coef_path)
+
+plt.figure(figsize=(8, 5))
+for j in range(coef_path.shape[1]):
+    plt.plot(alphas, coef_path[:, j])
+plt.xscale("log")
+plt.xlabel("Ridge alpha")
+plt.ylabel("Coefficient")
+plt.title("Regularization Shrinks Coefficients")
+plt.show()
+```
+
+For formal model selection, the scaling and hyperparameter search must remain inside the resampling workflow. We will deepen this in Chapter 16.
+
+## Coefficients Are Not Automatically Causes
+
+Suppose a model finds
+
+$$
+\hat y=
+12+
+3.1(\text{study hours})
++
+5.2(\text{attendance}).
+$$
+
+It is tempting to say that increasing attendance by one unit **causes** a 5.2-unit outcome increase. Regression alone does not justify that conclusion.
+
+Confounding, selection, measurement, reverse causation, and model specification all matter.
+
+## Three Tracks
+
+### Health Track
+
+A regression problem might predict a continuous biomarker or physiological measurement. Researchers must distinguish predictive usefulness from etiological interpretation and consider whether survey design or complex sampling affects inferential goals.
+
+### Education Track
+
+Institution-level regression might predict future retention or completion rates from prior-year characteristics. Temporal alignment is essential, and rates may have differing denominator reliability.
+
+### Open ML Benchmark Track
+
+Benchmark regression datasets are useful for comparing OLS, Ridge, Lasso, nonlinear feature expansion, and sensitivity to scaling under controlled conditions.
+
+## Beyond the Algorithm: Is Simplicity a Limitation or a Strength?
+
+::: {.callout-note icon=false}
+## The Intellectual Value of a Simple Model
+
+A more complex model can be more accurate. It can also be harder to inspect, explain, challenge, and learn from.
+
+Linear regression forces a strong claim: the outcome can be approximated through a weighted combination of represented features. That claim will often be incomplete. Its simplicity, however, makes assumptions visible.
+
+A simple model can serve as:
+
+- a baseline;
+- a diagnostic instrument;
+- a scientific summary;
+- a communication tool;
+- a test of whether complexity is actually necessary.
+
+The relevant question is therefore not:
+
+**“Is the model simple?”**
+
+but:
+
+**“Is the model sufficiently accurate, appropriately specified, and useful for the purpose?”**
+
+Complexity should earn its place through evidence.
+:::
+
+## AI Pair Programmer
+
+Ask an AI assistant to interpret coefficients from a fitted regression model.
+
+Audit whether it:
+
+- respects units;
+- conditions interpretations on other included predictors;
+- distinguishes association from causation;
+- notices transformations and interactions;
+- treats standardized coefficients correctly;
+- confuses statistical significance with practical importance;
+- reports training fit as evidence of generalization.
+
+Then rewrite the interpretation.
+
+## Hands-On Lab: OLS to Regularization
+
+Using a regression dataset:
+
+1. complete the Chapter 4 Problem Framing Canvas;
+2. complete the Chapter 5 Feature Ledger;
+3. establish a `DummyRegressor` baseline;
+4. fit OLS in a leakage-safe workflow;
+5. calculate MAE, RMSE, and $R^2$ on held-out data;
+6. inspect residuals;
+7. fit Ridge and Lasso with scaling inside pipelines;
+8. compare predictive performance;
+9. compare coefficient behavior;
+10. identify at least one possible nonlinearity or interaction;
+11. distinguish predictive findings from inferential or causal claims;
+12. document reproducibility decisions.
 
 ## Practitioner Track
 
-Focus on:
-
-- fitting the model,
-- generating predictions,
-- evaluating test-set performance,
-- building reproducible pipelines,
-- comparing linear regression with stronger predictive models.
+A practitioner should be able to fit, evaluate, diagnose, regularize, and communicate regression models while maintaining leakage-safe workflows.
 
 ## Researcher Track
 
-Focus additionally on:
+A researcher should additionally distinguish predictive from inferential aims, justify model specification, quantify uncertainty when appropriate, diagnose assumptions, and avoid causal overstatement.
 
-- assumptions,
-- sampling,
-- coefficient uncertainty,
-- variable selection,
-- model specification,
-- subgroup performance,
-- interpretation of findings,
-- reproducibility.
+## Research Studio
 
-## Hands-On Practice
+Choose a health or education continuous outcome suitable for a public-data study.
 
-### Practice 1 — Build a Baseline Model
+Write:
 
-Fit a linear regression model using a real dataset and report:
+1. research problem and contribution;
+2. unit and target;
+3. temporal framing;
+4. candidate predictors with theory;
+5. baseline;
+6. OLS specification;
+7. candidate interaction/nonlinearity;
+8. regularized alternative;
+9. validation strategy;
+10. inferential versus predictive claims;
+11. possible conference/journal contribution;
+12. one claim the design cannot support.
 
-- MAE,
-- RMSE,
-- $R^2$,
-- residual behavior,
-- the strongest predictors.
+## Professor's Challenge: The Significant Model
 
-### Practice 2 — Compare Models
+A paper reports:
 
-Compare:
+> “Our regression model explains student success. All predictors with $p<.05$ are important causes. The model has $R^2=.62$, demonstrating strong predictive accuracy.”
 
-1. ordinary least squares,
-2. Ridge regression,
-3. Lasso regression.
+No held-out evaluation is reported. Predictors were selected after examining the full dataset. Several are highly correlated. Residual diagnostics are absent. One predictor is measured after the outcome period begins.
 
-Use cross-validation to determine whether regularization improves predictive performance.
+Critique:
 
-## Common Mistakes
+- “explains”;
+- causal language;
+- significance versus importance;
+- $R^2$ versus predictive performance;
+- feature selection leakage;
+- multicollinearity;
+- temporal leakage;
+- missing diagnostics;
+- absence of a baseline and out-of-sample evaluation.
 
-- Evaluating the model only on training data.
-- Interpreting association as causation.
-- Ignoring nonlinearity.
-- Performing preprocessing before separating training and test data.
-- Using $R^2$ as the only evaluation metric.
-- Removing outliers without substantive justification.
-- Selecting predictors solely because they are statistically significant.
+Redesign the analysis for both an **inferential objective** and a **predictive objective**.
 
 ## Knowledge Check
 
-1. What does the slope coefficient represent in a simple linear regression model?
-2. Why can training-set performance provide an overly optimistic assessment of a model?
-3. What is the difference between RMSE and MAE?
-4. What does an $R^2$ value of 0.70 mean?
-5. Why can multicollinearity make coefficient interpretation difficult?
-6. Why does strong predictive performance not establish causation?
-
-## Real-World Case Study
-
-### Predicting a Health Outcome
-
-Develop a regression model using a publicly available health dataset.
-
-Your analysis should include:
-
-1. a clearly stated prediction problem,
-2. data preparation,
-3. exploratory analysis,
-4. model development,
-5. test-set evaluation,
-6. interpretation,
-7. diagnostics,
-8. reproducibility documentation.
-
-## Professor's Challenge
-
-A linear regression model produces:
-
-$$
-R^2 = 0.81
-$$
-
-on the training data but:
-
-$$
-R^2 = 0.54
-$$
-
-on the test data.
-
-A colleague claims:
-
-> “The model explains 81% of the variation, so it is an excellent model.”
-
-Critically evaluate this claim.
-
-What additional evidence would you require before recommending the model for decision-making?
-
-## Research Extension
-
-Transform the chapter case study into a potential research project.
-
-Consider:
-
-- What is the substantive research gap?
-- What population is being studied?
-- Which predictors are theoretically justified?
-- What alternative algorithms should be benchmarked?
-- How will predictive uncertainty be evaluated?
-- Will model performance differ across demographic groups?
-- What contribution could make the study publishable?
+1. What does a regression slope represent?
+2. What does OLS minimize?
+3. How are covariance and the simple-regression slope related?
+4. Why can RMSE and MAE rank models differently?
+5. What does a negative test-set $R^2$ imply?
+6. Why inspect residuals?
+7. How do inference and prediction differ?
+8. Why can multicollinearity destabilize coefficients?
+9. What does Ridge penalize?
+10. What does Lasso penalize?
+11. Why scale before regularized regression?
+12. What is the bias–variance tradeoff?
+13. Why is a coefficient not automatically causal?
+14. When might a simple linear model be preferable to a more complex model?
 
 ## Reproducibility Check
 
-Before completing this chapter, verify that:
+Record:
 
-- the analysis runs from beginning to end,
-- random seeds are documented,
-- data sources are cited,
-- preprocessing occurs inside the modeling workflow where appropriate,
-- the test set has not influenced model development,
-- software dependencies are documented.
+- problem specification;
+- feature ledger;
+- split/validation design;
+- baseline;
+- preprocessing pipeline;
+- transformations and interactions;
+- regression estimator and parameters;
+- regularization hyperparameters;
+- metrics;
+- residual diagnostics;
+- inferential procedures if used;
+- random seeds;
+- package versions;
+- code generating every reported result.
 
 ## Key Takeaways
 
-- Linear regression remains an important baseline machine learning algorithm.
-- Prediction and statistical inference are related but distinct objectives.
-- Model evaluation should focus on unseen data.
-- Mathematical understanding helps identify when a model is inappropriate.
-- Reproducible workflows are essential for credible machine learning research.
+- Linear regression is both a predictive model and a foundation for statistical reasoning.
+- OLS minimizes squared residual error.
+- Multiple-regression coefficients are conditional on the model specification.
+- MAE, RMSE, and $R^2$ answer different performance questions.
+- Residuals reveal structure the model failed to capture.
+- Statistical inference and out-of-sample prediction are related but distinct goals.
+- Multicollinearity can destabilize coefficients without necessarily destroying prediction.
+- Ridge and Lasso constrain coefficient magnitude to improve stability/generalization.
+- Scaling matters when regularization acts on coefficient magnitudes.
+- Regression coefficients do not establish causation.
+- Simple models remain valuable when their assumptions, performance, and purpose are appropriate.

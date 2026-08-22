@@ -1,79 +1,435 @@
-# Classification and Logistic Regression
+# Classification: From Probability to Decision
 
 ## Learning Objectives
-- Formulate binary and multiclass classification problems.
-- Explain logistic regression mathematically.
-- Interpret predicted probabilities and odds.
-- Evaluate classifiers using threshold-dependent and threshold-independent metrics.
-- Select decision thresholds based on real-world costs.
+
+By the end of this chapter, you should be able to:
+
+- distinguish probability estimation from classification decisions;
+- explain why ordinary linear regression is generally unsuitable for binary outcomes;
+- derive the logistic function from log-odds;
+- interpret logistic-regression coefficients and odds ratios;
+- construct and interpret confusion matrices;
+- calculate accuracy, sensitivity, specificity, precision, and F1;
+- explain how prevalence affects metric interpretation;
+- use ROC and precision-recall curves;
+- distinguish discrimination from calibration;
+- explain how thresholds encode operational tradeoffs;
+- compare classifiers using metrics aligned with intended use;
+- extend classification reasoning to multiclass problems.
 
 ## Why This Matters
-Classification models frequently influence high-stakes decisions. Accuracy alone rarely captures whether those decisions are useful or safe.
 
-## Real-World Problem
-A health screening model identifies individuals at elevated risk. Which is more consequential: a false positive or a false negative?
+Classification is often described as predicting categories. But many classifiers first estimate
 
-## Conceptual Foundations
-### Classification Problems
-### Probabilities, Classes, and Thresholds
-### Logistic Regression
-
-## Mathematical Foundations
-### The Logistic Function
 $$
-P(Y=1|X)=\frac{1}{1+e^{-z}}
+X\longrightarrow\hat P(Y=k\mid X).
 $$
-### Log-Odds
+
+A decision rule then converts model output into a category or action.
+
+::: {.callout-important icon=false}
+## Central Question
+**How do we move from estimating the probability of an outcome to making a defensible classification decision?**
+:::
+
+## Why Not Ordinary Linear Regression?
+
+For $Y\in\{0,1\}$, a linear model can produce fitted values outside $[0,1]$. Logistic regression instead models log-odds.
+
+Let $p=P(Y=1\mid X=x)$. The odds are
+
 $$
-\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1x_1+\cdots+\beta_px_p
+\frac{p}{1-p},
 $$
-### Maximum Likelihood and Log Loss
 
-## Evaluation
-### Confusion Matrix
-### Accuracy
-### Sensitivity and Specificity
-### Precision and Recall
-### F1 Score
-### ROC and AUC
-### Precision-Recall Curves
-### Calibration
-### Threshold Selection
+and the logit is
 
-## Python Implementation
-### LogisticRegression
-### Predicted Probabilities
-### Classification Metrics
+$$
+\log\left(\frac{p}{1-p}\right).
+$$
 
-## Hands-On Practice
-Build and evaluate a binary classifier using a public health dataset.
+Logistic regression assumes
 
-## Common Mistakes
-- Using accuracy with severe class imbalance.
-- Treating 0.50 as an automatically optimal threshold.
-- Interpreting predicted probabilities as causal effects.
-- Evaluating on data used for model selection.
+$$
+\log\left(\frac{p}{1-p}\right)=
+\beta_0+\beta_1x_1+\cdots+\beta_px_p.
+$$
+
+Therefore
+
+$$
+p=\frac{1}{1+\exp[-(\beta_0+\beta_1x_1+\cdots+\beta_px_p)]}.
+$$
+
+## Visual Intuition: Logistic Function
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+z=np.linspace(-8,8,400)
+p=1/(1+np.exp(-z))
+plt.figure(figsize=(8,5))
+plt.plot(z,p)
+plt.axhline(.5,linestyle="--",alpha=.6)
+plt.axvline(0,linestyle="--",alpha=.6)
+plt.xlabel("Linear score")
+plt.ylabel("Probability")
+plt.title("Logistic Transformation")
+plt.show()
+```
+
+## Coefficients and Odds Ratios
+
+$\beta_j$ is a conditional change in log-odds. Exponentiation gives
+
+$$
+OR_j=e^{\beta_j}.
+$$
+
+::: {.callout-warning icon=false}
+## Odds Ratio ≠ Probability Difference
+An odds ratio of 1.49 does not mean probability rises by 49 percentage points.
+:::
+
+## Leakage-Safe Logistic Regression
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+data=load_breast_cancer(as_frame=True)
+X=data.data
+# Recode malignant as positive class 1.
+y=(data.target==0).astype(int)
+
+X_train,X_test,y_train,y_test=train_test_split(
+    X,y,test_size=.25,random_state=42,stratify=y
+)
+
+model=Pipeline([
+    ("scale",StandardScaler()),
+    ("classifier",LogisticRegression(max_iter=2000))
+])
+model.fit(X_train,y_train)
+prob=model.predict_proba(X_test)[:,1]
+pred=(prob>=.50).astype(int)
+```
+
+## Probability Is Not Yet a Decision
+
+$$
+\hat y_i=
+\begin{cases}
+1,&\hat p_i\ge\tau\\
+0,&\hat p_i<\tau.
+\end{cases}
+$$
+
+Thus,
+
+$$
+\boxed{\text{Features}}
+\rightarrow
+\boxed{\text{Probability}}
+\rightarrow
+\boxed{\text{Threshold}}
+\rightarrow
+\boxed{\text{Decision}}
+\rightarrow
+\boxed{\text{Consequence}}.
+$$
+
+## Confusion Matrix
+
+| | Actual Positive | Actual Negative |
+|---|---:|---:|
+| Predicted Positive | TP | FP |
+| Predicted Negative | FN | TN |
+
+```{python}
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+cm=confusion_matrix(y_test,pred)
+ConfusionMatrixDisplay(cm,display_labels=["Benign","Malignant"]).plot()
+plt.title("Confusion Matrix at Threshold = 0.50")
+plt.show()
+```
+
+## Core Metrics
+
+$$
+Accuracy=\frac{TP+TN}{TP+TN+FP+FN}
+$$
+
+$$
+Sensitivity=\frac{TP}{TP+FN}
+$$
+
+$$
+Specificity=\frac{TN}{TN+FP}
+$$
+
+$$
+Precision=\frac{TP}{TP+FP}
+$$
+
+$$
+F_1=2\frac{Precision\times Recall}{Precision+Recall}.
+$$
+
+```{python}
+from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score
+tn,fp,fn,tp=cm.ravel()
+{
+ "accuracy":accuracy_score(y_test,pred),
+ "sensitivity":recall_score(y_test,pred),
+ "specificity":tn/(tn+fp),
+ "precision":precision_score(y_test,pred),
+ "f1":f1_score(y_test,pred)
+}
+```
+
+## Prevalence Changes Meaning
+
+A classifier predicting everyone negative achieves 99% accuracy when only 1% of observations are positive.
+
+::: {.callout-note icon=false}
+## Metric Meaning Is Contextual
+A metric is useful when it answers a question relevant to the problem—not merely because its value is large.
+:::
+
+## Thresholds Create Tradeoffs
+
+```{python}
+threshold_grid=np.linspace(.01,.99,99)
+sens=[]; spec=[]
+for t in threshold_grid:
+    pr=(prob>=t).astype(int)
+    tn,fp,fn,tp=confusion_matrix(y_test,pr).ravel()
+    sens.append(tp/(tp+fn))
+    spec.append(tn/(tn+fp))
+
+plt.figure(figsize=(8,5))
+plt.plot(threshold_grid,sens,label="Sensitivity")
+plt.plot(threshold_grid,spec,label="Specificity")
+plt.axvline(.5,linestyle="--",alpha=.6)
+plt.xlabel("Threshold")
+plt.ylabel("Metric value")
+plt.title("A Threshold Encodes a Tradeoff")
+plt.legend()
+plt.show()
+```
+
+There is no universally correct threshold.
+
+## ROC Analysis
+
+```{python}
+from sklearn.metrics import roc_curve,roc_auc_score
+fpr,tpr,_=roc_curve(y_test,prob)
+auc=roc_auc_score(y_test,prob)
+
+plt.figure(figsize=(7,5))
+plt.plot(fpr,tpr,label=f"ROC-AUC = {auc:.3f}")
+plt.plot([0,1],[0,1],linestyle="--")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend()
+plt.show()
+```
+
+ROC-AUC summarizes discrimination/ranking across thresholds. It does not establish calibration or the quality of a particular decision threshold.
+
+## Precision-Recall Analysis
+
+```{python}
+from sklearn.metrics import precision_recall_curve,average_precision_score
+precision_vals,recall_vals,_=precision_recall_curve(y_test,prob)
+ap=average_precision_score(y_test,prob)
+
+plt.figure(figsize=(7,5))
+plt.plot(recall_vals,precision_vals,label=f"Average Precision = {ap:.3f}")
+plt.xlabel("Recall")
+plt.ylabel("Precision")
+plt.title("Precision-Recall Curve")
+plt.legend()
+plt.show()
+```
+
+Precision-recall analysis is often especially informative when the positive class is uncommon.
+
+## Discrimination Is Not Calibration
+
+Discrimination concerns ranking. Calibration concerns whether predicted probabilities correspond to observed frequencies.
+
+```{python}
+from sklearn.calibration import calibration_curve
+from sklearn.metrics import brier_score_loss
+
+frac,mean_pred=calibration_curve(y_test,prob,n_bins=6,strategy="quantile")
+brier=brier_score_loss(y_test,prob)
+
+plt.figure(figsize=(7,5))
+plt.plot(mean_pred,frac,marker="o",label=f"Model (Brier={brier:.3f})")
+plt.plot([0,1],[0,1],linestyle="--",label="Perfect calibration")
+plt.xlabel("Mean predicted probability")
+plt.ylabel("Observed positive fraction")
+plt.title("Calibration Plot")
+plt.legend()
+plt.show()
+```
+
+A model can discriminate well and still produce poorly calibrated probabilities.
+
+## Threshold Selection as Decision Analysis
+
+A simplified cost function is
+
+$$
+C(\tau)=C_{FN}FN(\tau)+C_{FP}FP(\tau).
+$$
+
+```{python}
+cost_fn=5
+cost_fp=1
+costs=[]
+for t in threshold_grid:
+    pr=(prob>=t).astype(int)
+    tn,fp,fn,tp=confusion_matrix(y_test,pr).ravel()
+    costs.append(cost_fn*fn+cost_fp*fp)
+
+best_i=int(np.argmin(costs))
+best_t=threshold_grid[best_i]
+
+plt.figure(figsize=(8,5))
+plt.plot(threshold_grid,costs)
+plt.axvline(best_t,linestyle="--",label=f"Illustrative minimum ≈ {best_t:.2f}")
+plt.xlabel("Threshold")
+plt.ylabel("Illustrative decision cost")
+plt.title("Threshold Choice Depends on Consequences")
+plt.legend()
+plt.show()
+```
+
+The cost values are illustrative. Real consequences require substantive justification.
+
+## Class Imbalance
+
+Responses may include appropriate metrics, threshold adjustment, class weighting, resampling, additional data collection, or reconsidering the target.
+
+::: {.callout-warning icon=false}
+## Never Resample Before the Split
+Oversampling or synthetic sampling must remain inside the training/resampling workflow.
+:::
+
+## Multiclass Classification
+
+For $Y\in\{1,\ldots,K\}$, models estimate probabilities across classes. Evaluation can use per-class metrics, confusion matrices, and macro or weighted averages.
+
+Macro averaging gives each class equal weight. Weighted averaging weights classes by support.
+
+## Three Tracks
+
+### Health Track
+Consider positive-outcome definition, prevalence, follow-up action, error consequences, calibration, subgroup performance, and the distinction between risk identification and treatment recommendation.
+
+### Education Track
+Consider prediction timing, support following a flag, stigma or burden from false positives, missed support from false negatives, intervention capacity, and subgroup performance.
+
+### Open ML Benchmark Track
+Manipulate scaling, prevalence, overlap, and thresholds to understand classifier behavior without equating benchmark performance with real-world usefulness.
+
+## Beyond the Algorithm: A Probability Is Not a Decision
+
+::: {.callout-note icon=false}
+## The Space Between Prediction and Action
+
+A predicted risk of 0.63 contains no instruction. It does not itself say to label, contact, restrict, intervene, or ignore.
+
+Choosing $\tau=0.50$ is also not neutral: it determines who experiences the consequences of the decision system.
+
+$$
+\boxed{\text{What the model estimates}}
+\neq
+\boxed{\text{What the organization decides}}.
+$$
+
+Ask:
+
+**What decision rule transforms this probability into action, who chose that rule, and who bears the cost when it is wrong?**
+:::
+
+## AI Pair Programmer
+
+Ask AI to choose the “best” classifier from accuracy alone. Audit whether it asks about prevalence, intended use, error costs, threshold, calibration, capacity, subgroup performance, and uncertainty.
+
+## Hands-On Lab: Probability to Decision
+
+1. Complete the Problem Framing Canvas.
+2. Complete the Feature Ledger.
+3. Establish a `DummyClassifier` baseline.
+4. Build a leakage-safe logistic-regression pipeline.
+5. Obtain predicted probabilities.
+6. Evaluate thresholds .20, .50, and .80.
+7. Calculate confusion matrices and core metrics.
+8. Plot ROC and precision-recall curves.
+9. Examine calibration.
+10. Define an illustrative asymmetric cost structure.
+11. Identify a candidate operational threshold.
+12. Explain why it remains provisional.
+13. Compare one additional classifier.
+14. Distinguish ranking, probability, and decision quality.
+15. Document unsupported causal claims.
+
+## Research Studio
+
+Design a health, education, or benchmark classification study. Specify target, positive class, timing, expected prevalence, predictors, leakage risks, baseline, discrimination metrics, calibration, threshold strategy, asymmetric consequences, validation, scholarly contribution, and unsupported conclusions.
+
+## Professor's Challenge: Which Model Is Better?
+
+Model A has higher accuracy and ROC-AUC but lower sensitivity and poor high-risk calibration. Model B has lower accuracy/AUC but substantially higher sensitivity and good calibration. The outcome is uncommon and false negatives are believed more consequential than additional follow-up.
+
+Critique any claim that Model A is automatically superior. Address prevalence, discrimination, calibration, sensitivity, specificity, precision, threshold dependence, error consequences, metric uncertainty, threshold-selection leakage, external validation, subgroup performance, capacity, and deployment readiness.
 
 ## Knowledge Check
-1. What does logistic regression model?
-2. How do sensitivity and specificity differ?
-3. When is PR-AUC especially useful?
-4. Why does threshold choice depend on context?
 
-## Real-World Case Study
-### Health Risk Classification
-Compare logistic regression with a nonlinear classifier and assess discrimination and calibration.
-
-## Professor's Challenge
-Model A has higher ROC-AUC, but Model B is better calibrated and identifies more true cases at the operational threshold. Which model should be deployed?
-
-## Research Extension
-Investigate subgroup performance or temporal validation as a publishable extension.
+1. Why is linear regression unsuitable for binary probability modeling?
+2. What are odds?
+3. What does the logit do?
+4. How is a logistic coefficient interpreted?
+5. Why is an odds ratio not a probability difference?
+6. What converts probability into class?
+7. What does sensitivity measure?
+8. What does precision measure?
+9. Why can accuracy mislead for rare outcomes?
+10. What does ROC-AUC summarize?
+11. Why use precision-recall analysis?
+12. How do discrimination and calibration differ?
+13. Why is .50 not automatically correct?
+14. Why must resampling stay inside training?
+15. What does macro averaging emphasize?
+16. Why is a probability not a decision?
 
 ## Reproducibility Check
-Document class definitions, prevalence, splits, thresholds, metrics, and calibration methods.
+
+Record positive-class definition, prevalence, feature ledger, preprocessing, validation design, baseline, classifier, probabilities, threshold-selection procedure, confusion matrices, discrimination metrics, calibration, cost assumptions, subgroup analyses, seeds, package versions, and all code.
+
+Never select a threshold on the final test set and report performance on that same set as if the threshold were fixed in advance.
 
 ## Key Takeaways
-- Classification is fundamentally about uncertainty and decisions.
-- No single metric is sufficient for every classification problem.
-- Thresholds should reflect consequences, not convenience.
+
+- Classification often begins with probability estimation.
+- Logistic regression models log-odds as a linear function.
+- Odds ratios and probability differences differ.
+- Thresholds transform probabilities into classifications.
+- Confusion matrices reveal error types.
+- Accuracy can mislead under imbalance.
+- ROC and precision-recall analysis reveal different aspects of ranking.
+- Discrimination and calibration are distinct.
+- Thresholds should reflect intended use and consequences.
+- A highest-AUC model is not automatically the best decision system.
+- A predicted probability does not contain an instruction for action.

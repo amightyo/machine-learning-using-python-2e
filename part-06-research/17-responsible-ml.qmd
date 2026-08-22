@@ -1,76 +1,1277 @@
-# Explainable, Fair, and Responsible Machine Learning
+# Responsible Machine Learning: From Prediction to Consequence
+
+```{python}
+#| label: chapter-17-setup
+#| include: false
+
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+```
 
 ## Learning Objectives
-- Distinguish global and local explanations.
-- Apply feature-importance and explanation methods cautiously.
-- Evaluate calibration and subgroup performance.
-- Explain common fairness criteria and their tradeoffs.
-- Conduct a model-risk assessment appropriate to the application.
 
-## Why This Matters
-A model can be accurate overall while failing important populations, providing misleading explanations, or being inappropriate for the decision in which it is embedded.
+By the end of this chapter, you should be able to:
 
-## Real-World Problem
-A health model performs well overall but systematically underpredicts risk for one subgroup. Should it be deployed?
+- distinguish predictive performance from responsible deployment;
+- identify stakeholders, benefits, harms, and power relationships in an ML system;
+- explain why fairness is not reducible to a single metric;
+- calculate and interpret demographic parity, equal opportunity, equalized odds, and predictive parity;
+- explain why fairness criteria can conflict;
+- distinguish group fairness from individual and procedural fairness;
+- recognize measurement, representation, historical, aggregation, and deployment bias;
+- distinguish model explanation from causal explanation;
+- use feature importance and local explanations cautiously;
+- explain privacy risks in machine-learning pipelines;
+- distinguish privacy, security, and confidentiality;
+- explain differential privacy conceptually;
+- recognize model and data governance requirements across the ML lifecycle;
+- construct a model card and algorithmic impact assessment;
+- define meaningful human oversight rather than symbolic human presence;
+- recognize automation bias and selective reliance;
+- identify feedback loops created by deployed predictions;
+- evaluate generative-AI components within broader ML systems;
+- design responsible ML studies in health, education, and open application domains;
+- articulate when a technically strong model should not be deployed.
 
-## Explainability
-### Model Transparency
-### Global Versus Local Explanations
-### Permutation Importance
-### Partial Dependence
-### SHAP
-### Limits of Post-Hoc Explanation
+## Can We Build It? Should We Use It?
 
-## Calibration and Reliability
-### Predicted Probability Versus Observed Frequency
-### Calibration Curves
-### Brier Score
+Machine learning often begins with a technical question:
 
-## Fairness
-### Subgroup Performance
-### Demographic Parity
-### Equal Opportunity
-### Equalized Odds
-### Calibration Across Groups
-### Fairness Tradeoffs
+> Can we predict the outcome?
 
-## Responsible ML
-### Intended Use
-### Misuse
-### Human Oversight
-### Documentation
-### Model Cards
-### Monitoring and Drift
+Responsible machine learning asks additional questions:
 
-## Hands-On Practice
-Audit a classifier for calibration, subgroup performance, and explanation stability.
+> Who benefits?
 
-## Common Mistakes
-- Treating SHAP values as causal effects.
-- Reporting only aggregate performance.
-- Assuming removing protected variables removes bias.
-- Choosing a fairness metric without considering context.
+> Who bears the errors?
+
+> What assumptions are embedded in the target?
+
+> What happens after a prediction is made?
+
+> Who can challenge the decision?
+
+A model can be accurate and still be inappropriate for deployment.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**Technical capability establishes what a system can do. It does not, by itself, establish what the system should be allowed to do.**
+:::
+
+## From Model Evaluation to Responsible Use
+
+Chapter 16 asked whether evidence supports a performance claim.
+
+Chapter 17 extends the chain:
+
+$$
+\text{prediction}
+\rightarrow
+\text{decision}
+\rightarrow
+\text{action}
+\rightarrow
+\text{human consequence}.
+$$
+
+Errors acquire meaning only in context.
+
+A false negative in a movie recommendation is different from a false negative in disease screening.
+
+A false positive in spam filtering is different from a false positive in academic misconduct detection.
+
+## Responsibility Is a System Property
+
+Responsible ML cannot be achieved by choosing a “fair algorithm.”
+
+The system includes:
+
+- problem formulation;
+- data collection;
+- target definition;
+- feature construction;
+- modeling;
+- thresholding;
+- interface design;
+- human decision-makers;
+- institutional policy;
+- appeals;
+- monitoring;
+- retirement.
+
+Thus:
+
+$$
+\boxed{
+\text{responsible ML}
+\neq
+\text{responsible model only}
+}
+$$
+
+## Stakeholders, Harms, and Power
+
+## Map the Stakeholders
+
+Stakeholders may include:
+
+- people represented in the data;
+- people receiving predictions;
+- decision-makers;
+- domain professionals;
+- developers;
+- institutions;
+- communities;
+- regulators;
+- people indirectly affected by deployment.
+
+The person using the model is not necessarily the person bearing its consequences.
+
+## Types of Harm
+
+Potential harms include:
+
+### Allocative harm
+
+A system affects access to opportunities or resources.
+
+Examples include admissions, credit, employment, treatment, or academic support.
+
+### Quality-of-service harm
+
+A system performs worse for some populations.
+
+### Representational harm
+
+A system reinforces stereotypes, stigmatizes groups, or systematically mischaracterizes people.
+
+### Privacy harm
+
+Sensitive information is exposed, inferred, or reused beyond reasonable expectations.
+
+### Autonomy harm
+
+People are manipulated, surveilled, or denied meaningful choice.
+
+### Procedural harm
+
+People cannot understand, contest, or appeal consequential decisions.
+
+## Benefit Is Also Unequally Distributed
+
+Responsible evaluation should ask:
+
+$$
+\text{Who receives benefit?}
+\qquad
+\text{Who absorbs risk?}
+$$
+
+An average improvement can coexist with concentrated harm.
+
+## Where Bias Enters the Pipeline
+
+## Historical Bias
+
+Historical data can encode past inequities even when measurement is technically accurate.
+
+A model can reproduce historical patterns because it learns from them.
+
+## Representation Bias
+
+Some populations may be missing or underrepresented.
+
+Then:
+
+$$
+P_{sample}(X,Y)
+\neq
+P_{target}(X,Y).
+$$
+
+## Measurement Bias
+
+A recorded variable may be an imperfect proxy for the construct we actually care about.
+
+For example:
+
+$$
+\text{healthcare spending}
+\neq
+\text{health need}
+$$
+
+and
+
+$$
+\text{course grade}
+\neq
+\text{learning}.
+$$
+
+## Label Bias
+
+Labels can reflect subjective judgments, institutional practices, or historical decisions.
+
+A label is data—not unquestionable truth.
+
+## Aggregation Bias
+
+One model may be fitted across heterogeneous populations whose relationships differ.
+
+## Deployment Bias
+
+A model may be used in a setting or for a purpose different from the one for which it was developed.
+
+## Feedback Loops
+
+Predictions can change the world that produces future data.
+
+For example:
+
+$$
+\text{risk prediction}
+\rightarrow
+\text{intervention}
+\rightarrow
+\text{changed outcome}
+\rightarrow
+\text{new training data}.
+$$
+
+The model becomes part of the data-generating process.
+
+## Fairness as a Measurement Problem
+
+## Protected or Sensitive Groups
+
+Let $A$ denote a group attribute, $Y$ the true outcome, and $\hat Y$ the prediction.
+
+Different fairness definitions condition on different variables.
+
+There is no universal fairness score.
+
+## Demographic Parity
+
+Demographic parity asks whether positive prediction rates are equal:
+
+$$
+P(\hat Y=1\mid A=a)
+=
+P(\hat Y=1\mid A=b).
+$$
+
+A difference measure is:
+
+$$
+\Delta_{DP}
+=
+P(\hat Y=1\mid A=a)
+-
+P(\hat Y=1\mid A=b).
+$$
+
+A ratio can also be used:
+
+$$
+R_{DP}
+=
+\frac{
+P(\hat Y=1\mid A=a)
+}{
+P(\hat Y=1\mid A=b)
+}.
+$$
+
+## Equal Opportunity
+
+Equal opportunity compares true-positive rates:
+
+$$
+P(\hat Y=1\mid Y=1,A=a)
+=
+P(\hat Y=1\mid Y=1,A=b).
+$$
+
+This asks whether people who truly qualify for the positive outcome are identified at similar rates.
+
+## Equalized Odds
+
+Equalized odds requires both true-positive and false-positive rates to be equal across groups:
+
+$$
+TPR_a=TPR_b
+$$
+
+and
+
+$$
+FPR_a=FPR_b.
+$$
+
+## Predictive Parity
+
+Predictive parity asks whether precision is equal:
+
+$$
+P(Y=1\mid\hat Y=1,A=a)
+=
+P(Y=1\mid\hat Y=1,A=b).
+$$
+
+## A Small Fairness Audit
+
+```{python}
+audit = pd.DataFrame({
+    "group": (
+        ["A"] * 10
+        + ["B"] * 10
+    ),
+    "y_true": [
+        1,1,1,1,1,0,0,0,0,0,
+        1,1,1,1,0,0,0,0,0,0
+    ],
+    "y_pred": [
+        1,1,1,1,0,1,0,0,0,0,
+        1,1,0,0,1,1,0,0,0,0
+    ]
+})
+
+def group_metrics(frame):
+    y = frame["y_true"].to_numpy()
+    p = frame["y_pred"].to_numpy()
+
+    tp = ((y == 1) & (p == 1)).sum()
+    tn = ((y == 0) & (p == 0)).sum()
+    fp = ((y == 0) & (p == 1)).sum()
+    fn = ((y == 1) & (p == 0)).sum()
+
+    return pd.Series({
+        "n": len(frame),
+        "prevalence": y.mean(),
+        "positive_prediction_rate": p.mean(),
+        "TPR": tp / (tp + fn),
+        "FPR": fp / (fp + tn),
+        "precision": tp / (tp + fp)
+    })
+
+fairness_table = (
+    audit
+    .groupby("group")
+    .apply(group_metrics)
+)
+
+fairness_table.round(3)
+```
+
+The table shows why a single aggregate accuracy score cannot characterize fairness.
+
+## Visualize Group Metrics
+
+```{python}
+#| label: fig-fairness-metrics
+#| fig-cap: "Different fairness criteria compare different aspects of model behavior across groups."
+
+plot_metrics = fairness_table[
+    [
+        "positive_prediction_rate",
+        "TPR",
+        "FPR",
+        "precision"
+    ]
+].T
+
+plot_metrics.plot(
+    kind="bar",
+    figsize=(9, 5)
+)
+
+plt.ylabel("Metric value")
+plt.xlabel("Fairness-related metric")
+plt.title("Group-Level Model Behavior")
+plt.xticks(rotation=25)
+plt.legend(title="Group")
+plt.tight_layout()
+plt.show()
+```
+
+## Fairness Criteria Can Conflict
+
+## Different Definitions Encode Different Normative Goals
+
+Demographic parity asks about allocation rates.
+
+Equal opportunity asks about correctly identifying actual positives.
+
+Predictive parity asks about the reliability of positive predictions.
+
+These are not interchangeable.
+
+## Base Rates Matter
+
+Suppose:
+
+$$
+P(Y=1\mid A=a)
+\neq
+P(Y=1\mid A=b).
+$$
+
+Under unequal base rates and imperfect prediction, several desirable fairness conditions generally cannot all be satisfied simultaneously.
+
+This is not a reason to abandon fairness analysis.
+
+It is a reason to make the choice of fairness criterion explicit and connected to the application.
+
+## Fairness Is Not “Make Every Number Equal”
+
+A mechanically optimized parity metric can create other harms.
+
+The question is:
+
+> What kind of equality is substantively justified for this decision?
+
+That requires domain, ethical, legal, and stakeholder reasoning in addition to mathematics.
+
+## Individual, Group, and Procedural Fairness
+
+## Group Fairness
+
+Group fairness compares statistical behavior across defined groups.
+
+## Individual Fairness
+
+A broad principle is:
+
+> Similar individuals should receive similar treatment.
+
+The difficult question is what “similar” should mean.
+
+Similarity itself can encode contested value judgments.
+
+## Procedural Fairness
+
+Even a statistically balanced system may be procedurally unfair if:
+
+- decisions are opaque;
+- people cannot correct erroneous data;
+- no appeal exists;
+- responsibility is unclear;
+- automated recommendations are treated as final.
+
+Responsible systems need legitimate processes, not only metrics.
+
+## Intersectionality
+
+## One Attribute at a Time Can Hide Harm
+
+Analyzing only one dimension may miss intersectional patterns.
+
+For example, overall performance by one grouping variable can look acceptable while a smaller intersectional subgroup experiences much worse error rates.
+
+## Statistical Caution
+
+As groups become more granular:
+
+$$
+n_g\downarrow
+\quad\Rightarrow\quad
+\text{uncertainty}\uparrow.
+$$
+
+Report sample sizes and uncertainty rather than making strong claims from tiny groups.
+
+## Explainability and Interpretability
+
+## Why Explain?
+
+Different stakeholders need different explanations.
+
+A data scientist may ask:
+
+> Which features drive model predictions globally?
+
+A person affected by a decision may ask:
+
+> Why did this happen to me?
+
+An auditor may ask:
+
+> Does the model rely on inappropriate proxies?
+
+These are different explanation tasks.
+
+## Global Versus Local Explanation
+
+**Global explanation** describes overall model behavior.
+
+**Local explanation** describes a particular prediction.
+
+Neither automatically reveals causality.
+
+## Permutation Importance
+
+Permutation importance measures how much predictive performance deteriorates when a feature is randomly permuted.
+
+Conceptually:
+
+$$
+Importance_j
+=
+Score_{original}
+-
+Score_{permuted(j)}.
+$$
+
+## Demonstration
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.inspection import permutation_importance
+from sklearn.metrics import roc_auc_score
+
+data = load_breast_cancer(
+    as_frame=True
+)
+
+X = data.data
+y = (data.target == 0).astype(int)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=.30,
+    random_state=42,
+    stratify=y
+)
+
+rf = RandomForestClassifier(
+    n_estimators=250,
+    random_state=42,
+    n_jobs=1
+)
+
+rf.fit(
+    X_train,
+    y_train
+)
+
+rf_prob = rf.predict_proba(
+    X_test
+)[:, 1]
+
+roc_auc_score(
+    y_test,
+    rf_prob
+)
+```
+
+```{python}
+importance = permutation_importance(
+    rf,
+    X_test,
+    y_test,
+    scoring="roc_auc",
+    n_repeats=10,
+    random_state=42,
+    n_jobs=1
+)
+
+importance_df = pd.DataFrame({
+    "feature": X.columns,
+    "importance": importance.importances_mean
+}).sort_values(
+    "importance",
+    ascending=False
+).head(10)
+
+importance_df
+```
+
+```{python}
+#| label: fig-permutation-importance
+#| fig-cap: "Permutation importance estimates how predictive performance changes when a feature's information is disrupted."
+
+ordered = importance_df.sort_values(
+    "importance"
+)
+
+plt.figure(figsize=(8, 6))
+plt.barh(
+    ordered["feature"],
+    ordered["importance"]
+)
+plt.xlabel("Decrease in ROC-AUC after permutation")
+plt.ylabel("Feature")
+plt.title("Permutation Importance")
+plt.tight_layout()
+plt.show()
+```
+
+## Importance Is Not Causality
+
+If feature $X_j$ is important for prediction, we cannot conclude:
+
+$$
+do(X_j)
+\rightarrow
+Y.
+$$
+
+Predictive association can arise from:
+
+- confounding;
+- proxy relationships;
+- measurement artifacts;
+- selection;
+- correlated features.
+
+Therefore:
+
+$$
+\boxed{
+\text{feature importance}
+\neq
+\text{causal effect}
+}
+$$
+
+## Explanations Can Also Mislead
+
+An explanation method can be:
+
+- unstable;
+- sensitive to background data;
+- incomplete;
+- difficult for nontechnical users;
+- persuasive despite being approximate.
+
+An explanation should itself be evaluated for its intended purpose.
+
+## Privacy, Confidentiality, and Security
+
+## These Concepts Are Related but Different
+
+**Privacy** concerns appropriate collection, use, inference, and control of information about people.
+
+**Confidentiality** concerns obligations to protect entrusted information.
+
+**Security** concerns protection against unauthorized access, alteration, or disruption.
+
+A secure system can still violate privacy if data are used in ways people did not reasonably expect.
+
+## Data Minimization
+
+A useful principle is:
+
+> Collect and retain only what is necessary for the legitimate purpose.
+
+More features are not automatically better.
+
+## Reidentification Risk
+
+Removing names does not necessarily anonymize a dataset.
+
+Combinations of quasi-identifiers can enable reidentification.
+
+## Sensitive Inference
+
+A model may infer sensitive information even when that attribute is not explicitly collected.
+
+Removing a sensitive column does not guarantee that sensitive information has disappeared from the feature space.
+
+## Differential Privacy
+
+## Privacy as a Formal Guarantee
+
+Differential privacy provides a mathematical framework for limiting how much the output of an analysis can depend on any one individual's data.
+
+A randomized mechanism $M$ is $\epsilon$-differentially private if, for neighboring datasets $D$ and $D'$:
+
+$$
+P(M(D)\in S)
+\le
+e^\epsilon
+P(M(D')\in S)
+$$
+
+for all measurable output sets $S$.
+
+## Interpreting Epsilon
+
+Smaller $\epsilon$ generally corresponds to a stronger privacy guarantee, but practical interpretation depends on the mechanism and total privacy accounting.
+
+Differential privacy introduces a privacy-utility tradeoff.
+
+## Privacy Is Not Merely a Technical Parameter
+
+Even a privacy-preserving algorithm does not answer:
+
+- whether data collection was appropriate;
+- whether consent was meaningful;
+- whether the purpose is legitimate;
+- whether deployment is harmful.
+
+Technical privacy safeguards are necessary in many contexts but not sufficient for ethical legitimacy.
+
+## Human Oversight
+
+## “Human in the Loop” Is Not Enough
+
+A human reviewer may simply accept model recommendations.
+
+This is known as automation bias.
+
+Meaningful oversight requires that humans have:
+
+- relevant expertise;
+- adequate time;
+- access to evidence;
+- authority to disagree;
+- clear accountability;
+- mechanisms for escalation.
+
+## Selective Automation
+
+Some cases may be safe to automate while uncertain or consequential cases require review.
+
+Conceptually:
+
+$$
+\text{low-risk case}
+\rightarrow
+\text{automated workflow}
+$$
+
+$$
+\text{high-risk or uncertain case}
+\rightarrow
+\text{human review}.
+$$
+
+The boundary should be empirically and ethically justified.
+
+## Contestability
+
+People affected by consequential predictions may need mechanisms to:
+
+- understand the basis of a decision;
+- correct inaccurate information;
+- request human review;
+- appeal outcomes.
+
+Contestability is a design requirement, not an afterthought.
+
+## Governance Across the ML Lifecycle
+
+## Governance Begins Before Modeling
+
+A responsible lifecycle can be represented as:
+
+$$
+\text{purpose}
+\rightarrow
+\text{data}
+\rightarrow
+\text{development}
+\rightarrow
+\text{validation}
+\rightarrow
+\text{deployment}
+\rightarrow
+\text{monitoring}
+\rightarrow
+\text{retirement}.
+$$
+
+## Purpose and Scope
+
+Document:
+
+- intended use;
+- intended users;
+- affected populations;
+- prohibited uses;
+- decision authority.
+
+## Data Governance
+
+Document:
+
+- provenance;
+- consent/authority;
+- quality;
+- retention;
+- access;
+- sensitive attributes;
+- known limitations.
+
+## Model Governance
+
+Document:
+
+- version;
+- training procedure;
+- evaluation;
+- thresholds;
+- subgroup performance;
+- explainability;
+- known failure modes.
+
+## Deployment Governance
+
+Define:
+
+- who can use the system;
+- when human approval is required;
+- logging;
+- incident response;
+- monitoring;
+- rollback;
+- retirement criteria.
+
+## Model Cards
+
+## Documentation as an Engineering Artifact
+
+A model card can summarize:
+
+- model details;
+- intended use;
+- out-of-scope use;
+- training/evaluation data;
+- metrics;
+- subgroup results;
+- ethical considerations;
+- caveats;
+- limitations.
+
+Documentation does not make a model responsible.
+
+But undocumented systems are harder to audit responsibly.
+
+## Algorithmic Impact Assessment
+
+## Evaluate the System Before Deployment
+
+An impact assessment can ask:
+
+1. What decision will the system influence?
+2. Who is affected?
+3. What benefits are expected?
+4. What harms are plausible?
+5. How severe are those harms?
+6. How likely are they?
+7. What alternatives exist?
+8. What evidence supports deployment?
+9. How can people contest decisions?
+10. What monitoring and stopping rules are required?
+
+This reframes deployment as a hypothesis requiring evidence.
+
+## Feedback Loops and Performative Prediction
+
+## Predictions Can Change Outcomes
+
+Suppose a university predicts that a student is likely to withdraw and provides intensive support.
+
+If the student persists, the original prediction may appear “wrong,” even though the intervention succeeded.
+
+This creates an evaluation challenge:
+
+$$
+\text{prediction}
+\rightarrow
+\text{intervention}
+\rightarrow
+\text{changed outcome}.
+$$
+
+The deployed model is no longer a passive observer.
+
+## Policy Changes the Meaning of Data
+
+Once predictions influence treatment, future labels reflect both underlying risk and institutional response.
+
+Retraining without recognizing this feedback can produce misleading conclusions.
+
+## Generative AI Inside Responsible ML Systems
+
+## Generative Components Add New Failure Modes
+
+Systems that include LLMs may introduce:
+
+- hallucinated facts;
+- fabricated citations;
+- prompt injection;
+- sensitive-data leakage;
+- unstable outputs;
+- inappropriate tool use;
+- anthropomorphic overtrust.
+
+These risks sit alongside traditional ML concerns such as bias, calibration, and distribution shift.
+
+## RAG Does Not Eliminate Responsibility
+
+Retrieval can improve grounding, but retrieved material can be:
+
+- outdated;
+- biased;
+- malicious;
+- irrelevant;
+- incomplete.
+
+The entire information pipeline requires governance.
+
+## Agentic Systems Increase Consequence
+
+A model that can take actions requires stronger controls than one that only produces text.
+
+Permissions should follow the principle of least privilege.
+
+## Three Tracks
+
+## Health Track
+
+Consider a model recommending which patients should receive additional screening.
+
+Responsible evaluation should examine:
+
+- clinical benefit;
+- false-negative consequences;
+- subgroup calibration;
+- measurement proxies;
+- privacy;
+- external validation;
+- clinician oversight;
+- patient communication;
+- appeal or correction mechanisms;
+- post-deployment monitoring.
+
+A model should not become a substitute for clinical judgment merely because it is accurate.
+
+## Education Track
+
+Consider an early-warning model for student success.
+
+Responsible design should examine:
+
+- whether the target reflects learning or institutional behavior;
+- whether financial, demographic, or behavioral proxies create inequitable treatment;
+- whether intervention is supportive or punitive;
+- student privacy;
+- subgroup error rates;
+- instructor automation bias;
+- student contestability;
+- whether predictions become self-fulfilling.
+
+The ethical objective should be student support—not merely risk classification.
+
+## Open ML Benchmark Track
+
+Benchmark projects should supplement aggregate performance with:
+
+- subgroup analyses;
+- robustness;
+- calibration;
+- explainability;
+- privacy considerations;
+- compute/energy reporting where relevant;
+- failure analysis.
+
+Responsible benchmarking asks not only which model wins, but what tradeoffs produce the ranking.
+
+## Beyond the Algorithm: Prediction Is an Exercise of Power
+
+::: {.callout-note icon=false}
+## The Model Does Not Decide What Matters
+
+An optimization algorithm can minimize a loss function.
+
+It cannot independently determine whether the loss function represents a worthy social objective.
+
+When we choose:
+
+$$
+Y=\text{student withdrawal},
+$$
+
+$$
+Y=\text{hospital utilization},
+$$
+
+or
+
+$$
+Y=\text{employee attrition},
+$$
+
+we transform a complex human condition into a measurable target.
+
+That abstraction can be useful.
+
+It can also hide what the target leaves out.
+
+Responsible data science therefore requires two forms of reasoning:
+
+1. **instrumental reasoning** — How can we optimize the system?
+2. **normative reasoning** — What should the system optimize, and why?
+
+The first can be assisted substantially by algorithms.
+
+The second cannot be outsourced to an objective function.
+
+The deepest question is not:
+
+> “Is the model unbiased?”
+
+It is:
+
+> **“What human purposes, assumptions, and institutions does this model make operational?”**
+
+Machine learning is never only prediction once predictions acquire consequences.
+:::
+
+## AI Pair Programmer: Remove the Sensitive Attribute
+
+Ask an AI assistant:
+
+> “Our model may discriminate by race or sex. Remove those columns and confirm that the model is now fair.”
+
+Audit the response.
+
+A rigorous response should recognize:
+
+- proxy variables;
+- historical bias;
+- label bias;
+- unequal base rates;
+- subgroup error differences;
+- fairness-definition choices;
+- intersectionality;
+- procedural fairness;
+- deployment consequences.
+
+Redesign the audit rather than declaring fairness from column removal.
+
+## Hands-On Lab: Responsible ML Audit
+
+Choose a classification system and:
+
+1. define the intended use;
+2. identify affected stakeholders;
+3. identify plausible benefits;
+4. identify plausible harms;
+5. document data provenance;
+6. examine target validity;
+7. identify potential proxies;
+8. report overall performance;
+9. report group prevalence;
+10. calculate group positive-prediction rates;
+11. calculate group TPR and FPR;
+12. calculate group precision;
+13. quantify uncertainty;
+14. inspect intersectional groups where feasible;
+15. examine calibration by group;
+16. evaluate feature importance;
+17. explicitly reject causal interpretations of importance;
+18. assess privacy risks;
+19. define human-review boundaries;
+20. design an appeal mechanism;
+21. specify monitoring;
+22. define rollback or retirement conditions;
+23. complete a model card;
+24. complete an impact assessment;
+25. write a bounded deployment recommendation.
+
+## Practitioner Track
+
+A practitioner should be able to identify harms, conduct subgroup audits, distinguish fairness definitions, interpret explanations cautiously, minimize privacy risk, document intended use, and design meaningful human oversight.
+
+## Researcher Track
+
+A researcher should additionally justify fairness criteria, quantify uncertainty, examine intersectionality, analyze measurement validity, evaluate explanation stability, study feedback loops, compare mitigation strategies, document governance assumptions, and separate technical findings from normative conclusions.
+
+## Research Studio
+
+Design a responsible-ML study suitable for a conference or journal paper.
+
+Specify:
+
+1. substantive problem;
+2. affected population;
+3. stakeholder map;
+4. target construct;
+5. measurement validity;
+6. data provenance;
+7. historical context;
+8. candidate models;
+9. overall evaluation;
+10. fairness definitions;
+11. justification for those definitions;
+12. subgroup metrics;
+13. intersectional analysis;
+14. uncertainty;
+15. calibration;
+16. threshold policy;
+17. explainability method;
+18. explanation validation;
+19. privacy analysis;
+20. human oversight;
+21. contestability;
+22. feedback-loop analysis;
+23. governance plan;
+24. post-deployment monitoring;
+25. stopping criteria;
+26. limitations;
+27. unsupported claims;
+28. scholarly contribution.
+
+## Professor's Challenge: The Student Success Score
+
+A university develops a “Student Success Score” using:
+
+- LMS activity;
+- prior grades;
+- financial-aid status;
+- attendance;
+- advising records;
+- course withdrawals;
+- residential distance.
+
+The model predicts persistence with ROC-AUC 0.89.
+
+Students below a threshold are automatically restricted from registering for advanced courses until they meet with an advisor.
+
+The university removes race and sex from the model and announces:
+
+> “Because protected characteristics are excluded and accuracy is high, the system is objective and fair.”
+
+Critique the claim.
+
+Consider:
+
+- proxy variables;
+- target validity;
+- historical institutional patterns;
+- measurement bias;
+- subgroup calibration;
+- false-positive consequences;
+- threshold selection;
+- intersectionality;
+- privacy;
+- autonomy;
+- procedural fairness;
+- contestability;
+- whether restricting registration may itself affect persistence;
+- feedback loops;
+- whether a supportive intervention would be preferable to a restrictive one.
+
+Redesign the system around student success rather than prediction alone.
 
 ## Knowledge Check
-1. How do global and local explanations differ?
-2. What is calibration?
-3. Why can fairness criteria conflict?
-4. Why does removing a protected attribute not guarantee fairness?
 
-## Real-World Case Study
-### Responsible Prediction in Health or Education
-Conduct a structured model audit and document intended use and limitations.
-
-## Professor's Challenge
-The most accurate model has the largest subgroup disparity. What evidence and stakeholder input are needed to decide what to do?
-
-## Research Extension
-Develop a fairness, calibration, or explainability study with substantive domain relevance.
+1. Why is responsible ML a system property?
+2. What is allocative harm?
+3. What is quality-of-service harm?
+4. What is representational harm?
+5. What is historical bias?
+6. What is representation bias?
+7. What is measurement bias?
+8. Why should labels not automatically be treated as ground truth?
+9. What is deployment bias?
+10. What is demographic parity?
+11. What is equal opportunity?
+12. What is equalized odds?
+13. What is predictive parity?
+14. Why can fairness criteria conflict?
+15. Why is fairness not equivalent to making all group metrics equal?
+16. What is individual fairness?
+17. What is procedural fairness?
+18. Why does intersectional analysis increase uncertainty?
+19. How do global and local explanations differ?
+20. Why is feature importance not a causal effect?
+21. How can explanations themselves mislead?
+22. How do privacy, confidentiality, and security differ?
+23. Why does removing names not guarantee anonymity?
+24. What does differential privacy attempt to guarantee?
+25. Why is “human in the loop” insufficient?
+26. What is automation bias?
+27. What is contestability?
+28. What should a model card document?
+29. What is an algorithmic impact assessment?
+30. How can deployed predictions create feedback loops?
+31. Why does removing a sensitive feature not guarantee fairness?
+32. Why do agentic AI systems require stronger governance?
+33. When might a high-performing model still be inappropriate to deploy?
+34. Why are normative questions not reducible to optimization?
 
 ## Reproducibility Check
-Document group definitions, metrics, thresholds, explanation settings, software versions, and all audit decisions.
+
+Record:
+
+- intended use;
+- prohibited use;
+- stakeholders;
+- target construct;
+- target definition;
+- data provenance;
+- collection authority/consent;
+- sensitive attributes;
+- proxy analysis;
+- group sample sizes;
+- overall metrics;
+- subgroup metrics;
+- uncertainty;
+- calibration;
+- fairness definitions;
+- fairness rationale;
+- intersectional analyses;
+- thresholds;
+- feature-importance method;
+- explanation method;
+- privacy controls;
+- access controls;
+- human-review rules;
+- appeal mechanism;
+- model version;
+- data version;
+- deployment date;
+- monitoring metrics;
+- drift triggers;
+- incident-response process;
+- rollback criteria;
+- retirement criteria;
+- model card;
+- impact assessment;
+- code;
+- known limitations;
+- unresolved risks.
 
 ## Key Takeaways
-- Accuracy is necessary but not sufficient for responsible ML.
-- Explanations are model-dependent and not automatically causal.
-- Fairness requires explicit normative and technical choices.
+
+- High predictive performance does not establish responsible deployment.
+- Responsibility belongs to the full sociotechnical system, not only the model.
+- Bias can enter through history, representation, measurement, labels, aggregation, and deployment.
+- Fairness has multiple mathematical definitions because fairness has multiple substantive meanings.
+- Fairness criteria can conflict, especially under unequal base rates.
+- Group metrics are necessary in many applications but do not exhaust fairness.
+- Intersectional analyses require attention to sample size and uncertainty.
+- Model explanations are not causal explanations.
+- Privacy, confidentiality, and security are related but distinct.
+- Removing sensitive variables does not remove sensitive information or historical structure.
+- Meaningful human oversight requires expertise, authority, time, and accountability.
+- Contestability matters for consequential automated decisions.
+- Governance should span purpose, data, development, validation, deployment, monitoring, and retirement.
+- Model cards and impact assessments support accountability but do not substitute for responsible practice.
+- Deployed predictions can create feedback loops that alter future data.
+- Generative and agentic systems add new risks to traditional ML governance.
+- Optimization answers how to pursue an objective; it does not determine which objectives are worthy.
+- Once predictions affect people, machine learning becomes a question of consequence as well as accuracy.

@@ -1,73 +1,1596 @@
-# Model Evaluation, Validation, and Hyperparameter Optimization
+# Model Evaluation: From Performance Metrics to Scientific Evidence
+
+```{python}
+#| label: chapter-16-setup
+#| include: false
+
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+```
 
 ## Learning Objectives
-- Distinguish training, validation, and test data.
-- Apply cross-validation appropriately.
-- Explain nested cross-validation.
-- Tune hyperparameters without contaminating final evaluation.
-- Quantify uncertainty in model performance.
 
-## Why This Matters
-A sophisticated model evaluated incorrectly can produce less credible evidence than a simple model evaluated rigorously.
+By the end of this chapter, you should be able to:
 
-## Real-World Problem
-After trying dozens of models, an analyst reports only the best test-set result. Why is that result no longer a trustworthy estimate of generalization?
+- distinguish training, validation, and test performance;
+- explain generalization error as an estimand rather than merely a score;
+- choose evaluation metrics that align with the decision problem;
+- interpret confusion matrices, sensitivity, specificity, precision, F1, ROC-AUC, and PR-AUC;
+- explain why accuracy can fail under class imbalance;
+- distinguish discrimination from calibration;
+- calculate and interpret the Brier score;
+- reason about decision thresholds and asymmetric error costs;
+- explain cross-validation and repeated cross-validation;
+- distinguish model assessment from hyperparameter selection;
+- explain why nested cross-validation reduces selection bias;
+- quantify uncertainty around performance estimates;
+- compare models without overinterpreting tiny metric differences;
+- distinguish internal, temporal, geographic, and external validation;
+- identify distribution shift and dataset shift;
+- evaluate subgroup performance without confusing group averages with individual fairness;
+- design evaluation around deployment conditions;
+- recognize test-set contamination and leaderboard overfitting;
+- distinguish predictive evidence from causal or scientific claims;
+- design a research-grade evaluation protocol for health, education, and open ML applications.
 
-## Evaluation Foundations
-### Generalization Error
-### Train, Validation, and Test Sets
-### K-Fold Cross-Validation
-### Stratification
-### Grouped and Time-Based Splits
-### Repeated Cross-Validation
-### Nested Cross-Validation
+## What Does It Mean for a Model to Work?
 
-## Hyperparameter Optimization
-### Grid Search
-### Randomized Search
-### Bayesian Optimization
-### Search Budgets
+Suppose a classifier achieves:
+
+$$
+Accuracy=0.93.
+$$
+
+Is it good?
+
+We cannot answer until we know:
+
+- the class distribution;
+- the comparison baseline;
+- how the data were split;
+- whether tuning used the test set;
+- whether observations are independent;
+- the costs of false positives and false negatives;
+- calibration;
+- uncertainty;
+- subgroup performance;
+- whether future data resemble the evaluation data.
+
+A performance number is not evidence in isolation.
+
+::: {.callout-important icon=false}
+## Central Question
+
+**When we say that a model “works,” what evidence should be sufficient for us to believe that claim?**
+:::
+
+## Evaluation Begins With the Claim
+
+Different claims require different evidence.
+
+> “This model predicts held-out observations from the same dataset.”
+
+is weaker than:
+
+> “This model generalizes to future students at other universities.”
+
+And that is different from:
+
+> “Using this model improves student outcomes.”
+
+The first two are predictive claims.
+
+The third is causal and intervention-oriented.
+
+No evaluation metric can silently transform one claim into another.
+
+## Generalization Error
+
+Let $f$ be a fitted prediction rule and $L$ a loss function.
+
+The population generalization risk is:
+
+$$
+R(f)
+=
+\mathbb{E}_{(X,Y)\sim P}
+[
+L(Y,f(X))
+].
+$$
+
+We do not observe the full population distribution $P$.
+
+Evaluation methods estimate performance using finite samples.
+
+Therefore every reported metric is an estimate.
+
+## Training Error Is Optimistic
+
+A model is optimized using training data.
+
+Consequently,
+
+$$
+\widehat R_{train}
+$$
+
+usually underestimates the error expected on genuinely new observations.
+
+This motivates validation and test data.
+
+## Three Data Roles
+
+A clean conceptual separation is:
+
+$$
+\boxed{
+\text{training}
+\rightarrow
+\text{model fitting}
+}
+$$
+
+$$
+\boxed{
+\text{validation}
+\rightarrow
+\text{model/hyperparameter selection}
+}
+$$
+
+$$
+\boxed{
+\text{test}
+\rightarrow
+\text{final assessment}
+}
+$$
+
+Cross-validation can replace a single validation split, but the distinction between **selection** and **final assessment** remains.
+
+## The Test Set Is Not a Development Tool
+
+If we repeatedly inspect test performance and change the model, then the test set has influenced model development.
+
+Conceptually:
+
+$$
+\text{repeated test feedback}
+\rightarrow
+\text{implicit tuning}
+\rightarrow
+\text{optimistic test estimate}.
+$$
+
+The test set is no longer truly untouched.
+
+## Classification Evaluation
+
+## Confusion Matrix
+
+For binary classification:
+
+| | Predicted Positive | Predicted Negative |
+|---|---:|---:|
+| Actual Positive | True Positive (TP) | False Negative (FN) |
+| Actual Negative | False Positive (FP) | True Negative (TN) |
+
+Many classification metrics are different summaries of these four quantities.
+
+## Accuracy
+
+$$
+Accuracy
+=
+\frac{TP+TN}
+{TP+TN+FP+FN}.
+$$
+
+Accuracy is intuitive but can be misleading under imbalance.
+
+If disease prevalence is 2%, a classifier predicting everyone as negative achieves:
+
+$$
+Accuracy=98\%.
+$$
+
+Yet it identifies no cases.
+
+## Sensitivity
+
+Also called recall or true-positive rate:
+
+$$
+Sensitivity
+=
+\frac{TP}
+{TP+FN}.
+$$
+
+Sensitivity asks:
+
+> Among actual positives, what proportion did we identify?
+
+## Specificity
+
+$$
+Specificity
+=
+\frac{TN}
+{TN+FP}.
+$$
+
+Specificity asks:
+
+> Among actual negatives, what proportion did we correctly reject?
+
+## Precision
+
+Also called positive predictive value:
+
+$$
+Precision
+=
+\frac{TP}
+{TP+FP}.
+$$
+
+Precision asks:
+
+> Among predicted positives, what proportion were actually positive?
+
+Precision depends strongly on prevalence.
+
+## F1 Score
+
+$$
+F1
+=
+2
+\frac{
+Precision\times Recall
+}{
+Precision+Recall
+}.
+$$
+
+F1 balances precision and recall through their harmonic mean.
+
+But it does not incorporate true negatives directly.
+
+## Compute Classification Metrics
+
+```{python}
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    confusion_matrix,
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score,
+    average_precision_score,
+    brier_score_loss
+)
+
+data = load_breast_cancer(
+    as_frame=True
+)
+
+X = data.data
+
+## Define malignant as the positive class.
+y = (data.target == 0).astype(int)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=.30,
+    random_state=42,
+    stratify=y
+)
+
+model = Pipeline([
+    ("scale", StandardScaler()),
+    (
+        "model",
+        LogisticRegression(
+            max_iter=2000
+        )
+    )
+])
+
+model.fit(
+    X_train,
+    y_train
+)
+
+prob = model.predict_proba(
+    X_test
+)[:, 1]
+
+pred = (
+    prob >= .50
+).astype(int)
+
+tn, fp, fn, tp = confusion_matrix(
+    y_test,
+    pred
+).ravel()
+
+specificity = tn / (tn + fp)
+
+pd.Series({
+    "Accuracy": accuracy_score(y_test, pred),
+    "Sensitivity": recall_score(y_test, pred),
+    "Specificity": specificity,
+    "Precision": precision_score(y_test, pred),
+    "F1": f1_score(y_test, pred),
+    "ROC-AUC": roc_auc_score(y_test, prob),
+    "PR-AUC": average_precision_score(y_test, prob),
+    "Brier": brier_score_loss(y_test, prob)
+}).round(3)
+```
+
+## ROC Curve
+
+For threshold $c$:
+
+$$
+Sensitivity(c)
+=
+P(\hat p\ge c\mid Y=1)
+$$
+
+and
+
+$$
+FPR(c)
+=
+1-Specificity(c).
+$$
+
+The ROC curve evaluates sensitivity versus false-positive rate across thresholds.
+
+## ROC-AUC
+
+ROC-AUC can be interpreted as the probability that a randomly chosen positive receives a higher score than a randomly chosen negative:
+
+$$
+AUC
+=
+P(
+S^+>S^-
+).
+$$
+
+It measures **ranking discrimination**.
+
+It does not measure probability calibration.
+
+## Plot the ROC Curve
+
+```{python}
+#| label: fig-roc
+#| fig-cap: "The ROC curve summarizes discrimination across classification thresholds."
+
+from sklearn.metrics import roc_curve
+
+fpr, tpr, roc_thresholds = roc_curve(
+    y_test,
+    prob
+)
+
+plt.figure(figsize=(7, 5))
+plt.plot(
+    fpr,
+    tpr,
+    label=f"ROC-AUC = {roc_auc_score(y_test, prob):.3f}"
+)
+plt.plot(
+    [0, 1],
+    [0, 1],
+    linestyle="--",
+    label="Chance"
+)
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend()
+plt.show()
+```
+
+## Precision-Recall Curve
+
+When positive cases are uncommon, precision-recall analysis can be especially informative.
+
+```{python}
+#| label: fig-pr
+#| fig-cap: "Precision-recall curves emphasize performance on the positive class."
+
+from sklearn.metrics import precision_recall_curve
+
+precision_values, recall_values, pr_thresholds = (
+    precision_recall_curve(
+        y_test,
+        prob
+    )
+)
+
+plt.figure(figsize=(7, 5))
+plt.plot(
+    recall_values,
+    precision_values,
+    label=f"PR-AUC = {average_precision_score(y_test, prob):.3f}"
+)
+plt.xlabel("Recall")
+plt.ylabel("Precision")
+plt.title("Precision-Recall Curve")
+plt.legend()
+plt.show()
+```
+
+## ROC-AUC Versus PR-AUC
+
+Neither metric is universally superior.
+
+ROC-AUC emphasizes ranking across positives and negatives.
+
+PR-AUC emphasizes the positive predictions and is sensitive to prevalence.
+
+Choose based on the scientific or operational problem.
+
+## Calibration
+
+## Discrimination Is Not Calibration
+
+Suppose among cases assigned probability $0.80$, only 45% experience the outcome.
+
+The model may still rank observations well, but its probabilities are poorly calibrated.
+
+Calibration asks whether:
+
+$$
+P(Y=1\mid \hat p=p)
+\approx p.
+$$
+
+## Brier Score
+
+For binary outcomes:
+
+$$
+Brier
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(\hat p_i-y_i)^2.
+$$
+
+Lower is better.
+
+The Brier score reflects probability accuracy, combining aspects of calibration and discrimination.
+
+## Calibration Curve
+
+```{python}
+#| label: fig-calibration
+#| fig-cap: "Calibration compares predicted probabilities with observed outcome frequencies."
+
+from sklearn.calibration import calibration_curve
+
+observed, predicted = calibration_curve(
+    y_test,
+    prob,
+    n_bins=7,
+    strategy="quantile"
+)
+
+plt.figure(figsize=(7, 5))
+plt.plot(
+    predicted,
+    observed,
+    marker="o",
+    label="Logistic regression"
+)
+plt.plot(
+    [0, 1],
+    [0, 1],
+    linestyle="--",
+    label="Perfect calibration"
+)
+plt.xlabel("Mean predicted probability")
+plt.ylabel("Observed positive fraction")
+plt.title("Calibration Curve")
+plt.legend()
+plt.show()
+```
+
+## Calibration Depends on Context
+
+Calibration can change when prevalence or population characteristics change.
+
+A model calibrated in one hospital, university, year, or region may not remain calibrated elsewhere.
+
+## Decision Thresholds
+
+## Probability Is Not the Decision
+
+A model can estimate:
+
+$$
+P(Y=1\mid X)=0.37.
+$$
+
+Whether we act depends on the decision problem.
+
+The threshold is not a mathematical constant.
+
+## Threshold Tradeoffs
+
+```{python}
+threshold_rows = []
+
+for threshold in np.linspace(
+    .10,
+    .90,
+    9
+):
+    threshold_pred = (
+        prob >= threshold
+    ).astype(int)
+
+    tn_i, fp_i, fn_i, tp_i = confusion_matrix(
+        y_test,
+        threshold_pred,
+        labels=[0, 1]
+    ).ravel()
+
+    sensitivity_i = (
+        tp_i / (tp_i + fn_i)
+        if tp_i + fn_i > 0
+        else np.nan
+    )
+
+    specificity_i = (
+        tn_i / (tn_i + fp_i)
+        if tn_i + fp_i > 0
+        else np.nan
+    )
+
+    threshold_rows.append({
+        "Threshold": threshold,
+        "Sensitivity": sensitivity_i,
+        "Specificity": specificity_i,
+        "False Positives": fp_i,
+        "False Negatives": fn_i
+    })
+
+threshold_df = pd.DataFrame(
+    threshold_rows
+)
+
+threshold_df.round(3)
+```
+
+## Visualize Threshold Tradeoffs
+
+```{python}
+#| label: fig-threshold-tradeoff
+#| fig-cap: "Changing the classification threshold changes sensitivity and specificity."
+
+plt.figure(figsize=(8, 5))
+plt.plot(
+    threshold_df["Threshold"],
+    threshold_df["Sensitivity"],
+    marker="o",
+    label="Sensitivity"
+)
+plt.plot(
+    threshold_df["Threshold"],
+    threshold_df["Specificity"],
+    marker="o",
+    label="Specificity"
+)
+plt.xlabel("Decision threshold")
+plt.ylabel("Metric value")
+plt.title("Threshold Tradeoff")
+plt.legend()
+plt.show()
+```
+
+## Error Costs
+
+Suppose a false negative costs $C_{FN}$ and a false positive costs $C_{FP}$.
+
+A simple empirical cost is:
+
+$$
+Cost(c)
+=
+C_{FN}FN(c)
++
+C_{FP}FP(c).
+$$
+
+The preferred threshold may depend on these consequences.
+
+But assigning costs is a substantive decision—not merely a modeling choice.
+
+## Regression Evaluation
+
+## Mean Absolute Error
+
+$$
+MAE
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+|y_i-\hat y_i|.
+$$
+
+MAE is expressed in the outcome's original units.
+
+## Mean Squared Error
+
+$$
+MSE
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat y_i)^2.
+$$
+
+Squaring gives larger errors greater influence.
+
+## Root Mean Squared Error
+
+$$
+RMSE
+=
+\sqrt{MSE}.
+$$
+
+RMSE returns to the original outcome units.
+
+## Coefficient of Determination
+
+$$
+R^2
+=
+1-
+\frac{
+\sum_i(y_i-\hat y_i)^2
+}{
+\sum_i(y_i-\bar y)^2
+}.
+$$
+
+$R^2$ compares squared error with a mean-prediction baseline.
+
+A negative test $R^2$ is possible.
+
+## Metric Choice Encodes Values
+
+MAE and RMSE answer different questions.
+
+If rare large errors are especially consequential, RMSE may reflect that more strongly.
+
+Metric selection is partly a decision about what kinds of mistakes matter.
+
+## Resampling and Cross-Validation
+
+## Why a Single Split Is Unstable
+
+One train/test split can be unusually easy or difficult.
+
+Cross-validation evaluates multiple partitions.
+
+For $K$-fold cross-validation:
+
+$$
+\widehat R_{CV}
+=
+\frac{1}{K}
+\sum_{k=1}^{K}
+\widehat R_k.
+$$
+
+Each observation is used for validation in one fold and training in the others.
+
+## Cross-Validation Demonstration
+
+```{python}
+from sklearn.model_selection import (
+    StratifiedKFold,
+    cross_val_score
+)
+
+cv = StratifiedKFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=42
+)
+
+cv_auc = cross_val_score(
+    model,
+    X,
+    y,
+    cv=cv,
+    scoring="roc_auc"
+)
+
+pd.Series(
+    cv_auc,
+    name="ROC-AUC"
+)
+```
+
+```{python}
+pd.Series({
+    "Mean ROC-AUC": cv_auc.mean(),
+    "SD across folds": cv_auc.std(ddof=1)
+}).round(3)
+```
+
+## Standard Deviation Across Folds Is Not a Confidence Interval
+
+Fold scores are dependent because training sets overlap.
+
+Therefore:
+
+$$
+\bar x\pm1.96\frac{s}{\sqrt K}
+$$
+
+should not automatically be presented as a valid confidence interval for cross-validation performance.
+
+Uncertainty estimation requires careful attention to the resampling design and target estimand.
+
+## Repeated Cross-Validation
+
+Repeating shuffled $K$-fold cross-validation can reveal sensitivity to partitioning.
+
+```{python}
+from sklearn.model_selection import (
+    RepeatedStratifiedKFold
+)
+
+repeated_cv = RepeatedStratifiedKFold(
+    n_splits=5,
+    n_repeats=5,
+    random_state=42
+)
+
+repeated_auc = cross_val_score(
+    model,
+    X,
+    y,
+    cv=repeated_cv,
+    scoring="roc_auc"
+)
+
+pd.Series({
+    "Mean ROC-AUC": repeated_auc.mean(),
+    "SD of resampled scores": repeated_auc.std(ddof=1),
+    "Minimum": repeated_auc.min(),
+    "Maximum": repeated_auc.max()
+}).round(3)
+```
+
+Repeated resampling describes variability across partitions, but inferential interpretation still depends on the design.
+
+## Hyperparameter Tuning and Nested Cross-Validation
+
+## Selection Creates Optimism
+
+Suppose we evaluate 100 hyperparameter configurations and report the best cross-validation score.
+
+Some configurations benefit from sampling noise.
+
+Selecting the maximum tends to produce optimism.
+
+## Nested Cross-Validation
+
+Nested cross-validation separates:
+
+- **inner loop:** hyperparameter selection;
+- **outer loop:** model assessment.
+
+Conceptually:
+
+$$
+\boxed{
+\text{outer training set}
+\rightarrow
+\text{inner tuning}
+\rightarrow
+\text{selected model}
+\rightarrow
+\text{outer test fold}
+}
+$$
+
+The outer test fold is not used to choose hyperparameters.
+
+## Nested CV Example
+
+```{python}
+from sklearn.model_selection import (
+    GridSearchCV
+)
+
+param_grid = {
+    "model__C": [
+        .01,
+        .1,
+        1,
+        10,
+        100
+    ]
+}
+
+inner_cv = StratifiedKFold(
+    n_splits=4,
+    shuffle=True,
+    random_state=1
+)
+
+outer_cv = StratifiedKFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=42
+)
+
+search = GridSearchCV(
+    model,
+    param_grid=param_grid,
+    scoring="roc_auc",
+    cv=inner_cv
+)
+
+nested_auc = cross_val_score(
+    search,
+    X,
+    y,
+    cv=outer_cv,
+    scoring="roc_auc"
+)
+
+pd.Series(
+    nested_auc,
+    name="Outer-fold ROC-AUC"
+)
+```
+
+```{python}
+pd.Series({
+    "Nested CV mean ROC-AUC": nested_auc.mean(),
+    "Outer-fold SD": nested_auc.std(ddof=1)
+}).round(3)
+```
+
+Nested cross-validation estimates the performance of the **model-selection procedure**, not merely one fixed hyperparameter configuration.
+
+## Uncertainty in Performance
+
+## A Metric Without Uncertainty Is Incomplete
+
+Suppose:
+
+$$
+AUC=0.84.
+$$
+
+Would we interpret it differently if a plausible interval were:
+
+$$
+[0.83,0.85]
+$$
+
+versus:
+
+$$
+[0.68,0.95]?
+$$
+
+Point estimates conceal precision.
+
+## Bootstrap Confidence Interval for Test-Set AUC
+
+For a fixed trained model and an independent test set, we can bootstrap test observations.
+
+```{python}
+rng = np.random.default_rng(
+    42
+)
+
+bootstrap_auc = []
+
+y_test_array = np.asarray(
+    y_test
+)
+
+prob_array = np.asarray(
+    prob
+)
+
+n_test = len(
+    y_test_array
+)
+
+for _ in range(1000):
+    indices = rng.integers(
+        0,
+        n_test,
+        size=n_test
+    )
+
+    y_boot = y_test_array[
+        indices
+    ]
+
+    p_boot = prob_array[
+        indices
+    ]
+
+    # ROC-AUC is undefined if a bootstrap
+    # sample contains only one class.
+    if np.unique(
+        y_boot
+    ).size < 2:
+        continue
+
+    bootstrap_auc.append(
+        roc_auc_score(
+            y_boot,
+            p_boot
+        )
+    )
+
+auc_ci = np.quantile(
+    bootstrap_auc,
+    [.025, .975]
+)
+
+{
+    "Test ROC-AUC": roc_auc_score(
+        y_test,
+        prob
+    ),
+    "95% bootstrap lower": auc_ci[0],
+    "95% bootstrap upper": auc_ci[1]
+}
+```
+
+This interval reflects uncertainty from the finite test sample **conditional on the fitted model and sampling assumptions**.
+
+It does not automatically capture uncertainty from model development, dataset construction, hyperparameter search, or future distribution shift.
+
+## Visualize Bootstrap Performance
+
+```{python}
+#| label: fig-bootstrap-auc
+#| fig-cap: "Bootstrap resampling illustrates uncertainty in test-set ROC-AUC for a fixed fitted model."
+
+plt.figure(figsize=(8, 5))
+plt.hist(
+    bootstrap_auc,
+    bins=25
+)
+plt.axvline(
+    auc_ci[0],
+    linestyle="--"
+)
+plt.axvline(
+    auc_ci[1],
+    linestyle="--"
+)
+plt.xlabel("Bootstrap ROC-AUC")
+plt.ylabel("Frequency")
+plt.title("Bootstrap Distribution of Test ROC-AUC")
+plt.show()
+```
 
 ## Comparing Models
-### Baselines
-### Performance Distributions
-### Confidence Intervals
-### Practical Versus Statistical Differences
-### External Validation
 
-## Learning Curves
-### Diagnosing Bias
-### Diagnosing Variance
+## Tiny Differences Need Context
 
-## Hands-On Practice
-Compare several models under identical repeated cross-validation and preserve an untouched final test set.
+Suppose:
 
-## Common Mistakes
-- Repeatedly checking test performance.
-- Selecting folds that violate the data structure.
-- Reporting only the winning configuration.
-- Ignoring uncertainty around metrics.
+$$
+AUC_A=0.873
+$$
+
+and
+
+$$
+AUC_B=0.878.
+$$
+
+It is tempting to announce that Model B is superior.
+
+But ask:
+
+- Is the difference stable?
+- Is it practically meaningful?
+- Was the same test set used?
+- How much uncertainty surrounds the difference?
+- Does Model B cost substantially more?
+- Is calibration better or worse?
+- Does subgroup performance change?
+
+## Paired Evaluation
+
+When two models are evaluated on the same observations, their performance estimates are paired.
+
+A useful bootstrap strategy resamples observations and calculates:
+
+$$
+\Delta=AUC_B-AUC_A
+$$
+
+for each resample.
+
+The resulting distribution focuses directly on the performance difference.
+
+## Statistical Significance Is Not Practical Significance
+
+Even a precisely estimated tiny improvement may not justify:
+
+- greater latency;
+- higher financial cost;
+- reduced interpretability;
+- more compute;
+- greater maintenance burden;
+- poorer calibration.
+
+Model selection is a multi-criteria decision.
+
+## Validation Beyond Random Splits
+
+## Internal Validation
+
+Internal validation estimates performance within the development data-generating environment.
+
+Examples include:
+
+- cross-validation;
+- bootstrap validation;
+- held-out random test sets.
+
+## Temporal Validation
+
+Train on earlier data and test on later data:
+
+$$
+\text{past}
+\rightarrow
+\text{future}.
+$$
+
+This often better approximates deployment.
+
+## Geographic or Site Validation
+
+Train at some locations and test at another.
+
+This evaluates transportability across environments.
+
+## External Validation
+
+External validation uses data collected independently from the development dataset.
+
+This can reveal failures invisible to internal resampling.
+
+## External Validation Is Not a Ceremonial Final Step
+
+If a model will be used across institutions, populations, or time periods, external validation addresses the actual scientific claim.
+
+## Distribution Shift
+
+## The Data-Generating Process Can Change
+
+Training assumes future observations are sufficiently related to the development distribution.
+
+But:
+
+$$
+P_{train}(X,Y)
+\neq
+P_{deploy}(X,Y)
+$$
+
+may occur.
+
+## Covariate Shift
+
+The predictor distribution changes:
+
+$$
+P_{train}(X)
+\neq
+P_{deploy}(X),
+$$
+
+while the conditional relationship may remain relatively stable.
+
+## Label Shift
+
+Outcome prevalence changes:
+
+$$
+P_{train}(Y)
+\neq
+P_{deploy}(Y).
+$$
+
+## Concept Shift
+
+The relationship between predictors and outcome changes:
+
+$$
+P_{train}(Y\mid X)
+\neq
+P_{deploy}(Y\mid X).
+$$
+
+This can be especially damaging.
+
+## Examples
+
+Education:
+
+- grading policy changes;
+- new curriculum;
+- different student populations;
+- AI-assisted coursework changes behavioral traces.
+
+Health:
+
+- new treatment protocols;
+- coding changes;
+- new diagnostic technology;
+- changing disease prevalence.
+
+Finance:
+
+- market regimes;
+- regulation;
+- macroeconomic shocks;
+- adversarial adaptation.
+
+A static test score cannot guarantee future validity.
+
+## Subgroup Evaluation
+
+## Overall Performance Can Hide Important Differences
+
+Suppose overall sensitivity is 0.90.
+
+Subgroup sensitivities might be:
+
+$$
+0.96,\quad0.91,\quad0.72.
+$$
+
+The aggregate can conceal meaningful failures.
+
+## Evaluate Relevant Groups
+
+Potential grouping variables depend on the scientific and deployment context.
+
+Subgroup evaluation should be:
+
+- theoretically justified;
+- adequately powered;
+- interpreted with uncertainty;
+- privacy-conscious;
+- connected to possible mechanisms.
+
+## Small Groups Produce Noisy Estimates
+
+If a subgroup has only 12 positive cases, one additional error can dramatically change sensitivity.
+
+Report denominators and uncertainty.
+
+## Subgroup Metrics Do Not Solve Fairness
+
+Fairness involves:
+
+- outcomes;
+- opportunities;
+- measurement;
+- representation;
+- decision processes;
+- institutional context;
+- consequences.
+
+Metric parity is one piece of a larger question.
+
+## Evaluation Under Dependence
+
+## Observations Are Often Clustered
+
+Data may contain:
+
+- repeated visits per patient;
+- multiple semesters per student;
+- transactions per customer;
+- images per person;
+- posts per author.
+
+Random row splitting can leak identity or cluster-specific information.
+
+## Split at the Generalization Unit
+
+If deployment is to new patients, split by patient.
+
+If the claim concerns new universities, split by university.
+
+If prediction concerns future semesters, split by time.
+
+The correct split follows the scientific claim.
+
+## Leaderboards and Adaptive Overfitting
+
+## Public Test Sets Can Become Training Data Indirectly
+
+If researchers repeatedly submit models to a leaderboard and modify methods based on scores, they adapt to the benchmark.
+
+Over time:
+
+$$
+\text{benchmark feedback}
+\rightarrow
+\text{community-level overfitting}.
+$$
+
+A famous benchmark can cease to represent truly unseen evidence.
+
+## Benchmark Performance Is Not Scientific Universality
+
+A model that dominates one benchmark may fail under:
+
+- different prevalence;
+- different institutions;
+- new time periods;
+- alternative labeling;
+- different costs;
+- adversarial conditions.
+
+Benchmarks are useful instruments, not reality itself.
+
+## Three Tracks
+
+## Health Track
+
+Consider a model predicting a health outcome.
+
+A research-grade evaluation should examine:
+
+- sensitivity and specificity;
+- calibration;
+- clinically meaningful thresholds;
+- decision consequences;
+- temporal validation;
+- external validation;
+- relevant subgroup performance;
+- missingness and measurement changes.
+
+A high ROC-AUC alone is insufficient for clinical usefulness.
+
+## Education Track
+
+Consider a model predicting student persistence.
+
+Evaluation should distinguish:
+
+- prediction time;
+- student-level splitting;
+- institution-level transportability;
+- calibration;
+- intervention thresholds;
+- subgroup performance;
+- whether predictions lead to beneficial support.
+
+Predicting withdrawal is not equivalent to preventing withdrawal.
+
+## Open ML Benchmark Track
+
+Benchmark work can compare algorithms under controlled resampling.
+
+Students should report:
+
+- repeated performance;
+- uncertainty;
+- computational cost;
+- calibration;
+- paired differences;
+- sensitivity to preprocessing;
+- robustness to distribution perturbation.
+
+The goal is not merely to identify a winner but to characterize when models succeed or fail.
+
+## Beyond the Algorithm: Evidence Is Always Conditional
+
+::: {.callout-note icon=false}
+## What Have We Actually Learned?
+
+A model achieves 92% accuracy on a test set.
+
+The number appears objective.
+
+But its meaning depends on a chain of human decisions:
+
+- who entered the dataset;
+- what was measured;
+- how the target was defined;
+- when prediction occurred;
+- how data were split;
+- what metric was selected;
+- what comparison was considered meaningful.
+
+Evaluation does not remove judgment.
+
+It disciplines judgment by making claims testable.
+
+Scientific humility therefore requires us to say:
+
+> **This model performed this well, under these conditions, for this outcome, using this evaluation design.**
+
+That statement is less dramatic than:
+
+> “The model works.”
+
+But it is much more informative.
+
+The goal of evaluation is not to produce certainty.
+
+It is to define the boundaries within which confidence is justified.
+:::
+
+## AI Pair Programmer: Declare the Winner
+
+Ask an AI assistant:
+
+> “Model A has ROC-AUC 0.901 and Model B has ROC-AUC 0.904. Model B is obviously better. Write a paragraph recommending that we deploy Model B.”
+
+Audit the response.
+
+A rigorous assistant should ask about:
+
+- uncertainty;
+- paired evaluation;
+- calibration;
+- threshold performance;
+- subgroup performance;
+- external validation;
+- cost;
+- latency;
+- interpretability;
+- operational consequences.
+
+Rewrite the recommendation using appropriately bounded evidence.
+
+## Hands-On Lab: Evaluation Audit
+
+Using a classification problem:
+
+1. define the intended prediction claim;
+2. identify the true generalization unit;
+3. establish an untouched test set or external evaluation set;
+4. fit a baseline;
+5. report class prevalence;
+6. calculate a confusion matrix;
+7. report sensitivity, specificity, precision, and F1;
+8. report ROC-AUC and PR-AUC;
+9. assess calibration;
+10. calculate Brier score;
+11. examine several decision thresholds;
+12. define asymmetric error costs;
+13. use cross-validation for development;
+14. conduct nested CV when tuning;
+15. quantify uncertainty;
+16. compare models using paired observations;
+17. evaluate relevant subgroups;
+18. simulate or identify distribution shift;
+19. document computational cost;
+20. write a bounded conclusion stating exactly what the evidence supports.
+
+## Practitioner Track
+
+A practitioner should be able to select metrics, construct leakage-safe validation, assess calibration, choose thresholds based on consequences, compare models, and identify when deployment conditions differ from development conditions.
+
+## Researcher Track
+
+A researcher should additionally define the performance estimand, justify resampling, separate tuning from assessment, quantify uncertainty, conduct paired comparisons, perform temporal/external validation, analyze subgroup performance, document distribution shift, and constrain conclusions to the evaluation design.
+
+## Research Studio
+
+Design a model-evaluation study suitable for a conference or journal paper.
+
+Specify:
+
+1. scientific claim;
+2. target population;
+3. unit of analysis;
+4. prediction timestamp;
+5. target definition;
+6. development dataset;
+7. external dataset if available;
+8. baseline;
+9. candidate models;
+10. preprocessing boundary;
+11. tuning procedure;
+12. inner validation;
+13. outer/final assessment;
+14. primary metric;
+15. secondary metrics;
+16. calibration;
+17. threshold strategy;
+18. decision costs;
+19. uncertainty method;
+20. paired comparison method;
+21. subgroup analyses;
+22. temporal validation;
+23. external validation;
+24. shift analysis;
+25. computational cost;
+26. reproducibility plan;
+27. unsupported claims;
+28. scholarly contribution.
+
+## Professor's Challenge: The 94% Accurate Early-Warning System
+
+A university develops a model to predict which students will fail a first-year quantitative course.
+
+The dataset contains 18,000 course enrollments collected over six years.
+
+Researchers randomly split individual rows into training and test sets.
+
+Some students appear in multiple semesters.
+
+The final model achieves:
+
+$$
+Accuracy=94\%
+$$
+
+and
+
+$$
+ROC\text{-}AUC=0.91.
+$$
+
+Researchers tune the model repeatedly while checking test-set AUC.
+
+They report no calibration analysis, no baseline comparison, and no subgroup results.
+
+The university proposes automatically sending students with predicted risk above 0.50 into a mandatory remedial program.
+
+Critique:
+
+- row-level splitting;
+- repeated students;
+- test-set reuse;
+- class prevalence;
+- accuracy;
+- threshold choice;
+- calibration;
+- uncertainty;
+- subgroup performance;
+- intervention consequences;
+- temporal validation;
+- external validity;
+- whether prediction demonstrates that mandatory remediation helps.
+
+Redesign the complete evaluation.
 
 ## Knowledge Check
-1. What is the purpose of a validation set?
-2. Why use nested cross-validation?
-3. When is random K-fold inappropriate?
-4. Why should model comparisons include uncertainty?
 
-## Real-World Case Study
-### A Reproducible Model Benchmark
-Benchmark models on a public dataset using a preregistered evaluation protocol.
-
-## Professor's Challenge
-Model A's mean AUC is 0.842 and Model B's is 0.845. Is Model B meaningfully better?
-
-## Research Extension
-Design a benchmarking paper with robust validation, uncertainty, and external replication.
+1. What is generalization error?
+2. Why is training performance optimistic?
+3. How do training, validation, and test data differ?
+4. How can repeated test-set inspection create leakage?
+5. When can accuracy be misleading?
+6. What is sensitivity?
+7. What is specificity?
+8. How does precision differ from sensitivity?
+9. What does F1 summarize?
+10. What does ROC-AUC measure?
+11. Why can PR-AUC be useful under class imbalance?
+12. What is calibration?
+13. How does calibration differ from discrimination?
+14. What does the Brier score measure?
+15. Why is 0.50 not a universal classification threshold?
+16. How can error costs affect threshold selection?
+17. How do MAE and RMSE differ?
+18. Why can test $R^2$ be negative?
+19. What does $K$-fold cross-validation estimate?
+20. Why is one random split potentially unstable?
+21. Why is fold-score SD not automatically a confidence interval?
+22. What problem does nested cross-validation address?
+23. What does the outer loop of nested CV estimate?
+24. Why should performance estimates include uncertainty?
+25. Why should model comparisons be paired when evaluated on the same observations?
+26. How does practical significance differ from statistical significance?
+27. What is temporal validation?
+28. What is external validation?
+29. What is covariate shift?
+30. What is label shift?
+31. What is concept shift?
+32. Why can overall metrics hide subgroup failures?
+33. Why can row-level random splitting be invalid for clustered data?
+34. How can leaderboard use cause adaptive overfitting?
+35. Why does strong predictive evaluation not establish causal benefit?
 
 ## Reproducibility Check
-Freeze split logic, folds, search spaces, metrics, seeds, and the final evaluation protocol before inspecting final results.
+
+Record:
+
+- scientific claim;
+- target population;
+- unit of analysis;
+- prediction timestamp;
+- outcome definition;
+- inclusion/exclusion criteria;
+- sample size;
+- class prevalence;
+- group/cluster structure;
+- split strategy;
+- preprocessing pipeline;
+- baseline model;
+- candidate models;
+- hyperparameter search space;
+- tuning procedure;
+- cross-validation design;
+- random seeds;
+- final test set;
+- external test set;
+- primary metric;
+- secondary metrics;
+- calibration method;
+- threshold strategy;
+- uncertainty method;
+- paired comparison procedure;
+- subgroup definitions;
+- temporal validation;
+- shift analyses;
+- compute time;
+- hardware/software versions;
+- code;
+- data version;
+- model artifacts;
+- deviations from the preregistered plan where applicable.
 
 ## Key Takeaways
-- Evaluation design determines the credibility of performance claims.
-- The test set should approximate genuinely unseen data.
-- Hyperparameter optimization must occur inside validation.
+
+- Evaluation begins with the claim the model is supposed to support.
+- Training performance is not evidence of generalization.
+- Validation supports selection; an untouched test set supports final assessment.
+- Accuracy can conceal severe failure under imbalance.
+- ROC-AUC measures ranking discrimination, not calibration.
+- PR-AUC can be informative when positive cases are uncommon.
+- Probability calibration and discrimination answer different questions.
+- Classification thresholds should reflect consequences rather than habit.
+- Cross-validation reduces dependence on one arbitrary split.
+- Nested cross-validation separates hyperparameter selection from outer assessment.
+- Performance estimates require uncertainty.
+- Tiny metric differences should not automatically determine model choice.
+- External and temporal validation address stronger generalization claims.
+- Distribution shift can invalidate previously strong performance.
+- Subgroup averages and overall averages can tell different stories.
+- Evaluation splits must respect the real generalization unit.
+- Repeated benchmark feedback can produce adaptive overfitting.
+- Predictive performance does not establish causal benefit.
+- Evaluation does not eliminate judgment; it makes the basis of judgment explicit.
