@@ -1,15 +1,96 @@
+---
+title: "Machine Learning Using Python"
+subtitle: "Foundations, Algorithms, Applications, and Reproducible Research"
+author: "Itauma Itauma"
+---
+
 # Preface {.unnumbered}
 
 ## About This Book
 
-*Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research* is designed for data enthusiasts, analysts, students, researchers, and professionals who want to develop a deeper understanding of machine learning using Python.
+*Machine Learning Using Python* is for readers who want to move beyond calling machine-learning functions toward understanding what models do, why they work, how they fail, and what evidence is required before their predictions should be trusted.
 
-This Second Edition integrates conceptual foundations, mathematical reasoning, practical programming, real-world applications, responsible machine learning, and reproducible research.
+The book combines mathematical reasoning, statistical foundations, executable Python, real-world applications, responsible machine learning, and reproducible research.
 
-## Who This Book Is For
+$$
+\boxed{\text{Machine Learning}=\text{Algorithms}+\text{Data}+\text{Evidence}+\text{Judgment}}
+$$
 
-This book is intended for readers who want to move beyond simply fitting machine learning models toward understanding how algorithms work, how models should be evaluated, and how machine learning can be applied responsibly to meaningful real-world problems.
+Machine learning is not merely the construction of predictive models. It is the disciplined use of data, computation, and evidence to reason under uncertainty.
 
-## Second Edition
+## Why a Second Edition?
 
-This edition substantially expands the first edition with greater emphasis on mathematical foundations, modern machine learning methods, hands-on practice, health and education applications, research design, reproducibility, and responsible artificial intelligence.
+The First Edition introduced machine learning using Python through accessible explanations and practical examples. The Second Edition responds not simply to new algorithms, but to a changed practice of data science.
+
+It is no longer enough to ask whether a model predicts accurately. We must also ask whether the problem was formulated appropriately, whether evaluation supports the claim, whether performance generalizes, what happens when predictions affect people, and whether another researcher can reproduce the evidence.
+
+The Second Edition therefore expands the book into a graduate-level treatment of machine-learning foundations, algorithms, applications, responsible practice, and reproducible computational research.
+
+## What Is New?
+
+Major additions include stronger statistical and mathematical foundations; explicit problem formulation; reproducible data preparation; deeper supervised and unsupervised learning; neural networks; natural language processing; generative AI; calibration, uncertainty, and validation; responsible ML; reproducible research; three longitudinal application tracks; hands-on laboratories; knowledge checks; Professor's Challenges; AI Pair Programmer activities; and research-oriented exercises.
+
+The goal is not to expose readers to the largest possible collection of algorithms. It is to develop the judgment required to formulate, implement, evaluate, question, and communicate machine-learning work.
+
+## From Learning Algorithms to Doing Data Science
+
+A classroom workflow may look like:
+
+$$
+\text{load data}\rightarrow\text{fit model}\rightarrow\text{predict}\rightarrow\text{score}.
+$$
+
+A mature workflow is closer to:
+
+$$
+\text{question}\rightarrow\text{measurement}\rightarrow\text{data}\rightarrow\text{assumptions}\rightarrow\text{model}\rightarrow\text{evaluation}\rightarrow\text{interpretation}\rightarrow\text{decision}\rightarrow\text{reproducible evidence}.
+$$
+
+Readers will therefore be asked not only to write code, but to defend analytical choices.
+
+## A Philosophy of Machine Learning
+
+Algorithms optimize objectives that humans specify. A loss function can tell an optimizer what numerical quantity to minimize. It cannot determine whether the target is meaningful, whether the data represent the intended population, whether an intervention is justified, or whether a resulting decision is fair.
+
+Technical reasoning asks, *How does the algorithm work?*
+
+Critical reasoning asks, *What must be true for this result to mean what we claim it means?*
+
+Responsible reasoning asks, *What happens if someone acts on this prediction?*
+
+All three belong to data science.
+
+## Machine Learning in the Age of Generative AI
+
+This book treats generative AI neither as something learners must avoid nor as an epistemic authority.
+
+$$
+\boxed{\text{AI Output}+\text{Human Verification}+\text{Domain Knowledge}+\text{Empirical Evidence}}
+$$
+
+AI Pair Programmer activities ask readers to inspect, test, critique, and improve AI-generated reasoning and code.
+
+## From Learner to Practitioner and Researcher
+
+A reader may progress through:
+
+$$
+\text{Learner}\rightarrow\text{Coder}\rightarrow\text{Modeler}\rightarrow\text{Critical Evaluator}\rightarrow
+\begin{cases}\text{Practitioner}\\\text{Researcher}\end{cases}
+$$
+
+Both destinations require responsible reasoning and reproducibility.
+
+## Acknowledgments
+
+A book develops through conversations—with students, colleagues, collaborators, mentors, reviewers, and communities of scholars and practitioners.
+
+The final acknowledgments for the Second Edition will be completed before archival release.
+
+## Citation and Edition Status
+
+This is the **Second Edition** of *Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research*.
+
+During active development, readers should use the citation information supplied with the repository. A persistent DOI and final preferred citation will be added when the archival Second Edition is released.
+
+The educational content and original executable code are distributed under the licenses identified in the project repository.

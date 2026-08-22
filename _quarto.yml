@@ -9,6 +9,7 @@ book:
 
   chapters:
     - index.qmd
+    - intro.qmd
 
     - part: "Part I — Foundations"
       chapters:
@@ -40,7 +41,7 @@ book:
         - part-05-modern-ml/14-natural-language-processing.qmd
         - part-05-modern-ml/15-generative-ai.qmd
 
-    - part: "Part VI — Reliable and Research-Ready Machine Learning"
+    - part: "Part VI — Research, Responsibility, and Reproducibility"
       chapters:
         - part-06-research/16-model-evaluation.qmd
         - part-06-research/17-responsible-ml.qmd

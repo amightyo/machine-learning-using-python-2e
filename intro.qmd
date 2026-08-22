@@ -1,5 +1,155 @@
-# Introduction
+---
+title: "How to Use This Book"
+number-sections: false
+---
 
-This is a book created from markdown and executable code.
+# How to Use This Book {.unnumbered}
 
-See @knuth84 for additional discussion of literate programming.
+Machine learning can be learned in several ways. This book supports readers who need a systematic introduction, practitioners strengthening their modeling judgment, researchers preparing empirical studies, and readers concentrating on modern AI.
+
+## Who This Book Is For
+
+The book is designed for graduate students, data enthusiasts, analysts, researchers, instructors, professionals, and self-directed learners who want to move from Python examples toward defensible analytical practice.
+
+## What You Should Know Before Beginning
+
+Some Python familiarity is useful, but Chapter 2 develops the programming concepts used throughout the book. Introductory statistics is helpful, while Chapter 3 develops the statistical and mathematical foundations needed for later chapters.
+
+Mathematics is used to clarify algorithms rather than create unnecessary abstraction. When an equation appears, ask:
+
+1. What quantities does it relate?
+2. What mechanism or assumption does it represent?
+3. How does it connect to the executable implementation?
+
+## The Architecture of the Book
+
+The book has six parts:
+
+1. **Foundations** — Chapters 1–3.
+2. **Machine Learning Workflow** — Chapters 4–5.
+3. **Supervised Learning** — Chapters 6–10.
+4. **Unsupervised Learning** — Chapters 11–12.
+5. **Modern Machine Learning** — Chapters 13–15.
+6. **Research, Responsibility, and Reproducibility** — Chapters 16–18.
+
+$$
+\text{Foundations}\rightarrow\text{Workflow}\rightarrow\text{Models}\rightarrow\text{Modern AI}\rightarrow\text{Evaluation}\rightarrow\text{Responsibility}\rightarrow\text{Reproducible Research}.
+$$
+
+## Four Reading Pathways
+
+### Foundational Path
+
+For systematic study, read Chapters 1–18 sequentially.
+
+### Practitioner Path
+
+A possible route is Chapters 1, 4, 5, selected algorithm chapters, and Chapters 16–18. Evaluation, responsibility, and reproducibility remain professional competencies rather than optional research topics.
+
+### Researcher Path
+
+A possible route is Chapters 1, 3–5, relevant method chapters, and Chapters 16–18. Give particular attention to problem formulation, leakage, uncertainty, external validation, provenance, and reproducibility.
+
+### Modern AI Path
+
+A possible route is Chapters 1, 3, 5, 13–15, and 16–18. Powerful models still require rigorous evaluation and responsible use.
+
+## Three Application Tracks
+
+### Health
+
+The Health Track uses health outcomes, wellness, risk prediction, public health, clinical reasoning, and responsible health analytics.
+
+### Education
+
+The Education Track uses learning, student success, persistence, educational measurement, institutional analytics, and responsible learning analytics.
+
+### Open ML
+
+The Open ML Track uses public benchmark data, general analytical problems, methodological comparisons, and applications beyond the two primary domains.
+
+::: {.callout-tip icon=false}
+## You Do Not Have to Choose One Track
+
+Follow one track longitudinally for domain continuity, or move among all three to compare how the same machine-learning principle changes across contexts.
+:::
+
+## From Algorithm to Research Question
+
+Applying an algorithm is not automatically a research contribution.
+
+> Fit Random Forest to a public dataset and report accuracy.
+
+is an application.
+
+Research asks what substantive or methodological uncertainty the analysis resolves.
+
+$$
+\boxed{\text{Algorithm Application}\neq\text{Research Contribution}}
+$$
+
+Research Studio activities help readers make that transition.
+
+## How Chapters Are Designed
+
+Recurring elements include **Learning Objectives**, mathematical development, **Hands-On Practice**, the three application tracks, **AI Pair Programmer**, **Professor's Challenge**, **Practitioner Track**, **Researcher Track**, **Research Studio**, **Knowledge Check**, **Reproducibility Check**, and **Key Takeaways**. Not every feature appears in every chapter; features are used when they advance the learning objective.
+
+## Notation and Conventions
+
+| Notation | Meaning |
+|---|---|
+| $n$ | number of observations |
+| $p$ | number of predictors/features |
+| $X\in\mathbb{R}^{n\times p}$ | feature/design matrix |
+| $\mathbf{x}_i$ | feature vector for observation $i$ |
+| $y_i$ | observed outcome |
+| $\hat y_i$ | predicted outcome |
+| $\hat p_i$ | predicted probability |
+| $\boldsymbol{\beta}$ | regression coefficients |
+| $\theta$ | generic model parameters |
+| $\hat\theta$ | estimated parameters |
+| $\mathcal{L}(\theta)$ | loss/objective function |
+| $P(Y\mid X)$ | conditional probability |
+| $E[X]$ | expected value |
+| $\operatorname{Var}(X)$ | variance |
+
+Additional notation is introduced where needed.
+
+## Software and Computational Environment
+
+Examples primarily use Python, NumPy, pandas, Matplotlib, and scikit-learn, with additional tools introduced when required. Exact dependencies should be obtained from the repository rather than hard-coded into prose.
+
+> The computational environment is part of the method.
+
+## Using Generative AI While Learning
+
+Generative AI can explain code, propose implementations, identify errors, and suggest alternatives. It can also invent APIs, fabricate citations, create leakage, choose inappropriate metrics, and produce persuasive but incorrect explanations.
+
+A useful workflow is:
+
+$$
+\text{Ask}\rightarrow\text{Inspect}\rightarrow\text{Test}\rightarrow\text{Verify}\rightarrow\text{Revise}\rightarrow\text{Document}.
+$$
+
+## Reproducibility From the Beginning
+
+As you work through the book, document data sources, preserve source data, record transformations, set seeds where appropriate, use leakage-safe pipelines, track dependencies, use version control, and generate figures and tables from code.
+
+Chapter 18 brings these practices together into a complete research workflow.
+
+## Teaching and Self-Study Pathways
+
+Supporting repository materials provide suggested designs for a 7-week graduate course, 14-week graduate course, research seminar, and guided self-study.
+
+## A Final Orientation
+
+Do not measure progress only by algorithms memorized. Learn to ask:
+
+- What problem am I solving?
+- What evidence would convince me?
+- What assumptions am I making?
+- What does the model fail to capture?
+- Who is affected by the result?
+- Can someone else reproduce what I did?
+
+Those questions turn algorithms into analytical discipline.
