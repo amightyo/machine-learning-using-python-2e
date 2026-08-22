@@ -455,6 +455,114 @@ The kernel does not magically make the data “nonlinear.”
 It changes the similarity representation used by the algorithm so that a linear solution in the induced feature space can represent nonlinear structure in the original space.
 :::
 
+## Representation Can Change the Difficulty of the Problem
+
+A classification problem can appear difficult partly because of the coordinates in which it is expressed.
+
+A transformation
+
+$$
+x\rightarrow\phi(x)
+$$
+
+can make structure easier to separate.
+
+### A Simple Feature Map
+
+```{python}
+#| label: fig-feature-map-svm
+#| fig-cap: "A nonlinear feature map can reveal a simpler geometry than the original representation."
+#| warning: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng_rep = np.random.default_rng(42)
+
+x_rep = np.linspace(-3, 3, 180)
+y_rep = (np.abs(x_rep) > 1.4).astype(int)
+
+x_rep_noisy = x_rep + rng_rep.normal(scale=0.08, size=len(x_rep))
+
+plt.figure(figsize=(8, 4.5))
+plt.scatter(
+    x_rep_noisy,
+    np.zeros_like(x_rep_noisy),
+    c=y_rep,
+    cmap="coolwarm",
+    s=28
+)
+plt.xlabel("Original feature x")
+plt.yticks([])
+plt.title("Original One-Dimensional Representation")
+plt.show()
+
+plt.figure(figsize=(8, 5))
+plt.scatter(
+    x_rep_noisy,
+    x_rep_noisy**2,
+    c=y_rep,
+    cmap="coolwarm",
+    s=28
+)
+plt.xlabel("x")
+plt.ylabel(r"$x^2$")
+plt.title("Transformed Representation")
+plt.show()
+```
+
+The observations did not change. The geometry available to the learner did.
+
+### Kernel as an Implicit Representation
+
+A kernel computes
+
+$$
+K(x_i,x_j)=\langle\phi(x_i),\phi(x_j)\rangle
+$$
+
+without always constructing \(\phi(x)\) explicitly.
+
+Kernel choice is therefore not merely a tuning option. It is an assumption about similarity and geometry.
+
+$$
+\boxed{\text{Kernel Choice}=\text{Assumption About Representation}}.
+$$
+
+### Bridge to Representation Learning
+
+Kernel methods motivate the broader progression
+
+$$
+\text{feature engineering}
+\rightarrow
+\text{kernel-induced representation}
+\rightarrow
+\text{learned representation}.
+$$
+
+Neural networks later learn intermediate representations:
+
+$$
+x\rightarrow h^{(1)}\rightarrow h^{(2)}\rightarrow\cdots\rightarrow h^{(L)}.
+$$
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Is Complexity in the World or in the Representation?
+
+A boundary can look complicated in one coordinate system and simple in another.
+
+A model never sees reality directly. It sees a representation.
+
+Part of machine learning is therefore deciding **what geometry the model should be allowed to perceive**.
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+If one kernel strongly outperforms another, do not conclude only that it is “better.” Ask what the result suggests about the geometry and representation of the problem, and whether that advantage persists under resampling and external validation.
+:::
+
 ## Common Kernels
 
 ### Linear Kernel
@@ -863,6 +971,10 @@ Redesign the experiment using nested or otherwise properly separated model selec
 16. Why can large $\gamma$ create highly flexible boundaries?
 17. What is SVR's $\epsilon$-insensitive idea?
 18. Why does better RBF performance not prove the true scientific mechanism is nonlinear?
+19. How can nonlinear transformation simplify a classification problem?
+20. What does a kernel compute conceptually?
+21. Why is kernel choice a representational assumption?
+22. How do kernels bridge classical feature engineering and neural representation learning?
 
 ## Reproducibility Check
 
@@ -904,3 +1016,7 @@ Record:
 - SVR extends margin-based reasoning to continuous outcomes.
 - Better nonlinear prediction does not establish a nonlinear causal mechanism.
 - Changing the representation can change the apparent difficulty of a problem.
+- Problem difficulty depends partly on representation.
+- Kernels define similarity in implicit feature spaces.
+- Kernel choice expresses an assumption about geometry.
+- Kernel methods provide a bridge to learned representations.

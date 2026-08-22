@@ -285,6 +285,106 @@ plt.show()
 
 A model can discriminate well and still produce poorly calibrated probabilities.
 
+## From Probability to Decision
+
+A classifier may estimate
+
+$$
+\hat p_i=P(Y_i=1\mid X_i),
+$$
+
+but real systems eventually require actions:
+
+$$
+\boxed{\text{Probability}\rightarrow\text{Threshold}\rightarrow\text{Decision}\rightarrow\text{Consequence}}.
+$$
+
+### Why 0.50 Is Not Universal
+
+The rule
+
+$$
+\hat Y=
+\begin{cases}
+1,&\hat p\ge0.50\\
+0,&\hat p<0.50
+\end{cases}
+$$
+
+is a convention, not a law.
+
+Thresholds should depend on false-positive and false-negative consequences, prevalence, intervention capacity, cost, benefit, and fairness.
+
+If false positives cost \(C_{FP}\) and false negatives cost \(C_{FN}\),
+
+$$
+Cost(t)=C_{FP}FP(t)+C_{FN}FN(t).
+$$
+
+### Threshold Choice Under Asymmetric Costs
+
+```{python}
+#| label: fig-threshold-cost
+#| fig-cap: "The cost-minimizing threshold can differ from 0.50 when classification errors have asymmetric consequences."
+#| warning: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+
+cost_fp = 1
+cost_fn = 6
+
+thresholds_dc = np.linspace(0.05, 0.95, 19)
+rows_dc = []
+
+for t_dc in thresholds_dc:
+    pred_dc = (prob >= t_dc).astype(int)
+
+    tn_dc, fp_dc, fn_dc, tp_dc = confusion_matrix(
+        y_test, pred_dc, labels=[0, 1]
+    ).ravel()
+
+    rows_dc.append({
+        "threshold": t_dc,
+        "false_positives": fp_dc,
+        "false_negatives": fn_dc,
+        "cost": cost_fp * fp_dc + cost_fn * fn_dc
+    })
+
+cost_df = pd.DataFrame(rows_dc)
+best_row_dc = cost_df.loc[cost_df["cost"].idxmin()]
+
+plt.figure(figsize=(8, 5))
+plt.plot(cost_df["threshold"], cost_df["cost"], marker="o")
+plt.axvline(best_row_dc["threshold"], linestyle="--")
+plt.xlabel("Decision threshold")
+plt.ylabel("Empirical decision cost")
+plt.title("Threshold Choice Under Asymmetric Error Costs")
+plt.show()
+
+best_row_dc
+```
+
+### Three Tracks
+
+**Health:** false negatives may delay diagnosis; false positives may trigger unnecessary testing.
+
+**Education:** false positives may be acceptable for supportive outreach but harmful for punitive intervention.
+
+**Open ML:** fraud thresholds balance missed fraud against blocked legitimate activity and investigator capacity.
+
+$$
+\boxed{\text{Best Ranking Model}\neq\text{Best Decision Policy}}.
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+A high AUC does not establish deployment readiness. Decision quality also depends on calibration, threshold selection, error consequences, capacity constraints, subgroup behavior, and downstream action.
+:::
+
 ## Threshold Selection as Decision Analysis
 
 A simplified cost function is
@@ -413,6 +513,9 @@ Critique any claim that Model A is automatically superior. Address prevalence, d
 14. Why must resampling stay inside training?
 15. What does macro averaging emphasize?
 16. Why is a probability not a decision?
+17. Why is 0.50 not a universal threshold?
+18. How do asymmetric error costs affect threshold choice?
+19. Why can models with similar AUCs produce different deployment decisions?
 
 ## Reproducibility Check
 
@@ -433,3 +536,6 @@ Never select a threshold on the final test set and report performance on that sa
 - Thresholds should reflect intended use and consequences.
 - A highest-AUC model is not automatically the best decision system.
 - A predicted probability does not contain an instruction for action.
+- Classification probabilities become consequential only after a decision rule is applied.
+- Thresholds should reflect consequences and constraints.
+- Strong discrimination does not guarantee a good decision policy.

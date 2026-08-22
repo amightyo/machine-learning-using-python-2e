@@ -344,6 +344,83 @@ For classification, aggregation may use majority vote or averaged class probabil
 
 The central idea is that averaging can reduce variance.
 
+## Interpretable Does Not Mean Stable
+
+Decision trees are readable because their split structure can be visualized. But readability and stability are different properties.
+
+$$
+\boxed{\text{Readable Model}\neq\text{Stable Explanation}}.
+$$
+
+Small sample changes can alter the root feature, threshold, and every downstream branch.
+
+### Bootstrap the Root Split
+
+```{python}
+#| label: fig-tree-root-stability
+#| fig-cap: "Bootstrap resampling reveals whether a tree repeatedly selects the same feature at the root."
+#| warning: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
+
+rng_ts = np.random.default_rng(42)
+root_features_ts = []
+
+for _ in range(250):
+    idx_ts = rng_ts.choice(len(X_train), size=len(X_train), replace=True)
+
+    X_boot_ts = X_train.iloc[idx_ts] if hasattr(X_train, "iloc") else X_train[idx_ts]
+    y_boot_ts = y_train.iloc[idx_ts] if hasattr(y_train, "iloc") else np.asarray(y_train)[idx_ts]
+
+    tree_ts = DecisionTreeClassifier(
+        max_depth=3,
+        min_samples_leaf=8,
+        random_state=42
+    ).fit(X_boot_ts, y_boot_ts)
+
+    root_idx_ts = tree_ts.tree_.feature[0]
+
+    if hasattr(X_train, "columns"):
+        root_name_ts = X_train.columns[root_idx_ts]
+    else:
+        root_name_ts = f"feature_{root_idx_ts}"
+
+    root_features_ts.append(root_name_ts)
+
+root_counts_ts = pd.Series(root_features_ts).value_counts().head(10)
+
+plt.figure(figsize=(8, 5))
+root_counts_ts.sort_values().plot(kind="barh")
+plt.xlabel("Bootstrap selections at root")
+plt.ylabel("Feature")
+plt.title("How Stable Is the First Tree Split?")
+plt.tight_layout()
+plt.show()
+
+root_counts_ts
+```
+
+If several features frequently compete for the root, substantive interpretation should be cautious.
+
+Random forests reduce variance by aggregating many trees, producing a tradeoff:
+
+$$
+\text{single-tree interpretability}
+\leftrightarrow
+\text{ensemble stability and predictive strength}.
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+A tree diagram is visually persuasive, but visual clarity is not evidence that the structure is unique, stable, causal, or reproducible.
+
+**An explanation should be evaluated, not merely displayed.**
+:::
+
 ## Random Forests
 
 Random Forests extend bagging by adding **feature randomness**.
@@ -685,6 +762,9 @@ Design a stronger predictive analysis and explain what additional research desig
 16. Why does feature importance not imply causation?
 17. What does partial dependence describe?
 18. Why might a forest outperform a single tree while being less globally interpretable?
+19. Why can a small data change produce a different tree?
+20. Why is an interpretable tree not automatically a stable explanation?
+21. What interpretability/stability tradeoff does a random forest create?
 
 ## Reproducibility Check
 
@@ -721,3 +801,6 @@ Record:
 - Feature importance is model-dependent and is not causal importance.
 - Partial dependence describes fitted-model behavior, not intervention effects.
 - Predictive complexity should be justified by improved generalization.
+- Interpretability and stability are different properties.
+- Tree structure can change under resampling.
+- Ensembles can improve stability while reducing simple visual interpretability.

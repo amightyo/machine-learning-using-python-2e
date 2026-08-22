@@ -281,6 +281,90 @@ Confidence intervals and p-values answer inferential questions under model assum
 A strong analysis may need one, the other, or both.
 :::
 
+## Same Model, Different Question
+
+The model
+
+$$
+Y=X\beta+\epsilon
+$$
+
+can support predictive, inferential, or causal questions.
+
+- **Predictive:** How accurately can \(Y\) be predicted for new observations?
+- **Inferential:** What does the sample permit us to conclude about a population relationship?
+- **Causal:** What would happen to \(Y\) if we intervened on \(X\)?
+
+$$
+\boxed{\text{Prediction}\neq\text{Inference}\neq\text{Causal Effect}}
+$$
+
+A statistically detectable coefficient may contribute little practical predictive value, while a highly predictive feature may not admit a causal interpretation.
+
+### Weak Predictive Gain Despite a Real Relationship
+
+```{python}
+#| label: fig-significance-vs-prediction
+#| fig-cap: "A real relationship can be estimated precisely in a large sample while adding only modest predictive value."
+#| warning: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+rng_sp = np.random.default_rng(42)
+n_sp = 12000
+x_sp = rng_sp.normal(size=n_sp)
+y_sp = 0.10 * x_sp + rng_sp.normal(scale=1.0, size=n_sp)
+
+X_sp = x_sp.reshape(-1, 1)
+
+Xtr_sp, Xte_sp, ytr_sp, yte_sp = train_test_split(
+    X_sp, y_sp, test_size=0.30, random_state=42
+)
+
+model_sp = LinearRegression().fit(Xtr_sp, ytr_sp)
+pred_sp = model_sp.predict(Xte_sp)
+
+baseline_sp = np.repeat(ytr_sp.mean(), len(yte_sp))
+
+rmse_model_sp = np.sqrt(mean_squared_error(yte_sp, pred_sp))
+rmse_baseline_sp = np.sqrt(mean_squared_error(yte_sp, baseline_sp))
+
+plt.figure(figsize=(8, 5))
+plt.scatter(Xte_sp[:, 0], yte_sp, alpha=0.15, s=12)
+x_sorted_sp = np.sort(Xte_sp[:, 0])
+plt.plot(x_sorted_sp, model_sp.predict(x_sorted_sp.reshape(-1, 1)))
+plt.xlabel("Predictor")
+plt.ylabel("Outcome")
+plt.title("Real Association, Modest Predictive Gain")
+plt.show()
+
+{
+    "Estimated slope": model_sp.coef_[0],
+    "Model RMSE": rmse_model_sp,
+    "Mean-baseline RMSE": rmse_baseline_sp
+}
+```
+
+$$
+\boxed{\text{Statistical Significance}\neq\text{Predictive Importance}}
+$$
+
+Likewise,
+
+$$
+\boxed{\text{Low Prediction Error}\not\Rightarrow\text{Causal Effect}}.
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Before interpreting a regression model, state whether the goal is prediction, association/inference, or causal effect. Do not move between these goals simply because the same equation appears in all three settings.
+:::
+
 ## Nonlinearity
 
 A linear model can be linear in its parameters while using transformed features.
@@ -589,6 +673,9 @@ Redesign the analysis for both an **inferential objective** and a **predictive o
 12. What is the bias–variance tradeoff?
 13. Why is a coefficient not automatically causal?
 14. When might a simple linear model be preferable to a more complex model?
+15. How can a coefficient be statistically important but weak for prediction?
+16. Why does strong predictive performance not establish causality?
+17. Why should a predictive regression model be compared with a simple baseline?
 
 ## Reproducibility Check
 
@@ -622,3 +709,6 @@ Record:
 - Scaling matters when regularization acts on coefficient magnitudes.
 - Regression coefficients do not establish causation.
 - Simple models remain valuable when their assumptions, performance, and purpose are appropriate.
+- The same regression equation can serve different goals, but those goals require different evidence.
+- Statistical significance does not imply predictive usefulness.
+- Predictive performance does not establish causal effect.
