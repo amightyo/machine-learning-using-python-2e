@@ -120,6 +120,132 @@ A value can be syntactically valid and substantively impossible: negative age, 2
 
 Validation therefore combines computational checks with domain knowledge.
 
+## Data-Centric Machine Learning
+
+A common reflex is
+
+$$
+\text{Disappointing performance}\rightarrow\text{try a more sophisticated algorithm}.
+$$
+
+Sometimes that is appropriate. Often it is premature.
+
+A data-centric perspective asks whether better evidence could matter more than greater model complexity. Potential improvements include better labels, measurement, population coverage, temporal alignment, category consistency, feature representation, and removal of corrupted or duplicated observations.
+
+A useful diagnostic sequence is
+
+$$
+\text{Performance Problem}
+\rightarrow
+\begin{cases}
+\text{inspect target and labels}\\
+\text{inspect measurement}\\
+\text{inspect missingness}\\
+\text{inspect representation}\\
+\text{inspect population coverage}\\
+\text{inspect timing and leakage}\\
+\text{inspect evaluation design}\\
+\text{then reconsider model capacity}
+\end{cases}
+$$
+
+### Dimensions of Data Quality
+
+| Dimension | Diagnostic question |
+|---|---|
+| Label quality | Is the target recorded consistently and correctly? |
+| Measurement validity | Do variables represent the intended phenomena? |
+| Completeness | What is missing, for whom, and why? |
+| Consistency | Are units, categories, and definitions stable? |
+| Uniqueness | Are duplicate observations present? |
+| Timeliness | Would the information exist at prediction time? |
+| Coverage | Are important populations, sites, periods, or conditions underrepresented? |
+| Provenance | Can we explain how each variable was produced? |
+
+A large dataset can still be weak for a particular problem.
+
+### Small Experiment: Better Model or Better Data?
+
+```{python}
+#| label: fig-data-centric-ml
+#| fig-cap: "When training labels are corrupted, increasing model complexity may help less than improving the training evidence."
+#| warning: false
+
+from sklearn.datasets import make_classification
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+import numpy as np
+import matplotlib.pyplot as plt
+
+X_dc, y_dc = make_classification(
+    n_samples=1800,
+    n_features=12,
+    n_informative=7,
+    n_redundant=2,
+    class_sep=1.0,
+    random_state=42
+)
+
+Xtr_dc, Xte_dc, ytr_dc, yte_dc = train_test_split(
+    X_dc, y_dc, test_size=0.30, random_state=42, stratify=y_dc
+)
+
+rng_dc = np.random.default_rng(42)
+y_noisy_dc = ytr_dc.copy()
+flip_dc = rng_dc.choice(
+    len(y_noisy_dc),
+    size=int(0.20 * len(y_noisy_dc)),
+    replace=False
+)
+y_noisy_dc[flip_dc] = 1 - y_noisy_dc[flip_dc]
+
+log_noisy_dc = LogisticRegression(max_iter=1000).fit(Xtr_dc, y_noisy_dc)
+rf_noisy_dc = RandomForestClassifier(
+    n_estimators=300, random_state=42
+).fit(Xtr_dc, y_noisy_dc)
+log_clean_dc = LogisticRegression(max_iter=1000).fit(Xtr_dc, ytr_dc)
+
+scores_dc = [
+    accuracy_score(yte_dc, log_noisy_dc.predict(Xte_dc)),
+    accuracy_score(yte_dc, rf_noisy_dc.predict(Xte_dc)),
+    accuracy_score(yte_dc, log_clean_dc.predict(Xte_dc))
+]
+
+plt.figure(figsize=(8, 5))
+plt.bar(
+    ["Logistic\nnoisy labels", "Random forest\nnoisy labels", "Logistic\nclean labels"],
+    scores_dc
+)
+plt.ylabel("Test accuracy")
+plt.ylim(0, 1)
+plt.title("Model Complexity Cannot Always Rescue Weak Training Evidence")
+plt.show()
+
+scores_dc
+```
+
+This is a controlled illustration, not a universal law. The lesson is diagnostic: **before escalating model complexity, investigate whether the bottleneck is the information supplied to the model.**
+
+::: {.callout-note icon=false}
+## Data Quality Sets an Information Boundary
+
+A model cannot recover information that was never measured, repair an invalid target merely by optimizing harder, or guarantee coverage of populations absent from the data.
+
+$$
+\boxed{\text{Model quality is constrained by the information quality of the data-generating process.}}
+$$
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+If several algorithms perform poorly, do not immediately conclude that the phenomenon is “not predictable.” Examine target reliability, measurement, timing, missingness, coverage, label noise, feature availability, sample adequacy, and evaluation design.
+
+Failure of tested representations and algorithms is not proof that the underlying phenomenon contains no predictable signal.
+:::
+
 ## Missing Data
 
 Missing values may arise because a variable was not measured, not applicable, refused, structurally unavailable, lost, or recorded under a special code.
@@ -490,6 +616,8 @@ Choose a dataset with numeric and categorical features.
 10. evaluate without independently preprocessing the test set;
 11. inspect transformed feature names;
 12. document each transformation and rationale.
+13. identify one data-quality bottleneck that model tuning cannot directly repair;
+14. propose a data-improvement intervention and explain how you would test whether it improves generalization.
 
 ## Practitioner Track
 
@@ -515,6 +643,9 @@ Create a feature ledger containing:
 | Leakage risk | yes/no + rationale |
 | Inclusion rationale | why it belongs |
 | Provenance | authoritative source |
+| Quality risk | plausible measurement/label/coverage problem |
+| Quality evidence | how the risk will be assessed |
+| Improvement action | what could improve the data rather than the model |
 
 Identify at least three candidate engineered features and explain the substantive theory behind each.
 
@@ -556,6 +687,10 @@ Redesign the workflow with `ColumnTransformer` and `Pipeline`.
 12. Why are pipelines important during cross-validation?
 13. Why should engineered features pass the availability test?
 14. What does it mean to say data are “made” rather than merely found?
+15. What is a data-centric approach to machine learning?
+16. Why can model complexity fail to repair a data-quality problem?
+17. How does population coverage differ from simply having a large sample?
+18. Why does poor performance not prove an outcome is inherently unpredictable?
 
 ## Reproducibility Check
 
@@ -575,3 +710,6 @@ Record raw-data provenance, validation rules, exclusions, missing-value strategy
 - `Pipeline` keeps learned preprocessing inside the modeling workflow.
 - Leakage can make a weak model appear extraordinary.
 - A trustworthy feature should be meaningful, available at prediction time, reproducibly constructed, and evaluated without contamination.
+- Diagnose data limitations before escalating algorithmic complexity.
+- Label quality, measurement, timing, coverage, and provenance constrain achievable performance.
+- Poor performance can reflect weak evidence or representation rather than an inherently unpredictable phenomenon.

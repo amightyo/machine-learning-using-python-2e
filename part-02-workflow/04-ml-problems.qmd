@@ -77,6 +77,79 @@ Identify the defensible unit for:
 A measurable target is often a proxy for something broader. Predicting the proxy accurately does not prove that the full construct has been captured.
 :::
 
+## From Construct to Operational Target
+
+Many machine-learning problems begin with an idea that cannot be observed directly: learning, health need, engagement, readiness, quality, satisfaction, or resilience.
+
+A model cannot ingest a construct directly. The construct passes through operational decisions:
+
+$$
+\boxed{
+\text{Construct}
+\rightarrow
+\text{Operational Definition}
+\rightarrow
+\text{Measurement}
+\rightarrow
+\text{Recorded Variable}
+\rightarrow
+\text{ML Target}
+}
+$$
+
+Each arrow introduces assumptions.
+
+If an education study wants to predict **learning** but uses final course grade, it implicitly proposes
+
+$$
+\text{Learning}\approx\text{Final Course Grade}.
+$$
+
+Yet grades can also reflect assessment design, attendance policies, late penalties, prior preparation, revision opportunities, and instructor practices. The grade may still be useful; the question is whether it is defensible for the intended claim.
+
+### Three Tracks: Same Problem, Different Proxy
+
+| Track | Construct | Possible proxy | Validity question |
+|---|---|---|---|
+| Health | health need | healthcare utilization | Does utilization also reflect access and care-seeking behavior? |
+| Education | learning | final course grade | Does the grade combine learning with policy and opportunity? |
+| Open ML | customer satisfaction | support contacts | Do contacts indicate dissatisfaction, engagement, complexity, or access? |
+
+Let \(C\) denote the construct and \(Y\) the operational target. Strong prediction of \(Y\) does not establish
+
+$$
+Y=C.
+$$
+
+### Construct Validity as an ML Design Problem
+
+Before fitting a model, ask:
+
+1. What broader construct matters?
+2. Why should this target represent it?
+3. What dimensions does the target omit?
+4. What other processes influence the recorded target?
+5. Does the target mean the same thing across groups, sites, or time?
+6. Could optimizing the proxy distort the substantive goal?
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+An AUC of 0.95 says nothing by itself about whether the target validly represents the construct named in the research question.
+
+**Excellent prediction of the wrong operational target is still excellent prediction of the wrong target.**
+:::
+
+### Try It: Audit the Target
+
+For one proposed ML problem, identify:
+1. the construct;
+2. the operational definition;
+3. the recorded target;
+4. two other processes that could influence the target;
+5. an alternative operationalization;
+6. how conclusions might change under that alternative.
+
 | Target form | Example | Typical task |
 |---|---|---|
 | continuous | systolic blood pressure | regression |
@@ -168,6 +241,9 @@ Ask:
 | Decision/use | What could happen because of the output? |
 | Unit | What does one row represent? |
 | Target | What exactly is predicted? |
+| Construct | What broader phenomenon do we actually care about? |
+| Operationalization | Why should this target represent that construct? |
+| Proxy limitations | What does the target omit or confound? |
 | Prediction time | When is prediction made? |
 | Horizon | How far ahead is the outcome? |
 | Available features | What is known then? |
@@ -274,6 +350,9 @@ A useful predictive template is:
 
 Use this to expose assumptions, not as a mandatory formula.
 
+- one construct-to-target validity argument;
+- one alternative operationalization and how it could change the study.
+
 ## Professor's Challenge: The 95% Accurate Model
 
 A university reports 95% dropout-prediction accuracy and recommends automatic mandatory interventions. Only 6% dropped out; `final_term_status` is in the data; repeated student records may cross a random split; no baseline is reported; 0.50 is used as the default threshold; error costs and subgroup performance are ignored; years are randomly mixed; and feature importance is called “causes.”
@@ -294,6 +373,9 @@ Critique accuracy, leakage, unit ambiguity, temporal validity, baseline, thresho
 10. Why might 0.50 be inappropriate?
 11. What does deployment-aligned evaluation mean?
 12. Why might framing end with no ML model?
+13. Why is construct validity relevant even when predictive performance is high?
+14. Distinguish a construct, operational definition, and recorded target.
+15. How can optimizing a proxy conflict with the substantive goal?
 
 ## Reproducibility Check
 
@@ -314,3 +396,5 @@ If framing changes, document **what changed and why**.
 - Generalization must be defined across people, places, times, or settings.
 - Technical predictability does not determine whether something should be predicted.
 - Sometimes the best decision is not to build an ML model.
+- Target selection is a measurement decision as well as a modeling decision.
+- Predictive accuracy for a proxy does not establish validity for the broader construct.

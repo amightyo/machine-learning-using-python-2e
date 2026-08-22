@@ -266,6 +266,94 @@ As $n$ grows, the standard error generally becomes smaller, all else equal.
 
 But large samples do not automatically solve poor measurement, biased sampling, leakage, confounding, or dataset shift.
 
+## Prediction, Inference, and Different Kinds of Questions
+
+Statistics and machine learning may use the same data and even the same models while asking different questions.
+
+**Prediction:** How accurately can information in \(X\) predict \(Y\) for observations not used to fit the model?
+
+**Statistical inference:** What does the observed sample permit us to conclude about a population parameter or relationship?
+
+**Causal inference:** What would happen to \(Y\) if we intervened to change \(X\)?
+
+$$
+\boxed{\text{Prediction}\neq\text{Statistical Inference}\neq\text{Causal Inference}}
+$$
+
+A model can predict well even when individual coefficients are difficult to interpret. Conversely, a precisely estimated association may add little predictive value. The evidence required depends on the claim.
+
+### Predictive Signal Without a Unique Explanation
+
+Correlated predictors can preserve predictive signal while making allocation of that signal across individual coefficients unstable.
+
+```{python}
+#| label: fig-correlated-predictors
+#| fig-cap: "Correlated predictors can preserve predictive signal while individual coefficient estimates vary across bootstrap samples."
+#| warning: false
+
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng_pi = np.random.default_rng(42)
+n_pi = 600
+x1_pi = rng_pi.normal(size=n_pi)
+x2_pi = x1_pi + rng_pi.normal(scale=0.12, size=n_pi)
+y_pi = 3 * x1_pi + rng_pi.normal(scale=1.0, size=n_pi)
+X_pi = np.column_stack([x1_pi, x2_pi])
+
+Xtr_pi, Xte_pi, ytr_pi, yte_pi = train_test_split(
+    X_pi, y_pi, test_size=0.30, random_state=42
+)
+
+model_pi = LinearRegression().fit(Xtr_pi, ytr_pi)
+pred_pi = model_pi.predict(Xte_pi)
+rmse_pi = np.sqrt(mean_squared_error(yte_pi, pred_pi))
+
+coef_pi = []
+for _ in range(250):
+    idx_pi = rng_pi.choice(len(Xtr_pi), len(Xtr_pi), replace=True)
+    coef_pi.append(
+        LinearRegression().fit(Xtr_pi[idx_pi], ytr_pi[idx_pi]).coef_
+    )
+
+coef_pi = np.asarray(coef_pi)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(coef_pi[:, 0], coef_pi[:, 1], alpha=0.45, s=22)
+plt.xlabel(r"Estimated coefficient for $x_1$")
+plt.ylabel(r"Estimated coefficient for $x_2$")
+plt.title("Correlated Predictors and Coefficient Instability")
+plt.show()
+
+print(f"Test RMSE: {rmse_pi:.3f}")
+print("Fitted coefficients:", model_pi.coef_)
+```
+
+The model can retain useful predictive information while repeated samples redistribute the apparent contribution between \(x_1\) and \(x_2\).
+
+$$
+\boxed{\text{Stable prediction}\not\Rightarrow\text{stable interpretation of every parameter}}
+$$
+
+::: {.callout-note icon=false}
+## Uncertainty Is Information
+
+Uncertainty is not an embarrassment that disappears when a model becomes sophisticated. Sampling variation, measurement error, model specification, hyperparameter selection, and distribution shift can all matter.
+
+Ask not only **What is my estimate?** but also **How much could this conclusion change under another defensible sample, split, specification, or population?**
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Strong predictive performance does not, by itself, demonstrate that predictors cause the outcome, coefficients are stable scientific effects, the model reveals the true data-generating mechanism, or the same relationships hold elsewhere.
+
+**Match the strength of the claim to the design and strength of the evidence.**
+:::
+
 ## Covariance and Correlation
 
 Covariance describes how two variables vary together:
@@ -716,7 +804,9 @@ A researcher should additionally be able to:
 - separate association from causation;
 - connect mathematical representations to measurement assumptions;
 - recognize that estimates and model metrics vary across samples;
-- justify mathematical choices in relation to the research question.
+- justify mathematical choices in relation to the research question
+- distinguish predictive, inferential, and causal questions before interpreting model output;
+- report uncertainty appropriate to the scientific claim.
 
 ## Professor's Challenge: When Mathematics Misleads
 
@@ -782,6 +872,9 @@ Identify a candidate research problem and write a mathematical specification con
 10. What information does a derivative provide?
 11. Why does gradient descent move opposite the gradient?
 12. Why can a mathematically correct model still support a poor substantive conclusion?
+13. How can a model predict well while individual coefficient interpretations remain unstable?
+14. Why does strong out-of-sample prediction not establish causality?
+15. What does uncertainty communicate beyond a point estimate?
 
 ## Reproducibility Check
 
@@ -810,3 +903,6 @@ Before leaving this chapter, verify that your analysis records:
 - Derivatives and gradients describe local change.
 - Gradient descent uses local information to iteratively reduce a loss.
 - Mathematical correctness is necessary but not sufficient for scientific or practical validity.
+- Predictive, inferential, and causal questions require different forms of evidence.
+- Strong prediction does not establish stable parameter interpretation or causality.
+- Uncertainty communicates limits and stability of analytical conclusions.
