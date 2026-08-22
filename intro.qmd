@@ -1,8 +1,3 @@
----
-title: "How to Use This Book"
-number-sections: false
----
-
 # How to Use This Book {.unnumbered}
 
 Machine learning can be learned in several ways. This book supports readers who need a systematic introduction, practitioners strengthening their modeling judgment, researchers preparing empirical studies, and readers concentrating on modern AI.
