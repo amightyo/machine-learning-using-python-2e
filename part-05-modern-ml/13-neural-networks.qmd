@@ -196,6 +196,157 @@ z1,h,z2,p
 
 Every value is inspectable. A neural network is a computational graph, not magic.
 
+## Neural Networks as Representation Learning
+
+A neural network is more than a flexible nonlinear prediction function.
+
+Its hidden layers can learn intermediate representations of the input.
+
+For a feedforward network,
+
+$$
+h^{(1)}
+=
+g\left(
+W^{(1)}x+b^{(1)}
+\right),
+$$
+
+and later layers transform earlier representations:
+
+$$
+h^{(\ell)}
+=
+g\left(
+W^{(\ell)}h^{(\ell-1)}
++b^{(\ell)}
+\right).
+$$
+
+The network therefore constructs a sequence:
+
+$$
+\boxed{
+x
+\rightarrow
+h^{(1)}
+\rightarrow
+h^{(2)}
+\rightarrow
+\cdots
+\rightarrow
+h^{(L)}
+\rightarrow
+\hat y
+}
+$$
+
+### From Feature Engineering to Learned Features
+
+Earlier machine-learning methods often depend heavily on features designed by analysts.
+
+Support vector machines showed that changing representation can change the geometry of a problem:
+
+$$
+x\rightarrow\phi(x).
+$$
+
+Neural networks extend this idea by learning useful transformations from data.
+
+A useful conceptual progression is:
+
+$$
+\text{hand-crafted features}
+\rightarrow
+\text{kernel-induced features}
+\rightarrow
+\text{learned representations}.
+$$
+
+This is one reason deep learning became especially powerful for images, language, audio, and other high-dimensional data.
+
+### What Might a Hidden Representation Learn?
+
+Imagine a model trained on text.
+
+The raw input may begin as tokens or embeddings.
+
+Intermediate layers may encode increasingly useful patterns related to:
+
+- syntax;
+- semantic similarity;
+- topic;
+- context;
+- task-relevant distinctions.
+
+For images, early layers may respond to simple local patterns while later representations can support increasingly abstract visual distinctions.
+
+These interpretations should be treated cautiously: internal representations are distributed, context-dependent, and not guaranteed to correspond neatly to human concepts.
+
+### Learned Does Not Mean Understood
+
+A network can learn a representation that improves prediction without providing a human-readable explanation for why that representation works.
+
+Thus:
+
+$$
+\boxed{
+\text{Useful Representation}
+\neq
+\text{Human-Interpretable Representation}
+}
+$$
+
+This creates a recurring machine-learning tradeoff.
+
+Models can learn increasingly powerful internal representations while becoming harder to explain using simple human concepts.
+
+### Representation Quality Depends on the Objective
+
+A network learns features useful for the objective it is trained to optimize.
+
+If the objective rewards a shortcut, the learned representation may encode the shortcut.
+
+If training data contain systematic biases, representations can preserve or amplify them.
+
+If deployment differs from training, representations may no longer organize the world in a useful way.
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: What Does It Mean for a Machine to “Represent” Something?
+
+A hidden layer does not necessarily contain a miniature human concept such as “health,” “learning,” or “trust.”
+
+Representation in machine learning is operational: internal states organize information in ways that support the optimization objective.
+
+The philosophical question is therefore not simply:
+
+> What does this neuron mean?
+
+but:
+
+> What distinctions has the system learned to preserve because they help it perform the task?
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Strong neural-network performance does not prove that the model learned the intended concept.
+
+It may have learned proxies, artifacts, shortcuts, or site-specific signals.
+
+When the substantive interpretation matters, test the representation rather than inferring its meaning from predictive performance alone.
+:::
+
+### Bridge Forward
+
+This idea prepares the reader for later chapters:
+
+- NLP uses learned representations of language;
+- generative AI relies on large-scale learned representations;
+- model evaluation asks whether those representations generalize;
+- responsible ML asks what unwanted structure they encode;
+- reproducible ML asks whether the evidence supporting these claims can be reconstructed.
+
 ## Architecture
 
 An architecture
@@ -708,6 +859,10 @@ Redesign the experiment.
 22. Why does representation learning not eliminate human judgment?
 23. Why does approximation capacity not guarantee successful learning?
 24. When might a neural network be unnecessary?
+25. How does representation learning differ from hand-crafted feature engineering?
+26. How do SVM kernels provide a conceptual bridge to neural networks?
+27. Why does a useful learned representation not necessarily have a simple human interpretation?
+28. How can the training objective shape what a network learns to represent?
 
 ## Reproducibility Check
 
@@ -728,3 +883,6 @@ Record the question, data version, sample, target, prediction time, train/valida
 - High capacity does not guarantee better generalization.
 - Strong simpler baselines remain essential.
 - Automation relocates human judgment; it does not eliminate it.
+- Hidden layers learn intermediate representations that support prediction.
+- Neural networks extend the idea that changing representation can simplify a learning problem.
+- Predictive usefulness does not guarantee human interpretability or conceptual validity.

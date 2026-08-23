@@ -174,6 +174,150 @@ plt.show()
 
 We retain `y_hidden` only because this is simulated instructional data. The clustering algorithm will not receive it.
 
+## Are Clusters Discovered or Constructed?
+
+Clustering language often suggests that groups already exist in the data and the algorithm simply discovers them.
+
+Sometimes that is a useful approximation.
+
+But a clustering result depends on analytical choices such as
+
+$$
+\boxed{
+\text{Features}
++
+\text{Scaling}
++
+\text{Distance}
++
+\text{Algorithm}
++
+\text{Hyperparameters}
+\rightarrow
+\text{Clusters}
+}
+$$
+
+Change those choices and the apparent groups may change.
+
+### The Same Observations, Different Representations
+
+Consider observations measured on two variables with very different scales.
+
+```{python}
+#| label: fig-clustering-representation
+#| fig-cap: "Clustering can change when feature scaling changes the geometry used by the algorithm."
+#| warning: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+
+rng_cr = np.random.default_rng(42)
+
+group_a_cr = np.column_stack([
+    rng_cr.normal(0, 0.6, 120),
+    rng_cr.normal(20, 7, 120)
+])
+
+group_b_cr = np.column_stack([
+    rng_cr.normal(3, 0.6, 120),
+    rng_cr.normal(35, 7, 120)
+])
+
+X_cr = np.vstack([
+    group_a_cr,
+    group_b_cr
+])
+
+labels_raw_cr = KMeans(
+    n_clusters=2,
+    n_init=20,
+    random_state=42
+).fit_predict(X_cr)
+
+X_scaled_cr = StandardScaler().fit_transform(X_cr)
+
+labels_scaled_cr = KMeans(
+    n_clusters=2,
+    n_init=20,
+    random_state=42
+).fit_predict(X_scaled_cr)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(
+    X_cr[:, 0],
+    X_cr[:, 1],
+    c=labels_raw_cr,
+    cmap="tab10",
+    s=24,
+    alpha=0.7
+)
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("k-Means Using the Raw Representation")
+plt.show()
+
+plt.figure(figsize=(8, 5))
+plt.scatter(
+    X_scaled_cr[:, 0],
+    X_scaled_cr[:, 1],
+    c=labels_scaled_cr,
+    cmap="tab10",
+    s=24,
+    alpha=0.7
+)
+plt.xlabel("Standardized feature 1")
+plt.ylabel("Standardized feature 2")
+plt.title("k-Means After Standardization")
+plt.show()
+```
+
+The observations are the same. The geometry supplied to the algorithm is different.
+
+### Clusters Are Analytical Claims
+
+A cluster should not automatically be interpreted as a naturally occurring type.
+
+In health analytics, a cluster of patients may reflect measurement choices rather than distinct biological subtypes.
+
+In education, student clusters may reflect institutional variables and scaling choices rather than fixed “types of learners.”
+
+In Open ML, customer segments may change when behavioral, demographic, or transactional features are added or removed.
+
+Therefore, cluster interpretation should include:
+
+- stability under resampling;
+- sensitivity to scaling;
+- sensitivity to feature selection;
+- comparison across algorithms;
+- internal validity;
+- external or substantive validity;
+- domain interpretation.
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Categories Can Become Real Through Use
+
+Once analysts name clusters, organizations may begin treating them as meaningful categories.
+
+Labels such as “high-risk learner,” “complex patient,” or “premium customer” can influence interventions, resources, and expectations.
+
+This creates an important responsibility: a computational grouping can become socially consequential even when its boundaries were analytically constructed.
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Finding \(k=3\) clusters does not demonstrate that three natural populations exist.
+
+A defensible claim is narrower:
+
+> Under this representation, distance measure, algorithm, and validation procedure, a three-cluster solution produced useful structure.
+
+That is a stronger scientific statement because it makes the assumptions visible.
+:::
+
 ## $k$-Means Clustering
 
 $k$-means seeks $K$ cluster centers, or centroids,
@@ -897,6 +1041,9 @@ Design a stronger exploratory study before deployment.
 18. Why can an algorithm return clusters when no natural categories exist?
 19. What is cluster stability?
 20. Why should cluster labels be treated cautiously?
+21. Why can feature scaling change a clustering solution?
+22. In what sense can clusters be partly constructed rather than merely discovered?
+23. What evidence would strengthen a claim that a cluster solution is substantively meaningful?
 
 ## Reproducibility Check
 
@@ -937,3 +1084,6 @@ Record:
 - Clustering can impose discrete groups on continuous variation.
 - Cluster labels can introduce meaning not contained in the algorithm.
 - A useful partition and a natural category are different scientific claims.
+- Clusters depend on representation, distance, algorithm, and tuning choices.
+- Cluster labels should not automatically be treated as natural categories.
+- Stability and substantive validity matter alongside internal clustering metrics.

@@ -5,7 +5,12 @@
 #| include: false
 
 import os
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 ```
 
 ## Learning Objectives
@@ -638,6 +643,130 @@ It can also discard predictive information.
 
 It must earn its place empirically.
 
+
+## Dimensionality Reduction Is an Information Choice
+
+Dimensionality reduction creates a lower-dimensional representation
+
+$$
+X\in\mathbb{R}^{n\times p}
+\rightarrow
+Z\in\mathbb{R}^{n\times k},
+\qquad k<p.
+$$
+
+The purpose may be visualization, compression, denoising, feature extraction, or computational efficiency.
+
+But reducing dimension means deciding what information should be preserved.
+
+### PCA Preserves Variance, Not Meaning
+
+PCA identifies directions that capture large amounts of variance.
+
+That is mathematically useful, but high variance is not synonymous with substantive importance.
+
+A low-variance feature could still be:
+
+- clinically important;
+- highly predictive for a minority group;
+- essential for identifying rare events;
+- scientifically meaningful;
+- important for fairness analysis.
+
+Thus,
+
+$$
+\boxed{
+\text{Variance Preserved}
+\neq
+\text{Meaning Preserved}
+}
+$$
+
+### Reconstruction Error Makes the Tradeoff Visible
+
+```{python}
+#| label: fig-pca-reconstruction
+#| fig-cap: "Retaining more principal components reduces reconstruction error, illustrating the tradeoff between compression and retained information."
+#| warning: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+X_pca_ic = StandardScaler().fit_transform(X)
+
+max_components_ic = min(
+    X_pca_ic.shape[1],
+    12
+)
+
+components_ic = range(
+    1,
+    max_components_ic + 1
+)
+
+errors_ic = []
+
+for k_ic in components_ic:
+    pca_ic = PCA(
+        n_components=k_ic
+    )
+
+    Z_ic = pca_ic.fit_transform(
+        X_pca_ic
+    )
+
+    X_reconstructed_ic = pca_ic.inverse_transform(
+        Z_ic
+    )
+
+    mse_ic = np.mean(
+        (X_pca_ic - X_reconstructed_ic) ** 2
+    )
+
+    errors_ic.append(
+        mse_ic
+    )
+
+plt.figure(figsize=(8, 5))
+plt.plot(
+    list(components_ic),
+    errors_ic,
+    marker="o"
+)
+plt.xlabel("Number of retained components")
+plt.ylabel("Mean reconstruction error")
+plt.title("Compression Versus Reconstruction")
+plt.show()
+```
+
+
+### Visualization Is Not the Data
+
+Nonlinear methods such as t-SNE can produce compelling two-dimensional embeddings.
+
+But:
+
+$$
+\boxed{
+\text{Two-Dimensional Embedding}
+\neq
+\text{The Original Data Geometry}
+}
+$$
+
+For t-SNE in particular:
+
+- local neighborhoods are often more meaningful than global distances;
+- apparent gaps should not automatically be interpreted as true population separation;
+- cluster size can be visually misleading;
+- different seeds or hyperparameters can change the embedding.
+
+A visually persuasive map is therefore an analytical representation, not direct observation of an underlying truth.
+
+
 ## Nonlinear Embeddings
 
 PCA is linear.
@@ -829,15 +958,29 @@ A responsible dimensionality-reduction workflow should ask:
 
 ### Health Track
 
-PCA can summarize correlated biomarkers or physiological measurements. Nonlinear embeddings can visualize patient heterogeneity. But a visual patient subgroup is not a diagnosis. External clinical validity, stability, calibration of downstream models, and population transportability remain necessary.
+PCA can summarize correlated biomarkers or physiological measurements. Nonlinear embeddings can visualize patient heterogeneity. But a visual patient subgroup is not a diagnosis. External clinical validity, stability, calibration of downstream models, and population transportability remain necessary. 
+
+**Health:** compression may obscure rare but clinically important signals.
 
 ### Education Track
 
 Dimensionality reduction can summarize correlated engagement indicators, survey scales, or learning behaviors. A two-dimensional student map can support exploration, but spatial proximity does not automatically imply equivalent learning needs or justify intervention.
 
+**Education:** components explaining large overall variance may not preserve information relevant to smaller student populations.
+
 ### Open ML Benchmark Track
 
 High-dimensional benchmark datasets allow controlled comparison of retained variance, reconstruction, predictive performance, neighborhood preservation, runtime, and sensitivity to embedding parameters.
+
+**Open ML:** visualization can help exploration, but apparent clusters should be validated in the original feature space or with independent evidence.
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+A two-dimensional embedding that shows three visually separated clouds does not, by itself, establish three meaningful clusters.
+
+Dimensionality reduction and clustering answer different questions. Do not turn a visualization into a population taxonomy without additional evidence.
+:::
 
 ## Beyond the Algorithm: What Must Be Forgotten?
 
@@ -1018,6 +1161,10 @@ Design a stronger research program before any curricular assignment.
 18. Why should distances between t-SNE islands be interpreted cautiously?
 19. What is UMAP used for?
 20. Why can a compelling 2D visualization support an unjustified scientific claim?
+21. Why does preserving variance not guarantee preserving substantive meaning?
+22. What does reconstruction error tell us about dimensionality reduction?
+23. Why should distances and gaps in t-SNE plots be interpreted cautiously?
+
 
 ## Reproducibility Check
 
@@ -1058,3 +1205,6 @@ Record:
 - Attractive embeddings can create unjustified confidence in apparent categories.
 - Representation sensitivity and external validation matter.
 - Compression is not merely technical: it determines what information remains available for subsequent reasoning.
+- Dimensionality reduction chooses what information to preserve and what to discard.
+- PCA preserves variance rather than substantive meaning.
+- Low-dimensional visualizations are representations, not the original geometry.
