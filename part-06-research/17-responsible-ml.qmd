@@ -37,6 +37,8 @@ By the end of this chapter, you should be able to:
 - design responsible ML studies in health, education, and open application domains;
 - articulate when a technically strong model should not be deployed.
 
+- evaluate computer-vision systems for representation, measurement, privacy, subgroup, surveillance, accessibility, and human-oversight risks.
+
 ## Can We Build It? Should We Use It?
 
 Machine learning often begins with a technical question:
@@ -327,6 +329,7 @@ $$
 ## A Small Fairness Audit
 
 ```{python}
+
 audit = pd.DataFrame({
     "group": (
         ["A"] * 10
@@ -362,7 +365,7 @@ def group_metrics(frame):
 
 fairness_table = (
     audit
-    .groupby("group")
+    .groupby("group")[["y_true", "y_pred"]]
     .apply(group_metrics)
 )
 
@@ -935,6 +938,85 @@ The entire information pipeline requires governance.
 A model that can take actions requires stronger controls than one that only produces text.
 
 Permissions should follow the principle of least privilege.
+
+## Responsible Computer Vision: What Does the Camera Make Legible?
+
+Computer vision introduces distinctive responsibilities because visual data can contain far more information than the target variable requires.
+
+An image collected for one purpose may also reveal or proxy:
+
+- identity;
+- age or apparent age;
+- disability-related information;
+- location or environment;
+- socioeconomic context;
+- health-related characteristics;
+- demographic attributes;
+- bystanders who never consented to analysis.
+
+The responsible question is therefore not only
+
+> Can the model extract a useful signal?
+
+but also
+
+> **Should this visual information be collected, inferred, retained, or acted upon?**
+
+### Representation and Measurement
+
+A vision dataset is shaped by who and what was photographed, under which conditions, using which devices, and how labels were produced.
+
+If one subgroup is systematically captured under different lighting, resolution, positioning, or equipment, apparent group differences in model performance may reflect the measurement process.
+
+$$
+\boxed{\text{Image}\neq\text{Neutral Measurement of Reality}}
+$$
+
+### Privacy and Surveillance
+
+Removing names from image files does not necessarily make visual data anonymous. Faces, environments, metadata, distinctive objects, or repeated patterns may permit re-identification.
+
+Computer vision can also transform passive observation into scalable inference. This raises governance questions that are not resolved by predictive accuracy.
+
+### Human Oversight in Visual Decisions
+
+A human reviewer is not automatically a safeguard. If an automated vision score is presented as authoritative, reviewers may anchor on it even when the image is ambiguous or outside the model's validated domain.
+
+Meaningful oversight requires:
+
+- access to relevant context;
+- authority to disagree;
+- training about known failure modes;
+- escalation pathways;
+- documentation of overrides;
+- monitoring for automation bias.
+
+### Generative and Synthetic Visual Content
+
+Generative vision adds provenance concerns. Synthetic images may be useful for simulation, augmentation, education, or creative work, but realistic appearance does not establish authenticity or validity.
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+For high-stakes visual systems, ask whether the task itself is legitimate before optimizing the model.
+
+A technically feasible inference can still be scientifically weak, socially harmful, privacy-invasive, or inappropriate to deploy.
+:::
+
+### Responsible Vision Audit
+
+For one computer-vision application, document:
+
+1. the legitimate purpose;
+2. whose images are collected;
+3. who may be missing or underrepresented;
+4. what unintended information the images contain;
+5. how labels were created;
+6. subgroup and source-specific performance;
+7. privacy and retention risks;
+8. domain-shift risks;
+9. the human-review process;
+10. conditions under which the system should not be used.
 
 ## Three Tracks
 

@@ -22,7 +22,7 @@ import sklearn
 
 By the end of this chapter, you should be able to:
 
-- distinguish reproducibility, replicability, robustness, and generalizability;
+- distinguish reproducibility, replication, robustness, and generalizability;
 - explain why reproducibility is a property of a complete computational workflow rather than code alone;
 - organize a machine-learning project so another researcher can understand and rerun it;
 - document data provenance and transformations;
@@ -42,6 +42,8 @@ By the end of this chapter, you should be able to:
 - design a research compendium that supports conference or journal submission;
 - recognize when sharing data or models would be irresponsible or legally prohibited;
 - treat reproducibility as part of scientific reasoning rather than an administrative task.
+
+- design reproducible computer-vision workflows that preserve image provenance, preprocessing, grouping, model configuration, and evaluation conditions.
 
 ## A Result Is More Than a Number
 
@@ -104,7 +106,7 @@ If an important link is missing, reproducing the result becomes harder.
 
 A useful operational definition is the ability to obtain consistent results using the same underlying data, computational procedures, and analysis.
 
-### Replicability
+### Replication
 
 Replication asks whether a finding can be obtained through a new study, new sample, or independently implemented investigation.
 
@@ -168,19 +170,7 @@ $$
 
 Reproducibility asks whether another researcher can inspect and reconstruct that chain. This can require provenance, environment and package versions, seeds, configuration, data-access instructions, code, generated outputs, decision logs, licenses, and persistent identifiers.
 
-### Reproducibility, Replication, and Robustness
-
-Terminology varies across disciplines, so define usage explicitly.
-
-- **Computational reproducibility:** Can reported results be regenerated from the same data and workflow?
-- **Replication:** Does an independently conducted study or new dataset produce evidence consistent with the finding?
-- **Robustness:** Does the substantive conclusion persist under reasonable alternative analytical choices?
-
-$$
-\text{Can I rerun it?}\qquad
-\text{Does it recur?}\qquad
-\text{Does it survive alternatives?}
-$$
+Terminology varies across disciplines. This book uses the four definitions introduced above consistently. In computational ML work, **reproducibility** specifically includes the ability to regenerate reported results from the same underlying data and documented workflow.
 
 ### From Student Submission to Scholarly Artifact
 
@@ -1030,6 +1020,103 @@ Now imagine they collect a new sample from another university and obtain similar
 That supports replication and potentially transportability more strongly.
 
 The second claim requires new evidence.
+
+## Reproducible Computer Vision: Preserve the Visual Evidence Chain
+
+Computer-vision reproducibility requires more than saving a fitted model.
+
+A visual workflow may depend on:
+
+$$
+\text{Raw Image}
+\rightarrow
+\text{Decode}
+\rightarrow
+\text{Resize/Crop}
+\rightarrow
+\text{Normalize}
+\rightarrow
+\text{Augment}
+\rightarrow
+\text{Represent}
+\rightarrow
+\text{Model}
+\rightarrow
+\text{Evaluate}.
+$$
+
+Each transformation can change the evidence.
+
+A reproducible vision project should document, where applicable:
+
+- image source and provenance;
+- licensing and consent constraints;
+- file formats and decoding libraries;
+- inclusion and exclusion rules;
+- duplicate and near-duplicate handling;
+- subject, device, session, or institution grouping;
+- resize and crop rules;
+- channel and color-space handling;
+- normalization;
+- augmentation operations and probabilities;
+- random seeds;
+- pretrained model or checkpoint identifiers;
+- model architecture and weights;
+- train/validation/test source definitions;
+- evaluation metrics and subgroup analyses;
+- hardware or accelerator details when they materially affect execution;
+- generated artifacts and model outputs.
+
+### Preserve the Split, Not Just the Seed
+
+For grouped visual data, a random seed alone is insufficient. If images must generalize to new people, devices, or institutions, preserve the group-level split definition or the exact observation identifiers assigned to each partition.
+
+$$
+\boxed{\text{Seed}\neq\text{Data-Provenance Record}}
+$$
+
+### Restricted Images
+
+Visual datasets can be impossible or inappropriate to redistribute because of privacy, consent, licensing, proprietary ownership, or institutional restrictions.
+
+Reproducibility does not require violating those constraints.
+
+Instead, preserve:
+
+- acquisition and eligibility logic;
+- data dictionaries and schemas;
+- preprocessing code;
+- checksums or identifiers where permissible;
+- synthetic or public demonstration data when useful;
+- access instructions;
+- documentation of what cannot be shared and why.
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Reproducibility Preserves How We Saw the Data
+
+In computer vision, preprocessing determines what the model is allowed to see.
+
+Documenting crop rules, image transformations, exclusions, and acquisition conditions therefore preserves more than code. It preserves part of the study's **epistemic viewpoint**.
+:::
+
+### Vision Reproducibility Challenge
+
+Take one vision workflow from earlier chapters and create a minimal reproducibility manifest containing:
+
+1. dataset and provenance;
+2. unit of analysis;
+3. target;
+4. image representation;
+5. preprocessing;
+6. split logic;
+7. model and hyperparameters;
+8. seed;
+9. evaluation metrics;
+10. software environment;
+11. expected output;
+12. limitations on redistribution or reuse.
+
+A second student should be able to reconstruct the analytical logic without relying on undocumented assumptions.
 
 ## Three Tracks
 

@@ -37,6 +37,8 @@ By the end of this chapter, you should be able to:
 - distinguish predictive evidence from causal or scientific claims;
 - design a research-grade evaluation protocol for health, education, and open ML applications.
 
+- design computer-vision evaluation protocols that account for grouped images, visual domain shift, class-specific errors, and deployment conditions.
+
 ## What Does It Mean for a Model to Work?
 
 Suppose a classifier achieves:
@@ -1299,6 +1301,75 @@ A model that dominates one benchmark may fail under:
 - adversarial conditions.
 
 Benchmarks are useful instruments, not reality itself.
+
+## Computer Vision Learning Experience: When Does a Vision Model Generalize?
+
+The recurring handwritten-digits examples make model comparison convenient, but a research-grade computer-vision evaluation asks a harder question:
+
+> **To what visual conditions should the model generalize?**
+
+A random image split may be appropriate for a benchmark in which observations are independent and identically sampled. It can be misleading when images are grouped by person, device, institution, video, or acquisition session.
+
+Suppose \(g_i\) identifies the source group for image \(i\). If the deployment target is a new source, evaluation should protect that unit:
+
+$$
+g_i^{\text{train}}\cap g_i^{\text{test}}=\varnothing.
+$$
+
+The practical principle is:
+
+$$
+\boxed{\text{Split by the unit that must generalize}}
+$$
+
+### Visual Domain Shift
+
+Computer-vision systems may encounter shifts in:
+
+- camera or scanner hardware;
+- lighting and background;
+- image resolution;
+- acquisition protocol;
+- institution or geographic setting;
+- patient or student population;
+- handwriting or visual style;
+- preprocessing pipeline.
+
+A model can therefore perform strongly under internal random splitting and degrade under external visual conditions.
+
+### Beyond Overall Accuracy
+
+For multiclass vision, inspect the class-specific error structure:
+
+$$
+C_{jk}
+=
+\sum_{i=1}^{n}
+\mathbb{1}(y_i=j,\hat y_i=k).
+$$
+
+The confusion matrix helps identify which visual categories are systematically confused.
+
+Then ask:
+
+- Are particular classes disproportionately difficult?
+- Are errors concentrated in ambiguous images?
+- Does calibration matter for downstream decisions?
+- Are subgroup or source-specific performance estimates stable?
+- Does performance persist under plausible visual perturbations?
+- Does an external image source reproduce the apparent advantage?
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+A computer-vision model does not become deployment-ready because it achieves high benchmark accuracy.
+
+Evidence must match the intended claim:
+
+$$
+\boxed{\text{Evaluation Design}\rightarrow\text{Permissible Generalization Claim}}
+$$
+:::
 
 ## Three Tracks
 
