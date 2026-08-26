@@ -1,0 +1,11 @@
+# Tested computational environment for Machine Learning Using Python, Second Edition
+# Generated from the Pass 3B audit environment.
+numpy==2.3.5
+pandas==2.2.3
+scipy==1.17.0
+matplotlib==3.10.8
+scikit-learn==1.8.0
+statsmodels==0.14.6
+joblib==1.5.3
+jupyterlab==4.5.3
+ipykernel==7.2.0
