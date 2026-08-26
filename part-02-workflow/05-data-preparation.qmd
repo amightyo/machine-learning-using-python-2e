@@ -431,6 +431,95 @@ An engineered feature says:
 Feature engineering is therefore computational and conceptual.
 :::
 
+
+## Computer Vision Data: Representation Is Preprocessing
+
+Images require the same disciplined thinking as tabular data, but their structure introduces additional choices.
+
+An image may be represented as
+
+$$
+I_i\in\mathbb{R}^{H\times W}
+$$
+
+for grayscale data or
+
+$$
+I_i\in\mathbb{R}^{H\times W\times C}
+$$
+
+for multichannel data.
+
+Common preparation decisions include:
+
+- resizing and cropping;
+- pixel-value scaling or normalization;
+- color-space or channel handling;
+- augmentation;
+- image-quality screening;
+- class-label verification;
+- duplicate and near-duplicate detection;
+- grouping related images from the same person, object, session, or source.
+
+### Flattening Changes the Representation
+
+Classical algorithms often require a feature vector:
+
+$$
+I_i
+\rightarrow
+x_i\in\mathbb{R}^{p}.
+$$
+
+For an \(8\times8\) grayscale image, flattening produces \(p=64\) pixel features.
+
+```{python}
+from sklearn.datasets import load_digits
+
+digits_cv = load_digits()
+
+X_images_cv = digits_cv.images
+X_flat_cv = digits_cv.data
+y_cv = digits_cv.target
+
+X_images_cv.shape, X_flat_cv.shape, y_cv.shape
+```
+
+The flattened representation is convenient for many classical estimators, but it does not explicitly encode the two-dimensional neighborhood relationships visible in the original image.
+
+### Vision Leakage Can Be Subtle
+
+Suppose several images come from the same patient, student, device, video, or acquisition session. Randomly splitting individual images can place highly related observations in both training and test sets.
+
+The model may then appear to generalize while partly recognizing source-specific patterns.
+
+Whenever images are naturally grouped, consider splitting by the higher-level unit:
+
+$$
+\boxed{
+\text{Split by the unit that must generalize}
+}
+$$
+
+Examples include patient, institution, camera, video, subject, or acquisition session.
+
+### Augmentation Belongs Inside the Training Process
+
+Transformations such as flips, rotations, crops, or brightness changes can increase training diversity when substantively appropriate.
+
+But augmentation must respect the target.
+
+A horizontal flip may be harmless for some object-recognition problems and scientifically invalid for a task in which laterality matters.
+
+::: {.callout-note icon=false}
+## A Vision Transformation Is Also an Assumption
+
+Every crop, resize, normalization rule, augmentation, and color transformation states what visual information the model is allowed to treat as stable.
+
+Computer-vision preprocessing is therefore not merely image cleanup. It is part of the model's representation of the world.
+:::
+
+
 ## Interactions and Nonlinearity
 
 An interaction can be written
@@ -618,6 +707,23 @@ Choose a dataset with numeric and categorical features.
 12. document each transformation and rationale.
 13. identify one data-quality bottleneck that model tuning cannot directly repair;
 14. propose a data-improvement intervention and explain how you would test whether it improves generalization.
+
+### Computer Vision Extension
+
+Using `sklearn.datasets.load_digits`:
+
+1. inspect the original image tensor and flattened feature matrix;
+2. visualize examples from several classes;
+3. document the unit of analysis and target;
+4. identify an appropriate train/test split;
+5. scale pixel features inside a leakage-safe pipeline;
+6. fit a simple baseline classifier;
+7. evaluate performance on unseen images;
+8. inspect several misclassified images;
+9. explain what information is lost or obscured when images are flattened;
+10. describe how the evaluation design would need to change if multiple images came from the same person or acquisition session.
+
+This is intentionally a **classical computer-vision baseline**. Later neural-network work can be compared against it rather than treating deep learning as the starting point.
 
 ## Practitioner Track
 

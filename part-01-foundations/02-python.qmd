@@ -188,6 +188,62 @@ where $n$ is the number of observations and $p$ the number of features.
 If `X.shape` returns `(800, 12)`, your feature matrix has $n=800$ observations and $p=12$ features.
 :::
 
+
+## Images Are Arrays Too
+
+Tabular data are not the only data machine-learning systems consume. A grayscale image can be represented numerically as a two-dimensional array, while a color image is commonly represented with an additional channel dimension.
+
+For an image of height \(H\) and width \(W\),
+
+$$
+I\in\mathbb{R}^{H\times W}
+$$
+
+for grayscale data, while a color image can be represented as
+
+$$
+I\in\mathbb{R}^{H\times W\times C},
+$$
+
+where \(C\) is the number of channels.
+
+```{python}
+from sklearn.datasets import load_digits
+import matplotlib.pyplot as plt
+
+digits = load_digits()
+
+image = digits.images[0]
+label = digits.target[0]
+
+image.shape, label
+```
+
+```{python}
+#| label: fig-python-image-array
+#| fig-cap: "A handwritten digit represented as a numerical image array."
+#| warning: false
+
+plt.figure(figsize=(4, 4))
+plt.imshow(image, cmap="gray")
+plt.title(f"Target label: {label}")
+plt.axis("off")
+plt.show()
+```
+
+This is an important bridge to computer vision: an image is visually meaningful to a person, but a learning algorithm receives a numerical representation.
+
+Flattening an \(H\times W\) image produces a vector with \(HW\) values:
+
+$$
+I\in\mathbb{R}^{H\times W}
+\rightarrow
+x_i\in\mathbb{R}^{HW}.
+$$
+
+That transformation preserves pixel values but makes the original two-dimensional neighborhood structure less explicit. Later chapters will examine why representation matters so much for visual learning.
+
+
 ## pandas: Working with Tabular Data
 
 pandas provides labeled tabular data structures for data manipulation and analysis [@pandasUserGuide2026].

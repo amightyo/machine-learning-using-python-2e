@@ -42,7 +42,7 @@ This is why machine learning is concerned with evidence and not just computation
 
 A useful habit for the data scientist is therefore:
 
-Do not ask only, "Does the model work?"" Ask, "What does its success allow me to know?""
+Do not ask only, "Does the model work?" Ask, "What does its success allow me to know?"
 
 Suppose we observe
 
@@ -99,6 +99,44 @@ Constructs learning signals from the data themselves and is important in modern 
 
 ### Reinforcement Learning
 An agent interacts with an environment, takes actions, receives feedback, and learns a policy intended to maximize cumulative reward [@suttonBarto2018].
+
+
+## Machine Learning Workloads: Where Computer Vision Fits
+
+Learning paradigms describe **how a system learns**. Workloads describe **what kind of problem or data the system works with**. These are different dimensions.
+
+For example, **computer vision** is a major machine-learning workload concerned with extracting useful information from images and video. A vision system may use supervised, self-supervised, semi-supervised, or other learning paradigms.
+
+Common computer-vision tasks include:
+
+- **image classification** — assign a label to an image;
+- **object detection** — identify and locate objects;
+- **image segmentation** — assign labels to pixels or regions;
+- **image retrieval and similarity** — find visually related images;
+- **visual anomaly detection** — identify unusual visual patterns;
+- **image generation and transformation** — create or modify visual content.
+
+Other important ML workloads include natural-language processing, forecasting, recommendation, anomaly detection, ranking, and multimodal learning.
+
+The distinction matters:
+
+$$
+\boxed{
+\text{Learning Paradigm}
+\neq
+\text{Workload}
+}
+$$
+
+A computer-vision application is not automatically "deep learning," although modern vision systems often use neural networks. Classical ML can also operate on image features, and later chapters will show how representation learning changes what can be learned from visual data.
+
+::: {.callout-tip icon=false}
+## Computer Vision Learning Thread
+
+Computer vision will appear as a recurring learning experience in this book. We begin with images as numerical arrays, then revisit visual representation, classification, neural networks, evaluation, responsible use, and reproducibility.
+
+The goal is not merely to run a vision model. It is to understand how an image becomes data, how representations affect learning, and what evidence is required before a visual prediction should be trusted.
+:::
 
 ## Why Generalization Matters
 
@@ -229,6 +267,21 @@ Using the generalization experiment:
 4. Change `noise=0.30` to `0.15` and `0.45`.
 5. Explain how the data-generating process changes the result.
 
+### Computer Vision Preview
+
+Use `sklearn.datasets.load_digits` to inspect a small collection of handwritten-digit images.
+
+Without building a sophisticated vision model yet:
+
+1. load the dataset;
+2. inspect the shape of the image array;
+3. display several images with their labels;
+4. explain what one observation, one feature, and the target mean in this setting;
+5. reshape one image into a feature vector and describe what information is preserved and what spatial structure becomes less explicit;
+6. identify whether digit recognition is a workload, a learning paradigm, or both.
+
+We will return to computer vision after developing the mathematical, data-preparation, classification, and neural-network foundations needed to evaluate it responsibly.
+
 ## Research Studio
 
 Choose one track and specify the substantive problem, unit of analysis, target, feature families, prediction horizon, baseline, evaluation strategy, generalization concern, potential contribution, and claims the analysis cannot support.
@@ -305,6 +358,7 @@ Verify that you can explain the intended prediction problem, observation, target
 - Machine learning is about learning useful patterns and evaluating generalization.
 - Training performance is not evidence of real-world performance.
 - AI, ML, deep learning, foundation models, and generative AI are related but distinct.
+- Computer vision is a major ML workload that can use multiple learning paradigms.
 - Statistics and mathematics provide the language for understanding learning and uncertainty.
 - Prediction, explanation, inference, and causation require different evidence.
 - Benchmark and domain research datasets serve different purposes.

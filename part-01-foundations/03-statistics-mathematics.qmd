@@ -431,12 +431,12 @@ NumPy provides operations for dot products, matrix multiplication, norms, decomp
 
 ### Vectors
 
-A feature vector for one observation might be
+A feature vector for observation \(i\) might be
 
 $$
-x =
+x_i =
 \begin{bmatrix}
-x_1\\x_2\\x_3
+x_{i1}\\x_{i2}\\x_{i3}
 \end{bmatrix}.
 $$
 
@@ -452,9 +452,9 @@ $$
 Their dot product is
 
 $$
-x^\top\beta
+x_i^\top\beta
 =
-\sum_{j=1}^{p}x_j\beta_j.
+\sum_{j=1}^{p}x_{ij}\beta_j.
 $$
 
 ```{python}
@@ -528,10 +528,10 @@ Before asking which observations are “close,” ask:
 
 ## Functions, Loss, and Learning
 
-A supervised model can be written as
+For observation \(i\), a supervised model can be written as
 
 $$
-\hat{y}=f_\theta(x).
+\hat{y}_i=f_\theta(x_i).
 $$
 
 To learn $\theta$, we need a way to quantify error.

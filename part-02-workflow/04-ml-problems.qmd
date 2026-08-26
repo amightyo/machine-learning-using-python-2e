@@ -197,6 +197,42 @@ A predictor can identify risk without identifying an effective intervention.
 
 **Prediction** estimates unknown outcomes. **Forecasting** predicts future values with temporal structure. **Classification** estimates categories/probabilities. **Ranking** orders observations. **Discovery** characterizes structure. **Explanation** investigates relationships or mechanisms. **Causal estimation** asks what would happen under alternative interventions.
 
+
+## Computer Vision Is a Workload, Not a Problem Specification
+
+“Use computer vision” is not yet a machine-learning problem.
+
+A vision workload can contain very different targets, units, outputs, and evaluation requirements:
+
+| Vision task | Possible unit | Target/output | Example evaluation concern |
+|---|---|---|---|
+| image classification | image | class label | class imbalance and subgroup performance |
+| object detection | image/object | class + bounding box | localization and detection quality |
+| semantic segmentation | pixel/region | class per pixel | boundary quality and class imbalance |
+| visual anomaly detection | image/region | anomaly score | rare-event validation |
+| image retrieval | query-image pair | similarity/ranking | relevance and ranking quality |
+
+A health study might classify a medical image, an education application might analyze handwritten work, and an Open ML experiment might classify benchmark images. The workload does not determine whether the study is scientifically valid.
+
+The same framing questions still apply:
+
+- What does one observation represent?
+- What is the target or output?
+- When is the prediction made?
+- Which visual information is legitimately available then?
+- What is the baseline?
+- What errors matter?
+- To what cameras, sites, populations, devices, or acquisition conditions should performance generalize?
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+High image-classification accuracy does not establish that a vision system will generalize to new devices, lighting conditions, institutions, populations, or image-acquisition protocols.
+
+In computer vision, **domain shift can be visual**.
+:::
+
+
 ## Baselines: What Must the Model Beat?
 
 ```{python}
@@ -324,7 +360,7 @@ Audit whether it clarifies success, unit, prediction time, horizon, decision, po
 
 ## Hands-On Lab: Build an ML Problem Specification
 
-Choose one track and express it as
+Choose one track—or a computer-vision workload within a track—and express it as
 
 $$
 \mathcal{P}=(U,Y,X_t,t,H,L,E,C).
