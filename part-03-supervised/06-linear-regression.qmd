@@ -16,6 +16,7 @@ By the end of this chapter, you should be able to:
 - explain the bias–variance motivation for regularization;
 - fit and compare OLS, Ridge, and Lasso within leakage-safe pipelines;
 - evaluate regression using held-out data and appropriate baselines.
+- recognize regression outputs within computer-vision workloads without confusing prediction with causal explanation.
 
 ## Why This Matters
 
@@ -283,10 +284,10 @@ A strong analysis may need one, the other, or both.
 
 ## Same Model, Different Question
 
-The model
+For the observed sample, the regression model can be written
 
 $$
-Y=X\beta+\epsilon
+y=X\beta+\epsilon,
 $$
 
 can support predictive, inferential, or causal questions.
@@ -532,6 +533,34 @@ $$
 It is tempting to say that increasing attendance by one unit **causes** a 5.2-unit outcome increase. Regression alone does not justify that conclusion.
 
 Confounding, selection, measurement, reverse causation, and model specification all matter.
+
+## Computer Vision Connection: Regression From Images
+
+Computer vision is not limited to classifying images. Many visual tasks contain continuous prediction components.
+
+Examples include:
+
+- estimating depth from an image;
+- predicting object coordinates;
+- estimating pose or orientation;
+- predicting image-quality scores;
+- estimating continuous physical measurements from visual data.
+
+A visual regression problem can still be written conceptually as
+
+$$
+\hat y_i=f_\theta(x_i),
+$$
+
+where \(x_i\) is a numerical representation of image \(i\) and \(y_i\) is a continuous target.
+
+The statistical cautions from this chapter still apply. A model that predicts a continuous quantity from pixels does not automatically explain the physical or biological mechanism that produced the target.
+
+::: {.callout-tip icon=false}
+## Vision Learning Thread
+
+Later computer-vision examples will focus primarily on classification because the handwritten-digits dataset provides a compact reproducible benchmark. This regression connection is included to reinforce that **computer vision is a workload containing multiple prediction types**, not a synonym for image classification.
+:::
 
 ## Three Tracks
 

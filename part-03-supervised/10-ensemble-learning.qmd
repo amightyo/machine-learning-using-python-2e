@@ -19,6 +19,7 @@ By the end of this chapter, you should be able to:
 - evaluate ensemble predictions using discrimination, calibration, and task-relevant metrics;
 - distinguish predictive gains from scientific explanation;
 - reason about diversity, correlated errors, and collective failure.
+- compare simple and ensemble models on a reproducible computer-vision benchmark without treating the leaderboard as the research contribution.
 
 ## Why This Matters
 
@@ -757,6 +758,121 @@ $$
 $$
 
 A boosted ensemble can model complex associations exceptionally well while telling us little about what would happen under intervention.
+
+## Computer Vision Learning Experience: A Small Vision Model Comparison
+
+The handwritten-digits workload now gives us a recurring benchmark across several chapters.
+
+Rather than introducing a new dataset, we can ask a more mature question:
+
+> **What do different model families contribute when the data, split, and evaluation metric are held constant?**
+
+The following comparison uses the same train/test split for a linear model, an RBF SVM, a Random Forest, and histogram-based gradient boosting.
+
+```{python}
+#| warning: false
+
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
+
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier
+from sklearn.metrics import accuracy_score
+import pandas as pd
+
+digits_ens_cv = load_digits()
+
+X_ens_cv = digits_ens_cv.data
+y_ens_cv = digits_ens_cv.target
+
+X_train_ens_cv, X_test_ens_cv, y_train_ens_cv, y_test_ens_cv = train_test_split(
+    X_ens_cv,
+    y_ens_cv,
+    test_size=0.25,
+    random_state=42,
+    stratify=y_ens_cv
+)
+
+models_ens_cv = {
+    "Logistic regression": Pipeline([
+        ("scale", StandardScaler()),
+        ("model", LogisticRegression(max_iter=2000))
+    ]),
+    "RBF SVM": Pipeline([
+        ("scale", StandardScaler()),
+        ("model", SVC(kernel="rbf", C=3.0, gamma="scale"))
+    ]),
+    "Random Forest": RandomForestClassifier(
+        n_estimators=300,
+        random_state=42,
+        n_jobs=1
+    ),
+    "Histogram boosting": HistGradientBoostingClassifier(
+        learning_rate=0.08,
+        max_iter=180,
+        random_state=42
+    )
+}
+
+vision_results = []
+
+for model_name_cv, model_cv in models_ens_cv.items():
+    model_cv.fit(
+        X_train_ens_cv,
+        y_train_ens_cv
+    )
+
+    pred_model_cv = model_cv.predict(
+        X_test_ens_cv
+    )
+
+    vision_results.append({
+        "Model": model_name_cv,
+        "Accuracy": accuracy_score(
+            y_test_ens_cv,
+            pred_model_cv
+        )
+    })
+
+vision_results_df = (
+    pd.DataFrame(vision_results)
+    .sort_values(
+        "Accuracy",
+        ascending=False
+    )
+)
+
+vision_results_df
+```
+
+### Do Not Turn the Table Into the Conclusion
+
+The highest accuracy is not automatically the best scientific or operational choice.
+
+Ask:
+
+- How stable is the ranking under another split or repeated resampling?
+- Which errors differ by digit class?
+- How much more compute does the more complex model require?
+- Are probability estimates needed?
+- Which representation assumptions differ?
+- Would the ranking survive visual domain shift?
+- What new knowledge does the comparison produce?
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+“Model A achieved the highest accuracy on handwritten digits” is a result.
+
+By itself, it is not yet a meaningful research contribution.
+
+A publishable study needs a substantive or methodological question whose answer extends beyond the leaderboard.
+:::
 
 ## Three Tracks
 

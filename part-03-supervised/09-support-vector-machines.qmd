@@ -20,6 +20,7 @@ By the end of this chapter, you should be able to:
 - explain why probability estimates from an SVM require additional modeling;
 - apply SVM reasoning to classification and regression problems;
 - distinguish geometric separability from scientific explanation.
+- evaluate an RBF-kernel SVM as a classical computer-vision baseline.
 
 ## Why This Matters
 
@@ -753,6 +754,95 @@ comparison
 ```
 
 A model family should not be selected because it sounds more sophisticated. It should earn its complexity through appropriate validation and practical usefulness.
+
+## Computer Vision Learning Experience: An RBF SVM on Handwritten Digits
+
+Support Vector Machines have a natural connection to computer vision because image representations can be high dimensional and class boundaries can be nonlinear.
+
+We can revisit the handwritten-digits workload with an RBF-kernel SVM.
+
+```{python}
+#| warning: false
+
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
+
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+digits_svm_cv = load_digits()
+
+X_svm_cv = digits_svm_cv.data
+y_svm_cv = digits_svm_cv.target
+
+X_train_svm_cv, X_test_svm_cv, y_train_svm_cv, y_test_svm_cv = train_test_split(
+    X_svm_cv,
+    y_svm_cv,
+    test_size=0.25,
+    random_state=42,
+    stratify=y_svm_cv
+)
+
+vision_svm = Pipeline([
+    ("scale", StandardScaler()),
+    (
+        "model",
+        SVC(
+            kernel="rbf",
+            C=3.0,
+            gamma="scale"
+        )
+    )
+])
+
+vision_svm.fit(
+    X_train_svm_cv,
+    y_train_svm_cv
+)
+
+pred_svm_cv = vision_svm.predict(
+    X_test_svm_cv
+)
+
+accuracy_score(
+    y_test_svm_cv,
+    pred_svm_cv
+)
+```
+
+### What Did the Kernel Add?
+
+The input remains a flattened \(64\)-pixel representation. The RBF kernel changes the geometry in which similarity is evaluated.
+
+That makes this an important comparison with Chapter 7:
+
+- Chapter 7 used a linear logistic-regression decision structure;
+- this chapter allows a nonlinear kernel boundary;
+- Chapter 13 will later introduce **learned** representations.
+
+The learning progression is therefore:
+
+$$
+\text{Flattened Pixels}
+\rightarrow
+\text{Linear Classifier}
+\rightarrow
+\text{Kernel Geometry}
+\rightarrow
+\text{Learned Visual Representation}.
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+If the RBF SVM outperforms logistic regression, the evidence supports a difference in predictive performance under this benchmark and validation design.
+
+It does not prove that the RBF representation captures the “true” geometry of handwritten digits.
+:::
 
 ## Computational Considerations
 

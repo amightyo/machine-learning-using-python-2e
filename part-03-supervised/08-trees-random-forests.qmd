@@ -20,6 +20,7 @@ By the end of this chapter, you should be able to:
 - use partial dependence cautiously as a model-behavior tool;
 - compare single trees and forests using out-of-sample evidence;
 - connect tree models to health, education, and benchmark research problems.
+- interpret pixel-level feature importance cautiously in a computer-vision example.
 
 ## Why This Matters
 
@@ -50,11 +51,11 @@ A decision tree instead partitions the space into rectangles or regions.
 For a split on feature $x_j$ at threshold $s$,
 
 $$
-R_1(j,s)=\{X:x_j\le s\},
+R_1(j,s)=\{x:x_j\le s\},
 $$
 
 $$
-R_2(j,s)=\{X:x_j>s\}.
+R_2(j,s)=\{x:x_j>s\}.
 $$
 
 The algorithm searches for a feature and threshold that improve the purity or predictive quality of the resulting regions.
@@ -77,7 +78,7 @@ $$
 \quad\text{and}\quad
 \text{measure}>12.7
 \quad\Rightarrow\quad
-\hat Y=1.
+\hat y=1.
 $$
 
 A tree therefore represents prediction as a hierarchy of conditional partitions.
@@ -599,6 +600,87 @@ plt.show()
 ```
 
 Interpret this as a description of the fitted model's behavior—not automatically as the effect of changing the feature in the real world.
+
+## Computer Vision Learning Experience: Pixel Importance Is Model Dependence
+
+For flattened images, each pixel becomes a feature. Tree-based models can therefore assign feature importance to pixel locations.
+
+Using the same handwritten-digits workload introduced in Chapter 7, a Random Forest can produce a \(64\)-element importance vector. Reshaping that vector to \(8\times8\) makes the model's dependence visually inspectable.
+
+```{python}
+#| label: fig-digits-pixel-importance
+#| fig-cap: "Random-Forest impurity importance reshaped into the original 8 × 8 image geometry."
+#| warning: false
+
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
+
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+import matplotlib.pyplot as plt
+
+digits_tree_cv = load_digits()
+
+X_tree_cv = digits_tree_cv.data
+y_tree_cv = digits_tree_cv.target
+
+X_train_tree_cv, X_test_tree_cv, y_train_tree_cv, y_test_tree_cv = train_test_split(
+    X_tree_cv,
+    y_tree_cv,
+    test_size=0.25,
+    random_state=42,
+    stratify=y_tree_cv
+)
+
+forest_tree_cv = RandomForestClassifier(
+    n_estimators=300,
+    random_state=42,
+    n_jobs=1
+)
+
+forest_tree_cv.fit(
+    X_train_tree_cv,
+    y_train_tree_cv
+)
+
+pixel_importance_cv = forest_tree_cv.feature_importances_.reshape(
+    8,
+    8
+)
+
+plt.figure(figsize=(6, 5))
+plt.imshow(
+    pixel_importance_cv,
+    cmap="viridis"
+)
+plt.colorbar(
+    label="Impurity importance"
+)
+plt.title("Pixel Importance for Digit Classification")
+plt.axis("off")
+plt.show()
+```
+
+The heatmap is useful, but it should not be interpreted as a causal map of which pixels “make” a digit what it is.
+
+Importance is conditional on:
+
+- this dataset;
+- this representation;
+- this fitted Random Forest;
+- correlated pixel structure;
+- the impurity-importance definition.
+
+$$
+\boxed{
+\text{Visually Salient Importance}
+\neq
+\text{Causal Visual Explanation}
+}
+$$
+
+A useful extension is to compare this heatmap with permutation importance or with importance patterns from another fitted model.
 
 ## Single Tree Versus Forest
 

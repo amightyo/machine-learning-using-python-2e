@@ -16,13 +16,14 @@ By the end of this chapter, you should be able to:
 - explain how thresholds encode operational tradeoffs;
 - compare classifiers using metrics aligned with intended use;
 - extend classification reasoning to multiclass problems.
+- build and evaluate a multiclass computer-vision baseline using image data.
 
 ## Why This Matters
 
 Classification is often described as predicting categories. But many classifiers first estimate
 
 $$
-X\longrightarrow\hat P(Y=k\mid X).
+\hat p_{ik}=P(Y_i=k\mid x_i).
 $$
 
 A decision rule then converts model output into a category or action.
@@ -290,7 +291,7 @@ A model can discriminate well and still produce poorly calibrated probabilities.
 A classifier may estimate
 
 $$
-\hat p_i=P(Y_i=1\mid X_i),
+\hat p_i=P(Y_i=1\mid x_i),
 $$
 
 but real systems eventually require actions:
@@ -367,7 +368,120 @@ plt.show()
 best_row_dc
 ```
 
-### Three Tracks
+### Computer Vision Learning Experience: Handwritten-Digit Classification
+
+The handwritten-digits dataset provides a compact computer-vision workload in which each observation is an \(8\times8\) grayscale image and the target is one of ten digit classes.
+
+This is a **multiclass classification** problem:
+
+$$
+Y_i\in\{0,1,\ldots,9\}.
+$$
+
+For image \(i\), the classical baseline used here represents the image as a flattened feature vector
+
+$$
+x_i\in\mathbb{R}^{64}.
+$$
+
+That representation makes the task compatible with logistic regression while giving us a baseline that later vision models can improve upon.
+
+```{python}
+#| label: fig-digits-classification
+#| fig-cap: "Examples from the handwritten-digits computer-vision workload."
+#| warning: false
+
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+digits_cv = load_digits()
+
+X_cv = digits_cv.data
+y_cv = digits_cv.target
+images_cv = digits_cv.images
+
+fig, axes = plt.subplots(2, 5, figsize=(9, 4))
+for ax, image_cv, label_cv in zip(
+    axes.ravel(),
+    images_cv[:10],
+    y_cv[:10]
+):
+    ax.imshow(image_cv, cmap="gray")
+    ax.set_title(f"Label: {label_cv}")
+    ax.axis("off")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+X_train_cv, X_test_cv, y_train_cv, y_test_cv = train_test_split(
+    X_cv,
+    y_cv,
+    test_size=0.25,
+    random_state=42,
+    stratify=y_cv
+)
+
+vision_logit = Pipeline([
+    ("scale", StandardScaler()),
+    ("model", LogisticRegression(max_iter=2000))
+])
+
+vision_logit.fit(
+    X_train_cv,
+    y_train_cv
+)
+
+pred_cv = vision_logit.predict(
+    X_test_cv
+)
+
+accuracy_score(
+    y_test_cv,
+    pred_cv
+)
+```
+
+```{python}
+#| label: fig-digits-confusion
+#| fig-cap: "Confusion matrix for the logistic-regression computer-vision baseline."
+#| warning: false
+
+ConfusionMatrixDisplay.from_predictions(
+    y_test_cv,
+    pred_cv
+)
+plt.title("Handwritten-Digit Classification")
+plt.show()
+```
+
+### Think Like a Data Scientist
+
+Do not stop at overall accuracy.
+
+Ask:
+
+- Which digits are most often confused?
+- Are the mistakes visually plausible?
+- Does flattening discard spatial information that another representation could exploit?
+- Would performance change on handwriting collected from a different population or device?
+- What evaluation design would be required if several images came from the same person?
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Strong performance on `load_digits` demonstrates performance on a small benchmark under a particular representation and split.
+
+It does **not** establish that the model generalizes to every handwriting style, scanner, camera, demographic population, or image-acquisition process.
+:::
+
+## Three Tracks
 
 **Health:** false negatives may delay diagnosis; false positives may trigger unnecessary testing.
 
