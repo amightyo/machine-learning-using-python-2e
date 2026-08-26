@@ -37,6 +37,7 @@ By the end of this chapter, you should be able to:
 - distinguish encoder-style, decoder-style, and sequence-to-sequence transformer objectives at a high level;
 - recognize data leakage, spurious lexical cues, subgroup harms, and construct-validity problems in NLP;
 - design reproducible NLP studies using health, education, or public benchmark text.
+- distinguish language-only NLP from multimodal learning that jointly represents text and visual information.
 
 ## Why Language Is Different
 
@@ -1119,6 +1120,53 @@ Language reflects:
 A text model may interpret legitimate language variation as predictive signal.
 
 Responsible evaluation should examine relevant subgroups and avoid treating one linguistic norm as inherently superior.
+
+## From NLP to Multimodal Learning
+
+Natural-language processing focuses on language, while computer vision focuses on visual information. Many modern systems operate across both.
+
+A multimodal system may learn from paired observations such as
+
+$$
+(\text{image},\text{text}),
+$$
+
+or combine several modalities:
+
+$$
+x_i=
+\left(
+x_i^{\text{text}},
+x_i^{\text{image}},
+x_i^{\text{audio}}
+\right).
+$$
+
+Applications include image captioning, text-to-image retrieval, visual question answering, medical image–text analysis, and interpreting diagrams together with written explanations.
+
+### Shared Spaces and Cross-Modal Alignment
+
+One strategy is to learn representations in which related text and images are close in a shared embedding space. Conceptually,
+
+$$
+f_{\text{text}}(x_i^{\text{text}})
+\approx
+f_{\text{image}}(x_i^{\text{image}})
+$$
+
+when the observations describe related content.
+
+This bridges dimensionality reduction and representation learning with the language representations developed in this chapter.
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+A multimodal model that aligns an image with a caption has learned useful statistical correspondence. That does not establish that the system interprets either modality as a human does, nor that its representations are free from biases inherited from image-text data.
+:::
+
+### Learning Experience: Design a Multimodal Study
+
+Choose one book track and specify the unit of analysis, text modality, visual modality, analytical objective, representation of each modality, alignment strategy, one leakage risk, one construct-validity concern, one domain-shift concern, and the evidence required before making a substantive claim.
 
 ## Three Tracks
 

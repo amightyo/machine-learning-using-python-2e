@@ -35,6 +35,7 @@ By the end of this chapter, you should be able to:
 - recognize prompt injection, data leakage, privacy, citation, bias, and overreliance risks;
 - design reproducible generative-AI experiments for health, education, and research applications;
 - use generative AI as a research collaborator without surrendering scholarly judgment.
+- connect text generation with image generation and multimodal generative systems while preserving modality-specific evaluation concerns.
 
 ## Why Generative AI Changes the Conversation
 
@@ -1007,6 +1008,74 @@ Never treat an AI-generated citation, numerical result, quotation, interpretatio
 Ask: **What independent evidence would establish that this is correct?**
 :::
 
+
+## Generative AI Beyond Text: Images and Multimodal Systems
+
+Generative AI includes more than language generation.
+
+A generative image model can produce visual content conditioned on information such as text, class labels, other images, or latent variables. Conceptually,
+
+$$
+z\sim p(z),
+\qquad
+\tilde x=g_\theta(z,c),
+$$
+
+where \(z\) is a latent input, \(c\) is optional conditioning information, and \(\tilde x\) is generated content.
+
+Modern image-generation families include latent-variable, adversarial, autoregressive, and diffusion approaches. Their architectures differ, but the evidence question remains familiar:
+
+> What does the generated output demonstrate, and what does it not demonstrate?
+
+### Multimodal Generation
+
+Generative systems can operate across modalities:
+
+$$
+\text{text}\rightarrow\text{image},
+\qquad
+\text{image}\rightarrow\text{text},
+\qquad
+(\text{text},\text{image})\rightarrow\text{response}.
+$$
+
+The distinction between NLP and computer vision is therefore increasingly porous at the system level, although each modality retains distinct measurement and evaluation challenges.
+
+### Evaluating Generated Images
+
+A visually impressive image is not sufficient evidence of model quality. Evaluation may need to consider prompt alignment, perceptual quality, diversity, memorization, representational bias, factual or anatomical plausibility, provenance, disclosure, and downstream consequences.
+
+$$
+\boxed{\text{Visual Plausibility}\neq\text{Visual Truth}}
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+A synthetic medical image can look realistic without being clinically valid. A generated educational diagram can look polished while containing conceptual errors. A photorealistic image can depict an event that never occurred.
+
+Generation increases the need to separate **appearance**, **evidence**, and **provenance**.
+:::
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Synthetic Media Changes the Burden of Evidence
+
+When realistic images, audio, video, and text become inexpensive to generate, sensory plausibility becomes weaker evidence that something occurred in the world.
+
+For data scientists, provenance and verification become part of analytical literacy.
+:::
+
+### Computer Vision Learning Experience
+
+Compare two systems:
+
+**System A:** classifies a handwritten digit.
+
+**System B:** generates a handwritten digit from a requested label.
+
+For each, identify the input, output, evaluation target, what successful performance establishes, what it does not establish, one failure mode, and one responsible-use concern.
+
+The exercise reinforces the distinction between **predictive vision** and **generative vision**.
 
 ## Three Tracks
 

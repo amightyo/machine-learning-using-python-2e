@@ -21,6 +21,7 @@ By the end of this chapter, you should be able to:
 - evaluate cluster stability and substantive usefulness;
 - explain why clustering can create patterns even when meaningful groups do not exist;
 - apply clustering to health, education, and open benchmark problems without turning descriptive segments into unsupported scientific categories.
+- evaluate clustering of visual data as a representation-dependent exploratory task.
 
 ## Why This Matters
 
@@ -850,6 +851,55 @@ plt.show()
 The colors are real outputs of the algorithm.
 
 That does not mean four natural populations existed before we requested them.
+
+## Computer Vision Learning Experience: Clustering Images Without Labels
+
+Computer vision also contains unsupervised workloads. Suppose image labels are unavailable and we ask whether visually similar observations form useful groups.
+
+Using handwritten digits, we can cluster flattened images without supplying digit labels to \(k\)-means. Known labels are retained only for **post hoc evaluation**, not fitting.
+
+```{python}
+#| warning: false
+
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
+
+from sklearn.datasets import load_digits
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.metrics import adjusted_rand_score
+
+digits_cluster_cv = load_digits()
+
+X_cluster_cv = digits_cluster_cv.data
+y_cluster_cv = digits_cluster_cv.target
+
+X_cluster_scaled_cv = StandardScaler().fit_transform(X_cluster_cv)
+
+kmeans_digits_cv = KMeans(
+    n_clusters=10,
+    n_init=20,
+    random_state=42
+)
+
+clusters_digits_cv = kmeans_digits_cv.fit_predict(X_cluster_scaled_cv)
+
+adjusted_rand_score(y_cluster_cv, clusters_digits_cv)
+```
+
+The adjusted Rand index compares the discovered partition with known labels while accounting for agreement expected by chance. Cluster numbers do not need to match digit numbers.
+
+A modest score would not necessarily mean clustering “failed.” \(k\)-means optimizes geometric compactness, not semantic digit identity.
+
+$$
+\boxed{\text{Visual Similarity Under a Representation}\neq\text{Semantic Identity}}
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+If image clusters resemble known classes, that is evidence that the chosen representation contains class-related structure. It does not establish that the clusters are natural visual kinds or that the same structure will appear under another representation.
+:::
 
 ## Three Tracks
 

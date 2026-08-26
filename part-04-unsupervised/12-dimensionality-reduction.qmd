@@ -35,6 +35,7 @@ By the end of this chapter, you should be able to:
 - recognize why two-dimensional embeddings can create visually compelling but misleading apparent clusters;
 - compare PCA, t-SNE, and UMAP based on purpose rather than visual appeal;
 - apply dimensionality reduction responsibly in health, education, and research workflows.
+- use dimensionality reduction to explore visual representations without turning embeddings into unsupported class claims.
 
 ## Why This Matters
 
@@ -953,6 +954,54 @@ A responsible dimensionality-reduction workflow should ask:
 - Is the pattern also visible through other methods?
 - Does the low-dimensional representation preserve what the application needs?
 - Are conclusions based on visualization alone?
+
+## Computer Vision Learning Experience: Projecting Image Space
+
+An \(8\times8\) grayscale digit contains \(64\) pixel values. PCA can compress this visual feature space into fewer dimensions.
+
+```{python}
+#| label: fig-digits-pca
+#| fig-cap: "Two-dimensional PCA projection of handwritten-digit images. Color uses known labels only to help interpret the projection."
+#| warning: false
+
+from sklearn.datasets import load_digits
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
+digits_pca_cv = load_digits()
+
+X_pca_cv = StandardScaler().fit_transform(digits_pca_cv.data)
+y_pca_cv = digits_pca_cv.target
+
+pca_digits_cv = PCA(n_components=2)
+Z_pca_cv = pca_digits_cv.fit_transform(X_pca_cv)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(
+    Z_pca_cv[:, 0],
+    Z_pca_cv[:, 1],
+    c=y_pca_cv,
+    cmap="tab10",
+    s=20,
+    alpha=0.65
+)
+plt.xlabel("Principal component 1")
+plt.ylabel("Principal component 2")
+plt.title("PCA Projection of Handwritten Digits")
+plt.colorbar(label="Digit label")
+plt.show()
+```
+
+The colors were not used by PCA. They are added afterward to ask whether the unsupervised representation aligns with known semantic classes.
+
+$$
+\boxed{\text{Visible Separation in an Embedding}\neq\text{Perfect Class Separability}}
+$$
+
+Compare this PCA representation with the t-SNE example already in the chapter. Ask which structure each method preserves, which patterns remain ambiguous, how sensitive the display is to analytical choices, and whether conclusions would survive a change in image source.
+
+The goal is not to select the prettiest plot. The goal is to understand what each representation preserves.
 
 ## Three Tracks
 

@@ -24,6 +24,7 @@ By the end of this chapter, you should be able to:
 - build and evaluate an MLP with scikit-learn;
 - explain learned representations;
 - recognize when a neural network is unnecessary.
+- train a compact neural-network computer-vision model and connect it to learned visual representations.
 
 ## Why This Matters
 
@@ -740,6 +741,79 @@ Modern research commonly uses frameworks such as PyTorch, JAX, and TensorFlow/Ke
 
 A companion lab can later rebuild the network in PyTorch so students explicitly write the architecture, forward pass, loss, optimizer, training loop, backpropagation, and parameter update.
 :::
+
+## Computer Vision Learning Experience: From Pixels to a Neural Classifier
+
+The recurring handwritten-digits workload now reaches an important transition.
+
+Earlier chapters treated each \(8\times8\) image as a \(64\)-feature vector and used logistic regression, trees, ensembles, and kernel methods. A neural network can learn nonlinear intermediate representations from those pixel features.
+
+```{python}
+#| warning: false
+
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
+
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import accuracy_score
+
+digits_nn_cv = load_digits()
+
+X_nn_cv = digits_nn_cv.data
+y_nn_cv = digits_nn_cv.target
+
+X_train_nn_cv, X_test_nn_cv, y_train_nn_cv, y_test_nn_cv = train_test_split(
+    X_nn_cv,
+    y_nn_cv,
+    test_size=0.25,
+    random_state=42,
+    stratify=y_nn_cv
+)
+
+vision_mlp = Pipeline([
+    ("scale", StandardScaler()),
+    ("model", MLPClassifier(
+        hidden_layer_sizes=(64, 32),
+        activation="relu",
+        max_iter=600,
+        random_state=42,
+        early_stopping=True
+    ))
+])
+
+vision_mlp.fit(X_train_nn_cv, y_train_nn_cv)
+pred_nn_cv = vision_mlp.predict(X_test_nn_cv)
+
+accuracy_score(y_test_nn_cv, pred_nn_cv)
+```
+
+This is a neural computer-vision model, but it is **not yet a convolutional neural network**. Flattening removes the image's explicit two-dimensional structure before learning begins.
+
+### Why Convolution Changed Computer Vision
+
+Convolutional neural networks (CNNs) exploit spatial structure more directly. Local filters can detect patterns such as edges and textures across image locations.
+
+$$
+\text{Image}\rightarrow\text{Local Features}\rightarrow\text{Higher-Level Features}\rightarrow\text{Prediction}.
+$$
+
+Modern vision architectures also include vision transformers and multimodal systems. The architectural details are beyond this chapter's core scope, but the conceptual lesson is central:
+
+$$
+\boxed{\text{Architecture Encodes Assumptions About Useful Representation}}
+$$
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Seeing Is Not Merely Classifying Pixels
+
+A model that classifies an image accurately has demonstrated task performance, not human-like seeing. The distinction between **successful representation** and **human understanding** remains essential.
+:::
+
+The vision thread now connects image arrays, flattened pixels, classical models, kernel geometry, learned representations, and spatial architectures.
 
 ## Three Tracks
 
