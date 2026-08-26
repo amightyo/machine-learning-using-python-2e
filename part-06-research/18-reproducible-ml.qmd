@@ -156,6 +156,88 @@ The exact structure can vary.
 
 The important principle is that another person should be able to infer where inputs, transformations, outputs, and documentation belong.
 
+## Reproducibility Is More Than Rerunning Code
+
+A research claim rests on an evidence chain:
+
+$$
+\boxed{
+\text{Question}\rightarrow\text{Data}\rightarrow\text{Processing}\rightarrow\text{Model}\rightarrow\text{Evaluation}\rightarrow\text{Result}\rightarrow\text{Claim}
+}
+$$
+
+Reproducibility asks whether another researcher can inspect and reconstruct that chain. This can require provenance, environment and package versions, seeds, configuration, data-access instructions, code, generated outputs, decision logs, licenses, and persistent identifiers.
+
+### Reproducibility, Replication, and Robustness
+
+Terminology varies across disciplines, so define usage explicitly.
+
+- **Computational reproducibility:** Can reported results be regenerated from the same data and workflow?
+- **Replication:** Does an independently conducted study or new dataset produce evidence consistent with the finding?
+- **Robustness:** Does the substantive conclusion persist under reasonable alternative analytical choices?
+
+$$
+\text{Can I rerun it?}\qquad
+\text{Does it recur?}\qquad
+\text{Does it survive alternatives?}
+$$
+
+### From Student Submission to Scholarly Artifact
+
+A conventional assignment is primarily designed to be graded. A research artifact should also be designed to be inspected, rerun, extended, cited, challenged, and reused where licensing permits.
+
+Shift from:
+
+> Did I complete the analysis?
+
+to:
+
+> Have I left enough evidence for another person to understand and reconstruct what I did?
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Reproducibility Is Intellectual Hospitality
+
+Research asks readers to trust processes they did not personally observe. Documentation, provenance, code, and transparent decisions invite another person into the reasoning process and make scholarship more open to correction.
+:::
+
+::: {.callout-important icon=false}
+## Final Research Reality Check
+
+A repository containing code is not automatically reproducible. Ask whether a new researcher can determine the question, data provenance, analytical sample, required environment, origin of each reported result, major judgment calls, and unavoidable privacy/licensing/access limitations.
+
+The goal is **maximal defensible transparency within real constraints**.
+:::
+
+## Final Three-Track Culmination
+
+**Guided Learner:** reproduce one central analysis and explain each major workflow step.
+
+**Practitioner:** build a documented end-to-end pipeline that can be rerun on new data.
+
+**Researcher:** produce a research-ready package containing manuscript, provenance, analysis code, environment documentation, generated outputs, and reproducibility limitations.
+
+## Final Reflection
+
+A trustworthy machine-learning project requires more than algorithmic performance:
+
+$$
+\text{Problem Framing}
++
+\text{Measurement}
++
+\text{Data}
++
+\text{Modeling}
++
+\text{Evaluation}
++
+\text{Responsibility}
++
+\text{Reproducibility}.
+$$
+
+Machine learning becomes mature analytical practice when these are treated as one connected system.
+
 ## Separate Source From Derived Artifacts
 
 A useful distinction is:
@@ -1277,6 +1359,10 @@ It is to produce a defensible **research artifact**.
 32. Why should figures and tables be generated from code when practical?
 33. What should be preserved so another researcher can reproduce an ML result?
 34. Why is reproducibility an infrastructure for scientific self-correction?
+35. How does computational reproducibility differ from replication and robustness?
+36. Why is code alone insufficient?
+37. What should a research package preserve about analytical judgment?
+38. Why is reproducibility part of scholarly accountability?
 
 ## Reproducibility Check
 
@@ -1344,3 +1430,6 @@ Before releasing a project, verify:
 - Replication requires new evidence.
 - Reproducibility enables criticism, correction, extension, and cumulative knowledge.
 - A mature ML project should end not merely as a fitted model, but as a defensible research artifact.
+- Reproducibility concerns the entire evidence chain.
+- Replication and robustness ask questions reproducibility alone cannot answer.
+- Research-ready artifacts allow others to inspect, reconstruct, and challenge the analytical process.

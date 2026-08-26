@@ -1134,6 +1134,38 @@ Specify:
 27. unsupported claims;
 28. scholarly contribution.
 
+## Responsibility Begins Before the Model
+
+Consequential choices occur throughout the lifecycle:
+
+$$
+\boxed{
+\text{Problem}\rightarrow\text{Target}\rightarrow\text{Data}\rightarrow\text{Model}\rightarrow\text{Evaluation}\rightarrow\text{Decision}\rightarrow\text{Monitoring}
+}
+$$
+
+Responsible ML asks whether the problem should be predicted, whether the target is defensible, who is missing from the data, which errors cause harm, who receives benefits and burdens, whether decisions can be contested, what happens under change, and who remains accountable.
+
+### Fairness Metrics Do Not Choose Values for Us
+
+Fairness criteria can reveal disparities and formalize tradeoffs. They do not determine which tradeoff a community ought to accept.
+
+$$
+\boxed{\text{Fairness Metric}\neq\text{Complete Ethical Judgment}}
+$$
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: Optimization Contains Value Choices
+
+Every objective function says what counts as success. Every threshold says which errors are tolerated. Every target says what the system treats as worth predicting. Responsible ML makes those choices visible enough to question.
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Adding a fairness table at the end does not make a study responsible if the target is invalid, populations are excluded, deployment is inappropriate, or harms fall outside the measured metric.
+:::
+
 ## Professor's Challenge: The Student Success Score
 
 A university develops a “Student Success Score” using:
@@ -1212,6 +1244,10 @@ Redesign the system around student success rather than prediction alone.
 32. Why do agentic AI systems require stronger governance?
 33. When might a high-performing model still be inappropriate to deploy?
 34. Why are normative questions not reducible to optimization?
+35. Why is responsible ML a lifecycle property?
+36. Why can fairness metrics conflict?
+37. Why can a technically fair model still be inappropriate to deploy?
+38. Where do value choices enter an ML workflow?
 
 ## Reproducibility Check
 
@@ -1275,3 +1311,5 @@ Record:
 - Generative and agentic systems add new risks to traditional ML governance.
 - Optimization answers how to pursue an objective; it does not determine which objectives are worthy.
 - Once predictions affect people, machine learning becomes a question of consequence as well as accuracy.
+- Responsibility begins with problem formulation and continues through monitoring.
+- Fairness metrics inform but do not replace ethical and governance judgment.

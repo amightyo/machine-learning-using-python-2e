@@ -687,6 +687,36 @@ If rare large errors are especially consequential, RMSE may reflect that more st
 
 Metric selection is partly a decision about what kinds of mistakes matter.
 
+## Evaluation Is an Argument About Future Performance
+
+An evaluation result is evidence supporting a claim about behavior beyond the observations used to train the model.
+
+$$
+\boxed{
+\text{Claim}
+\leftarrow
+\text{Metric}+\text{Test Design}+\text{Comparison}+\text{Uncertainty}+\text{Target Population}
+}
+$$
+
+An AUC of 0.88 is incomplete without knowing where it was measured, whether evaluation data were independent of training and tuning, what population they represent, what comparison was used, and how uncertain or heterogeneous performance is.
+
+| Evaluation design | Strongest reasonable question |
+|---|---|
+| random holdout | does performance generalize to similar observations from the same context? |
+| cross-validation | is performance reasonably stable across partitions of the available sample? |
+| temporal validation | does performance generalize forward in time? |
+| site/institution holdout | does the model transfer to another organizational context? |
+| external dataset | does performance generalize beyond the development dataset? |
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+“Test-set performance” is not automatically “real-world generalization.” A test set from the same source, period, institution, measurement system, and sampling process may support a much narrower claim than deployment requires.
+:::
+
+**Research Studio addition:** require a generalization statement naming the target population/setting, validation design, strongest supported claim, and one important unsupported claim.
+
 ## Resampling and Cross-Validation
 
 ## Why a Single Split Is Unstable
@@ -1533,6 +1563,9 @@ Redesign the complete evaluation.
 33. Why can row-level random splitting be invalid for clustered data?
 34. How can leaderboard use cause adaptive overfitting?
 35. Why does strong predictive evaluation not establish causal benefit?
+36. Why is a metric inseparable from its evaluation design?
+37. How does temporal validation support a different claim from random holdout?
+38. Why can test-set performance still be weak evidence for deployment elsewhere?
 
 ## Reproducibility Check
 
@@ -1594,3 +1627,5 @@ Record:
 - Repeated benchmark feedback can produce adaptive overfitting.
 - Predictive performance does not establish causal benefit.
 - Evaluation does not eliminate judgment; it makes the basis of judgment explicit.
+- Evaluation is an evidence argument about generalization.
+- Validation design determines the scope of the performance claim.

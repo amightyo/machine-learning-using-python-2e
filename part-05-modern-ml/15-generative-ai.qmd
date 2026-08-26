@@ -977,6 +977,37 @@ Generated code should be treated like code received from an unfamiliar collabora
 
 Execution without comprehension is not reproducible research.
 
+## Fluent Generation Is Not Evidence
+
+Generative output can be coherent, specific, and persuasive. Fluency is a property of the response, not proof that its claims are true.
+
+$$
+\boxed{\text{Plausibility}\neq\text{Verification}}
+$$
+
+For analytical and research work:
+
+$$
+\text{Generate}\rightarrow\text{Inspect}\rightarrow\text{Verify}\rightarrow\text{Revise}\rightarrow\text{Document}.
+$$
+
+Generative AI can accelerate brainstorming, code scaffolding, explanation, summarization, debugging, and documentation. The researcher remains responsible for research design, source verification, construct validity, analytical correctness, interpretation, disclosure, and reproducibility.
+
+::: {.callout-note icon=false}
+## Beyond the Algorithm: When Language Becomes Cheap, Judgment Becomes More Valuable
+
+Generative systems reduce the cost of producing plausible text and code. Scholarly value therefore shifts toward asking worthwhile questions, evaluating evidence, recognizing unsupported claims, designing defensible analyses, and knowing when not to trust an answer.
+:::
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+Never treat an AI-generated citation, numerical result, quotation, interpretation, or code output as verified merely because it is presented confidently.
+
+Ask: **What independent evidence would establish that this is correct?**
+:::
+
+
 ## Three Tracks
 
 ## Health Track
@@ -1136,6 +1167,10 @@ A practitioner should understand generation parameters, prompting, retrieval, fi
 ## Researcher Track
 
 A researcher should additionally define controlled experiments, freeze model/prompt versions, quantify uncertainty, evaluate retrieval separately from generation, use rigorous human-rating protocols, conduct subgroup and robustness analyses, report compute/cost, and preserve reproducibility despite rapidly changing model APIs.
+Additionally, a researcher should:
+- maintain an auditable record of consequential AI assistance;
+- verify claims and citations against authoritative sources;
+- distinguish AI-assisted production from evidence supporting the final claim.
 
 ## Research Studio
 
@@ -1241,6 +1276,9 @@ Design a stronger study, potentially including a randomized or carefully designe
 30. Why should AI-generated scholarly citations always be verified?
 31. Why is AI-generated code not automatically reproducible research?
 32. Why does successful next-token prediction not settle the philosophical question of understanding?
+33. Why is fluent generation not factual verification?
+34. Which responsibilities remain with the researcher?
+35. Why might critical judgment become more important as generation becomes easier?
 
 ## Reproducibility Check
 
@@ -1301,3 +1339,5 @@ Record:
 - Research uses of generative AI require citation, code, methodological, and factual verification.
 - Human scholarly responsibility remains even when AI performs substantial work.
 - Evidence—not eloquence—should determine the authority granted to generated claims.
+- Generative fluency is not evidence of truth.
+- AI-assisted research still requires independent verification and human accountability.

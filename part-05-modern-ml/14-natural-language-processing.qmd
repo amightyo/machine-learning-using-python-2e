@@ -1231,6 +1231,27 @@ $$
 A model should be credited for what evidence demonstrates—not for metaphysical properties we inferred from impressive output.
 :::
 
+
+## Text Is Not the Same as Meaning
+
+Natural-language processing transforms language into representations algorithms can process:
+
+$$
+\text{Language}\rightarrow\text{Representation}\rightarrow\text{Model}\rightarrow\text{Prediction or Generation}.
+$$
+
+Every representation preserves some distinctions and transforms or discards others. Bag-of-words emphasizes lexical occurrence; embeddings encode learned relationships; contextual representations allow the same token to differ across contexts.
+
+$$
+\boxed{\text{Representation of Language}\neq\text{Language Itself}}
+$$
+
+::: {.callout-important icon=false}
+## Research Reality Check
+
+High accuracy on a text benchmark does not establish that a model understands the underlying human construct. Test whether performance depends on intended linguistic evidence or shortcuts such as formatting, source, demographic proxies, repeated phrases, or dataset artifacts.
+:::
+
 ## AI Pair Programmer: The Model Understands Students
 
 An AI assistant analyzes open-ended student comments and produces a classifier with high accuracy.
@@ -1285,6 +1306,10 @@ A practitioner should be able to build leakage-safe lexical NLP pipelines, choos
 ## Researcher Track
 
 A researcher should additionally justify the unit of analysis and split boundary, examine duplicate contamination, establish construct validity, conduct error and subgroup analyses, compare strong baselines, document data provenance, and distinguish predictive performance from claims about meaning or cognition.
+
+- document text collection, cleaning, segmentation, and representation;
+- distinguish performance on a linguistic proxy from validity for the substantive construct;
+- test shortcut features and source-specific artifacts where feasible.
 
 ## Research Studio
 
@@ -1378,6 +1403,9 @@ Design a scientifically and ethically stronger study.
 26. Why can random document splitting create leakage?
 27. Why is construct validity still essential with transformers?
 28. Why does predictive language modeling not by itself prove human-like understanding?
+29. Why is a text representation not equivalent to language itself?
+30. How can an NLP model perform well using unintended shortcuts?
+31. Why should construct validity remain part of NLP evaluation?
 
 ## Reproducibility Check
 
@@ -1429,3 +1457,5 @@ Record:
 - NLP studies require careful unit-of-analysis, split-boundary, construct-validity, and duplicate-contamination decisions.
 - Language variation creates important fairness considerations.
 - Successful linguistic representation does not by itself establish human-like understanding.
+- NLP performance depends on representational and data-design choices.
+- Strong benchmark performance does not establish human-like understanding or construct validity.
