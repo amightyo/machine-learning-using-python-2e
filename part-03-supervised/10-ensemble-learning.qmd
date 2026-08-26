@@ -408,7 +408,7 @@ import os
 
 # Prevent a Windows-specific joblib/loky physical-core detection warning.
 # One core is sufficient for this small instructional example.
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
 
 from sklearn.ensemble import HistGradientBoostingClassifier
 
@@ -521,7 +521,7 @@ candidate_models={
         ("model",LogisticRegression(max_iter=2000))
     ]),
     "Random Forest":RandomForestClassifier(
-        n_estimators=500,random_state=42,n_jobs=-1
+        n_estimators=500,random_state=42,n_jobs=1
     ),
     "RBF SVM":Pipeline([
         ("scale",StandardScaler()),
@@ -582,7 +582,7 @@ voting=VotingClassifier(
             ("model",LogisticRegression(max_iter=2000))
         ])),
         ("rf",RandomForestClassifier(
-            n_estimators=300,random_state=42,n_jobs=-1
+            n_estimators=300,random_state=42,n_jobs=1
         )),
         ("gb",GradientBoostingClassifier(
             n_estimators=150,
@@ -641,7 +641,7 @@ base_estimators=[
         ("model",LogisticRegression(max_iter=2000))
     ])),
     ("rf",RandomForestClassifier(
-        n_estimators=300,random_state=42,n_jobs=-1
+        n_estimators=300,random_state=42,n_jobs=1
     )),
     ("gb",GradientBoostingClassifier(
         n_estimators=150,

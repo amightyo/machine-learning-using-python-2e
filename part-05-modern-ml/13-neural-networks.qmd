@@ -4,7 +4,7 @@
 #| label: chapter-13-setup
 #| include: false
 import os
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
 ```
 
 ## Learning Objectives

@@ -100,7 +100,7 @@ import os
 
 # Prevent Windows-specific joblib/loky physical-core detection warnings.
 # One core is sufficient for the instructional examples in this chapter.
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
 ```
 
 ### Manhattan Distance

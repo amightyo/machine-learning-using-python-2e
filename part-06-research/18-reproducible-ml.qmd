@@ -10,7 +10,7 @@ import json
 import platform
 from pathlib import Path
 
-os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+os.environ["LOKY_MAX_CPU_COUNT"] = "1"
 
 import numpy as np
 import pandas as pd
