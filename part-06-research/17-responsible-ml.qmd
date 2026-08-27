@@ -89,7 +89,7 @@ A false positive in spam filtering is different from a false positive in academi
 
 ## Responsibility Is a System Property
 
-Responsible ML cannot be achieved by choosing a “fair algorithm.”
+Responsible ML cannot be achieved by choosing a “fair algorithm.” Responsible-AI frameworks and sociotechnical scholarship emphasize that risk emerges across the full system lifecycle rather than from the model in isolation [@nistAIRMF2023; @selbst2019fairness].
 
 The system includes:
 
@@ -198,7 +198,7 @@ $$
 
 ## Measurement Bias
 
-A recorded variable may be an imperfect proxy for the construct we actually care about.
+A recorded variable may be an imperfect proxy for the construct we actually care about. Treating computational variables as measurements of substantive constructs makes validity part of fairness analysis [@jacobsWallach2021].
 
 For example:
 
@@ -292,7 +292,7 @@ $$
 
 ## Equal Opportunity
 
-Equal opportunity compares true-positive rates:
+Equal opportunity compares true-positive rates and is closely related to the equalized-odds framework developed by Hardt, Price, and Srebro [@hardt2016equality]:
 
 $$
 P(\hat Y=1\mid Y=1,A=a)
@@ -405,6 +405,8 @@ plt.show()
 
 ## Fairness Criteria Can Conflict
 
+Formal fairness criteria can be mutually incompatible under common conditions, particularly when base rates differ across groups [@kleinberg2017inherent].
+
 ## Different Definitions Encode Different Normative Goals
 
 Demographic parity asks about allocation rates.
@@ -490,6 +492,8 @@ $$
 Report sample sizes and uncertainty rather than making strong claims from tiny groups.
 
 ## Explainability and Interpretability
+
+Interpretability methods can be useful, but in high-stakes settings post hoc explanations should not be treated as substitutes for transparent, appropriately constrained modeling and governance [@rudin2019].
 
 ## Why Explain?
 
@@ -841,6 +845,8 @@ Define:
 - retirement criteria.
 
 ## Model Cards
+
+Model cards provide a structured approach for documenting intended uses, evaluation conditions, subgroup performance, limitations, and other model characteristics [@mitchell2019model]. Dataset documentation can play a complementary role through datasheets that make provenance, composition, collection, and recommended uses explicit [@gebru2021datasheets].
 
 ## Documentation as an Engineering Artifact
 

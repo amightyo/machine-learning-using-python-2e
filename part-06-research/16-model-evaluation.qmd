@@ -345,6 +345,8 @@ pd.Series({
 
 ## ROC Curve
 
+ROC analysis summarizes discrimination across thresholds by tracing the tradeoff between true-positive and false-positive rates [@fawcett2006roc].
+
 For threshold $c$:
 
 $$
@@ -413,7 +415,7 @@ plt.show()
 
 ## Precision-Recall Curve
 
-When positive cases are uncommon, precision-recall analysis can be especially informative.
+When positive cases are uncommon, precision-recall analysis can be especially informative; precision-recall curves can reveal differences that ROC curves may obscure under substantial class imbalance [@saitoRehmsmeier2015].
 
 ```{python}
 #| label: fig-pr
@@ -453,6 +455,8 @@ Choose based on the scientific or operational problem.
 
 ## Calibration
 
+Probability calibration should be evaluated separately from discrimination when predicted probabilities will support decisions [@niculescuMizilCaruana2005]. Modern neural networks can be highly accurate while remaining poorly calibrated [@guoEtAl2017].
+
 ## Discrimination Is Not Calibration
 
 Suppose among cases assigned probability $0.80$, only 45% experience the outcome.
@@ -467,6 +471,8 @@ P(Y=1\mid \hat p=p)
 $$
 
 ## Brier Score
+
+The Brier score is a classic proper scoring rule for probabilistic forecasts [@brier1950].
 
 For binary outcomes:
 
@@ -1034,6 +1040,8 @@ plt.show()
 ```
 
 ## Comparing Models
+
+When many algorithms are compared across datasets or repeated resampling results, apparent rank differences should not be overinterpreted without appropriate paired statistical comparison [@demsar2006].
 
 ## Tiny Differences Need Context
 

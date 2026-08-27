@@ -76,6 +76,8 @@ A number without provenance is difficult to interrogate scientifically.
 
 ## Reproducibility Is a Chain
 
+Reproducible research treats the computational workflow as part of the evidence supporting a scientific claim, rather than as disposable implementation detail [@peng2011reproducible; @sandve2013ten].
+
 A useful mental model is:
 
 $$
@@ -102,6 +104,8 @@ If an important link is missing, reproducing the result becomes harder.
 
 ## Four Related Ideas
 
+Terminology around reproducibility is not fully standardized across disciplines, so the distinctions below are explicit conventions for this book [@goodmanEtAl2016].
+
 ### Reproducibility
 
 A useful operational definition is the ability to obtain consistent results using the same underlying data, computational procedures, and analysis.
@@ -123,6 +127,8 @@ These ideas overlap, but they are not synonyms.
 A computationally reproducible result can still fail to replicate or generalize.
 
 ## The Research Compendium
+
+A research compendium organizes code, data or access instructions, documentation, and computational outputs as a coherent scholarly artifact [@gentlemanLang2007].
 
 ## Organize the Project Around the Research Process
 
@@ -245,6 +251,8 @@ Do not silently overwrite the original source data.
 Derived files should be reproducible from documented inputs and code whenever possible.
 
 ## Data Provenance
+
+FAIR data stewardship emphasizes making research objects findable, accessible under appropriate conditions, interoperable, and reusable [@wilkinsonEtAl2016].
 
 ## Every Dataset Has a History
 
@@ -943,6 +951,8 @@ Data provenance is part of scholarly credit.
 ## Reproducibility and Restricted Data
 
 ## Open Science Does Not Mean “Upload Everything”
+
+Open-science norms encourage transparent and reusable research practices while still requiring appropriate protection of sensitive or restricted materials [@nosekEtAl2015].
 
 Health, education, financial, and institutional data may contain sensitive or restricted information.
 
