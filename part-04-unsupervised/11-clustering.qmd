@@ -321,7 +321,7 @@ That is a stronger scientific statement because it makes the assumptions visible
 
 ## $k$-Means Clustering
 
-$k$-means seeks $K$ cluster centers, or centroids,
+$k$-means seeks $K$ cluster centers, or centroids, following one of the foundational formulations of partition-based clustering [@macqueen1967]:
 
 $$
 \mu_1,\mu_2,\ldots,\mu_K.
@@ -446,6 +446,8 @@ plt.show()
 The elbow method is a heuristic. Some datasets have no obvious elbow; analysts can disagree about where it occurs.
 
 ## Silhouette Analysis
+
+Silhouette analysis provides an internal diagnostic of how well an observation fits its assigned cluster relative to neighboring clusters [@rousseeuw1987].
 
 For observation $i$, let:
 

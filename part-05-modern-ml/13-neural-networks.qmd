@@ -88,6 +88,8 @@ sigmoid(z)
 
 ## Hidden Layers and Representation Learning
 
+A central strength of neural networks is their ability to learn intermediate representations rather than rely only on manually specified features [@bengioEtAl2013; @goodfellow2016].
+
 A hidden layer computes
 
 $$
@@ -450,7 +452,7 @@ This allows sensitivity to propagate backward through composed operations.
 
 ## Backpropagation
 
-Backpropagation is an efficient application of the chain rule:
+Backpropagation is an efficient application of the chain rule for computing gradients through layered networks; its modern neural-network formulation was established by Rumelhart, Hinton, and Williams [@rumelhartEtAl1986]:
 
 $$
 \boxed{\text{forward pass}\rightarrow\text{loss}\rightarrow\text{backward gradients}\rightarrow\text{parameter update}}.
@@ -522,7 +524,9 @@ $$
 
 Very large gradients can instead destabilize training.
 
-## Initialization and Regularization
+## Initialization
+
+Initialization affects how signals and gradients propagate through a network; principled initialization schemes help avoid poorly scaled activations and gradients [@glorot2010understanding]. and Regularization
 
 Random initialization breaks symmetry among neurons. Initialization scale also affects optimization.
 
@@ -795,7 +799,7 @@ This is a neural computer-vision model, but it is **not yet a convolutional neur
 
 ### Why Convolution Changed Computer Vision
 
-Convolutional neural networks (CNNs) exploit spatial structure more directly. Local filters can detect patterns such as edges and textures across image locations.
+Convolutional neural networks (CNNs) exploit spatial structure more directly. Local filters can detect patterns such as edges and textures across image locations; influential early CNN systems demonstrated how gradient-based learning could learn hierarchical visual features for document recognition [@lecunEtAl1998].
 
 $$
 \text{Image}\rightarrow\text{Local Features}\rightarrow\text{Higher-Level Features}\rightarrow\text{Prediction}.

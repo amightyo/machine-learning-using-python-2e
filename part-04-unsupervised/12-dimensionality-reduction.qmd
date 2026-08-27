@@ -131,6 +131,8 @@ PCA answers this geometrically.
 
 ## Principal Component Analysis
 
+Principal component analysis has roots in Pearson's geometric formulation and Hotelling's statistical development of principal components [@pearson1901; @hotelling1933].
+
 ### Begin With Variance
 
 For a variable $X$ with mean $\bar{x}$, sample variance is
@@ -780,7 +782,7 @@ Their beautiful plots require careful interpretation.
 
 ### t-SNE
 
-t-distributed Stochastic Neighbor Embedding (t-SNE) seeks a low-dimensional representation that preserves local neighborhood relationships probabilistically.
+t-distributed Stochastic Neighbor Embedding (t-SNE) seeks a low-dimensional representation that preserves local neighborhood relationships probabilistically [@vandermaatenHinton2008].
 
 At a high level:
 
@@ -875,7 +877,7 @@ Apparent visual clusters may depend on:
 
 Uniform Manifold Approximation and Projection (UMAP) is another nonlinear dimensionality-reduction method widely used for visualization and representation learning.
 
-Conceptually, UMAP attempts to construct a graph representing local high-dimensional relationships and optimize a lower-dimensional graph-like representation [@umap2026].
+Conceptually, UMAP attempts to construct a graph representing local high-dimensional relationships and optimize a lower-dimensional graph-like representation [@mcinnesEtAl2018; @umap2026].
 
 Two widely discussed parameters are:
 

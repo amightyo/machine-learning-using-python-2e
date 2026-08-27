@@ -349,7 +349,7 @@ This creates a tradeoff between richer local context and dimensionality/sparsity
 
 A term appearing frequently in every document may be less discriminating than a term concentrated in a smaller subset.
 
-TF-IDF combines:
+TF-IDF combines term-specific evidence with corpus-level rarity, reflecting a long information-retrieval tradition of term weighting [@saltonBuckley1988]:
 
 - **term frequency** — importance within a document;
 - **inverse document frequency** — rarity across documents.
@@ -715,7 +715,7 @@ The coordinates are learned rather than manually assigned.
 
 ## Word2Vec Intuition
 
-Two classic Word2Vec objectives are:
+Word2Vec helped popularize efficient learning of distributed word representations from large corpora [@mikolov2013efficient]. Two classic Word2Vec objectives are:
 
 - Continuous Bag of Words (CBOW): predict a target word from surrounding context;
 - Skip-Gram: predict surrounding context from a target word.
@@ -923,7 +923,7 @@ Model internals and scientific explanations are different objects.
 
 ## The Transformer Idea
 
-The transformer architecture builds representations using attention rather than relying exclusively on recurrence.
+The transformer architecture builds representations using attention rather than relying exclusively on recurrence [@vaswani2017attention].
 
 A simplified transformer block includes:
 
@@ -1125,7 +1125,9 @@ Responsible evaluation should examine relevant subgroups and avoid treating one 
 
 Natural-language processing focuses on language, while computer vision focuses on visual information. Many modern systems operate across both.
 
-A multimodal system may learn from paired observations such as
+A multimodal system may learn from paired observations such as image-text pairs; contrastive vision-language systems such as CLIP demonstrate how aligned representations can be learned from large collections of such pairs [@radfordEtAl2021].
+
+For example, it may learn from
 
 $$
 (\text{image},\text{text}),
