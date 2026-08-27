@@ -641,6 +641,7 @@ Instead of manually copying a result from a notebook into a manuscript, generate
 ```{python}
 #| label: fig-reproducible-example
 #| fig-cap: "A reproducible figure is generated from code rather than manually reconstructed."
+#| fig-alt: "Code-generated line plot of the sine function from x equals 0 to 10, illustrating a figure whose data, transformation, and rendering are reproducible from source code."
 
 x = np.linspace(
     0,

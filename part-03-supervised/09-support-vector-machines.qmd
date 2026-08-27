@@ -139,6 +139,7 @@ This is one of the most distinctive ideas in SVMs:
 ```{python}
 #| label: fig-linear-svm
 #| fig-cap: "A linear SVM chooses a separating hyperplane whose margin is determined by support vectors."
+#| fig-alt: "Two-class scatterplot with a linear SVM separating hyperplane, two parallel margin boundaries, and support vectors outlined with large circles. The support vectors lie closest to the margin and determine the fitted maximum-margin boundary."
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -267,6 +268,7 @@ Observations inside the margin or on the wrong side incur loss.
 ```{python}
 #| label: fig-hinge-loss
 #| fig-cap: "Hinge loss becomes zero once the signed margin reaches one."
+#| fig-alt: "Piecewise hinge-loss curve plotted against signed margin. Loss decreases linearly for margins below one and becomes zero once the signed margin reaches or exceeds one, marked by a vertical reference line."
 
 margin = np.linspace(-2, 3, 400)
 hinge = np.maximum(0, 1 - margin)
@@ -374,6 +376,7 @@ No straight line can separate the classes well in the original two-dimensional s
 ```{python}
 #| label: fig-circles
 #| fig-cap: "Some classification problems are not linearly separable in their original representation."
+#| fig-alt: "Scatterplot of two classes arranged as noisy concentric circles. Because one class surrounds the other, no single straight line can separate the classes in the original two-dimensional representation."
 
 from sklearn.datasets import make_circles
 
@@ -475,6 +478,7 @@ can make structure easier to separate.
 ```{python}
 #| label: fig-feature-map-svm
 #| fig-cap: "A nonlinear feature map can reveal a simpler geometry than the original representation."
+#| fig-alt: "Two related scatterplots showing a nonlinear feature transformation. In the original one-dimensional representation, class membership changes at both ends of the axis; after adding the squared feature, the classes become geometrically easier to separate."
 #| warning: false
 
 import numpy as np
@@ -629,6 +633,7 @@ The interaction between $C$ and $\gamma$ is crucial.
 ```{python}
 #| label: fig-kernel-boundaries
 #| fig-cap: "A linear kernel cannot represent the circular structure, while an RBF kernel can create a nonlinear decision boundary."
+#| fig-alt: "Comparison of decision boundaries for linear and radial-basis-function SVMs on concentric-circle data. The linear model cannot follow the circular class structure, whereas the RBF model forms a curved boundary that separates the inner and outer classes."
 
 from sklearn.pipeline import make_pipeline
 
@@ -684,6 +689,7 @@ The RBF model does not prove that the underlying scientific mechanism is radial.
 ```{python}
 #| label: fig-c-gamma
 #| fig-cap: "C and gamma jointly control the flexibility of an RBF SVM."
+#| fig-alt: "Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations."
 
 settings = [
     (0.1, 0.5),

@@ -42,7 +42,17 @@ $$
 A mature workflow is closer to:
 
 $$
-\text{question}\rightarrow\text{measurement}\rightarrow\text{data}\rightarrow\text{assumptions}\rightarrow\text{model}\rightarrow\text{evaluation}\rightarrow\text{interpretation}\rightarrow\text{decision}\rightarrow\text{reproducible evidence}.
+\begin{aligned}
+\text{question}
+&\rightarrow \text{measurement}
+\rightarrow \text{data}
+\rightarrow \text{assumptions}
+\rightarrow \text{model}\\
+&\rightarrow \text{evaluation}
+\rightarrow \text{interpretation}
+\rightarrow \text{decision}
+\rightarrow \text{reproducible evidence}.
+\end{aligned}
 $$
 
 Readers will therefore be asked not only to write code, but to defend analytical choices.

@@ -168,6 +168,7 @@ $$
 ```{python}
 #| label: fig-activations
 #| fig-cap: "Common neural-network activation functions."
+#| fig-alt: "Comparison of common neural-network activation functions across a range of input values."
 import matplotlib.pyplot as plt
 z_grid=np.linspace(-6,6,500)
 functions={
@@ -415,6 +416,7 @@ we can watch optimization reduce loss.
 ```{python}
 #| label: fig-nn-gradient-descent
 #| fig-cap: "Gradient descent iteratively moves toward a lower-loss region."
+#| fig-alt: "Illustration of gradient descent moving iteratively toward a lower value of a neural-network loss function."
 w_value=-4.0
 eta=.15
 history=[]
@@ -550,6 +552,7 @@ $$
 ```{python}
 #| label: fig-learning-curves-concept
 #| fig-cap: "Conceptual learning curves illustrate how validation loss can worsen while training loss continues to decline."
+#| fig-alt: "Conceptual training and validation learning curves illustrating how model performance changes with training."
 epochs=np.arange(1,81)
 train_loss=.9*np.exp(-epochs/25)+.08
 validation_loss=.8*np.exp(-epochs/20)+.13+.00008*(epochs-42).clip(min=0)**2
@@ -648,6 +651,7 @@ A neural network should earn its added complexity.
 ```{python}
 #| label: fig-mlp-calibration
 #| fig-cap: "Neural-network probabilities require calibration assessment when interpreted as risks."
+#| fig-alt: "Calibration plot comparing predicted probabilities from a multilayer perceptron with observed outcome frequencies."
 from sklearn.calibration import calibration_curve
 from sklearn.metrics import brier_score_loss
 

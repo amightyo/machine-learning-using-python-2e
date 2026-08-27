@@ -198,6 +198,7 @@ Unlike logistic regression, ordinary decision trees generally do not require sta
 ```{python}
 #| label: fig-tree
 #| fig-cap: "A shallow decision tree exposes the hierarchy of learned splits."
+#| fig-alt: "Diagram of a shallow classification tree. Internal nodes show a hierarchy of feature-threshold splits, branches show the resulting decisions, and terminal nodes summarize the predicted class composition."
 
 import matplotlib.pyplot as plt
 from sklearn.tree import plot_tree
@@ -257,6 +258,7 @@ but test error need not continue falling.
 ```{python}
 #| label: fig-depth-overfit
 #| fig-cap: "Increasing tree depth can reduce training error while eventually harming generalization."
+#| fig-alt: "Training and test accuracy plotted across increasing maximum tree depth. Training accuracy rises as depth increases, while test accuracy improves only to a point and then levels off or deteriorates, illustrating overfitting."
 
 from sklearn.metrics import accuracy_score
 
@@ -364,6 +366,7 @@ Small sample changes can alter the root feature, threshold, and every downstream
 ```{python}
 #| label: fig-tree-root-stability
 #| fig-cap: "Bootstrap resampling reveals whether a tree repeatedly selects the same feature at the root."
+#| fig-alt: "Horizontal bar chart showing how often each feature is selected as the root split across 250 bootstrap samples. A dominant bar indicates a stable first split, while several similarly sized bars would indicate root-feature instability."
 #| warning: false
 
 import numpy as np
@@ -567,6 +570,7 @@ Even this is not causal importance. Correlated predictors can also complicate in
 ```{python}
 #| label: fig-feature-importance
 #| fig-cap: "Impurity-based and permutation importance can tell different stories about model dependence."
+#| fig-alt: "Grouped horizontal bar chart comparing impurity-based importance with permutation importance for leading features. Differences between paired bars show that the two importance methods can rank model dependence differently."
 
 compare=pd.DataFrame({
     "Impurity importance": importance,
@@ -614,6 +618,7 @@ Using the same handwritten-digits workload introduced in Chapter 7, a Random For
 ```{python}
 #| label: fig-digits-pixel-importance
 #| fig-cap: "Random-Forest impurity importance reshaped into the original 8 × 8 image geometry."
+#| fig-alt: "Eight-by-eight heatmap of Random-Forest impurity importance reshaped to the original handwritten-digit image geometry. Stronger cells indicate pixel locations on which the fitted forest depends more heavily for classification."
 #| warning: false
 
 import os

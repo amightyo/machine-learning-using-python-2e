@@ -384,6 +384,7 @@ The table shows why a single aggregate accuracy score cannot characterize fairne
 ```{python}
 #| label: fig-fairness-metrics
 #| fig-cap: "Different fairness criteria compare different aspects of model behavior across groups."
+#| fig-alt: "Grouped bar chart comparing positive prediction rate, true positive rate, false positive rate, and precision across groups to illustrate differences in model behavior under multiple fairness-related metrics."
 
 plot_metrics = fairness_table[
     [
@@ -610,6 +611,7 @@ importance_df
 ```{python}
 #| label: fig-permutation-importance
 #| fig-cap: "Permutation importance estimates how predictive performance changes when a feature's information is disrupted."
+#| fig-alt: "Horizontal bar chart ranking features by the decrease in ROC-AUC after each feature is permuted; larger decreases indicate greater predictive importance."
 
 ordered = importance_df.sort_values(
     "importance"

@@ -324,6 +324,7 @@ For $T>1$, it becomes flatter.
 ```{python}
 #| label: fig-temperature
 #| fig-cap: "Temperature changes the concentration of a token probability distribution without changing the underlying logits."
+#| fig-alt: "Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities."
 
 temperatures = [
     0.4,

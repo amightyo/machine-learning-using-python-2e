@@ -98,7 +98,7 @@ $$
 \boxed{\text{consensus across models}}.
 $$
 
-### Stacking
+### Stacking: Learn the Combination Rule
 
 Train a meta-model to learn how to combine base-model predictions.
 

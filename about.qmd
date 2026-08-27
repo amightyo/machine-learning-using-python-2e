@@ -5,8 +5,22 @@ number-depth: 0
 
 # About the Author {.unnumbered}
 
-::: {.column-margin}
-![Dr. Itauma Itauma](images/itauma-itauma-headshot.jpeg){fig-alt="Headshot of Dr. Itauma Itauma" width="100%"}
+::: {.content-visible when-format="html"}
+
+<div style="float:left; width:180px; margin:0.25rem 1.25rem 0.75rem 0;">
+  <img src="images/itauma-itauma-headshot.jpeg"
+       alt="Headshot of Dr. Itauma Itauma"
+       style="width:100%; height:auto;">
+</div>
+
+:::
+
+::: {.content-visible when-format="pdf"}
+
+\begin{center}
+\includegraphics[width=0.24\textwidth]{images/itauma-itauma-headshot.jpeg}
+\end{center}
+
 :::
 
 **Dr. Itauma Itauma** is an Associate Professor of Data Science and Analytics at Harrisburg University of Science and Technology. His work brings together data science, artificial intelligence, machine learning, analytics, research methodology, and graduate education.
@@ -32,7 +46,13 @@ Dr. Itauma's approach to graduate education emphasizes analytical reasoning, res
 He works with master's and doctoral students across applied analytics and research settings, with particular interest in helping learners progress from:
 
 $$
-\text{Learning Methods}\rightarrow\text{Applying Methods}\rightarrow\text{Evaluating Evidence}\rightarrow\text{Producing Knowledge}.
+\text{Learning Methods}
+\rightarrow
+\text{Applying Methods}
+\rightarrow
+\text{Evaluating Evidence}
+\rightarrow
+\text{Producing Knowledge}.
 $$
 
 ## Beyond the Classroom

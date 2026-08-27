@@ -327,6 +327,7 @@ $$
 ```{python}
 #| label: fig-threshold-cost
 #| fig-cap: "The cost-minimizing threshold can differ from 0.50 when classification errors have asymmetric consequences."
+#| fig-alt: "Line plot of empirical decision cost across classification thresholds. Cost changes as the threshold moves from 0.05 to 0.95, and a vertical dashed line marks the threshold with the lowest cost when false negatives are weighted more heavily than false positives."
 #| warning: false
 
 import numpy as np
@@ -389,6 +390,7 @@ That representation makes the task compatible with logistic regression while giv
 ```{python}
 #| label: fig-digits-classification
 #| fig-cap: "Examples from the handwritten-digits computer-vision workload."
+#| fig-alt: "Grid of ten grayscale handwritten-digit images from the scikit-learn digits dataset. Each small 8 by 8 image is shown with its numeric class label, illustrating the visual inputs later flattened into predictor features."
 #| warning: false
 
 from sklearn.datasets import load_digits
@@ -451,6 +453,7 @@ accuracy_score(
 ```{python}
 #| label: fig-digits-confusion
 #| fig-cap: "Confusion matrix for the logistic-regression computer-vision baseline."
+#| fig-alt: "Ten-by-ten confusion matrix for the logistic-regression handwritten-digit classifier. Most counts lie on the main diagonal, indicating correct classifications, while smaller off-diagonal cells identify specific digit pairs the model confuses."
 #| warning: false
 
 ConfusionMatrixDisplay.from_predictions(

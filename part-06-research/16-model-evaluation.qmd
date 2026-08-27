@@ -391,6 +391,7 @@ It does not measure probability calibration.
 ```{python}
 #| label: fig-roc
 #| fig-cap: "The ROC curve summarizes discrimination across classification thresholds."
+#| fig-alt: "ROC curve plotting true positive rate against false positive rate across classification thresholds, with a diagonal chance-reference line and the model's ROC-AUC shown in the legend."
 
 from sklearn.metrics import roc_curve
 
@@ -425,6 +426,7 @@ When positive cases are uncommon, precision-recall analysis can be especially in
 ```{python}
 #| label: fig-pr
 #| fig-cap: "Precision-recall curves emphasize performance on the positive class."
+#| fig-alt: "Precision-recall curve plotting precision against recall across classification thresholds, with the model's average precision summarized in the legend."
 
 from sklearn.metrics import precision_recall_curve
 
@@ -498,6 +500,7 @@ The Brier score reflects probability accuracy, combining aspects of calibration 
 ```{python}
 #| label: fig-calibration
 #| fig-cap: "Calibration compares predicted probabilities with observed outcome frequencies."
+#| fig-alt: "Calibration curve comparing mean predicted probabilities with observed positive fractions across probability bins, alongside a diagonal line representing perfect calibration."
 
 from sklearn.calibration import calibration_curve
 
@@ -600,6 +603,7 @@ threshold_df.round(3)
 ```{python}
 #| label: fig-threshold-tradeoff
 #| fig-cap: "Changing the classification threshold changes sensitivity and specificity."
+#| fig-alt: "Line chart showing sensitivity and specificity across decision thresholds, illustrating how increasing or decreasing the threshold changes the balance between the two metrics."
 
 plt.figure(figsize=(8, 5))
 plt.plot(
@@ -1026,6 +1030,7 @@ It does not automatically capture uncertainty from model development, dataset co
 ```{python}
 #| label: fig-bootstrap-auc
 #| fig-cap: "Bootstrap resampling illustrates uncertainty in test-set ROC-AUC for a fixed fitted model."
+#| fig-alt: "Histogram of bootstrap ROC-AUC estimates for the fixed fitted model, with dashed vertical lines marking the lower and upper confidence interval bounds."
 
 plt.figure(figsize=(8, 5))
 plt.hist(

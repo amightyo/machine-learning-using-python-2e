@@ -263,6 +263,7 @@ $$
 ```{python}
 #| label: fig-pca-geometry
 #| fig-cap: "PCA identifies orthogonal directions aligned with decreasing variance in the data."
+#| fig-alt: "Geometric illustration of principal component analysis, showing data projected onto directions of greatest variance."
 
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
@@ -390,6 +391,7 @@ This full-data transformation is used here for **exploratory demonstration**. Wh
 ```{python}
 #| label: fig-pca-scree
 #| fig-cap: "A scree plot displays the proportion of variance associated with successive principal components."
+#| fig-alt: "Scree plot showing the variance explained by successive principal components."
 
 components = np.arange(
     1,
@@ -415,6 +417,7 @@ A scree plot can help identify diminishing returns, but it does not provide a un
 ```{python}
 #| label: fig-pca-cumulative
 #| fig-cap: "Cumulative explained variance shows how much total variance is retained as components are added."
+#| fig-alt: "Cumulative explained-variance curve showing how retained variance increases as principal components are added."
 
 cumulative = np.cumsum(
     pca.explained_variance_ratio_
@@ -464,6 +467,7 @@ $$
 ```{python}
 #| label: fig-pca-two-components
 #| fig-cap: "The first two principal components provide a two-dimensional projection of the standardized feature space."
+#| fig-alt: "Two-dimensional representation of observations using the first two principal components."
 
 plt.figure(figsize=(8, 6))
 plt.scatter(
@@ -554,6 +558,7 @@ This gives dimensionality reduction a concrete interpretation:
 ```{python}
 #| label: fig-reconstruction-error
 #| fig-cap: "Reconstruction error decreases as more principal components are retained."
+#| fig-alt: "Reconstruction error across retained principal components, showing improved reconstruction as dimensionality increases."
 
 component_counts = range(1, 16)
 errors = []
@@ -691,6 +696,7 @@ $$
 ```{python}
 #| label: fig-pca-reconstruction
 #| fig-cap: "Retaining more principal components reduces reconstruction error, illustrating the tradeoff between compression and retained information."
+#| fig-alt: "Comparison of original and PCA-reconstructed observations illustrating information retained after dimensionality reduction."
 #| warning: false
 
 import numpy as np
@@ -810,6 +816,7 @@ The goal is not to preserve every original distance.
 ```{python}
 #| label: fig-tsne
 #| fig-cap: "t-SNE can reveal local neighborhood structure, but distances and apparent gaps in the two-dimensional embedding require cautious interpretation."
+#| fig-alt: "Two-dimensional t-SNE embedding showing local group structure in a lower-dimensional representation."
 
 #| warning: false
 
@@ -964,6 +971,7 @@ An \(8\times8\) grayscale digit contains \(64\) pixel values. PCA can compress t
 ```{python}
 #| label: fig-digits-pca
 #| fig-cap: "Two-dimensional PCA projection of handwritten-digit images. Color uses known labels only to help interpret the projection."
+#| fig-alt: "Handwritten digit observations projected into principal-component space, illustrating lower-dimensional structure in image data."
 #| warning: false
 
 from sklearn.datasets import load_digits

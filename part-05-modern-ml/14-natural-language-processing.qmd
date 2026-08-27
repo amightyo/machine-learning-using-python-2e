@@ -853,6 +853,7 @@ A token's representation is therefore updated using information from other token
 ```{python}
 #| label: fig-attention-matrix
 #| fig-cap: "A toy attention matrix shows how each token can assign different weights to other tokens."
+#| fig-alt: "Attention-weight matrix showing the relative strength of relationships between token positions in a sequence."
 
 tokens = [
     "student",
