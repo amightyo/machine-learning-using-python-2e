@@ -47,6 +47,11 @@ A clustering algorithm can always organize observations according to its mathema
 **If no labels tell us what the correct groups are, what does it mean for a clustering solution to be good?**
 :::
 
+
+### From Supervised to Unsupervised Learning
+
+Chapters 6–10 learned mappings from predictors to known outcomes. Clustering begins a different kind of inquiry. Without a supplied target, the algorithm must organize observations using patterns in the representation itself. This makes questions of scaling, distance, feature construction, validation, and interpretation even more central—not less.
+
 ## From Prediction to Structure Discovery
 
 In classification, an observed label gives us a criterion against which predictions can be evaluated.

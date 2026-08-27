@@ -906,3 +906,8 @@ Before leaving this chapter, verify that your analysis records:
 - Predictive, inferential, and causal questions require different forms of evidence.
 - Strong prediction does not establish stable parameter interpretation or causality.
 - Uncertainty communicates limits and stability of analytical conclusions.
+
+## Looking Ahead
+
+The mathematical and statistical ideas in this chapter become useful only when they are connected to a well-defined analytical problem. Chapter 4 therefore shifts from foundations to formulation: defining the unit of analysis, target, predictors, prediction horizon, decision context, baseline, and evidence required before modeling begins.
+

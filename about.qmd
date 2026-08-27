@@ -1,0 +1,44 @@
+---
+number-sections: false
+number-depth: 0
+---
+
+# About the Author {.unnumbered}
+
+::: {.column-margin}
+![Dr. Itauma Itauma](images/itauma-itauma-headshot.jpeg){fig-alt="Headshot of Dr. Itauma Itauma" width="100%"}
+:::
+
+**Dr. Itauma Itauma** is an Associate Professor of Data Science and Analytics at Harrisburg University of Science and Technology. His work brings together data science, artificial intelligence, machine learning, analytics, research methodology, and graduate education.
+
+His scholarly interests include artificial intelligence and machine learning in education, health, and business; learning analytics; structural equation modeling; meta-analysis; reproducible analytics; and the use of computational methods to strengthen evidence-based decision-making.
+
+Dr. Itauma holds a Ph.D. in Instructional Design and Technology with a concentration in Analytics, an M.S. in Computer Science, an M.S. in Computer Engineering, and an MBA. He also completed the Harvard Business Analytics Program (HBAP). His academic work has included teaching, program leadership, curriculum development, dissertation mentorship, and the development of graduate learning experiences in analytics, data science, artificial intelligence, and research.
+
+A recurring theme in his teaching and scholarship is that technical competence is necessary but insufficient. Data scientists must also learn to question assumptions, evaluate evidence, communicate uncertainty, consider the consequences of analytical decisions, and create work that others can inspect and reproduce.
+
+That perspective informs the philosophy of *Machine Learning Using Python*:
+
+$$
+\boxed{\text{Algorithms}+\text{Data}+\text{Evidence}+\text{Judgment}}
+$$
+
+The Second Edition reflects his commitment to helping students move beyond executing machine-learning libraries toward becoming thoughtful practitioners and researchers who can explain what they did, why they did it, what the evidence supports, and what remains uncertain.
+
+## Teaching and Mentorship
+
+Dr. Itauma's approach to graduate education emphasizes analytical reasoning, research literacy, reproducible workflows, responsible use of artificial intelligence, and the connection between computational methods and meaningful questions.
+
+He works with master's and doctoral students across applied analytics and research settings, with particular interest in helping learners progress from:
+
+$$
+\text{Learning Methods}\rightarrow\text{Applying Methods}\rightarrow\text{Evaluating Evidence}\rightarrow\text{Producing Knowledge}.
+$$
+
+## Beyond the Classroom
+
+Outside his academic work, Dr. Itauma enjoys pickleball and figure skating. These interests offer a different kind of reminder that development is iterative: technique improves through practice, feedback, reflection, and the willingness to keep learning.
+
+## Author Information
+
+Current professional, scholarly, repository, and contact information should be obtained from the official publication and project resources associated with this book.

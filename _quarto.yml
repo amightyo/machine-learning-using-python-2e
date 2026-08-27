@@ -5,7 +5,7 @@ book:
   title: "Machine Learning Using Python"
   subtitle: "Foundations, Algorithms, Applications, and Reproducible Research"
   author: "Itauma Itauma"
-  date: today
+  edition: "Second Edition"
 
   chapters:
     - index.qmd
@@ -46,6 +46,12 @@ book:
         - part-06-research/16-model-evaluation.qmd
         - part-06-research/17-responsible-ml.qmd
         - part-06-research/18-reproducible-ml.qmd
+
+    - part: "Resources"
+      chapters:
+        - teaching.qmd
+        - about.qmd
+        - citation.qmd
 
     - references.qmd
 

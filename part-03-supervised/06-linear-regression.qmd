@@ -28,6 +28,11 @@ Linear regression is one of the most important models in statistics and machine 
 **How can a linear model transform observed relationships into useful predictions—and what must be true before we trust its coefficients or predictions?**
 :::
 
+
+### Connection to the Workflow
+
+Chapters 4 and 5 established the problem specification and the data pipeline. Those choices now become part of the model itself: the target defines what is predicted, the features define what information is available, and the evaluation boundary determines what counts as honest evidence. Linear regression provides the first transparent setting in which to study how those decisions interact with model fitting and generalization.
+
 ## The Simple Linear Model
 
 For one predictor,

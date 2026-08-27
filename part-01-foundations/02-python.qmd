@@ -27,6 +27,11 @@ Python makes it easy to move from an idea to executable analysis. That speed is 
 **How do we move from exploratory Python code to a trustworthy, reproducible computational workflow for machine learning?**
 :::
 
+
+### Connection to Chapter 1
+
+Chapter 1 framed machine learning as a complete evidence-building process rather than an exercise in calling algorithms. This chapter provides the computational language for that process. Python will be used not only to fit models, but also to represent data, automate transformations, visualize evidence, document decisions, and reproduce analyses across the chapters that follow.
+
 ## Why Python?
 
 Python combines a readable general-purpose language with a large scientific-computing ecosystem.

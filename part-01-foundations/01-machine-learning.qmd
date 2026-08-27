@@ -24,7 +24,7 @@ Machine learning supports predictive systems, scientific discovery, decision sup
 
 ## A Conceptual Map of Modern Machine Learning
 
-![Conceptual map of AI and modern machine learning.](figures/figure-01-01-ai-ml-map.svg){#fig-ai-ml-map fig-cap="A conceptual map of AI, machine learning, and modern learning paradigms."}
+![Conceptual map of AI and modern machine learning.](figures/figure-01-01-ai-ml-map.png){#fig-ai-ml-map fig-cap="A conceptual map of AI, machine learning, and modern learning paradigms."}
 
 **Artificial intelligence (AI)** is the broadest concept here. **Machine learning (ML)** is a major approach to AI in which models learn patterns from data [@mitchell1997]. **Deep learning** uses multilayer neural networks to learn representations [@goodfellow2016]. **Foundation models** are trained at scale on broad data and adapted to downstream tasks [@bommasani2021opportunities]. **Generative AI** creates new content such as text, images, audio, video, or code.
 
@@ -364,3 +364,8 @@ Verify that you can explain the intended prediction problem, observation, target
 - Benchmark and domain research datasets serve different purposes.
 - Responsible and reproducible ML begins with problem formulation.
 - Using an ML algorithm does not by itself create a research contribution.
+
+## Looking Ahead
+
+Chapter 1 established machine learning as a disciplined process of learning from data rather than merely selecting algorithms. Chapter 2 turns that perspective into practice by developing the Python foundations used throughout the book to represent data, express computational logic, inspect results, and build reproducible machine-learning workflows.
+

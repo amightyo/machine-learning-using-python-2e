@@ -70,6 +70,11 @@ A performance number is not evidence in isolation.
 **When we say that a model “works,” what evidence should be sufficient for us to believe that claim?**
 :::
 
+
+### From Building Systems to Evaluating Evidence
+
+The preceding chapters developed increasingly flexible models, from linear methods and trees to ensembles, neural networks, NLP systems, and generative AI. Flexibility expands what models can do, but it also raises the standard of evidence required to justify their use. This chapter consolidates evaluation as a scientific process: not merely reporting a score, but determining what a result means, how uncertain it is, what it should be compared with, and whether it is likely to generalize.
+
 ## Evaluation Begins With the Claim
 
 Different claims require different evidence.
@@ -1712,3 +1717,8 @@ Record:
 - Evaluation does not eliminate judgment; it makes the basis of judgment explicit.
 - Evaluation is an evidence argument about generalization.
 - Validation design determines the scope of the performance claim.
+
+## Looking Ahead
+
+Evaluation tells us how well a model performs and how uncertain that evidence may be, but performance alone does not determine whether a system should be used. Chapter 17 extends evaluation into responsibility by examining fairness, explainability, privacy, governance, human consequences, and the distribution of errors across people and contexts.
+

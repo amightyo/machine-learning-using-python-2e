@@ -1085,3 +1085,8 @@ Record:
 - Ensemble complexity should earn its place through meaningful, reproducible improvement.
 - Modern boosting systems share a common algorithmic lineage while differing in important implementation choices.
 - Package-level performance comparisons require careful validation and should produce insight beyond a leaderboard.
+
+## Looking Ahead
+
+Chapters 6–10 assumed that labeled outcomes were available for supervised learning. Chapter 11 removes that assumption and begins unsupervised learning, asking a different question: when no target label is supplied, what structure can the data reveal—and how do we determine whether that apparent structure is meaningful rather than an artifact of representation or method?
+

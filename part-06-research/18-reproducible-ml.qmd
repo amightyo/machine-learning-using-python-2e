@@ -74,6 +74,11 @@ A number without provenance is difficult to interrogate scientifically.
 **What must we preserve so that a machine-learning result can become inspectable, repeatable, and cumulative scientific knowledge?**
 :::
 
+
+### From Responsible Claims to Reproducible Evidence
+
+Chapter 17 emphasized that trustworthy machine learning requires claims about fairness, explanation, privacy, governance, and consequences to be examined rather than assumed. Reproducibility provides the evidentiary infrastructure for that examination. If another researcher cannot reconstruct how data became results, then even careful evaluation and responsible-ML claims become difficult to verify, critique, or extend.
+
 ## Reproducibility Is a Chain
 
 Reproducible research treats the computational workflow as part of the evidence supporting a scientific claim, rather than as disposable implementation detail [@peng2011reproducible; @sandve2013ten].

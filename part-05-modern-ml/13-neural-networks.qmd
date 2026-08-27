@@ -48,6 +48,11 @@ Hidden layers can construct new representations useful for prediction.
 **When a model learns its own representations, have we removed human judgment—or moved human judgment into the architecture, data, objective, and evaluation?**
 :::
 
+
+### From Representation to Representation Learning
+
+Chapter 12 showed that changing a representation can reveal, compress, or distort structure in data. Neural networks take the next step: rather than relying only on representations chosen in advance, they can learn intermediate representations jointly with the predictive task. This connection is central to understanding why deep learning became influential in vision, language, and other high-dimensional domains.
+
 ## From Logistic Regression to a Neuron
 
 Logistic regression computes
@@ -408,7 +413,7 @@ $$
 we can watch optimization reduce loss.
 
 ```{python}
-#| label: fig-gradient-descent
+#| label: fig-nn-gradient-descent
 #| fig-cap: "Gradient descent iteratively moves toward a lower-loss region."
 w_value=-4.0
 eta=.15

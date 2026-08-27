@@ -18,7 +18,7 @@ Mathematics is used to clarify algorithms rather than create unnecessary abstrac
 
 ## The Architecture of the Book
 
-The book has six parts:
+The Second Edition contains **18 chapters organized into six parts**:
 
 1. **Foundations** — Chapters 1–3.
 2. **Machine Learning Workflow** — Chapters 4–5.
@@ -30,6 +30,8 @@ The book has six parts:
 $$
 \text{Foundations}\rightarrow\text{Workflow}\rightarrow\text{Models}\rightarrow\text{Modern AI}\rightarrow\text{Evaluation}\rightarrow\text{Responsibility}\rightarrow\text{Reproducible Research}.
 $$
+
+The progression is cumulative rather than merely sequential. Later chapters repeatedly return to ideas introduced earlier—problem formulation, measurement, leakage, representation, uncertainty, generalization, responsibility, and reproducibility—so that increasingly sophisticated models are evaluated within a consistent analytical framework.
 
 ## Four Reading Pathways
 
@@ -68,6 +70,18 @@ The Open ML Track uses public benchmark data, general analytical problems, metho
 
 Follow one track longitudinally for domain continuity, or move among all three to compare how the same machine-learning principle changes across contexts.
 :::
+
+## A Longitudinal Computer Vision Thread
+
+Computer vision appears throughout the book as a recurring machine-learning workload rather than as a single isolated chapter. Readers encounter images as data, classical supervised models, unsupervised visual structure, dimensionality reduction, neural representations, multimodal learning, generative vision, evaluation under visual domain shift, responsible use, and reproducible visual workflows.
+
+This progression reinforces a broader lesson:
+
+$$
+\boxed{\text{A Modality Changes the Evidence Problem, Not the Need for Judgment}}
+$$
+
+The goal is not to turn the book into a specialized computer-vision text. It is to help readers experience how one important data modality interacts with the same principles of representation, evaluation, responsibility, and reproducibility developed across the rest of the book.
 
 ## From Algorithm to Research Question
 
@@ -134,7 +148,14 @@ Chapter 18 brings these practices together into a complete research workflow.
 
 ## Teaching and Self-Study Pathways
 
-Supporting repository materials provide suggested designs for a 7-week graduate course, 14-week graduate course, research seminar, and guided self-study.
+A dedicated **Teaching with This Book** resource accompanies the Second Edition. It provides suggested pathways for:
+
+- a 7-week graduate course;
+- a 14-week graduate course;
+- a research seminar;
+- guided self-study.
+
+These pathways are designed to help instructors and independent learners sequence chapters, laboratories, application tracks, reproducibility activities, and research-oriented assignments without changing the book's 18-chapter structure.
 
 ## A Final Orientation
 

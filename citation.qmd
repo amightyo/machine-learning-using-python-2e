@@ -1,0 +1,120 @@
+---
+number-sections: false
+number-depth: 0
+---
+
+# Citation, Edition, and License {.unnumbered}
+
+This page identifies the publication status, preferred citation structure, versioning conventions, repository record, and licensing information for *Machine Learning Using Python*.
+
+## Publication Identity
+
+**Title:** *Machine Learning Using Python*  
+**Subtitle:** *Foundations, Algorithms, Applications, and Reproducible Research*  
+**Author:** Itauma Itauma  
+**Edition:** Second Edition  
+**Publication format:** Quarto book and reproducible computational repository
+
+The Second Edition contains **18 chapters organized into six parts**, together with front matter, teaching resources, author information, references, and publication metadata.
+
+## Preferred Citation
+
+Before the archival DOI is minted, cite the Second Edition using the publication information supplied by the book repository.
+
+The final archival citation will follow this structure:
+
+> Itauma, I. (YEAR). *Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research* (2nd ed.). DOI
+
+The publication year and DOI will be inserted when the archival release is created.
+
+## Versioning
+
+The book uses versioned releases so that readers can distinguish the evolving repository from a fixed scholarly release.
+
+The publication record distinguishes among:
+
+- the **edition** of the book;
+- the **version** of a specific release;
+- the **Git tag** associated with that release;
+- the **archival DOI** assigned to the preserved release.
+
+These identifiers serve different purposes.
+
+The **Second Edition** identifies the intellectual edition of the book. A release version identifies a particular state of that edition. A Git tag identifies the corresponding repository snapshot. The DOI identifies the archived scholarly object.
+
+A typical release relationship is:
+
+$$
+\text{Second Edition}
+\rightarrow
+\text{Versioned GitHub Release}
+\rightarrow
+\text{Archived Release}
+\rightarrow
+\text{DOI}.
+$$
+
+## Repository and Reproducibility
+
+The source files, executable examples, environment information, and reproducibility infrastructure for the Second Edition are maintained with the book repository.
+
+The repository is intended to support:
+
+- transparent inspection of the source;
+- reproducible execution of examples;
+- version history;
+- issue tracking and corrections;
+- preservation of release-specific materials.
+
+Readers reproducing computational results should consult the environment and reproducibility documentation associated with the release they are using.
+
+## Archival DOI
+
+A persistent DOI will be added when the Second Edition reaches its archival release.
+
+**DOI:** *To be assigned at archival release.*
+
+Once assigned, the DOI will become the preferred persistent identifier for citing the archived Second Edition.
+
+The DOI should not be invented or pre-populated before the archival service has minted it.
+
+## License
+
+The book separates the licensing of original educational content from any third-party materials that may appear through citation, quotation, datasets, software packages, documentation, or other attributed resources.
+
+The definitive license terms are provided in the repository's license file and release record.
+
+Readers and instructors should consult those terms before redistributing, adapting, or republishing substantial portions of the work.
+
+Third-party materials remain subject to their respective licenses, terms, and attribution requirements.
+
+## How to Cite Code or a Specific Release
+
+When reproducibility requires identifying the exact computational state used for an analysis, cite the archived release or version corresponding to that state rather than citing only the continuously updated repository.
+
+A reproducible citation record should make it possible to identify:
+
+1. the book edition;
+2. the release version;
+3. the repository snapshot or Git tag;
+4. the archival DOI.
+
+This distinction matters because computational dependencies, examples, corrections, and supporting materials can evolve after publication.
+
+## Corrections and Updates
+
+Corrections made after an archival release should be documented through subsequent repository history and, when appropriate, a new versioned release.
+
+A corrected release should preserve the scholarly record rather than silently replacing the state associated with an earlier archived version.
+
+## Citation Principle
+
+The purpose of citation metadata is not merely formatting.
+
+It is provenance.
+
+$$
+\boxed{\text{A Scholarly Artifact Should Be Identifiable, Recoverable, and Verifiable}}
+$$
+
+The final publication record for the Second Edition will therefore connect the rendered book, source repository, versioned release, and archival DOI.

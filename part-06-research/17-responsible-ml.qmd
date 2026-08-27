@@ -65,6 +65,11 @@ A model can be accurate and still be inappropriate for deployment.
 **Technical capability establishes what a system can do. It does not, by itself, establish what the system should be allowed to do.**
 :::
 
+
+### From Performance to Consequence
+
+Chapter 16 asked whether model performance is supported by credible evidence. Responsible machine learning asks the next question: **credible for whom, under what conditions, and with what consequences?** A model can perform well on average while distributing errors unevenly, exposing sensitive information, encouraging inappropriate reliance, or creating harms that aggregate metrics do not reveal.
+
 ## From Model Evaluation to Responsible Use
 
 Chapter 16 asked whether evidence supports a performance claim.
@@ -1401,3 +1406,8 @@ Record:
 - Once predictions affect people, machine learning becomes a question of consequence as well as accuracy.
 - Responsibility begins with problem formulation and continues through monitoring.
 - Fairness metrics inform but do not replace ethical and governance judgment.
+
+## Looking Ahead
+
+Responsible machine learning requires more than good intentions or a one-time audit. Claims about performance, fairness, explanation, and risk must be traceable to the data, code, environments, decisions, and evidence that produced them. Chapter 18 completes the book by treating reproducibility as the infrastructure that makes machine-learning research inspectable, challengeable, extensible, and capable of contributing to cumulative knowledge.
+

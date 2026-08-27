@@ -1259,3 +1259,8 @@ Record:
 - Dimensionality reduction chooses what information to preserve and what to discard.
 - PCA preserves variance rather than substantive meaning.
 - Low-dimensional visualizations are representations, not the original geometry.
+
+## Looking Ahead
+
+Dimensionality reduction makes representation explicit: what a model can learn depends on what information its representation preserves. Chapter 13 extends that idea from constructed low-dimensional representations to **learned representations**, showing how neural networks build increasingly useful internal features through layers, nonlinear transformations, and optimization.
+

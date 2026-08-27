@@ -1021,7 +1021,7 @@ z\sim p(z),
 \tilde x=g_\theta(z,c),
 $$
 
-where \(z\) is a latent input, \(c\) is optional conditioning information, and \(\tilde x\) is generated content.
+where \(z\) is a latent input, \(c\) is optional conditioning information, and ($\tilde{x}$) is generated content.
 
 Modern image-generation families include latent-variable approaches such as variational autoencoders [@kingmaWelling2014], adversarial approaches such as generative adversarial networks [@goodfellowEtAl2014gan], autoregressive models, and diffusion models [@hoEtAl2020diffusion]. Their architectures differ, but the evidence question remains familiar:
 
@@ -1410,3 +1410,8 @@ Record:
 - Evidence—not eloquence—should determine the authority granted to generated claims.
 - Generative fluency is not evidence of truth.
 - AI-assisted research still requires independent verification and human accountability.
+
+## Looking Ahead
+
+Generative AI makes the need for rigorous evaluation especially visible because fluent output can appear convincing even when it is incomplete, unsupported, biased, or wrong. Chapter 16 therefore returns to a question that has run through the entire book: **what evidence is sufficient to trust a model or system?** The focus shifts from producing predictions and generations to evaluating performance, uncertainty, calibration, comparison, and scientific credibility.
+

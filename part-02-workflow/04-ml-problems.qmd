@@ -25,6 +25,11 @@ Projects often begin too late: “Which model should we use?” A stronger proje
 **Before choosing an algorithm, how do we translate a real-world problem into a machine-learning problem that is actually worth solving?**
 :::
 
+
+### Connection to the Foundations
+
+Chapters 1–3 established what machine learning is, the Python environment in which we will work, and the mathematical and statistical ideas that support model reasoning. We now move from foundations to the first major workflow decision: translating a substantive question into a machine-learning problem that can be evaluated with appropriate data and evidence.
+
 ## Start With the Problem, Not the Algorithm
 
 Compare:

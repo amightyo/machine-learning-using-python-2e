@@ -84,12 +84,16 @@ Both destinations require responsible reasoning and reproducibility.
 
 A book develops through conversations—with students, colleagues, collaborators, mentors, reviewers, and communities of scholars and practitioners.
 
-The final acknowledgments for the Second Edition will be completed before archival release.
+I am grateful to the students whose questions continually sharpen the distinction between knowing how to run an algorithm and understanding why an analytical choice is justified. I am equally grateful to colleagues, collaborators, and mentors whose scholarship, critique, encouragement, and example have shaped how I think about data science, research, teaching, and evidence.
 
-## Citation and Edition Status
+The Second Edition also reflects the work of the broader open-source and scientific-computing communities whose tools make transparent, reproducible, and accessible computational learning possible.
+
+Most of all, I acknowledge every reader who approaches machine learning with curiosity and humility—the willingness to build models, question assumptions, examine evidence, and revise conclusions when the evidence requires it.
+
+## Edition Statement
 
 This is the **Second Edition** of *Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research*.
 
-During active development, readers should use the citation information supplied with the repository. A persistent DOI and final preferred citation will be added when the archival Second Edition is released.
+The Second Edition expands the original work into an 18-chapter graduate-level treatment that integrates machine-learning foundations, algorithms, real-world applications, computer vision, modern AI, responsible practice, and reproducible research.
 
-The educational content and original executable code are distributed under the licenses identified in the project repository.
+Formal citation, licensing, version, repository, and archival information are provided with the publication resources accompanying this book.

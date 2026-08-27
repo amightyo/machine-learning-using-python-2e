@@ -819,3 +819,8 @@ Record raw-data provenance, validation rules, exclusions, missing-value strategy
 - Diagnose data limitations before escalating algorithmic complexity.
 - Label quality, measurement, timing, coverage, and provenance constrain achievable performance.
 - Poor performance can reflect weak evidence or representation rather than an inherently unpredictable phenomenon.
+
+## Looking Ahead
+
+With the prediction problem defined and the data pipeline constructed, the book now moves from workflow design to model families. Chapter 6 begins supervised learning with linear regression, using a deliberately transparent model to connect features, loss, residuals, generalization, regularization, and evidence about predictive performance.
+
