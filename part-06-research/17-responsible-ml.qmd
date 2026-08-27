@@ -698,7 +698,7 @@ Removing a sensitive column does not guarantee that sensitive information has di
 
 ## Privacy as a Formal Guarantee
 
-Differential privacy provides a mathematical framework for limiting how much the output of an analysis can depend on any one individual's data.
+Differential privacy provides a mathematical framework for limiting how much the output of an analysis can depend on any one individual's data [@dwork2014algorithmic].
 
 A randomized mechanism $M$ is $\epsilon$-differentially private if, for neighboring datasets $D$ and $D'$:
 

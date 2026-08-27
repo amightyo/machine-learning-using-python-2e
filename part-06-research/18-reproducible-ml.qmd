@@ -104,7 +104,7 @@ If an important link is missing, reproducing the result becomes harder.
 
 ## Four Related Ideas
 
-Terminology around reproducibility is not fully standardized across disciplines, so the distinctions below are explicit conventions for this book [@goodmanEtAl2016].
+Terminology around reproducibility is not fully standardized across disciplines, so the distinctions below are explicit conventions for this book [@goodmanEtAl2016]. Broader scientific guidance likewise distinguishes reproducibility from replicability and treats both as central to trustworthy research [@nationalacademies2019reproducibility].
 
 ### Reproducibility
 
@@ -622,6 +622,8 @@ Quarto can combine:
 This reduces the distance between analysis and publication.
 
 ## Literate Programming
+
+Practical scientific-computing guidance emphasizes readable project organization, version control, documentation, automation, and workflows that other researchers can inspect and rerun [@wilson2017good].
 
 The principle is:
 
@@ -1289,7 +1291,7 @@ A practitioner should be able to structure a project, preserve provenance, contr
 
 ## Researcher Track
 
-A researcher should additionally distinguish reproducibility from replication, preregister analytical decisions when appropriate, conduct robustness analyses, preserve research provenance, document deviations, archive citable artifacts, design workflows for independent verification, and distinguish open science from indiscriminate data sharing.
+A researcher should additionally distinguish reproducibility from replication, preregister analytical decisions when appropriate [@nosek2018preregistration], conduct robustness analyses, preserve research provenance, document deviations, archive citable artifacts, design workflows for independent verification, and distinguish open science from indiscriminate data sharing.
 
 ## Research Studio
 

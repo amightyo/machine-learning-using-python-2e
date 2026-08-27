@@ -536,7 +536,7 @@ $$
 L_{reg}=L+\lambda\sum_jw_j^2.
 $$
 
-**Dropout** randomly suppresses activations during training.
+**Dropout** randomly suppresses activations during training, providing a widely used regularization strategy for reducing co-adaptation and overfitting in neural networks [@srivastava2014dropout].
 
 **Early stopping** halts training when validation performance stops improving meaningfully.
 

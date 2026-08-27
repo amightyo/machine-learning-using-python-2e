@@ -460,7 +460,7 @@ Prompt design follows problem design.
 
 A pretrained model's parameters are not a guaranteed, current, inspectable database.
 
-Retrieval-Augmented Generation (RAG) supplies external evidence at inference time.
+Retrieval-Augmented Generation (RAG) supplies external evidence at inference time; the modern RAG formulation combines parametric generation with retrieved non-parametric memory [@lewis2020retrieval].
 
 A simplified workflow is:
 

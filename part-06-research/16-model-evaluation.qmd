@@ -839,7 +839,9 @@ Selecting the maximum tends to produce optimism.
 
 ## Nested Cross-Validation
 
-Nested cross-validation separates:
+Nested cross-validation separates model selection from model assessment, reducing the optimistic bias that arises when the same resampling process is used both to tune and to report performance [@varma2006bias].
+
+It separates:
 
 - **inner loop:** hyperparameter selection;
 - **outer loop:** model assessment.
@@ -1130,13 +1132,15 @@ This evaluates transportability across environments.
 
 External validation uses data collected independently from the development dataset.
 
-This can reveal failures invisible to internal resampling.
+This can reveal failures invisible to internal resampling and is central to judging whether predictive performance transports beyond the development setting [@steyerberg2010assessing].
 
 ## External Validation Is Not a Ceremonial Final Step
 
 If a model will be used across institutions, populations, or time periods, external validation addresses the actual scientific claim.
 
 ## Distribution Shift
+
+Re-evaluation on newly collected benchmark data has shown that even strong computer-vision systems can lose accuracy when apparently similar test data are gathered under changed conditions [@recht2019imagenet]. This makes distribution shift an empirical evaluation problem rather than a purely theoretical possibility.
 
 ## The Data-Generating Process Can Change
 
