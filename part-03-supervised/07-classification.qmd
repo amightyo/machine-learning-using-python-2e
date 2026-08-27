@@ -243,7 +243,7 @@ plt.legend()
 plt.show()
 ```
 
-ROC-AUC summarizes discrimination/ranking across thresholds. It does not establish calibration or the quality of a particular decision threshold.
+ROC-AUC summarizes discrimination/ranking across thresholds. It does not establish calibration or the quality of a particular decision threshold. ROC analysis provides a threshold-spanning view of the tradeoff between true-positive and false-positive rates [@fawcett2006roc].
 
 ## Precision-Recall Analysis
 
@@ -261,7 +261,7 @@ plt.legend()
 plt.show()
 ```
 
-Precision-recall analysis is often especially informative when the positive class is uncommon.
+Precision-recall analysis is often especially informative when the positive class is uncommon; under class imbalance, precision-recall curves can reveal performance differences that ROC curves may obscure [@saitoRehmsmeier2015].
 
 ## Discrimination Is Not Calibration
 
@@ -284,7 +284,7 @@ plt.legend()
 plt.show()
 ```
 
-A model can discriminate well and still produce poorly calibrated probabilities.
+A model can discriminate well and still produce poorly calibrated probabilities. Probability calibration therefore deserves separate evaluation when predicted probabilities will support decisions [@niculescuMizilCaruana2005].
 
 ## From Probability to Decision
 

@@ -110,6 +110,8 @@ $$
 
 ## Bagging Revisited
 
+Bagging combines predictors trained on bootstrap samples to reduce variance [@breiman1996bagging]. Random Forests extend this principle with randomized feature selection [@breiman2001randomForests].
+
 For bootstrap models $\hat f^{(1)},\ldots,\hat f^{(B)}$,
 
 $$
@@ -162,7 +164,7 @@ Each stage attempts to improve the current ensemble.
 
 ## AdaBoost
 
-AdaBoost increases attention to observations that previous learners classified incorrectly.
+AdaBoost increases attention to observations that previous learners classified incorrectly, building on the adaptive boosting framework developed by Freund and Schapire [@freundSchapire1997].
 
 Begin with weights
 
@@ -262,7 +264,7 @@ An algorithm sees loss. A researcher must still ask **why** the loss is large.
 
 ## Gradient Boosting: Optimization in Function Space
 
-Gradient boosting provides a broader view.
+Gradient boosting provides a broader view, interpreting boosting as stage-wise optimization in function space [@friedman2001gbm].
 
 We seek a predictive function $F(x)$ minimizing a loss:
 
@@ -438,9 +440,9 @@ A useful conceptual map is:
 | Ecosystem | Distinguishing emphasis | Typical reason to encounter it |
 |---|---|---|
 | scikit-learn HistGradientBoosting | native scikit-learn workflow and histogram-based efficiency | strong general-purpose baseline inside sklearn pipelines |
-| XGBoost | regularized boosting, mature ecosystem, broad deployment history | tabular prediction and established production/research workflows |
-| LightGBM | histogram methods and efficient leaf-wise growth | large tabular datasets and computational efficiency |
-| CatBoost | ordered boosting and strong categorical-feature handling | datasets with important categorical predictors |
+| XGBoost [@chenGuestrin2016] | regularized boosting, mature ecosystem, broad deployment history | tabular prediction and established production/research workflows |
+| LightGBM [@keEtAl2017] | histogram methods and efficient leaf-wise growth | large tabular datasets and computational efficiency |
+| CatBoost [@prokhorenkovaEtAl2018] | ordered boosting and strong categorical-feature handling | datasets with important categorical predictors |
 
 These are not four unrelated algorithms. They are engineering and statistical variations on a shared boosting family.
 
@@ -603,7 +605,7 @@ A voting ensemble is useful only if its components add complementary information
 
 ## Stacking
 
-Stacking uses predictions from base models as inputs to a meta-model.
+Stacking uses predictions from base models as inputs to a meta-model, following the stacked-generalization framework introduced by Wolpert [@wolpert1992stacking].
 
 Conceptually,
 
@@ -718,7 +720,7 @@ The remaining shared component illustrates why correlated error does not disappe
 
 ## Calibration Still Matters
 
-An ensemble can have excellent discrimination and poor calibration.
+An ensemble can have excellent discrimination and poor calibration. Calibration should therefore be evaluated separately when probabilities matter [@niculescuMizilCaruana2005].
 
 If probabilities drive decisions, evaluate calibration just as in Chapter 7.
 

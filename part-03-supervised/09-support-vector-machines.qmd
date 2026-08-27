@@ -102,6 +102,8 @@ Maximizing the margin is therefore equivalent to minimizing $\|w\|$.
 
 ## Hard-Margin SVM
 
+Support-vector machines formalize classification around maximum-margin separation, with the canonical support-vector network formulation developed by Cortes and Vapnik [@cortesVapnik1995].
+
 For perfectly separable data, the optimization can be written
 
 $$
@@ -444,7 +446,7 @@ $$
 
 without requiring us to explicitly construct every transformed coordinate.
 
-This is the **kernel trick**.
+This is the **kernel trick**, a central idea in kernel methods that allows algorithms to operate through inner products in an implicit feature space [@scholkopfSmola2002].
 
 It allows a linear separator in a transformed feature space to correspond to a nonlinear boundary in the original feature space.
 

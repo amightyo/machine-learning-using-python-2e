@@ -62,6 +62,8 @@ The algorithm searches for a feature and threshold that improve the purity or pr
 
 ## Anatomy of a Tree
 
+The modern classification-and-regression-tree framework is classically associated with CART [@breimanEtAl1984cart].
+
 A decision tree contains:
 
 - **root node** — the first split;
@@ -330,6 +332,8 @@ This weakness motivates ensemble methods.
 
 ## Bagging: Many Unstable Models Can Become Stable Together
 
+Bagging reduces variance by aggregating predictors fitted to bootstrap samples, an approach introduced by Breiman [@breiman1996bagging].
+
 Bootstrap aggregation, or **bagging**, repeatedly samples training observations with replacement, fits a model to each bootstrap sample, and aggregates predictions.
 
 For regression,
@@ -424,7 +428,7 @@ A tree diagram is visually persuasive, but visual clarity is not evidence that t
 
 ## Random Forests
 
-Random Forests extend bagging by adding **feature randomness**.
+Random Forests extend bagging by adding **feature randomness**, reducing correlation among trees while retaining the variance-reduction benefits of aggregation [@breiman2001randomForests].
 
 At each candidate split, a tree considers only a random subset of predictors rather than all predictors.
 

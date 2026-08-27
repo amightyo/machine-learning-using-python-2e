@@ -284,6 +284,8 @@ A strong analysis may need one, the other, or both.
 
 ## Same Model, Different Question
 
+The distinction between explanatory and predictive modeling is methodological rather than merely terminological: the same model family can be evaluated differently depending on whether the goal is explanation or out-of-sample prediction [@shmueli2010explain].
+
 For the observed sample, the regression model can be written
 
 $$
@@ -414,7 +416,7 @@ Multicollinearity motivates careful feature reasoning and, in predictive setting
 
 ## Ridge Regression
 
-Ridge adds an $L_2$ penalty:
+Ridge regression stabilizes coefficient estimation by adding an $L_2$ penalty, following the regularization approach introduced by Hoerl and Kennard [@hoerlKennard1970]:
 
 $$
 \hat\beta^{ridge}
@@ -431,7 +433,7 @@ As $\lambda$ increases, coefficients are increasingly shrunk toward zero.
 
 ## Lasso Regression
 
-Lasso uses an $L_1$ penalty:
+Lasso uses an $L_1$ penalty and can perform both shrinkage and variable selection [@tibshirani1996lasso]:
 
 $$
 \hat\beta^{lasso}
@@ -519,6 +521,8 @@ plt.show()
 For formal model selection, the scaling and hyperparameter search must remain inside the resampling workflow. We will deepen this in Chapter 16.
 
 ## Coefficients Are Not Automatically Causes
+
+Predictive association does not by itself identify an intervention effect; causal claims require assumptions and designs appropriate to causal inference [@hernanRobins2020].
 
 Suppose a model finds
 
