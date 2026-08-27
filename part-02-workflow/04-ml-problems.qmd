@@ -79,7 +79,7 @@ A measurable target is often a proxy for something broader. Predicting the proxy
 
 ## From Construct to Operational Target
 
-Many machine-learning problems begin with an idea that cannot be observed directly: learning, health need, engagement, readiness, quality, satisfaction, or resilience.
+Many machine-learning problems begin with an idea that cannot be observed directly: learning, health need, engagement, readiness, quality, satisfaction, or resilience. This connects machine-learning design to the tradition of construct validity and to contemporary measurement modeling in computational systems [@cronbachMeehl1955; @jacobsWallach2021].
 
 A model cannot ingest a construct directly. The construct passes through operational decisions:
 
@@ -171,7 +171,7 @@ $$
 
 > **Would I actually know this value at the moment the model is supposed to make its prediction?**
 
-If not, it may create leakage.
+If not, it may create leakage. Leakage can produce systematically overoptimistic estimates of model performance and has become an important reproducibility concern in machine-learning-based science [@kapoorNarayanan2023].
 
 ## Leakage Begins With Framing
 
@@ -186,7 +186,7 @@ Predicting course completion using prior GPA and first-week attendance may be le
 
 A high predicted attrition risk does not identify which intervention will help. A health risk predictor does not prove that modifying an important feature will cause risk to fall.
 
-Prediction concerns $P(Y\mid X)$. Intervention requires different causal reasoning.
+Prediction concerns $P(Y\mid X)$. Intervention requires different causal reasoning [@hernanRobins2020].
 
 ::: {.callout-warning icon=false}
 ## Risk Factor ≠ Treatment Recommendation

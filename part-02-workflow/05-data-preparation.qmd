@@ -130,7 +130,7 @@ $$
 
 Sometimes that is appropriate. Often it is premature.
 
-A data-centric perspective asks whether better evidence could matter more than greater model complexity. Potential improvements include better labels, measurement, population coverage, temporal alignment, category consistency, feature representation, and removal of corrupted or duplicated observations.
+A data-centric perspective asks whether better evidence could matter more than greater model complexity. Research on data cascades in high-stakes AI similarly shows how upstream data problems can propagate through downstream systems [@sambasivan2021data]. Potential improvements include better labels, measurement, population coverage, temporal alignment, category consistency, feature representation, and removal of corrupted or duplicated observations.
 
 A useful diagnostic sequence is
 
@@ -248,7 +248,7 @@ Failure of tested representations and algorithms is not proof that the underlyin
 
 ## Missing Data
 
-Missing values may arise because a variable was not measured, not applicable, refused, structurally unavailable, lost, or recorded under a special code.
+Missing values may arise because a variable was not measured, not applicable, refused, structurally unavailable, lost, or recorded under a special code. The missingness process matters for valid inference; missing values should therefore not be treated as a purely mechanical cleaning problem [@rubin1976missing].
 
 Before imputation, ask:
 
@@ -312,7 +312,7 @@ Best for repeatable workflows: place learned preprocessing and modeling inside a
 ::: {.callout-warning icon=false}
 ## Leakage Can Be Quiet
 
-The target does not need to appear explicitly in the training features for leakage to occur. Test-set information used to estimate preprocessing parameters also contaminates evaluation.
+The target does not need to appear explicitly in the training features for leakage to occur. Test-set information used to estimate preprocessing parameters also contaminates evaluation. Leakage can make reported performance substantially more optimistic than performance under a valid evaluation design [@kapoorNarayanan2023].
 :::
 
 ## Train/Test Splitting
@@ -589,7 +589,7 @@ model.fit(X_train, y_train)
 model.score(X_test, y_test)
 ```
 
-This becomes especially important during cross-validation because each training fold should learn its own preprocessing parameters.
+This becomes especially important during cross-validation because each training fold should learn its own preprocessing parameters. scikit-learn's estimator and pipeline ecosystem supports composable preprocessing and modeling workflows [@pedregosa2011scikit].
 
 ::: {.callout-important icon=false}
 ## Pipeline Principle

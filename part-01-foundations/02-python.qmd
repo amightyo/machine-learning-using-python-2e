@@ -33,12 +33,12 @@ Python combines a readable general-purpose language with a large scientific-comp
 
 | Library | Primary role |
 |---|---|
-| NumPy | numerical arrays and vectorized computation |
+| NumPy | numerical arrays and vectorized computation [@harris2020numpy] |
 | pandas | tabular data manipulation |
-| Matplotlib | foundational plotting |
+| Matplotlib | foundational plotting [@hunter2007matplotlib] |
 | Plotly | interactive visualization when interactivity adds value |
-| scikit-learn | preprocessing, modeling, evaluation, pipelines |
-| SciPy | scientific and numerical routines |
+| scikit-learn | preprocessing, modeling, evaluation, pipelines [@pedregosa2011scikit] |
+| SciPy | scientific and numerical routines [@virtanen2020scipy] |
 | statsmodels | statistical modeling and inference in selected applications |
 
 The goal is not to memorize library names. It is to understand how the tools participate in a coherent analytical workflow.

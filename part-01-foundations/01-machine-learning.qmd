@@ -26,7 +26,7 @@ Machine learning supports predictive systems, scientific discovery, decision sup
 
 ![Conceptual map of AI and modern machine learning.](figures/figure-01-01-ai-ml-map.svg){#fig-ai-ml-map fig-cap="A conceptual map of AI, machine learning, and modern learning paradigms."}
 
-**Artificial intelligence (AI)** is the broadest concept here. **Machine learning (ML)** is a major approach to AI in which models learn patterns from data. **Deep learning** uses multilayer neural networks to learn representations. **Foundation models** are trained at scale on broad data and adapted to downstream tasks. **Generative AI** creates new content such as text, images, audio, video, or code.
+**Artificial intelligence (AI)** is the broadest concept here. **Machine learning (ML)** is a major approach to AI in which models learn patterns from data [@mitchell1997]. **Deep learning** uses multilayer neural networks to learn representations [@goodfellow2016]. **Foundation models** are trained at scale on broad data and adapted to downstream tasks [@bommasani2021opportunities]. **Generative AI** creates new content such as text, images, audio, video, or code.
 
 Modern generative systems do not make classical machine learning obsolete. Regression, trees, ensembles, clustering, and related techniques remain central to structured problems in health, education, finance, operations, and science.
 
@@ -105,7 +105,7 @@ An agent interacts with an environment, takes actions, receives feedback, and le
 
 Learning paradigms describe **how a system learns**. Workloads describe **what kind of problem or data the system works with**. These are different dimensions.
 
-For example, **computer vision** is a major machine-learning workload concerned with extracting useful information from images and video. A vision system may use supervised, self-supervised, semi-supervised, or other learning paradigms.
+For example, **computer vision** is a major machine-learning workload concerned with extracting useful information from images and video [@szeliski2022]. A vision system may use supervised, self-supervised, semi-supervised, or other learning paradigms.
 
 Common computer-vision tasks include:
 

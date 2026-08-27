@@ -268,7 +268,7 @@ But large samples do not automatically solve poor measurement, biased sampling, 
 
 ## Prediction, Inference, and Different Kinds of Questions
 
-Statistics and machine learning may use the same data and even the same models while asking different questions.
+Statistics and machine learning may use the same data and even the same models while asking different questions. In particular, explanatory and predictive modeling pursue distinct goals and can imply different modeling choices [@shmueli2010explain].
 
 **Prediction:** How accurately can information in \(X\) predict \(Y\) for observations not used to fit the model?
 
