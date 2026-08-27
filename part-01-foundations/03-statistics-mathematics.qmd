@@ -126,6 +126,7 @@ Two datasets can have the same mean and dramatically different variability, shap
 ```{python}
 #| label: fig-distributions
 #| fig-cap: "Two samples can have similar centers while differing substantially in spread."
+#| fig-alt: "Overlapping histograms centered near the same value. One distribution is narrow with standard deviation about 1, while the other is much wider with standard deviation about 3, showing similar centers but very different variability."
 #| warning: false
 
 import matplotlib.pyplot as plt
@@ -223,6 +224,7 @@ We use statistics to learn about parameters, but the statistic changes from samp
 ```{python}
 #| label: fig-sampling-distribution
 #| fig-cap: "Sampling distribution of the mean across repeated samples."
+#| fig-alt: "Histogram of sample means from 2,000 repeated samples of size 100. The estimates cluster around the population mean, marked by a vertical dashed line, illustrating sampling variability."
 #| warning: false
 
 rng = np.random.default_rng(42)
@@ -289,6 +291,7 @@ Correlated predictors can preserve predictive signal while making allocation of 
 ```{python}
 #| label: fig-correlated-predictors
 #| fig-cap: "Correlated predictors can preserve predictive signal while individual coefficient estimates vary across bootstrap samples."
+#| fig-alt: "Scatterplot of bootstrap coefficient estimates for two highly correlated predictors. The coefficient pairs vary substantially across resamples, showing instability in individual coefficients despite preserved overall predictive signal."
 #| warning: false
 
 from sklearn.linear_model import LinearRegression
@@ -630,6 +633,7 @@ where $\eta$ is the **learning rate**.
 ```{python}
 #| label: fig-gradient-descent
 #| fig-cap: "Gradient descent iteratively approaches the minimum of a simple loss function."
+#| fig-alt: "Curve of the quadratic loss J(theta) = (theta minus 3) squared with successive gradient-descent steps marked along the curve. The steps move from an initial value near minus 4 toward the minimum at theta equals 3."
 #| warning: false
 
 theta = -4.0

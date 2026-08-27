@@ -169,6 +169,7 @@ A large dataset can still be weak for a particular problem.
 ```{python}
 #| label: fig-data-centric-ml
 #| fig-cap: "When training labels are corrupted, increasing model complexity may help less than improving the training evidence."
+#| fig-alt: "Bar chart comparing test accuracy for logistic regression trained on noisy labels, random forest trained on the same noisy labels, and logistic regression trained on clean labels. The clean-label model performs best, emphasizing that better training evidence can matter more than greater model complexity."
 #| warning: false
 
 from sklearn.datasets import make_classification
@@ -602,6 +603,7 @@ This becomes especially important during cross-validation because each training 
 ```{python}
 #| label: fig-leakage
 #| fig-cap: "A leaked feature can create spectacular but meaningless test performance."
+#| fig-alt: "Two-bar comparison of logistic-regression test accuracy using legitimate features versus features that include the target itself. Accuracy becomes nearly perfect when the target leaks into the predictors, illustrating misleading performance caused by leakage."
 
 from sklearn.datasets import make_classification
 from sklearn.metrics import accuracy_score

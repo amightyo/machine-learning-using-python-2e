@@ -239,6 +239,7 @@ A regression model should demonstrate value relative to a meaningful simple stra
 ```{python}
 #| label: fig-residuals
 #| fig-cap: "Residuals plotted against fitted values can reveal systematic model failure."
+#| fig-alt: "Scatterplot of residuals against fitted values with a horizontal reference line at zero. The residual cloud is used to inspect whether prediction errors show curvature, changing spread, or other systematic structure."
 
 residuals = y_test - pred
 
@@ -314,6 +315,7 @@ A statistically detectable coefficient may contribute little practical predictiv
 ```{python}
 #| label: fig-significance-vs-prediction
 #| fig-cap: "A real relationship can be estimated precisely in a large sample while adding only modest predictive value."
+#| fig-alt: "Dense scatterplot of a predictor and outcome with a shallow positive fitted regression line. The relationship is real but weak relative to the vertical scatter, illustrating that statistical precision in a large sample can coexist with modest predictive improvement."
 #| warning: false
 
 import numpy as np
@@ -498,6 +500,7 @@ This decomposition is an intuition under particular conditions, not a universal 
 ```{python}
 #| label: fig-ridge-path
 #| fig-cap: "Ridge regularization progressively shrinks standardized coefficients."
+#| fig-alt: "Coefficient paths plotted against ridge alpha on a logarithmic horizontal scale. As regularization strength increases, the standardized regression coefficients progressively move toward zero."
 
 from sklearn.linear_model import Ridge
 

@@ -227,6 +227,7 @@ image.shape, label
 ```{python}
 #| label: fig-python-image-array
 #| fig-cap: "A handwritten digit represented as a numerical image array."
+#| fig-alt: "Grayscale image of a handwritten digit reconstructed from its pixel-value array, with the true target label displayed above the image."
 #| warning: false
 
 plt.figure(figsize=(4, 4))

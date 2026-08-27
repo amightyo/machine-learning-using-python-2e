@@ -332,6 +332,7 @@ That gives a useful intuition:
 ```{python}
 #| label: fig-boosting-residuals
 #| fig-cap: "A sequence of shallow trees can progressively model residual structure."
+#| fig-alt: "Scatterplot of observed nonlinear data with prediction curves after one, two, and four shallow boosting learners. Successive curves move closer to the observed pattern as each learner corrects residual structure left by the preceding ensemble."
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -689,6 +690,7 @@ True ensemble diversity concerns **error structure**, not merely model branding.
 ```{python}
 #| label: fig-ensemble-errors
 #| fig-cap: "Averaging reduces error most effectively when component errors are not perfectly correlated."
+#| fig-alt: "Line plot of mean squared error as the number of averaged component models increases from one to twenty. Error drops rapidly as partly independent errors are averaged and then levels off because a shared correlated error component cannot be removed by averaging."
 
 rng=np.random.default_rng(7)
 n=1000

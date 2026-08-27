@@ -151,6 +151,7 @@ This experiment fits decision trees of increasing complexity to a nonlinear clas
 ```{python}
 #| label: fig-generalization
 #| fig-cap: "Training and test accuracy as decision-tree complexity increases."
+#| fig-alt: "Line chart of decision-tree accuracy by maximum depth. Training accuracy rises steadily toward perfect fit, while test accuracy peaks at moderate depth and then levels off or declines, illustrating overfitting as complexity increases."
 #| warning: false
 #| message: false
 

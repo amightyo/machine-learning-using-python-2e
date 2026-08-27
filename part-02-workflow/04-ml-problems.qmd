@@ -312,6 +312,7 @@ Rather than “compare five classifiers on Wine,” specify a common evaluation 
 ```{python}
 #| label: fig-prevalence-accuracy
 #| fig-cap: "Majority-class accuracy increases as the positive outcome becomes rarer."
+#| fig-alt: "Line chart showing that the accuracy of always predicting the negative class increases as positive-class prevalence decreases. The plot demonstrates how a naive classifier can appear highly accurate when the positive outcome is rare."
 import matplotlib.pyplot as plt
 
 positive_prevalence = np.linspace(0.01, 0.50, 50)
