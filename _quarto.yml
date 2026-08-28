@@ -6,6 +6,8 @@ book:
   subtitle: "Foundations, Algorithms, Applications, and Reproducible Research"
   author: "Itauma Itauma"
   edition: "Second Edition"
+  date: "2026-08-28"
+  doi: "10.5281/zenodo.22136083"
 
   site-url: "https://amightyo.github.io/machine-learning-using-python-2e/"
   repo-url: "https://github.com/amightyo/machine-learning-using-python-2e"

@@ -4,9 +4,12 @@ title: "Machine Learning Using Python: Foundations, Algorithms, Applications, an
 authors:
   - family-names: "Itauma"
     given-names: "Itauma"
-version: "2.0.0-dev"
+    orcid: "https://orcid.org/0009-0000-8835-5292"
+version: "2.0.0"
+date-released: "2026-08-28"
+doi: "10.5281/zenodo.22136083"
 repository-code: "https://github.com/amightyo/machine-learning-using-python-2e"
-url: "https://github.com/amightyo/machine-learning-using-python-2e"
+url: "https://amightyo.github.io/machine-learning-using-python-2e/"
 license: "CC-BY-4.0"
 keywords:
   - machine learning
@@ -16,3 +19,5 @@ keywords:
   - artificial intelligence
   - health analytics
   - education analytics
+  - responsible machine learning
+  - computer vision

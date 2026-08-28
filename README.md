@@ -12,11 +12,18 @@ The Second Edition emphasizes conceptual and mathematical foundations, reproduci
 
 ## Author
 
-**Dr. Itauma Itauma**
+**Dr. Itauma Itauma**  
+ORCID: [0009-0000-8835-5292](https://orcid.org/0009-0000-8835-5292)
 
-## Development Status
+## Release
 
-This repository contains the in-development Second Edition. Content, examples, datasets, and exercises will continue to evolve until an official release is tagged.
+**Second Edition — Version 2.0.0**  
+**Publication date:** August 28, 2026  
+**DOI:** [10.5281/zenodo.22136083](https://doi.org/10.5281/zenodo.22136083)
+
+The browsable HTML edition is available at:
+
+https://amightyo.github.io/machine-learning-using-python-2e/
 
 ## Local Preview
 
@@ -32,7 +39,11 @@ quarto render
 
 ## Citation
 
-Citation metadata are provided in `CITATION.cff`. A DOI will be added when an official archived release is created.
+Citation metadata are provided in `CITATION.cff`.
+
+Preferred citation:
+
+> Itauma, I. (2026). *Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research* (2nd ed., Version 2.0.0). Zenodo. https://doi.org/10.5281/zenodo.22136083
 
 ## Licensing
 
