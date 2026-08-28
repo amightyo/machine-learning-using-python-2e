@@ -596,7 +596,7 @@ y_n
 <p><span class="math display">\[
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i.
 \]</span></p>
-<div id="720c391d" class="cell" data-execution_count="1">
+<div id="dc4030da" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> np.array([<span class="dv">72</span>, <span class="dv">75</span>, <span class="dv">81</span>, <span class="dv">84</span>, <span class="dv">88</span>, <span class="dv">90</span>, <span class="dv">95</span>])</span>
@@ -617,7 +617,7 @@ s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2.
 <p><span class="math display">\[
 s = \sqrt{s^2}.
 \]</span></p>
-<div id="07b4dde4" class="cell" data-execution_count="2">
+<div id="1c787c0c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sample_variance <span class="op">=</span> np.var(scores, ddof<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sample_sd <span class="op">=</span> np.std(scores, ddof<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -712,7 +712,7 @@ E[X] = \sum_x xP(X=x).
 </ul>
 <section id="a-normal-distribution-in-python" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="a-normal-distribution-in-python"><span class="header-section-number">3.7.1</span> A Normal Distribution in Python</h3>
-<div id="ce624c72" class="cell" data-execution_count="4">
+<div id="f755918a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>probability <span class="op">=</span> norm.cdf(<span class="fl">1.96</span>) <span class="op">-</span> norm.cdf(<span class="op">-</span><span class="fl">1.96</span>)</span>
@@ -916,7 +916,7 @@ r_{XY}
 <p><span class="math display">\[
 -1 \le r \le 1.
 \]</span></p>
-<div id="8d220d84" class="cell" data-execution_count="7">
+<div id="845c3a67" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>study_hours <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>exam_score <span class="op">=</span> np.array([<span class="dv">61</span>, <span class="dv">66</span>, <span class="dv">74</span>, <span class="dv">78</span>, <span class="dv">88</span>, <span class="dv">92</span>])</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -934,7 +934,7 @@ r_{XY}
 z_i=\frac{x_i-\bar{x}}{s}.
 \]</span></p>
 <p>In machine-learning implementations, scaling statistics should be learned from the <strong>training data</strong> and then applied to later data. scikit-learn’s <code>StandardScaler</code> centers features and scales them using statistics learned during <code>fit</code> <span class="citation" data-cites="sklearnStandardScaler2026">(<a href="../references.html#ref-sklearnStandardScaler2026" role="doc-biblioref">scikit-learn developers 2026</a>)</span>.</p>
-<div id="ce63e132" class="cell" data-execution_count="8">
+<div id="1241081c" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_scale_demo <span class="op">=</span> np.array([</span>
@@ -996,7 +996,7 @@ x_i^\top\beta
 =
 \sum_{j=1}^{p}x_{ij}\beta_j.
 \]</span></p>
-<div id="9d9c2744" class="cell" data-execution_count="9">
+<div id="b61c511d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">2.0</span>, <span class="fl">5.0</span>, <span class="fl">1.5</span>])</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.array([<span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.1</span>])</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1013,7 +1013,7 @@ x_i^\top\beta
 <p><span class="math display">\[
 \hat{y}=X\beta.
 \]</span></p>
-<div id="6b1e78e3" class="cell" data-execution_count="10">
+<div id="38441c51" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X_demo <span class="op">=</span> np.array([</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.0</span>, <span class="fl">2.0</span>],</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.0</span>, <span class="fl">4.0</span>],</span>
@@ -1038,7 +1038,7 @@ d(x,z)
 =
 \sqrt{\sum_{j=1}^{p}(x_j-z_j)^2}.
 \]</span></p>
-<div id="27361175" class="cell" data-execution_count="11">
+<div id="55b64d81" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.array([<span class="fl">4.0</span>, <span class="fl">6.0</span>])</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1050,7 +1050,7 @@ d(x,z)
 <p>Distance is central to methods such as nearest neighbors, clustering, and some anomaly-detection approaches.</p>
 <section id="why-scaling-changes-distance" class="level3" data-number="3.14.1">
 <h3 data-number="3.14.1" class="anchored" data-anchor-id="why-scaling-changes-distance"><span class="header-section-number">3.14.1</span> Why Scaling Changes Distance</h3>
-<div id="8c9ff12f" class="cell" data-execution_count="12">
+<div id="d9074b75" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>person_a <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">30_000</span>])</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>person_b <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">31_000</span>])</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1091,7 +1091,7 @@ d(x,z)
 \sum_{i=1}^{n}
 (y_i-\hat{y}_i)^2.
 \]</span></p>
-<div id="4a724c5c" class="cell" data-execution_count="13">
+<div id="8ac5e8ed" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([<span class="fl">3.0</span>, <span class="fl">5.0</span>, <span class="fl">7.0</span>])</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> np.array([<span class="fl">2.5</span>, <span class="fl">5.5</span>, <span class="fl">8.0</span>])</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1210,7 +1210,7 @@ Figure&nbsp;3.4: Gradient descent iteratively approaches the minimum of a simple
 z=\frac{x-\mu}{\sigma}.
 \]</span></p>
 <p><strong>Python:</strong></p>
-<div id="61a27dd9" class="cell" data-execution_count="15">
+<div id="ab4b202b" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>ML application:</strong> support vector machines, regularized linear models, nearest-neighbor methods, neural networks, and other methods can be sensitive to feature scale.</p>

@@ -806,7 +806,7 @@ Precision+Recall
 </section>
 <section id="compute-classification-metrics" class="level2" data-number="16.15">
 <h2 data-number="16.15" class="anchored" data-anchor-id="compute-classification-metrics"><span class="header-section-number">16.15</span> Compute Classification Metrics</h2>
-<div id="9a05cf07" class="cell" data-execution_count="2">
+<div id="bab4b9bb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
@@ -1100,7 +1100,7 @@ P(Y=1\mid X)=0.37.
 </section>
 <section id="threshold-tradeoffs" class="level2" data-number="16.28">
 <h2 data-number="16.28" class="anchored" data-anchor-id="threshold-tradeoffs"><span class="header-section-number">16.28</span> Threshold Tradeoffs</h2>
-<div id="90e26d23" class="cell" data-execution_count="6">
+<div id="12334cec" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>threshold_rows <span class="op">=</span> []</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> threshold <span class="kw">in</span> np.linspace(</span>
@@ -1421,7 +1421,7 @@ R^2
 </section>
 <section id="cross-validation-demonstration" class="level2" data-number="16.40">
 <h2 data-number="16.40" class="anchored" data-anchor-id="cross-validation-demonstration"><span class="header-section-number">16.40</span> Cross-Validation Demonstration</h2>
-<div id="248f617d" class="cell" data-execution_count="8">
+<div id="20c720d5" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    StratifiedKFold,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    cross_val_score</span>
@@ -1454,7 +1454,7 @@ R^2
 Name: ROC-AUC, dtype: float64</code></pre>
 </div>
 </div>
-<div id="08a8b9e5" class="cell" data-execution_count="9">
+<div id="65761761" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean ROC-AUC"</span>: cv_auc.mean(),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SD across folds"</span>: cv_auc.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1479,7 +1479,7 @@ dtype: float64</code></pre>
 <section id="repeated-cross-validation" class="level2" data-number="16.42">
 <h2 data-number="16.42" class="anchored" data-anchor-id="repeated-cross-validation"><span class="header-section-number">16.42</span> Repeated Cross-Validation</h2>
 <p>Repeating shuffled <span class="math inline">\(K\)</span>-fold cross-validation can reveal sensitivity to partitioning.</p>
-<div id="ac1d08e7" class="cell" data-execution_count="10">
+<div id="550bf4a5" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    RepeatedStratifiedKFold</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1547,7 +1547,7 @@ dtype: float64</code></pre>
 </section>
 <section id="nested-cv-example" class="level2" data-number="16.46">
 <h2 data-number="16.46" class="anchored" data-anchor-id="nested-cv-example"><span class="header-section-number">16.46</span> Nested CV Example</h2>
-<div id="c0619ec8" class="cell" data-execution_count="11">
+<div id="5c6d3429" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    GridSearchCV</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1602,7 +1602,7 @@ dtype: float64</code></pre>
 Name: Outer-fold ROC-AUC, dtype: float64</code></pre>
 </div>
 </div>
-<div id="9c193152" class="cell" data-execution_count="12">
+<div id="d676a846" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Nested CV mean ROC-AUC"</span>: nested_auc.mean(),</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outer-fold SD"</span>: nested_auc.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1637,7 +1637,7 @@ AUC=0.84.
 <section id="bootstrap-confidence-interval-for-test-set-auc" class="level2" data-number="16.49">
 <h2 data-number="16.49" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-test-set-auc"><span class="header-section-number">16.49</span> Bootstrap Confidence Interval for Test-Set AUC</h2>
 <p>For a fixed trained model and an independent test set, we can bootstrap test observations.</p>
-<div id="2cfde595" class="cell" data-execution_count="13">
+<div id="dda85838" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">42</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>)</span>

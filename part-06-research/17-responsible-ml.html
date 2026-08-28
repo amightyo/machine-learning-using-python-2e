@@ -864,7 +864,7 @@ P(Y=1\mid\hat Y=1,A=b).
 </section>
 <section id="a-small-fairness-audit" class="level2" data-number="17.23">
 <h2 data-number="17.23" class="anchored" data-anchor-id="a-small-fairness-audit"><span class="header-section-number">17.23</span> A Small Fairness Audit</h2>
-<div id="e3be0ab3" class="cell" data-execution_count="2">
+<div id="6ff6e828" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>audit <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"group"</span>: (</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"A"</span>] <span class="op">*</span> <span class="dv">10</span></span>
@@ -1114,7 +1114,7 @@ Score_{permuted(j)}.
 </section>
 <section id="demonstration" class="level2" data-number="17.40">
 <h2 data-number="17.40" class="anchored" data-anchor-id="demonstration"><span class="header-section-number">17.40</span> Demonstration</h2>
-<div id="6793dbb3" class="cell" data-execution_count="4">
+<div id="8df50e30" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
@@ -1159,7 +1159,7 @@ Score_{permuted(j)}.
 <pre><code>np.float64(0.9958382009345794)</code></pre>
 </div>
 </div>
-<div id="96fc5924" class="cell" data-execution_count="5">
+<div id="81cdaf0d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> permutation_importance(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    rf,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    X_test,</span>

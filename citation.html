@@ -405,24 +405,27 @@ window.Quarto = {
 </header>
 
 
-<p>This page identifies the publication status, preferred citation structure, versioning conventions, repository record, and licensing information for <em>Machine Learning Using Python</em>.</p>
+<p>This page identifies the publication status, preferred citation, versioning conventions, repository record, and licensing information for <em>Machine Learning Using Python</em>.</p>
 <section id="publication-identity" class="level2">
 <h2 class="anchored" data-anchor-id="publication-identity">Publication Identity</h2>
 <p><strong>Title:</strong> <em>Machine Learning Using Python</em><br>
 <strong>Subtitle:</strong> <em>Foundations, Algorithms, Applications, and Reproducible Research</em><br>
 <strong>Author:</strong> Itauma Itauma<br>
+<strong>ORCID:</strong> <a href="https://orcid.org/0009-0000-8835-5292">0009-0000-8835-5292</a><br>
 <strong>Edition:</strong> Second Edition<br>
-<strong>Publication format:</strong> Quarto book and reproducible computational repository</p>
+<strong>Version:</strong> 2.0.0<br>
+<strong>Publication date:</strong> August 28, 2026<br>
+<strong>Publication format:</strong> Quarto book and reproducible computational repository<br>
+<strong>Canonical DOI:</strong> <a href="https://doi.org/10.5281/zenodo.22136083">10.5281/zenodo.22136083</a></p>
 <p>The Second Edition contains <strong>18 chapters organized into six parts</strong>, together with front matter, teaching resources, author information, references, and publication metadata.</p>
 </section>
 <section id="preferred-citation" class="level2">
 <h2 class="anchored" data-anchor-id="preferred-citation">Preferred Citation</h2>
-<p>Before the archival DOI is minted, cite the Second Edition using the publication information supplied by the book repository.</p>
-<p>The final archival citation will follow this structure:</p>
+<p>Please cite the archived Second Edition as:</p>
 <blockquote class="blockquote">
-<p>Itauma, I. (YEAR). <em>Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research</em> (2nd ed.). DOI</p>
+<p>Itauma, I. (2026). <em>Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research</em> (2nd ed., Version 2.0.0). Zenodo. https://doi.org/10.5281/zenodo.22136083</p>
 </blockquote>
-<p>The publication year and DOI will be inserted when the archival release is created.</p>
+<p>The DOI identifies the preserved Second Edition release and should be preferred when citing the book as a scholarly object.</p>
 </section>
 <section id="versioning" class="level2">
 <h2 class="anchored" data-anchor-id="versioning">Versioning</h2>
@@ -435,21 +438,26 @@ window.Quarto = {
 <li>the <strong>archival DOI</strong> assigned to the preserved release.</li>
 </ul>
 <p>These identifiers serve different purposes.</p>
-<p>The <strong>Second Edition</strong> identifies the intellectual edition of the book. A release version identifies a particular state of that edition. A Git tag identifies the corresponding repository snapshot. The DOI identifies the archived scholarly object.</p>
-<p>A typical release relationship is:</p>
+<p>The <strong>Second Edition</strong> identifies the intellectual edition of the book. Version <strong>2.0.0</strong> identifies this release. The Git tag <strong>v2.0.0</strong> identifies the corresponding repository snapshot. The DOI identifies the archived scholarly object.</p>
+<p>The release relationship is:</p>
 <p><span class="math display">\[
 \text{Second Edition}
 \rightarrow
-\text{Versioned GitHub Release}
+\text{Version 2.0.0}
+\rightarrow
+\text{Git tag v2.0.0}
 \rightarrow
 \text{Archived Release}
 \rightarrow
-\text{DOI}.
+\text{DOI 10.5281/zenodo.22136083}.
 \]</span></p>
 </section>
 <section id="repository-and-reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="repository-and-reproducibility">Repository and Reproducibility</h2>
-<p>The source files, executable examples, environment information, and reproducibility infrastructure for the Second Edition are maintained with the book repository.</p>
+<p>The source files, executable examples, environment information, and reproducibility infrastructure for the Second Edition are maintained with the book repository:</p>
+<p><a href="https://github.com/amightyo/machine-learning-using-python-2e" class="uri">https://github.com/amightyo/machine-learning-using-python-2e</a></p>
+<p>The browsable HTML edition is available at:</p>
+<p><a href="https://amightyo.github.io/machine-learning-using-python-2e/" class="uri">https://amightyo.github.io/machine-learning-using-python-2e/</a></p>
 <p>The repository is intended to support:</p>
 <ul>
 <li>transparent inspection of the source;</li>
@@ -462,16 +470,14 @@ window.Quarto = {
 </section>
 <section id="archival-doi" class="level2">
 <h2 class="anchored" data-anchor-id="archival-doi">Archival DOI</h2>
-<p>A persistent DOI will be added when the Second Edition reaches its archival release.</p>
-<p><strong>DOI:</strong> <em>To be assigned at archival release.</em></p>
-<p>Once assigned, the DOI will become the preferred persistent identifier for citing the archived Second Edition.</p>
-<p>The DOI should not be invented or pre-populated before the archival service has minted it.</p>
+<p>The canonical DOI for the Second Edition, Version 2.0.0, is:</p>
+<p><strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.22136083">10.5281/zenodo.22136083</a></p>
+<p>This DOI is the preferred persistent identifier for the archived Second Edition.</p>
 </section>
 <section id="license" class="level2">
 <h2 class="anchored" data-anchor-id="license">License</h2>
 <p>The book separates the licensing of original educational content from any third-party materials that may appear through citation, quotation, datasets, software packages, documentation, or other attributed resources.</p>
-<p>The definitive license terms are provided in the repository’s license file and release record.</p>
-<p>Readers and instructors should consult those terms before redistributing, adapting, or republishing substantial portions of the work.</p>
+<p>Book prose, original figures, exercises, and other non-code educational content are licensed under the <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong> license. Original executable source code is licensed under the <strong>MIT License</strong>, as documented in the repository license file.</p>
 <p>Third-party materials remain subject to their respective licenses, terms, and attribution requirements.</p>
 </section>
 <section id="how-to-cite-code-or-a-specific-release" class="level2">
@@ -488,7 +494,7 @@ window.Quarto = {
 </section>
 <section id="corrections-and-updates" class="level2">
 <h2 class="anchored" data-anchor-id="corrections-and-updates">Corrections and Updates</h2>
-<p>Corrections made after an archival release should be documented through subsequent repository history and, when appropriate, a new versioned release.</p>
+<p>Corrections made after this archival release should be documented through subsequent repository history and, when appropriate, a new versioned release.</p>
 <p>A corrected release should preserve the scholarly record rather than silently replacing the state associated with an earlier archived version.</p>
 </section>
 <section id="citation-principle" class="level2">
@@ -498,7 +504,7 @@ window.Quarto = {
 <p><span class="math display">\[
 \boxed{\text{A Scholarly Artifact Should Be Identifiable, Recoverable, and Verifiable}}
 \]</span></p>
-<p>The final publication record for the Second Edition will therefore connect the rendered book, source repository, versioned release, and archival DOI.</p>
+<p>The publication record for the Second Edition connects the rendered book, source repository, versioned release, and archival DOI.</p>
 
 
 </section>

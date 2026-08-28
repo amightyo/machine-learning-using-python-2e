@@ -586,7 +586,7 @@ a=\phi(z).
 </section>
 <section id="a-neuron-by-hand" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="a-neuron-by-hand"><span class="header-section-number">13.4</span> A Neuron by Hand</h2>
-<div id="de2d7e8b" class="cell" data-execution_count="2">
+<div id="21ee80ee" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.array([<span class="fl">0.8</span>,<span class="op">-</span><span class="fl">0.4</span>,<span class="fl">1.2</span>])</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>w<span class="op">=</span>np.array([<span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.7</span>,<span class="fl">0.3</span>])</span>
@@ -597,7 +597,7 @@ a=\phi(z).
 <pre><code>np.float64(1.1400000000000001)</code></pre>
 </div>
 </div>
-<div id="a784bd5b" class="cell" data-execution_count="3">
+<div id="8f645ed4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sigmoid<span class="op">=</span><span class="kw">lambda</span> z: <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>z))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sigmoid(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -702,7 +702,7 @@ P(Y=k\mid x)=\frac{e^{z_k}}{\sum_{j=1}^{K}e^{z_j}}.
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-activations-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="683" height="413" alt="Comparison of common neural-network activation functions across a range of input values.">
+<div id="fig-activations-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="413" width="683" alt="Comparison of common neural-network activation functions across a range of input values.">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-activations-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="13-neural-networks_files/figure-html/fig-activations-output-2.png" id="fig-activations-2" data-ref-parent="fig-activations" alt="Comparison of common neural-network activation functions across a range of input values." width="683" height="413" class="figure-img">
@@ -714,7 +714,7 @@ P(Y=k\mid x)=\frac{e^{z_k}}{\sum_{j=1}^{K}e^{z_j}}.
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-activations-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="651" height="413" alt="Comparison of common neural-network activation functions across a range of input values.">
+<div id="fig-activations-3" class="quarto-float quarto-figure quarto-figure-center anchored" height="413" width="651" alt="Comparison of common neural-network activation functions across a range of input values.">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-activations-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="13-neural-networks_files/figure-html/fig-activations-output-3.png" id="fig-activations-3" data-ref-parent="fig-activations" alt="Comparison of common neural-network activation functions across a range of input values." width="651" height="413" class="figure-img">
@@ -735,7 +735,7 @@ Figure&nbsp;13.1
 </section>
 <section id="forward-propagation-by-hand" class="level2" data-number="13.9">
 <h2 data-number="13.9" class="anchored" data-anchor-id="forward-propagation-by-hand"><span class="header-section-number">13.9</span> Forward Propagation by Hand</h2>
-<div id="16e23991" class="cell" data-execution_count="5">
+<div id="06895a1c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.array([<span class="fl">0.6</span>,<span class="op">-</span><span class="fl">1.2</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>W1<span class="op">=</span>np.array([[<span class="fl">0.4</span>,<span class="op">-</span><span class="fl">0.3</span>],[<span class="fl">0.7</span>,<span class="fl">0.2</span>],[<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.8</span>]])</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b1<span class="op">=</span>np.array([<span class="fl">0.1</span>,<span class="op">-</span><span class="fl">0.2</span>,<span class="fl">0.05</span>])</span>
@@ -1009,7 +1009,7 @@ L=L(a),\quad a=\phi(z),\quad z=wx+b,
 </section>
 <section id="numerical-gradient-check" class="level2" data-number="13.17">
 <h2 data-number="13.17" class="anchored" data-anchor-id="numerical-gradient-check"><span class="header-section-number">13.17</span> Numerical Gradient Check</h2>
-<div id="a9bbc3cf" class="cell" data-execution_count="7">
+<div id="29d3435e" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_loss(w,x,y,b<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>(w<span class="op">*</span>x<span class="op">+</span>b)))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>(y<span class="op">*</span>np.log(p)<span class="op">+</span>(<span class="dv">1</span><span class="op">-</span>y)<span class="op">*</span>np.log(<span class="dv">1</span><span class="op">-</span>p))</span>
@@ -1094,7 +1094,7 @@ Figure&nbsp;13.3: Conceptual learning curves illustrate how validation loss can 
 </section>
 <section id="build-an-mlp-with-scikit-learn" class="level2" data-number="13.22">
 <h2 data-number="13.22" class="anchored" data-anchor-id="build-an-mlp-with-scikit-learn"><span class="header-section-number">13.22</span> Build an MLP With scikit-learn</h2>
-<div id="24f86242" class="cell" data-execution_count="9">
+<div id="d8228c6c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
@@ -1136,7 +1136,7 @@ Figure&nbsp;13.3: Conceptual learning curves illustrate how validation loss can 
 </section>
 <section id="inspect-the-learned-architecture" class="level2" data-number="13.23">
 <h2 data-number="13.23" class="anchored" data-anchor-id="inspect-the-learned-architecture"><span class="header-section-number">13.23</span> Inspect the Learned Architecture</h2>
-<div id="0ded05e6" class="cell" data-execution_count="10">
+<div id="d57b4702" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fitted_mlp<span class="op">=</span>mlp.named_steps[<span class="st">"model"</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -1152,7 +1152,7 @@ Figure&nbsp;13.3: Conceptual learning curves illustrate how validation loss can 
  'Final training loss': np.float64(0.038450243636669365)}</code></pre>
 </div>
 </div>
-<div id="fdd81124" class="cell" data-execution_count="11">
+<div id="14cf2562" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>[weights.shape <span class="cf">for</span> weights <span class="kw">in</span> fitted_mlp.coefs_]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>[(30, 64), (64, 32), (32, 1)]</code></pre>
@@ -1161,7 +1161,7 @@ Figure&nbsp;13.3: Conceptual learning curves illustrate how validation loss can 
 </section>
 <section id="compare-with-a-simpler-baseline" class="level2" data-number="13.24">
 <h2 data-number="13.24" class="anchored" data-anchor-id="compare-with-a-simpler-baseline"><span class="header-section-number">13.24</span> Compare With a Simpler Baseline</h2>
-<div id="ca34790d" class="cell" data-execution_count="12">
+<div id="45ddfe37" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>logit<span class="op">=</span>Pipeline([</span>
@@ -1247,7 +1247,7 @@ Figure&nbsp;13.4: Neural-network probabilities require calibration assessment wh
 </section>
 <section id="neural-networks-for-regression" class="level2" data-number="13.29">
 <h2 data-number="13.29" class="anchored" data-anchor-id="neural-networks-for-regression"><span class="header-section-number">13.29</span> Neural Networks for Regression</h2>
-<div id="e9a775d1" class="cell" data-execution_count="14">
+<div id="44f4643c" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPRegressor</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
@@ -1309,7 +1309,7 @@ Figure&nbsp;13.4: Neural-network probabilities require calibration assessment wh
 <h2 data-number="13.32" class="anchored" data-anchor-id="computer-vision-learning-experience-from-pixels-to-a-neural-classifier"><span class="header-section-number">13.32</span> Computer Vision Learning Experience: From Pixels to a Neural Classifier</h2>
 <p>The recurring handwritten-digits workload now reaches an important transition.</p>
 <p>Earlier chapters treated each (8) image as a (64)-feature vector and used logistic regression, trees, ensembles, and kernel methods. A neural network can learn nonlinear intermediate representations from those pixel features.</p>
-<div id="aa84524b" class="cell" data-execution_count="15">
+<div id="b5e6407e" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>

@@ -10023,7 +10023,7 @@
     "href": "citation.html",
     "title": "Citation, Edition, and License",
     "section": "",
-    "text": "Publication Identity\nThis page identifies the publication status, preferred citation structure, versioning conventions, repository record, and licensing information for Machine Learning Using Python.\nTitle: Machine Learning Using Python\nSubtitle: Foundations, Algorithms, Applications, and Reproducible Research\nAuthor: Itauma Itauma\nEdition: Second Edition\nPublication format: Quarto book and reproducible computational repository\nThe Second Edition contains 18 chapters organized into six parts, together with front matter, teaching resources, author information, references, and publication metadata.",
+    "text": "Publication Identity\nThis page identifies the publication status, preferred citation, versioning conventions, repository record, and licensing information for Machine Learning Using Python.\nTitle: Machine Learning Using Python\nSubtitle: Foundations, Algorithms, Applications, and Reproducible Research\nAuthor: Itauma Itauma\nORCID: 0009-0000-8835-5292\nEdition: Second Edition\nVersion: 2.0.0\nPublication date: August 28, 2026\nPublication format: Quarto book and reproducible computational repository\nCanonical DOI: 10.5281/zenodo.22136083\nThe Second Edition contains 18 chapters organized into six parts, together with front matter, teaching resources, author information, references, and publication metadata.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10034,7 +10034,7 @@
     "href": "citation.html#preferred-citation",
     "title": "Citation, Edition, and License",
     "section": "Preferred Citation",
-    "text": "Preferred Citation\nBefore the archival DOI is minted, cite the Second Edition using the publication information supplied by the book repository.\nThe final archival citation will follow this structure:\n\nItauma, I. (YEAR). Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research (2nd ed.). DOI\n\nThe publication year and DOI will be inserted when the archival release is created.",
+    "text": "Preferred Citation\nPlease cite the archived Second Edition as:\n\nItauma, I. (2026). Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research (2nd ed., Version 2.0.0). Zenodo. https://doi.org/10.5281/zenodo.22136083\n\nThe DOI identifies the preserved Second Edition release and should be preferred when citing the book as a scholarly object.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10045,7 +10045,7 @@
     "href": "citation.html#versioning",
     "title": "Citation, Edition, and License",
     "section": "Versioning",
-    "text": "Versioning\nThe book uses versioned releases so that readers can distinguish the evolving repository from a fixed scholarly release.\nThe publication record distinguishes among:\n\nthe edition of the book;\nthe version of a specific release;\nthe Git tag associated with that release;\nthe archival DOI assigned to the preserved release.\n\nThese identifiers serve different purposes.\nThe Second Edition identifies the intellectual edition of the book. A release version identifies a particular state of that edition. A Git tag identifies the corresponding repository snapshot. The DOI identifies the archived scholarly object.\nA typical release relationship is:\n\\[\n\\text{Second Edition}\n\\rightarrow\n\\text{Versioned GitHub Release}\n\\rightarrow\n\\text{Archived Release}\n\\rightarrow\n\\text{DOI}.\n\\]",
+    "text": "Versioning\nThe book uses versioned releases so that readers can distinguish the evolving repository from a fixed scholarly release.\nThe publication record distinguishes among:\n\nthe edition of the book;\nthe version of a specific release;\nthe Git tag associated with that release;\nthe archival DOI assigned to the preserved release.\n\nThese identifiers serve different purposes.\nThe Second Edition identifies the intellectual edition of the book. Version 2.0.0 identifies this release. The Git tag v2.0.0 identifies the corresponding repository snapshot. The DOI identifies the archived scholarly object.\nThe release relationship is:\n\\[\n\\text{Second Edition}\n\\rightarrow\n\\text{Version 2.0.0}\n\\rightarrow\n\\text{Git tag v2.0.0}\n\\rightarrow\n\\text{Archived Release}\n\\rightarrow\n\\text{DOI 10.5281/zenodo.22136083}.\n\\]",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10056,7 +10056,7 @@
     "href": "citation.html#repository-and-reproducibility",
     "title": "Citation, Edition, and License",
     "section": "Repository and Reproducibility",
-    "text": "Repository and Reproducibility\nThe source files, executable examples, environment information, and reproducibility infrastructure for the Second Edition are maintained with the book repository.\nThe repository is intended to support:\n\ntransparent inspection of the source;\nreproducible execution of examples;\nversion history;\nissue tracking and corrections;\npreservation of release-specific materials.\n\nReaders reproducing computational results should consult the environment and reproducibility documentation associated with the release they are using.",
+    "text": "Repository and Reproducibility\nThe source files, executable examples, environment information, and reproducibility infrastructure for the Second Edition are maintained with the book repository:\nhttps://github.com/amightyo/machine-learning-using-python-2e\nThe browsable HTML edition is available at:\nhttps://amightyo.github.io/machine-learning-using-python-2e/\nThe repository is intended to support:\n\ntransparent inspection of the source;\nreproducible execution of examples;\nversion history;\nissue tracking and corrections;\npreservation of release-specific materials.\n\nReaders reproducing computational results should consult the environment and reproducibility documentation associated with the release they are using.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10067,7 +10067,7 @@
     "href": "citation.html#archival-doi",
     "title": "Citation, Edition, and License",
     "section": "Archival DOI",
-    "text": "Archival DOI\nA persistent DOI will be added when the Second Edition reaches its archival release.\nDOI: To be assigned at archival release.\nOnce assigned, the DOI will become the preferred persistent identifier for citing the archived Second Edition.\nThe DOI should not be invented or pre-populated before the archival service has minted it.",
+    "text": "Archival DOI\nThe canonical DOI for the Second Edition, Version 2.0.0, is:\nDOI: 10.5281/zenodo.22136083\nThis DOI is the preferred persistent identifier for the archived Second Edition.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10078,7 +10078,7 @@
     "href": "citation.html#license",
     "title": "Citation, Edition, and License",
     "section": "License",
-    "text": "License\nThe book separates the licensing of original educational content from any third-party materials that may appear through citation, quotation, datasets, software packages, documentation, or other attributed resources.\nThe definitive license terms are provided in the repository’s license file and release record.\nReaders and instructors should consult those terms before redistributing, adapting, or republishing substantial portions of the work.\nThird-party materials remain subject to their respective licenses, terms, and attribution requirements.",
+    "text": "License\nThe book separates the licensing of original educational content from any third-party materials that may appear through citation, quotation, datasets, software packages, documentation, or other attributed resources.\nBook prose, original figures, exercises, and other non-code educational content are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. Original executable source code is licensed under the MIT License, as documented in the repository license file.\nThird-party materials remain subject to their respective licenses, terms, and attribution requirements.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10100,7 +10100,7 @@
     "href": "citation.html#corrections-and-updates",
     "title": "Citation, Edition, and License",
     "section": "Corrections and Updates",
-    "text": "Corrections and Updates\nCorrections made after an archival release should be documented through subsequent repository history and, when appropriate, a new versioned release.\nA corrected release should preserve the scholarly record rather than silently replacing the state associated with an earlier archived version.",
+    "text": "Corrections and Updates\nCorrections made after this archival release should be documented through subsequent repository history and, when appropriate, a new versioned release.\nA corrected release should preserve the scholarly record rather than silently replacing the state associated with an earlier archived version.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"
@@ -10111,7 +10111,7 @@
     "href": "citation.html#citation-principle",
     "title": "Citation, Edition, and License",
     "section": "Citation Principle",
-    "text": "Citation Principle\nThe purpose of citation metadata is not merely formatting.\nIt is provenance.\n\\[\n\\boxed{\\text{A Scholarly Artifact Should Be Identifiable, Recoverable, and Verifiable}}\n\\]\nThe final publication record for the Second Edition will therefore connect the rendered book, source repository, versioned release, and archival DOI.",
+    "text": "Citation Principle\nThe purpose of citation metadata is not merely formatting.\nIt is provenance.\n\\[\n\\boxed{\\text{A Scholarly Artifact Should Be Identifiable, Recoverable, and Verifiable}}\n\\]\nThe publication record for the Second Edition connects the rendered book, source repository, versioned release, and archival DOI.",
     "crumbs": [
       "Resources",
       "Citation, Edition, and License"

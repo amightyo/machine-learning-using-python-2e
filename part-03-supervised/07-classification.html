@@ -553,7 +553,7 @@ p=\frac{1}{1+\exp[-(\beta_0+\beta_1x_1+\cdots+\beta_px_p)]}.
 </section>
 <section id="visual-intuition-logistic-function" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="visual-intuition-logistic-function"><span class="header-section-number">7.4</span> Visual Intuition: Logistic Function</h2>
-<div id="435c6cd0" class="cell" data-execution_count="1">
+<div id="7600c7de" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -598,7 +598,7 @@ OR_j=e^{\beta_j}.
 </section>
 <section id="leakage-safe-logistic-regression" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="leakage-safe-logistic-regression"><span class="header-section-number">7.6</span> Leakage-Safe Logistic Regression</h2>
-<div id="0575cd41" class="cell" data-execution_count="2">
+<div id="3d9f9ce0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
@@ -668,7 +668,7 @@ OR_j=e^{\beta_j}.
 </tr>
 </tbody>
 </table>
-<div id="078d9f4e" class="cell" data-execution_count="3">
+<div id="02527214" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cm<span class="op">=</span>confusion_matrix(y_test,pred)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(cm,display_labels<span class="op">=</span>[<span class="st">"Benign"</span>,<span class="st">"Malignant"</span>]).plot()</span>
@@ -700,7 +700,7 @@ Precision=\frac{TP}{TP+FP}
 <p><span class="math display">\[
 F_1=2\frac{Precision\times Recall}{Precision+Recall}.
 \]</span></p>
-<div id="5a492922" class="cell" data-execution_count="4">
+<div id="56381fd4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score,precision_score,recall_score,f1_score</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tn,fp,fn,tp<span class="op">=</span>cm.ravel()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -738,7 +738,7 @@ F_1=2\frac{Precision\times Recall}{Precision+Recall}.
 </section>
 <section id="thresholds-create-tradeoffs" class="level2" data-number="7.11">
 <h2 data-number="7.11" class="anchored" data-anchor-id="thresholds-create-tradeoffs"><span class="header-section-number">7.11</span> Thresholds Create Tradeoffs</h2>
-<div id="88860bfa" class="cell" data-execution_count="5">
+<div id="5b68222d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>threshold_grid<span class="op">=</span>np.linspace(<span class="fl">.01</span>,<span class="fl">.99</span>,<span class="dv">99</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sens<span class="op">=</span>[]<span class="op">;</span> spec<span class="op">=</span>[]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> threshold_grid:</span>
@@ -768,7 +768,7 @@ F_1=2\frac{Precision\times Recall}{Precision+Recall}.
 </section>
 <section id="roc-analysis" class="level2" data-number="7.12">
 <h2 data-number="7.12" class="anchored" data-anchor-id="roc-analysis"><span class="header-section-number">7.12</span> ROC Analysis</h2>
-<div id="39b1905d" class="cell" data-execution_count="6">
+<div id="acadb264" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve,roc_auc_score</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fpr,tpr,_<span class="op">=</span>roc_curve(y_test,prob)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>auc<span class="op">=</span>roc_auc_score(y_test,prob)</span>
@@ -793,7 +793,7 @@ F_1=2\frac{Precision\times Recall}{Precision+Recall}.
 </section>
 <section id="precision-recall-analysis" class="level2" data-number="7.13">
 <h2 data-number="7.13" class="anchored" data-anchor-id="precision-recall-analysis"><span class="header-section-number">7.13</span> Precision-Recall Analysis</h2>
-<div id="defc8e7d" class="cell" data-execution_count="7">
+<div id="83e18e24" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_recall_curve,average_precision_score</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>precision_vals,recall_vals,_<span class="op">=</span>precision_recall_curve(y_test,prob)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ap<span class="op">=</span>average_precision_score(y_test,prob)</span>
@@ -818,7 +818,7 @@ F_1=2\frac{Precision\times Recall}{Precision+Recall}.
 <section id="discrimination-is-not-calibration" class="level2" data-number="7.14">
 <h2 data-number="7.14" class="anchored" data-anchor-id="discrimination-is-not-calibration"><span class="header-section-number">7.14</span> Discrimination Is Not Calibration</h2>
 <p>Discrimination concerns ranking. Calibration concerns whether predicted probabilities correspond to observed frequencies.</p>
-<div id="dd0db636" class="cell" data-execution_count="8">
+<div id="a028008a" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> brier_score_loss</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -999,7 +999,7 @@ Figure&nbsp;7.2: Examples from the handwritten-digits computer-vision workload.
 </div>
 </div>
 </div>
-<div id="c96635bd" class="cell" data-execution_count="11">
+<div id="23b3829b" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>X_train_cv, X_test_cv, y_train_cv, y_test_cv <span class="op">=</span> train_test_split(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    X_cv,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    y_cv,</span>
@@ -1106,7 +1106,7 @@ Figure&nbsp;7.3: Confusion matrix for the logistic-regression computer-vision ba
 <p><span class="math display">\[
 C(\tau)=C_{FN}FN(\tau)+C_{FP}FP(\tau).
 \]</span></p>
-<div id="26aa56dc" class="cell" data-execution_count="13">
+<div id="3febe183" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cost_fn<span class="op">=</span><span class="dv">5</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cost_fp<span class="op">=</span><span class="dv">1</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>costs<span class="op">=</span>[]</span>

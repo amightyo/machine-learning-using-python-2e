@@ -701,7 +701,7 @@ I(y_i\neq h_m(x_i))
 </section>
 <section id="fit-adaboost" class="level2" data-number="10.9">
 <h2 data-number="10.9" class="anchored" data-anchor-id="fit-adaboost"><span class="header-section-number">10.9</span> Fit AdaBoost</h2>
-<div id="46d77506" class="cell" data-execution_count="1">
+<div id="ad31770e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
@@ -874,7 +874,7 @@ F_m=F_{m-1}+\eta h_m.
 </section>
 <section id="fit-gradient-boosting" class="level2" data-number="10.15">
 <h2 data-number="10.15" class="anchored" data-anchor-id="fit-gradient-boosting"><span class="header-section-number">10.15</span> Fit Gradient Boosting</h2>
-<div id="a0604113" class="cell" data-execution_count="3">
+<div id="376888bd" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingClassifier</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>gb<span class="op">=</span>GradientBoostingClassifier(</span>
@@ -895,7 +895,7 @@ F_m=F_{m-1}+\eta h_m.
 <section id="modern-histogram-based-gradient-boosting" class="level2" data-number="10.16">
 <h2 data-number="10.16" class="anchored" data-anchor-id="modern-histogram-based-gradient-boosting"><span class="header-section-number">10.16</span> Modern Histogram-Based Gradient Boosting</h2>
 <p>Histogram-based methods discretize continuous feature values into bins, which can improve computational efficiency on larger datasets.</p>
-<div id="502ae531" class="cell" data-execution_count="4">
+<div id="c5b4a36a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prevent a Windows-specific joblib/loky physical-core detection warning.</span></span>
@@ -1035,7 +1035,7 @@ F_m=F_{m-1}+\eta h_m.
 </section>
 <section id="compare-several-supervised-models" class="level2" data-number="10.19">
 <h2 data-number="10.19" class="anchored" data-anchor-id="compare-several-supervised-models"><span class="header-section-number">10.19</span> Compare Several Supervised Models</h2>
-<div id="95216980" class="cell" data-execution_count="5">
+<div id="44f66b6e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
@@ -1102,7 +1102,7 @@ F_m=F_{m-1}+\eta h_m.
 </section>
 <section id="fit-a-soft-voting-ensemble" class="level2" data-number="10.21">
 <h2 data-number="10.21" class="anchored" data-anchor-id="fit-a-soft-voting-ensemble"><span class="header-section-number">10.21</span> Fit a Soft-Voting Ensemble</h2>
-<div id="7cb1e864" class="cell" data-execution_count="6">
+<div id="caee376e" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> VotingClassifier</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>voting<span class="op">=</span>VotingClassifier(</span>
@@ -1160,7 +1160,7 @@ g(\cdot)
 </section>
 <section id="fit-a-stacking-classifier" class="level2" data-number="10.23">
 <h2 data-number="10.23" class="anchored" data-anchor-id="fit-a-stacking-classifier"><span class="header-section-number">10.23</span> Fit a Stacking Classifier</h2>
-<div id="faa9e4f0" class="cell" data-execution_count="7">
+<div id="926f955b" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> StackingClassifier</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>base_estimators<span class="op">=</span>[</span>
@@ -1256,7 +1256,7 @@ Figure&nbsp;10.2: Averaging reduces error most effectively when component errors
 <h2 data-number="10.26" class="anchored" data-anchor-id="calibration-still-matters"><span class="header-section-number">10.26</span> Calibration Still Matters</h2>
 <p>An ensemble can have excellent discrimination and poor calibration. Calibration should therefore be evaluated separately when probabilities matter <span class="citation" data-cites="niculescuMizilCaruana2005">(<a href="../references.html#ref-niculescuMizilCaruana2005" role="doc-biblioref">Niculescu-Mizil and Caruana 2005</a>)</span>.</p>
 <p>If probabilities drive decisions, evaluate calibration just as in Chapter 7.</p>
-<div id="8f296a0e" class="cell" data-execution_count="9">
+<div id="be75eadd" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> brier_score_loss</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1305,7 +1305,7 @@ Figure&nbsp;10.2: Averaging reduces error most effectively when component errors
 <p><strong>What do different model families contribute when the data, split, and evaluation metric are held constant?</strong></p>
 </blockquote>
 <p>The following comparison uses the same train/test split for a linear model, an RBF SVM, a Random Forest, and histogram-based gradient boosting.</p>
-<div id="e73a070e" class="cell" data-execution_count="10">
+<div id="aacff3fe" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>

@@ -669,7 +669,7 @@ Cov(X_2,X_1) &amp; Var(X_2) &amp; \cdots\\
 </section>
 <section id="covariance-by-hand" class="level3" data-number="12.6.3">
 <h3 data-number="12.6.3" class="anchored" data-anchor-id="covariance-by-hand"><span class="header-section-number">12.6.3</span> Covariance by Hand</h3>
-<div id="321b1a28" class="cell" data-execution_count="2">
+<div id="bb0755e7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X_small <span class="op">=</span> np.array([</span>
@@ -807,7 +807,7 @@ Z=X_cW,
 \]</span></p>
 <p>where <span class="math inline">\(X_c\)</span> is centered data and columns of <span class="math inline">\(W\)</span> contain selected principal directions.</p>
 <p>Each row of <span class="math inline">\(Z\)</span> contains the <strong>component scores</strong> for an observation.</p>
-<div id="8777f4ce" class="cell" data-execution_count="4">
+<div id="95df1687" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Z_geom <span class="op">=</span> pca_geom.transform(X_geom)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Z_geom[:<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -824,7 +824,7 @@ Z=X_cW,
 <h3 data-number="12.6.8" class="anchored" data-anchor-id="loadings"><span class="header-section-number">12.6.8</span> Loadings</h3>
 <p>The component coefficients describe how original variables contribute to each principal direction.</p>
 <p>In scikit-learn, <code>components_</code> contains the principal axes.</p>
-<div id="6c353eca" class="cell" data-execution_count="5">
+<div id="2c555d6f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pca_geom.components_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([[ 0.77976061,  0.62607778],
@@ -849,7 +849,7 @@ z_{ij}
 </section>
 <section id="pca-on-a-real-dataset" class="level3" data-number="12.6.10">
 <h3 data-number="12.6.10" class="anchored" data-anchor-id="pca-on-a-real-dataset"><span class="header-section-number">12.6.10</span> PCA on a Real Dataset</h3>
-<div id="0dbdaa90" class="cell" data-execution_count="6">
+<div id="885dcca9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -995,7 +995,7 @@ Figure&nbsp;12.4: The first two principal components provide a two-dimensional p
 </section>
 <section id="interpreting-loadings" class="level3" data-number="12.6.15">
 <h3 data-number="12.6.15" class="anchored" data-anchor-id="interpreting-loadings"><span class="header-section-number">12.6.15</span> Interpreting Loadings</h3>
-<div id="293374b8" class="cell" data-execution_count="10">
+<div id="8c739d4e" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>loading_df <span class="op">=</span> pd.DataFrame(</span>
@@ -1110,7 +1110,7 @@ Z_k=X_cW_k.
 \hat X_c=Z_kW_k^\top.
 \]</span></p>
 <p>Information outside the retained subspace is lost.</p>
-<div id="a9b720c1" class="cell" data-execution_count="11">
+<div id="16a02327" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pca_5 <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Z_5 <span class="op">=</span> pca_5.fit_transform(X_scaled)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1172,7 +1172,7 @@ Figure&nbsp;12.5: Reconstruction error decreases as more principal components ar
 <section id="pca-in-predictive-modeling" class="level3" data-number="12.6.18">
 <h3 data-number="12.6.18" class="anchored" data-anchor-id="pca-in-predictive-modeling"><span class="header-section-number">12.6.18</span> PCA in Predictive Modeling</h3>
 <p>If PCA is part of a supervised-learning workflow, both scaling and PCA must be fitted inside the training pipeline.</p>
-<div id="fe71b391" class="cell" data-execution_count="13">
+<div id="3c926d2c" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
@@ -1209,7 +1209,7 @@ Figure&nbsp;12.5: Reconstruction error decreases as more principal components ar
 <h3 data-number="12.6.19" class="anchored" data-anchor-id="does-pca-improve-prediction"><span class="header-section-number">12.6.19</span> Does PCA Improve Prediction?</h3>
 <p>Not necessarily.</p>
 <p>Compare a logistic model with and without PCA.</p>
-<div id="be06bef1" class="cell" data-execution_count="14">
+<div id="b7ef7b8b" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plain_logit <span class="op">=</span> Pipeline([</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>

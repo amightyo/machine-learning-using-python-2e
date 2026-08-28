@@ -834,7 +834,7 @@ Reproduction instructions:</code></pre>
 <section id="hashes-can-identify-file-versions" class="level2" data-number="18.14">
 <h2 data-number="18.14" class="anchored" data-anchor-id="hashes-can-identify-file-versions"><span class="header-section-number">18.14</span> Hashes Can Identify File Versions</h2>
 <p>A cryptographic hash can help detect whether a file changed.</p>
-<div id="52de592f" class="cell" data-execution_count="2">
+<div id="3e86fe1e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>example_bytes <span class="op">=</span> <span class="st">b"machine learning reproducibility"</span></span>
@@ -866,7 +866,7 @@ Reproduction instructions:</code></pre>
 <li>augmentation.</li>
 </ul>
 <p>A fixed seed can make a computational path easier to reproduce.</p>
-<div id="251e72f7" class="cell" data-execution_count="3">
+<div id="bb7b9536" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">42</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -916,7 +916,7 @@ Reproduction instructions:</code></pre>
 </section>
 <section id="inspect-the-current-environment" class="level2" data-number="18.20">
 <h2 data-number="18.20" class="anchored" data-anchor-id="inspect-the-current-environment"><span class="header-section-number">18.20</span> Inspect the Current Environment</h2>
-<div id="44fad9de" class="cell" data-execution_count="4">
+<div id="b6ab5168" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>environment_info <span class="op">=</span> {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"python"</span>: sys.version.split()[<span class="dv">0</span>],</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"platform"</span>: platform.platform(),</span>
@@ -965,7 +965,7 @@ Name: version, dtype: object</code></pre>
 <p>Suppose standardization is performed before cross-validation using the full dataset.</p>
 <p>That creates leakage.</p>
 <p>A reproducible workflow should preserve the transformation boundary.</p>
-<div id="169831b8" class="cell" data-execution_count="5">
+<div id="bce4dd1c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
@@ -1034,7 +1034,7 @@ Name: version, dtype: object</code></pre>
 <section id="separate-configuration-from-results" class="level2" data-number="18.26">
 <h2 data-number="18.26" class="anchored" data-anchor-id="separate-configuration-from-results"><span class="header-section-number">18.26</span> Separate Configuration From Results</h2>
 <p>An experiment should record the settings that produced the result.</p>
-<div id="115f60a4" class="cell" data-execution_count="6">
+<div id="f5f46303" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>experiment <span class="op">=</span> {</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"experiment_id"</span>: <span class="st">"logistic-baseline-v1"</span>,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"random_state"</span>: <span class="dv">42</span>,</span>
@@ -1059,7 +1059,7 @@ Name: version, dtype: object</code></pre>
 </section>
 <section id="store-machine-readable-metadata" class="level2" data-number="18.27">
 <h2 data-number="18.27" class="anchored" data-anchor-id="store-machine-readable-metadata"><span class="header-section-number">18.27</span> Store Machine-Readable Metadata</h2>
-<div id="ee8d1de2" class="cell" data-execution_count="7">
+<div id="6ccf3b50" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>experiment_json <span class="op">=</span> json.dumps(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    experiment,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    indent<span class="op">=</span><span class="dv">2</span></span>
@@ -1272,7 +1272,7 @@ Figure&nbsp;18.1: A reproducible figure is generated from code rather than manua
 <section id="models-are-derived-artifacts" class="level2" data-number="18.44">
 <h2 data-number="18.44" class="anchored" data-anchor-id="models-are-derived-artifacts"><span class="header-section-number">18.44</span> Models Are Derived Artifacts</h2>
 <p>A fitted model can be saved for reuse.</p>
-<div id="ebbdff2e" class="cell" data-execution_count="9">
+<div id="a862b3a9" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tempfile <span class="im">import</span> TemporaryDirectory</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1373,7 +1373,7 @@ Figure&nbsp;18.1: A reproducible figure is generated from code rather than manua
 </section>
 <section id="example-data-assertions" class="level2" data-number="18.51">
 <h2 data-number="18.51" class="anchored" data-anchor-id="example-data-assertions"><span class="header-section-number">18.51</span> Example Data Assertions</h2>
-<div id="6d0f30cb" class="cell" data-execution_count="10">
+<div id="d62c8674" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> X.shape[<span class="dv">0</span>] <span class="op">==</span> y.shape[<span class="dv">0</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> y.isin([<span class="dv">0</span>, <span class="dv">1</span>]).<span class="bu">all</span>()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="kw">not</span> X.columns.duplicated().<span class="bu">any</span>()</span>

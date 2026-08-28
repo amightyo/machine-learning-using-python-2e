@@ -626,7 +626,7 @@ d_1(x_i,x_j)
 </section>
 <section id="distance-by-hand" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="distance-by-hand"><span class="header-section-number">11.5</span> Distance by Hand</h2>
-<div id="d57df1e1" class="cell" data-execution_count="2">
+<div id="0f7c1288" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>np.array([<span class="dv">2</span>,<span class="dv">4</span>])</span>
@@ -669,7 +669,7 @@ z_{ij}
 </section>
 <section id="a-first-clustering-dataset" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="a-first-clustering-dataset"><span class="header-section-number">11.7</span> A First Clustering Dataset</h2>
-<div id="d1b708fd" class="cell" data-execution_count="3">
+<div id="58c78022" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -800,7 +800,7 @@ z_{ij}
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-clustering-representation-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data." width="662" height="449">
+<div id="fig-clustering-representation-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="662" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data." height="449">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-clustering-representation-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="11-clustering_files/figure-html/fig-clustering-representation-output-2.png" id="fig-clustering-representation-2" data-ref-parent="fig-clustering-representation" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data." width="662" height="449" class="figure-img">
@@ -909,7 +909,7 @@ J
 </section>
 <section id="fit-k-means" class="level2" data-number="11.11">
 <h2 data-number="11.11" class="anchored" data-anchor-id="fit-k-means"><span class="header-section-number">11.11</span> Fit <span class="math inline">\(k\)</span>-Means</h2>
-<div id="6f44375b" class="cell" data-execution_count="5">
+<div id="24fb8000" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>kmeans<span class="op">=</span>KMeans(</span>
@@ -1020,7 +1020,7 @@ s(i)
 <p>Values approach 1 when an observation is well matched to its cluster and separated from alternatives.</p>
 <p>Values near 0 suggest boundary ambiguity.</p>
 <p>Negative values suggest that another cluster may be closer on average.</p>
-<div id="d056abbf" class="cell" data-execution_count="7">
+<div id="f74d99ef" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>silhouette_results<span class="op">=</span>{}</span>
@@ -1090,7 +1090,7 @@ Figure&nbsp;11.3: Silhouette scores provide one internal view of cohesion and se
 <section id="cluster-profiles" class="level2" data-number="11.17">
 <h2 data-number="11.17" class="anchored" data-anchor-id="cluster-profiles"><span class="header-section-number">11.17</span> Cluster Profiles</h2>
 <p>After clustering, analysts often summarize feature values by cluster.</p>
-<div id="3acc5bbd" class="cell" data-execution_count="9">
+<div id="c5a6bd36" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>demo_df<span class="op">=</span>pd.DataFrame(</span>
@@ -1224,7 +1224,7 @@ Figure&nbsp;11.4: A dendrogram represents a hierarchy of merges; choosing where 
 </section>
 <section id="agglomerative-clustering-in-scikit-learn" class="level2" data-number="11.21">
 <h2 data-number="11.21" class="anchored" data-anchor-id="agglomerative-clustering-in-scikit-learn"><span class="header-section-number">11.21</span> Agglomerative Clustering in scikit-learn</h2>
-<div id="bd34942a" class="cell" data-execution_count="11">
+<div id="94f5bd39" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>agg<span class="op">=</span>AgglomerativeClustering(</span>
@@ -1348,7 +1348,7 @@ N_\varepsilon(x_i)
 </section>
 <section id="fit-dbscan" class="level2" data-number="11.25">
 <h2 data-number="11.25" class="anchored" data-anchor-id="fit-dbscan"><span class="header-section-number">11.25</span> Fit DBSCAN</h2>
-<div id="458afb0c" class="cell" data-execution_count="14">
+<div id="2ebb05a6" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1435,7 +1435,7 @@ N_\varepsilon(x_i)
 <li>inspect whether substantive profiles persist.</li>
 </ol>
 <p>For two partitions with known correspondence, the Adjusted Rand Index (ARI) is one possible agreement measure:</p>
-<div id="499273f2" class="cell" data-execution_count="15">
+<div id="8b04d2b1" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> adjusted_rand_score</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>rng<span class="op">=</span>np.random.default_rng(<span class="dv">42</span>)</span>
@@ -1520,7 +1520,7 @@ Figure&nbsp;11.7: A clustering algorithm can partition continuous structure even
 <h2 data-number="11.30" class="anchored" data-anchor-id="computer-vision-learning-experience-clustering-images-without-labels"><span class="header-section-number">11.30</span> Computer Vision Learning Experience: Clustering Images Without Labels</h2>
 <p>Computer vision also contains unsupervised workloads. Suppose image labels are unavailable and we ask whether visually similar observations form useful groups.</p>
 <p>Using handwritten digits, we can cluster flattened images without supplying digit labels to (k)-means. Known labels are retained only for <strong>post hoc evaluation</strong>, not fitting.</p>
-<div id="47857b07" class="cell" data-execution_count="17">
+<div id="d4e2f34e" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
