@@ -1,7 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this book or its accompanying materials, please cite it using the metadata below."
 title: "Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research"
-type: book
 authors:
   - family-names: "Itauma"
     given-names: "Itauma"

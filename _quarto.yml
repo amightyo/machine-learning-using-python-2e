@@ -7,6 +7,9 @@ book:
   author: "Itauma Itauma"
   edition: "Second Edition"
 
+  site-url: "https://amightyo.github.io/machine-learning-using-python-2e/"
+  repo-url: "https://github.com/amightyo/machine-learning-using-python-2e"
+
   chapters:
     - index.qmd
     - intro.qmd
