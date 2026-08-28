@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -306,50 +431,62 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">5.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">5.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">5.3</span> Real-World Problem</a></li>
-  <li><a href="#data-quality" id="toc-data-quality" class="nav-link" data-scroll-target="#data-quality"><span class="header-section-number">5.4</span> Data Quality</a>
+  <li><a href="#from-problem-specification-to-data-pipeline" id="toc-from-problem-specification-to-data-pipeline" class="nav-link" data-scroll-target="#from-problem-specification-to-data-pipeline"><span class="header-section-number">5.3</span> From Problem Specification to Data Pipeline</a></li>
+  <li><a href="#preserve-raw-data" id="toc-preserve-raw-data" class="nav-link" data-scroll-target="#preserve-raw-data"><span class="header-section-number">5.4</span> Preserve Raw Data</a></li>
+  <li><a href="#inspect-before-cleaning" id="toc-inspect-before-cleaning" class="nav-link" data-scroll-target="#inspect-before-cleaning"><span class="header-section-number">5.5</span> Inspect Before Cleaning</a></li>
+  <li><a href="#data-quality-is-contextual" id="toc-data-quality-is-contextual" class="nav-link" data-scroll-target="#data-quality-is-contextual"><span class="header-section-number">5.6</span> Data Quality Is Contextual</a></li>
+  <li><a href="#data-centric-machine-learning" id="toc-data-centric-machine-learning" class="nav-link" data-scroll-target="#data-centric-machine-learning"><span class="header-section-number">5.7</span> Data-Centric Machine Learning</a>
   <ul class="collapse">
-  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types"><span class="header-section-number">5.4.1</span> Data Types</a></li>
-  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">5.4.2</span> Missing Data</a></li>
-  <li><a href="#duplicates" id="toc-duplicates" class="nav-link" data-scroll-target="#duplicates"><span class="header-section-number">5.4.3</span> Duplicates</a></li>
-  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="header-section-number">5.4.4</span> Outliers</a></li>
-  <li><a href="#inconsistent-coding" id="toc-inconsistent-coding" class="nav-link" data-scroll-target="#inconsistent-coding"><span class="header-section-number">5.4.5</span> Inconsistent Coding</a></li>
+  <li><a href="#dimensions-of-data-quality" id="toc-dimensions-of-data-quality" class="nav-link" data-scroll-target="#dimensions-of-data-quality"><span class="header-section-number">5.7.1</span> Dimensions of Data Quality</a></li>
+  <li><a href="#small-experiment-better-model-or-better-data" id="toc-small-experiment-better-model-or-better-data" class="nav-link" data-scroll-target="#small-experiment-better-model-or-better-data"><span class="header-section-number">5.7.2</span> Small Experiment: Better Model or Better Data?</a></li>
   </ul></li>
-  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering"><span class="header-section-number">5.5</span> Feature Engineering</a>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">5.8</span> Missing Data</a>
   <ul class="collapse">
-  <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations"><span class="header-section-number">5.5.1</span> Transformations</a></li>
-  <li><a href="#categorical-encoding" id="toc-categorical-encoding" class="nav-link" data-scroll-target="#categorical-encoding"><span class="header-section-number">5.5.2</span> Categorical Encoding</a></li>
-  <li><a href="#scaling" id="toc-scaling" class="nav-link" data-scroll-target="#scaling"><span class="header-section-number">5.5.3</span> Scaling</a></li>
-  <li><a href="#interaction-features" id="toc-interaction-features" class="nav-link" data-scroll-target="#interaction-features"><span class="header-section-number">5.5.4</span> Interaction Features</a></li>
-  <li><a href="#domain-informed-features" id="toc-domain-informed-features" class="nav-link" data-scroll-target="#domain-informed-features"><span class="header-section-number">5.5.5</span> Domain-Informed Features</a></li>
-  <li><a href="#date-and-time-features" id="toc-date-and-time-features" class="nav-link" data-scroll-target="#date-and-time-features"><span class="header-section-number">5.5.6</span> Date and Time Features</a></li>
+  <li><a href="#why-dropna-is-not-a-strategy" id="toc-why-dropna-is-not-a-strategy" class="nav-link" data-scroll-target="#why-dropna-is-not-a-strategy"><span class="header-section-number">5.8.1</span> Why <code>dropna()</code> Is Not a Strategy</a></li>
+  <li><a href="#imputation" id="toc-imputation" class="nav-link" data-scroll-target="#imputation"><span class="header-section-number">5.8.2</span> Imputation</a></li>
   </ul></li>
-  <li><a href="#leakage-free-preprocessing" id="toc-leakage-free-preprocessing" class="nav-link" data-scroll-target="#leakage-free-preprocessing"><span class="header-section-number">5.6</span> Leakage-Free Preprocessing</a>
+  <li><a href="#the-evaluation-boundary" id="toc-the-evaluation-boundary" class="nav-link" data-scroll-target="#the-evaluation-boundary"><span class="header-section-number">5.9</span> The Evaluation Boundary</a></li>
+  <li><a href="#traintest-splitting" id="toc-traintest-splitting" class="nav-link" data-scroll-target="#traintest-splitting"><span class="header-section-number">5.10</span> Train/Test Splitting</a></li>
+  <li><a href="#numerical-features" id="toc-numerical-features" class="nav-link" data-scroll-target="#numerical-features"><span class="header-section-number">5.11</span> Numerical Features</a></li>
+  <li><a href="#categorical-features" id="toc-categorical-features" class="nav-link" data-scroll-target="#categorical-features"><span class="header-section-number">5.12</span> Categorical Features</a>
   <ul class="collapse">
-  <li><a href="#train-test-separation" id="toc-train-test-separation" class="nav-link" data-scroll-target="#train-test-separation"><span class="header-section-number">5.6.1</span> Train-Test Separation</a></li>
-  <li><a href="#columntransformer" id="toc-columntransformer" class="nav-link" data-scroll-target="#columntransformer"><span class="header-section-number">5.6.2</span> ColumnTransformer</a></li>
-  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">5.6.3</span> Pipelines</a></li>
-  <li><a href="#fit-versus-transform" id="toc-fit-versus-transform" class="nav-link" data-scroll-target="#fit-versus-transform"><span class="header-section-number">5.6.4</span> Fit Versus Transform</a></li>
+  <li><a href="#one-hot-encoding" id="toc-one-hot-encoding" class="nav-link" data-scroll-target="#one-hot-encoding"><span class="header-section-number">5.12.1</span> One-Hot Encoding</a></li>
+  <li><a href="#ordinal-variables" id="toc-ordinal-variables" class="nav-link" data-scroll-target="#ordinal-variables"><span class="header-section-number">5.12.2</span> Ordinal Variables</a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">5.7</span> Python Implementation</a>
+  <li><a href="#identifiers-are-not-ordinary-features" id="toc-identifiers-are-not-ordinary-features" class="nav-link" data-scroll-target="#identifiers-are-not-ordinary-features"><span class="header-section-number">5.13</span> Identifiers Are Not Ordinary Features</a></li>
+  <li><a href="#datetime-features" id="toc-datetime-features" class="nav-link" data-scroll-target="#datetime-features"><span class="header-section-number">5.14</span> Datetime Features</a></li>
+  <li><a href="#feature-engineering-representation-as-modeling" id="toc-feature-engineering-representation-as-modeling" class="nav-link" data-scroll-target="#feature-engineering-representation-as-modeling"><span class="header-section-number">5.15</span> Feature Engineering: Representation as Modeling</a></li>
+  <li><a href="#computer-vision-data-representation-is-preprocessing" id="toc-computer-vision-data-representation-is-preprocessing" class="nav-link" data-scroll-target="#computer-vision-data-representation-is-preprocessing"><span class="header-section-number">5.16</span> Computer Vision Data: Representation Is Preprocessing</a>
   <ul class="collapse">
-  <li><a href="#numeric-and-categorical-pipelines" id="toc-numeric-and-categorical-pipelines" class="nav-link" data-scroll-target="#numeric-and-categorical-pipelines"><span class="header-section-number">5.7.1</span> Numeric and Categorical Pipelines</a></li>
-  <li><a href="#missing-value-imputation" id="toc-missing-value-imputation" class="nav-link" data-scroll-target="#missing-value-imputation"><span class="header-section-number">5.7.2</span> Missing-Value Imputation</a></li>
-  <li><a href="#one-hot-encoding" id="toc-one-hot-encoding" class="nav-link" data-scroll-target="#one-hot-encoding"><span class="header-section-number">5.7.3</span> One-Hot Encoding</a></li>
-  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="header-section-number">5.7.4</span> Standardization</a></li>
-  <li><a href="#integrated-modeling-pipelines" id="toc-integrated-modeling-pipelines" class="nav-link" data-scroll-target="#integrated-modeling-pipelines"><span class="header-section-number">5.7.5</span> Integrated Modeling Pipelines</a></li>
+  <li><a href="#flattening-changes-the-representation" id="toc-flattening-changes-the-representation" class="nav-link" data-scroll-target="#flattening-changes-the-representation"><span class="header-section-number">5.16.1</span> Flattening Changes the Representation</a></li>
+  <li><a href="#vision-leakage-can-be-subtle" id="toc-vision-leakage-can-be-subtle" class="nav-link" data-scroll-target="#vision-leakage-can-be-subtle"><span class="header-section-number">5.16.2</span> Vision Leakage Can Be Subtle</a></li>
+  <li><a href="#augmentation-belongs-inside-the-training-process" id="toc-augmentation-belongs-inside-the-training-process" class="nav-link" data-scroll-target="#augmentation-belongs-inside-the-training-process"><span class="header-section-number">5.16.3</span> Augmentation Belongs Inside the Training Process</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">5.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">5.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">5.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">5.11</span> Real-World Case Study</a>
+  <li><a href="#interactions-and-nonlinearity" id="toc-interactions-and-nonlinearity" class="nav-link" data-scroll-target="#interactions-and-nonlinearity"><span class="header-section-number">5.17</span> Interactions and Nonlinearity</a></li>
+  <li><a href="#outliers-error-rarity-or-signal" id="toc-outliers-error-rarity-or-signal" class="nav-link" data-scroll-target="#outliers-error-rarity-or-signal"><span class="header-section-number">5.18</span> Outliers: Error, Rarity, or Signal?</a></li>
+  <li><a href="#columntransformer-different-columns-different-transformations" id="toc-columntransformer-different-columns-different-transformations" class="nav-link" data-scroll-target="#columntransformer-different-columns-different-transformations"><span class="header-section-number">5.19</span> ColumnTransformer: Different Columns, Different Transformations</a></li>
+  <li><a href="#pipeline-preprocessing-and-model-as-one-workflow" id="toc-pipeline-preprocessing-and-model-as-one-workflow" class="nav-link" data-scroll-target="#pipeline-preprocessing-and-model-as-one-workflow"><span class="header-section-number">5.20</span> Pipeline: Preprocessing and Model as One Workflow</a></li>
+  <li><a href="#visual-experiment-leakage-inflates-performance" id="toc-visual-experiment-leakage-inflates-performance" class="nav-link" data-scroll-target="#visual-experiment-leakage-inflates-performance"><span class="header-section-number">5.21</span> Visual Experiment: Leakage Inflates Performance</a></li>
+  <li><a href="#three-data-tracks" id="toc-three-data-tracks" class="nav-link" data-scroll-target="#three-data-tracks"><span class="header-section-number">5.22</span> Three Data Tracks</a>
   <ul class="collapse">
-  <li><a href="#preparing-public-education-data-for-modeling" id="toc-preparing-public-education-data-for-modeling" class="nav-link" data-scroll-target="#preparing-public-education-data-for-modeling"><span class="header-section-number">5.11.1</span> Preparing Public Education Data for Modeling</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">5.22.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">5.22.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">5.22.3</span> Open ML Benchmark Track</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">5.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">5.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">5.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">5.15</span> Key Takeaways</a></li>
+  <li><a href="#beyond-the-algorithm-data-are-made-not-merely-found" id="toc-beyond-the-algorithm-data-are-made-not-merely-found" class="nav-link" data-scroll-target="#beyond-the-algorithm-data-are-made-not-merely-found"><span class="header-section-number">5.23</span> Beyond the Algorithm: Data Are Made, Not Merely Found</a></li>
+  <li><a href="#ai-pair-programmer-audit-the-preprocessing" id="toc-ai-pair-programmer-audit-the-preprocessing" class="nav-link" data-scroll-target="#ai-pair-programmer-audit-the-preprocessing"><span class="header-section-number">5.24</span> AI Pair Programmer: Audit the Preprocessing</a></li>
+  <li><a href="#hands-on-lab-build-a-leakage-safe-pipeline" id="toc-hands-on-lab-build-a-leakage-safe-pipeline" class="nav-link" data-scroll-target="#hands-on-lab-build-a-leakage-safe-pipeline"><span class="header-section-number">5.25</span> Hands-On Lab: Build a Leakage-Safe Pipeline</a>
+  <ul class="collapse">
+  <li><a href="#computer-vision-extension" id="toc-computer-vision-extension" class="nav-link" data-scroll-target="#computer-vision-extension"><span class="header-section-number">5.25.1</span> Computer Vision Extension</a></li>
+  </ul></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">5.26</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">5.27</span> Researcher Track</a></li>
+  <li><a href="#research-studio-build-a-data-dictionary-and-feature-ledger" id="toc-research-studio-build-a-data-dictionary-and-feature-ledger" class="nav-link" data-scroll-target="#research-studio-build-a-data-dictionary-and-feature-ledger"><span class="header-section-number">5.28</span> Research Studio: Build a Data Dictionary and Feature Ledger</a></li>
+  <li><a href="#professors-challenge-the-perfect-preprocessing-notebook" id="toc-professors-challenge-the-perfect-preprocessing-notebook" class="nav-link" data-scroll-target="#professors-challenge-the-perfect-preprocessing-notebook"><span class="header-section-number">5.29</span> Professor’s Challenge: The Perfect Preprocessing Notebook</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">5.30</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">5.31</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">5.32</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">5.33</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
@@ -377,144 +514,1595 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">5.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Diagnose data-quality problems.</li>
-<li>Handle missing, categorical, and scaled features appropriately.</li>
-<li>Explain data leakage and prevent it with pipelines.</li>
-<li>Engineer features using substantive knowledge.</li>
-<li>Build preprocessing workflows with scikit-learn.</li>
+<li>distinguish raw, analytical, training, validation, and test data;</li>
+<li>explain why preprocessing must respect the evaluation boundary;</li>
+<li>diagnose missingness, duplicates, invalid values, and inconsistent representations;</li>
+<li>distinguish numerical, nominal, ordinal, datetime, text, and identifier variables;</li>
+<li>apply scaling, imputation, and categorical encoding appropriately;</li>
+<li>explain feature engineering as the construction of model representations;</li>
+<li>use <code>Pipeline</code> and <code>ColumnTransformer</code> to prevent common forms of leakage;</li>
+<li>explain why preprocessing choices should be learned from training data;</li>
+<li>evaluate whether an engineered feature would actually exist at prediction time;</li>
+<li>build reproducible transformations rather than manually modifying source data;</li>
+<li>connect domain knowledge to health, education, and benchmark feature design;</li>
+<li>audit AI-generated preprocessing code for technically subtle errors.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">5.2</span> Why This Matters</h2>
-<p>Model quality is constrained by data quality, and seemingly harmless preprocessing can invalidate an evaluation if information leaks across data partitions.</p>
+<p>Most machine-learning algorithms do not receive “reality.” They receive a representation of reality produced by a data pipeline.</p>
+<p>That representation may contain missing values, inconsistent categories, measurement artifacts, duplicated records, inappropriate identifiers, post-outcome information, or transformations learned from the wrong observations.</p>
+<p>A model can therefore fail before the algorithm itself has done anything wrong.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>How do we transform raw data into model-ready evidence without contaminating the evaluation or distorting the meaning of the variables?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">5.3</span> Real-World Problem</h2>
-<p>A preprocessing workflow standardizes the entire dataset before the train-test split. Why is the resulting performance estimate potentially optimistic?</p>
+<section id="from-problem-specification-to-data-pipeline" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="from-problem-specification-to-data-pipeline"><span class="header-section-number">5.3</span> From Problem Specification to Data Pipeline</h2>
+<p>Chapter 4 defined the problem as</p>
+<p><span class="math display">\[
+\mathcal{P}=(U,Y,X_t,t,H,L,E,C).
+\]</span></p>
+<p>Chapter 5 operationalizes <span class="math inline">\(X_t\)</span>.</p>
+<p>The critical subscript is <span class="math inline">\(t\)</span>: features must be legitimately available when the prediction is made.</p>
+<p>A useful conceptual pipeline is</p>
+<p><span class="math display">\[
+D_{\text{raw}}
+\rightarrow
+D_{\text{validated}}
+\rightarrow
+D_{\text{split}}
+\rightarrow
+T_{\text{train}}
+\rightarrow
+X_{\text{model}}.
+\]</span></p>
+<p>Transformations <span class="math inline">\(T\)</span> that learn from data are estimated using the training portion rather than the complete dataset.</p>
 </section>
-<section id="data-quality" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="data-quality"><span class="header-section-number">5.4</span> Data Quality</h2>
-<section id="data-types" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="data-types"><span class="header-section-number">5.4.1</span> Data Types</h3>
+<section id="preserve-raw-data" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="preserve-raw-data"><span class="header-section-number">5.4</span> Preserve Raw Data</h2>
+<p>Raw data should normally remain immutable within the analytical workflow.</p>
+<pre class="text"><code>data/
+├── raw/
+├── interim/
+└── processed/</code></pre>
+<p>Instead of manually changing cells, write transformations that can be rerun.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reproducibility Principle
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A transformation that matters to the analysis should exist as code, not as an undocumented manual edit.</strong></p>
+</div>
+</div>
 </section>
-<section id="missing-data" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">5.4.2</span> Missing Data</h3>
+<section id="inspect-before-cleaning" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="inspect-before-cleaning"><span class="header-section-number">5.5</span> Inspect Before Cleaning</h2>
+<div id="27a38fb2" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: [<span class="dv">22</span>, <span class="dv">35</span>, <span class="dv">35</span>, np.nan, <span class="dv">51</span>, <span class="dv">64</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"program"</span>: [<span class="st">"MS"</span>, <span class="st">"PhD"</span>, <span class="st">"PhD"</span>, <span class="st">"MS"</span>, <span class="st">"DBA"</span>, <span class="st">"DBA"</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"study_hours"</span>: [<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">4</span>, np.nan, <span class="dv">10</span>],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"retained"</span>: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">program</th>
+<th data-quarto-table-cell-role="th">study_hours</th>
+<th data-quarto-table-cell-role="th">retained</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>22.0</td>
+<td>MS</td>
+<td>6.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>35.0</td>
+<td>PhD</td>
+<td>8.0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>35.0</td>
+<td>PhD</td>
+<td>8.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>NaN</td>
+<td>MS</td>
+<td>4.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>51.0</td>
+<td>DBA</td>
+<td>NaN</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>64.0</td>
+<td>DBA</td>
+<td>10.0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Start with structure, missingness, duplicates, and summaries.</p>
+<div id="1920c0f3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.shape, df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>((6, 4),
+ age            float64
+ program         object
+ study_hours    float64
+ retained         int64
+ dtype: object)</code></pre>
+</div>
+</div>
+<div id="2970c9df" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.isna().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>age            1
+program        0
+study_hours    1
+retained       0
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="13504a80" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.duplicated().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>np.int64(1)</code></pre>
+</div>
+</div>
+<div id="d9d6c584" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.describe(include<span class="op">=</span><span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">program</th>
+<th data-quarto-table-cell-role="th">study_hours</th>
+<th data-quarto-table-cell-role="th">retained</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>5.000000</td>
+<td>6</td>
+<td>5.000000</td>
+<td>6.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">unique</th>
+<td>NaN</td>
+<td>3</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">top</th>
+<td>NaN</td>
+<td>MS</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">freq</th>
+<td>NaN</td>
+<td>2</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>41.400000</td>
+<td>NaN</td>
+<td>7.200000</td>
+<td>0.666667</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">std</th>
+<td>16.288032</td>
+<td>NaN</td>
+<td>2.280351</td>
+<td>0.516398</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">min</th>
+<td>22.000000</td>
+<td>NaN</td>
+<td>4.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>35.000000</td>
+<td>NaN</td>
+<td>6.000000</td>
+<td>0.250000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>35.000000</td>
+<td>NaN</td>
+<td>8.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>51.000000</td>
+<td>NaN</td>
+<td>8.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">max</th>
+<td>64.000000</td>
+<td>NaN</td>
+<td>10.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The goal is not to “clean everything.” The goal is to understand which observations and variables are credible for the specified problem.</p>
 </section>
-<section id="duplicates" class="level3" data-number="5.4.3">
-<h3 data-number="5.4.3" class="anchored" data-anchor-id="duplicates"><span class="header-section-number">5.4.3</span> Duplicates</h3>
+<section id="data-quality-is-contextual" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="data-quality-is-contextual"><span class="header-section-number">5.6</span> Data Quality Is Contextual</h2>
+<p>A value can be syntactically valid and substantively impossible: negative age, 25 hours of sleep per day, graduation before enrollment, an identifier treated as a continuous quantity, inconsistent laboratory units, or categories whose definitions changed across years.</p>
+<p>Validation therefore combines computational checks with domain knowledge.</p>
 </section>
-<section id="outliers" class="level3" data-number="5.4.4">
-<h3 data-number="5.4.4" class="anchored" data-anchor-id="outliers"><span class="header-section-number">5.4.4</span> Outliers</h3>
+<section id="data-centric-machine-learning" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="data-centric-machine-learning"><span class="header-section-number">5.7</span> Data-Centric Machine Learning</h2>
+<p>A common reflex is</p>
+<p><span class="math display">\[
+\text{Disappointing performance}\rightarrow\text{try a more sophisticated algorithm}.
+\]</span></p>
+<p>Sometimes that is appropriate. Often it is premature.</p>
+<p>A data-centric perspective asks whether better evidence could matter more than greater model complexity. Research on data cascades in high-stakes AI similarly shows how upstream data problems can propagate through downstream systems <span class="citation" data-cites="sambasivan2021data">(<a href="../references.html#ref-sambasivan2021data" role="doc-biblioref">Sambasivan et al. 2021</a>)</span>. Potential improvements include better labels, measurement, population coverage, temporal alignment, category consistency, feature representation, and removal of corrupted or duplicated observations.</p>
+<p>A useful diagnostic sequence is</p>
+<p><span class="math display">\[
+\text{Performance Problem}
+\rightarrow
+\begin{cases}
+\text{inspect target and labels}\\
+\text{inspect measurement}\\
+\text{inspect missingness}\\
+\text{inspect representation}\\
+\text{inspect population coverage}\\
+\text{inspect timing and leakage}\\
+\text{inspect evaluation design}\\
+\text{then reconsider model capacity}
+\end{cases}
+\]</span></p>
+<section id="dimensions-of-data-quality" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="dimensions-of-data-quality"><span class="header-section-number">5.7.1</span> Dimensions of Data Quality</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Diagnostic question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Label quality</td>
+<td>Is the target recorded consistently and correctly?</td>
+</tr>
+<tr class="even">
+<td>Measurement validity</td>
+<td>Do variables represent the intended phenomena?</td>
+</tr>
+<tr class="odd">
+<td>Completeness</td>
+<td>What is missing, for whom, and why?</td>
+</tr>
+<tr class="even">
+<td>Consistency</td>
+<td>Are units, categories, and definitions stable?</td>
+</tr>
+<tr class="odd">
+<td>Uniqueness</td>
+<td>Are duplicate observations present?</td>
+</tr>
+<tr class="even">
+<td>Timeliness</td>
+<td>Would the information exist at prediction time?</td>
+</tr>
+<tr class="odd">
+<td>Coverage</td>
+<td>Are important populations, sites, periods, or conditions underrepresented?</td>
+</tr>
+<tr class="even">
+<td>Provenance</td>
+<td>Can we explain how each variable was produced?</td>
+</tr>
+</tbody>
+</table>
+<p>A large dataset can still be weak for a particular problem.</p>
 </section>
-<section id="inconsistent-coding" class="level3" data-number="5.4.5">
-<h3 data-number="5.4.5" class="anchored" data-anchor-id="inconsistent-coding"><span class="header-section-number">5.4.5</span> Inconsistent Coding</h3>
+<section id="small-experiment-better-model-or-better-data" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="small-experiment-better-model-or-better-data"><span class="header-section-number">5.7.2</span> Small Experiment: Better Model or Better Data?</h3>
+<div id="cell-fig-data-centric-ml" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>X_dc, y_dc <span class="op">=</span> make_classification(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1800</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    n_features<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    n_informative<span class="op">=</span><span class="dv">7</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    n_redundant<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    class_sep<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>Xtr_dc, Xte_dc, ytr_dc, yte_dc <span class="op">=</span> train_test_split(</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    X_dc, y_dc, test_size<span class="op">=</span><span class="fl">0.30</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y_dc</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>rng_dc <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>y_noisy_dc <span class="op">=</span> ytr_dc.copy()</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>flip_dc <span class="op">=</span> rng_dc.choice(</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(y_noisy_dc),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="bu">int</span>(<span class="fl">0.20</span> <span class="op">*</span> <span class="bu">len</span>(y_noisy_dc)),</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    replace<span class="op">=</span><span class="va">False</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>y_noisy_dc[flip_dc] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> y_noisy_dc[flip_dc]</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>log_noisy_dc <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>).fit(Xtr_dc, y_noisy_dc)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>rf_noisy_dc <span class="op">=</span> RandomForestClassifier(</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">300</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>).fit(Xtr_dc, y_noisy_dc)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>log_clean_dc <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>).fit(Xtr_dc, ytr_dc)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>scores_dc <span class="op">=</span> [</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    accuracy_score(yte_dc, log_noisy_dc.predict(Xte_dc)),</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    accuracy_score(yte_dc, rf_noisy_dc.predict(Xte_dc)),</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    accuracy_score(yte_dc, log_clean_dc.predict(Xte_dc))</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>plt.bar(</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Logistic</span><span class="ch">\n</span><span class="st">noisy labels"</span>, <span class="st">"Random forest</span><span class="ch">\n</span><span class="st">noisy labels"</span>, <span class="st">"Logistic</span><span class="ch">\n</span><span class="st">clean labels"</span>],</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    scores_dc</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Test accuracy"</span>)</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Model Complexity Cannot Always Rescue Weak Training Evidence"</span>)</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>scores_dc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-data-centric-ml" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Bar chart comparing test accuracy for logistic regression trained on noisy labels, random forest trained on the same noisy labels, and logistic regression trained on clean labels. The clean-label model performs best, emphasizing that better training evidence can matter more than greater model complexity.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-centric-ml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-data-preparation_files/figure-html/fig-data-centric-ml-output-1.png" alt="Bar chart comparing test accuracy for logistic regression trained on noisy labels, random forest trained on the same noisy labels, and logistic regression trained on clean labels. The clean-label model performs best, emphasizing that better training evidence can matter more than greater model complexity." width="663" height="446" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-centric-ml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: When training labels are corrupted, increasing model complexity may help less than improving the training evidence.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is a controlled illustration, not a universal law. The lesson is diagnostic: <strong>before escalating model complexity, investigate whether the bottleneck is the information supplied to the model.</strong></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data Quality Sets an Information Boundary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A model cannot recover information that was never measured, repair an invalid target merely by optimizing harder, or guarantee coverage of populations absent from the data.</p>
+<p><span class="math display">\[
+\boxed{\text{Model quality is constrained by the information quality of the data-generating process.}}
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If several algorithms perform poorly, do not immediately conclude that the phenomenon is “not predictable.” Examine target reliability, measurement, timing, missingness, coverage, label noise, feature availability, sample adequacy, and evaluation design.</p>
+<p>Failure of tested representations and algorithms is not proof that the underlying phenomenon contains no predictable signal.</p>
+</div>
+</div>
 </section>
 </section>
-<section id="feature-engineering" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="feature-engineering"><span class="header-section-number">5.5</span> Feature Engineering</h2>
-<section id="transformations" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="transformations"><span class="header-section-number">5.5.1</span> Transformations</h3>
-</section>
-<section id="categorical-encoding" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="categorical-encoding"><span class="header-section-number">5.5.2</span> Categorical Encoding</h3>
-</section>
-<section id="scaling" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="scaling"><span class="header-section-number">5.5.3</span> Scaling</h3>
-</section>
-<section id="interaction-features" class="level3" data-number="5.5.4">
-<h3 data-number="5.5.4" class="anchored" data-anchor-id="interaction-features"><span class="header-section-number">5.5.4</span> Interaction Features</h3>
-</section>
-<section id="domain-informed-features" class="level3" data-number="5.5.5">
-<h3 data-number="5.5.5" class="anchored" data-anchor-id="domain-informed-features"><span class="header-section-number">5.5.5</span> Domain-Informed Features</h3>
-</section>
-<section id="date-and-time-features" class="level3" data-number="5.5.6">
-<h3 data-number="5.5.6" class="anchored" data-anchor-id="date-and-time-features"><span class="header-section-number">5.5.6</span> Date and Time Features</h3>
-</section>
-</section>
-<section id="leakage-free-preprocessing" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="leakage-free-preprocessing"><span class="header-section-number">5.6</span> Leakage-Free Preprocessing</h2>
-<section id="train-test-separation" class="level3" data-number="5.6.1">
-<h3 data-number="5.6.1" class="anchored" data-anchor-id="train-test-separation"><span class="header-section-number">5.6.1</span> Train-Test Separation</h3>
-</section>
-<section id="columntransformer" class="level3" data-number="5.6.2">
-<h3 data-number="5.6.2" class="anchored" data-anchor-id="columntransformer"><span class="header-section-number">5.6.2</span> ColumnTransformer</h3>
-</section>
-<section id="pipelines" class="level3" data-number="5.6.3">
-<h3 data-number="5.6.3" class="anchored" data-anchor-id="pipelines"><span class="header-section-number">5.6.3</span> Pipelines</h3>
-</section>
-<section id="fit-versus-transform" class="level3" data-number="5.6.4">
-<h3 data-number="5.6.4" class="anchored" data-anchor-id="fit-versus-transform"><span class="header-section-number">5.6.4</span> Fit Versus Transform</h3>
-</section>
-</section>
-<section id="python-implementation" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">5.7</span> Python Implementation</h2>
-<section id="numeric-and-categorical-pipelines" class="level3" data-number="5.7.1">
-<h3 data-number="5.7.1" class="anchored" data-anchor-id="numeric-and-categorical-pipelines"><span class="header-section-number">5.7.1</span> Numeric and Categorical Pipelines</h3>
-</section>
-<section id="missing-value-imputation" class="level3" data-number="5.7.2">
-<h3 data-number="5.7.2" class="anchored" data-anchor-id="missing-value-imputation"><span class="header-section-number">5.7.2</span> Missing-Value Imputation</h3>
-</section>
-<section id="one-hot-encoding" class="level3" data-number="5.7.3">
-<h3 data-number="5.7.3" class="anchored" data-anchor-id="one-hot-encoding"><span class="header-section-number">5.7.3</span> One-Hot Encoding</h3>
-</section>
-<section id="standardization" class="level3" data-number="5.7.4">
-<h3 data-number="5.7.4" class="anchored" data-anchor-id="standardization"><span class="header-section-number">5.7.4</span> Standardization</h3>
-</section>
-<section id="integrated-modeling-pipelines" class="level3" data-number="5.7.5">
-<h3 data-number="5.7.5" class="anchored" data-anchor-id="integrated-modeling-pipelines"><span class="header-section-number">5.7.5</span> Integrated Modeling Pipelines</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">5.8</span> Hands-On Practice</h2>
-<p>Construct a preprocessing pipeline for mixed numeric and categorical data.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">5.9</span> Common Mistakes</h2>
-<ul>
-<li>Preprocessing before splitting.</li>
-<li>Imputing using information from the test set.</li>
-<li>Encoding identifiers as meaningful numeric features.</li>
-<li>Feature engineering using future information.</li>
-</ul>
-</section>
-<section id="knowledge-check" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">5.10</span> Knowledge Check</h2>
+<section id="missing-data" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">5.8</span> Missing Data</h2>
+<p>Missing values may arise because a variable was not measured, not applicable, refused, structurally unavailable, lost, or recorded under a special code. The missingness process matters for valid inference; missing values should therefore not be treated as a purely mechanical cleaning problem <span class="citation" data-cites="rubin1976missing">(<a href="../references.html#ref-rubin1976missing" role="doc-biblioref">Rubin 1976</a>)</span>.</p>
+<p>Before imputation, ask:</p>
 <ol type="1">
-<li>Why can scaling cause leakage?</li>
+<li>How much is missing?</li>
+<li>For which variables?</li>
+<li>For which observations or groups?</li>
+<li>Why might it be missing?</li>
+<li>Is missingness itself informative?</li>
+<li>Would this variable be available at deployment?</li>
+</ol>
+<section id="why-dropna-is-not-a-strategy" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="why-dropna-is-not-a-strategy"><span class="header-section-number">5.8.1</span> Why <code>dropna()</code> Is Not a Strategy</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This can change the analytical sample and therefore the population represented by the analysis.</p>
+</section>
+<section id="imputation" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="imputation"><span class="header-section-number">5.8.2</span> Imputation</h3>
+<p>For a numerical feature, simple median imputation can be written</p>
+<p><span class="math display">\[
+x_i^{*}=
+\begin{cases}
+x_i, &amp; x_i \text{ observed}\\
+\tilde{x}_{\text{train}}, &amp; x_i \text{ missing}.
+\end{cases}
+\]</span></p>
+<p>The training subscript matters.</p>
+</section>
+</section>
+<section id="the-evaluation-boundary" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="the-evaluation-boundary"><span class="header-section-number">5.9</span> The Evaluation Boundary</h2>
+<p>Suppose</p>
+<p><span class="math display">\[
+D=D_{\text{train}}\cup D_{\text{test}}.
+\]</span></p>
+<p>The test set approximates unseen data. Preprocessing statistics should not be learned from it.</p>
+<p>Incorrect:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> train_test_split(X_scaled, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Better:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>scaler.fit(X_train)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.transform(X_train)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Best for repeatable workflows: place learned preprocessing and modeling inside a pipeline.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Leakage Can Be Quiet
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The target does not need to appear explicitly in the training features for leakage to occur. Test-set information used to estimate preprocessing parameters also contaminates evaluation. Leakage can make reported performance substantially more optimistic than performance under a valid evaluation design <span class="citation" data-cites="kapoorNarayanan2023">(<a href="../references.html#ref-kapoorNarayanan2023" role="doc-biblioref">Kapoor and Narayanan 2023</a>)</span>.</p>
+</div>
+</div>
+</section>
+<section id="traintest-splitting" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="traintest-splitting"><span class="header-section-number">5.10</span> Train/Test Splitting</h2>
+<p>For demonstration, create a slightly larger mixed-type dataset so stratification is stable.</p>
+<div id="f4e59488" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>ml_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: rng.integers(<span class="dv">20</span>, <span class="dv">66</span>, size<span class="op">=</span>n).astype(<span class="bu">float</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"program"</span>: rng.choice([<span class="st">"MS"</span>, <span class="st">"PhD"</span>, <span class="st">"DBA"</span>], size<span class="op">=</span>n),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"study_hours"</span>: rng.normal(<span class="dv">7</span>, <span class="dv">2</span>, size<span class="op">=</span>n).clip(<span class="dv">0</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>ml_df.loc[rng.choice(n, <span class="dv">8</span>, replace<span class="op">=</span><span class="va">False</span>), <span class="st">"age"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>ml_df.loc[rng.choice(n, <span class="dv">10</span>, replace<span class="op">=</span><span class="va">False</span>), <span class="st">"study_hours"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>signal <span class="op">=</span> (</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    ml_df[<span class="st">"age"</span>].fillna(<span class="dv">40</span>) <span class="op">*</span> <span class="op">-</span><span class="fl">0.015</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> ml_df[<span class="st">"study_hours"</span>].fillna(<span class="dv">7</span>) <span class="op">*</span> <span class="fl">0.35</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> (ml_df[<span class="st">"program"</span>] <span class="op">==</span> <span class="st">"PhD"</span>) <span class="op">*</span> <span class="fl">0.4</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>(signal <span class="op">-</span> <span class="fl">1.5</span>)))</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>ml_df[<span class="st">"retained"</span>] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, prob)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> ml_df[[<span class="st">"age"</span>, <span class="st">"program"</span>, <span class="st">"study_hours"</span>]]</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ml_df[<span class="st">"retained"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="14c467b7" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>X_train.shape, X_test.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>((90, 3), (30, 3))</code></pre>
+</div>
+</div>
+<p>A random stratified split is pedagogically convenient here. Chapter 4 established that grouped, temporal, geographic, or external validation may be required by the actual problem.</p>
+</section>
+<section id="numerical-features" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="numerical-features"><span class="header-section-number">5.11</span> Numerical Features</h2>
+<p>Common transformations include imputation, standardization, robust scaling, transformations, interaction terms, and substantively justified rates or ratios.</p>
+<p>Standardization is</p>
+<p><span class="math display">\[
+z=\frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
+\]</span></p>
+</section>
+<section id="categorical-features" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="categorical-features"><span class="header-section-number">5.12</span> Categorical Features</h2>
+<p>Many algorithms require numeric representations of categories.</p>
+<section id="one-hot-encoding" class="level3" data-number="5.12.1">
+<h3 data-number="5.12.1" class="anchored" data-anchor-id="one-hot-encoding"><span class="header-section-number">5.12.1</span> One-Hot Encoding</h3>
+<div id="486a333c" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pd.get_dummies(ml_df[<span class="st">"program"</span>], dtype<span class="op">=</span><span class="bu">int</span>).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">DBA</th>
+<th data-quarto-table-cell-role="th">MS</th>
+<th data-quarto-table-cell-role="th">PhD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>For a fitted ML workflow, <code>OneHotEncoder</code> can learn category structure from training data and handle later unknown categories.</p>
+</section>
+<section id="ordinal-variables" class="level3" data-number="5.12.2">
+<h3 data-number="5.12.2" class="anchored" data-anchor-id="ordinal-variables"><span class="header-section-number">5.12.2</span> Ordinal Variables</h3>
+<p>An ordinal variable has order but not necessarily equal intervals:</p>
+<p><span class="math display">\[
+\text{Never}&lt;\text{Sometimes}&lt;\text{Often}&lt;\text{Always}.
+\]</span></p>
+<p>Encoding these as 0, 1, 2, 3 imposes numerical structure. That is an analytical assumption, not merely a formatting decision.</p>
+</section>
+</section>
+<section id="identifiers-are-not-ordinary-features" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="identifiers-are-not-ordinary-features"><span class="header-section-number">5.13</span> Identifiers Are Not Ordinary Features</h2>
+<p>Student IDs, patient IDs, account numbers, and institution IDs may look numeric but usually function as identifiers.</p>
+<p>They may still be needed for grouping, joins, longitudinal linkage, split design, and auditing. The question is whether they belong in the predictive feature matrix.</p>
+</section>
+<section id="datetime-features" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="datetime-features"><span class="header-section-number">5.14</span> Datetime Features</h2>
+<p>Timestamps may be transformed into day of week, month, elapsed time, age at event, time since prior event, or academic term.</p>
+<p>Datetime engineering must still pass the Chapter 4 availability test.</p>
+</section>
+<section id="feature-engineering-representation-as-modeling" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="feature-engineering-representation-as-modeling"><span class="header-section-number">5.15</span> Feature Engineering: Representation as Modeling</h2>
+<p>For height <span class="math inline">\(h\)</span> and weight <span class="math inline">\(w\)</span>,</p>
+<p><span class="math display">\[
+BMI=\frac{w}{h^2},
+\]</span></p>
+<p>with appropriate units.</p>
+<p>An education study might construct</p>
+<p><span class="math display">\[
+\text{credit completion ratio}
+=
+\frac{\text{credits completed}}{\text{credits attempted}}.
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A Feature Is an Argument
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An engineered feature says:</p>
+<blockquote class="blockquote">
+<p>“I believe this representation may contain information relevant to the target.”</p>
+</blockquote>
+<p>Feature engineering is therefore computational and conceptual.</p>
+</div>
+</div>
+</section>
+<section id="computer-vision-data-representation-is-preprocessing" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="computer-vision-data-representation-is-preprocessing"><span class="header-section-number">5.16</span> Computer Vision Data: Representation Is Preprocessing</h2>
+<p>Images require the same disciplined thinking as tabular data, but their structure introduces additional choices.</p>
+<p>An image may be represented as</p>
+<p><span class="math display">\[
+I_i\in\mathbb{R}^{H\times W}
+\]</span></p>
+<p>for grayscale data or</p>
+<p><span class="math display">\[
+I_i\in\mathbb{R}^{H\times W\times C}
+\]</span></p>
+<p>for multichannel data.</p>
+<p>Common preparation decisions include:</p>
+<ul>
+<li>resizing and cropping;</li>
+<li>pixel-value scaling or normalization;</li>
+<li>color-space or channel handling;</li>
+<li>augmentation;</li>
+<li>image-quality screening;</li>
+<li>class-label verification;</li>
+<li>duplicate and near-duplicate detection;</li>
+<li>grouping related images from the same person, object, session, or source.</li>
+</ul>
+<section id="flattening-changes-the-representation" class="level3" data-number="5.16.1">
+<h3 data-number="5.16.1" class="anchored" data-anchor-id="flattening-changes-the-representation"><span class="header-section-number">5.16.1</span> Flattening Changes the Representation</h3>
+<p>Classical algorithms often require a feature vector:</p>
+<p><span class="math display">\[
+I_i
+\rightarrow
+x_i\in\mathbb{R}^{p}.
+\]</span></p>
+<p>For an (8) grayscale image, flattening produces (p=64) pixel features.</p>
+<div id="d42a6c5b" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>digits_cv <span class="op">=</span> load_digits()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>X_images_cv <span class="op">=</span> digits_cv.images</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>X_flat_cv <span class="op">=</span> digits_cv.data</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>y_cv <span class="op">=</span> digits_cv.target</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>X_images_cv.shape, X_flat_cv.shape, y_cv.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>((1797, 8, 8), (1797, 64), (1797,))</code></pre>
+</div>
+</div>
+<p>The flattened representation is convenient for many classical estimators, but it does not explicitly encode the two-dimensional neighborhood relationships visible in the original image.</p>
+</section>
+<section id="vision-leakage-can-be-subtle" class="level3" data-number="5.16.2">
+<h3 data-number="5.16.2" class="anchored" data-anchor-id="vision-leakage-can-be-subtle"><span class="header-section-number">5.16.2</span> Vision Leakage Can Be Subtle</h3>
+<p>Suppose several images come from the same patient, student, device, video, or acquisition session. Randomly splitting individual images can place highly related observations in both training and test sets.</p>
+<p>The model may then appear to generalize while partly recognizing source-specific patterns.</p>
+<p>Whenever images are naturally grouped, consider splitting by the higher-level unit:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Split by the unit that must generalize}
+}
+\]</span></p>
+<p>Examples include patient, institution, camera, video, subject, or acquisition session.</p>
+</section>
+<section id="augmentation-belongs-inside-the-training-process" class="level3" data-number="5.16.3">
+<h3 data-number="5.16.3" class="anchored" data-anchor-id="augmentation-belongs-inside-the-training-process"><span class="header-section-number">5.16.3</span> Augmentation Belongs Inside the Training Process</h3>
+<p>Transformations such as flips, rotations, crops, or brightness changes can increase training diversity when substantively appropriate.</p>
+<p>But augmentation must respect the target.</p>
+<p>A horizontal flip may be harmless for some object-recognition problems and scientifically invalid for a task in which laterality matters.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A Vision Transformation Is Also an Assumption
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every crop, resize, normalization rule, augmentation, and color transformation states what visual information the model is allowed to treat as stable.</p>
+<p>Computer-vision preprocessing is therefore not merely image cleanup. It is part of the model’s representation of the world.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="interactions-and-nonlinearity" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="interactions-and-nonlinearity"><span class="header-section-number">5.17</span> Interactions and Nonlinearity</h2>
+<p>An interaction can be written</p>
+<p><span class="math display">\[
+x_3=x_1x_2.
+\]</span></p>
+<p>Polynomial expansion may include</p>
+<p><span class="math display">\[
+x,\quad x^2,\quad x^3.
+\]</span></p>
+<p>Additional flexibility can reveal structure but also increase dimensionality and overfitting.</p>
+</section>
+<section id="outliers-error-rarity-or-signal" class="level2" data-number="5.18">
+<h2 data-number="5.18" class="anchored" data-anchor-id="outliers-error-rarity-or-signal"><span class="header-section-number">5.18</span> Outliers: Error, Rarity, or Signal?</h2>
+<p>An extreme value may be a data-entry error, unit mismatch, valid rare observation, subgroup member, or exactly the event we need to detect.</p>
+<blockquote class="blockquote">
+<p><strong>Outlier treatment should begin with interpretation, not automatic deletion.</strong></p>
+</blockquote>
+</section>
+<section id="columntransformer-different-columns-different-transformations" class="level2" data-number="5.19">
+<h2 data-number="5.19" class="anchored" data-anchor-id="columntransformer-different-columns-different-transformations"><span class="header-section-number">5.19</span> ColumnTransformer: Different Columns, Different Transformations</h2>
+<div id="2dbf1a23" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>numeric_features <span class="op">=</span> [<span class="st">"age"</span>, <span class="st">"study_hours"</span>]</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [<span class="st">"program"</span>]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>numeric_pipeline <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler())</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>categorical_pipeline <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>)),</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"onehot"</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"num"</span>, numeric_pipeline, numeric_features),</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"cat"</span>, categorical_pipeline, categorical_features)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>preprocessor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ColumnTransformer(transformers=[('num',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='median')),
+                                                 ('scaler', StandardScaler())]),
+                                 ['age', 'study_hours']),
+                                ('cat',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='most_frequent')),
+                                                 ('onehot',
+                                                  OneHotEncoder(handle_unknown='ignore'))]),
+                                 ['program'])])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"><label for="sk-estimator-id-1" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>ColumnTransformer</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for ColumnTransformer</span></a><span class="sk-estimator-doc-link ">i<span>Not fitted</span></span></div></label><div class="sk-toggleable__content "><pre>ColumnTransformer(transformers=[('num',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='median')),
+                                                 ('scaler', StandardScaler())]),
+                                 ['age', 'study_hours']),
+                                ('cat',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='most_frequent')),
+                                                 ('onehot',
+                                                  OneHotEncoder(handle_unknown='ignore'))]),
+                                 ['program'])])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>num</div></div></label><div class="sk-toggleable__content "><pre>['age', 'study_hours']</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content "><pre>SimpleImputer(strategy='median')</pre></div> </div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content "><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content "><pre>['program']</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"><label for="sk-estimator-id-6" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content "><pre>SimpleImputer(strategy='most_frequent')</pre></div> </div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content "><pre>OneHotEncoder(handle_unknown='ignore')</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
+</div>
+</div>
+<p>The preprocessing logic exists, but training statistics have not yet been learned.</p>
+</section>
+<section id="pipeline-preprocessing-and-model-as-one-workflow" class="level2" data-number="5.20">
+<h2 data-number="5.20" class="anchored" data-anchor-id="pipeline-preprocessing-and-model-as-one-workflow"><span class="header-section-number">5.20</span> Pipeline: Preprocessing and Model as One Workflow</h2>
+<div id="494f1822" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"preprocessor"</span>, preprocessor),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"classifier"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>model.score(X_test, y_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>0.6</code></pre>
+</div>
+</div>
+<p>This becomes especially important during cross-validation because each training fold should learn its own preprocessing parameters. scikit-learn’s estimator and pipeline ecosystem supports composable preprocessing and modeling workflows <span class="citation" data-cites="pedregosa2011scikit">(<a href="../references.html#ref-pedregosa2011scikit" role="doc-biblioref">Pedregosa et al. 2011</a>)</span>.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Pipeline Principle
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Anything that learns from data and affects the model should usually live inside the evaluation workflow.</strong></p>
+</div>
+</div>
+</section>
+<section id="visual-experiment-leakage-inflates-performance" class="level2" data-number="5.21">
+<h2 data-number="5.21" class="anchored" data-anchor-id="visual-experiment-leakage-inflates-performance"><span class="header-section-number">5.21</span> Visual Experiment: Leakage Inflates Performance</h2>
+<div id="cell-fig-leakage" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>X_syn, y_syn <span class="op">=</span> make_classification(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1200</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    n_features<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    n_informative<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    class_sep<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>X_leaked <span class="op">=</span> np.column_stack([X_syn, y_syn])</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(features):</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    Xtr, Xte, ytr, yte <span class="op">=</span> train_test_split(</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        features, y_syn, test_size<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y_syn</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    clf.fit(Xtr, ytr)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> accuracy_score(yte, clf.predict(Xte))</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> [evaluate(X_syn), evaluate(X_leaked)]</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>plt.bar([<span class="st">"Legitimate features"</span>, <span class="st">"Target leaked into X"</span>], scores)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Test accuracy"</span>)</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="fl">1.05</span>)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Leakage Can Make a Model Look Brilliant"</span>)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-leakage" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-bar comparison of logistic-regression test accuracy using legitimate features versus features that include the target itself. Accuracy becomes nearly perfect when the target leaks into the predictors, illustrating misleading performance caused by leakage.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-leakage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-data-preparation_files/figure-html/fig-leakage-output-1.png" alt="Two-bar comparison of logistic-regression test accuracy using legitimate features versus features that include the target itself. Accuracy becomes nearly perfect when the target leaks into the predictors, illustrating misleading performance caused by leakage." width="589" height="357" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leakage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: A leaked feature can create spectacular but meaningless test performance.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The leaked model is not more intelligent. The experiment has been corrupted.</p>
+</section>
+<section id="three-data-tracks" class="level2" data-number="5.22">
+<h2 data-number="5.22" class="anchored" data-anchor-id="three-data-tracks"><span class="header-section-number">5.22</span> Three Data Tracks</h2>
+<section id="health-track" class="level3" data-number="5.22.1">
+<h3 data-number="5.22.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">5.22.1</span> Health Track</h3>
+<p>Ask whether measurements were available at prediction time, whether special missing codes exist, whether units are consistent, whether a derived clinical feature partly defines the target, and whether complex survey design affects the intended inference.</p>
+</section>
+<section id="education-track" class="level3" data-number="5.22.2">
+<h3 data-number="5.22.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">5.22.2</span> Education Track</h3>
+<p>Ask whether variables align temporally with the outcome, whether lagged features are needed, whether definitions changed across years, whether IDs are used only for linkage/grouping, and whether rates have comparable denominator reliability.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="5.22.3">
+<h3 data-number="5.22.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">5.22.3</span> Open ML Benchmark Track</h3>
+<p>Benchmark data let us deliberately alter scale, inject missingness, or add irrelevant features to study preprocessing behavior under controlled conditions.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-data-are-made-not-merely-found" class="level2" data-number="5.23">
+<h2 data-number="5.23" class="anchored" data-anchor-id="beyond-the-algorithm-data-are-made-not-merely-found"><span class="header-section-number">5.23</span> Beyond the Algorithm: Data Are Made, Not Merely Found</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Dataset Is Already an Interpretation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before the first model is fitted, choices have already determined what was measured, who was included, how categories were defined, which instruments were used, when measurements occurred, how missingness was encoded, and which observations survived collection.</p>
+<p>Feature engineering adds another layer.</p>
+<p>The model does not learn directly from the world. It learns from a <strong>representation produced through measurement and transformation</strong>.</p>
+<p>This does not make quantitative analysis arbitrary. It makes documentation, domain knowledge, validation, and humility essential.</p>
+<p>Ask:</p>
+<p><strong>What had to happen for this phenomenon to become this column?</strong></p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-audit-the-preprocessing" class="level2" data-number="5.24">
+<h2 data-number="5.24" class="anchored" data-anchor-id="ai-pair-programmer-audit-the-preprocessing"><span class="header-section-number">5.24</span> AI Pair Programmer: Audit the Preprocessing</h2>
+<p>Ask an AI assistant to preprocess a mixed-type classification dataset.</p>
+<p>Audit whether it:</p>
+<ul>
+<li>imputes before or after splitting;</li>
+<li>scales the complete dataset;</li>
+<li>encodes before cross-validation;</li>
+<li>silently drops missing rows;</li>
+<li>includes identifiers;</li>
+<li>uses post-outcome variables;</li>
+<li>handles unseen categories;</li>
+<li>documents transformations;</li>
+<li>places learned transformations inside a pipeline.</li>
+</ul>
+<p>Do not judge the answer merely by whether the code runs.</p>
+</section>
+<section id="hands-on-lab-build-a-leakage-safe-pipeline" class="level2" data-number="5.25">
+<h2 data-number="5.25" class="anchored" data-anchor-id="hands-on-lab-build-a-leakage-safe-pipeline"><span class="header-section-number">5.25</span> Hands-On Lab: Build a Leakage-Safe Pipeline</h2>
+<p>Choose a dataset with numeric and categorical features.</p>
+<ol type="1">
+<li>document provenance and unit of analysis;</li>
+<li>identify target and prediction time;</li>
+<li>classify variables by analytical type;</li>
+<li>identify IDs and leakage risks;</li>
+<li>inspect missingness and unusual values;</li>
+<li>split according to the Chapter 4 evaluation design;</li>
+<li>build numeric and categorical preprocessing pipelines;</li>
+<li>combine them with <code>ColumnTransformer</code>;</li>
+<li>attach a simple estimator;</li>
+<li>evaluate without independently preprocessing the test set;</li>
+<li>inspect transformed feature names;</li>
+<li>document each transformation and rationale.</li>
+<li>identify one data-quality bottleneck that model tuning cannot directly repair;</li>
+<li>propose a data-improvement intervention and explain how you would test whether it improves generalization.</li>
+</ol>
+<section id="computer-vision-extension" class="level3" data-number="5.25.1">
+<h3 data-number="5.25.1" class="anchored" data-anchor-id="computer-vision-extension"><span class="header-section-number">5.25.1</span> Computer Vision Extension</h3>
+<p>Using <code>sklearn.datasets.load_digits</code>:</p>
+<ol type="1">
+<li>inspect the original image tensor and flattened feature matrix;</li>
+<li>visualize examples from several classes;</li>
+<li>document the unit of analysis and target;</li>
+<li>identify an appropriate train/test split;</li>
+<li>scale pixel features inside a leakage-safe pipeline;</li>
+<li>fit a simple baseline classifier;</li>
+<li>evaluate performance on unseen images;</li>
+<li>inspect several misclassified images;</li>
+<li>explain what information is lost or obscured when images are flattened;</li>
+<li>describe how the evaluation design would need to change if multiple images came from the same person or acquisition session.</li>
+</ol>
+<p>This is intentionally a <strong>classical computer-vision baseline</strong>. Later neural-network work can be compared against it rather than treating deep learning as the starting point.</p>
+</section>
+</section>
+<section id="practitioner-track" class="level2" data-number="5.26">
+<h2 data-number="5.26" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">5.26</span> Practitioner Track</h2>
+<p>Build robust preprocessing workflows that handle missing values, categorical variables, scaling, unknown categories, and repeated evaluation without manual intervention.</p>
+</section>
+<section id="researcher-track" class="level2" data-number="5.27">
+<h2 data-number="5.27" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">5.27</span> Researcher Track</h2>
+<p>Additionally justify preprocessing decisions in relation to measurement, sampling, timing, validity, reproducibility, and the scientific claim.</p>
+</section>
+<section id="research-studio-build-a-data-dictionary-and-feature-ledger" class="level2" data-number="5.28">
+<h2 data-number="5.28" class="anchored" data-anchor-id="research-studio-build-a-data-dictionary-and-feature-ledger"><span class="header-section-number">5.28</span> Research Studio: Build a Data Dictionary and Feature Ledger</h2>
+<p>Create a feature ledger containing:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variable</td>
+<td>source variable</td>
+</tr>
+<tr class="even">
+<td>Construct</td>
+<td>what it represents</td>
+</tr>
+<tr class="odd">
+<td>Unit/type</td>
+<td>measurement scale</td>
+</tr>
+<tr class="even">
+<td>Availability time</td>
+<td>when known</td>
+</tr>
+<tr class="odd">
+<td>Missing codes</td>
+<td>documented meanings</td>
+</tr>
+<tr class="even">
+<td>Transformation</td>
+<td>proposed preprocessing</td>
+</tr>
+<tr class="odd">
+<td>Derived feature</td>
+<td>if applicable</td>
+</tr>
+<tr class="even">
+<td>Leakage risk</td>
+<td>yes/no + rationale</td>
+</tr>
+<tr class="odd">
+<td>Inclusion rationale</td>
+<td>why it belongs</td>
+</tr>
+<tr class="even">
+<td>Provenance</td>
+<td>authoritative source</td>
+</tr>
+<tr class="odd">
+<td>Quality risk</td>
+<td>plausible measurement/label/coverage problem</td>
+</tr>
+<tr class="even">
+<td>Quality evidence</td>
+<td>how the risk will be assessed</td>
+</tr>
+<tr class="odd">
+<td>Improvement action</td>
+<td>what could improve the data rather than the model</td>
+</tr>
+</tbody>
+</table>
+<p>Identify at least three candidate engineered features and explain the substantive theory behind each.</p>
+</section>
+<section id="professors-challenge-the-perfect-preprocessing-notebook" class="level2" data-number="5.29">
+<h2 data-number="5.29" class="anchored" data-anchor-id="professors-challenge-the-perfect-preprocessing-notebook"><span class="header-section-number">5.29</span> Professor’s Challenge: The Perfect Preprocessing Notebook</h2>
+<p>A team reports excellent cross-validation performance:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data.csv"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df.drop(columns<span class="op">=</span><span class="st">"target"</span>))</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> StandardScaler().fit_transform(X)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    X, df[<span class="st">"target"</span>], random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>They then cross-validate on <code>X_train</code>.</p>
+<p>Critique complete-case deletion, encoding before splitting, scaling before splitting, preprocessing before cross-validation, possible IDs, feature availability, unseen categories, provenance, whether all variables should be scaled, and whether the split matches deployment.</p>
+<p>Redesign the workflow with <code>ColumnTransformer</code> and <code>Pipeline</code>.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="5.30">
+<h2 data-number="5.30" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">5.30</span> Knowledge Check</h2>
+<ol type="1">
+<li>Why preserve raw data?</li>
+<li>Why is <code>dropna()</code> not a complete strategy?</li>
+<li>What is the evaluation boundary?</li>
+<li>Why learn scaling parameters from training data?</li>
+<li>How can preprocessing cause leakage?</li>
 <li>When is one-hot encoding appropriate?</li>
-<li>What does a Pipeline protect against?</li>
-<li>Why should identifiers usually be excluded?</li>
+<li>Why is an integer not necessarily quantitative?</li>
+<li>Why exclude identifiers from the model matrix?</li>
+<li>What is feature engineering?</li>
+<li>Why can outlier removal destroy signal?</li>
+<li>What does <code>ColumnTransformer</code> solve?</li>
+<li>Why are pipelines important during cross-validation?</li>
+<li>Why should engineered features pass the availability test?</li>
+<li>What does it mean to say data are “made” rather than merely found?</li>
+<li>What is a data-centric approach to machine learning?</li>
+<li>Why can model complexity fail to repair a data-quality problem?</li>
+<li>How does population coverage differ from simply having a large sample?</li>
+<li>Why does poor performance not prove an outcome is inherently unpredictable?</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="5.11">
-<h2 data-number="5.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">5.11</span> Real-World Case Study</h2>
-<section id="preparing-public-education-data-for-modeling" class="level3" data-number="5.11.1">
-<h3 data-number="5.11.1" class="anchored" data-anchor-id="preparing-public-education-data-for-modeling"><span class="header-section-number">5.11.1</span> Preparing Public Education Data for Modeling</h3>
-<p>Develop a documented feature matrix from an institutional dataset.</p>
+<section id="reproducibility-check" class="level2" data-number="5.31">
+<h2 data-number="5.31" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">5.31</span> Reproducibility Check</h2>
+<p>Record raw-data provenance, validation rules, exclusions, missing-value strategy, variable types, split strategy, random seed where applicable, feature lists, encoding, scaling, engineered features, fitted preprocessing objects, software dependencies, and code producing processed data.</p>
 </section>
-</section>
-<section id="professors-challenge" class="level2" data-number="5.12">
-<h2 data-number="5.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">5.12</span> Professor’s Challenge</h2>
-<p>Two analysts obtain different model results from the same raw data. How would you audit their preprocessing pipelines?</p>
-</section>
-<section id="research-extension" class="level2" data-number="5.13">
-<h2 data-number="5.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">5.13</span> Research Extension</h2>
-<p>Compare alternative missing-data or feature-engineering strategies using nested evaluation.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="5.14">
-<h2 data-number="5.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">5.14</span> Reproducibility Check</h2>
-<p>Preserve raw data, script transformations, document exclusions, and keep preprocessing inside the modeling workflow.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="5.15">
-<h2 data-number="5.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">5.15</span> Key Takeaways</h2>
+<section id="key-takeaways" class="level2" data-number="5.32">
+<h2 data-number="5.32" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">5.32</span> Key Takeaways</h2>
 <ul>
-<li>Preprocessing is part of the model.</li>
-<li>Leakage can invalidate otherwise sophisticated analyses.</li>
-<li>Feature engineering should combine technical and domain knowledge.</li>
+<li>ML algorithms learn from representations, not directly from reality.</li>
+<li>Raw data should remain recoverable and transformations should be scripted.</li>
+<li>Cleaning decisions require substantive reasoning.</li>
+<li>Preprocessing learned from test data contaminates evaluation.</li>
+<li>Missingness should be understood before imputation or deletion.</li>
+<li>Variable meaning matters more than storage type.</li>
+<li>Feature engineering embeds domain assumptions.</li>
+<li>Outliers can be error, rarity, or signal.</li>
+<li><code>ColumnTransformer</code> handles heterogeneous feature types.</li>
+<li><code>Pipeline</code> keeps learned preprocessing inside the modeling workflow.</li>
+<li>Leakage can make a weak model appear extraordinary.</li>
+<li>A trustworthy feature should be meaningful, available at prediction time, reproducibly constructed, and evaluated without contamination.</li>
+<li>Diagnose data limitations before escalating algorithmic complexity.</li>
+<li>Label quality, measurement, timing, coverage, and provenance constrain achievable performance.</li>
+<li>Poor performance can reflect weak evidence or representation rather than an inherently unpredictable phenomenon.</li>
 </ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="5.33">
+<h2 data-number="5.33" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">5.33</span> Looking Ahead</h2>
+<p>With the prediction problem defined and the data pipeline constructed, the book now moves from workflow design to model families. Chapter 6 begins supervised learning with linear regression, using a deliberately transparent model to connect features, loss, residuals, generalization, regularization, and evidence about predictive performance.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-kapoorNarayanan2023" class="csl-entry" role="listitem">
+Kapoor, Sayash, and Arvind Narayanan. 2023. <span>“Leakage and the Reproducibility Crisis in Machine-Learning-Based Science.”</span> <em>Patterns</em> 4 (9): 100804. <a href="https://doi.org/10.1016/j.patter.2023.100804">https://doi.org/10.1016/j.patter.2023.100804</a>.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, et al. 2011. <span>“Scikit-Learn: Machine Learning in Python.”</span> <em>Journal of Machine Learning Research</em> 12 (85): 2825–30.
+</div>
+<div id="ref-rubin1976missing" class="csl-entry" role="listitem">
+Rubin, Donald B. 1976. <span>“Inference and Missing Data.”</span> <em>Biometrika</em> 63 (3): 581–92. <a href="https://doi.org/10.1093/biomet/63.3.581">https://doi.org/10.1093/biomet/63.3.581</a>.
+</div>
+<div id="ref-sambasivan2021data" class="csl-entry" role="listitem">
+Sambasivan, Nithya, Shivani Kapania, Hannah Highfill, Diana Akrong, Praveen Paritosh, and Lora M. Aroyo. 2021. <span>“Everyone Wants to Do the Model Work, Not the Data Work: Data Cascades in High-Stakes AI.”</span> In <em>Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</em>. Association for Computing Machinery.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -591,7 +2179,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -920,13 +2508,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-02-workflow/04-ml-problems.html" class="pagination-link" aria-label="From Research Question to Machine Learning Problem">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span>
+      <a href="../part-02-workflow/04-ml-problems.html" class="pagination-link" aria-label="Framing Machine Learning Problems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-03-supervised/06-linear-regression.html" class="pagination-link" aria-label="Linear Regression">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-03-supervised/06-linear-regression.html" class="pagination-link" aria-label="Linear Regression: From Relationship to Prediction">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

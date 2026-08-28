@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>17&nbsp; Explainable, Fair, and Responsible Machine Learning – Machine Learning Using Python</title>
+<title>17&nbsp; Responsible Machine Learning: From Prediction to Consequence – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/17-responsible-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Research, Responsibility, and Reproducibility</a></li><li class="breadcrumb-item"><a href="../part-06-research/17-responsible-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,61 +430,124 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">17.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">17.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">17.3</span> Real-World Problem</a></li>
-  <li><a href="#explainability" id="toc-explainability" class="nav-link" data-scroll-target="#explainability"><span class="header-section-number">17.4</span> Explainability</a>
+  <li><a href="#can-we-build-it-should-we-use-it" id="toc-can-we-build-it-should-we-use-it" class="nav-link" data-scroll-target="#can-we-build-it-should-we-use-it"><span class="header-section-number">17.2</span> Can We Build It? Should We Use It?</a>
   <ul class="collapse">
-  <li><a href="#model-transparency" id="toc-model-transparency" class="nav-link" data-scroll-target="#model-transparency"><span class="header-section-number">17.4.1</span> Model Transparency</a></li>
-  <li><a href="#global-versus-local-explanations" id="toc-global-versus-local-explanations" class="nav-link" data-scroll-target="#global-versus-local-explanations"><span class="header-section-number">17.4.2</span> Global Versus Local Explanations</a></li>
-  <li><a href="#permutation-importance" id="toc-permutation-importance" class="nav-link" data-scroll-target="#permutation-importance"><span class="header-section-number">17.4.3</span> Permutation Importance</a></li>
-  <li><a href="#partial-dependence" id="toc-partial-dependence" class="nav-link" data-scroll-target="#partial-dependence"><span class="header-section-number">17.4.4</span> Partial Dependence</a></li>
-  <li><a href="#shap" id="toc-shap" class="nav-link" data-scroll-target="#shap"><span class="header-section-number">17.4.5</span> SHAP</a></li>
-  <li><a href="#limits-of-post-hoc-explanation" id="toc-limits-of-post-hoc-explanation" class="nav-link" data-scroll-target="#limits-of-post-hoc-explanation"><span class="header-section-number">17.4.6</span> Limits of Post-Hoc Explanation</a></li>
+  <li><a href="#from-performance-to-consequence" id="toc-from-performance-to-consequence" class="nav-link" data-scroll-target="#from-performance-to-consequence"><span class="header-section-number">17.2.1</span> From Performance to Consequence</a></li>
   </ul></li>
-  <li><a href="#calibration-and-reliability" id="toc-calibration-and-reliability" class="nav-link" data-scroll-target="#calibration-and-reliability"><span class="header-section-number">17.5</span> Calibration and Reliability</a>
+  <li><a href="#from-model-evaluation-to-responsible-use" id="toc-from-model-evaluation-to-responsible-use" class="nav-link" data-scroll-target="#from-model-evaluation-to-responsible-use"><span class="header-section-number">17.3</span> From Model Evaluation to Responsible Use</a></li>
+  <li><a href="#responsibility-is-a-system-property" id="toc-responsibility-is-a-system-property" class="nav-link" data-scroll-target="#responsibility-is-a-system-property"><span class="header-section-number">17.4</span> Responsibility Is a System Property</a></li>
+  <li><a href="#stakeholders-harms-and-power" id="toc-stakeholders-harms-and-power" class="nav-link" data-scroll-target="#stakeholders-harms-and-power"><span class="header-section-number">17.5</span> Stakeholders, Harms, and Power</a></li>
+  <li><a href="#map-the-stakeholders" id="toc-map-the-stakeholders" class="nav-link" data-scroll-target="#map-the-stakeholders"><span class="header-section-number">17.6</span> Map the Stakeholders</a></li>
+  <li><a href="#types-of-harm" id="toc-types-of-harm" class="nav-link" data-scroll-target="#types-of-harm"><span class="header-section-number">17.7</span> Types of Harm</a>
   <ul class="collapse">
-  <li><a href="#predicted-probability-versus-observed-frequency" id="toc-predicted-probability-versus-observed-frequency" class="nav-link" data-scroll-target="#predicted-probability-versus-observed-frequency"><span class="header-section-number">17.5.1</span> Predicted Probability Versus Observed Frequency</a></li>
-  <li><a href="#calibration-curves" id="toc-calibration-curves" class="nav-link" data-scroll-target="#calibration-curves"><span class="header-section-number">17.5.2</span> Calibration Curves</a></li>
-  <li><a href="#brier-score" id="toc-brier-score" class="nav-link" data-scroll-target="#brier-score"><span class="header-section-number">17.5.3</span> Brier Score</a></li>
+  <li><a href="#allocative-harm" id="toc-allocative-harm" class="nav-link" data-scroll-target="#allocative-harm"><span class="header-section-number">17.7.1</span> Allocative harm</a></li>
+  <li><a href="#quality-of-service-harm" id="toc-quality-of-service-harm" class="nav-link" data-scroll-target="#quality-of-service-harm"><span class="header-section-number">17.7.2</span> Quality-of-service harm</a></li>
+  <li><a href="#representational-harm" id="toc-representational-harm" class="nav-link" data-scroll-target="#representational-harm"><span class="header-section-number">17.7.3</span> Representational harm</a></li>
+  <li><a href="#privacy-harm" id="toc-privacy-harm" class="nav-link" data-scroll-target="#privacy-harm"><span class="header-section-number">17.7.4</span> Privacy harm</a></li>
+  <li><a href="#autonomy-harm" id="toc-autonomy-harm" class="nav-link" data-scroll-target="#autonomy-harm"><span class="header-section-number">17.7.5</span> Autonomy harm</a></li>
+  <li><a href="#procedural-harm" id="toc-procedural-harm" class="nav-link" data-scroll-target="#procedural-harm"><span class="header-section-number">17.7.6</span> Procedural harm</a></li>
   </ul></li>
-  <li><a href="#fairness" id="toc-fairness" class="nav-link" data-scroll-target="#fairness"><span class="header-section-number">17.6</span> Fairness</a>
+  <li><a href="#benefit-is-also-unequally-distributed" id="toc-benefit-is-also-unequally-distributed" class="nav-link" data-scroll-target="#benefit-is-also-unequally-distributed"><span class="header-section-number">17.8</span> Benefit Is Also Unequally Distributed</a></li>
+  <li><a href="#where-bias-enters-the-pipeline" id="toc-where-bias-enters-the-pipeline" class="nav-link" data-scroll-target="#where-bias-enters-the-pipeline"><span class="header-section-number">17.9</span> Where Bias Enters the Pipeline</a></li>
+  <li><a href="#historical-bias" id="toc-historical-bias" class="nav-link" data-scroll-target="#historical-bias"><span class="header-section-number">17.10</span> Historical Bias</a></li>
+  <li><a href="#representation-bias" id="toc-representation-bias" class="nav-link" data-scroll-target="#representation-bias"><span class="header-section-number">17.11</span> Representation Bias</a></li>
+  <li><a href="#measurement-bias" id="toc-measurement-bias" class="nav-link" data-scroll-target="#measurement-bias"><span class="header-section-number">17.12</span> Measurement Bias</a></li>
+  <li><a href="#label-bias" id="toc-label-bias" class="nav-link" data-scroll-target="#label-bias"><span class="header-section-number">17.13</span> Label Bias</a></li>
+  <li><a href="#aggregation-bias" id="toc-aggregation-bias" class="nav-link" data-scroll-target="#aggregation-bias"><span class="header-section-number">17.14</span> Aggregation Bias</a></li>
+  <li><a href="#deployment-bias" id="toc-deployment-bias" class="nav-link" data-scroll-target="#deployment-bias"><span class="header-section-number">17.15</span> Deployment Bias</a></li>
+  <li><a href="#feedback-loops" id="toc-feedback-loops" class="nav-link" data-scroll-target="#feedback-loops"><span class="header-section-number">17.16</span> Feedback Loops</a></li>
+  <li><a href="#fairness-as-a-measurement-problem" id="toc-fairness-as-a-measurement-problem" class="nav-link" data-scroll-target="#fairness-as-a-measurement-problem"><span class="header-section-number">17.17</span> Fairness as a Measurement Problem</a></li>
+  <li><a href="#protected-or-sensitive-groups" id="toc-protected-or-sensitive-groups" class="nav-link" data-scroll-target="#protected-or-sensitive-groups"><span class="header-section-number">17.18</span> Protected or Sensitive Groups</a></li>
+  <li><a href="#demographic-parity" id="toc-demographic-parity" class="nav-link" data-scroll-target="#demographic-parity"><span class="header-section-number">17.19</span> Demographic Parity</a></li>
+  <li><a href="#equal-opportunity" id="toc-equal-opportunity" class="nav-link" data-scroll-target="#equal-opportunity"><span class="header-section-number">17.20</span> Equal Opportunity</a></li>
+  <li><a href="#equalized-odds" id="toc-equalized-odds" class="nav-link" data-scroll-target="#equalized-odds"><span class="header-section-number">17.21</span> Equalized Odds</a></li>
+  <li><a href="#predictive-parity" id="toc-predictive-parity" class="nav-link" data-scroll-target="#predictive-parity"><span class="header-section-number">17.22</span> Predictive Parity</a></li>
+  <li><a href="#a-small-fairness-audit" id="toc-a-small-fairness-audit" class="nav-link" data-scroll-target="#a-small-fairness-audit"><span class="header-section-number">17.23</span> A Small Fairness Audit</a></li>
+  <li><a href="#visualize-group-metrics" id="toc-visualize-group-metrics" class="nav-link" data-scroll-target="#visualize-group-metrics"><span class="header-section-number">17.24</span> Visualize Group Metrics</a></li>
+  <li><a href="#fairness-criteria-can-conflict" id="toc-fairness-criteria-can-conflict" class="nav-link" data-scroll-target="#fairness-criteria-can-conflict"><span class="header-section-number">17.25</span> Fairness Criteria Can Conflict</a></li>
+  <li><a href="#different-definitions-encode-different-normative-goals" id="toc-different-definitions-encode-different-normative-goals" class="nav-link" data-scroll-target="#different-definitions-encode-different-normative-goals"><span class="header-section-number">17.26</span> Different Definitions Encode Different Normative Goals</a></li>
+  <li><a href="#base-rates-matter" id="toc-base-rates-matter" class="nav-link" data-scroll-target="#base-rates-matter"><span class="header-section-number">17.27</span> Base Rates Matter</a></li>
+  <li><a href="#fairness-is-not-make-every-number-equal" id="toc-fairness-is-not-make-every-number-equal" class="nav-link" data-scroll-target="#fairness-is-not-make-every-number-equal"><span class="header-section-number">17.28</span> Fairness Is Not “Make Every Number Equal”</a></li>
+  <li><a href="#individual-group-and-procedural-fairness" id="toc-individual-group-and-procedural-fairness" class="nav-link" data-scroll-target="#individual-group-and-procedural-fairness"><span class="header-section-number">17.29</span> Individual, Group, and Procedural Fairness</a></li>
+  <li><a href="#group-fairness" id="toc-group-fairness" class="nav-link" data-scroll-target="#group-fairness"><span class="header-section-number">17.30</span> Group Fairness</a></li>
+  <li><a href="#individual-fairness" id="toc-individual-fairness" class="nav-link" data-scroll-target="#individual-fairness"><span class="header-section-number">17.31</span> Individual Fairness</a></li>
+  <li><a href="#procedural-fairness" id="toc-procedural-fairness" class="nav-link" data-scroll-target="#procedural-fairness"><span class="header-section-number">17.32</span> Procedural Fairness</a></li>
+  <li><a href="#intersectionality" id="toc-intersectionality" class="nav-link" data-scroll-target="#intersectionality"><span class="header-section-number">17.33</span> Intersectionality</a></li>
+  <li><a href="#one-attribute-at-a-time-can-hide-harm" id="toc-one-attribute-at-a-time-can-hide-harm" class="nav-link" data-scroll-target="#one-attribute-at-a-time-can-hide-harm"><span class="header-section-number">17.34</span> One Attribute at a Time Can Hide Harm</a></li>
+  <li><a href="#statistical-caution" id="toc-statistical-caution" class="nav-link" data-scroll-target="#statistical-caution"><span class="header-section-number">17.35</span> Statistical Caution</a></li>
+  <li><a href="#explainability-and-interpretability" id="toc-explainability-and-interpretability" class="nav-link" data-scroll-target="#explainability-and-interpretability"><span class="header-section-number">17.36</span> Explainability and Interpretability</a></li>
+  <li><a href="#why-explain" id="toc-why-explain" class="nav-link" data-scroll-target="#why-explain"><span class="header-section-number">17.37</span> Why Explain?</a></li>
+  <li><a href="#global-versus-local-explanation" id="toc-global-versus-local-explanation" class="nav-link" data-scroll-target="#global-versus-local-explanation"><span class="header-section-number">17.38</span> Global Versus Local Explanation</a></li>
+  <li><a href="#permutation-importance" id="toc-permutation-importance" class="nav-link" data-scroll-target="#permutation-importance"><span class="header-section-number">17.39</span> Permutation Importance</a></li>
+  <li><a href="#demonstration" id="toc-demonstration" class="nav-link" data-scroll-target="#demonstration"><span class="header-section-number">17.40</span> Demonstration</a></li>
+  <li><a href="#importance-is-not-causality" id="toc-importance-is-not-causality" class="nav-link" data-scroll-target="#importance-is-not-causality"><span class="header-section-number">17.41</span> Importance Is Not Causality</a></li>
+  <li><a href="#explanations-can-also-mislead" id="toc-explanations-can-also-mislead" class="nav-link" data-scroll-target="#explanations-can-also-mislead"><span class="header-section-number">17.42</span> Explanations Can Also Mislead</a></li>
+  <li><a href="#privacy-confidentiality-and-security" id="toc-privacy-confidentiality-and-security" class="nav-link" data-scroll-target="#privacy-confidentiality-and-security"><span class="header-section-number">17.43</span> Privacy, Confidentiality, and Security</a></li>
+  <li><a href="#these-concepts-are-related-but-different" id="toc-these-concepts-are-related-but-different" class="nav-link" data-scroll-target="#these-concepts-are-related-but-different"><span class="header-section-number">17.44</span> These Concepts Are Related but Different</a></li>
+  <li><a href="#data-minimization" id="toc-data-minimization" class="nav-link" data-scroll-target="#data-minimization"><span class="header-section-number">17.45</span> Data Minimization</a></li>
+  <li><a href="#reidentification-risk" id="toc-reidentification-risk" class="nav-link" data-scroll-target="#reidentification-risk"><span class="header-section-number">17.46</span> Reidentification Risk</a></li>
+  <li><a href="#sensitive-inference" id="toc-sensitive-inference" class="nav-link" data-scroll-target="#sensitive-inference"><span class="header-section-number">17.47</span> Sensitive Inference</a></li>
+  <li><a href="#differential-privacy" id="toc-differential-privacy" class="nav-link" data-scroll-target="#differential-privacy"><span class="header-section-number">17.48</span> Differential Privacy</a></li>
+  <li><a href="#privacy-as-a-formal-guarantee" id="toc-privacy-as-a-formal-guarantee" class="nav-link" data-scroll-target="#privacy-as-a-formal-guarantee"><span class="header-section-number">17.49</span> Privacy as a Formal Guarantee</a></li>
+  <li><a href="#interpreting-epsilon" id="toc-interpreting-epsilon" class="nav-link" data-scroll-target="#interpreting-epsilon"><span class="header-section-number">17.50</span> Interpreting Epsilon</a></li>
+  <li><a href="#privacy-is-not-merely-a-technical-parameter" id="toc-privacy-is-not-merely-a-technical-parameter" class="nav-link" data-scroll-target="#privacy-is-not-merely-a-technical-parameter"><span class="header-section-number">17.51</span> Privacy Is Not Merely a Technical Parameter</a></li>
+  <li><a href="#human-oversight" id="toc-human-oversight" class="nav-link" data-scroll-target="#human-oversight"><span class="header-section-number">17.52</span> Human Oversight</a></li>
+  <li><a href="#human-in-the-loop-is-not-enough" id="toc-human-in-the-loop-is-not-enough" class="nav-link" data-scroll-target="#human-in-the-loop-is-not-enough"><span class="header-section-number">17.53</span> “Human in the Loop” Is Not Enough</a></li>
+  <li><a href="#selective-automation" id="toc-selective-automation" class="nav-link" data-scroll-target="#selective-automation"><span class="header-section-number">17.54</span> Selective Automation</a></li>
+  <li><a href="#contestability" id="toc-contestability" class="nav-link" data-scroll-target="#contestability"><span class="header-section-number">17.55</span> Contestability</a></li>
+  <li><a href="#governance-across-the-ml-lifecycle" id="toc-governance-across-the-ml-lifecycle" class="nav-link" data-scroll-target="#governance-across-the-ml-lifecycle"><span class="header-section-number">17.56</span> Governance Across the ML Lifecycle</a></li>
+  <li><a href="#governance-begins-before-modeling" id="toc-governance-begins-before-modeling" class="nav-link" data-scroll-target="#governance-begins-before-modeling"><span class="header-section-number">17.57</span> Governance Begins Before Modeling</a></li>
+  <li><a href="#purpose-and-scope" id="toc-purpose-and-scope" class="nav-link" data-scroll-target="#purpose-and-scope"><span class="header-section-number">17.58</span> Purpose and Scope</a></li>
+  <li><a href="#data-governance" id="toc-data-governance" class="nav-link" data-scroll-target="#data-governance"><span class="header-section-number">17.59</span> Data Governance</a></li>
+  <li><a href="#model-governance" id="toc-model-governance" class="nav-link" data-scroll-target="#model-governance"><span class="header-section-number">17.60</span> Model Governance</a></li>
+  <li><a href="#deployment-governance" id="toc-deployment-governance" class="nav-link" data-scroll-target="#deployment-governance"><span class="header-section-number">17.61</span> Deployment Governance</a></li>
+  <li><a href="#model-cards" id="toc-model-cards" class="nav-link" data-scroll-target="#model-cards"><span class="header-section-number">17.62</span> Model Cards</a></li>
+  <li><a href="#documentation-as-an-engineering-artifact" id="toc-documentation-as-an-engineering-artifact" class="nav-link" data-scroll-target="#documentation-as-an-engineering-artifact"><span class="header-section-number">17.63</span> Documentation as an Engineering Artifact</a></li>
+  <li><a href="#algorithmic-impact-assessment" id="toc-algorithmic-impact-assessment" class="nav-link" data-scroll-target="#algorithmic-impact-assessment"><span class="header-section-number">17.64</span> Algorithmic Impact Assessment</a></li>
+  <li><a href="#evaluate-the-system-before-deployment" id="toc-evaluate-the-system-before-deployment" class="nav-link" data-scroll-target="#evaluate-the-system-before-deployment"><span class="header-section-number">17.65</span> Evaluate the System Before Deployment</a></li>
+  <li><a href="#feedback-loops-and-performative-prediction" id="toc-feedback-loops-and-performative-prediction" class="nav-link" data-scroll-target="#feedback-loops-and-performative-prediction"><span class="header-section-number">17.66</span> Feedback Loops and Performative Prediction</a></li>
+  <li><a href="#predictions-can-change-outcomes" id="toc-predictions-can-change-outcomes" class="nav-link" data-scroll-target="#predictions-can-change-outcomes"><span class="header-section-number">17.67</span> Predictions Can Change Outcomes</a></li>
+  <li><a href="#policy-changes-the-meaning-of-data" id="toc-policy-changes-the-meaning-of-data" class="nav-link" data-scroll-target="#policy-changes-the-meaning-of-data"><span class="header-section-number">17.68</span> Policy Changes the Meaning of Data</a></li>
+  <li><a href="#generative-ai-inside-responsible-ml-systems" id="toc-generative-ai-inside-responsible-ml-systems" class="nav-link" data-scroll-target="#generative-ai-inside-responsible-ml-systems"><span class="header-section-number">17.69</span> Generative AI Inside Responsible ML Systems</a></li>
+  <li><a href="#generative-components-add-new-failure-modes" id="toc-generative-components-add-new-failure-modes" class="nav-link" data-scroll-target="#generative-components-add-new-failure-modes"><span class="header-section-number">17.70</span> Generative Components Add New Failure Modes</a></li>
+  <li><a href="#rag-does-not-eliminate-responsibility" id="toc-rag-does-not-eliminate-responsibility" class="nav-link" data-scroll-target="#rag-does-not-eliminate-responsibility"><span class="header-section-number">17.71</span> RAG Does Not Eliminate Responsibility</a></li>
+  <li><a href="#agentic-systems-increase-consequence" id="toc-agentic-systems-increase-consequence" class="nav-link" data-scroll-target="#agentic-systems-increase-consequence"><span class="header-section-number">17.72</span> Agentic Systems Increase Consequence</a></li>
+  <li><a href="#responsible-computer-vision-what-does-the-camera-make-legible" id="toc-responsible-computer-vision-what-does-the-camera-make-legible" class="nav-link" data-scroll-target="#responsible-computer-vision-what-does-the-camera-make-legible"><span class="header-section-number">17.73</span> Responsible Computer Vision: What Does the Camera Make Legible?</a>
   <ul class="collapse">
-  <li><a href="#subgroup-performance" id="toc-subgroup-performance" class="nav-link" data-scroll-target="#subgroup-performance"><span class="header-section-number">17.6.1</span> Subgroup Performance</a></li>
-  <li><a href="#demographic-parity" id="toc-demographic-parity" class="nav-link" data-scroll-target="#demographic-parity"><span class="header-section-number">17.6.2</span> Demographic Parity</a></li>
-  <li><a href="#equal-opportunity" id="toc-equal-opportunity" class="nav-link" data-scroll-target="#equal-opportunity"><span class="header-section-number">17.6.3</span> Equal Opportunity</a></li>
-  <li><a href="#equalized-odds" id="toc-equalized-odds" class="nav-link" data-scroll-target="#equalized-odds"><span class="header-section-number">17.6.4</span> Equalized Odds</a></li>
-  <li><a href="#calibration-across-groups" id="toc-calibration-across-groups" class="nav-link" data-scroll-target="#calibration-across-groups"><span class="header-section-number">17.6.5</span> Calibration Across Groups</a></li>
-  <li><a href="#fairness-tradeoffs" id="toc-fairness-tradeoffs" class="nav-link" data-scroll-target="#fairness-tradeoffs"><span class="header-section-number">17.6.6</span> Fairness Tradeoffs</a></li>
+  <li><a href="#representation-and-measurement" id="toc-representation-and-measurement" class="nav-link" data-scroll-target="#representation-and-measurement"><span class="header-section-number">17.73.1</span> Representation and Measurement</a></li>
+  <li><a href="#privacy-and-surveillance" id="toc-privacy-and-surveillance" class="nav-link" data-scroll-target="#privacy-and-surveillance"><span class="header-section-number">17.73.2</span> Privacy and Surveillance</a></li>
+  <li><a href="#human-oversight-in-visual-decisions" id="toc-human-oversight-in-visual-decisions" class="nav-link" data-scroll-target="#human-oversight-in-visual-decisions"><span class="header-section-number">17.73.3</span> Human Oversight in Visual Decisions</a></li>
+  <li><a href="#generative-and-synthetic-visual-content" id="toc-generative-and-synthetic-visual-content" class="nav-link" data-scroll-target="#generative-and-synthetic-visual-content"><span class="header-section-number">17.73.4</span> Generative and Synthetic Visual Content</a></li>
+  <li><a href="#responsible-vision-audit" id="toc-responsible-vision-audit" class="nav-link" data-scroll-target="#responsible-vision-audit"><span class="header-section-number">17.73.5</span> Responsible Vision Audit</a></li>
   </ul></li>
-  <li><a href="#responsible-ml" id="toc-responsible-ml" class="nav-link" data-scroll-target="#responsible-ml"><span class="header-section-number">17.7</span> Responsible ML</a>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">17.74</span> Three Tracks</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">17.75</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">17.76</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">17.77</span> Open ML Benchmark Track</a></li>
+  <li><a href="#beyond-the-algorithm-prediction-is-an-exercise-of-power" id="toc-beyond-the-algorithm-prediction-is-an-exercise-of-power" class="nav-link" data-scroll-target="#beyond-the-algorithm-prediction-is-an-exercise-of-power"><span class="header-section-number">17.78</span> Beyond the Algorithm: Prediction Is an Exercise of Power</a></li>
+  <li><a href="#ai-pair-programmer-remove-the-sensitive-attribute" id="toc-ai-pair-programmer-remove-the-sensitive-attribute" class="nav-link" data-scroll-target="#ai-pair-programmer-remove-the-sensitive-attribute"><span class="header-section-number">17.79</span> AI Pair Programmer: Remove the Sensitive Attribute</a></li>
+  <li><a href="#hands-on-lab-responsible-ml-audit" id="toc-hands-on-lab-responsible-ml-audit" class="nav-link" data-scroll-target="#hands-on-lab-responsible-ml-audit"><span class="header-section-number">17.80</span> Hands-On Lab: Responsible ML Audit</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">17.81</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">17.82</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">17.83</span> Research Studio</a></li>
+  <li><a href="#responsibility-begins-before-the-model" id="toc-responsibility-begins-before-the-model" class="nav-link" data-scroll-target="#responsibility-begins-before-the-model"><span class="header-section-number">17.84</span> Responsibility Begins Before the Model</a>
   <ul class="collapse">
-  <li><a href="#intended-use" id="toc-intended-use" class="nav-link" data-scroll-target="#intended-use"><span class="header-section-number">17.7.1</span> Intended Use</a></li>
-  <li><a href="#misuse" id="toc-misuse" class="nav-link" data-scroll-target="#misuse"><span class="header-section-number">17.7.2</span> Misuse</a></li>
-  <li><a href="#human-oversight" id="toc-human-oversight" class="nav-link" data-scroll-target="#human-oversight"><span class="header-section-number">17.7.3</span> Human Oversight</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation"><span class="header-section-number">17.7.4</span> Documentation</a></li>
-  <li><a href="#model-cards" id="toc-model-cards" class="nav-link" data-scroll-target="#model-cards"><span class="header-section-number">17.7.5</span> Model Cards</a></li>
-  <li><a href="#monitoring-and-drift" id="toc-monitoring-and-drift" class="nav-link" data-scroll-target="#monitoring-and-drift"><span class="header-section-number">17.7.6</span> Monitoring and Drift</a></li>
+  <li><a href="#fairness-metrics-do-not-choose-values-for-us" id="toc-fairness-metrics-do-not-choose-values-for-us" class="nav-link" data-scroll-target="#fairness-metrics-do-not-choose-values-for-us"><span class="header-section-number">17.84.1</span> Fairness Metrics Do Not Choose Values for Us</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">17.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">17.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">17.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">17.11</span> Real-World Case Study</a>
-  <ul class="collapse">
-  <li><a href="#responsible-prediction-in-health-or-education" id="toc-responsible-prediction-in-health-or-education" class="nav-link" data-scroll-target="#responsible-prediction-in-health-or-education"><span class="header-section-number">17.11.1</span> Responsible Prediction in Health or Education</a></li>
-  </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">17.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">17.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">17.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">17.15</span> Key Takeaways</a></li>
+  <li><a href="#professors-challenge-the-student-success-score" id="toc-professors-challenge-the-student-success-score" class="nav-link" data-scroll-target="#professors-challenge-the-student-success-score"><span class="header-section-number">17.85</span> Professor’s Challenge: The Student Success Score</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">17.86</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">17.87</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">17.88</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">17.89</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/17-responsible-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Research, Responsibility, and Reproducibility</a></li><li class="breadcrumb-item"><a href="../part-06-research/17-responsible-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></h1>
 </div>
 
 
@@ -378,147 +566,1529 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">17.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Distinguish global and local explanations.</li>
-<li>Apply feature-importance and explanation methods cautiously.</li>
-<li>Evaluate calibration and subgroup performance.</li>
-<li>Explain common fairness criteria and their tradeoffs.</li>
-<li>Conduct a model-risk assessment appropriate to the application.</li>
+<li><p>distinguish predictive performance from responsible deployment;</p></li>
+<li><p>identify stakeholders, benefits, harms, and power relationships in an ML system;</p></li>
+<li><p>explain why fairness is not reducible to a single metric;</p></li>
+<li><p>calculate and interpret demographic parity, equal opportunity, equalized odds, and predictive parity;</p></li>
+<li><p>explain why fairness criteria can conflict;</p></li>
+<li><p>distinguish group fairness from individual and procedural fairness;</p></li>
+<li><p>recognize measurement, representation, historical, aggregation, and deployment bias;</p></li>
+<li><p>distinguish model explanation from causal explanation;</p></li>
+<li><p>use feature importance and local explanations cautiously;</p></li>
+<li><p>explain privacy risks in machine-learning pipelines;</p></li>
+<li><p>distinguish privacy, security, and confidentiality;</p></li>
+<li><p>explain differential privacy conceptually;</p></li>
+<li><p>recognize model and data governance requirements across the ML lifecycle;</p></li>
+<li><p>construct a model card and algorithmic impact assessment;</p></li>
+<li><p>define meaningful human oversight rather than symbolic human presence;</p></li>
+<li><p>recognize automation bias and selective reliance;</p></li>
+<li><p>identify feedback loops created by deployed predictions;</p></li>
+<li><p>evaluate generative-AI components within broader ML systems;</p></li>
+<li><p>design responsible ML studies in health, education, and open application domains;</p></li>
+<li><p>articulate when a technically strong model should not be deployed.</p></li>
+<li><p>evaluate computer-vision systems for representation, measurement, privacy, subgroup, surveillance, accessibility, and human-oversight risks.</p></li>
 </ul>
 </section>
-<section id="why-this-matters" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">17.2</span> Why This Matters</h2>
-<p>A model can be accurate overall while failing important populations, providing misleading explanations, or being inappropriate for the decision in which it is embedded.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">17.3</span> Real-World Problem</h2>
-<p>A health model performs well overall but systematically underpredicts risk for one subgroup. Should it be deployed?</p>
-</section>
-<section id="explainability" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="explainability"><span class="header-section-number">17.4</span> Explainability</h2>
-<section id="model-transparency" class="level3" data-number="17.4.1">
-<h3 data-number="17.4.1" class="anchored" data-anchor-id="model-transparency"><span class="header-section-number">17.4.1</span> Model Transparency</h3>
-</section>
-<section id="global-versus-local-explanations" class="level3" data-number="17.4.2">
-<h3 data-number="17.4.2" class="anchored" data-anchor-id="global-versus-local-explanations"><span class="header-section-number">17.4.2</span> Global Versus Local Explanations</h3>
-</section>
-<section id="permutation-importance" class="level3" data-number="17.4.3">
-<h3 data-number="17.4.3" class="anchored" data-anchor-id="permutation-importance"><span class="header-section-number">17.4.3</span> Permutation Importance</h3>
-</section>
-<section id="partial-dependence" class="level3" data-number="17.4.4">
-<h3 data-number="17.4.4" class="anchored" data-anchor-id="partial-dependence"><span class="header-section-number">17.4.4</span> Partial Dependence</h3>
-</section>
-<section id="shap" class="level3" data-number="17.4.5">
-<h3 data-number="17.4.5" class="anchored" data-anchor-id="shap"><span class="header-section-number">17.4.5</span> SHAP</h3>
-</section>
-<section id="limits-of-post-hoc-explanation" class="level3" data-number="17.4.6">
-<h3 data-number="17.4.6" class="anchored" data-anchor-id="limits-of-post-hoc-explanation"><span class="header-section-number">17.4.6</span> Limits of Post-Hoc Explanation</h3>
-</section>
-</section>
-<section id="calibration-and-reliability" class="level2" data-number="17.5">
-<h2 data-number="17.5" class="anchored" data-anchor-id="calibration-and-reliability"><span class="header-section-number">17.5</span> Calibration and Reliability</h2>
-<section id="predicted-probability-versus-observed-frequency" class="level3" data-number="17.5.1">
-<h3 data-number="17.5.1" class="anchored" data-anchor-id="predicted-probability-versus-observed-frequency"><span class="header-section-number">17.5.1</span> Predicted Probability Versus Observed Frequency</h3>
-</section>
-<section id="calibration-curves" class="level3" data-number="17.5.2">
-<h3 data-number="17.5.2" class="anchored" data-anchor-id="calibration-curves"><span class="header-section-number">17.5.2</span> Calibration Curves</h3>
-</section>
-<section id="brier-score" class="level3" data-number="17.5.3">
-<h3 data-number="17.5.3" class="anchored" data-anchor-id="brier-score"><span class="header-section-number">17.5.3</span> Brier Score</h3>
-</section>
-</section>
-<section id="fairness" class="level2" data-number="17.6">
-<h2 data-number="17.6" class="anchored" data-anchor-id="fairness"><span class="header-section-number">17.6</span> Fairness</h2>
-<section id="subgroup-performance" class="level3" data-number="17.6.1">
-<h3 data-number="17.6.1" class="anchored" data-anchor-id="subgroup-performance"><span class="header-section-number">17.6.1</span> Subgroup Performance</h3>
-</section>
-<section id="demographic-parity" class="level3" data-number="17.6.2">
-<h3 data-number="17.6.2" class="anchored" data-anchor-id="demographic-parity"><span class="header-section-number">17.6.2</span> Demographic Parity</h3>
-</section>
-<section id="equal-opportunity" class="level3" data-number="17.6.3">
-<h3 data-number="17.6.3" class="anchored" data-anchor-id="equal-opportunity"><span class="header-section-number">17.6.3</span> Equal Opportunity</h3>
-</section>
-<section id="equalized-odds" class="level3" data-number="17.6.4">
-<h3 data-number="17.6.4" class="anchored" data-anchor-id="equalized-odds"><span class="header-section-number">17.6.4</span> Equalized Odds</h3>
-</section>
-<section id="calibration-across-groups" class="level3" data-number="17.6.5">
-<h3 data-number="17.6.5" class="anchored" data-anchor-id="calibration-across-groups"><span class="header-section-number">17.6.5</span> Calibration Across Groups</h3>
-</section>
-<section id="fairness-tradeoffs" class="level3" data-number="17.6.6">
-<h3 data-number="17.6.6" class="anchored" data-anchor-id="fairness-tradeoffs"><span class="header-section-number">17.6.6</span> Fairness Tradeoffs</h3>
+<section id="can-we-build-it-should-we-use-it" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="can-we-build-it-should-we-use-it"><span class="header-section-number">17.2</span> Can We Build It? Should We Use It?</h2>
+<p>Machine learning often begins with a technical question:</p>
+<blockquote class="blockquote">
+<p>Can we predict the outcome?</p>
+</blockquote>
+<p>Responsible machine learning asks additional questions:</p>
+<blockquote class="blockquote">
+<p>Who benefits?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Who bears the errors?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>What assumptions are embedded in the target?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>What happens after a prediction is made?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Who can challenge the decision?</p>
+</blockquote>
+<p>A model can be accurate and still be inappropriate for deployment.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Technical capability establishes what a system can do. It does not, by itself, establish what the system should be allowed to do.</strong></p>
+</div>
+</div>
+<section id="from-performance-to-consequence" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="from-performance-to-consequence"><span class="header-section-number">17.2.1</span> From Performance to Consequence</h3>
+<p>Chapter 16 asked whether model performance is supported by credible evidence. Responsible machine learning asks the next question: <strong>credible for whom, under what conditions, and with what consequences?</strong> A model can perform well on average while distributing errors unevenly, exposing sensitive information, encouraging inappropriate reliance, or creating harms that aggregate metrics do not reveal.</p>
 </section>
 </section>
-<section id="responsible-ml" class="level2" data-number="17.7">
-<h2 data-number="17.7" class="anchored" data-anchor-id="responsible-ml"><span class="header-section-number">17.7</span> Responsible ML</h2>
-<section id="intended-use" class="level3" data-number="17.7.1">
-<h3 data-number="17.7.1" class="anchored" data-anchor-id="intended-use"><span class="header-section-number">17.7.1</span> Intended Use</h3>
+<section id="from-model-evaluation-to-responsible-use" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="from-model-evaluation-to-responsible-use"><span class="header-section-number">17.3</span> From Model Evaluation to Responsible Use</h2>
+<p>Chapter 16 asked whether evidence supports a performance claim.</p>
+<p>Chapter 17 extends the chain:</p>
+<p><span class="math display">\[
+\text{prediction}
+\rightarrow
+\text{decision}
+\rightarrow
+\text{action}
+\rightarrow
+\text{human consequence}.
+\]</span></p>
+<p>Errors acquire meaning only in context.</p>
+<p>A false negative in a movie recommendation is different from a false negative in disease screening.</p>
+<p>A false positive in spam filtering is different from a false positive in academic misconduct detection.</p>
 </section>
-<section id="misuse" class="level3" data-number="17.7.2">
-<h3 data-number="17.7.2" class="anchored" data-anchor-id="misuse"><span class="header-section-number">17.7.2</span> Misuse</h3>
-</section>
-<section id="human-oversight" class="level3" data-number="17.7.3">
-<h3 data-number="17.7.3" class="anchored" data-anchor-id="human-oversight"><span class="header-section-number">17.7.3</span> Human Oversight</h3>
-</section>
-<section id="documentation" class="level3" data-number="17.7.4">
-<h3 data-number="17.7.4" class="anchored" data-anchor-id="documentation"><span class="header-section-number">17.7.4</span> Documentation</h3>
-</section>
-<section id="model-cards" class="level3" data-number="17.7.5">
-<h3 data-number="17.7.5" class="anchored" data-anchor-id="model-cards"><span class="header-section-number">17.7.5</span> Model Cards</h3>
-</section>
-<section id="monitoring-and-drift" class="level3" data-number="17.7.6">
-<h3 data-number="17.7.6" class="anchored" data-anchor-id="monitoring-and-drift"><span class="header-section-number">17.7.6</span> Monitoring and Drift</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="17.8">
-<h2 data-number="17.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">17.8</span> Hands-On Practice</h2>
-<p>Audit a classifier for calibration, subgroup performance, and explanation stability.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="17.9">
-<h2 data-number="17.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">17.9</span> Common Mistakes</h2>
+<section id="responsibility-is-a-system-property" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="responsibility-is-a-system-property"><span class="header-section-number">17.4</span> Responsibility Is a System Property</h2>
+<p>Responsible ML cannot be achieved by choosing a “fair algorithm.” Responsible-AI frameworks and sociotechnical scholarship emphasize that risk emerges across the full system lifecycle rather than from the model in isolation <span class="citation" data-cites="nistAIRMF2023 selbst2019fairness">(<a href="../references.html#ref-nistAIRMF2023" role="doc-biblioref">National Institute of Standards and Technology 2023</a>; <a href="../references.html#ref-selbst2019fairness" role="doc-biblioref">Selbst et al. 2019</a>)</span>.</p>
+<p>The system includes:</p>
 <ul>
-<li>Treating SHAP values as causal effects.</li>
-<li>Reporting only aggregate performance.</li>
-<li>Assuming removing protected variables removes bias.</li>
-<li>Choosing a fairness metric without considering context.</li>
+<li>problem formulation;</li>
+<li>data collection;</li>
+<li>target definition;</li>
+<li>feature construction;</li>
+<li>modeling;</li>
+<li>thresholding;</li>
+<li>interface design;</li>
+<li>human decision-makers;</li>
+<li>institutional policy;</li>
+<li>appeals;</li>
+<li>monitoring;</li>
+<li>retirement.</li>
+</ul>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{
+\text{responsible ML}
+\neq
+\text{responsible model only}
+}
+\]</span></p>
+</section>
+<section id="stakeholders-harms-and-power" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="stakeholders-harms-and-power"><span class="header-section-number">17.5</span> Stakeholders, Harms, and Power</h2>
+</section>
+<section id="map-the-stakeholders" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="map-the-stakeholders"><span class="header-section-number">17.6</span> Map the Stakeholders</h2>
+<p>Stakeholders may include:</p>
+<ul>
+<li>people represented in the data;</li>
+<li>people receiving predictions;</li>
+<li>decision-makers;</li>
+<li>domain professionals;</li>
+<li>developers;</li>
+<li>institutions;</li>
+<li>communities;</li>
+<li>regulators;</li>
+<li>people indirectly affected by deployment.</li>
+</ul>
+<p>The person using the model is not necessarily the person bearing its consequences.</p>
+</section>
+<section id="types-of-harm" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="types-of-harm"><span class="header-section-number">17.7</span> Types of Harm</h2>
+<p>Potential harms include:</p>
+<section id="allocative-harm" class="level3" data-number="17.7.1">
+<h3 data-number="17.7.1" class="anchored" data-anchor-id="allocative-harm"><span class="header-section-number">17.7.1</span> Allocative harm</h3>
+<p>A system affects access to opportunities or resources.</p>
+<p>Examples include admissions, credit, employment, treatment, or academic support.</p>
+</section>
+<section id="quality-of-service-harm" class="level3" data-number="17.7.2">
+<h3 data-number="17.7.2" class="anchored" data-anchor-id="quality-of-service-harm"><span class="header-section-number">17.7.2</span> Quality-of-service harm</h3>
+<p>A system performs worse for some populations.</p>
+</section>
+<section id="representational-harm" class="level3" data-number="17.7.3">
+<h3 data-number="17.7.3" class="anchored" data-anchor-id="representational-harm"><span class="header-section-number">17.7.3</span> Representational harm</h3>
+<p>A system reinforces stereotypes, stigmatizes groups, or systematically mischaracterizes people.</p>
+</section>
+<section id="privacy-harm" class="level3" data-number="17.7.4">
+<h3 data-number="17.7.4" class="anchored" data-anchor-id="privacy-harm"><span class="header-section-number">17.7.4</span> Privacy harm</h3>
+<p>Sensitive information is exposed, inferred, or reused beyond reasonable expectations.</p>
+</section>
+<section id="autonomy-harm" class="level3" data-number="17.7.5">
+<h3 data-number="17.7.5" class="anchored" data-anchor-id="autonomy-harm"><span class="header-section-number">17.7.5</span> Autonomy harm</h3>
+<p>People are manipulated, surveilled, or denied meaningful choice.</p>
+</section>
+<section id="procedural-harm" class="level3" data-number="17.7.6">
+<h3 data-number="17.7.6" class="anchored" data-anchor-id="procedural-harm"><span class="header-section-number">17.7.6</span> Procedural harm</h3>
+<p>People cannot understand, contest, or appeal consequential decisions.</p>
+</section>
+</section>
+<section id="benefit-is-also-unequally-distributed" class="level2" data-number="17.8">
+<h2 data-number="17.8" class="anchored" data-anchor-id="benefit-is-also-unequally-distributed"><span class="header-section-number">17.8</span> Benefit Is Also Unequally Distributed</h2>
+<p>Responsible evaluation should ask:</p>
+<p><span class="math display">\[
+\text{Who receives benefit?}
+\qquad
+\text{Who absorbs risk?}
+\]</span></p>
+<p>An average improvement can coexist with concentrated harm.</p>
+</section>
+<section id="where-bias-enters-the-pipeline" class="level2" data-number="17.9">
+<h2 data-number="17.9" class="anchored" data-anchor-id="where-bias-enters-the-pipeline"><span class="header-section-number">17.9</span> Where Bias Enters the Pipeline</h2>
+</section>
+<section id="historical-bias" class="level2" data-number="17.10">
+<h2 data-number="17.10" class="anchored" data-anchor-id="historical-bias"><span class="header-section-number">17.10</span> Historical Bias</h2>
+<p>Historical data can encode past inequities even when measurement is technically accurate.</p>
+<p>A model can reproduce historical patterns because it learns from them.</p>
+</section>
+<section id="representation-bias" class="level2" data-number="17.11">
+<h2 data-number="17.11" class="anchored" data-anchor-id="representation-bias"><span class="header-section-number">17.11</span> Representation Bias</h2>
+<p>Some populations may be missing or underrepresented.</p>
+<p>Then:</p>
+<p><span class="math display">\[
+P_{sample}(X,Y)
+\neq
+P_{target}(X,Y).
+\]</span></p>
+</section>
+<section id="measurement-bias" class="level2" data-number="17.12">
+<h2 data-number="17.12" class="anchored" data-anchor-id="measurement-bias"><span class="header-section-number">17.12</span> Measurement Bias</h2>
+<p>A recorded variable may be an imperfect proxy for the construct we actually care about. Treating computational variables as measurements of substantive constructs makes validity part of fairness analysis <span class="citation" data-cites="jacobsWallach2021">(<a href="../references.html#ref-jacobsWallach2021" role="doc-biblioref">Jacobs and Wallach 2021</a>)</span>.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+\text{healthcare spending}
+\neq
+\text{health need}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\text{course grade}
+\neq
+\text{learning}.
+\]</span></p>
+</section>
+<section id="label-bias" class="level2" data-number="17.13">
+<h2 data-number="17.13" class="anchored" data-anchor-id="label-bias"><span class="header-section-number">17.13</span> Label Bias</h2>
+<p>Labels can reflect subjective judgments, institutional practices, or historical decisions.</p>
+<p>A label is data—not unquestionable truth.</p>
+</section>
+<section id="aggregation-bias" class="level2" data-number="17.14">
+<h2 data-number="17.14" class="anchored" data-anchor-id="aggregation-bias"><span class="header-section-number">17.14</span> Aggregation Bias</h2>
+<p>One model may be fitted across heterogeneous populations whose relationships differ.</p>
+</section>
+<section id="deployment-bias" class="level2" data-number="17.15">
+<h2 data-number="17.15" class="anchored" data-anchor-id="deployment-bias"><span class="header-section-number">17.15</span> Deployment Bias</h2>
+<p>A model may be used in a setting or for a purpose different from the one for which it was developed.</p>
+</section>
+<section id="feedback-loops" class="level2" data-number="17.16">
+<h2 data-number="17.16" class="anchored" data-anchor-id="feedback-loops"><span class="header-section-number">17.16</span> Feedback Loops</h2>
+<p>Predictions can change the world that produces future data.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+\text{risk prediction}
+\rightarrow
+\text{intervention}
+\rightarrow
+\text{changed outcome}
+\rightarrow
+\text{new training data}.
+\]</span></p>
+<p>The model becomes part of the data-generating process.</p>
+</section>
+<section id="fairness-as-a-measurement-problem" class="level2" data-number="17.17">
+<h2 data-number="17.17" class="anchored" data-anchor-id="fairness-as-a-measurement-problem"><span class="header-section-number">17.17</span> Fairness as a Measurement Problem</h2>
+</section>
+<section id="protected-or-sensitive-groups" class="level2" data-number="17.18">
+<h2 data-number="17.18" class="anchored" data-anchor-id="protected-or-sensitive-groups"><span class="header-section-number">17.18</span> Protected or Sensitive Groups</h2>
+<p>Let <span class="math inline">\(A\)</span> denote a group attribute, <span class="math inline">\(Y\)</span> the true outcome, and <span class="math inline">\(\hat Y\)</span> the prediction.</p>
+<p>Different fairness definitions condition on different variables.</p>
+<p>There is no universal fairness score.</p>
+</section>
+<section id="demographic-parity" class="level2" data-number="17.19">
+<h2 data-number="17.19" class="anchored" data-anchor-id="demographic-parity"><span class="header-section-number">17.19</span> Demographic Parity</h2>
+<p>Demographic parity asks whether positive prediction rates are equal:</p>
+<p><span class="math display">\[
+P(\hat Y=1\mid A=a)
+=
+P(\hat Y=1\mid A=b).
+\]</span></p>
+<p>A difference measure is:</p>
+<p><span class="math display">\[
+\Delta_{DP}
+=
+P(\hat Y=1\mid A=a)
+-
+P(\hat Y=1\mid A=b).
+\]</span></p>
+<p>A ratio can also be used:</p>
+<p><span class="math display">\[
+R_{DP}
+=
+\frac{
+P(\hat Y=1\mid A=a)
+}{
+P(\hat Y=1\mid A=b)
+}.
+\]</span></p>
+</section>
+<section id="equal-opportunity" class="level2" data-number="17.20">
+<h2 data-number="17.20" class="anchored" data-anchor-id="equal-opportunity"><span class="header-section-number">17.20</span> Equal Opportunity</h2>
+<p>Equal opportunity compares true-positive rates and is closely related to the equalized-odds framework developed by Hardt, Price, and Srebro <span class="citation" data-cites="hardt2016equality">(<a href="../references.html#ref-hardt2016equality" role="doc-biblioref">Hardt, Price, and Srebro 2016</a>)</span>:</p>
+<p><span class="math display">\[
+P(\hat Y=1\mid Y=1,A=a)
+=
+P(\hat Y=1\mid Y=1,A=b).
+\]</span></p>
+<p>This asks whether people who truly qualify for the positive outcome are identified at similar rates.</p>
+</section>
+<section id="equalized-odds" class="level2" data-number="17.21">
+<h2 data-number="17.21" class="anchored" data-anchor-id="equalized-odds"><span class="header-section-number">17.21</span> Equalized Odds</h2>
+<p>Equalized odds requires both true-positive and false-positive rates to be equal across groups:</p>
+<p><span class="math display">\[
+TPR_a=TPR_b
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+FPR_a=FPR_b.
+\]</span></p>
+</section>
+<section id="predictive-parity" class="level2" data-number="17.22">
+<h2 data-number="17.22" class="anchored" data-anchor-id="predictive-parity"><span class="header-section-number">17.22</span> Predictive Parity</h2>
+<p>Predictive parity asks whether precision is equal:</p>
+<p><span class="math display">\[
+P(Y=1\mid\hat Y=1,A=a)
+=
+P(Y=1\mid\hat Y=1,A=b).
+\]</span></p>
+</section>
+<section id="a-small-fairness-audit" class="level2" data-number="17.23">
+<h2 data-number="17.23" class="anchored" data-anchor-id="a-small-fairness-audit"><span class="header-section-number">17.23</span> A Small Fairness Audit</h2>
+<div id="e3be0ab3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>audit <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"group"</span>: (</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"A"</span>] <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> [<span class="st">"B"</span>] <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y_true"</span>: [</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y_pred"</span>: [</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> group_metrics(frame):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> frame[<span class="st">"y_true"</span>].to_numpy()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> frame[<span class="st">"y_pred"</span>].to_numpy()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    tp <span class="op">=</span> ((y <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (p <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    tn <span class="op">=</span> ((y <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (p <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    fp <span class="op">=</span> ((y <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (p <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> ((y <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (p <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series({</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"n"</span>: <span class="bu">len</span>(frame),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prevalence"</span>: y.mean(),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"positive_prediction_rate"</span>: p.mean(),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"TPR"</span>: tp <span class="op">/</span> (tp <span class="op">+</span> fn),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"FPR"</span>: fp <span class="op">/</span> (fp <span class="op">+</span> tn),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"precision"</span>: tp <span class="op">/</span> (tp <span class="op">+</span> fp)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>fairness_table <span class="op">=</span> (</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    audit</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"group"</span>)[[<span class="st">"y_true"</span>, <span class="st">"y_pred"</span>]]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">apply</span>(group_metrics)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>fairness_table.<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">n</th>
+<th data-quarto-table-cell-role="th">prevalence</th>
+<th data-quarto-table-cell-role="th">positive_prediction_rate</th>
+<th data-quarto-table-cell-role="th">TPR</th>
+<th data-quarto-table-cell-role="th">FPR</th>
+<th data-quarto-table-cell-role="th">precision</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">group</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">A</th>
+<td>10.0</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>0.8</td>
+<td>0.200</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">B</th>
+<td>10.0</td>
+<td>0.4</td>
+<td>0.4</td>
+<td>0.5</td>
+<td>0.333</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The table shows why a single aggregate accuracy score cannot characterize fairness.</p>
+</section>
+<section id="visualize-group-metrics" class="level2" data-number="17.24">
+<h2 data-number="17.24" class="anchored" data-anchor-id="visualize-group-metrics"><span class="header-section-number">17.24</span> Visualize Group Metrics</h2>
+<div id="cell-fig-fairness-metrics" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plot_metrics <span class="op">=</span> fairness_table[</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"positive_prediction_rate"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"TPR"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"FPR"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"precision"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>].T</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plot_metrics.plot(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Metric value"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Fairness-related metric"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Group-Level Model Behavior"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">25</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Group"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-fairness-metrics" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Grouped bar chart comparing positive prediction rate, true positive rate, false positive rate, and precision across groups to illustrate differences in model behavior under multiple fairness-related metrics.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fairness-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="17-responsible-ml_files/figure-html/fig-fairness-metrics-output-1.png" alt="Grouped bar chart comparing positive prediction rate, true positive rate, false positive rate, and precision across groups to illustrate differences in model behavior under multiple fairness-related metrics." width="854" height="470" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fairness-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.1: Different fairness criteria compare different aspects of model behavior across groups.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fairness-criteria-can-conflict" class="level2" data-number="17.25">
+<h2 data-number="17.25" class="anchored" data-anchor-id="fairness-criteria-can-conflict"><span class="header-section-number">17.25</span> Fairness Criteria Can Conflict</h2>
+<p>Formal fairness criteria can be mutually incompatible under common conditions, particularly when base rates differ across groups <span class="citation" data-cites="kleinberg2017inherent">(<a href="../references.html#ref-kleinberg2017inherent" role="doc-biblioref">Kleinberg, Mullainathan, and Raghavan 2017</a>)</span>.</p>
+</section>
+<section id="different-definitions-encode-different-normative-goals" class="level2" data-number="17.26">
+<h2 data-number="17.26" class="anchored" data-anchor-id="different-definitions-encode-different-normative-goals"><span class="header-section-number">17.26</span> Different Definitions Encode Different Normative Goals</h2>
+<p>Demographic parity asks about allocation rates.</p>
+<p>Equal opportunity asks about correctly identifying actual positives.</p>
+<p>Predictive parity asks about the reliability of positive predictions.</p>
+<p>These are not interchangeable.</p>
+</section>
+<section id="base-rates-matter" class="level2" data-number="17.27">
+<h2 data-number="17.27" class="anchored" data-anchor-id="base-rates-matter"><span class="header-section-number">17.27</span> Base Rates Matter</h2>
+<p>Suppose:</p>
+<p><span class="math display">\[
+P(Y=1\mid A=a)
+\neq
+P(Y=1\mid A=b).
+\]</span></p>
+<p>Under unequal base rates and imperfect prediction, several desirable fairness conditions generally cannot all be satisfied simultaneously.</p>
+<p>This is not a reason to abandon fairness analysis.</p>
+<p>It is a reason to make the choice of fairness criterion explicit and connected to the application.</p>
+</section>
+<section id="fairness-is-not-make-every-number-equal" class="level2" data-number="17.28">
+<h2 data-number="17.28" class="anchored" data-anchor-id="fairness-is-not-make-every-number-equal"><span class="header-section-number">17.28</span> Fairness Is Not “Make Every Number Equal”</h2>
+<p>A mechanically optimized parity metric can create other harms.</p>
+<p>The question is:</p>
+<blockquote class="blockquote">
+<p>What kind of equality is substantively justified for this decision?</p>
+</blockquote>
+<p>That requires domain, ethical, legal, and stakeholder reasoning in addition to mathematics.</p>
+</section>
+<section id="individual-group-and-procedural-fairness" class="level2" data-number="17.29">
+<h2 data-number="17.29" class="anchored" data-anchor-id="individual-group-and-procedural-fairness"><span class="header-section-number">17.29</span> Individual, Group, and Procedural Fairness</h2>
+</section>
+<section id="group-fairness" class="level2" data-number="17.30">
+<h2 data-number="17.30" class="anchored" data-anchor-id="group-fairness"><span class="header-section-number">17.30</span> Group Fairness</h2>
+<p>Group fairness compares statistical behavior across defined groups.</p>
+</section>
+<section id="individual-fairness" class="level2" data-number="17.31">
+<h2 data-number="17.31" class="anchored" data-anchor-id="individual-fairness"><span class="header-section-number">17.31</span> Individual Fairness</h2>
+<p>A broad principle is:</p>
+<blockquote class="blockquote">
+<p>Similar individuals should receive similar treatment.</p>
+</blockquote>
+<p>The difficult question is what “similar” should mean.</p>
+<p>Similarity itself can encode contested value judgments.</p>
+</section>
+<section id="procedural-fairness" class="level2" data-number="17.32">
+<h2 data-number="17.32" class="anchored" data-anchor-id="procedural-fairness"><span class="header-section-number">17.32</span> Procedural Fairness</h2>
+<p>Even a statistically balanced system may be procedurally unfair if:</p>
+<ul>
+<li>decisions are opaque;</li>
+<li>people cannot correct erroneous data;</li>
+<li>no appeal exists;</li>
+<li>responsibility is unclear;</li>
+<li>automated recommendations are treated as final.</li>
+</ul>
+<p>Responsible systems need legitimate processes, not only metrics.</p>
+</section>
+<section id="intersectionality" class="level2" data-number="17.33">
+<h2 data-number="17.33" class="anchored" data-anchor-id="intersectionality"><span class="header-section-number">17.33</span> Intersectionality</h2>
+</section>
+<section id="one-attribute-at-a-time-can-hide-harm" class="level2" data-number="17.34">
+<h2 data-number="17.34" class="anchored" data-anchor-id="one-attribute-at-a-time-can-hide-harm"><span class="header-section-number">17.34</span> One Attribute at a Time Can Hide Harm</h2>
+<p>Analyzing only one dimension may miss intersectional patterns.</p>
+<p>For example, overall performance by one grouping variable can look acceptable while a smaller intersectional subgroup experiences much worse error rates.</p>
+</section>
+<section id="statistical-caution" class="level2" data-number="17.35">
+<h2 data-number="17.35" class="anchored" data-anchor-id="statistical-caution"><span class="header-section-number">17.35</span> Statistical Caution</h2>
+<p>As groups become more granular:</p>
+<p><span class="math display">\[
+n_g\downarrow
+\quad\Rightarrow\quad
+\text{uncertainty}\uparrow.
+\]</span></p>
+<p>Report sample sizes and uncertainty rather than making strong claims from tiny groups.</p>
+</section>
+<section id="explainability-and-interpretability" class="level2" data-number="17.36">
+<h2 data-number="17.36" class="anchored" data-anchor-id="explainability-and-interpretability"><span class="header-section-number">17.36</span> Explainability and Interpretability</h2>
+<p>Interpretability methods can be useful, but in high-stakes settings post hoc explanations should not be treated as substitutes for transparent, appropriately constrained modeling and governance <span class="citation" data-cites="rudin2019">(<a href="../references.html#ref-rudin2019" role="doc-biblioref">Rudin 2019</a>)</span>.</p>
+</section>
+<section id="why-explain" class="level2" data-number="17.37">
+<h2 data-number="17.37" class="anchored" data-anchor-id="why-explain"><span class="header-section-number">17.37</span> Why Explain?</h2>
+<p>Different stakeholders need different explanations.</p>
+<p>A data scientist may ask:</p>
+<blockquote class="blockquote">
+<p>Which features drive model predictions globally?</p>
+</blockquote>
+<p>A person affected by a decision may ask:</p>
+<blockquote class="blockquote">
+<p>Why did this happen to me?</p>
+</blockquote>
+<p>An auditor may ask:</p>
+<blockquote class="blockquote">
+<p>Does the model rely on inappropriate proxies?</p>
+</blockquote>
+<p>These are different explanation tasks.</p>
+</section>
+<section id="global-versus-local-explanation" class="level2" data-number="17.38">
+<h2 data-number="17.38" class="anchored" data-anchor-id="global-versus-local-explanation"><span class="header-section-number">17.38</span> Global Versus Local Explanation</h2>
+<p><strong>Global explanation</strong> describes overall model behavior.</p>
+<p><strong>Local explanation</strong> describes a particular prediction.</p>
+<p>Neither automatically reveals causality.</p>
+</section>
+<section id="permutation-importance" class="level2" data-number="17.39">
+<h2 data-number="17.39" class="anchored" data-anchor-id="permutation-importance"><span class="header-section-number">17.39</span> Permutation Importance</h2>
+<p>Permutation importance measures how much predictive performance deteriorates when a feature is randomly permuted.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+Importance_j
+=
+Score_{original}
+-
+Score_{permuted(j)}.
+\]</span></p>
+</section>
+<section id="demonstration" class="level2" data-number="17.40">
+<h2 data-number="17.40" class="anchored" data-anchor-id="demonstration"><span class="header-section-number">17.40</span> Demonstration</h2>
+<div id="6793dbb3" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_breast_cancer(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    as_frame<span class="op">=</span><span class="va">True</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.data</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (data.target <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">.30</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">250</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>rf.fit(</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    y_train</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>rf_prob <span class="op">=</span> rf.predict_proba(</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>roc_auc_score(</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    rf_prob</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>np.float64(0.9958382009345794)</code></pre>
+</div>
+</div>
+<div id="96fc5924" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> permutation_importance(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    rf,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    X_test,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"roc_auc"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    n_repeats<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feature"</span>: X.columns,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"importance"</span>: importance.importances_mean</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>}).sort_values(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"importance"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>).head(<span class="dv">10</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>importance_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">feature</th>
+<th data-quarto-table-cell-role="th">importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">27</th>
+<td>worst concave points</td>
+<td>0.005009</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>worst area</td>
+<td>0.004658</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>worst perimeter</td>
+<td>0.004527</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>area error</td>
+<td>0.002344</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">21</th>
+<td>worst texture</td>
+<td>0.001687</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">20</th>
+<td>worst radius</td>
+<td>0.001322</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">7</th>
+<td>mean concave points</td>
+<td>0.001300</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">26</th>
+<td>worst concavity</td>
+<td>0.000387</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>mean texture</td>
+<td>0.000329</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">29</th>
+<td>worst fractal dimension</td>
+<td>0.000015</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-fig-permutation-importance" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ordered <span class="op">=</span> importance_df.sort_values(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"importance"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.barh(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    ordered[<span class="st">"feature"</span>],</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    ordered[<span class="st">"importance"</span>]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Decrease in ROC-AUC after permutation"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Permutation Importance"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-permutation-importance" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Horizontal bar chart ranking features by the decrease in ROC-AUC after each feature is permuted; larger decreases indicate greater predictive importance.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-permutation-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="17-responsible-ml_files/figure-html/fig-permutation-importance-output-1.png" alt="Horizontal bar chart ranking features by the decrease in ROC-AUC after each feature is permuted; larger decreases indicate greater predictive importance." width="757" height="566" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-permutation-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.2: Permutation importance estimates how predictive performance changes when a feature’s information is disrupted.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="importance-is-not-causality" class="level2" data-number="17.41">
+<h2 data-number="17.41" class="anchored" data-anchor-id="importance-is-not-causality"><span class="header-section-number">17.41</span> Importance Is Not Causality</h2>
+<p>If feature <span class="math inline">\(X_j\)</span> is important for prediction, we cannot conclude:</p>
+<p><span class="math display">\[
+do(X_j)
+\rightarrow
+Y.
+\]</span></p>
+<p>Predictive association can arise from:</p>
+<ul>
+<li>confounding;</li>
+<li>proxy relationships;</li>
+<li>measurement artifacts;</li>
+<li>selection;</li>
+<li>correlated features.</li>
+</ul>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{
+\text{feature importance}
+\neq
+\text{causal effect}
+}
+\]</span></p>
+</section>
+<section id="explanations-can-also-mislead" class="level2" data-number="17.42">
+<h2 data-number="17.42" class="anchored" data-anchor-id="explanations-can-also-mislead"><span class="header-section-number">17.42</span> Explanations Can Also Mislead</h2>
+<p>An explanation method can be:</p>
+<ul>
+<li>unstable;</li>
+<li>sensitive to background data;</li>
+<li>incomplete;</li>
+<li>difficult for nontechnical users;</li>
+<li>persuasive despite being approximate.</li>
+</ul>
+<p>An explanation should itself be evaluated for its intended purpose.</p>
+</section>
+<section id="privacy-confidentiality-and-security" class="level2" data-number="17.43">
+<h2 data-number="17.43" class="anchored" data-anchor-id="privacy-confidentiality-and-security"><span class="header-section-number">17.43</span> Privacy, Confidentiality, and Security</h2>
+</section>
+<section id="these-concepts-are-related-but-different" class="level2" data-number="17.44">
+<h2 data-number="17.44" class="anchored" data-anchor-id="these-concepts-are-related-but-different"><span class="header-section-number">17.44</span> These Concepts Are Related but Different</h2>
+<p><strong>Privacy</strong> concerns appropriate collection, use, inference, and control of information about people.</p>
+<p><strong>Confidentiality</strong> concerns obligations to protect entrusted information.</p>
+<p><strong>Security</strong> concerns protection against unauthorized access, alteration, or disruption.</p>
+<p>A secure system can still violate privacy if data are used in ways people did not reasonably expect.</p>
+</section>
+<section id="data-minimization" class="level2" data-number="17.45">
+<h2 data-number="17.45" class="anchored" data-anchor-id="data-minimization"><span class="header-section-number">17.45</span> Data Minimization</h2>
+<p>A useful principle is:</p>
+<blockquote class="blockquote">
+<p>Collect and retain only what is necessary for the legitimate purpose.</p>
+</blockquote>
+<p>More features are not automatically better.</p>
+</section>
+<section id="reidentification-risk" class="level2" data-number="17.46">
+<h2 data-number="17.46" class="anchored" data-anchor-id="reidentification-risk"><span class="header-section-number">17.46</span> Reidentification Risk</h2>
+<p>Removing names does not necessarily anonymize a dataset.</p>
+<p>Combinations of quasi-identifiers can enable reidentification.</p>
+</section>
+<section id="sensitive-inference" class="level2" data-number="17.47">
+<h2 data-number="17.47" class="anchored" data-anchor-id="sensitive-inference"><span class="header-section-number">17.47</span> Sensitive Inference</h2>
+<p>A model may infer sensitive information even when that attribute is not explicitly collected.</p>
+<p>Removing a sensitive column does not guarantee that sensitive information has disappeared from the feature space.</p>
+</section>
+<section id="differential-privacy" class="level2" data-number="17.48">
+<h2 data-number="17.48" class="anchored" data-anchor-id="differential-privacy"><span class="header-section-number">17.48</span> Differential Privacy</h2>
+</section>
+<section id="privacy-as-a-formal-guarantee" class="level2" data-number="17.49">
+<h2 data-number="17.49" class="anchored" data-anchor-id="privacy-as-a-formal-guarantee"><span class="header-section-number">17.49</span> Privacy as a Formal Guarantee</h2>
+<p>Differential privacy provides a mathematical framework for limiting how much the output of an analysis can depend on any one individual’s data <span class="citation" data-cites="dwork2014algorithmic">(<a href="../references.html#ref-dwork2014algorithmic" role="doc-biblioref">Dwork and Roth 2014</a>)</span>.</p>
+<p>A randomized mechanism <span class="math inline">\(M\)</span> is <span class="math inline">\(\epsilon\)</span>-differentially private if, for neighboring datasets <span class="math inline">\(D\)</span> and <span class="math inline">\(D'\)</span>:</p>
+<p><span class="math display">\[
+P(M(D)\in S)
+\le
+e^\epsilon
+P(M(D')\in S)
+\]</span></p>
+<p>for all measurable output sets <span class="math inline">\(S\)</span>.</p>
+</section>
+<section id="interpreting-epsilon" class="level2" data-number="17.50">
+<h2 data-number="17.50" class="anchored" data-anchor-id="interpreting-epsilon"><span class="header-section-number">17.50</span> Interpreting Epsilon</h2>
+<p>Smaller <span class="math inline">\(\epsilon\)</span> generally corresponds to a stronger privacy guarantee, but practical interpretation depends on the mechanism and total privacy accounting.</p>
+<p>Differential privacy introduces a privacy-utility tradeoff.</p>
+</section>
+<section id="privacy-is-not-merely-a-technical-parameter" class="level2" data-number="17.51">
+<h2 data-number="17.51" class="anchored" data-anchor-id="privacy-is-not-merely-a-technical-parameter"><span class="header-section-number">17.51</span> Privacy Is Not Merely a Technical Parameter</h2>
+<p>Even a privacy-preserving algorithm does not answer:</p>
+<ul>
+<li>whether data collection was appropriate;</li>
+<li>whether consent was meaningful;</li>
+<li>whether the purpose is legitimate;</li>
+<li>whether deployment is harmful.</li>
+</ul>
+<p>Technical privacy safeguards are necessary in many contexts but not sufficient for ethical legitimacy.</p>
+</section>
+<section id="human-oversight" class="level2" data-number="17.52">
+<h2 data-number="17.52" class="anchored" data-anchor-id="human-oversight"><span class="header-section-number">17.52</span> Human Oversight</h2>
+</section>
+<section id="human-in-the-loop-is-not-enough" class="level2" data-number="17.53">
+<h2 data-number="17.53" class="anchored" data-anchor-id="human-in-the-loop-is-not-enough"><span class="header-section-number">17.53</span> “Human in the Loop” Is Not Enough</h2>
+<p>A human reviewer may simply accept model recommendations.</p>
+<p>This is known as automation bias.</p>
+<p>Meaningful oversight requires that humans have:</p>
+<ul>
+<li>relevant expertise;</li>
+<li>adequate time;</li>
+<li>access to evidence;</li>
+<li>authority to disagree;</li>
+<li>clear accountability;</li>
+<li>mechanisms for escalation.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="17.10">
-<h2 data-number="17.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">17.10</span> Knowledge Check</h2>
+<section id="selective-automation" class="level2" data-number="17.54">
+<h2 data-number="17.54" class="anchored" data-anchor-id="selective-automation"><span class="header-section-number">17.54</span> Selective Automation</h2>
+<p>Some cases may be safe to automate while uncertain or consequential cases require review.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\text{low-risk case}
+\rightarrow
+\text{automated workflow}
+\]</span></p>
+<p><span class="math display">\[
+\text{high-risk or uncertain case}
+\rightarrow
+\text{human review}.
+\]</span></p>
+<p>The boundary should be empirically and ethically justified.</p>
+</section>
+<section id="contestability" class="level2" data-number="17.55">
+<h2 data-number="17.55" class="anchored" data-anchor-id="contestability"><span class="header-section-number">17.55</span> Contestability</h2>
+<p>People affected by consequential predictions may need mechanisms to:</p>
+<ul>
+<li>understand the basis of a decision;</li>
+<li>correct inaccurate information;</li>
+<li>request human review;</li>
+<li>appeal outcomes.</li>
+</ul>
+<p>Contestability is a design requirement, not an afterthought.</p>
+</section>
+<section id="governance-across-the-ml-lifecycle" class="level2" data-number="17.56">
+<h2 data-number="17.56" class="anchored" data-anchor-id="governance-across-the-ml-lifecycle"><span class="header-section-number">17.56</span> Governance Across the ML Lifecycle</h2>
+</section>
+<section id="governance-begins-before-modeling" class="level2" data-number="17.57">
+<h2 data-number="17.57" class="anchored" data-anchor-id="governance-begins-before-modeling"><span class="header-section-number">17.57</span> Governance Begins Before Modeling</h2>
+<p>A responsible lifecycle can be represented as:</p>
+<p><span class="math display">\[
+\text{purpose}
+\rightarrow
+\text{data}
+\rightarrow
+\text{development}
+\rightarrow
+\text{validation}
+\rightarrow
+\text{deployment}
+\rightarrow
+\text{monitoring}
+\rightarrow
+\text{retirement}.
+\]</span></p>
+</section>
+<section id="purpose-and-scope" class="level2" data-number="17.58">
+<h2 data-number="17.58" class="anchored" data-anchor-id="purpose-and-scope"><span class="header-section-number">17.58</span> Purpose and Scope</h2>
+<p>Document:</p>
+<ul>
+<li>intended use;</li>
+<li>intended users;</li>
+<li>affected populations;</li>
+<li>prohibited uses;</li>
+<li>decision authority.</li>
+</ul>
+</section>
+<section id="data-governance" class="level2" data-number="17.59">
+<h2 data-number="17.59" class="anchored" data-anchor-id="data-governance"><span class="header-section-number">17.59</span> Data Governance</h2>
+<p>Document:</p>
+<ul>
+<li>provenance;</li>
+<li>consent/authority;</li>
+<li>quality;</li>
+<li>retention;</li>
+<li>access;</li>
+<li>sensitive attributes;</li>
+<li>known limitations.</li>
+</ul>
+</section>
+<section id="model-governance" class="level2" data-number="17.60">
+<h2 data-number="17.60" class="anchored" data-anchor-id="model-governance"><span class="header-section-number">17.60</span> Model Governance</h2>
+<p>Document:</p>
+<ul>
+<li>version;</li>
+<li>training procedure;</li>
+<li>evaluation;</li>
+<li>thresholds;</li>
+<li>subgroup performance;</li>
+<li>explainability;</li>
+<li>known failure modes.</li>
+</ul>
+</section>
+<section id="deployment-governance" class="level2" data-number="17.61">
+<h2 data-number="17.61" class="anchored" data-anchor-id="deployment-governance"><span class="header-section-number">17.61</span> Deployment Governance</h2>
+<p>Define:</p>
+<ul>
+<li>who can use the system;</li>
+<li>when human approval is required;</li>
+<li>logging;</li>
+<li>incident response;</li>
+<li>monitoring;</li>
+<li>rollback;</li>
+<li>retirement criteria.</li>
+</ul>
+</section>
+<section id="model-cards" class="level2" data-number="17.62">
+<h2 data-number="17.62" class="anchored" data-anchor-id="model-cards"><span class="header-section-number">17.62</span> Model Cards</h2>
+<p>Model cards provide a structured approach for documenting intended uses, evaluation conditions, subgroup performance, limitations, and other model characteristics <span class="citation" data-cites="mitchell2019model">(<a href="../references.html#ref-mitchell2019model" role="doc-biblioref">Mitchell et al. 2019</a>)</span>. Dataset documentation can play a complementary role through datasheets that make provenance, composition, collection, and recommended uses explicit <span class="citation" data-cites="gebru2021datasheets">(<a href="../references.html#ref-gebru2021datasheets" role="doc-biblioref">Gebru et al. 2021</a>)</span>.</p>
+</section>
+<section id="documentation-as-an-engineering-artifact" class="level2" data-number="17.63">
+<h2 data-number="17.63" class="anchored" data-anchor-id="documentation-as-an-engineering-artifact"><span class="header-section-number">17.63</span> Documentation as an Engineering Artifact</h2>
+<p>A model card can summarize:</p>
+<ul>
+<li>model details;</li>
+<li>intended use;</li>
+<li>out-of-scope use;</li>
+<li>training/evaluation data;</li>
+<li>metrics;</li>
+<li>subgroup results;</li>
+<li>ethical considerations;</li>
+<li>caveats;</li>
+<li>limitations.</li>
+</ul>
+<p>Documentation does not make a model responsible.</p>
+<p>But undocumented systems are harder to audit responsibly.</p>
+</section>
+<section id="algorithmic-impact-assessment" class="level2" data-number="17.64">
+<h2 data-number="17.64" class="anchored" data-anchor-id="algorithmic-impact-assessment"><span class="header-section-number">17.64</span> Algorithmic Impact Assessment</h2>
+</section>
+<section id="evaluate-the-system-before-deployment" class="level2" data-number="17.65">
+<h2 data-number="17.65" class="anchored" data-anchor-id="evaluate-the-system-before-deployment"><span class="header-section-number">17.65</span> Evaluate the System Before Deployment</h2>
+<p>An impact assessment can ask:</p>
 <ol type="1">
-<li>How do global and local explanations differ?</li>
-<li>What is calibration?</li>
-<li>Why can fairness criteria conflict?</li>
-<li>Why does removing a protected attribute not guarantee fairness?</li>
+<li>What decision will the system influence?</li>
+<li>Who is affected?</li>
+<li>What benefits are expected?</li>
+<li>What harms are plausible?</li>
+<li>How severe are those harms?</li>
+<li>How likely are they?</li>
+<li>What alternatives exist?</li>
+<li>What evidence supports deployment?</li>
+<li>How can people contest decisions?</li>
+<li>What monitoring and stopping rules are required?</li>
+</ol>
+<p>This reframes deployment as a hypothesis requiring evidence.</p>
+</section>
+<section id="feedback-loops-and-performative-prediction" class="level2" data-number="17.66">
+<h2 data-number="17.66" class="anchored" data-anchor-id="feedback-loops-and-performative-prediction"><span class="header-section-number">17.66</span> Feedback Loops and Performative Prediction</h2>
+</section>
+<section id="predictions-can-change-outcomes" class="level2" data-number="17.67">
+<h2 data-number="17.67" class="anchored" data-anchor-id="predictions-can-change-outcomes"><span class="header-section-number">17.67</span> Predictions Can Change Outcomes</h2>
+<p>Suppose a university predicts that a student is likely to withdraw and provides intensive support.</p>
+<p>If the student persists, the original prediction may appear “wrong,” even though the intervention succeeded.</p>
+<p>This creates an evaluation challenge:</p>
+<p><span class="math display">\[
+\text{prediction}
+\rightarrow
+\text{intervention}
+\rightarrow
+\text{changed outcome}.
+\]</span></p>
+<p>The deployed model is no longer a passive observer.</p>
+</section>
+<section id="policy-changes-the-meaning-of-data" class="level2" data-number="17.68">
+<h2 data-number="17.68" class="anchored" data-anchor-id="policy-changes-the-meaning-of-data"><span class="header-section-number">17.68</span> Policy Changes the Meaning of Data</h2>
+<p>Once predictions influence treatment, future labels reflect both underlying risk and institutional response.</p>
+<p>Retraining without recognizing this feedback can produce misleading conclusions.</p>
+</section>
+<section id="generative-ai-inside-responsible-ml-systems" class="level2" data-number="17.69">
+<h2 data-number="17.69" class="anchored" data-anchor-id="generative-ai-inside-responsible-ml-systems"><span class="header-section-number">17.69</span> Generative AI Inside Responsible ML Systems</h2>
+</section>
+<section id="generative-components-add-new-failure-modes" class="level2" data-number="17.70">
+<h2 data-number="17.70" class="anchored" data-anchor-id="generative-components-add-new-failure-modes"><span class="header-section-number">17.70</span> Generative Components Add New Failure Modes</h2>
+<p>Systems that include LLMs may introduce:</p>
+<ul>
+<li>hallucinated facts;</li>
+<li>fabricated citations;</li>
+<li>prompt injection;</li>
+<li>sensitive-data leakage;</li>
+<li>unstable outputs;</li>
+<li>inappropriate tool use;</li>
+<li>anthropomorphic overtrust.</li>
+</ul>
+<p>These risks sit alongside traditional ML concerns such as bias, calibration, and distribution shift.</p>
+</section>
+<section id="rag-does-not-eliminate-responsibility" class="level2" data-number="17.71">
+<h2 data-number="17.71" class="anchored" data-anchor-id="rag-does-not-eliminate-responsibility"><span class="header-section-number">17.71</span> RAG Does Not Eliminate Responsibility</h2>
+<p>Retrieval can improve grounding, but retrieved material can be:</p>
+<ul>
+<li>outdated;</li>
+<li>biased;</li>
+<li>malicious;</li>
+<li>irrelevant;</li>
+<li>incomplete.</li>
+</ul>
+<p>The entire information pipeline requires governance.</p>
+</section>
+<section id="agentic-systems-increase-consequence" class="level2" data-number="17.72">
+<h2 data-number="17.72" class="anchored" data-anchor-id="agentic-systems-increase-consequence"><span class="header-section-number">17.72</span> Agentic Systems Increase Consequence</h2>
+<p>A model that can take actions requires stronger controls than one that only produces text.</p>
+<p>Permissions should follow the principle of least privilege.</p>
+</section>
+<section id="responsible-computer-vision-what-does-the-camera-make-legible" class="level2" data-number="17.73">
+<h2 data-number="17.73" class="anchored" data-anchor-id="responsible-computer-vision-what-does-the-camera-make-legible"><span class="header-section-number">17.73</span> Responsible Computer Vision: What Does the Camera Make Legible?</h2>
+<p>Computer vision introduces distinctive responsibilities because visual data can contain far more information than the target variable requires.</p>
+<p>An image collected for one purpose may also reveal or proxy:</p>
+<ul>
+<li>identity;</li>
+<li>age or apparent age;</li>
+<li>disability-related information;</li>
+<li>location or environment;</li>
+<li>socioeconomic context;</li>
+<li>health-related characteristics;</li>
+<li>demographic attributes;</li>
+<li>bystanders who never consented to analysis.</li>
+</ul>
+<p>The responsible question is therefore not only</p>
+<blockquote class="blockquote">
+<p>Can the model extract a useful signal?</p>
+</blockquote>
+<p>but also</p>
+<blockquote class="blockquote">
+<p><strong>Should this visual information be collected, inferred, retained, or acted upon?</strong></p>
+</blockquote>
+<section id="representation-and-measurement" class="level3" data-number="17.73.1">
+<h3 data-number="17.73.1" class="anchored" data-anchor-id="representation-and-measurement"><span class="header-section-number">17.73.1</span> Representation and Measurement</h3>
+<p>A vision dataset is shaped by who and what was photographed, under which conditions, using which devices, and how labels were produced.</p>
+<p>If one subgroup is systematically captured under different lighting, resolution, positioning, or equipment, apparent group differences in model performance may reflect the measurement process.</p>
+<p><span class="math display">\[
+\boxed{\text{Image}\neq\text{Neutral Measurement of Reality}}
+\]</span></p>
+</section>
+<section id="privacy-and-surveillance" class="level3" data-number="17.73.2">
+<h3 data-number="17.73.2" class="anchored" data-anchor-id="privacy-and-surveillance"><span class="header-section-number">17.73.2</span> Privacy and Surveillance</h3>
+<p>Removing names from image files does not necessarily make visual data anonymous. Faces, environments, metadata, distinctive objects, or repeated patterns may permit re-identification.</p>
+<p>Computer vision can also transform passive observation into scalable inference. This raises governance questions that are not resolved by predictive accuracy.</p>
+</section>
+<section id="human-oversight-in-visual-decisions" class="level3" data-number="17.73.3">
+<h3 data-number="17.73.3" class="anchored" data-anchor-id="human-oversight-in-visual-decisions"><span class="header-section-number">17.73.3</span> Human Oversight in Visual Decisions</h3>
+<p>A human reviewer is not automatically a safeguard. If an automated vision score is presented as authoritative, reviewers may anchor on it even when the image is ambiguous or outside the model’s validated domain.</p>
+<p>Meaningful oversight requires:</p>
+<ul>
+<li>access to relevant context;</li>
+<li>authority to disagree;</li>
+<li>training about known failure modes;</li>
+<li>escalation pathways;</li>
+<li>documentation of overrides;</li>
+<li>monitoring for automation bias.</li>
+</ul>
+</section>
+<section id="generative-and-synthetic-visual-content" class="level3" data-number="17.73.4">
+<h3 data-number="17.73.4" class="anchored" data-anchor-id="generative-and-synthetic-visual-content"><span class="header-section-number">17.73.4</span> Generative and Synthetic Visual Content</h3>
+<p>Generative vision adds provenance concerns. Synthetic images may be useful for simulation, augmentation, education, or creative work, but realistic appearance does not establish authenticity or validity.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For high-stakes visual systems, ask whether the task itself is legitimate before optimizing the model.</p>
+<p>A technically feasible inference can still be scientifically weak, socially harmful, privacy-invasive, or inappropriate to deploy.</p>
+</div>
+</div>
+</section>
+<section id="responsible-vision-audit" class="level3" data-number="17.73.5">
+<h3 data-number="17.73.5" class="anchored" data-anchor-id="responsible-vision-audit"><span class="header-section-number">17.73.5</span> Responsible Vision Audit</h3>
+<p>For one computer-vision application, document:</p>
+<ol type="1">
+<li>the legitimate purpose;</li>
+<li>whose images are collected;</li>
+<li>who may be missing or underrepresented;</li>
+<li>what unintended information the images contain;</li>
+<li>how labels were created;</li>
+<li>subgroup and source-specific performance;</li>
+<li>privacy and retention risks;</li>
+<li>domain-shift risks;</li>
+<li>the human-review process;</li>
+<li>conditions under which the system should not be used.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="17.11">
-<h2 data-number="17.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">17.11</span> Real-World Case Study</h2>
-<section id="responsible-prediction-in-health-or-education" class="level3" data-number="17.11.1">
-<h3 data-number="17.11.1" class="anchored" data-anchor-id="responsible-prediction-in-health-or-education"><span class="header-section-number">17.11.1</span> Responsible Prediction in Health or Education</h3>
-<p>Conduct a structured model audit and document intended use and limitations.</p>
 </section>
+<section id="three-tracks" class="level2" data-number="17.74">
+<h2 data-number="17.74" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">17.74</span> Three Tracks</h2>
 </section>
-<section id="professors-challenge" class="level2" data-number="17.12">
-<h2 data-number="17.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">17.12</span> Professor’s Challenge</h2>
-<p>The most accurate model has the largest subgroup disparity. What evidence and stakeholder input are needed to decide what to do?</p>
-</section>
-<section id="research-extension" class="level2" data-number="17.13">
-<h2 data-number="17.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">17.13</span> Research Extension</h2>
-<p>Develop a fairness, calibration, or explainability study with substantive domain relevance.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="17.14">
-<h2 data-number="17.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">17.14</span> Reproducibility Check</h2>
-<p>Document group definitions, metrics, thresholds, explanation settings, software versions, and all audit decisions.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="17.15">
-<h2 data-number="17.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">17.15</span> Key Takeaways</h2>
+<section id="health-track" class="level2" data-number="17.75">
+<h2 data-number="17.75" class="anchored" data-anchor-id="health-track"><span class="header-section-number">17.75</span> Health Track</h2>
+<p>Consider a model recommending which patients should receive additional screening.</p>
+<p>Responsible evaluation should examine:</p>
 <ul>
-<li>Accuracy is necessary but not sufficient for responsible ML.</li>
-<li>Explanations are model-dependent and not automatically causal.</li>
-<li>Fairness requires explicit normative and technical choices.</li>
+<li>clinical benefit;</li>
+<li>false-negative consequences;</li>
+<li>subgroup calibration;</li>
+<li>measurement proxies;</li>
+<li>privacy;</li>
+<li>external validation;</li>
+<li>clinician oversight;</li>
+<li>patient communication;</li>
+<li>appeal or correction mechanisms;</li>
+<li>post-deployment monitoring.</li>
 </ul>
+<p>A model should not become a substitute for clinical judgment merely because it is accurate.</p>
+</section>
+<section id="education-track" class="level2" data-number="17.76">
+<h2 data-number="17.76" class="anchored" data-anchor-id="education-track"><span class="header-section-number">17.76</span> Education Track</h2>
+<p>Consider an early-warning model for student success.</p>
+<p>Responsible design should examine:</p>
+<ul>
+<li>whether the target reflects learning or institutional behavior;</li>
+<li>whether financial, demographic, or behavioral proxies create inequitable treatment;</li>
+<li>whether intervention is supportive or punitive;</li>
+<li>student privacy;</li>
+<li>subgroup error rates;</li>
+<li>instructor automation bias;</li>
+<li>student contestability;</li>
+<li>whether predictions become self-fulfilling.</li>
+</ul>
+<p>The ethical objective should be student support—not merely risk classification.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level2" data-number="17.77">
+<h2 data-number="17.77" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">17.77</span> Open ML Benchmark Track</h2>
+<p>Benchmark projects should supplement aggregate performance with:</p>
+<ul>
+<li>subgroup analyses;</li>
+<li>robustness;</li>
+<li>calibration;</li>
+<li>explainability;</li>
+<li>privacy considerations;</li>
+<li>compute/energy reporting where relevant;</li>
+<li>failure analysis.</li>
+</ul>
+<p>Responsible benchmarking asks not only which model wins, but what tradeoffs produce the ranking.</p>
+</section>
+<section id="beyond-the-algorithm-prediction-is-an-exercise-of-power" class="level2" data-number="17.78">
+<h2 data-number="17.78" class="anchored" data-anchor-id="beyond-the-algorithm-prediction-is-an-exercise-of-power"><span class="header-section-number">17.78</span> Beyond the Algorithm: Prediction Is an Exercise of Power</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Model Does Not Decide What Matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An optimization algorithm can minimize a loss function.</p>
+<p>It cannot independently determine whether the loss function represents a worthy social objective.</p>
+<p>When we choose:</p>
+<p><span class="math display">\[
+Y=\text{student withdrawal},
+\]</span></p>
+<p><span class="math display">\[
+Y=\text{hospital utilization},
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+Y=\text{employee attrition},
+\]</span></p>
+<p>we transform a complex human condition into a measurable target.</p>
+<p>That abstraction can be useful.</p>
+<p>It can also hide what the target leaves out.</p>
+<p>Responsible data science therefore requires two forms of reasoning:</p>
+<ol type="1">
+<li><strong>instrumental reasoning</strong> — How can we optimize the system?</li>
+<li><strong>normative reasoning</strong> — What should the system optimize, and why?</li>
+</ol>
+<p>The first can be assisted substantially by algorithms.</p>
+<p>The second cannot be outsourced to an objective function.</p>
+<p>The deepest question is not:</p>
+<blockquote class="blockquote">
+<p>“Is the model unbiased?”</p>
+</blockquote>
+<p>It is:</p>
+<blockquote class="blockquote">
+<p><strong>“What human purposes, assumptions, and institutions does this model make operational?”</strong></p>
+</blockquote>
+<p>Machine learning is never only prediction once predictions acquire consequences.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-remove-the-sensitive-attribute" class="level2" data-number="17.79">
+<h2 data-number="17.79" class="anchored" data-anchor-id="ai-pair-programmer-remove-the-sensitive-attribute"><span class="header-section-number">17.79</span> AI Pair Programmer: Remove the Sensitive Attribute</h2>
+<p>Ask an AI assistant:</p>
+<blockquote class="blockquote">
+<p>“Our model may discriminate by race or sex. Remove those columns and confirm that the model is now fair.”</p>
+</blockquote>
+<p>Audit the response.</p>
+<p>A rigorous response should recognize:</p>
+<ul>
+<li>proxy variables;</li>
+<li>historical bias;</li>
+<li>label bias;</li>
+<li>unequal base rates;</li>
+<li>subgroup error differences;</li>
+<li>fairness-definition choices;</li>
+<li>intersectionality;</li>
+<li>procedural fairness;</li>
+<li>deployment consequences.</li>
+</ul>
+<p>Redesign the audit rather than declaring fairness from column removal.</p>
+</section>
+<section id="hands-on-lab-responsible-ml-audit" class="level2" data-number="17.80">
+<h2 data-number="17.80" class="anchored" data-anchor-id="hands-on-lab-responsible-ml-audit"><span class="header-section-number">17.80</span> Hands-On Lab: Responsible ML Audit</h2>
+<p>Choose a classification system and:</p>
+<ol type="1">
+<li>define the intended use;</li>
+<li>identify affected stakeholders;</li>
+<li>identify plausible benefits;</li>
+<li>identify plausible harms;</li>
+<li>document data provenance;</li>
+<li>examine target validity;</li>
+<li>identify potential proxies;</li>
+<li>report overall performance;</li>
+<li>report group prevalence;</li>
+<li>calculate group positive-prediction rates;</li>
+<li>calculate group TPR and FPR;</li>
+<li>calculate group precision;</li>
+<li>quantify uncertainty;</li>
+<li>inspect intersectional groups where feasible;</li>
+<li>examine calibration by group;</li>
+<li>evaluate feature importance;</li>
+<li>explicitly reject causal interpretations of importance;</li>
+<li>assess privacy risks;</li>
+<li>define human-review boundaries;</li>
+<li>design an appeal mechanism;</li>
+<li>specify monitoring;</li>
+<li>define rollback or retirement conditions;</li>
+<li>complete a model card;</li>
+<li>complete an impact assessment;</li>
+<li>write a bounded deployment recommendation.</li>
+</ol>
+</section>
+<section id="practitioner-track" class="level2" data-number="17.81">
+<h2 data-number="17.81" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">17.81</span> Practitioner Track</h2>
+<p>A practitioner should be able to identify harms, conduct subgroup audits, distinguish fairness definitions, interpret explanations cautiously, minimize privacy risk, document intended use, and design meaningful human oversight.</p>
+</section>
+<section id="researcher-track" class="level2" data-number="17.82">
+<h2 data-number="17.82" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">17.82</span> Researcher Track</h2>
+<p>A researcher should additionally justify fairness criteria, quantify uncertainty, examine intersectionality, analyze measurement validity, evaluate explanation stability, study feedback loops, compare mitigation strategies, document governance assumptions, and separate technical findings from normative conclusions.</p>
+</section>
+<section id="research-studio" class="level2" data-number="17.83">
+<h2 data-number="17.83" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">17.83</span> Research Studio</h2>
+<p>Design a responsible-ML study suitable for a conference or journal paper.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>substantive problem;</li>
+<li>affected population;</li>
+<li>stakeholder map;</li>
+<li>target construct;</li>
+<li>measurement validity;</li>
+<li>data provenance;</li>
+<li>historical context;</li>
+<li>candidate models;</li>
+<li>overall evaluation;</li>
+<li>fairness definitions;</li>
+<li>justification for those definitions;</li>
+<li>subgroup metrics;</li>
+<li>intersectional analysis;</li>
+<li>uncertainty;</li>
+<li>calibration;</li>
+<li>threshold policy;</li>
+<li>explainability method;</li>
+<li>explanation validation;</li>
+<li>privacy analysis;</li>
+<li>human oversight;</li>
+<li>contestability;</li>
+<li>feedback-loop analysis;</li>
+<li>governance plan;</li>
+<li>post-deployment monitoring;</li>
+<li>stopping criteria;</li>
+<li>limitations;</li>
+<li>unsupported claims;</li>
+<li>scholarly contribution.</li>
+</ol>
+</section>
+<section id="responsibility-begins-before-the-model" class="level2" data-number="17.84">
+<h2 data-number="17.84" class="anchored" data-anchor-id="responsibility-begins-before-the-model"><span class="header-section-number">17.84</span> Responsibility Begins Before the Model</h2>
+<p>Consequential choices occur throughout the lifecycle:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Problem}\rightarrow\text{Target}\rightarrow\text{Data}\rightarrow\text{Model}\rightarrow\text{Evaluation}\rightarrow\text{Decision}\rightarrow\text{Monitoring}
+}
+\]</span></p>
+<p>Responsible ML asks whether the problem should be predicted, whether the target is defensible, who is missing from the data, which errors cause harm, who receives benefits and burdens, whether decisions can be contested, what happens under change, and who remains accountable.</p>
+<section id="fairness-metrics-do-not-choose-values-for-us" class="level3" data-number="17.84.1">
+<h3 data-number="17.84.1" class="anchored" data-anchor-id="fairness-metrics-do-not-choose-values-for-us"><span class="header-section-number">17.84.1</span> Fairness Metrics Do Not Choose Values for Us</h3>
+<p>Fairness criteria can reveal disparities and formalize tradeoffs. They do not determine which tradeoff a community ought to accept.</p>
+<p><span class="math display">\[
+\boxed{\text{Fairness Metric}\neq\text{Complete Ethical Judgment}}
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Optimization Contains Value Choices
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every objective function says what counts as success. Every threshold says which errors are tolerated. Every target says what the system treats as worth predicting. Responsible ML makes those choices visible enough to question.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Adding a fairness table at the end does not make a study responsible if the target is invalid, populations are excluded, deployment is inappropriate, or harms fall outside the measured metric.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="professors-challenge-the-student-success-score" class="level2" data-number="17.85">
+<h2 data-number="17.85" class="anchored" data-anchor-id="professors-challenge-the-student-success-score"><span class="header-section-number">17.85</span> Professor’s Challenge: The Student Success Score</h2>
+<p>A university develops a “Student Success Score” using:</p>
+<ul>
+<li>LMS activity;</li>
+<li>prior grades;</li>
+<li>financial-aid status;</li>
+<li>attendance;</li>
+<li>advising records;</li>
+<li>course withdrawals;</li>
+<li>residential distance.</li>
+</ul>
+<p>The model predicts persistence with ROC-AUC 0.89.</p>
+<p>Students below a threshold are automatically restricted from registering for advanced courses until they meet with an advisor.</p>
+<p>The university removes race and sex from the model and announces:</p>
+<blockquote class="blockquote">
+<p>“Because protected characteristics are excluded and accuracy is high, the system is objective and fair.”</p>
+</blockquote>
+<p>Critique the claim.</p>
+<p>Consider:</p>
+<ul>
+<li>proxy variables;</li>
+<li>target validity;</li>
+<li>historical institutional patterns;</li>
+<li>measurement bias;</li>
+<li>subgroup calibration;</li>
+<li>false-positive consequences;</li>
+<li>threshold selection;</li>
+<li>intersectionality;</li>
+<li>privacy;</li>
+<li>autonomy;</li>
+<li>procedural fairness;</li>
+<li>contestability;</li>
+<li>whether restricting registration may itself affect persistence;</li>
+<li>feedback loops;</li>
+<li>whether a supportive intervention would be preferable to a restrictive one.</li>
+</ul>
+<p>Redesign the system around student success rather than prediction alone.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="17.86">
+<h2 data-number="17.86" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">17.86</span> Knowledge Check</h2>
+<ol type="1">
+<li>Why is responsible ML a system property?</li>
+<li>What is allocative harm?</li>
+<li>What is quality-of-service harm?</li>
+<li>What is representational harm?</li>
+<li>What is historical bias?</li>
+<li>What is representation bias?</li>
+<li>What is measurement bias?</li>
+<li>Why should labels not automatically be treated as ground truth?</li>
+<li>What is deployment bias?</li>
+<li>What is demographic parity?</li>
+<li>What is equal opportunity?</li>
+<li>What is equalized odds?</li>
+<li>What is predictive parity?</li>
+<li>Why can fairness criteria conflict?</li>
+<li>Why is fairness not equivalent to making all group metrics equal?</li>
+<li>What is individual fairness?</li>
+<li>What is procedural fairness?</li>
+<li>Why does intersectional analysis increase uncertainty?</li>
+<li>How do global and local explanations differ?</li>
+<li>Why is feature importance not a causal effect?</li>
+<li>How can explanations themselves mislead?</li>
+<li>How do privacy, confidentiality, and security differ?</li>
+<li>Why does removing names not guarantee anonymity?</li>
+<li>What does differential privacy attempt to guarantee?</li>
+<li>Why is “human in the loop” insufficient?</li>
+<li>What is automation bias?</li>
+<li>What is contestability?</li>
+<li>What should a model card document?</li>
+<li>What is an algorithmic impact assessment?</li>
+<li>How can deployed predictions create feedback loops?</li>
+<li>Why does removing a sensitive feature not guarantee fairness?</li>
+<li>Why do agentic AI systems require stronger governance?</li>
+<li>When might a high-performing model still be inappropriate to deploy?</li>
+<li>Why are normative questions not reducible to optimization?</li>
+<li>Why is responsible ML a lifecycle property?</li>
+<li>Why can fairness metrics conflict?</li>
+<li>Why can a technically fair model still be inappropriate to deploy?</li>
+<li>Where do value choices enter an ML workflow?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="17.87">
+<h2 data-number="17.87" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">17.87</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>intended use;</li>
+<li>prohibited use;</li>
+<li>stakeholders;</li>
+<li>target construct;</li>
+<li>target definition;</li>
+<li>data provenance;</li>
+<li>collection authority/consent;</li>
+<li>sensitive attributes;</li>
+<li>proxy analysis;</li>
+<li>group sample sizes;</li>
+<li>overall metrics;</li>
+<li>subgroup metrics;</li>
+<li>uncertainty;</li>
+<li>calibration;</li>
+<li>fairness definitions;</li>
+<li>fairness rationale;</li>
+<li>intersectional analyses;</li>
+<li>thresholds;</li>
+<li>feature-importance method;</li>
+<li>explanation method;</li>
+<li>privacy controls;</li>
+<li>access controls;</li>
+<li>human-review rules;</li>
+<li>appeal mechanism;</li>
+<li>model version;</li>
+<li>data version;</li>
+<li>deployment date;</li>
+<li>monitoring metrics;</li>
+<li>drift triggers;</li>
+<li>incident-response process;</li>
+<li>rollback criteria;</li>
+<li>retirement criteria;</li>
+<li>model card;</li>
+<li>impact assessment;</li>
+<li>code;</li>
+<li>known limitations;</li>
+<li>unresolved risks.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="17.88">
+<h2 data-number="17.88" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">17.88</span> Key Takeaways</h2>
+<ul>
+<li>High predictive performance does not establish responsible deployment.</li>
+<li>Responsibility belongs to the full sociotechnical system, not only the model.</li>
+<li>Bias can enter through history, representation, measurement, labels, aggregation, and deployment.</li>
+<li>Fairness has multiple mathematical definitions because fairness has multiple substantive meanings.</li>
+<li>Fairness criteria can conflict, especially under unequal base rates.</li>
+<li>Group metrics are necessary in many applications but do not exhaust fairness.</li>
+<li>Intersectional analyses require attention to sample size and uncertainty.</li>
+<li>Model explanations are not causal explanations.</li>
+<li>Privacy, confidentiality, and security are related but distinct.</li>
+<li>Removing sensitive variables does not remove sensitive information or historical structure.</li>
+<li>Meaningful human oversight requires expertise, authority, time, and accountability.</li>
+<li>Contestability matters for consequential automated decisions.</li>
+<li>Governance should span purpose, data, development, validation, deployment, monitoring, and retirement.</li>
+<li>Model cards and impact assessments support accountability but do not substitute for responsible practice.</li>
+<li>Deployed predictions can create feedback loops that alter future data.</li>
+<li>Generative and agentic systems add new risks to traditional ML governance.</li>
+<li>Optimization answers how to pursue an objective; it does not determine which objectives are worthy.</li>
+<li>Once predictions affect people, machine learning becomes a question of consequence as well as accuracy.</li>
+<li>Responsibility begins with problem formulation and continues through monitoring.</li>
+<li>Fairness metrics inform but do not replace ethical and governance judgment.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="17.89">
+<h2 data-number="17.89" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">17.89</span> Looking Ahead</h2>
+<p>Responsible machine learning requires more than good intentions or a one-time audit. Claims about performance, fairness, explanation, and risk must be traceable to the data, code, environments, decisions, and evidence that produced them. Chapter 18 completes the book by treating reproducibility as the infrastructure that makes machine-learning research inspectable, challengeable, extensible, and capable of contributing to cumulative knowledge.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-dwork2014algorithmic" class="csl-entry" role="listitem">
+Dwork, Cynthia, and Aaron Roth. 2014. <em>The Algorithmic Foundations of Differential Privacy</em>. Now Publishers.
+</div>
+<div id="ref-gebru2021datasheets" class="csl-entry" role="listitem">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daume III, and Kate Crawford. 2021. <span>“Datasheets for Datasets.”</span> <em>Communications of the ACM</em> 64 (12): 86–92.
+</div>
+<div id="ref-hardt2016equality" class="csl-entry" role="listitem">
+Hardt, Moritz, Eric Price, and Nati Srebro. 2016. <span>“Equality of Opportunity in Supervised Learning.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 29.
+</div>
+<div id="ref-jacobsWallach2021" class="csl-entry" role="listitem">
+Jacobs, Abigail Z., and Hanna Wallach. 2021. <span>“Measurement and Fairness.”</span> In <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency</em>, 375–85. <a href="https://doi.org/10.1145/3442188.3445901">https://doi.org/10.1145/3442188.3445901</a>.
+</div>
+<div id="ref-kleinberg2017inherent" class="csl-entry" role="listitem">
+Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2017. <span>“Inherent Trade-Offs in the Fair Determination of Risk Scores.”</span> In <em>Proceedings of Innovations in Theoretical Computer Science</em>.
+</div>
+<div id="ref-mitchell2019model" class="csl-entry" role="listitem">
+Mitchell, Margaret, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, and Timnit Gebru. 2019. <span>“Model Cards for Model Reporting.”</span> <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>.
+</div>
+<div id="ref-nistAIRMF2023" class="csl-entry" role="listitem">
+National Institute of Standards and Technology. 2023. <span>“Artificial Intelligence Risk Management Framework (AI RMF 1.0).”</span> NIST AI 100-1. NIST. <a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a>.
+</div>
+<div id="ref-rudin2019" class="csl-entry" role="listitem">
+Rudin, Cynthia. 2019. <span>“Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead.”</span> <em>Nature Machine Intelligence</em> 1: 206–15. <a href="https://doi.org/10.1038/s42256-019-0048-x">https://doi.org/10.1038/s42256-019-0048-x</a>.
+</div>
+<div id="ref-selbst2019fairness" class="csl-entry" role="listitem">
+Selbst, Andrew D., Danah Boyd, Sorelle A. Friedler, Suresh Venkatasubramanian, and Janet Vertesi. 2019. <span>“Fairness and Abstraction in Sociotechnical Systems.”</span> <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -595,7 +2165,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -924,13 +2494,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-06-research/16-model-evaluation.html" class="pagination-link" aria-label="Model Evaluation, Validation, and Hyperparameter Optimization">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span>
+      <a href="../part-06-research/16-model-evaluation.html" class="pagination-link" aria-label="Model Evaluation: From Performance Metrics to Scientific Evidence">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-06-research/18-reproducible-ml.html" class="pagination-link" aria-label="Reproducible Machine Learning and Research Communication">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-06-research/18-reproducible-ml.html" class="pagination-link" aria-label="Reproducible Machine Learning: From Analysis to Scientific Knowledge">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

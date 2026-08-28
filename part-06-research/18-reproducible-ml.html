@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>18&nbsp; Reproducible Machine Learning and Research Communication – Machine Learning Using Python</title>
+<title>18&nbsp; Reproducible Machine Learning: From Analysis to Scientific Knowledge – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
+<link href="../teaching.html" rel="next">
 <link href="../part-06-research/17-responsible-ml.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -71,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/18-reproducible-ml.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Research, Responsibility, and Reproducibility</a></li><li class="breadcrumb-item"><a href="../part-06-research/18-reproducible-ml.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +183,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +199,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +271,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +312,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +335,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +364,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,71 +427,121 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">18.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">18.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">18.3</span> Real-World Problem</a></li>
-  <li><a href="#reproducible-project-design" id="toc-reproducible-project-design" class="nav-link" data-scroll-target="#reproducible-project-design"><span class="header-section-number">18.4</span> Reproducible Project Design</a>
+  <li><a href="#a-result-is-more-than-a-number" id="toc-a-result-is-more-than-a-number" class="nav-link" data-scroll-target="#a-result-is-more-than-a-number"><span class="header-section-number">18.2</span> A Result Is More Than a Number</a>
   <ul class="collapse">
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure"><span class="header-section-number">18.4.1</span> Project Structure</a></li>
-  <li><a href="#raw-versus-derived-data" id="toc-raw-versus-derived-data" class="nav-link" data-scroll-target="#raw-versus-derived-data"><span class="header-section-number">18.4.2</span> Raw Versus Derived Data</a></li>
-  <li><a href="#scripts-and-notebooks" id="toc-scripts-and-notebooks" class="nav-link" data-scroll-target="#scripts-and-notebooks"><span class="header-section-number">18.4.3</span> Scripts and Notebooks</a></li>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto"><span class="header-section-number">18.4.4</span> Quarto</a></li>
-  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github"><span class="header-section-number">18.4.5</span> Git and GitHub</a></li>
-  <li><a href="#environments-and-dependencies" id="toc-environments-and-dependencies" class="nav-link" data-scroll-target="#environments-and-dependencies"><span class="header-section-number">18.4.6</span> Environments and Dependencies</a></li>
-  <li><a href="#randomness-and-seeds" id="toc-randomness-and-seeds" class="nav-link" data-scroll-target="#randomness-and-seeds"><span class="header-section-number">18.4.7</span> Randomness and Seeds</a></li>
+  <li><a href="#from-responsible-claims-to-reproducible-evidence" id="toc-from-responsible-claims-to-reproducible-evidence" class="nav-link" data-scroll-target="#from-responsible-claims-to-reproducible-evidence"><span class="header-section-number">18.2.1</span> From Responsible Claims to Reproducible Evidence</a></li>
   </ul></li>
-  <li><a href="#data-provenance" id="toc-data-provenance" class="nav-link" data-scroll-target="#data-provenance"><span class="header-section-number">18.5</span> Data Provenance</a>
+  <li><a href="#reproducibility-is-a-chain" id="toc-reproducibility-is-a-chain" class="nav-link" data-scroll-target="#reproducibility-is-a-chain"><span class="header-section-number">18.3</span> Reproducibility Is a Chain</a></li>
+  <li><a href="#four-related-ideas" id="toc-four-related-ideas" class="nav-link" data-scroll-target="#four-related-ideas"><span class="header-section-number">18.4</span> Four Related Ideas</a>
   <ul class="collapse">
-  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources"><span class="header-section-number">18.5.1</span> Data Sources</a></li>
-  <li><a href="#data-dictionaries" id="toc-data-dictionaries" class="nav-link" data-scroll-target="#data-dictionaries"><span class="header-section-number">18.5.2</span> Data Dictionaries</a></li>
-  <li><a href="#licensing" id="toc-licensing" class="nav-link" data-scroll-target="#licensing"><span class="header-section-number">18.5.3</span> Licensing</a></li>
-  <li><a href="#versioning" id="toc-versioning" class="nav-link" data-scroll-target="#versioning"><span class="header-section-number">18.5.4</span> Versioning</a></li>
-  <li><a href="#sensitive-data" id="toc-sensitive-data" class="nav-link" data-scroll-target="#sensitive-data"><span class="header-section-number">18.5.5</span> Sensitive Data</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">18.4.1</span> Reproducibility</a></li>
+  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication"><span class="header-section-number">18.4.2</span> Replication</a></li>
+  <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness"><span class="header-section-number">18.4.3</span> Robustness</a></li>
+  <li><a href="#generalizability" id="toc-generalizability" class="nav-link" data-scroll-target="#generalizability"><span class="header-section-number">18.4.4</span> Generalizability</a></li>
   </ul></li>
-  <li><a href="#model-provenance" id="toc-model-provenance" class="nav-link" data-scroll-target="#model-provenance"><span class="header-section-number">18.6</span> Model Provenance</a>
+  <li><a href="#the-research-compendium" id="toc-the-research-compendium" class="nav-link" data-scroll-target="#the-research-compendium"><span class="header-section-number">18.5</span> The Research Compendium</a></li>
+  <li><a href="#organize-the-project-around-the-research-process" id="toc-organize-the-project-around-the-research-process" class="nav-link" data-scroll-target="#organize-the-project-around-the-research-process"><span class="header-section-number">18.6</span> Organize the Project Around the Research Process</a></li>
+  <li><a href="#reproducibility-is-more-than-rerunning-code" id="toc-reproducibility-is-more-than-rerunning-code" class="nav-link" data-scroll-target="#reproducibility-is-more-than-rerunning-code"><span class="header-section-number">18.7</span> Reproducibility Is More Than Rerunning Code</a>
   <ul class="collapse">
-  <li><a href="#training-configuration" id="toc-training-configuration" class="nav-link" data-scroll-target="#training-configuration"><span class="header-section-number">18.6.1</span> Training Configuration</a></li>
-  <li><a href="#hyperparameters" id="toc-hyperparameters" class="nav-link" data-scroll-target="#hyperparameters"><span class="header-section-number">18.6.2</span> Hyperparameters</a></li>
-  <li><a href="#evaluation-protocol" id="toc-evaluation-protocol" class="nav-link" data-scroll-target="#evaluation-protocol"><span class="header-section-number">18.6.3</span> Evaluation Protocol</a></li>
-  <li><a href="#artifacts-and-model-cards" id="toc-artifacts-and-model-cards" class="nav-link" data-scroll-target="#artifacts-and-model-cards"><span class="header-section-number">18.6.4</span> Artifacts and Model Cards</a></li>
+  <li><a href="#from-student-submission-to-scholarly-artifact" id="toc-from-student-submission-to-scholarly-artifact" class="nav-link" data-scroll-target="#from-student-submission-to-scholarly-artifact"><span class="header-section-number">18.7.1</span> From Student Submission to Scholarly Artifact</a></li>
   </ul></li>
-  <li><a href="#scholarly-communication" id="toc-scholarly-communication" class="nav-link" data-scroll-target="#scholarly-communication"><span class="header-section-number">18.7</span> Scholarly Communication</a>
+  <li><a href="#final-three-track-culmination" id="toc-final-three-track-culmination" class="nav-link" data-scroll-target="#final-three-track-culmination"><span class="header-section-number">18.8</span> Final Three-Track Culmination</a></li>
+  <li><a href="#final-reflection" id="toc-final-reflection" class="nav-link" data-scroll-target="#final-reflection"><span class="header-section-number">18.9</span> Final Reflection</a></li>
+  <li><a href="#separate-source-from-derived-artifacts" id="toc-separate-source-from-derived-artifacts" class="nav-link" data-scroll-target="#separate-source-from-derived-artifacts"><span class="header-section-number">18.10</span> Separate Source From Derived Artifacts</a></li>
+  <li><a href="#data-provenance" id="toc-data-provenance" class="nav-link" data-scroll-target="#data-provenance"><span class="header-section-number">18.11</span> Data Provenance</a></li>
+  <li><a href="#every-dataset-has-a-history" id="toc-every-dataset-has-a-history" class="nav-link" data-scroll-target="#every-dataset-has-a-history"><span class="header-section-number">18.12</span> Every Dataset Has a History</a></li>
+  <li><a href="#create-a-data-readme" id="toc-create-a-data-readme" class="nav-link" data-scroll-target="#create-a-data-readme"><span class="header-section-number">18.13</span> Create a Data README</a></li>
+  <li><a href="#hashes-can-identify-file-versions" id="toc-hashes-can-identify-file-versions" class="nav-link" data-scroll-target="#hashes-can-identify-file-versions"><span class="header-section-number">18.14</span> Hashes Can Identify File Versions</a></li>
+  <li><a href="#randomness-and-determinism" id="toc-randomness-and-determinism" class="nav-link" data-scroll-target="#randomness-and-determinism"><span class="header-section-number">18.15</span> Randomness and Determinism</a></li>
+  <li><a href="#random-seeds-improve-repeatability" id="toc-random-seeds-improve-repeatability" class="nav-link" data-scroll-target="#random-seeds-improve-repeatability"><span class="header-section-number">18.16</span> Random Seeds Improve Repeatability</a></li>
+  <li><a href="#a-seed-is-not-a-reproducibility-guarantee" id="toc-a-seed-is-not-a-reproducibility-guarantee" class="nav-link" data-scroll-target="#a-seed-is-not-a-reproducibility-guarantee"><span class="header-section-number">18.17</span> A Seed Is Not a Reproducibility Guarantee</a></li>
+  <li><a href="#record-the-computational-environment" id="toc-record-the-computational-environment" class="nav-link" data-scroll-target="#record-the-computational-environment"><span class="header-section-number">18.18</span> Record the Computational Environment</a></li>
+  <li><a href="#software-is-part-of-the-method" id="toc-software-is-part-of-the-method" class="nav-link" data-scroll-target="#software-is-part-of-the-method"><span class="header-section-number">18.19</span> Software Is Part of the Method</a></li>
+  <li><a href="#inspect-the-current-environment" id="toc-inspect-the-current-environment" class="nav-link" data-scroll-target="#inspect-the-current-environment"><span class="header-section-number">18.20</span> Inspect the Current Environment</a></li>
+  <li><a href="#dependency-files" id="toc-dependency-files" class="nav-link" data-scroll-target="#dependency-files"><span class="header-section-number">18.21</span> Dependency Files</a></li>
+  <li><a href="#do-not-confuse-environment-capture-with-scientific-validity" id="toc-do-not-confuse-environment-capture-with-scientific-validity" class="nav-link" data-scroll-target="#do-not-confuse-environment-capture-with-scientific-validity"><span class="header-section-number">18.22</span> Do Not Confuse Environment Capture With Scientific Validity</a></li>
+  <li><a href="#pipelines-as-reproducible-methods" id="toc-pipelines-as-reproducible-methods" class="nav-link" data-scroll-target="#pipelines-as-reproducible-methods"><span class="header-section-number">18.23</span> Pipelines as Reproducible Methods</a></li>
+  <li><a href="#preprocessing-is-part-of-the-model" id="toc-preprocessing-is-part-of-the-model" class="nav-link" data-scroll-target="#preprocessing-is-part-of-the-model"><span class="header-section-number">18.24</span> Preprocessing Is Part of the Model</a></li>
+  <li><a href="#experiment-configuration" id="toc-experiment-configuration" class="nav-link" data-scroll-target="#experiment-configuration"><span class="header-section-number">18.25</span> Experiment Configuration</a></li>
+  <li><a href="#separate-configuration-from-results" id="toc-separate-configuration-from-results" class="nav-link" data-scroll-target="#separate-configuration-from-results"><span class="header-section-number">18.26</span> Separate Configuration From Results</a></li>
+  <li><a href="#store-machine-readable-metadata" id="toc-store-machine-readable-metadata" class="nav-link" data-scroll-target="#store-machine-readable-metadata"><span class="header-section-number">18.27</span> Store Machine-Readable Metadata</a></li>
+  <li><a href="#results-should-point-back-to-configuration" id="toc-results-should-point-back-to-configuration" class="nav-link" data-scroll-target="#results-should-point-back-to-configuration"><span class="header-section-number">18.28</span> Results Should Point Back to Configuration</a></li>
+  <li><a href="#version-control-with-git" id="toc-version-control-with-git" class="nav-link" data-scroll-target="#version-control-with-git"><span class="header-section-number">18.29</span> Version Control With Git</a></li>
+  <li><a href="#git-preserves-project-history" id="toc-git-preserves-project-history" class="nav-link" data-scroll-target="#git-preserves-project-history"><span class="header-section-number">18.30</span> Git Preserves Project History</a></li>
+  <li><a href="#a-commit-should-represent-a-meaningful-change" id="toc-a-commit-should-represent-a-meaningful-change" class="nav-link" data-scroll-target="#a-commit-should-represent-a-meaningful-change"><span class="header-section-number">18.31</span> A Commit Should Represent a Meaningful Change</a></li>
+  <li><a href="#git-does-not-replace-documentation" id="toc-git-does-not-replace-documentation" class="nav-link" data-scroll-target="#git-does-not-replace-documentation"><span class="header-section-number">18.32</span> Git Does Not Replace Documentation</a></li>
+  <li><a href="#github-and-remote-repositories" id="toc-github-and-remote-repositories" class="nav-link" data-scroll-target="#github-and-remote-repositories"><span class="header-section-number">18.33</span> GitHub and Remote Repositories</a></li>
+  <li><a href="#why-use-a-remote-repository" id="toc-why-use-a-remote-repository" class="nav-link" data-scroll-target="#why-use-a-remote-repository"><span class="header-section-number">18.34</span> Why Use a Remote Repository?</a></li>
+  <li><a href="#do-not-commit-secrets" id="toc-do-not-commit-secrets" class="nav-link" data-scroll-target="#do-not-commit-secrets"><span class="header-section-number">18.35</span> Do Not Commit Secrets</a></li>
+  <li><a href="#quarto-as-a-reproducible-publishing-system" id="toc-quarto-as-a-reproducible-publishing-system" class="nav-link" data-scroll-target="#quarto-as-a-reproducible-publishing-system"><span class="header-section-number">18.36</span> Quarto as a Reproducible Publishing System</a></li>
+  <li><a href="#narrative-and-computation-belong-together" id="toc-narrative-and-computation-belong-together" class="nav-link" data-scroll-target="#narrative-and-computation-belong-together"><span class="header-section-number">18.37</span> Narrative and Computation Belong Together</a></li>
+  <li><a href="#literate-programming" id="toc-literate-programming" class="nav-link" data-scroll-target="#literate-programming"><span class="header-section-number">18.38</span> Literate Programming</a></li>
+  <li><a href="#a-figure-should-have-provenance" id="toc-a-figure-should-have-provenance" class="nav-link" data-scroll-target="#a-figure-should-have-provenance"><span class="header-section-number">18.39</span> A Figure Should Have Provenance</a></li>
+  <li><a href="#notebooks-versus-scripts" id="toc-notebooks-versus-scripts" class="nav-link" data-scroll-target="#notebooks-versus-scripts"><span class="header-section-number">18.40</span> Notebooks Versus Scripts</a></li>
+  <li><a href="#exploration-and-production-serve-different-purposes" id="toc-exploration-and-production-serve-different-purposes" class="nav-link" data-scroll-target="#exploration-and-production-serve-different-purposes"><span class="header-section-number">18.41</span> Exploration and Production Serve Different Purposes</a></li>
+  <li><a href="#beware-hidden-notebook-state" id="toc-beware-hidden-notebook-state" class="nav-link" data-scroll-target="#beware-hidden-notebook-state"><span class="header-section-number">18.42</span> Beware Hidden Notebook State</a></li>
+  <li><a href="#saving-model-artifacts" id="toc-saving-model-artifacts" class="nav-link" data-scroll-target="#saving-model-artifacts"><span class="header-section-number">18.43</span> Saving Model Artifacts</a></li>
+  <li><a href="#models-are-derived-artifacts" id="toc-models-are-derived-artifacts" class="nav-link" data-scroll-target="#models-are-derived-artifacts"><span class="header-section-number">18.44</span> Models Are Derived Artifacts</a></li>
+  <li><a href="#serialization-has-limits" id="toc-serialization-has-limits" class="nav-link" data-scroll-target="#serialization-has-limits"><span class="header-section-number">18.45</span> Serialization Has Limits</a></li>
+  <li><a href="#automated-workflows" id="toc-automated-workflows" class="nav-link" data-scroll-target="#automated-workflows"><span class="header-section-number">18.46</span> Automated Workflows</a></li>
+  <li><a href="#reproducibility-improves-when-steps-are-explicit" id="toc-reproducibility-improves-when-steps-are-explicit" class="nav-link" data-scroll-target="#reproducibility-improves-when-steps-are-explicit"><span class="header-section-number">18.47</span> Reproducibility Improves When Steps Are Explicit</a></li>
+  <li><a href="#one-command-reproduction" id="toc-one-command-reproduction" class="nav-link" data-scroll-target="#one-command-reproduction"><span class="header-section-number">18.48</span> One-Command Reproduction</a></li>
+  <li><a href="#testing-data-and-ml-pipelines" id="toc-testing-data-and-ml-pipelines" class="nav-link" data-scroll-target="#testing-data-and-ml-pipelines"><span class="header-section-number">18.49</span> Testing Data and ML Pipelines</a></li>
+  <li><a href="#tests-are-not-only-for-software-engineers" id="toc-tests-are-not-only-for-software-engineers" class="nav-link" data-scroll-target="#tests-are-not-only-for-software-engineers"><span class="header-section-number">18.50</span> Tests Are Not Only for Software Engineers</a></li>
+  <li><a href="#example-data-assertions" id="toc-example-data-assertions" class="nav-link" data-scroll-target="#example-data-assertions"><span class="header-section-number">18.51</span> Example Data Assertions</a></li>
+  <li><a href="#tests-cannot-prove-the-research-question-is-good" id="toc-tests-cannot-prove-the-research-question-is-good" class="nav-link" data-scroll-target="#tests-cannot-prove-the-research-question-is-good"><span class="header-section-number">18.52</span> Tests Cannot Prove the Research Question Is Good</a></li>
+  <li><a href="#provenance-of-figures-tables-and-claims" id="toc-provenance-of-figures-tables-and-claims" class="nav-link" data-scroll-target="#provenance-of-figures-tables-and-claims"><span class="header-section-number">18.53</span> Provenance of Figures, Tables, and Claims</a></li>
+  <li><a href="#every-result-should-be-traceable" id="toc-every-result-should-be-traceable" class="nav-link" data-scroll-target="#every-result-should-be-traceable"><span class="header-section-number">18.54</span> Every Result Should Be Traceable</a></li>
+  <li><a href="#archiving-and-persistent-identifiers" id="toc-archiving-and-persistent-identifiers" class="nav-link" data-scroll-target="#archiving-and-persistent-identifiers"><span class="header-section-number">18.55</span> Archiving and Persistent Identifiers</a></li>
+  <li><a href="#a-repository-is-living-a-release-is-fixed" id="toc-a-repository-is-living-a-release-is-fixed" class="nav-link" data-scroll-target="#a-repository-is-living-a-release-is-fixed"><span class="header-section-number">18.56</span> A Repository Is Living; A Release Is Fixed</a></li>
+  <li><a href="#zenodo-and-doi-archiving" id="toc-zenodo-and-doi-archiving" class="nav-link" data-scroll-target="#zenodo-and-doi-archiving"><span class="header-section-number">18.57</span> Zenodo and DOI Archiving</a></li>
+  <li><a href="#concept-doi-and-version-doi" id="toc-concept-doi-and-version-doi" class="nav-link" data-scroll-target="#concept-doi-and-version-doi"><span class="header-section-number">18.58</span> Concept DOI and Version DOI</a></li>
+  <li><a href="#osf-as-a-research-hub" id="toc-osf-as-a-research-hub" class="nav-link" data-scroll-target="#osf-as-a-research-hub"><span class="header-section-number">18.59</span> OSF as a Research Hub</a></li>
+  <li><a href="#doi-does-not-mean-peer-reviewed" id="toc-doi-does-not-mean-peer-reviewed" class="nav-link" data-scroll-target="#doi-does-not-mean-peer-reviewed"><span class="header-section-number">18.60</span> DOI Does Not Mean Peer Reviewed</a></li>
+  <li><a href="#citation-and-credit" id="toc-citation-and-credit" class="nav-link" data-scroll-target="#citation-and-credit"><span class="header-section-number">18.61</span> Citation and Credit</a></li>
+  <li><a href="#make-software-and-data-citable" id="toc-make-software-and-data-citable" class="nav-link" data-scroll-target="#make-software-and-data-citable"><span class="header-section-number">18.62</span> Make Software and Data Citable</a></li>
+  <li><a href="#cite-data-as-research-objects" id="toc-cite-data-as-research-objects" class="nav-link" data-scroll-target="#cite-data-as-research-objects"><span class="header-section-number">18.63</span> Cite Data as Research Objects</a></li>
+  <li><a href="#reproducibility-and-restricted-data" id="toc-reproducibility-and-restricted-data" class="nav-link" data-scroll-target="#reproducibility-and-restricted-data"><span class="header-section-number">18.64</span> Reproducibility and Restricted Data</a></li>
+  <li><a href="#open-science-does-not-mean-upload-everything" id="toc-open-science-does-not-mean-upload-everything" class="nav-link" data-scroll-target="#open-science-does-not-mean-upload-everything"><span class="header-section-number">18.65</span> Open Science Does Not Mean “Upload Everything”</a></li>
+  <li><a href="#never-publish-data-merely-to-satisfy-a-reproducibility-checklist" id="toc-never-publish-data-merely-to-satisfy-a-reproducibility-checklist" class="nav-link" data-scroll-target="#never-publish-data-merely-to-satisfy-a-reproducibility-checklist"><span class="header-section-number">18.66</span> Never Publish Data Merely to Satisfy a Reproducibility Checklist</a></li>
+  <li><a href="#robustness-and-multiverse-thinking" id="toc-robustness-and-multiverse-thinking" class="nav-link" data-scroll-target="#robustness-and-multiverse-thinking"><span class="header-section-number">18.67</span> Robustness and Multiverse Thinking</a></li>
+  <li><a href="#one-analysis-path-is-rarely-the-only-reasonable-path" id="toc-one-analysis-path-is-rarely-the-only-reasonable-path" class="nav-link" data-scroll-target="#one-analysis-path-is-rarely-the-only-reasonable-path"><span class="header-section-number">18.68</span> One Analysis Path Is Rarely the Only Reasonable Path</a></li>
+  <li><a href="#specification-curves-and-multiverse-analyses" id="toc-specification-curves-and-multiverse-analyses" class="nav-link" data-scroll-target="#specification-curves-and-multiverse-analyses"><span class="header-section-number">18.69</span> Specification Curves and Multiverse Analyses</a></li>
+  <li><a href="#reproducibility-is-not-replication" id="toc-reproducibility-is-not-replication" class="nav-link" data-scroll-target="#reproducibility-is-not-replication"><span class="header-section-number">18.70</span> Reproducibility Is Not Replication</a></li>
+  <li><a href="#the-distinction-matters" id="toc-the-distinction-matters" class="nav-link" data-scroll-target="#the-distinction-matters"><span class="header-section-number">18.71</span> The Distinction Matters</a></li>
+  <li><a href="#reproducible-computer-vision-preserve-the-visual-evidence-chain" id="toc-reproducible-computer-vision-preserve-the-visual-evidence-chain" class="nav-link" data-scroll-target="#reproducible-computer-vision-preserve-the-visual-evidence-chain"><span class="header-section-number">18.72</span> Reproducible Computer Vision: Preserve the Visual Evidence Chain</a>
   <ul class="collapse">
-  <li><a href="#tables-and-figures" id="toc-tables-and-figures" class="nav-link" data-scroll-target="#tables-and-figures"><span class="header-section-number">18.7.1</span> Tables and Figures</a></li>
-  <li><a href="#methods-reporting" id="toc-methods-reporting" class="nav-link" data-scroll-target="#methods-reporting"><span class="header-section-number">18.7.2</span> Methods Reporting</a></li>
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">18.7.3</span> Limitations</a></li>
-  <li><a href="#repositories" id="toc-repositories" class="nav-link" data-scroll-target="#repositories"><span class="header-section-number">18.7.4</span> Repositories</a></li>
-  <li><a href="#citation.cff" id="toc-citation.cff" class="nav-link" data-scroll-target="#citation.cff"><span class="header-section-number">18.7.5</span> CITATION.cff</a></li>
-  <li><a href="#releases" id="toc-releases" class="nav-link" data-scroll-target="#releases"><span class="header-section-number">18.7.6</span> Releases</a></li>
-  <li><a href="#archiving-and-dois" id="toc-archiving-and-dois" class="nav-link" data-scroll-target="#archiving-and-dois"><span class="header-section-number">18.7.7</span> Archiving and DOIs</a></li>
+  <li><a href="#preserve-the-split-not-just-the-seed" id="toc-preserve-the-split-not-just-the-seed" class="nav-link" data-scroll-target="#preserve-the-split-not-just-the-seed"><span class="header-section-number">18.72.1</span> Preserve the Split, Not Just the Seed</a></li>
+  <li><a href="#restricted-images" id="toc-restricted-images" class="nav-link" data-scroll-target="#restricted-images"><span class="header-section-number">18.72.2</span> Restricted Images</a></li>
+  <li><a href="#vision-reproducibility-challenge" id="toc-vision-reproducibility-challenge" class="nav-link" data-scroll-target="#vision-reproducibility-challenge"><span class="header-section-number">18.72.3</span> Vision Reproducibility Challenge</a></li>
   </ul></li>
-  <li><a href="#from-class-project-to-research-product" id="toc-from-class-project-to-research-product" class="nav-link" data-scroll-target="#from-class-project-to-research-product"><span class="header-section-number">18.8</span> From Class Project to Research Product</a>
-  <ul class="collapse">
-  <li><a href="#replication" id="toc-replication" class="nav-link" data-scroll-target="#replication"><span class="header-section-number">18.8.1</span> Replication</a></li>
-  <li><a href="#extension" id="toc-extension" class="nav-link" data-scroll-target="#extension"><span class="header-section-number">18.8.2</span> Extension</a></li>
-  <li><a href="#benchmarking" id="toc-benchmarking" class="nav-link" data-scroll-target="#benchmarking"><span class="header-section-number">18.8.3</span> Benchmarking</a></li>
-  <li><a href="#methodological-contribution" id="toc-methodological-contribution" class="nav-link" data-scroll-target="#methodological-contribution"><span class="header-section-number">18.8.4</span> Methodological Contribution</a></li>
-  <li><a href="#substantive-contribution" id="toc-substantive-contribution" class="nav-link" data-scroll-target="#substantive-contribution"><span class="header-section-number">18.8.5</span> Substantive Contribution</a></li>
-  </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">18.9</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">18.10</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">18.11</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">18.12</span> Real-World Case Study</a>
-  <ul class="collapse">
-  <li><a href="#from-notebook-to-citable-research-artifact" id="toc-from-notebook-to-citable-research-artifact" class="nav-link" data-scroll-target="#from-notebook-to-citable-research-artifact"><span class="header-section-number">18.12.1</span> From Notebook to Citable Research Artifact</a></li>
-  </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">18.13</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">18.14</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">18.15</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">18.16</span> Key Takeaways</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">18.73</span> Three Tracks</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">18.74</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">18.75</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">18.76</span> Open ML Benchmark Track</a></li>
+  <li><a href="#beyond-the-algorithm-reproducibility-as-intellectual-humility" id="toc-beyond-the-algorithm-reproducibility-as-intellectual-humility" class="nav-link" data-scroll-target="#beyond-the-algorithm-reproducibility-as-intellectual-humility"><span class="header-section-number">18.77</span> Beyond the Algorithm: Reproducibility as Intellectual Humility</a></li>
+  <li><a href="#ai-pair-programmer-make-my-study-reproducible" id="toc-ai-pair-programmer-make-my-study-reproducible" class="nav-link" data-scroll-target="#ai-pair-programmer-make-my-study-reproducible"><span class="header-section-number">18.78</span> AI Pair Programmer: Make My Study Reproducible</a></li>
+  <li><a href="#hands-on-lab-build-a-research-compendium" id="toc-hands-on-lab-build-a-research-compendium" class="nav-link" data-scroll-target="#hands-on-lab-build-a-research-compendium"><span class="header-section-number">18.79</span> Hands-On Lab: Build a Research Compendium</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">18.80</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">18.81</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">18.82</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-irreproducible-breakthrough" id="toc-professors-challenge-the-irreproducible-breakthrough" class="nav-link" data-scroll-target="#professors-challenge-the-irreproducible-breakthrough"><span class="header-section-number">18.83</span> Professor’s Challenge: The Irreproducible Breakthrough</a></li>
+  <li><a href="#capstone-from-machine-learning-project-to-research-artifact" id="toc-capstone-from-machine-learning-project-to-research-artifact" class="nav-link" data-scroll-target="#capstone-from-machine-learning-project-to-research-artifact"><span class="header-section-number">18.84</span> Capstone: From Machine Learning Project to Research Artifact</a></li>
+  <li><a href="#health" id="toc-health" class="nav-link" data-scroll-target="#health"><span class="header-section-number">18.85</span> Health</a></li>
+  <li><a href="#education" id="toc-education" class="nav-link" data-scroll-target="#education"><span class="header-section-number">18.86</span> Education</a></li>
+  <li><a href="#open-ml" id="toc-open-ml" class="nav-link" data-scroll-target="#open-ml"><span class="header-section-number">18.87</span> Open ML</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">18.88</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">18.89</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">18.90</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/18-reproducible-ml.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Research, Responsibility, and Reproducibility</a></li><li class="breadcrumb-item"><a href="../part-06-research/18-reproducible-ml.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></h1>
 </div>
 
 
@@ -388,173 +560,1556 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">18.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Build a reproducible ML project from raw data to publication.</li>
-<li>Use Git, GitHub, Quarto, and environment specifications.</li>
-<li>Document data and model provenance.</li>
-<li>Archive scholarly releases with persistent identifiers.</li>
-<li>Translate a machine learning analysis into research communication.</li>
+<li><p>distinguish reproducibility, replication, robustness, and generalizability;</p></li>
+<li><p>explain why reproducibility is a property of a complete computational workflow rather than code alone;</p></li>
+<li><p>organize a machine-learning project so another researcher can understand and rerun it;</p></li>
+<li><p>document data provenance and transformations;</p></li>
+<li><p>control randomness and explain the limits of random seeds;</p></li>
+<li><p>record software and computational environments;</p></li>
+<li><p>distinguish source data, derived data, code, models, results, and publication artifacts;</p></li>
+<li><p>use Git conceptually to preserve project history;</p></li>
+<li><p>explain the role of GitHub or another remote repository in collaborative research;</p></li>
+<li><p>use Quarto to combine narrative, equations, code, figures, tables, and citations;</p></li>
+<li><p>design leakage-safe pipelines whose preprocessing is part of the reproducible model;</p></li>
+<li><p>save and reload fitted model artifacts appropriately;</p></li>
+<li><p>record experimental configurations and metrics;</p></li>
+<li><p>distinguish computational reproducibility from scientific validity;</p></li>
+<li><p>use persistent repositories such as Zenodo or OSF to archive research outputs;</p></li>
+<li><p>explain how DOIs support persistent citation and scholarly provenance;</p></li>
+<li><p>create a reproducibility checklist for health, education, and open ML research;</p></li>
+<li><p>design a research compendium that supports conference or journal submission;</p></li>
+<li><p>recognize when sharing data or models would be irresponsible or legally prohibited;</p></li>
+<li><p>treat reproducibility as part of scientific reasoning rather than an administrative task.</p></li>
+<li><p>design reproducible computer-vision workflows that preserve image provenance, preprocessing, grouping, model configuration, and evaluation conditions.</p></li>
 </ul>
 </section>
-<section id="why-this-matters" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">18.2</span> Why This Matters</h2>
-<p>A result that cannot be traced, audited, or reproduced is difficult to trust and difficult to build upon.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">18.3</span> Real-World Problem</h2>
-<p>Six months after publication, can another researcher reproduce every table, figure, metric, and modeling decision in your study?</p>
-</section>
-<section id="reproducible-project-design" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="reproducible-project-design"><span class="header-section-number">18.4</span> Reproducible Project Design</h2>
-<section id="project-structure" class="level3" data-number="18.4.1">
-<h3 data-number="18.4.1" class="anchored" data-anchor-id="project-structure"><span class="header-section-number">18.4.1</span> Project Structure</h3>
-</section>
-<section id="raw-versus-derived-data" class="level3" data-number="18.4.2">
-<h3 data-number="18.4.2" class="anchored" data-anchor-id="raw-versus-derived-data"><span class="header-section-number">18.4.2</span> Raw Versus Derived Data</h3>
-</section>
-<section id="scripts-and-notebooks" class="level3" data-number="18.4.3">
-<h3 data-number="18.4.3" class="anchored" data-anchor-id="scripts-and-notebooks"><span class="header-section-number">18.4.3</span> Scripts and Notebooks</h3>
-</section>
-<section id="quarto" class="level3" data-number="18.4.4">
-<h3 data-number="18.4.4" class="anchored" data-anchor-id="quarto"><span class="header-section-number">18.4.4</span> Quarto</h3>
-</section>
-<section id="git-and-github" class="level3" data-number="18.4.5">
-<h3 data-number="18.4.5" class="anchored" data-anchor-id="git-and-github"><span class="header-section-number">18.4.5</span> Git and GitHub</h3>
-</section>
-<section id="environments-and-dependencies" class="level3" data-number="18.4.6">
-<h3 data-number="18.4.6" class="anchored" data-anchor-id="environments-and-dependencies"><span class="header-section-number">18.4.6</span> Environments and Dependencies</h3>
-</section>
-<section id="randomness-and-seeds" class="level3" data-number="18.4.7">
-<h3 data-number="18.4.7" class="anchored" data-anchor-id="randomness-and-seeds"><span class="header-section-number">18.4.7</span> Randomness and Seeds</h3>
-</section>
-</section>
-<section id="data-provenance" class="level2" data-number="18.5">
-<h2 data-number="18.5" class="anchored" data-anchor-id="data-provenance"><span class="header-section-number">18.5</span> Data Provenance</h2>
-<section id="data-sources" class="level3" data-number="18.5.1">
-<h3 data-number="18.5.1" class="anchored" data-anchor-id="data-sources"><span class="header-section-number">18.5.1</span> Data Sources</h3>
-</section>
-<section id="data-dictionaries" class="level3" data-number="18.5.2">
-<h3 data-number="18.5.2" class="anchored" data-anchor-id="data-dictionaries"><span class="header-section-number">18.5.2</span> Data Dictionaries</h3>
-</section>
-<section id="licensing" class="level3" data-number="18.5.3">
-<h3 data-number="18.5.3" class="anchored" data-anchor-id="licensing"><span class="header-section-number">18.5.3</span> Licensing</h3>
-</section>
-<section id="versioning" class="level3" data-number="18.5.4">
-<h3 data-number="18.5.4" class="anchored" data-anchor-id="versioning"><span class="header-section-number">18.5.4</span> Versioning</h3>
-</section>
-<section id="sensitive-data" class="level3" data-number="18.5.5">
-<h3 data-number="18.5.5" class="anchored" data-anchor-id="sensitive-data"><span class="header-section-number">18.5.5</span> Sensitive Data</h3>
-</section>
-</section>
-<section id="model-provenance" class="level2" data-number="18.6">
-<h2 data-number="18.6" class="anchored" data-anchor-id="model-provenance"><span class="header-section-number">18.6</span> Model Provenance</h2>
-<section id="training-configuration" class="level3" data-number="18.6.1">
-<h3 data-number="18.6.1" class="anchored" data-anchor-id="training-configuration"><span class="header-section-number">18.6.1</span> Training Configuration</h3>
-</section>
-<section id="hyperparameters" class="level3" data-number="18.6.2">
-<h3 data-number="18.6.2" class="anchored" data-anchor-id="hyperparameters"><span class="header-section-number">18.6.2</span> Hyperparameters</h3>
-</section>
-<section id="evaluation-protocol" class="level3" data-number="18.6.3">
-<h3 data-number="18.6.3" class="anchored" data-anchor-id="evaluation-protocol"><span class="header-section-number">18.6.3</span> Evaluation Protocol</h3>
-</section>
-<section id="artifacts-and-model-cards" class="level3" data-number="18.6.4">
-<h3 data-number="18.6.4" class="anchored" data-anchor-id="artifacts-and-model-cards"><span class="header-section-number">18.6.4</span> Artifacts and Model Cards</h3>
-</section>
-</section>
-<section id="scholarly-communication" class="level2" data-number="18.7">
-<h2 data-number="18.7" class="anchored" data-anchor-id="scholarly-communication"><span class="header-section-number">18.7</span> Scholarly Communication</h2>
-<section id="tables-and-figures" class="level3" data-number="18.7.1">
-<h3 data-number="18.7.1" class="anchored" data-anchor-id="tables-and-figures"><span class="header-section-number">18.7.1</span> Tables and Figures</h3>
-</section>
-<section id="methods-reporting" class="level3" data-number="18.7.2">
-<h3 data-number="18.7.2" class="anchored" data-anchor-id="methods-reporting"><span class="header-section-number">18.7.2</span> Methods Reporting</h3>
-</section>
-<section id="limitations" class="level3" data-number="18.7.3">
-<h3 data-number="18.7.3" class="anchored" data-anchor-id="limitations"><span class="header-section-number">18.7.3</span> Limitations</h3>
-</section>
-<section id="repositories" class="level3" data-number="18.7.4">
-<h3 data-number="18.7.4" class="anchored" data-anchor-id="repositories"><span class="header-section-number">18.7.4</span> Repositories</h3>
-</section>
-<section id="citation.cff" class="level3" data-number="18.7.5">
-<h3 data-number="18.7.5" class="anchored" data-anchor-id="citation.cff"><span class="header-section-number">18.7.5</span> CITATION.cff</h3>
-</section>
-<section id="releases" class="level3" data-number="18.7.6">
-<h3 data-number="18.7.6" class="anchored" data-anchor-id="releases"><span class="header-section-number">18.7.6</span> Releases</h3>
-</section>
-<section id="archiving-and-dois" class="level3" data-number="18.7.7">
-<h3 data-number="18.7.7" class="anchored" data-anchor-id="archiving-and-dois"><span class="header-section-number">18.7.7</span> Archiving and DOIs</h3>
-</section>
-</section>
-<section id="from-class-project-to-research-product" class="level2" data-number="18.8">
-<h2 data-number="18.8" class="anchored" data-anchor-id="from-class-project-to-research-product"><span class="header-section-number">18.8</span> From Class Project to Research Product</h2>
-<section id="replication" class="level3" data-number="18.8.1">
-<h3 data-number="18.8.1" class="anchored" data-anchor-id="replication"><span class="header-section-number">18.8.1</span> Replication</h3>
-</section>
-<section id="extension" class="level3" data-number="18.8.2">
-<h3 data-number="18.8.2" class="anchored" data-anchor-id="extension"><span class="header-section-number">18.8.2</span> Extension</h3>
-</section>
-<section id="benchmarking" class="level3" data-number="18.8.3">
-<h3 data-number="18.8.3" class="anchored" data-anchor-id="benchmarking"><span class="header-section-number">18.8.3</span> Benchmarking</h3>
-</section>
-<section id="methodological-contribution" class="level3" data-number="18.8.4">
-<h3 data-number="18.8.4" class="anchored" data-anchor-id="methodological-contribution"><span class="header-section-number">18.8.4</span> Methodological Contribution</h3>
-</section>
-<section id="substantive-contribution" class="level3" data-number="18.8.5">
-<h3 data-number="18.8.5" class="anchored" data-anchor-id="substantive-contribution"><span class="header-section-number">18.8.5</span> Substantive Contribution</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="18.9">
-<h2 data-number="18.9" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">18.9</span> Hands-On Practice</h2>
-<p>Package one analysis from the book as a fully reproducible research repository.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="18.10">
-<h2 data-number="18.10" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">18.10</span> Common Mistakes</h2>
+<section id="a-result-is-more-than-a-number" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="a-result-is-more-than-a-number"><span class="header-section-number">18.2</span> A Result Is More Than a Number</h2>
+<p>Suppose a paper reports:</p>
+<p><span class="math display">\[
+ROC\text{-}AUC=0.91.
+\]</span></p>
+<p>A reader may reasonably ask:</p>
 <ul>
-<li>Manually editing outputs.</li>
-<li>Losing track of data versions.</li>
-<li>Failing to capture dependencies.</li>
-<li>Publishing only a notebook without execution instructions.</li>
-<li>Confusing an open repository with an archived scholarly release.</li>
+<li>Which data version?</li>
+<li>Which inclusion criteria?</li>
+<li>Which preprocessing steps?</li>
+<li>Which random split?</li>
+<li>Which software versions?</li>
+<li>Which hyperparameters?</li>
+<li>Which metric implementation?</li>
+<li>Which code produced the result?</li>
+<li>Can the analysis be rerun?</li>
+<li>Can the result be reproduced independently?</li>
+</ul>
+<p>A number without provenance is difficult to interrogate scientifically.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>What must we preserve so that a machine-learning result can become inspectable, repeatable, and cumulative scientific knowledge?</strong></p>
+</div>
+</div>
+<section id="from-responsible-claims-to-reproducible-evidence" class="level3" data-number="18.2.1">
+<h3 data-number="18.2.1" class="anchored" data-anchor-id="from-responsible-claims-to-reproducible-evidence"><span class="header-section-number">18.2.1</span> From Responsible Claims to Reproducible Evidence</h3>
+<p>Chapter 17 emphasized that trustworthy machine learning requires claims about fairness, explanation, privacy, governance, and consequences to be examined rather than assumed. Reproducibility provides the evidentiary infrastructure for that examination. If another researcher cannot reconstruct how data became results, then even careful evaluation and responsible-ML claims become difficult to verify, critique, or extend.</p>
+</section>
+</section>
+<section id="reproducibility-is-a-chain" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="reproducibility-is-a-chain"><span class="header-section-number">18.3</span> Reproducibility Is a Chain</h2>
+<p>Reproducible research treats the computational workflow as part of the evidence supporting a scientific claim, rather than as disposable implementation detail <span class="citation" data-cites="peng2011reproducible sandve2013ten">(<a href="../references.html#ref-peng2011reproducible" role="doc-biblioref">Peng 2011</a>; <a href="../references.html#ref-sandve2013ten" role="doc-biblioref">Sandve et al. 2013</a>)</span>.</p>
+<p>A useful mental model is:</p>
+<p><span class="math display">\[
+\text{Question}
+\rightarrow
+\text{Data}
+\rightarrow
+\text{Environment}
+\rightarrow
+\text{Code}
+\rightarrow
+\text{Experiment}
+\rightarrow
+\text{Model}
+\rightarrow
+\text{Result}
+\rightarrow
+\text{Artifact}
+\rightarrow
+\text{Archive}.
+\]</span></p>
+<p>If an important link is missing, reproducing the result becomes harder.</p>
+</section>
+<section id="four-related-ideas" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="four-related-ideas"><span class="header-section-number">18.4</span> Four Related Ideas</h2>
+<p>Terminology around reproducibility is not fully standardized across disciplines, so the distinctions below are explicit conventions for this book <span class="citation" data-cites="goodmanEtAl2016">(<a href="../references.html#ref-goodmanEtAl2016" role="doc-biblioref">Goodman, Fanelli, and Ioannidis 2016</a>)</span>. Broader scientific guidance likewise distinguishes reproducibility from replicability and treats both as central to trustworthy research <span class="citation" data-cites="nationalacademies2019reproducibility">(<a href="../references.html#ref-nationalacademies2019reproducibility" role="doc-biblioref">National Academies of Sciences, Engineering, and Medicine 2019</a>)</span>.</p>
+<section id="reproducibility" class="level3" data-number="18.4.1">
+<h3 data-number="18.4.1" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">18.4.1</span> Reproducibility</h3>
+<p>A useful operational definition is the ability to obtain consistent results using the same underlying data, computational procedures, and analysis.</p>
+</section>
+<section id="replication" class="level3" data-number="18.4.2">
+<h3 data-number="18.4.2" class="anchored" data-anchor-id="replication"><span class="header-section-number">18.4.2</span> Replication</h3>
+<p>Replication asks whether a finding can be obtained through a new study, new sample, or independently implemented investigation.</p>
+</section>
+<section id="robustness" class="level3" data-number="18.4.3">
+<h3 data-number="18.4.3" class="anchored" data-anchor-id="robustness"><span class="header-section-number">18.4.3</span> Robustness</h3>
+<p>Robustness asks whether conclusions survive reasonable analytical choices or perturbations.</p>
+</section>
+<section id="generalizability" class="level3" data-number="18.4.4">
+<h3 data-number="18.4.4" class="anchored" data-anchor-id="generalizability"><span class="header-section-number">18.4.4</span> Generalizability</h3>
+<p>Generalizability asks whether conclusions extend beyond the studied sample, setting, time, or population.</p>
+<p>These ideas overlap, but they are not synonyms.</p>
+<p>A computationally reproducible result can still fail to replicate or generalize.</p>
+</section>
+</section>
+<section id="the-research-compendium" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="the-research-compendium"><span class="header-section-number">18.5</span> The Research Compendium</h2>
+<p>A research compendium organizes code, data or access instructions, documentation, and computational outputs as a coherent scholarly artifact <span class="citation" data-cites="gentlemanLang2007">(<a href="../references.html#ref-gentlemanLang2007" role="doc-biblioref">Gentleman and Lang 2007</a>)</span>.</p>
+</section>
+<section id="organize-the-project-around-the-research-process" class="level2" data-number="18.6">
+<h2 data-number="18.6" class="anchored" data-anchor-id="organize-the-project-around-the-research-process"><span class="header-section-number">18.6</span> Organize the Project Around the Research Process</h2>
+<p>A project might use:</p>
+<pre class="text"><code>machine-learning-study/
+├── README.md
+├── _quarto.yml
+├── environment/
+│   └── requirements.txt
+├── data/
+│   ├── README.md
+│   ├── raw/
+│   └── processed/
+├── src/
+│   ├── prepare.py
+│   ├── features.py
+│   ├── train.py
+│   └── evaluate.py
+├── notebooks/
+│   └── exploration.ipynb
+├── models/
+├── results/
+│   ├── figures/
+│   └── tables/
+├── manuscript/
+│   └── paper.qmd
+└── CITATION.cff</code></pre>
+<p>The exact structure can vary.</p>
+<p>The important principle is that another person should be able to infer where inputs, transformations, outputs, and documentation belong.</p>
+</section>
+<section id="reproducibility-is-more-than-rerunning-code" class="level2" data-number="18.7">
+<h2 data-number="18.7" class="anchored" data-anchor-id="reproducibility-is-more-than-rerunning-code"><span class="header-section-number">18.7</span> Reproducibility Is More Than Rerunning Code</h2>
+<p>A research claim rests on an evidence chain:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Question}\rightarrow\text{Data}\rightarrow\text{Processing}\rightarrow\text{Model}\rightarrow\text{Evaluation}\rightarrow\text{Result}\rightarrow\text{Claim}
+}
+\]</span></p>
+<p>Reproducibility asks whether another researcher can inspect and reconstruct that chain. This can require provenance, environment and package versions, seeds, configuration, data-access instructions, code, generated outputs, decision logs, licenses, and persistent identifiers.</p>
+<p>Terminology varies across disciplines. This book uses the four definitions introduced above consistently. In computational ML work, <strong>reproducibility</strong> specifically includes the ability to regenerate reported results from the same underlying data and documented workflow.</p>
+<section id="from-student-submission-to-scholarly-artifact" class="level3" data-number="18.7.1">
+<h3 data-number="18.7.1" class="anchored" data-anchor-id="from-student-submission-to-scholarly-artifact"><span class="header-section-number">18.7.1</span> From Student Submission to Scholarly Artifact</h3>
+<p>A conventional assignment is primarily designed to be graded. A research artifact should also be designed to be inspected, rerun, extended, cited, challenged, and reused where licensing permits.</p>
+<p>Shift from:</p>
+<blockquote class="blockquote">
+<p>Did I complete the analysis?</p>
+</blockquote>
+<p>to:</p>
+<blockquote class="blockquote">
+<p>Have I left enough evidence for another person to understand and reconstruct what I did?</p>
+</blockquote>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Reproducibility Is Intellectual Hospitality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Research asks readers to trust processes they did not personally observe. Documentation, provenance, code, and transparent decisions invite another person into the reasoning process and make scholarship more open to correction.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Final Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A repository containing code is not automatically reproducible. Ask whether a new researcher can determine the question, data provenance, analytical sample, required environment, origin of each reported result, major judgment calls, and unavoidable privacy/licensing/access limitations.</p>
+<p>The goal is <strong>maximal defensible transparency within real constraints</strong>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="final-three-track-culmination" class="level2" data-number="18.8">
+<h2 data-number="18.8" class="anchored" data-anchor-id="final-three-track-culmination"><span class="header-section-number">18.8</span> Final Three-Track Culmination</h2>
+<p><strong>Guided Learner:</strong> reproduce one central analysis and explain each major workflow step.</p>
+<p><strong>Practitioner:</strong> build a documented end-to-end pipeline that can be rerun on new data.</p>
+<p><strong>Researcher:</strong> produce a research-ready package containing manuscript, provenance, analysis code, environment documentation, generated outputs, and reproducibility limitations.</p>
+</section>
+<section id="final-reflection" class="level2" data-number="18.9">
+<h2 data-number="18.9" class="anchored" data-anchor-id="final-reflection"><span class="header-section-number">18.9</span> Final Reflection</h2>
+<p>A trustworthy machine-learning project requires more than algorithmic performance:</p>
+<p><span class="math display">\[
+\text{Problem Framing}
++
+\text{Measurement}
++
+\text{Data}
++
+\text{Modeling}
++
+\text{Evaluation}
++
+\text{Responsibility}
++
+\text{Reproducibility}.
+\]</span></p>
+<p>Machine learning becomes mature analytical practice when these are treated as one connected system.</p>
+</section>
+<section id="separate-source-from-derived-artifacts" class="level2" data-number="18.10">
+<h2 data-number="18.10" class="anchored" data-anchor-id="separate-source-from-derived-artifacts"><span class="header-section-number">18.10</span> Separate Source From Derived Artifacts</h2>
+<p>A useful distinction is:</p>
+<p><span class="math display">\[
+\boxed{\text{source data}}
+\rightarrow
+\boxed{\text{derived data}}
+\rightarrow
+\boxed{\text{analysis outputs}}.
+\]</span></p>
+<p>Do not silently overwrite the original source data.</p>
+<p>Derived files should be reproducible from documented inputs and code whenever possible.</p>
+</section>
+<section id="data-provenance" class="level2" data-number="18.11">
+<h2 data-number="18.11" class="anchored" data-anchor-id="data-provenance"><span class="header-section-number">18.11</span> Data Provenance</h2>
+<p>FAIR data stewardship emphasizes making research objects findable, accessible under appropriate conditions, interoperable, and reusable <span class="citation" data-cites="wilkinsonEtAl2016">(<a href="../references.html#ref-wilkinsonEtAl2016" role="doc-biblioref">Wilkinson et al. 2016</a>)</span>.</p>
+</section>
+<section id="every-dataset-has-a-history" class="level2" data-number="18.12">
+<h2 data-number="18.12" class="anchored" data-anchor-id="every-dataset-has-a-history"><span class="header-section-number">18.12</span> Every Dataset Has a History</h2>
+<p>Record:</p>
+<ul>
+<li>source;</li>
+<li>access date;</li>
+<li>version or release;</li>
+<li>persistent identifier when available;</li>
+<li>license;</li>
+<li>inclusion/exclusion criteria;</li>
+<li>variable definitions;</li>
+<li>transformations;</li>
+<li>missing-data decisions;</li>
+<li>known limitations.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="18.11">
-<h2 data-number="18.11" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">18.11</span> Knowledge Check</h2>
+<section id="create-a-data-readme" class="level2" data-number="18.13">
+<h2 data-number="18.13" class="anchored" data-anchor-id="create-a-data-readme"><span class="header-section-number">18.13</span> Create a Data README</h2>
+<p>A <code>data/README.md</code> can explain:</p>
+<pre class="text"><code>Dataset:
+Source:
+Version:
+Access date:
+License:
+Unit of analysis:
+Outcome:
+Predictors:
+Inclusion criteria:
+Exclusion criteria:
+Missingness:
+Transformations:
+Files not shared:
+Reason not shared:
+Reproduction instructions:</code></pre>
+</section>
+<section id="hashes-can-identify-file-versions" class="level2" data-number="18.14">
+<h2 data-number="18.14" class="anchored" data-anchor-id="hashes-can-identify-file-versions"><span class="header-section-number">18.14</span> Hashes Can Identify File Versions</h2>
+<p>A cryptographic hash can help detect whether a file changed.</p>
+<div id="52de592f" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>example_bytes <span class="op">=</span> <span class="st">b"machine learning reproducibility"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sha256 <span class="op">=</span> hashlib.sha256(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    example_bytes</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>).hexdigest()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sha256</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>'b53196464907eaecda7eedf8e83e76a5fd4e14ecce9526c83b803e5f3cdd2bea'</code></pre>
+</div>
+</div>
+<p>A hash does not explain what changed or whether the data are correct.</p>
+<p>It provides a useful fingerprint for a particular byte sequence.</p>
+</section>
+<section id="randomness-and-determinism" class="level2" data-number="18.15">
+<h2 data-number="18.15" class="anchored" data-anchor-id="randomness-and-determinism"><span class="header-section-number">18.15</span> Randomness and Determinism</h2>
+</section>
+<section id="random-seeds-improve-repeatability" class="level2" data-number="18.16">
+<h2 data-number="18.16" class="anchored" data-anchor-id="random-seeds-improve-repeatability"><span class="header-section-number">18.16</span> Random Seeds Improve Repeatability</h2>
+<p>Many ML procedures contain randomness:</p>
+<ul>
+<li>train/test splitting;</li>
+<li>bootstrapping;</li>
+<li>random forests;</li>
+<li>stochastic optimization;</li>
+<li>initialization;</li>
+<li>augmentation.</li>
+</ul>
+<p>A fixed seed can make a computational path easier to reproduce.</p>
+<div id="251e72f7" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">42</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>rng.normal(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>array([ 0.30471708, -1.03998411,  0.7504512 ,  0.94056472, -1.95103519])</code></pre>
+</div>
+</div>
+</section>
+<section id="a-seed-is-not-a-reproducibility-guarantee" class="level2" data-number="18.17">
+<h2 data-number="18.17" class="anchored" data-anchor-id="a-seed-is-not-a-reproducibility-guarantee"><span class="header-section-number">18.17</span> A Seed Is Not a Reproducibility Guarantee</h2>
+<p>Results can still differ because of:</p>
+<ul>
+<li>software versions;</li>
+<li>hardware;</li>
+<li>parallel execution;</li>
+<li>nondeterministic libraries;</li>
+<li>numerical precision;</li>
+<li>operating systems;</li>
+<li>changed data;</li>
+<li>changed defaults.</li>
+</ul>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{\text{random seed}}
+\neq
+\boxed{\text{complete reproducibility}}.
+\]</span></p>
+</section>
+<section id="record-the-computational-environment" class="level2" data-number="18.18">
+<h2 data-number="18.18" class="anchored" data-anchor-id="record-the-computational-environment"><span class="header-section-number">18.18</span> Record the Computational Environment</h2>
+</section>
+<section id="software-is-part-of-the-method" class="level2" data-number="18.19">
+<h2 data-number="18.19" class="anchored" data-anchor-id="software-is-part-of-the-method"><span class="header-section-number">18.19</span> Software Is Part of the Method</h2>
+<p>The computational environment can affect results.</p>
+<p>Record at least:</p>
+<ul>
+<li>operating system;</li>
+<li>Python version;</li>
+<li>package versions;</li>
+<li>major external libraries;</li>
+<li>hardware when relevant.</li>
+</ul>
+</section>
+<section id="inspect-the-current-environment" class="level2" data-number="18.20">
+<h2 data-number="18.20" class="anchored" data-anchor-id="inspect-the-current-environment"><span class="header-section-number">18.20</span> Inspect the Current Environment</h2>
+<div id="44fad9de" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>environment_info <span class="op">=</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"python"</span>: sys.version.split()[<span class="dv">0</span>],</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"platform"</span>: platform.platform(),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numpy"</span>: np.__version__,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas"</span>: pd.__version__,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scikit-learn"</span>: sklearn.__version__</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>pd.Series(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    environment_info,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"version"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>python                             3.13.1
+platform        Windows-11-10.0.26200-SP0
+numpy                               2.2.2
+pandas                              2.2.3
+scikit-learn                        1.6.1
+Name: version, dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="dependency-files" class="level2" data-number="18.21">
+<h2 data-number="18.21" class="anchored" data-anchor-id="dependency-files"><span class="header-section-number">18.21</span> Dependency Files</h2>
+<p>Common approaches include:</p>
+<ul>
+<li><code>requirements.txt</code>;</li>
+<li><code>pyproject.toml</code>;</li>
+<li>Conda environment files;</li>
+<li>lock files;</li>
+<li>containers.</li>
+</ul>
+<p>A plain package list improves documentation, while a lock file or container can provide stronger control over dependency resolution.</p>
+</section>
+<section id="do-not-confuse-environment-capture-with-scientific-validity" class="level2" data-number="18.22">
+<h2 data-number="18.22" class="anchored" data-anchor-id="do-not-confuse-environment-capture-with-scientific-validity"><span class="header-section-number">18.22</span> Do Not Confuse Environment Capture With Scientific Validity</h2>
+<p>A perfectly preserved environment can reproduce a flawed analysis exactly.</p>
+<p>Reproducibility enables scrutiny.</p>
+<p>It does not certify correctness.</p>
+</section>
+<section id="pipelines-as-reproducible-methods" class="level2" data-number="18.23">
+<h2 data-number="18.23" class="anchored" data-anchor-id="pipelines-as-reproducible-methods"><span class="header-section-number">18.23</span> Pipelines as Reproducible Methods</h2>
+</section>
+<section id="preprocessing-is-part-of-the-model" class="level2" data-number="18.24">
+<h2 data-number="18.24" class="anchored" data-anchor-id="preprocessing-is-part-of-the-model"><span class="header-section-number">18.24</span> Preprocessing Is Part of the Model</h2>
+<p>Suppose standardization is performed before cross-validation using the full dataset.</p>
+<p>That creates leakage.</p>
+<p>A reproducible workflow should preserve the transformation boundary.</p>
+<div id="169831b8" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_breast_cancer(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    as_frame<span class="op">=</span><span class="va">True</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.data</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (data.target <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">.30</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"scale"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        StandardScaler()</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        LogisticRegression(</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>            max_iter<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>pipeline.fit(</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    y_train</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> pipeline.predict_proba(</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>roc_auc_score(</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    prob</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>np.float64(0.997517523364486)</code></pre>
+</div>
+</div>
+<p>The pipeline preserves the order:</p>
+<p><span class="math display">\[
+\text{training data}
+\rightarrow
+\text{fit preprocessing}
+\rightarrow
+\text{fit model}.
+\]</span></p>
+<p>New data receive the transformations learned from training data.</p>
+</section>
+<section id="experiment-configuration" class="level2" data-number="18.25">
+<h2 data-number="18.25" class="anchored" data-anchor-id="experiment-configuration"><span class="header-section-number">18.25</span> Experiment Configuration</h2>
+</section>
+<section id="separate-configuration-from-results" class="level2" data-number="18.26">
+<h2 data-number="18.26" class="anchored" data-anchor-id="separate-configuration-from-results"><span class="header-section-number">18.26</span> Separate Configuration From Results</h2>
+<p>An experiment should record the settings that produced the result.</p>
+<div id="115f60a4" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>experiment <span class="op">=</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"experiment_id"</span>: <span class="st">"logistic-baseline-v1"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"random_state"</span>: <span class="dv">42</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"test_size"</span>: <span class="fl">0.30</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: <span class="st">"LogisticRegression"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"max_iter"</span>: <span class="dv">2000</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scaling"</span>: <span class="st">"StandardScaler"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"primary_metric"</span>: <span class="st">"roc_auc"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>experiment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>{'experiment_id': 'logistic-baseline-v1',
+ 'random_state': 42,
+ 'test_size': 0.3,
+ 'model': 'LogisticRegression',
+ 'max_iter': 2000,
+ 'scaling': 'StandardScaler',
+ 'primary_metric': 'roc_auc'}</code></pre>
+</div>
+</div>
+</section>
+<section id="store-machine-readable-metadata" class="level2" data-number="18.27">
+<h2 data-number="18.27" class="anchored" data-anchor-id="store-machine-readable-metadata"><span class="header-section-number">18.27</span> Store Machine-Readable Metadata</h2>
+<div id="ee8d1de2" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>experiment_json <span class="op">=</span> json.dumps(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    experiment,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    indent<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    experiment_json</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "experiment_id": "logistic-baseline-v1",
+  "random_state": 42,
+  "test_size": 0.3,
+  "model": "LogisticRegression",
+  "max_iter": 2000,
+  "scaling": "StandardScaler",
+  "primary_metric": "roc_auc"
+}</code></pre>
+</div>
+</div>
+<p>Machine-readable metadata can support automated experiment tracking and auditing.</p>
+</section>
+<section id="results-should-point-back-to-configuration" class="level2" data-number="18.28">
+<h2 data-number="18.28" class="anchored" data-anchor-id="results-should-point-back-to-configuration"><span class="header-section-number">18.28</span> Results Should Point Back to Configuration</h2>
+<p>A result table should not contain only:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th style="text-align: right;">ROC-AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logistic Regression</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+</tbody>
+</table>
+<p>It should also be possible to identify:</p>
+<ul>
+<li>experiment ID;</li>
+<li>code version;</li>
+<li>data version;</li>
+<li>configuration;</li>
+<li>environment;</li>
+<li>evaluation split.</li>
+</ul>
+</section>
+<section id="version-control-with-git" class="level2" data-number="18.29">
+<h2 data-number="18.29" class="anchored" data-anchor-id="version-control-with-git"><span class="header-section-number">18.29</span> Version Control With Git</h2>
+</section>
+<section id="git-preserves-project-history" class="level2" data-number="18.30">
+<h2 data-number="18.30" class="anchored" data-anchor-id="git-preserves-project-history"><span class="header-section-number">18.30</span> Git Preserves Project History</h2>
+<p>Git records snapshots of a project over time.</p>
+<p>A basic workflow is:</p>
+<pre class="text"><code>edit
+↓
+git status
+↓
+git add
+↓
+git commit
+↓
+git push</code></pre>
+</section>
+<section id="a-commit-should-represent-a-meaningful-change" class="level2" data-number="18.31">
+<h2 data-number="18.31" class="anchored" data-anchor-id="a-commit-should-represent-a-meaningful-change"><span class="header-section-number">18.31</span> A Commit Should Represent a Meaningful Change</h2>
+<p>Useful commit messages might be:</p>
+<pre class="text"><code>Add leakage-safe preprocessing pipeline
+Add external validation analysis
+Correct outcome coding
+Revise calibration figure
+Document dataset release</code></pre>
+<p>Avoid treating version control as a periodic backup of mysterious changes.</p>
+</section>
+<section id="git-does-not-replace-documentation" class="level2" data-number="18.32">
+<h2 data-number="18.32" class="anchored" data-anchor-id="git-does-not-replace-documentation"><span class="header-section-number">18.32</span> Git Does Not Replace Documentation</h2>
+<p>A repository with 500 commits but no README may still be difficult to reproduce.</p>
+<p>Version history and scientific documentation solve different problems.</p>
+</section>
+<section id="github-and-remote-repositories" class="level2" data-number="18.33">
+<h2 data-number="18.33" class="anchored" data-anchor-id="github-and-remote-repositories"><span class="header-section-number">18.33</span> GitHub and Remote Repositories</h2>
+</section>
+<section id="why-use-a-remote-repository" class="level2" data-number="18.34">
+<h2 data-number="18.34" class="anchored" data-anchor-id="why-use-a-remote-repository"><span class="header-section-number">18.34</span> Why Use a Remote Repository?</h2>
+<p>A remote repository can support:</p>
+<ul>
+<li>collaboration;</li>
+<li>issue tracking;</li>
+<li>code review;</li>
+<li>version history;</li>
+<li>public dissemination;</li>
+<li>integration with archival services.</li>
+</ul>
+<p>But GitHub itself should not automatically be treated as the permanent scholarly archive.</p>
+<p>For a citable release, archive a stable version in an appropriate preservation repository.</p>
+</section>
+<section id="do-not-commit-secrets" class="level2" data-number="18.35">
+<h2 data-number="18.35" class="anchored" data-anchor-id="do-not-commit-secrets"><span class="header-section-number">18.35</span> Do Not Commit Secrets</h2>
+<p>Never commit:</p>
+<ul>
+<li>passwords;</li>
+<li>API keys;</li>
+<li>access tokens;</li>
+<li>private credentials;</li>
+<li>restricted data.</li>
+</ul>
+<p>Use environment variables or secure secret-management systems.</p>
+<p>If a secret is committed, deleting the visible line may not remove it from Git history.</p>
+</section>
+<section id="quarto-as-a-reproducible-publishing-system" class="level2" data-number="18.36">
+<h2 data-number="18.36" class="anchored" data-anchor-id="quarto-as-a-reproducible-publishing-system"><span class="header-section-number">18.36</span> Quarto as a Reproducible Publishing System</h2>
+</section>
+<section id="narrative-and-computation-belong-together" class="level2" data-number="18.37">
+<h2 data-number="18.37" class="anchored" data-anchor-id="narrative-and-computation-belong-together"><span class="header-section-number">18.37</span> Narrative and Computation Belong Together</h2>
+<p>Quarto can combine:</p>
+<ul>
+<li>prose;</li>
+<li>equations;</li>
+<li>executable code;</li>
+<li>figures;</li>
+<li>tables;</li>
+<li>citations;</li>
+<li>cross-references;</li>
+<li>multiple output formats.</li>
+</ul>
+<p>This reduces the distance between analysis and publication.</p>
+</section>
+<section id="literate-programming" class="level2" data-number="18.38">
+<h2 data-number="18.38" class="anchored" data-anchor-id="literate-programming"><span class="header-section-number">18.38</span> Literate Programming</h2>
+<p>Practical scientific-computing guidance emphasizes readable project organization, version control, documentation, automation, and workflows that other researchers can inspect and rerun <span class="citation" data-cites="wilson2017good">(<a href="../references.html#ref-wilson2017good" role="doc-biblioref">Wilson et al. 2017</a>)</span>.</p>
+<p>The principle is:</p>
+<blockquote class="blockquote">
+<p>Explain the reasoning alongside the computation that implements it.</p>
+</blockquote>
+<p>Instead of manually copying a result from a notebook into a manuscript, generate the result from code when practical.</p>
+</section>
+<section id="a-figure-should-have-provenance" class="level2" data-number="18.39">
+<h2 data-number="18.39" class="anchored" data-anchor-id="a-figure-should-have-provenance"><span class="header-section-number">18.39</span> A Figure Should Have Provenance</h2>
+<div id="cell-fig-reproducible-example" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>y_demo <span class="op">=</span> np.sin(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    x</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    x,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    y_demo</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"sin(x)"</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"A Code-Generated Figure"</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-reproducible-example" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Code-generated line plot of the sine function from x equals 0 to 10, illustrating a figure whose data, transformation, and rendering are reproducible from source code.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reproducible-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="18-reproducible-ml_files/figure-html/fig-reproducible-example-output-1.png" alt="Code-generated line plot of the sine function from x equals 0 to 10, illustrating a figure whose data, transformation, and rendering are reproducible from source code." width="683" height="376" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reproducible-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.1: A reproducible figure is generated from code rather than manually reconstructed.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure’s provenance is visible in the document source.</p>
+</section>
+<section id="notebooks-versus-scripts" class="level2" data-number="18.40">
+<h2 data-number="18.40" class="anchored" data-anchor-id="notebooks-versus-scripts"><span class="header-section-number">18.40</span> Notebooks Versus Scripts</h2>
+</section>
+<section id="exploration-and-production-serve-different-purposes" class="level2" data-number="18.41">
+<h2 data-number="18.41" class="anchored" data-anchor-id="exploration-and-production-serve-different-purposes"><span class="header-section-number">18.41</span> Exploration and Production Serve Different Purposes</h2>
+<p>Notebooks are valuable for:</p>
+<ul>
+<li>exploration;</li>
+<li>teaching;</li>
+<li>visualization;</li>
+<li>iterative reasoning.</li>
+</ul>
+<p>Scripts and modules are often useful for:</p>
+<ul>
+<li>reusable transformations;</li>
+<li>testing;</li>
+<li>automation;</li>
+<li>pipelines;</li>
+<li>production workflows.</li>
+</ul>
+<p>A strong project can use both.</p>
+</section>
+<section id="beware-hidden-notebook-state" class="level2" data-number="18.42">
+<h2 data-number="18.42" class="anchored" data-anchor-id="beware-hidden-notebook-state"><span class="header-section-number">18.42</span> Beware Hidden Notebook State</h2>
+<p>A notebook may run successfully only because cells were executed out of order.</p>
+<p>A useful test is:</p>
+<blockquote class="blockquote">
+<p>Restart the kernel and run everything from the beginning.</p>
+</blockquote>
+<p>If the analysis fails, the computational narrative is incomplete.</p>
+</section>
+<section id="saving-model-artifacts" class="level2" data-number="18.43">
+<h2 data-number="18.43" class="anchored" data-anchor-id="saving-model-artifacts"><span class="header-section-number">18.43</span> Saving Model Artifacts</h2>
+</section>
+<section id="models-are-derived-artifacts" class="level2" data-number="18.44">
+<h2 data-number="18.44" class="anchored" data-anchor-id="models-are-derived-artifacts"><span class="header-section-number">18.44</span> Models Are Derived Artifacts</h2>
+<p>A fitted model can be saved for reuse.</p>
+<div id="ebbdff2e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tempfile <span class="im">import</span> TemporaryDirectory</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> TemporaryDirectory() <span class="im">as</span> tmp:</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    model_path <span class="op">=</span> Path(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        tmp</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">/</span> <span class="st">"model.pkl"</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        model_path,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"wb"</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        pickle.dump(</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            pipeline,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        model_path,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rb"</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    ) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        reloaded_pipeline <span class="op">=</span> pickle.load(</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    reloaded_prob <span class="op">=</span> reloaded_pipeline.predict_proba(</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        X_test</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    )[:, <span class="dv">1</span>]</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    maximum_difference <span class="op">=</span> np.<span class="bu">max</span>(</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        np.<span class="bu">abs</span>(</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>            prob</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>            <span class="op">-</span> reloaded_prob</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>maximum_difference</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>np.float64(0.0)</code></pre>
+</div>
+</div>
+</section>
+<section id="serialization-has-limits" class="level2" data-number="18.45">
+<h2 data-number="18.45" class="anchored" data-anchor-id="serialization-has-limits"><span class="header-section-number">18.45</span> Serialization Has Limits</h2>
+<p>Serialized model artifacts can be:</p>
+<ul>
+<li>version-dependent;</li>
+<li>unsafe to load from untrusted sources;</li>
+<li>incomplete without preprocessing and metadata;</li>
+<li>incompatible across environments.</li>
+</ul>
+<p>Never load an untrusted pickle file.</p>
+<p>A model artifact should be accompanied by provenance and environment information.</p>
+</section>
+<section id="automated-workflows" class="level2" data-number="18.46">
+<h2 data-number="18.46" class="anchored" data-anchor-id="automated-workflows"><span class="header-section-number">18.46</span> Automated Workflows</h2>
+</section>
+<section id="reproducibility-improves-when-steps-are-explicit" class="level2" data-number="18.47">
+<h2 data-number="18.47" class="anchored" data-anchor-id="reproducibility-improves-when-steps-are-explicit"><span class="header-section-number">18.47</span> Reproducibility Improves When Steps Are Explicit</h2>
+<p>A workflow might define:</p>
+<p><span class="math display">\[
+\text{download}
+\rightarrow
+\text{validate}
+\rightarrow
+\text{prepare}
+\rightarrow
+\text{train}
+\rightarrow
+\text{evaluate}
+\rightarrow
+\text{render}.
+\]</span></p>
+<p>The more these dependencies are automated, the less the workflow depends on undocumented memory.</p>
+</section>
+<section id="one-command-reproduction" class="level2" data-number="18.48">
+<h2 data-number="18.48" class="anchored" data-anchor-id="one-command-reproduction"><span class="header-section-number">18.48</span> One-Command Reproduction</h2>
+<p>An aspirational standard is that a documented command can regenerate major outputs from permitted inputs.</p>
+<p>Examples might include:</p>
+<pre class="text"><code>quarto render</code></pre>
+<p>or a project-specific workflow command.</p>
+<p>The exact tooling matters less than the principle: reduce hidden manual steps.</p>
+</section>
+<section id="testing-data-and-ml-pipelines" class="level2" data-number="18.49">
+<h2 data-number="18.49" class="anchored" data-anchor-id="testing-data-and-ml-pipelines"><span class="header-section-number">18.49</span> Testing Data and ML Pipelines</h2>
+</section>
+<section id="tests-are-not-only-for-software-engineers" class="level2" data-number="18.50">
+<h2 data-number="18.50" class="anchored" data-anchor-id="tests-are-not-only-for-software-engineers"><span class="header-section-number">18.50</span> Tests Are Not Only for Software Engineers</h2>
+<p>Research code can test assumptions such as:</p>
+<ul>
+<li>IDs are unique;</li>
+<li>expected columns exist;</li>
+<li>impossible values are absent;</li>
+<li>train/test groups do not overlap;</li>
+<li>outcome coding is valid;</li>
+<li>row counts fall within expected ranges.</li>
+</ul>
+</section>
+<section id="example-data-assertions" class="level2" data-number="18.51">
+<h2 data-number="18.51" class="anchored" data-anchor-id="example-data-assertions"><span class="header-section-number">18.51</span> Example Data Assertions</h2>
+<div id="6d0f30cb" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> X.shape[<span class="dv">0</span>] <span class="op">==</span> y.shape[<span class="dv">0</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> y.isin([<span class="dv">0</span>, <span class="dv">1</span>]).<span class="bu">all</span>()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="kw">not</span> X.columns.duplicated().<span class="bu">any</span>()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> X_train.index.intersection(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    X_test.index</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>).empty</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These checks turn assumptions into executable statements.</p>
+</section>
+<section id="tests-cannot-prove-the-research-question-is-good" class="level2" data-number="18.52">
+<h2 data-number="18.52" class="anchored" data-anchor-id="tests-cannot-prove-the-research-question-is-good"><span class="header-section-number">18.52</span> Tests Cannot Prove the Research Question Is Good</h2>
+<p>Automated tests can verify that code behaves as specified.</p>
+<p>They cannot determine whether:</p>
+<ul>
+<li>the construct is valid;</li>
+<li>the causal claim is justified;</li>
+<li>the intervention is ethical;</li>
+<li>the research question matters.</li>
+</ul>
+<p>Again, computational rigor and scientific judgment are complementary.</p>
+</section>
+<section id="provenance-of-figures-tables-and-claims" class="level2" data-number="18.53">
+<h2 data-number="18.53" class="anchored" data-anchor-id="provenance-of-figures-tables-and-claims"><span class="header-section-number">18.53</span> Provenance of Figures, Tables, and Claims</h2>
+</section>
+<section id="every-result-should-be-traceable" class="level2" data-number="18.54">
+<h2 data-number="18.54" class="anchored" data-anchor-id="every-result-should-be-traceable"><span class="header-section-number">18.54</span> Every Result Should Be Traceable</h2>
+<p>For a reported number, ask:</p>
+<blockquote class="blockquote">
+<p>Which code produced it?</p>
+</blockquote>
+<p>For a figure:</p>
+<blockquote class="blockquote">
+<p>Which data and transformation produced it?</p>
+</blockquote>
+<p>For a model:</p>
+<blockquote class="blockquote">
+<p>Which configuration and training sample produced it?</p>
+</blockquote>
+<p>For a claim:</p>
+<blockquote class="blockquote">
+<p>Which evidence supports it?</p>
+</blockquote>
+<p>This creates a provenance graph:</p>
+<p><span class="math display">\[
+\text{claim}
+\leftarrow
+\text{result}
+\leftarrow
+\text{code}
+\leftarrow
+\text{data}.
+\]</span></p>
+</section>
+<section id="archiving-and-persistent-identifiers" class="level2" data-number="18.55">
+<h2 data-number="18.55" class="anchored" data-anchor-id="archiving-and-persistent-identifiers"><span class="header-section-number">18.55</span> Archiving and Persistent Identifiers</h2>
+</section>
+<section id="a-repository-is-living-a-release-is-fixed" class="level2" data-number="18.56">
+<h2 data-number="18.56" class="anchored" data-anchor-id="a-repository-is-living-a-release-is-fixed"><span class="header-section-number">18.56</span> A Repository Is Living; A Release Is Fixed</h2>
+<p>Active Git repositories evolve.</p>
+<p>Scholarly citation often requires a stable snapshot.</p>
+<p>A release can freeze a version of:</p>
+<ul>
+<li>code;</li>
+<li>documentation;</li>
+<li>configuration;</li>
+<li>figures;</li>
+<li>supplementary materials.</li>
+</ul>
+</section>
+<section id="zenodo-and-doi-archiving" class="level2" data-number="18.57">
+<h2 data-number="18.57" class="anchored" data-anchor-id="zenodo-and-doi-archiving"><span class="header-section-number">18.57</span> Zenodo and DOI Archiving</h2>
+<p>A common workflow is:</p>
+<pre class="text"><code>GitHub repository
+↓
+versioned release
+↓
+Zenodo archive
+↓
+DOI</code></pre>
+<p>A DOI provides a persistent identifier for the archived scholarly object.</p>
+</section>
+<section id="concept-doi-and-version-doi" class="level2" data-number="18.58">
+<h2 data-number="18.58" class="anchored" data-anchor-id="concept-doi-and-version-doi"><span class="header-section-number">18.58</span> Concept DOI and Version DOI</h2>
+<p>When supported by the repository, individual releases can receive version-specific identifiers while the overall project can have a persistent concept-level identifier.</p>
+<p>This supports both:</p>
+<ul>
+<li>citing the project generally;</li>
+<li>citing the exact version used in a study.</li>
+</ul>
+</section>
+<section id="osf-as-a-research-hub" class="level2" data-number="18.59">
+<h2 data-number="18.59" class="anchored" data-anchor-id="osf-as-a-research-hub"><span class="header-section-number">18.59</span> OSF as a Research Hub</h2>
+<p>OSF can support:</p>
+<ul>
+<li>project organization;</li>
+<li>registrations;</li>
+<li>preregistration;</li>
+<li>files;</li>
+<li>collaboration;</li>
+<li>links to other research services.</li>
+</ul>
+<p>The best repository depends on the artifact and research workflow.</p>
+</section>
+<section id="doi-does-not-mean-peer-reviewed" class="level2" data-number="18.60">
+<h2 data-number="18.60" class="anchored" data-anchor-id="doi-does-not-mean-peer-reviewed"><span class="header-section-number">18.60</span> DOI Does Not Mean Peer Reviewed</h2>
+<p>A DOI establishes persistent identification.</p>
+<p>It does not automatically imply:</p>
+<ul>
+<li>peer review;</li>
+<li>methodological quality;</li>
+<li>correctness;</li>
+<li>journal publication.</li>
+</ul>
+<p>Persistent citation and scientific validation are different functions.</p>
+</section>
+<section id="citation-and-credit" class="level2" data-number="18.61">
+<h2 data-number="18.61" class="anchored" data-anchor-id="citation-and-credit"><span class="header-section-number">18.61</span> Citation and Credit</h2>
+</section>
+<section id="make-software-and-data-citable" class="level2" data-number="18.62">
+<h2 data-number="18.62" class="anchored" data-anchor-id="make-software-and-data-citable"><span class="header-section-number">18.62</span> Make Software and Data Citable</h2>
+<p>A project can include citation metadata such as:</p>
+<pre class="text"><code>CITATION.cff</code></pre>
+<p>Document:</p>
+<ul>
+<li>authors;</li>
+<li>title;</li>
+<li>version;</li>
+<li>release date;</li>
+<li>DOI;</li>
+<li>repository;</li>
+<li>preferred citation.</li>
+</ul>
+</section>
+<section id="cite-data-as-research-objects" class="level2" data-number="18.63">
+<h2 data-number="18.63" class="anchored" data-anchor-id="cite-data-as-research-objects"><span class="header-section-number">18.63</span> Cite Data as Research Objects</h2>
+<p>Datasets should be cited when possible using their official citation or persistent identifier.</p>
+<p>Data provenance is part of scholarly credit.</p>
+</section>
+<section id="reproducibility-and-restricted-data" class="level2" data-number="18.64">
+<h2 data-number="18.64" class="anchored" data-anchor-id="reproducibility-and-restricted-data"><span class="header-section-number">18.64</span> Reproducibility and Restricted Data</h2>
+</section>
+<section id="open-science-does-not-mean-upload-everything" class="level2" data-number="18.65">
+<h2 data-number="18.65" class="anchored" data-anchor-id="open-science-does-not-mean-upload-everything"><span class="header-section-number">18.65</span> Open Science Does Not Mean “Upload Everything”</h2>
+<p>Open-science norms encourage transparent and reusable research practices while still requiring appropriate protection of sensitive or restricted materials <span class="citation" data-cites="nosekEtAl2015">(<a href="../references.html#ref-nosekEtAl2015" role="doc-biblioref">Nosek et al. 2015</a>)</span>.</p>
+<p>Health, education, financial, and institutional data may contain sensitive or restricted information.</p>
+<p>Responsible reproducibility can use:</p>
+<ul>
+<li>data dictionaries;</li>
+<li>synthetic examples;</li>
+<li>access instructions;</li>
+<li>transformation code;</li>
+<li>controlled repositories;</li>
+<li>metadata;</li>
+<li>documented eligibility procedures.</li>
+</ul>
+<p>The goal is <strong>as open as possible, as restricted as necessary</strong>.</p>
+</section>
+<section id="never-publish-data-merely-to-satisfy-a-reproducibility-checklist" class="level2" data-number="18.66">
+<h2 data-number="18.66" class="anchored" data-anchor-id="never-publish-data-merely-to-satisfy-a-reproducibility-checklist"><span class="header-section-number">18.66</span> Never Publish Data Merely to Satisfy a Reproducibility Checklist</h2>
+<p>Legal, ethical, contractual, and privacy obligations take priority.</p>
+<p>A reproducible workflow can document why an artifact cannot be public.</p>
+</section>
+<section id="robustness-and-multiverse-thinking" class="level2" data-number="18.67">
+<h2 data-number="18.67" class="anchored" data-anchor-id="robustness-and-multiverse-thinking"><span class="header-section-number">18.67</span> Robustness and Multiverse Thinking</h2>
+</section>
+<section id="one-analysis-path-is-rarely-the-only-reasonable-path" class="level2" data-number="18.68">
+<h2 data-number="18.68" class="anchored" data-anchor-id="one-analysis-path-is-rarely-the-only-reasonable-path"><span class="header-section-number">18.68</span> One Analysis Path Is Rarely the Only Reasonable Path</h2>
+<p>Researchers make choices about:</p>
+<ul>
+<li>exclusions;</li>
+<li>transformations;</li>
+<li>missing data;</li>
+<li>features;</li>
+<li>models;</li>
+<li>hyperparameters;</li>
+<li>thresholds;</li>
+<li>metrics.</li>
+</ul>
+<p>A robustness analysis asks whether conclusions depend heavily on one defensible choice.</p>
+</section>
+<section id="specification-curves-and-multiverse-analyses" class="level2" data-number="18.69">
+<h2 data-number="18.69" class="anchored" data-anchor-id="specification-curves-and-multiverse-analyses"><span class="header-section-number">18.69</span> Specification Curves and Multiverse Analyses</h2>
+<p>For some research questions, researchers can examine many reasonable analytical specifications.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\mathcal{S}
+=
+\{
+s_1,s_2,\ldots,s_m
+\}.
+\]</span></p>
+<p>For each specification:</p>
+<p><span class="math display">\[
+\hat\theta_j
+=
+f(D,s_j).
+\]</span></p>
+<p>The distribution of results reveals sensitivity to analytical decisions.</p>
+<p>This is particularly valuable when the scientific conclusion—not merely predictive performance—is the primary outcome.</p>
+</section>
+<section id="reproducibility-is-not-replication" class="level2" data-number="18.70">
+<h2 data-number="18.70" class="anchored" data-anchor-id="reproducibility-is-not-replication"><span class="header-section-number">18.70</span> Reproducibility Is Not Replication</h2>
+</section>
+<section id="the-distinction-matters" class="level2" data-number="18.71">
+<h2 data-number="18.71" class="anchored" data-anchor-id="the-distinction-matters"><span class="header-section-number">18.71</span> The Distinction Matters</h2>
+<p>Imagine that another researcher obtains exactly the same ROC-AUC by running your code on your data.</p>
+<p>That supports computational reproducibility.</p>
+<p>Now imagine they collect a new sample from another university and obtain similar results.</p>
+<p>That supports replication and potentially transportability more strongly.</p>
+<p>The second claim requires new evidence.</p>
+</section>
+<section id="reproducible-computer-vision-preserve-the-visual-evidence-chain" class="level2" data-number="18.72">
+<h2 data-number="18.72" class="anchored" data-anchor-id="reproducible-computer-vision-preserve-the-visual-evidence-chain"><span class="header-section-number">18.72</span> Reproducible Computer Vision: Preserve the Visual Evidence Chain</h2>
+<p>Computer-vision reproducibility requires more than saving a fitted model.</p>
+<p>A visual workflow may depend on:</p>
+<p><span class="math display">\[
+\text{Raw Image}
+\rightarrow
+\text{Decode}
+\rightarrow
+\text{Resize/Crop}
+\rightarrow
+\text{Normalize}
+\rightarrow
+\text{Augment}
+\rightarrow
+\text{Represent}
+\rightarrow
+\text{Model}
+\rightarrow
+\text{Evaluate}.
+\]</span></p>
+<p>Each transformation can change the evidence.</p>
+<p>A reproducible vision project should document, where applicable:</p>
+<ul>
+<li>image source and provenance;</li>
+<li>licensing and consent constraints;</li>
+<li>file formats and decoding libraries;</li>
+<li>inclusion and exclusion rules;</li>
+<li>duplicate and near-duplicate handling;</li>
+<li>subject, device, session, or institution grouping;</li>
+<li>resize and crop rules;</li>
+<li>channel and color-space handling;</li>
+<li>normalization;</li>
+<li>augmentation operations and probabilities;</li>
+<li>random seeds;</li>
+<li>pretrained model or checkpoint identifiers;</li>
+<li>model architecture and weights;</li>
+<li>train/validation/test source definitions;</li>
+<li>evaluation metrics and subgroup analyses;</li>
+<li>hardware or accelerator details when they materially affect execution;</li>
+<li>generated artifacts and model outputs.</li>
+</ul>
+<section id="preserve-the-split-not-just-the-seed" class="level3" data-number="18.72.1">
+<h3 data-number="18.72.1" class="anchored" data-anchor-id="preserve-the-split-not-just-the-seed"><span class="header-section-number">18.72.1</span> Preserve the Split, Not Just the Seed</h3>
+<p>For grouped visual data, a random seed alone is insufficient. If images must generalize to new people, devices, or institutions, preserve the group-level split definition or the exact observation identifiers assigned to each partition.</p>
+<p><span class="math display">\[
+\boxed{\text{Seed}\neq\text{Data-Provenance Record}}
+\]</span></p>
+</section>
+<section id="restricted-images" class="level3" data-number="18.72.2">
+<h3 data-number="18.72.2" class="anchored" data-anchor-id="restricted-images"><span class="header-section-number">18.72.2</span> Restricted Images</h3>
+<p>Visual datasets can be impossible or inappropriate to redistribute because of privacy, consent, licensing, proprietary ownership, or institutional restrictions.</p>
+<p>Reproducibility does not require violating those constraints.</p>
+<p>Instead, preserve:</p>
+<ul>
+<li>acquisition and eligibility logic;</li>
+<li>data dictionaries and schemas;</li>
+<li>preprocessing code;</li>
+<li>checksums or identifiers where permissible;</li>
+<li>synthetic or public demonstration data when useful;</li>
+<li>access instructions;</li>
+<li>documentation of what cannot be shared and why.</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Reproducibility Preserves How We Saw the Data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In computer vision, preprocessing determines what the model is allowed to see.</p>
+<p>Documenting crop rules, image transformations, exclusions, and acquisition conditions therefore preserves more than code. It preserves part of the study’s <strong>epistemic viewpoint</strong>.</p>
+</div>
+</div>
+</section>
+<section id="vision-reproducibility-challenge" class="level3" data-number="18.72.3">
+<h3 data-number="18.72.3" class="anchored" data-anchor-id="vision-reproducibility-challenge"><span class="header-section-number">18.72.3</span> Vision Reproducibility Challenge</h3>
+<p>Take one vision workflow from earlier chapters and create a minimal reproducibility manifest containing:</p>
 <ol type="1">
-<li>What is computational reproducibility?</li>
-<li>Why separate raw and derived data?</li>
-<li>What role does a software environment play?</li>
-<li>Why create tagged releases?</li>
-<li>What does a DOI contribute?</li>
+<li>dataset and provenance;</li>
+<li>unit of analysis;</li>
+<li>target;</li>
+<li>image representation;</li>
+<li>preprocessing;</li>
+<li>split logic;</li>
+<li>model and hyperparameters;</li>
+<li>seed;</li>
+<li>evaluation metrics;</li>
+<li>software environment;</li>
+<li>expected output;</li>
+<li>limitations on redistribution or reuse.</li>
+</ol>
+<p>A second student should be able to reconstruct the analytical logic without relying on undocumented assumptions.</p>
+</section>
+</section>
+<section id="three-tracks" class="level2" data-number="18.73">
+<h2 data-number="18.73" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">18.73</span> Three Tracks</h2>
+</section>
+<section id="health-track" class="level2" data-number="18.74">
+<h2 data-number="18.74" class="anchored" data-anchor-id="health-track"><span class="header-section-number">18.74</span> Health Track</h2>
+<p>A reproducible health ML study should document:</p>
+<ul>
+<li>cohort construction;</li>
+<li>diagnostic definitions;</li>
+<li>coding systems;</li>
+<li>data release;</li>
+<li>temporal boundaries;</li>
+<li>missingness;</li>
+<li>preprocessing;</li>
+<li>patient-level splitting;</li>
+<li>calibration;</li>
+<li>external validation;</li>
+<li>software environment;</li>
+<li>restricted-data access procedures.</li>
+</ul>
+<p>Sensitive patient-level data may remain protected while code and metadata are shared.</p>
+</section>
+<section id="education-track" class="level2" data-number="18.75">
+<h2 data-number="18.75" class="anchored" data-anchor-id="education-track"><span class="header-section-number">18.75</span> Education Track</h2>
+<p>A reproducible education study should document:</p>
+<ul>
+<li>institution and term boundaries;</li>
+<li>student-level identifiers and deidentification;</li>
+<li>outcome definitions;</li>
+<li>LMS extraction logic;</li>
+<li>course/instructor effects;</li>
+<li>repeated-student handling;</li>
+<li>intervention timing;</li>
+<li>FERPA or institutional restrictions where applicable;</li>
+<li>code and synthetic examples when raw data cannot be released.</li>
+</ul>
+<p>A reproducible early-warning model must make clear exactly <strong>when</strong> each predictor becomes available.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level2" data-number="18.76">
+<h2 data-number="18.76" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">18.76</span> Open ML Benchmark Track</h2>
+<p>A benchmark study should preserve:</p>
+<ul>
+<li>dataset version;</li>
+<li>split;</li>
+<li>preprocessing;</li>
+<li>seeds;</li>
+<li>hyperparameter search space;</li>
+<li>compute environment;</li>
+<li>evaluation code;</li>
+<li>model configuration;</li>
+<li>final metrics;</li>
+<li>uncertainty;</li>
+<li>runtime or compute information;</li>
+<li>exact release used for the paper.</li>
+</ul>
+<p>Benchmark reproducibility is strengthened when another researcher can rerun the comparison without reconstructing undocumented decisions.</p>
+</section>
+<section id="beyond-the-algorithm-reproducibility-as-intellectual-humility" class="level2" data-number="18.77">
+<h2 data-number="18.77" class="anchored" data-anchor-id="beyond-the-algorithm-reproducibility-as-intellectual-humility"><span class="header-section-number">18.77</span> Beyond the Algorithm: Reproducibility as Intellectual Humility</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A Scientific Result Should Be Able to Survive Its Author
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A researcher remembers why a row was removed.</p>
+<p>A collaborator remembers which file is current.</p>
+<p>A student remembers which notebook cell must run first.</p>
+<p>Then time passes.</p>
+<p>Memory is not an archival system.</p>
+<p>Reproducibility asks us to move knowledge from the researcher’s memory into inspectable artifacts.</p>
+<p>That is partly an engineering practice.</p>
+<p>It is also a philosophical commitment.</p>
+<p>To make a workflow reproducible is to accept that our work should be open to:</p>
+<ul>
+<li>inspection;</li>
+<li>criticism;</li>
+<li>correction;</li>
+<li>extension;</li>
+<li>replication.</li>
+</ul>
+<p>The purpose is not to prove that we were right.</p>
+<p>The purpose is to make it possible for knowledge to advance even when we were wrong.</p>
+<p>In that sense:</p>
+<p><span class="math display">\[
+\boxed{
+\text{reproducibility}
+=
+\text{an infrastructure for scientific self-correction}
+}
+\]</span></p>
+<p>A result becomes more valuable when others can understand how it came to exist.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-make-my-study-reproducible" class="level2" data-number="18.78">
+<h2 data-number="18.78" class="anchored" data-anchor-id="ai-pair-programmer-make-my-study-reproducible"><span class="header-section-number">18.78</span> AI Pair Programmer: Make My Study Reproducible</h2>
+<p>Ask an AI assistant:</p>
+<blockquote class="blockquote">
+<p>“I set random_state=42, so my machine-learning study is fully reproducible. Write a sentence confirming this for my paper.”</p>
+</blockquote>
+<p>Audit the response.</p>
+<p>A rigorous answer should distinguish the random seed from:</p>
+<ul>
+<li>data version;</li>
+<li>software environment;</li>
+<li>preprocessing;</li>
+<li>split logic;</li>
+<li>package defaults;</li>
+<li>hardware;</li>
+<li>parallelism;</li>
+<li>code version;</li>
+<li>experiment configuration;</li>
+<li>provenance.</li>
+</ul>
+<p>Rewrite the statement so it accurately describes what the seed contributes.</p>
+</section>
+<section id="hands-on-lab-build-a-research-compendium" class="level2" data-number="18.79">
+<h2 data-number="18.79" class="anchored" data-anchor-id="hands-on-lab-build-a-research-compendium"><span class="header-section-number">18.79</span> Hands-On Lab: Build a Research Compendium</h2>
+<p>Create a small reproducible ML project.</p>
+<ol type="1">
+<li>define a research question;</li>
+<li>create a project README;</li>
+<li>create a data README;</li>
+<li>record dataset provenance;</li>
+<li>preserve source and derived data separately;</li>
+<li>create a leakage-safe pipeline;</li>
+<li>set and document random seeds;</li>
+<li>record package versions;</li>
+<li>create an experiment configuration;</li>
+<li>fit a baseline;</li>
+<li>evaluate the model;</li>
+<li>generate one figure from code;</li>
+<li>generate one table from code;</li>
+<li>add executable data checks;</li>
+<li>place reusable code in <code>src/</code>;</li>
+<li>render the report with Quarto;</li>
+<li>initialize Git;</li>
+<li>make meaningful commits;</li>
+<li>push to a remote repository when appropriate;</li>
+<li>add citation metadata;</li>
+<li>create a versioned release;</li>
+<li>archive the release in a persistent repository when appropriate;</li>
+<li>record its persistent identifier;</li>
+<li>document any files that cannot be shared;</li>
+<li>ask another person to reproduce the workflow from the README.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="18.12">
-<h2 data-number="18.12" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">18.12</span> Real-World Case Study</h2>
-<section id="from-notebook-to-citable-research-artifact" class="level3" data-number="18.12.1">
-<h3 data-number="18.12.1" class="anchored" data-anchor-id="from-notebook-to-citable-research-artifact"><span class="header-section-number">18.12.1</span> From Notebook to Citable Research Artifact</h3>
-<p>Transform a chapter project into a documented, versioned, archived research output.</p>
+<section id="practitioner-track" class="level2" data-number="18.80">
+<h2 data-number="18.80" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">18.80</span> Practitioner Track</h2>
+<p>A practitioner should be able to structure a project, preserve provenance, control randomness, record environments, build pipelines, version code, generate reports from computation, test assumptions, and archive stable releases.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="18.81">
+<h2 data-number="18.81" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">18.81</span> Researcher Track</h2>
+<p>A researcher should additionally distinguish reproducibility from replication, preregister analytical decisions when appropriate <span class="citation" data-cites="nosek2018preregistration">(<a href="../references.html#ref-nosek2018preregistration" role="doc-biblioref">Nosek et al. 2018</a>)</span>, conduct robustness analyses, preserve research provenance, document deviations, archive citable artifacts, design workflows for independent verification, and distinguish open science from indiscriminate data sharing.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="18.13">
-<h2 data-number="18.13" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">18.13</span> Professor’s Challenge</h2>
-<p>A paper’s repository contains code but the analysis no longer runs. Is the research reproducible?</p>
+<section id="research-studio" class="level2" data-number="18.82">
+<h2 data-number="18.82" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">18.82</span> Research Studio</h2>
+<p>Design a reproducibility plan suitable for a conference or journal submission.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>research question;</li>
+<li>hypotheses or predictive claims;</li>
+<li>data source;</li>
+<li>dataset version;</li>
+<li>access date;</li>
+<li>license or restrictions;</li>
+<li>cohort/sample construction;</li>
+<li>unit of analysis;</li>
+<li>target definition;</li>
+<li>preprocessing;</li>
+<li>feature engineering;</li>
+<li>split logic;</li>
+<li>random seeds;</li>
+<li>environment specification;</li>
+<li>model configurations;</li>
+<li>hyperparameter search;</li>
+<li>evaluation protocol;</li>
+<li>robustness analyses;</li>
+<li>generated tables;</li>
+<li>generated figures;</li>
+<li>model artifacts;</li>
+<li>code repository;</li>
+<li>documentation;</li>
+<li>citation metadata;</li>
+<li>preregistration/registration where appropriate;</li>
+<li>archival repository;</li>
+<li>persistent identifier;</li>
+<li>restricted-data reproduction pathway;</li>
+<li>independent reproduction test;</li>
+<li>scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="18.14">
-<h2 data-number="18.14" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">18.14</span> Research Extension</h2>
-<p>Develop a replication or reproducibility study around a published machine learning analysis.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="18.15">
-<h2 data-number="18.15" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">18.15</span> Reproducibility Check</h2>
-<p>Clone the project into a clean location and reproduce the complete analysis using only documented instructions.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="18.16">
-<h2 data-number="18.16" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">18.16</span> Key Takeaways</h2>
+<section id="professors-challenge-the-irreproducible-breakthrough" class="level2" data-number="18.83">
+<h2 data-number="18.83" class="anchored" data-anchor-id="professors-challenge-the-irreproducible-breakthrough"><span class="header-section-number">18.83</span> Professor’s Challenge: The Irreproducible Breakthrough</h2>
+<p>A research team reports a new model for predicting college persistence.</p>
+<p>The paper claims:</p>
+<p><span class="math display">\[
+ROC\text{-}AUC=0.94,
+\]</span></p>
+<p>substantially exceeding previous studies.</p>
+<p>The authors provide a GitHub repository containing one notebook.</p>
+<p>However:</p>
 <ul>
-<li>Reproducibility is a design principle, not a final checklist.</li>
-<li>Version control and environment capture make analytical decisions auditable.</li>
-<li>Scholarly archiving turns computational work into a persistent research artifact.</li>
+<li>the dataset is called <code>final_data_v7_REAL.csv</code>;</li>
+<li>no data source or release is documented;</li>
+<li>preprocessing was partly performed manually in Excel;</li>
+<li>notebook cells must be run in an undocumented order;</li>
+<li>no random seeds are reported;</li>
+<li>package versions are absent;</li>
+<li>the train/test split file is missing;</li>
+<li>hyperparameter search results are unavailable;</li>
+<li>the manuscript figure was manually recreated in PowerPoint;</li>
+<li>the repository changed after publication;</li>
+<li>no versioned release was archived;</li>
+<li>the raw student data cannot legally be shared.</li>
+</ul>
+<p>Evaluate the claim that the study is “open and reproducible because the code is on GitHub.”</p>
+<p>Redesign the project without violating student privacy.</p>
+<p>Your solution should address:</p>
+<ul>
+<li>provenance;</li>
+<li>manual transformations;</li>
+<li>environment capture;</li>
+<li>split preservation;</li>
+<li>experiment tracking;</li>
+<li>executable figures;</li>
+<li>version control;</li>
+<li>release archiving;</li>
+<li>DOI assignment;</li>
+<li>restricted-data documentation;</li>
+<li>synthetic or simulated examples;</li>
+<li>independent verification.</li>
+</ul>
+</section>
+<section id="capstone-from-machine-learning-project-to-research-artifact" class="level2" data-number="18.84">
+<h2 data-number="18.84" class="anchored" data-anchor-id="capstone-from-machine-learning-project-to-research-artifact"><span class="header-section-number">18.84</span> Capstone: From Machine Learning Project to Research Artifact</h2>
+<p>Choose one of the book’s three tracks.</p>
+</section>
+<section id="health" class="level2" data-number="18.85">
+<h2 data-number="18.85" class="anchored" data-anchor-id="health"><span class="header-section-number">18.85</span> Health</h2>
+<p>Develop a reproducible prediction study using a public or appropriately accessible health dataset.</p>
+</section>
+<section id="education" class="level2" data-number="18.86">
+<h2 data-number="18.86" class="anchored" data-anchor-id="education"><span class="header-section-number">18.86</span> Education</h2>
+<p>Develop a reproducible study of a learning, persistence, achievement, or institutional outcome.</p>
+</section>
+<section id="open-ml" class="level2" data-number="18.87">
+<h2 data-number="18.87" class="anchored" data-anchor-id="open-ml"><span class="header-section-number">18.87</span> Open ML</h2>
+<p>Develop a reproducible benchmark, methodological comparison, or robustness study using a public dataset.</p>
+<p>For your chosen project, produce:</p>
+<ol type="1">
+<li>research question;</li>
+<li>literature-grounded motivation;</li>
+<li>data provenance;</li>
+<li>exploratory analysis;</li>
+<li>preprocessing pipeline;</li>
+<li>baseline;</li>
+<li>candidate models;</li>
+<li>tuning;</li>
+<li>model evaluation;</li>
+<li>calibration where appropriate;</li>
+<li>uncertainty;</li>
+<li>responsible-ML audit;</li>
+<li>robustness analysis;</li>
+<li>reproducible Quarto manuscript;</li>
+<li>Git repository;</li>
+<li>README;</li>
+<li>environment specification;</li>
+<li>citation metadata;</li>
+<li>versioned release;</li>
+<li>archival plan;</li>
+<li>conference or journal positioning statement.</li>
+</ol>
+<p>The objective is not merely to train a model.</p>
+<p>It is to produce a defensible <strong>research artifact</strong>.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="18.88">
+<h2 data-number="18.88" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">18.88</span> Knowledge Check</h2>
+<ol type="1">
+<li>How does reproducibility differ from replication?</li>
+<li>How does robustness differ from generalizability?</li>
+<li>Why is reproducibility a workflow property rather than a code property?</li>
+<li>Why should source data not be silently overwritten?</li>
+<li>What information belongs in a data README?</li>
+<li>What does a cryptographic hash provide?</li>
+<li>Why is a random seed insufficient for complete reproducibility?</li>
+<li>Why are software versions part of the method?</li>
+<li>How do lock files differ conceptually from simple dependency lists?</li>
+<li>Why should preprocessing be included inside an ML pipeline?</li>
+<li>What should an experiment configuration record?</li>
+<li>What is the purpose of Git?</li>
+<li>Why does Git not replace scientific documentation?</li>
+<li>Why should secrets never be committed to a repository?</li>
+<li>What is literate programming?</li>
+<li>Why can notebooks contain hidden state?</li>
+<li>Why should untrusted pickle files never be loaded?</li>
+<li>What is the benefit of automating a workflow?</li>
+<li>What kinds of assumptions can executable tests check?</li>
+<li>What is research provenance?</li>
+<li>Why is a versioned release useful?</li>
+<li>What role can Zenodo play in an ML project?</li>
+<li>What is a DOI?</li>
+<li>Why does a DOI not imply peer review?</li>
+<li>What role can OSF play in a research workflow?</li>
+<li>Why should datasets be cited?</li>
+<li>Why does open science not require publishing restricted data?</li>
+<li>What is a robustness analysis?</li>
+<li>What is a multiverse analysis?</li>
+<li>Why can a perfectly reproducible analysis still be scientifically wrong?</li>
+<li>What additional evidence does replication provide?</li>
+<li>Why should figures and tables be generated from code when practical?</li>
+<li>What should be preserved so another researcher can reproduce an ML result?</li>
+<li>Why is reproducibility an infrastructure for scientific self-correction?</li>
+<li>How does computational reproducibility differ from replication and robustness?</li>
+<li>Why is code alone insufficient?</li>
+<li>What should a research package preserve about analytical judgment?</li>
+<li>Why is reproducibility part of scholarly accountability?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="18.89">
+<h2 data-number="18.89" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">18.89</span> Reproducibility Check</h2>
+<p>Before releasing a project, verify:</p>
+<ul>
+<li>README;</li>
+<li>research question;</li>
+<li>data README;</li>
+<li>data source;</li>
+<li>dataset version;</li>
+<li>access date;</li>
+<li>license;</li>
+<li>restrictions;</li>
+<li>data dictionary;</li>
+<li>inclusion/exclusion logic;</li>
+<li>source/derived-data separation;</li>
+<li>preprocessing code;</li>
+<li>feature-engineering code;</li>
+<li>split logic;</li>
+<li>seeds;</li>
+<li>environment specification;</li>
+<li>package versions;</li>
+<li>hardware notes where relevant;</li>
+<li>experiment configurations;</li>
+<li>hyperparameter search;</li>
+<li>evaluation code;</li>
+<li>uncertainty analysis;</li>
+<li>robustness analysis;</li>
+<li>generated figures;</li>
+<li>generated tables;</li>
+<li>executable checks/tests;</li>
+<li>model artifacts;</li>
+<li>model metadata;</li>
+<li>Git history;</li>
+<li>remote repository;</li>
+<li>meaningful release tag;</li>
+<li>citation metadata;</li>
+<li>archive;</li>
+<li>persistent identifier;</li>
+<li>restricted-data pathway;</li>
+<li>known limitations;</li>
+<li>independent reproduction instructions.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="18.90">
+<h2 data-number="18.90" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">18.90</span> Key Takeaways</h2>
+<ul>
+<li>Reproducibility, replication, robustness, and generalizability answer different questions.</li>
+<li>Reproducibility belongs to the complete research workflow.</li>
+<li>Data provenance is part of the scientific method.</li>
+<li>Source data and derived artifacts should be distinguishable.</li>
+<li>Random seeds help repeat computational paths but do not guarantee reproducibility.</li>
+<li>Software environments are part of computational methodology.</li>
+<li>Leakage-safe preprocessing should be preserved inside the modeling workflow.</li>
+<li>Experiment configurations connect results to the procedures that generated them.</li>
+<li>Git preserves project history; documentation explains the science.</li>
+<li>Quarto can connect narrative, computation, equations, figures, tables, and citations.</li>
+<li>Hidden notebook state is a reproducibility risk.</li>
+<li>Automated checks make assumptions inspectable.</li>
+<li>Figures, tables, models, and claims should have traceable provenance.</li>
+<li>A living repository and a stable scholarly release serve different purposes.</li>
+<li>Persistent archives and DOIs improve citation and preservation.</li>
+<li>A DOI does not certify scientific quality.</li>
+<li>Open science does not require irresponsible disclosure of restricted data.</li>
+<li>Robustness analysis asks whether conclusions depend on reasonable analytical choices.</li>
+<li>A reproducible analysis can still be wrong.</li>
+<li>Replication requires new evidence.</li>
+<li>Reproducibility enables criticism, correction, extension, and cumulative knowledge.</li>
+<li>A mature ML project should end not merely as a fitted model, but as a defensible research artifact.</li>
+<li>Reproducibility concerns the entire evidence chain.</li>
+<li>Replication and robustness ask questions reproducibility alone cannot answer.</li>
+<li>Research-ready artifacts allow others to inspect, reconstruct, and challenge the analytical process.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-gentlemanLang2007" class="csl-entry" role="listitem">
+Gentleman, Robert, and Duncan Temple Lang. 2007. <span>“Statistical Analyses and Reproducible Research.”</span> <em>Journal of Computational and Graphical Statistics</em> 16 (1): 1–23. <a href="https://doi.org/10.1198/106186007X178663">https://doi.org/10.1198/106186007X178663</a>.
+</div>
+<div id="ref-goodmanEtAl2016" class="csl-entry" role="listitem">
+Goodman, Steven N., Daniele Fanelli, and John P. A. Ioannidis. 2016. <span>“What Does Research Reproducibility Mean?”</span> <em>Science Translational Medicine</em> 8 (341): 341ps12. <a href="https://doi.org/10.1126/scitranslmed.aaf5027">https://doi.org/10.1126/scitranslmed.aaf5027</a>.
+</div>
+<div id="ref-nationalacademies2019reproducibility" class="csl-entry" role="listitem">
+National Academies of Sciences, Engineering, and Medicine. 2019. <em>Reproducibility and Replicability in Science</em>. The National Academies Press.
+</div>
+<div id="ref-nosekEtAl2015" class="csl-entry" role="listitem">
+Nosek, Brian A., George Alter, George C. Banks, et al. 2015. <span>“Promoting an Open Research Culture.”</span> <em>Science</em> 348 (6242): 1422–25. <a href="https://doi.org/10.1126/science.aab2374">https://doi.org/10.1126/science.aab2374</a>.
+</div>
+<div id="ref-nosek2018preregistration" class="csl-entry" role="listitem">
+Nosek, Brian A., Charles R. Ebersole, Alexander C. DeHaven, and David T. Mellor. 2018. <span>“The Preregistration Revolution.”</span> <em>Proceedings of the National Academy of Sciences</em> 115 (11): 2600–2606.
+</div>
+<div id="ref-peng2011reproducible" class="csl-entry" role="listitem">
+Peng, Roger D. 2011. <span>“Reproducible Research in Computational Science.”</span> <em>Science</em> 334 (6060): 1226–27.
+</div>
+<div id="ref-sandve2013ten" class="csl-entry" role="listitem">
+Sandve, Geir Kjetil, Anton Nekrutenko, James Taylor, and Eivind Hovig. 2013. <span>“Ten Simple Rules for Reproducible Computational Research.”</span> <em>PLoS Computational Biology</em> 9 (10).
+</div>
+<div id="ref-wilkinsonEtAl2016" class="csl-entry" role="listitem">
+Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, et al. 2016. <span>“The <span>FAIR</span> Guiding Principles for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3: 160018. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
+</div>
+<div id="ref-wilson2017good" class="csl-entry" role="listitem">
+Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in Scientific Computing.”</span> <em>PLoS Computational Biology</em> 13 (6).
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -631,7 +2186,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -960,13 +2515,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-06-research/17-responsible-ml.html" class="pagination-link" aria-label="Explainable, Fair, and Responsible Machine Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span>
+      <a href="../part-06-research/17-responsible-ml.html" class="pagination-link" aria-label="Responsible Machine Learning: From Prediction to Consequence">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../teaching.html" class="pagination-link" aria-label="Teaching with This Book">
+        <span class="nav-page-text">Teaching with This Book</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

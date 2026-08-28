@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; Dimensionality Reduction – Machine Learning Using Python</title>
+<title>12&nbsp; Dimensionality Reduction: Compressing Data Without Losing the Story – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/12-dimensionality-reduction.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/12-dimensionality-reduction.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -306,50 +431,79 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">12.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">12.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">12.3</span> Real-World Problem</a></li>
-  <li><a href="#pca-foundations" id="toc-pca-foundations" class="nav-link" data-scroll-target="#pca-foundations"><span class="header-section-number">12.4</span> PCA Foundations</a>
+  <li><a href="#feature-selection-versus-feature-extraction" id="toc-feature-selection-versus-feature-extraction" class="nav-link" data-scroll-target="#feature-selection-versus-feature-extraction"><span class="header-section-number">12.3</span> Feature Selection Versus Feature Extraction</a>
   <ul class="collapse">
-  <li><a href="#variance-and-covariance" id="toc-variance-and-covariance" class="nav-link" data-scroll-target="#variance-and-covariance"><span class="header-section-number">12.4.1</span> Variance and Covariance</a></li>
-  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#eigenvalues-and-eigenvectors"><span class="header-section-number">12.4.2</span> Eigenvalues and Eigenvectors</a></li>
-  <li><a href="#principal-components" id="toc-principal-components" class="nav-link" data-scroll-target="#principal-components"><span class="header-section-number">12.4.3</span> Principal Components</a></li>
-  <li><a href="#explained-variance" id="toc-explained-variance" class="nav-link" data-scroll-target="#explained-variance"><span class="header-section-number">12.4.4</span> Explained Variance</a></li>
-  <li><a href="#loadings-and-scores" id="toc-loadings-and-scores" class="nav-link" data-scroll-target="#loadings-and-scores"><span class="header-section-number">12.4.5</span> Loadings and Scores</a></li>
-  <li><a href="#scaling-before-pca" id="toc-scaling-before-pca" class="nav-link" data-scroll-target="#scaling-before-pca"><span class="header-section-number">12.4.6</span> Scaling Before PCA</a></li>
+  <li><a href="#feature-selection" id="toc-feature-selection" class="nav-link" data-scroll-target="#feature-selection"><span class="header-section-number">12.3.1</span> Feature Selection</a></li>
+  <li><a href="#feature-extraction" id="toc-feature-extraction" class="nav-link" data-scroll-target="#feature-extraction"><span class="header-section-number">12.3.2</span> Feature Extraction</a></li>
   </ul></li>
-  <li><a href="#related-methods" id="toc-related-methods" class="nav-link" data-scroll-target="#related-methods"><span class="header-section-number">12.5</span> Related Methods</a>
+  <li><a href="#why-high-dimensions-become-difficult" id="toc-why-high-dimensions-become-difficult" class="nav-link" data-scroll-target="#why-high-dimensions-become-difficult"><span class="header-section-number">12.4</span> Why High Dimensions Become Difficult</a></li>
+  <li><a href="#a-representation-problem" id="toc-a-representation-problem" class="nav-link" data-scroll-target="#a-representation-problem"><span class="header-section-number">12.5</span> A Representation Problem</a></li>
+  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis"><span class="header-section-number">12.6</span> Principal Component Analysis</a>
   <ul class="collapse">
-  <li><a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"><span class="header-section-number">12.5.1</span> Factor Analysis</a></li>
-  <li><a href="#t-sne" id="toc-t-sne" class="nav-link" data-scroll-target="#t-sne"><span class="header-section-number">12.5.2</span> t-SNE</a></li>
-  <li><a href="#umap" id="toc-umap" class="nav-link" data-scroll-target="#umap"><span class="header-section-number">12.5.3</span> UMAP</a></li>
-  <li><a href="#visualization-versus-modeling" id="toc-visualization-versus-modeling" class="nav-link" data-scroll-target="#visualization-versus-modeling"><span class="header-section-number">12.5.4</span> Visualization Versus Modeling</a></li>
+  <li><a href="#begin-with-variance" id="toc-begin-with-variance" class="nav-link" data-scroll-target="#begin-with-variance"><span class="header-section-number">12.6.1</span> Begin With Variance</a></li>
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance"><span class="header-section-number">12.6.2</span> Covariance</a></li>
+  <li><a href="#covariance-by-hand" id="toc-covariance-by-hand" class="nav-link" data-scroll-target="#covariance-by-hand"><span class="header-section-number">12.6.3</span> Covariance by Hand</a></li>
+  <li><a href="#pca-as-a-rotation-of-the-coordinate-system" id="toc-pca-as-a-rotation-of-the-coordinate-system" class="nav-link" data-scroll-target="#pca-as-a-rotation-of-the-coordinate-system"><span class="header-section-number">12.6.4</span> PCA as a Rotation of the Coordinate System</a></li>
+  <li><a href="#eigenvectors-and-eigenvalues" id="toc-eigenvectors-and-eigenvalues" class="nav-link" data-scroll-target="#eigenvectors-and-eigenvalues"><span class="header-section-number">12.6.5</span> Eigenvectors and Eigenvalues</a></li>
+  <li><a href="#a-geometric-pca-example" id="toc-a-geometric-pca-example" class="nav-link" data-scroll-target="#a-geometric-pca-example"><span class="header-section-number">12.6.6</span> A Geometric PCA Example</a></li>
+  <li><a href="#principal-component-scores" id="toc-principal-component-scores" class="nav-link" data-scroll-target="#principal-component-scores"><span class="header-section-number">12.6.7</span> Principal Component Scores</a></li>
+  <li><a href="#loadings" id="toc-loadings" class="nav-link" data-scroll-target="#loadings"><span class="header-section-number">12.6.8</span> Loadings</a></li>
+  <li><a href="#scaling-can-change-the-answer" id="toc-scaling-can-change-the-answer" class="nav-link" data-scroll-target="#scaling-can-change-the-answer"><span class="header-section-number">12.6.9</span> Scaling Can Change the Answer</a></li>
+  <li><a href="#pca-on-a-real-dataset" id="toc-pca-on-a-real-dataset" class="nav-link" data-scroll-target="#pca-on-a-real-dataset"><span class="header-section-number">12.6.10</span> PCA on a Real Dataset</a></li>
+  <li><a href="#scree-plot" id="toc-scree-plot" class="nav-link" data-scroll-target="#scree-plot"><span class="header-section-number">12.6.11</span> Scree Plot</a></li>
+  <li><a href="#cumulative-explained-variance" id="toc-cumulative-explained-variance" class="nav-link" data-scroll-target="#cumulative-explained-variance"><span class="header-section-number">12.6.12</span> Cumulative Explained Variance</a></li>
+  <li><a href="#explained-variance-is-not-importance" id="toc-explained-variance-is-not-importance" class="nav-link" data-scroll-target="#explained-variance-is-not-importance"><span class="header-section-number">12.6.13</span> Explained Variance Is Not Importance</a></li>
+  <li><a href="#visualizing-observations-with-pca" id="toc-visualizing-observations-with-pca" class="nav-link" data-scroll-target="#visualizing-observations-with-pca"><span class="header-section-number">12.6.14</span> Visualizing Observations With PCA</a></li>
+  <li><a href="#interpreting-loadings" id="toc-interpreting-loadings" class="nav-link" data-scroll-target="#interpreting-loadings"><span class="header-section-number">12.6.15</span> Interpreting Loadings</a></li>
+  <li><a href="#reconstruction" id="toc-reconstruction" class="nav-link" data-scroll-target="#reconstruction"><span class="header-section-number">12.6.16</span> Reconstruction</a></li>
+  <li><a href="#reconstruction-error-across-dimensions" id="toc-reconstruction-error-across-dimensions" class="nav-link" data-scroll-target="#reconstruction-error-across-dimensions"><span class="header-section-number">12.6.17</span> Reconstruction Error Across Dimensions</a></li>
+  <li><a href="#pca-in-predictive-modeling" id="toc-pca-in-predictive-modeling" class="nav-link" data-scroll-target="#pca-in-predictive-modeling"><span class="header-section-number">12.6.18</span> PCA in Predictive Modeling</a></li>
+  <li><a href="#does-pca-improve-prediction" id="toc-does-pca-improve-prediction" class="nav-link" data-scroll-target="#does-pca-improve-prediction"><span class="header-section-number">12.6.19</span> Does PCA Improve Prediction?</a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">12.6</span> Python Implementation</a>
+  <li><a href="#dimensionality-reduction-is-an-information-choice" id="toc-dimensionality-reduction-is-an-information-choice" class="nav-link" data-scroll-target="#dimensionality-reduction-is-an-information-choice"><span class="header-section-number">12.7</span> Dimensionality Reduction Is an Information Choice</a>
   <ul class="collapse">
-  <li><a href="#standardscaler" id="toc-standardscaler" class="nav-link" data-scroll-target="#standardscaler"><span class="header-section-number">12.6.1</span> StandardScaler</a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">12.6.2</span> PCA</a></li>
-  <li><a href="#explained-variance-plots" id="toc-explained-variance-plots" class="nav-link" data-scroll-target="#explained-variance-plots"><span class="header-section-number">12.6.3</span> Explained Variance Plots</a></li>
-  <li><a href="#component-interpretation" id="toc-component-interpretation" class="nav-link" data-scroll-target="#component-interpretation"><span class="header-section-number">12.6.4</span> Component Interpretation</a></li>
+  <li><a href="#pca-preserves-variance-not-meaning" id="toc-pca-preserves-variance-not-meaning" class="nav-link" data-scroll-target="#pca-preserves-variance-not-meaning"><span class="header-section-number">12.7.1</span> PCA Preserves Variance, Not Meaning</a></li>
+  <li><a href="#reconstruction-error-makes-the-tradeoff-visible" id="toc-reconstruction-error-makes-the-tradeoff-visible" class="nav-link" data-scroll-target="#reconstruction-error-makes-the-tradeoff-visible"><span class="header-section-number">12.7.2</span> Reconstruction Error Makes the Tradeoff Visible</a></li>
+  <li><a href="#visualization-is-not-the-data" id="toc-visualization-is-not-the-data" class="nav-link" data-scroll-target="#visualization-is-not-the-data"><span class="header-section-number">12.7.3</span> Visualization Is Not the Data</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">12.7</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">12.8</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">12.9</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">12.10</span> Real-World Case Study</a>
+  <li><a href="#nonlinear-embeddings" id="toc-nonlinear-embeddings" class="nav-link" data-scroll-target="#nonlinear-embeddings"><span class="header-section-number">12.8</span> Nonlinear Embeddings</a>
   <ul class="collapse">
-  <li><a href="#reducing-correlated-institutional-indicators" id="toc-reducing-correlated-institutional-indicators" class="nav-link" data-scroll-target="#reducing-correlated-institutional-indicators"><span class="header-section-number">12.10.1</span> Reducing Correlated Institutional Indicators</a></li>
+  <li><a href="#t-sne" id="toc-t-sne" class="nav-link" data-scroll-target="#t-sne"><span class="header-section-number">12.8.1</span> t-SNE</a></li>
+  <li><a href="#t-sne-example" id="toc-t-sne-example" class="nav-link" data-scroll-target="#t-sne-example"><span class="header-section-number">12.8.2</span> t-SNE Example</a></li>
+  <li><a href="#perplexity" id="toc-perplexity" class="nav-link" data-scroll-target="#perplexity"><span class="header-section-number">12.8.3</span> Perplexity</a></li>
+  <li><a href="#t-sne-is-primarily-a-visualization-tool" id="toc-t-sne-is-primarily-a-visualization-tool" class="nav-link" data-scroll-target="#t-sne-is-primarily-a-visualization-tool"><span class="header-section-number">12.8.4</span> t-SNE Is Primarily a Visualization Tool</a></li>
+  <li><a href="#umap" id="toc-umap" class="nav-link" data-scroll-target="#umap"><span class="header-section-number">12.8.5</span> UMAP</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">12.11</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">12.12</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">12.13</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.14</span> Key Takeaways</a></li>
+  <li><a href="#pca-t-sne-or-umap" id="toc-pca-t-sne-or-umap" class="nav-link" data-scroll-target="#pca-t-sne-or-umap"><span class="header-section-number">12.9</span> PCA, t-SNE, or UMAP?</a></li>
+  <li><a href="#a-visualization-can-manufacture-confidence" id="toc-a-visualization-can-manufacture-confidence" class="nav-link" data-scroll-target="#a-visualization-can-manufacture-confidence"><span class="header-section-number">12.10</span> A Visualization Can Manufacture Confidence</a></li>
+  <li><a href="#stress-test-the-representation" id="toc-stress-test-the-representation" class="nav-link" data-scroll-target="#stress-test-the-representation"><span class="header-section-number">12.11</span> Stress-Test the Representation</a></li>
+  <li><a href="#computer-vision-learning-experience-projecting-image-space" id="toc-computer-vision-learning-experience-projecting-image-space" class="nav-link" data-scroll-target="#computer-vision-learning-experience-projecting-image-space"><span class="header-section-number">12.12</span> Computer Vision Learning Experience: Projecting Image Space</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">12.13</span> Three Tracks</a>
+  <ul class="collapse">
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">12.13.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">12.13.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">12.13.3</span> Open ML Benchmark Track</a></li>
+  </ul></li>
+  <li><a href="#beyond-the-algorithm-what-must-be-forgotten" id="toc-beyond-the-algorithm-what-must-be-forgotten" class="nav-link" data-scroll-target="#beyond-the-algorithm-what-must-be-forgotten"><span class="header-section-number">12.14</span> Beyond the Algorithm: What Must Be Forgotten?</a></li>
+  <li><a href="#ai-pair-programmer-i-found-three-patient-types" id="toc-ai-pair-programmer-i-found-three-patient-types" class="nav-link" data-scroll-target="#ai-pair-programmer-i-found-three-patient-types"><span class="header-section-number">12.15</span> AI Pair Programmer: I Found Three Patient Types</a></li>
+  <li><a href="#hands-on-lab-compress-visualize-predict" id="toc-hands-on-lab-compress-visualize-predict" class="nav-link" data-scroll-target="#hands-on-lab-compress-visualize-predict"><span class="header-section-number">12.16</span> Hands-On Lab: Compress, Visualize, Predict</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">12.17</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">12.18</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">12.19</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-two-dimensional-truth" id="toc-professors-challenge-the-two-dimensional-truth" class="nav-link" data-scroll-target="#professors-challenge-the-two-dimensional-truth"><span class="header-section-number">12.20</span> Professor’s Challenge: The Two-Dimensional Truth</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">12.21</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">12.22</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.23</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">12.24</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/12-dimensionality-reduction.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/12-dimensionality-reduction.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></h1>
 </div>
 
 
@@ -368,123 +522,1388 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">12.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain why dimensionality reduction is useful.</li>
-<li>Derive the intuition behind PCA.</li>
-<li>Interpret explained variance and component loadings.</li>
-<li>Distinguish PCA, factor analysis, t-SNE, and UMAP.</li>
-<li>Recognize when low-dimensional visualizations can mislead.</li>
+<li>explain the curse of dimensionality and why high-dimensional data create statistical and computational challenges;</li>
+<li>distinguish feature selection from feature extraction;</li>
+<li>explain dimensionality reduction as a change of representation;</li>
+<li>calculate variance, covariance, and standardized features;</li>
+<li>explain eigenvectors and eigenvalues in the context of Principal Component Analysis (PCA);</li>
+<li>derive the PCA optimization objective conceptually;</li>
+<li>interpret principal-component scores, loadings, and explained variance;</li>
+<li>distinguish explained variance from predictive or substantive importance;</li>
+<li>use scree plots and cumulative explained variance critically;</li>
+<li>reconstruct data from a reduced PCA representation and interpret reconstruction error;</li>
+<li>explain why scaling can radically change PCA;</li>
+<li>use PCA inside a leakage-safe machine-learning pipeline;</li>
+<li>compare PCA for visualization with PCA for predictive modeling;</li>
+<li>explain the purpose and limitations of t-SNE;</li>
+<li>explain the neighborhood-preserving intuition of UMAP;</li>
+<li>recognize why two-dimensional embeddings can create visually compelling but misleading apparent clusters;</li>
+<li>compare PCA, t-SNE, and UMAP based on purpose rather than visual appeal;</li>
+<li>apply dimensionality reduction responsibly in health, education, and research workflows.</li>
+<li>use dimensionality reduction to explore visual representations without turning embeddings into unsupported class claims.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">12.2</span> Why This Matters</h2>
-<p>High-dimensional data can be redundant, noisy, and difficult to visualize. Dimensionality reduction creates compact representations while introducing important interpretive tradeoffs.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">12.3</span> Real-World Problem</h2>
-<p>A dataset contains dozens of correlated indicators. Can a smaller representation preserve the dominant structure?</p>
-</section>
-<section id="pca-foundations" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="pca-foundations"><span class="header-section-number">12.4</span> PCA Foundations</h2>
-<section id="variance-and-covariance" class="level3" data-number="12.4.1">
-<h3 data-number="12.4.1" class="anchored" data-anchor-id="variance-and-covariance"><span class="header-section-number">12.4.1</span> Variance and Covariance</h3>
-</section>
-<section id="eigenvalues-and-eigenvectors" class="level3" data-number="12.4.2">
-<h3 data-number="12.4.2" class="anchored" data-anchor-id="eigenvalues-and-eigenvectors"><span class="header-section-number">12.4.2</span> Eigenvalues and Eigenvectors</h3>
-</section>
-<section id="principal-components" class="level3" data-number="12.4.3">
-<h3 data-number="12.4.3" class="anchored" data-anchor-id="principal-components"><span class="header-section-number">12.4.3</span> Principal Components</h3>
-</section>
-<section id="explained-variance" class="level3" data-number="12.4.4">
-<h3 data-number="12.4.4" class="anchored" data-anchor-id="explained-variance"><span class="header-section-number">12.4.4</span> Explained Variance</h3>
-</section>
-<section id="loadings-and-scores" class="level3" data-number="12.4.5">
-<h3 data-number="12.4.5" class="anchored" data-anchor-id="loadings-and-scores"><span class="header-section-number">12.4.5</span> Loadings and Scores</h3>
-</section>
-<section id="scaling-before-pca" class="level3" data-number="12.4.6">
-<h3 data-number="12.4.6" class="anchored" data-anchor-id="scaling-before-pca"><span class="header-section-number">12.4.6</span> Scaling Before PCA</h3>
-</section>
-</section>
-<section id="related-methods" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="related-methods"><span class="header-section-number">12.5</span> Related Methods</h2>
-<section id="factor-analysis" class="level3" data-number="12.5.1">
-<h3 data-number="12.5.1" class="anchored" data-anchor-id="factor-analysis"><span class="header-section-number">12.5.1</span> Factor Analysis</h3>
-</section>
-<section id="t-sne" class="level3" data-number="12.5.2">
-<h3 data-number="12.5.2" class="anchored" data-anchor-id="t-sne"><span class="header-section-number">12.5.2</span> t-SNE</h3>
-</section>
-<section id="umap" class="level3" data-number="12.5.3">
-<h3 data-number="12.5.3" class="anchored" data-anchor-id="umap"><span class="header-section-number">12.5.3</span> UMAP</h3>
-</section>
-<section id="visualization-versus-modeling" class="level3" data-number="12.5.4">
-<h3 data-number="12.5.4" class="anchored" data-anchor-id="visualization-versus-modeling"><span class="header-section-number">12.5.4</span> Visualization Versus Modeling</h3>
-</section>
-</section>
-<section id="python-implementation" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">12.6</span> Python Implementation</h2>
-<section id="standardscaler" class="level3" data-number="12.6.1">
-<h3 data-number="12.6.1" class="anchored" data-anchor-id="standardscaler"><span class="header-section-number">12.6.1</span> StandardScaler</h3>
-</section>
-<section id="pca" class="level3" data-number="12.6.2">
-<h3 data-number="12.6.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">12.6.2</span> PCA</h3>
-</section>
-<section id="explained-variance-plots" class="level3" data-number="12.6.3">
-<h3 data-number="12.6.3" class="anchored" data-anchor-id="explained-variance-plots"><span class="header-section-number">12.6.3</span> Explained Variance Plots</h3>
-</section>
-<section id="component-interpretation" class="level3" data-number="12.6.4">
-<h3 data-number="12.6.4" class="anchored" data-anchor-id="component-interpretation"><span class="header-section-number">12.6.4</span> Component Interpretation</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">12.7</span> Hands-On Practice</h2>
-<p>Reduce a multivariate health or education dataset and compare models before and after reduction.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">12.8</span> Common Mistakes</h2>
+<p>Modern datasets can contain hundreds, thousands, or even millions of features.</p>
+<p>A document can be represented by thousands of terms. An image can contain millions of pixel values. Genomic data may contain tens of thousands of measurements. Learning-management systems can generate hundreds of behavioral indicators.</p>
+<p>More variables can contain more information.</p>
+<p>But more dimensions can also create:</p>
 <ul>
-<li>Applying PCA without scaling when scales differ.</li>
-<li>Interpreting components as causal constructs.</li>
-<li>Using t-SNE coordinates as ordinary quantitative variables.</li>
-<li>Choosing dimensions only because a plot looks attractive.</li>
+<li>redundancy;</li>
+<li>noise;</li>
+<li>multicollinearity;</li>
+<li>computational burden;</li>
+<li>unstable models;</li>
+<li>difficult visualization;</li>
+<li>distance concentration;</li>
+<li>interpretive overload.</li>
+</ul>
+<p>Dimensionality reduction asks whether we can construct a smaller representation</p>
+<p><span class="math display">\[
+X\in\mathbb{R}^{n\times p}
+\quad\longrightarrow\quad
+Z\in\mathbb{R}^{n\times k},
+\qquad k\ll p,
+\]</span></p>
+<p>while retaining information useful for our purpose.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>When we compress a high-dimensional world into fewer dimensions, what information are we preserving—and what are we choosing to forget?</strong></p>
+</div>
+</div>
+</section>
+<section id="feature-selection-versus-feature-extraction" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="feature-selection-versus-feature-extraction"><span class="header-section-number">12.3</span> Feature Selection Versus Feature Extraction</h2>
+<p>These approaches reduce dimensionality differently.</p>
+<section id="feature-selection" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="feature-selection"><span class="header-section-number">12.3.1</span> Feature Selection</h3>
+<p>Choose a subset of the original variables:</p>
+<p><span class="math display">\[
+(x_1,x_2,\ldots,x_p)
+\rightarrow
+(x_2,x_5,x_9).
+\]</span></p>
+<p>The retained variables preserve their original meaning.</p>
+</section>
+<section id="feature-extraction" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="feature-extraction"><span class="header-section-number">12.3.2</span> Feature Extraction</h3>
+<p>Construct new variables from combinations of the originals:</p>
+<p><span class="math display">\[
+(x_1,x_2,\ldots,x_p)
+\rightarrow
+(z_1,z_2,\ldots,z_k).
+\]</span></p>
+<p>PCA is a feature-extraction method.</p>
+<p>The new dimensions are not usually identical to familiar substantive variables.</p>
+</section>
+</section>
+<section id="why-high-dimensions-become-difficult" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="why-high-dimensions-become-difficult"><span class="header-section-number">12.4</span> Why High Dimensions Become Difficult</h2>
+<p>Imagine uniformly distributed points in increasingly high-dimensional spaces.</p>
+<p>As dimensionality grows, data become sparse relative to the volume of the space.</p>
+<p>Distance-based intuition can also weaken because nearest and farthest observations may become less distinct under some high-dimensional distributions.</p>
+<p>This family of problems is often called the <strong>curse of dimensionality</strong>.</p>
+<p>It does not mean that high-dimensional data are unusable. It means that methods, sample sizes, representations, and regularization must respond to the geometry.</p>
+</section>
+<section id="a-representation-problem" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="a-representation-problem"><span class="header-section-number">12.5</span> A Representation Problem</h2>
+<p>Suppose three variables measure related aspects of academic engagement:</p>
+<ul>
+<li>LMS logins;</li>
+<li>assignment activity;</li>
+<li>discussion participation.</li>
+</ul>
+<p>They may share substantial information.</p>
+<p>Could a smaller set of latent numerical directions summarize much of their variation?</p>
+<p>PCA answers this geometrically.</p>
+</section>
+<section id="principal-component-analysis" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="principal-component-analysis"><span class="header-section-number">12.6</span> Principal Component Analysis</h2>
+<p>Principal component analysis has roots in Pearson’s geometric formulation and Hotelling’s statistical development of principal components <span class="citation" data-cites="pearson1901 hotelling1933">(<a href="../references.html#ref-pearson1901" role="doc-biblioref">Pearson 1901</a>; <a href="../references.html#ref-hotelling1933" role="doc-biblioref">Hotelling 1933</a>)</span>.</p>
+<section id="begin-with-variance" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="begin-with-variance"><span class="header-section-number">12.6.1</span> Begin With Variance</h3>
+<p>For a variable <span class="math inline">\(X\)</span> with mean <span class="math inline">\(\bar{x}\)</span>, sample variance is</p>
+<p><span class="math display">\[
+s^2
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}(x_i-\bar{x})^2.
+\]</span></p>
+<p>Variance describes spread around the mean.</p>
+<p>PCA seeks directions through multivariate space along which projected observations have large variance.</p>
+</section>
+<section id="covariance" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="covariance"><span class="header-section-number">12.6.2</span> Covariance</h3>
+<p>For variables <span class="math inline">\(X_j\)</span> and <span class="math inline">\(X_k\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X_j,X_k)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}
+(x_{ij}-\bar{x}_j)
+(x_{ik}-\bar{x}_k).
+\]</span></p>
+<p>Positive covariance indicates that the variables tend to increase together.</p>
+<p>Negative covariance indicates opposing movement.</p>
+<p>The covariance matrix is</p>
+<p><span class="math display">\[
+\Sigma
+=
+\begin{bmatrix}
+Var(X_1) &amp; Cov(X_1,X_2) &amp; \cdots\\
+Cov(X_2,X_1) &amp; Var(X_2) &amp; \cdots\\
+\vdots &amp; \vdots &amp; \ddots
+\end{bmatrix}.
+\]</span></p>
+</section>
+<section id="covariance-by-hand" class="level3" data-number="12.6.3">
+<h3 data-number="12.6.3" class="anchored" data-anchor-id="covariance-by-hand"><span class="header-section-number">12.6.3</span> Covariance by Hand</h3>
+<div id="321b1a28" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X_small <span class="op">=</span> np.array([</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">2.0</span>, <span class="fl">3.0</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.0</span>, <span class="fl">5.0</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.0</span>, <span class="fl">4.0</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">5.0</span>, <span class="fl">7.0</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">6.0</span>, <span class="fl">8.0</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>np.cov(X_small, rowvar<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>array([[2.5, 3. ],
+       [3. , 4.3]])</code></pre>
+</div>
+</div>
+</section>
+<section id="pca-as-a-rotation-of-the-coordinate-system" class="level3" data-number="12.6.4">
+<h3 data-number="12.6.4" class="anchored" data-anchor-id="pca-as-a-rotation-of-the-coordinate-system"><span class="header-section-number">12.6.4</span> PCA as a Rotation of the Coordinate System</h3>
+<p>Consider centered observations</p>
+<p><span class="math display">\[
+x_i-\bar{x}.
+\]</span></p>
+<p>PCA finds a unit vector <span class="math inline">\(w_1\)</span> such that the projected values</p>
+<p><span class="math display">\[
+z_{i1}=w_1^\top(x_i-\bar{x})
+\]</span></p>
+<p>have maximum variance.</p>
+<p>The first principal component solves</p>
+<p><span class="math display">\[
+\max_{\|w_1\|=1}
+Var(Xw_1).
+\]</span></p>
+<p>The second component finds the direction of greatest remaining variance subject to being orthogonal to the first.</p>
+<p>Thus,</p>
+<p><span class="math display">\[
+PC_1\perp PC_2\perp\cdots\perp PC_p.
+\]</span></p>
+<p>PCA does not simply delete dimensions.</p>
+<p>It <strong>rotates the coordinate system and then allows us to retain selected directions</strong>.</p>
+</section>
+<section id="eigenvectors-and-eigenvalues" class="level3" data-number="12.6.5">
+<h3 data-number="12.6.5" class="anchored" data-anchor-id="eigenvectors-and-eigenvalues"><span class="header-section-number">12.6.5</span> Eigenvectors and Eigenvalues</h3>
+<p>For covariance matrix <span class="math inline">\(\Sigma\)</span>, an eigenvector <span class="math inline">\(v\)</span> satisfies</p>
+<p><span class="math display">\[
+\Sigma v=\lambda v.
+\]</span></p>
+<p>Here:</p>
+<ul>
+<li><span class="math inline">\(v\)</span> gives a principal direction;</li>
+<li><span class="math inline">\(\lambda\)</span> gives the variance associated with that direction.</li>
+</ul>
+<p>Sorting eigenvalues from largest to smallest gives the principal components in decreasing order of explained variance.</p>
+<p>If</p>
+<p><span class="math display">\[
+\lambda_1\ge\lambda_2\ge\cdots\ge\lambda_p,
+\]</span></p>
+<p>then the explained-variance ratio of component <span class="math inline">\(j\)</span> is</p>
+<p><span class="math display">\[
+EVR_j
+=
+\frac{\lambda_j}
+{\sum_{k=1}^{p}\lambda_k}.
+\]</span></p>
+</section>
+<section id="a-geometric-pca-example" class="level3" data-number="12.6.6">
+<h3 data-number="12.6.6" class="anchored" data-anchor-id="a-geometric-pca-example"><span class="header-section-number">12.6.6</span> A Geometric PCA Example</h3>
+<div id="cell-fig-pca-geometry" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> np.array([</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.0</span>, <span class="fl">2.4</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">2.4</span>, <span class="fl">2.2</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>X_geom <span class="op">=</span> rng.multivariate_normal(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    mean<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    cov<span class="op">=</span>cov,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>pca_geom <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>pca_geom.fit(X_geom)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    X_geom[:, <span class="dv">0</span>],</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    X_geom[:, <span class="dv">1</span>],</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">.45</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">22</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> pca_geom.mean_</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> component, variance <span class="kw">in</span> <span class="bu">zip</span>(</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    pca_geom.components_,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    pca_geom.explained_variance_</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    endpoint <span class="op">=</span> mean <span class="op">+</span> component <span class="op">*</span> np.sqrt(variance) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    plt.annotate(</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">""</span>,</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        xy<span class="op">=</span>endpoint,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        xytext<span class="op">=</span>mean,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Original Feature 1"</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Original Feature 2"</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Directions of Variation"</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"equal"</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-pca-geometry" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Geometric illustration of principal component analysis, showing data projected onto directions of greatest variance.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-pca-geometry-output-1.png" alt="Geometric illustration of principal component analysis, showing data projected onto directions of greatest variance." width="662" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: PCA identifies orthogonal directions aligned with decreasing variance in the data.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The arrows show directions of variation, not causal effects.</p>
+</section>
+<section id="principal-component-scores" class="level3" data-number="12.6.7">
+<h3 data-number="12.6.7" class="anchored" data-anchor-id="principal-component-scores"><span class="header-section-number">12.6.7</span> Principal Component Scores</h3>
+<p>Once the directions are estimated, observations can be transformed:</p>
+<p><span class="math display">\[
+Z=X_cW,
+\]</span></p>
+<p>where <span class="math inline">\(X_c\)</span> is centered data and columns of <span class="math inline">\(W\)</span> contain selected principal directions.</p>
+<p>Each row of <span class="math inline">\(Z\)</span> contains the <strong>component scores</strong> for an observation.</p>
+<div id="8777f4ce" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Z_geom <span class="op">=</span> pca_geom.transform(X_geom)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Z_geom[:<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>array([[-7.22602736e-01, -4.31764942e-01],
+       [-1.74352843e+00,  3.50756872e-01],
+       [ 4.33914973e+00, -4.05706324e-01],
+       [-3.33703033e-01, -1.25759373e-01],
+       [-3.54877773e-03, -3.36444936e-01]])</code></pre>
+</div>
+</div>
+</section>
+<section id="loadings" class="level3" data-number="12.6.8">
+<h3 data-number="12.6.8" class="anchored" data-anchor-id="loadings"><span class="header-section-number">12.6.8</span> Loadings</h3>
+<p>The component coefficients describe how original variables contribute to each principal direction.</p>
+<p>In scikit-learn, <code>components_</code> contains the principal axes.</p>
+<div id="6c353eca" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pca_geom.components_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>array([[ 0.77976061,  0.62607778],
+       [-0.62607778,  0.77976061]])</code></pre>
+</div>
+</div>
+<p>The sign of a principal component is arbitrary: multiplying an eigenvector by <span class="math inline">\(-1\)</span> describes the same axis.</p>
+<p>Therefore, do not attach meaning to component sign without considering the full loading pattern.</p>
+</section>
+<section id="scaling-can-change-the-answer" class="level3" data-number="12.6.9">
+<h3 data-number="12.6.9" class="anchored" data-anchor-id="scaling-can-change-the-answer"><span class="header-section-number">12.6.9</span> Scaling Can Change the Answer</h3>
+<p>PCA based on the covariance matrix is sensitive to measurement scale.</p>
+<p>Consider a variable measured in dollars and another measured on a 1-to-5 scale. The variable with much larger numerical variance may dominate the first components.</p>
+<p>For many applications, we therefore standardize:</p>
+<p><span class="math display">\[
+z_{ij}
+=
+\frac{x_{ij}-\mu_j}{\sigma_j}.
+\]</span></p>
+<p>PCA on standardized variables is closely related to performing PCA on a correlation matrix.</p>
+<p>But scaling should be justified rather than automatic.</p>
+</section>
+<section id="pca-on-a-real-dataset" class="level3" data-number="12.6.10">
+<h3 data-number="12.6.10" class="anchored" data-anchor-id="pca-on-a-real-dataset"><span class="header-section-number">12.6.10</span> PCA on a Real Dataset</h3>
+<div id="0dbdaa90" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cancer.data</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cancer.target</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X_scaled)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>pca.explained_variance_ratio_[:<span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>array([0.44272026, 0.18971182, 0.09393163, 0.06602135, 0.05495768,
+       0.04024522, 0.02250734, 0.01588724, 0.01389649, 0.01168978])</code></pre>
+</div>
+</div>
+<p>This full-data transformation is used here for <strong>exploratory demonstration</strong>. When PCA is part of predictive modeling, preprocessing must be learned only from training data.</p>
+</section>
+<section id="scree-plot" class="level3" data-number="12.6.11">
+<h3 data-number="12.6.11" class="anchored" data-anchor-id="scree-plot"><span class="header-section-number">12.6.11</span> Scree Plot</h3>
+<div id="cell-fig-pca-scree" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>components <span class="op">=</span> np.arange(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(pca.explained_variance_ratio_) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    components,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    pca.explained_variance_ratio_,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Principal component"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Explained variance ratio"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"PCA Scree Plot"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-pca-scree" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scree plot showing the variance explained by successive principal components.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-pca-scree-output-1.png" alt="Scree plot showing the variance explained by successive principal components." width="738" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2: A scree plot displays the proportion of variance associated with successive principal components.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A scree plot can help identify diminishing returns, but it does not provide a universally correct number of components.</p>
+</section>
+<section id="cumulative-explained-variance" class="level3" data-number="12.6.12">
+<h3 data-number="12.6.12" class="anchored" data-anchor-id="cumulative-explained-variance"><span class="header-section-number">12.6.12</span> Cumulative Explained Variance</h3>
+<div id="cell-fig-pca-cumulative" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cumulative <span class="op">=</span> np.cumsum(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    pca.explained_variance_ratio_</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    components,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    cumulative,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="fl">.90</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="fl">.95</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of principal components"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Cumulative explained variance"</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Cumulative Explained Variance"</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-pca-cumulative" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Cumulative explained-variance curve showing how retained variance increases as principal components are added.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-cumulative-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-pca-cumulative-output-1.png" alt="Cumulative explained-variance curve showing how retained variance increases as principal components are added." width="738" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-cumulative-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3: Cumulative explained variance shows how much total variance is retained as components are added.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Thresholds such as 90% or 95% are conventions, not laws.</p>
+<p>The right amount of retained variance depends on purpose.</p>
+</section>
+<section id="explained-variance-is-not-importance" class="level3" data-number="12.6.13">
+<h3 data-number="12.6.13" class="anchored" data-anchor-id="explained-variance-is-not-importance"><span class="header-section-number">12.6.13</span> Explained Variance Is Not Importance</h3>
+<p>A principal component explaining substantial variance captures a direction along which predictors vary.</p>
+<p>It does not necessarily capture:</p>
+<ul>
+<li>the features most predictive of an outcome;</li>
+<li>the variables most scientifically important;</li>
+<li>the variables most actionable;</li>
+<li>causal mechanisms.</li>
+</ul>
+<p>A low-variance direction can sometimes contain strong predictive signal.</p>
+<p>Thus,</p>
+<p><span class="math display">\[
+\boxed{\text{explained predictor variance}}
+\neq
+\boxed{\text{outcome relevance}}.
+\]</span></p>
+</section>
+<section id="visualizing-observations-with-pca" class="level3" data-number="12.6.14">
+<h3 data-number="12.6.14" class="anchored" data-anchor-id="visualizing-observations-with-pca"><span class="header-section-number">12.6.14</span> Visualizing Observations With PCA</h3>
+<div id="cell-fig-pca-two-components" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    X_pca[:, <span class="dv">0</span>],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    X_pca[:, <span class="dv">1</span>],</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">.65</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"PC1 (</span><span class="sc">{</span>pca<span class="sc">.</span>explained_variance_ratio_[<span class="dv">0</span>]<span class="sc">:.1%}</span><span class="ss">)"</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"PC2 (</span><span class="sc">{</span>pca<span class="sc">.</span>explained_variance_ratio_[<span class="dv">1</span>]<span class="sc">:.1%}</span><span class="ss">)"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"PCA Projection"</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-pca-two-components" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-dimensional representation of observations using the first two principal components.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-two-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-pca-two-components-output-1.png" alt="Two-dimensional representation of observations using the first two principal components." width="674" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-two-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.4: The first two principal components provide a two-dimensional projection of the standardized feature space.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The class labels are used only for coloring after the unsupervised PCA transformation.</p>
+<p>PCA itself did not use <span class="math inline">\(y\)</span>.</p>
+</section>
+<section id="interpreting-loadings" class="level3" data-number="12.6.15">
+<h3 data-number="12.6.15" class="anchored" data-anchor-id="interpreting-loadings"><span class="header-section-number">12.6.15</span> Interpreting Loadings</h3>
+<div id="293374b8" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>loading_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    pca.components_[:<span class="dv">3</span>].T,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>X.columns,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"PC1"</span>, <span class="st">"PC2"</span>, <span class="st">"PC3"</span>]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>loading_df.loc[</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    loading_df[<span class="st">"PC1"</span>].<span class="bu">abs</span>().sort_values(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    ).index</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>].head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">PC1</th>
+<th data-quarto-table-cell-role="th">PC2</th>
+<th data-quarto-table-cell-role="th">PC3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">mean concave points</th>
+<td>0.260854</td>
+<td>-0.034768</td>
+<td>-0.025564</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean concavity</th>
+<td>0.258400</td>
+<td>0.060165</td>
+<td>0.002734</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">worst concave points</th>
+<td>0.250886</td>
+<td>-0.008257</td>
+<td>-0.170344</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean compactness</th>
+<td>0.239285</td>
+<td>0.151892</td>
+<td>-0.074092</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">worst perimeter</th>
+<td>0.236640</td>
+<td>-0.199878</td>
+<td>-0.048547</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">worst concavity</th>
+<td>0.228768</td>
+<td>0.097964</td>
+<td>-0.173057</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">worst radius</th>
+<td>0.227997</td>
+<td>-0.219866</td>
+<td>-0.047507</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean perimeter</th>
+<td>0.227537</td>
+<td>-0.215181</td>
+<td>-0.009314</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">worst area</th>
+<td>0.224871</td>
+<td>-0.219352</td>
+<td>-0.011902</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean area</th>
+<td>0.220995</td>
+<td>-0.231077</td>
+<td>0.028700</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>A component may combine many correlated measurements.</p>
+<p>Interpretation should consider:</p>
+<ul>
+<li>magnitude;</li>
+<li>sign pattern;</li>
+<li>measurement meaning;</li>
+<li>whether variables were standardized;</li>
+<li>whether the component is stable across samples.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">12.9</span> Knowledge Check</h2>
+<section id="reconstruction" class="level3" data-number="12.6.16">
+<h3 data-number="12.6.16" class="anchored" data-anchor-id="reconstruction"><span class="header-section-number">12.6.16</span> Reconstruction</h3>
+<p>If we retain only <span class="math inline">\(k&lt;p\)</span> components,</p>
+<p><span class="math display">\[
+Z_k=X_cW_k.
+\]</span></p>
+<p>An approximation to the original centered data is</p>
+<p><span class="math display">\[
+\hat X_c=Z_kW_k^\top.
+\]</span></p>
+<p>Information outside the retained subspace is lost.</p>
+<div id="a9b720c1" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pca_5 <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Z_5 <span class="op">=</span> pca_5.fit_transform(X_scaled)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>X_reconstructed <span class="op">=</span> pca_5.inverse_transform(Z_5)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>reconstruction_mse <span class="op">=</span> np.mean(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    (X_scaled <span class="op">-</span> X_reconstructed) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>reconstruction_mse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>np.float64(0.15265725683192763)</code></pre>
+</div>
+</div>
+<p>This gives dimensionality reduction a concrete interpretation:</p>
+<blockquote class="blockquote">
+<p>compression trades representational detail for simplicity.</p>
+</blockquote>
+</section>
+<section id="reconstruction-error-across-dimensions" class="level3" data-number="12.6.17">
+<h3 data-number="12.6.17" class="anchored" data-anchor-id="reconstruction-error-across-dimensions"><span class="header-section-number">12.6.17</span> Reconstruction Error Across Dimensions</h3>
+<div id="cell-fig-reconstruction-error" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>component_counts <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">16</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> []</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> component_counts:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    pca_k <span class="op">=</span> PCA(n_components<span class="op">=</span>k)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    z_k <span class="op">=</span> pca_k.fit_transform(X_scaled)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    x_hat <span class="op">=</span> pca_k.inverse_transform(z_k)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    errors.append(</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        np.mean((X_scaled <span class="op">-</span> x_hat) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(component_counts),</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    errors,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of retained components"</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Reconstruction MSE"</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Compression Versus Reconstruction"</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-reconstruction-error" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Reconstruction error across retained principal components, showing improved reconstruction as dimensionality increases.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reconstruction-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-reconstruction-error-output-1.png" alt="Reconstruction error across retained principal components, showing improved reconstruction as dimensionality increases." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reconstruction-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.5: Reconstruction error decreases as more principal components are retained.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pca-in-predictive-modeling" class="level3" data-number="12.6.18">
+<h3 data-number="12.6.18" class="anchored" data-anchor-id="pca-in-predictive-modeling"><span class="header-section-number">12.6.18</span> PCA in Predictive Modeling</h3>
+<p>If PCA is part of a supervised-learning workflow, both scaling and PCA must be fitted inside the training pipeline.</p>
+<div id="fe71b391" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">.25</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>pca_logit <span class="op">=</span> Pipeline([</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"pca"</span>, PCA(n_components<span class="op">=</span><span class="fl">.95</span>)),</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>pca_logit.fit(X_train, y_train)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>pca_prob <span class="op">=</span> pca_logit.predict_proba(</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>roc_auc_score(y_test, pca_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>np.float64(0.9972746331236897)</code></pre>
+</div>
+</div>
+<p>The test data did not influence the scaling parameters or principal directions.</p>
+</section>
+<section id="does-pca-improve-prediction" class="level3" data-number="12.6.19">
+<h3 data-number="12.6.19" class="anchored" data-anchor-id="does-pca-improve-prediction"><span class="header-section-number">12.6.19</span> Does PCA Improve Prediction?</h3>
+<p>Not necessarily.</p>
+<p>Compare a logistic model with and without PCA.</p>
+<div id="be06bef1" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plain_logit <span class="op">=</span> Pipeline([</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plain_logit.fit(X_train, y_train)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plain_prob <span class="op">=</span> plain_logit.predict_proba(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic regression"</span>:</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        roc_auc_score(y_test, plain_prob),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PCA + logistic regression"</span>:</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        roc_auc_score(y_test, pca_prob)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>{'Logistic regression': np.float64(0.9976939203354298),
+ 'PCA + logistic regression': np.float64(0.9972746331236897)}</code></pre>
+</div>
+</div>
+<p>PCA can improve computational efficiency, reduce collinearity, or regularize a representation.</p>
+<p>It can also discard predictive information.</p>
+<p>It must earn its place empirically.</p>
+</section>
+</section>
+<section id="dimensionality-reduction-is-an-information-choice" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="dimensionality-reduction-is-an-information-choice"><span class="header-section-number">12.7</span> Dimensionality Reduction Is an Information Choice</h2>
+<p>Dimensionality reduction creates a lower-dimensional representation</p>
+<p><span class="math display">\[
+X\in\mathbb{R}^{n\times p}
+\rightarrow
+Z\in\mathbb{R}^{n\times k},
+\qquad k&lt;p.
+\]</span></p>
+<p>The purpose may be visualization, compression, denoising, feature extraction, or computational efficiency.</p>
+<p>But reducing dimension means deciding what information should be preserved.</p>
+<section id="pca-preserves-variance-not-meaning" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="pca-preserves-variance-not-meaning"><span class="header-section-number">12.7.1</span> PCA Preserves Variance, Not Meaning</h3>
+<p>PCA identifies directions that capture large amounts of variance.</p>
+<p>That is mathematically useful, but high variance is not synonymous with substantive importance.</p>
+<p>A low-variance feature could still be:</p>
+<ul>
+<li>clinically important;</li>
+<li>highly predictive for a minority group;</li>
+<li>essential for identifying rare events;</li>
+<li>scientifically meaningful;</li>
+<li>important for fairness analysis.</li>
+</ul>
+<p>Thus,</p>
+<p><span class="math display">\[
+\boxed{
+\text{Variance Preserved}
+\neq
+\text{Meaning Preserved}
+}
+\]</span></p>
+</section>
+<section id="reconstruction-error-makes-the-tradeoff-visible" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2" class="anchored" data-anchor-id="reconstruction-error-makes-the-tradeoff-visible"><span class="header-section-number">12.7.2</span> Reconstruction Error Makes the Tradeoff Visible</h3>
+<div id="cell-fig-pca-reconstruction" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>X_pca_ic <span class="op">=</span> StandardScaler().fit_transform(X)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>max_components_ic <span class="op">=</span> <span class="bu">min</span>(</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    X_pca_ic.shape[<span class="dv">1</span>],</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>components_ic <span class="op">=</span> <span class="bu">range</span>(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    max_components_ic <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>errors_ic <span class="op">=</span> []</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k_ic <span class="kw">in</span> components_ic:</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    pca_ic <span class="op">=</span> PCA(</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        n_components<span class="op">=</span>k_ic</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    Z_ic <span class="op">=</span> pca_ic.fit_transform(</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>        X_pca_ic</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    X_reconstructed_ic <span class="op">=</span> pca_ic.inverse_transform(</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>        Z_ic</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>    mse_ic <span class="op">=</span> np.mean(</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        (X_pca_ic <span class="op">-</span> X_reconstructed_ic) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    errors_ic.append(</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        mse_ic</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(components_ic),</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>    errors_ic,</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span></span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of retained components"</span>)</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Mean reconstruction error"</span>)</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Compression Versus Reconstruction"</span>)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-pca-reconstruction" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Comparison of original and PCA-reconstructed observations illustrating information retained after dimensionality reduction.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-reconstruction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-pca-reconstruction-output-1.png" alt="Comparison of original and PCA-reconstructed observations illustrating information retained after dimensionality reduction." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-reconstruction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.6: Retaining more principal components reduces reconstruction error, illustrating the tradeoff between compression and retained information.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualization-is-not-the-data" class="level3" data-number="12.7.3">
+<h3 data-number="12.7.3" class="anchored" data-anchor-id="visualization-is-not-the-data"><span class="header-section-number">12.7.3</span> Visualization Is Not the Data</h3>
+<p>Nonlinear methods such as t-SNE can produce compelling two-dimensional embeddings.</p>
+<p>But:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Two-Dimensional Embedding}
+\neq
+\text{The Original Data Geometry}
+}
+\]</span></p>
+<p>For t-SNE in particular:</p>
+<ul>
+<li>local neighborhoods are often more meaningful than global distances;</li>
+<li>apparent gaps should not automatically be interpreted as true population separation;</li>
+<li>cluster size can be visually misleading;</li>
+<li>different seeds or hyperparameters can change the embedding.</li>
+</ul>
+<p>A visually persuasive map is therefore an analytical representation, not direct observation of an underlying truth.</p>
+</section>
+</section>
+<section id="nonlinear-embeddings" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="nonlinear-embeddings"><span class="header-section-number">12.8</span> Nonlinear Embeddings</h2>
+<p>PCA is linear.</p>
+<p>Many high-dimensional datasets may contain nonlinear structure.</p>
+<p>Methods such as t-SNE and UMAP are especially popular for producing low-dimensional visualizations.</p>
+<p>Their beautiful plots require careful interpretation.</p>
+<section id="t-sne" class="level3" data-number="12.8.1">
+<h3 data-number="12.8.1" class="anchored" data-anchor-id="t-sne"><span class="header-section-number">12.8.1</span> t-SNE</h3>
+<p>t-distributed Stochastic Neighbor Embedding (t-SNE) seeks a low-dimensional representation that preserves local neighborhood relationships probabilistically <span class="citation" data-cites="vandermaatenHinton2008">(<a href="../references.html#ref-vandermaatenHinton2008" role="doc-biblioref">Maaten and Hinton 2008</a>)</span>.</p>
+<p>At a high level:</p>
 <ol type="1">
-<li>What does the first principal component maximize?</li>
-<li>What is explained variance?</li>
-<li>How does PCA differ from factor analysis?</li>
-<li>Why should t-SNE be interpreted cautiously?</li>
+<li>convert high-dimensional pairwise relationships into neighborhood probabilities;</li>
+<li>create corresponding low-dimensional relationships;</li>
+<li>optimize the embedding so these neighborhood structures are similar.</li>
+</ol>
+<p>A common objective is based on Kullback-Leibler divergence:</p>
+<p><span class="math display">\[
+KL(P\|Q)
+=
+\sum_{i\neq j}
+p_{ij}
+\log
+\left(
+\frac{p_{ij}}{q_{ij}}
+\right).
+\]</span></p>
+<p>The goal is not to preserve every original distance.</p>
+</section>
+<section id="t-sne-example" class="level3" data-number="12.8.2">
+<h3 data-number="12.8.2" class="anchored" data-anchor-id="t-sne-example"><span class="header-section-number">12.8.2</span> t-SNE Example</h3>
+<div id="cell-fig-tsne" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>X_scaled_tsne <span class="op">=</span> StandardScaler().fit_transform(X)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    n_components<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    perplexity<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    init<span class="op">=</span><span class="st">"pca"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="st">"auto"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>X_tsne <span class="op">=</span> tsne.fit_transform(X_scaled_tsne)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    X_tsne[:, <span class="dv">0</span>],</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    X_tsne[:, <span class="dv">1</span>],</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">.65</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t-SNE dimension 1"</span>)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"t-SNE dimension 2"</span>)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"t-SNE Embedding"</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-tsne" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-dimensional t-SNE embedding showing local group structure in a lower-dimensional representation.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tsne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-tsne-output-1.png" alt="Two-dimensional t-SNE embedding showing local group structure in a lower-dimensional representation." width="670" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tsne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.7: t-SNE can reveal local neighborhood structure, but distances and apparent gaps in the two-dimensional embedding require cautious interpretation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The axes do not have the same direct interpretation as PCA axes.</p>
+</section>
+<section id="perplexity" class="level3" data-number="12.8.3">
+<h3 data-number="12.8.3" class="anchored" data-anchor-id="perplexity"><span class="header-section-number">12.8.3</span> Perplexity</h3>
+<p>Perplexity influences the effective neighborhood scale considered by t-SNE.</p>
+<p>Different perplexity values can produce different visual structures.</p>
+<p>Therefore, a responsible t-SNE analysis should examine sensitivity rather than presenting one attractive embedding as definitive.</p>
+</section>
+<section id="t-sne-is-primarily-a-visualization-tool" class="level3" data-number="12.8.4">
+<h3 data-number="12.8.4" class="anchored" data-anchor-id="t-sne-is-primarily-a-visualization-tool"><span class="header-section-number">12.8.4</span> t-SNE Is Primarily a Visualization Tool</h3>
+<p>A common misuse is:</p>
+<ol type="1">
+<li>run t-SNE;</li>
+<li>see islands;</li>
+<li>declare that natural clusters have been discovered.</li>
+</ol>
+<p>That conclusion does not follow automatically.</p>
+<p>The embedding itself was optimized to represent neighborhood relationships in a low-dimensional display.</p>
+<p>Apparent visual clusters may depend on:</p>
+<ul>
+<li>preprocessing;</li>
+<li>perplexity;</li>
+<li>initialization;</li>
+<li>random seed;</li>
+<li>sample composition;</li>
+<li>other optimization settings.</li>
+</ul>
+</section>
+<section id="umap" class="level3" data-number="12.8.5">
+<h3 data-number="12.8.5" class="anchored" data-anchor-id="umap"><span class="header-section-number">12.8.5</span> UMAP</h3>
+<p>Uniform Manifold Approximation and Projection (UMAP) is another nonlinear dimensionality-reduction method widely used for visualization and representation learning.</p>
+<p>Conceptually, UMAP attempts to construct a graph representing local high-dimensional relationships and optimize a lower-dimensional graph-like representation <span class="citation" data-cites="mcinnesEtAl2018 umap2026">(<a href="../references.html#ref-mcinnesEtAl2018" role="doc-biblioref">McInnes, Healy, and Melville 2018</a>; <a href="../references.html#ref-umap2026" role="doc-biblioref">UMAP Developers 2026</a>)</span>.</p>
+<p>Two widely discussed parameters are:</p>
+<ul>
+<li><code>n_neighbors</code> — neighborhood scale;</li>
+<li><code>min_dist</code> — how tightly observations may be packed in the embedding.</li>
+</ul>
+<p>UMAP is provided by the optional <code>umap-learn</code> package rather than core scikit-learn.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Optional Modern Extension
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The core chapter does not require <code>umap-learn</code>, keeping the main book environment lightweight.</p>
+<p>Students who install it can run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> umap <span class="im">import</span> UMAP</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>umap_model <span class="op">=</span> UMAP(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    n_neighbors<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    min_dist<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    n_components<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>X_umap <span class="op">=</span> umap_model.fit_transform(X_scaled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As with t-SNE, a visually separated embedding is not by itself evidence of natural categories.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="pca-t-sne-or-umap" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="pca-t-sne-or-umap"><span class="header-section-number">12.9</span> PCA, t-SNE, or UMAP?</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Main strength</th>
+<th>Global geometry</th>
+<th>Interpretability</th>
+<th>Typical role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PCA</td>
+<td>linear compression</td>
+<td>relatively strong</td>
+<td>comparatively high</td>
+<td>compression, preprocessing, visualization</td>
+</tr>
+<tr class="even">
+<td>t-SNE</td>
+<td>local visualization</td>
+<td>weak</td>
+<td>low</td>
+<td>exploratory visualization</td>
+</tr>
+<tr class="odd">
+<td>UMAP</td>
+<td>local/manifold representation</td>
+<td>partial</td>
+<td>low</td>
+<td>visualization, nonlinear representation</td>
+</tr>
+</tbody>
+</table>
+<p>No method dominates for every purpose.</p>
+<p>The correct question is not:</p>
+<blockquote class="blockquote">
+<p><strong>Which one makes the prettiest plot?</strong></p>
+</blockquote>
+<p>It is:</p>
+<blockquote class="blockquote">
+<p><strong>Which representation preserves the information relevant to the analytical task?</strong></p>
+</blockquote>
+</section>
+<section id="a-visualization-can-manufacture-confidence" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="a-visualization-can-manufacture-confidence"><span class="header-section-number">12.10</span> A Visualization Can Manufacture Confidence</h2>
+<p>Two-dimensional plots are cognitively powerful.</p>
+<p>Humans readily see:</p>
+<ul>
+<li>islands;</li>
+<li>boundaries;</li>
+<li>gradients;</li>
+<li>outliers;</li>
+<li>apparent categories.</li>
+</ul>
+<p>But a 2D embedding is a transformation of a much larger space.</p>
+<p>Visual clarity can exceed evidential clarity.</p>
+<p>This is especially dangerous when an embedding is colored by known outcomes after the fact.</p>
+</section>
+<section id="stress-test-the-representation" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="stress-test-the-representation"><span class="header-section-number">12.11</span> Stress-Test the Representation</h2>
+<p>A responsible dimensionality-reduction workflow should ask:</p>
+<ul>
+<li>Does the structure persist under different preprocessing?</li>
+<li>Does it persist under different seeds?</li>
+<li>Does it persist across plausible parameter values?</li>
+<li>Does it replicate in another sample?</li>
+<li>Is the pattern also visible through other methods?</li>
+<li>Does the low-dimensional representation preserve what the application needs?</li>
+<li>Are conclusions based on visualization alone?</li>
+</ul>
+</section>
+<section id="computer-vision-learning-experience-projecting-image-space" class="level2" data-number="12.12">
+<h2 data-number="12.12" class="anchored" data-anchor-id="computer-vision-learning-experience-projecting-image-space"><span class="header-section-number">12.12</span> Computer Vision Learning Experience: Projecting Image Space</h2>
+<p>An (8) grayscale digit contains (64) pixel values. PCA can compress this visual feature space into fewer dimensions.</p>
+<div id="cell-fig-digits-pca" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>digits_pca_cv <span class="op">=</span> load_digits()</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>X_pca_cv <span class="op">=</span> StandardScaler().fit_transform(digits_pca_cv.data)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>y_pca_cv <span class="op">=</span> digits_pca_cv.target</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>pca_digits_cv <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>Z_pca_cv <span class="op">=</span> pca_digits_cv.fit_transform(X_pca_cv)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    Z_pca_cv[:, <span class="dv">0</span>],</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    Z_pca_cv[:, <span class="dv">1</span>],</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y_pca_cv,</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.65</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Principal component 1"</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Principal component 2"</span>)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"PCA Projection of Handwritten Digits"</span>)</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">"Digit label"</span>)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-digits-pca" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Handwritten digit observations projected into principal-component space, illustrating lower-dimensional structure in image data.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-digits-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="12-dimensionality-reduction_files/figure-html/fig-digits-pca-output-1.png" alt="Handwritten digit observations projected into principal-component space, illustrating lower-dimensional structure in image data." width="644" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-digits-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.8: Two-dimensional PCA projection of handwritten-digit images. Color uses known labels only to help interpret the projection.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The colors were not used by PCA. They are added afterward to ask whether the unsupervised representation aligns with known semantic classes.</p>
+<p><span class="math display">\[
+\boxed{\text{Visible Separation in an Embedding}\neq\text{Perfect Class Separability}}
+\]</span></p>
+<p>Compare this PCA representation with the t-SNE example already in the chapter. Ask which structure each method preserves, which patterns remain ambiguous, how sensitive the display is to analytical choices, and whether conclusions would survive a change in image source.</p>
+<p>The goal is not to select the prettiest plot. The goal is to understand what each representation preserves.</p>
+</section>
+<section id="three-tracks" class="level2" data-number="12.13">
+<h2 data-number="12.13" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">12.13</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="12.13.1">
+<h3 data-number="12.13.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">12.13.1</span> Health Track</h3>
+<p>PCA can summarize correlated biomarkers or physiological measurements. Nonlinear embeddings can visualize patient heterogeneity. But a visual patient subgroup is not a diagnosis. External clinical validity, stability, calibration of downstream models, and population transportability remain necessary.</p>
+<p><strong>Health:</strong> compression may obscure rare but clinically important signals.</p>
+</section>
+<section id="education-track" class="level3" data-number="12.13.2">
+<h3 data-number="12.13.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">12.13.2</span> Education Track</h3>
+<p>Dimensionality reduction can summarize correlated engagement indicators, survey scales, or learning behaviors. A two-dimensional student map can support exploration, but spatial proximity does not automatically imply equivalent learning needs or justify intervention.</p>
+<p><strong>Education:</strong> components explaining large overall variance may not preserve information relevant to smaller student populations.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="12.13.3">
+<h3 data-number="12.13.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">12.13.3</span> Open ML Benchmark Track</h3>
+<p>High-dimensional benchmark datasets allow controlled comparison of retained variance, reconstruction, predictive performance, neighborhood preservation, runtime, and sensitivity to embedding parameters.</p>
+<p><strong>Open ML:</strong> visualization can help exploration, but apparent clusters should be validated in the original feature space or with independent evidence.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A two-dimensional embedding that shows three visually separated clouds does not, by itself, establish three meaningful clusters.</p>
+<p>Dimensionality reduction and clustering answer different questions. Do not turn a visualization into a population taxonomy without additional evidence.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="beyond-the-algorithm-what-must-be-forgotten" class="level2" data-number="12.14">
+<h2 data-number="12.14" class="anchored" data-anchor-id="beyond-the-algorithm-what-must-be-forgotten"><span class="header-section-number">12.14</span> Beyond the Algorithm: What Must Be Forgotten?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Compression Is a Choice About Memory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dimensionality reduction is often described as removing unnecessary information.</p>
+<p>But the algorithm does not know what humanity considers unnecessary.</p>
+<p>PCA preserves directions of variance.</p>
+<p>t-SNE emphasizes local neighborhoods.</p>
+<p>UMAP encodes another geometric view of neighborhood structure.</p>
+<p>Each method remembers some relationships more faithfully than others.</p>
+<p>This suggests a broader principle:</p>
+<blockquote class="blockquote">
+<p><strong>Every representation is simultaneously a way of seeing and a way of not seeing.</strong></p>
+</blockquote>
+<p>A map leaves out details so that geography becomes comprehensible.</p>
+<p>A statistical model leaves out variation so that structure becomes estimable.</p>
+<p>A scientific theory leaves out parts of reality so that explanation becomes possible.</p>
+<p>The intellectual question is therefore not whether we simplify.</p>
+<p>We must.</p>
+<p>The question is:</p>
+<p><strong>Did we discard information that mattered for the claim we eventually made?</strong></p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-i-found-three-patient-types" class="level2" data-number="12.15">
+<h2 data-number="12.15" class="anchored" data-anchor-id="ai-pair-programmer-i-found-three-patient-types"><span class="header-section-number">12.15</span> AI Pair Programmer: I Found Three Patient Types</h2>
+<p>Give an AI assistant a two-dimensional t-SNE plot containing three visually separated regions.</p>
+<p>Tell it:</p>
+<blockquote class="blockquote">
+<p>“The t-SNE plot clearly proves that our population consists of three biologically distinct patient types.”</p>
+</blockquote>
+<p>Audit the response.</p>
+<p>A strong critique should ask about:</p>
+<ul>
+<li>preprocessing;</li>
+<li>dimensionality;</li>
+<li>perplexity;</li>
+<li>random seed;</li>
+<li>visual versus quantitative evidence;</li>
+<li>stability;</li>
+<li>clustering performed independently of the embedding;</li>
+<li>external biological validation;</li>
+<li>replication;</li>
+<li>continuous alternatives;</li>
+<li>whether t-SNE preserved relevant global relationships.</li>
+</ul>
+<p>Rewrite the claim into defensible scientific language.</p>
+</section>
+<section id="hands-on-lab-compress-visualize-predict" class="level2" data-number="12.16">
+<h2 data-number="12.16" class="anchored" data-anchor-id="hands-on-lab-compress-visualize-predict"><span class="header-section-number">12.16</span> Hands-On Lab: Compress, Visualize, Predict</h2>
+<p>Using a health, education, or benchmark dataset:</p>
+<ol type="1">
+<li>define the analytical purpose;</li>
+<li>complete the Feature Ledger;</li>
+<li>examine feature scales and correlations;</li>
+<li>standardize where justified;</li>
+<li>fit PCA;</li>
+<li>inspect eigenvalue/explained-variance behavior;</li>
+<li>create scree and cumulative-variance plots;</li>
+<li>inspect component loadings;</li>
+<li>reconstruct the data using several values of <span class="math inline">\(k\)</span>;</li>
+<li>quantify reconstruction error;</li>
+<li>create a two-component PCA visualization;</li>
+<li>fit a supervised baseline without PCA;</li>
+<li>fit the same model with leakage-safe PCA;</li>
+<li>compare predictive performance and dimensionality;</li>
+<li>create a t-SNE visualization;</li>
+<li>vary at least one t-SNE parameter;</li>
+<li>optionally create a UMAP visualization;</li>
+<li>compare the stories told by the representations;</li>
+<li>document what each representation cannot establish.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="12.10">
-<h2 data-number="12.10" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">12.10</span> Real-World Case Study</h2>
-<section id="reducing-correlated-institutional-indicators" class="level3" data-number="12.10.1">
-<h3 data-number="12.10.1" class="anchored" data-anchor-id="reducing-correlated-institutional-indicators"><span class="header-section-number">12.10.1</span> Reducing Correlated Institutional Indicators</h3>
-<p>Use PCA to summarize institutional characteristics and examine downstream predictive performance.</p>
+<section id="practitioner-track" class="level2" data-number="12.17">
+<h2 data-number="12.17" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">12.17</span> Practitioner Track</h2>
+<p>A practitioner should be able to use PCA for compression and preprocessing, select dimensionality based on task requirements, build leakage-safe pipelines, and treat nonlinear embeddings primarily as exploratory representations.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="12.18">
+<h2 data-number="12.18" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">12.18</span> Researcher Track</h2>
+<p>A researcher should additionally examine loading stability, sensitivity to scaling, reconstruction, parameter sensitivity, replication, downstream inferential consequences, and whether visual structures support substantive claims.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="12.11">
-<h2 data-number="12.11" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">12.11</span> Professor’s Challenge</h2>
-<p>PCA improves computational efficiency but makes stakeholder interpretation harder. Should it be retained?</p>
+<section id="research-studio" class="level2" data-number="12.19">
+<h2 data-number="12.19" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">12.19</span> Research Studio</h2>
+<p>Design a dimensionality-reduction study suitable for a conference or journal paper.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>substantive problem;</li>
+<li>high-dimensional feature source;</li>
+<li>unit of analysis;</li>
+<li>preprocessing;</li>
+<li>scaling rationale;</li>
+<li>PCA or alternative method;</li>
+<li>dimensionality-selection strategy;</li>
+<li>loading interpretation;</li>
+<li>reconstruction assessment;</li>
+<li>downstream prediction task if applicable;</li>
+<li>leakage-safe pipeline;</li>
+<li>nonlinear visualization strategy;</li>
+<li>sensitivity analyses;</li>
+<li>stability assessment;</li>
+<li>external validation;</li>
+<li>interpretive limitations;</li>
+<li>reproducibility plan;</li>
+<li>potential scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="12.12">
-<h2 data-number="12.12" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">12.12</span> Research Extension</h2>
-<p>Evaluate whether latent representations are stable across populations or time.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="12.13">
-<h2 data-number="12.13" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">12.13</span> Reproducibility Check</h2>
-<p>Document preprocessing, component-selection criteria, random seeds for stochastic methods, and interpretation rules.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="12.14">
-<h2 data-number="12.14" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.14</span> Key Takeaways</h2>
+<section id="professors-challenge-the-two-dimensional-truth" class="level2" data-number="12.20">
+<h2 data-number="12.20" class="anchored" data-anchor-id="professors-challenge-the-two-dimensional-truth"><span class="header-section-number">12.20</span> Professor’s Challenge: The Two-Dimensional Truth</h2>
+<p>Researchers collect 150 behavioral variables from 8,000 university students.</p>
+<p>They standardize the variables, run t-SNE once using default settings, and obtain four visually separated islands.</p>
+<p>They name the islands:</p>
+<ol type="1">
+<li>Deep Learners</li>
+<li>Strategic Learners</li>
+<li>Passive Learners</li>
+<li>At-Risk Learners</li>
+</ol>
+<p>They report:</p>
+<blockquote class="blockquote">
+<p>“Machine learning discovered four naturally occurring student learning styles.”</p>
+</blockquote>
+<p>The university proposes assigning students to different curricula based on the visualization.</p>
+<p>Critique:</p>
 <ul>
-<li>Dimensionality reduction trades original-variable interpretability for compact representation.</li>
-<li>PCA is grounded in variance and linear algebra.</li>
-<li>Visualization embeddings require cautious interpretation.</li>
+<li>representation choices;</li>
+<li>standardization;</li>
+<li>use of t-SNE;</li>
+<li>parameter sensitivity;</li>
+<li>stochasticity;</li>
+<li>visual cluster inference;</li>
+<li>absence of an independent clustering analysis;</li>
+<li>cluster stability;</li>
+<li>labeling;</li>
+<li>construct validity;</li>
+<li>continuous alternatives;</li>
+<li>external validation;</li>
+<li>intervention evidence;</li>
+<li>ethical consequences.</li>
 </ul>
+<p>Design a stronger research program before any curricular assignment.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="12.21">
+<h2 data-number="12.21" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">12.21</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is dimensionality reduction?</li>
+<li>How does feature extraction differ from feature selection?</li>
+<li>What is the curse of dimensionality?</li>
+<li>What does covariance measure?</li>
+<li>What does PCA optimize?</li>
+<li>What is an eigenvector in PCA?</li>
+<li>What does its eigenvalue represent?</li>
+<li>Why are principal components orthogonal?</li>
+<li>What is a component score?</li>
+<li>What are PCA loadings?</li>
+<li>Why can scaling radically change PCA?</li>
+<li>What does explained-variance ratio measure?</li>
+<li>Why is explained variance not equivalent to predictive importance?</li>
+<li>What is reconstruction error?</li>
+<li>Why must PCA be inside a predictive pipeline?</li>
+<li>What does t-SNE attempt to preserve?</li>
+<li>What does perplexity influence?</li>
+<li>Why should distances between t-SNE islands be interpreted cautiously?</li>
+<li>What is UMAP used for?</li>
+<li>Why can a compelling 2D visualization support an unjustified scientific claim?</li>
+<li>Why does preserving variance not guarantee preserving substantive meaning?</li>
+<li>What does reconstruction error tell us about dimensionality reduction?</li>
+<li>Why should distances and gaps in t-SNE plots be interpreted cautiously?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="12.22">
+<h2 data-number="12.22" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">12.22</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>analytical purpose;</li>
+<li>sample;</li>
+<li>feature inclusion/exclusion;</li>
+<li>missing-data treatment;</li>
+<li>transformations;</li>
+<li>scaling;</li>
+<li>covariance/correlation choice;</li>
+<li>PCA component count;</li>
+<li>explained-variance criterion;</li>
+<li>loading calculations;</li>
+<li>reconstruction analysis;</li>
+<li>pipeline placement;</li>
+<li>predictive validation design;</li>
+<li>t-SNE parameters;</li>
+<li>UMAP parameters if used;</li>
+<li>random seeds;</li>
+<li>sensitivity analyses;</li>
+<li>software/package versions;</li>
+<li>code producing every figure and table.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="12.23">
+<h2 data-number="12.23" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.23</span> Key Takeaways</h2>
+<ul>
+<li>Dimensionality reduction constructs a smaller representation of high-dimensional data.</li>
+<li>Feature selection retains original variables; feature extraction creates new dimensions.</li>
+<li>PCA identifies orthogonal directions of decreasing variance.</li>
+<li>Eigenvectors define principal directions and eigenvalues quantify their variance.</li>
+<li>Scaling changes PCA geometry and must be justified.</li>
+<li>Explained variance does not equal predictive, causal, or substantive importance.</li>
+<li>Reconstruction makes information loss measurable.</li>
+<li>PCA used for prediction must be fitted within the training pipeline.</li>
+<li>t-SNE emphasizes local neighborhood visualization rather than faithful preservation of all distances.</li>
+<li>UMAP offers a modern nonlinear representation based on neighborhood structure.</li>
+<li>Attractive embeddings can create unjustified confidence in apparent categories.</li>
+<li>Representation sensitivity and external validation matter.</li>
+<li>Compression is not merely technical: it determines what information remains available for subsequent reasoning.</li>
+<li>Dimensionality reduction chooses what information to preserve and what to discard.</li>
+<li>PCA preserves variance rather than substantive meaning.</li>
+<li>Low-dimensional visualizations are representations, not the original geometry.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="12.24">
+<h2 data-number="12.24" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">12.24</span> Looking Ahead</h2>
+<p>Dimensionality reduction makes representation explicit: what a model can learn depends on what information its representation preserves. Chapter 13 extends that idea from constructed low-dimensional representations to <strong>learned representations</strong>, showing how neural networks build increasingly useful internal features through layers, nonlinear transformations, and optimization.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-hotelling1933" class="csl-entry" role="listitem">
+Hotelling, Harold. 1933. <span>“Analysis of a Complex of Statistical Variables into Principal Components.”</span> <em>Journal of Educational Psychology</em> 24 (6): 417–41. <a href="https://doi.org/10.1037/h0071325">https://doi.org/10.1037/h0071325</a>.
+</div>
+<div id="ref-vandermaatenHinton2008" class="csl-entry" role="listitem">
+Maaten, Laurens van der, and Geoffrey Hinton. 2008. <span>“Visualizing Data Using t-SNE.”</span> <em>Journal of Machine Learning Research</em> 9: 2579–2605.
+</div>
+<div id="ref-mcinnesEtAl2018" class="csl-entry" role="listitem">
+McInnes, Leland, John Healy, and James Melville. 2018. <span>“<span>UMAP</span>: Uniform Manifold Approximation and Projection for Dimension Reduction.”</span> <em>arXiv Preprint arXiv:1802.03426</em>. <a href="https://doi.org/10.48550/arXiv.1802.03426">https://doi.org/10.48550/arXiv.1802.03426</a>.
+</div>
+<div id="ref-pearson1901" class="csl-entry" role="listitem">
+Pearson, Karl. 1901. <span>“On Lines and Planes of Closest Fit to Systems of Points in Space.”</span> <em>The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science</em> 2 (11): 559–72. <a href="https://doi.org/10.1080/14786440109462720">https://doi.org/10.1080/14786440109462720</a>.
+</div>
+<div id="ref-umap2026" class="csl-entry" role="listitem">
+UMAP Developers. 2026. <span>“UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction.”</span> <a href="https://umap-learn.readthedocs.io/">https://umap-learn.readthedocs.io/</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -561,7 +1980,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -890,13 +2309,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-04-unsupervised/11-clustering.html" class="pagination-link" aria-label="Clustering">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span>
+      <a href="../part-04-unsupervised/11-clustering.html" class="pagination-link" aria-label="Clustering: Discovering Structure Without Labels">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-05-modern-ml/13-neural-networks.html" class="pagination-link" aria-label="Neural Networks and Deep Learning">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-05-modern-ml/13-neural-networks.html" class="pagination-link" aria-label="Neural Networks: Learning Representations Through Layers">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

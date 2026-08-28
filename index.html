@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Itauma Itauma">
-<meta name="dcterms.date" content="2026-08-20">
 
 <title>Machine Learning Using Python</title>
 <style>
@@ -32,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./part-01-foundations/01-machine-learning.html" rel="next">
+<link href="./intro.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -72,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -100,6 +128,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -113,6 +144,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -156,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -179,31 +216,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -220,13 +257,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -243,19 +280,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -263,7 +300,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -272,19 +309,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -308,8 +374,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
   <li><a href="#about-this-book" id="toc-about-this-book" class="nav-link" data-scroll-target="#about-this-book">About This Book</a></li>
-  <li><a href="#who-this-book-is-for" id="toc-who-this-book-is-for" class="nav-link" data-scroll-target="#who-this-book-is-for">Who This Book Is For</a></li>
-  <li><a href="#second-edition" id="toc-second-edition" class="nav-link" data-scroll-target="#second-edition">Second Edition</a></li>
+  <li><a href="#why-a-second-edition" id="toc-why-a-second-edition" class="nav-link" data-scroll-target="#why-a-second-edition">Why a Second Edition?</a></li>
+  <li><a href="#what-is-new" id="toc-what-is-new" class="nav-link" data-scroll-target="#what-is-new">What Is New?</a></li>
+  <li><a href="#from-learning-algorithms-to-doing-data-science" id="toc-from-learning-algorithms-to-doing-data-science" class="nav-link" data-scroll-target="#from-learning-algorithms-to-doing-data-science">From Learning Algorithms to Doing Data Science</a></li>
+  <li><a href="#a-philosophy-of-machine-learning" id="toc-a-philosophy-of-machine-learning" class="nav-link" data-scroll-target="#a-philosophy-of-machine-learning">A Philosophy of Machine Learning</a></li>
+  <li><a href="#machine-learning-in-the-age-of-generative-ai" id="toc-machine-learning-in-the-age-of-generative-ai" class="nav-link" data-scroll-target="#machine-learning-in-the-age-of-generative-ai">Machine Learning in the Age of Generative AI</a></li>
+  <li><a href="#from-learner-to-practitioner-and-researcher" id="toc-from-learner-to-practitioner-and-researcher" class="nav-link" data-scroll-target="#from-learner-to-practitioner-and-researcher">From Learner to Practitioner and Researcher</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
+  <li><a href="#edition-statement" id="toc-edition-statement" class="nav-link" data-scroll-target="#edition-statement">Edition Statement</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -334,12 +406,6 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 20, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -353,16 +419,83 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="unnumbered">Preface</h1>
 <section id="about-this-book" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-book">About This Book</h2>
-<p><em>Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research</em> is designed for data enthusiasts, analysts, students, researchers, and professionals who want to develop a deeper understanding of machine learning using Python.</p>
-<p>This Second Edition integrates conceptual foundations, mathematical reasoning, practical programming, real-world applications, responsible machine learning, and reproducible research.</p>
+<p><em>Machine Learning Using Python</em> is for readers who want to move beyond calling machine-learning functions toward understanding what models do, why they work, how they fail, and what evidence is required before their predictions should be trusted.</p>
+<p>The book combines mathematical reasoning, statistical foundations, executable Python, real-world applications, responsible machine learning, and reproducible research.</p>
+<p><span class="math display">\[
+\boxed{\text{Machine Learning}=\text{Algorithms}+\text{Data}+\text{Evidence}+\text{Judgment}}
+\]</span></p>
+<p>Machine learning is not merely the construction of predictive models. It is the disciplined use of data, computation, and evidence to reason under uncertainty.</p>
 </section>
-<section id="who-this-book-is-for" class="level2">
-<h2 class="anchored" data-anchor-id="who-this-book-is-for">Who This Book Is For</h2>
-<p>This book is intended for readers who want to move beyond simply fitting machine learning models toward understanding how algorithms work, how models should be evaluated, and how machine learning can be applied responsibly to meaningful real-world problems.</p>
+<section id="why-a-second-edition" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-second-edition">Why a Second Edition?</h2>
+<p>The First Edition introduced machine learning using Python through accessible explanations and practical examples. The Second Edition responds not simply to new algorithms, but to a changed practice of data science.</p>
+<p>It is no longer enough to ask whether a model predicts accurately. We must also ask whether the problem was formulated appropriately, whether evaluation supports the claim, whether performance generalizes, what happens when predictions affect people, and whether another researcher can reproduce the evidence.</p>
+<p>The Second Edition therefore expands the book into a graduate-level treatment of machine-learning foundations, algorithms, applications, responsible practice, and reproducible computational research.</p>
 </section>
-<section id="second-edition" class="level2">
-<h2 class="anchored" data-anchor-id="second-edition">Second Edition</h2>
-<p>This edition substantially expands the first edition with greater emphasis on mathematical foundations, modern machine learning methods, hands-on practice, health and education applications, research design, reproducibility, and responsible artificial intelligence.</p>
+<section id="what-is-new" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-new">What Is New?</h2>
+<p>Major additions include stronger statistical and mathematical foundations; explicit problem formulation; reproducible data preparation; deeper supervised and unsupervised learning; neural networks; natural language processing; generative AI; calibration, uncertainty, and validation; responsible ML; reproducible research; three longitudinal application tracks; hands-on laboratories; knowledge checks; Professor’s Challenges; AI Pair Programmer activities; and research-oriented exercises.</p>
+<p>The goal is not to expose readers to the largest possible collection of algorithms. It is to develop the judgment required to formulate, implement, evaluate, question, and communicate machine-learning work.</p>
+</section>
+<section id="from-learning-algorithms-to-doing-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="from-learning-algorithms-to-doing-data-science">From Learning Algorithms to Doing Data Science</h2>
+<p>A classroom workflow may look like:</p>
+<p><span class="math display">\[
+\text{load data}\rightarrow\text{fit model}\rightarrow\text{predict}\rightarrow\text{score}.
+\]</span></p>
+<p>A mature workflow is closer to:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{question}
+&amp;\rightarrow \text{measurement}
+\rightarrow \text{data}
+\rightarrow \text{assumptions}
+\rightarrow \text{model}\\
+&amp;\rightarrow \text{evaluation}
+\rightarrow \text{interpretation}
+\rightarrow \text{decision}
+\rightarrow \text{reproducible evidence}.
+\end{aligned}
+\]</span></p>
+<p>Readers will therefore be asked not only to write code, but to defend analytical choices.</p>
+</section>
+<section id="a-philosophy-of-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="a-philosophy-of-machine-learning">A Philosophy of Machine Learning</h2>
+<p>Algorithms optimize objectives that humans specify. A loss function can tell an optimizer what numerical quantity to minimize. It cannot determine whether the target is meaningful, whether the data represent the intended population, whether an intervention is justified, or whether a resulting decision is fair.</p>
+<p>Technical reasoning asks, <em>How does the algorithm work?</em></p>
+<p>Critical reasoning asks, <em>What must be true for this result to mean what we claim it means?</em></p>
+<p>Responsible reasoning asks, <em>What happens if someone acts on this prediction?</em></p>
+<p>All three belong to data science.</p>
+</section>
+<section id="machine-learning-in-the-age-of-generative-ai" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learning-in-the-age-of-generative-ai">Machine Learning in the Age of Generative AI</h2>
+<p>This book treats generative AI neither as something learners must avoid nor as an epistemic authority.</p>
+<p><span class="math display">\[
+\boxed{\text{AI Output}+\text{Human Verification}+\text{Domain Knowledge}+\text{Empirical Evidence}}
+\]</span></p>
+<p>AI Pair Programmer activities ask readers to inspect, test, critique, and improve AI-generated reasoning and code.</p>
+</section>
+<section id="from-learner-to-practitioner-and-researcher" class="level2">
+<h2 class="anchored" data-anchor-id="from-learner-to-practitioner-and-researcher">From Learner to Practitioner and Researcher</h2>
+<p>A reader may progress through:</p>
+<p><span class="math display">\[
+\text{Learner}\rightarrow\text{Coder}\rightarrow\text{Modeler}\rightarrow\text{Critical Evaluator}\rightarrow
+\begin{cases}\text{Practitioner}\\\text{Researcher}\end{cases}
+\]</span></p>
+<p>Both destinations require responsible reasoning and reproducibility.</p>
+</section>
+<section id="acknowledgments" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
+<p>A book develops through conversations—with students, colleagues, collaborators, mentors, reviewers, and communities of scholars and practitioners.</p>
+<p>I am grateful to the students whose questions continually sharpen the distinction between knowing how to run an algorithm and understanding why an analytical choice is justified. I am equally grateful to colleagues, collaborators, and mentors whose scholarship, critique, encouragement, and example have shaped how I think about data science, research, teaching, and evidence.</p>
+<p>The Second Edition also reflects the work of the broader open-source and scientific-computing communities whose tools make transparent, reproducible, and accessible computational learning possible.</p>
+<p>Most of all, I acknowledge every reader who approaches machine learning with curiosity and humility—the willingness to build models, question assumptions, examine evidence, and revise conclusions when the evidence requires it.</p>
+</section>
+<section id="edition-statement" class="level2">
+<h2 class="anchored" data-anchor-id="edition-statement">Edition Statement</h2>
+<p>This is the <strong>Second Edition</strong> of <em>Machine Learning Using Python: Foundations, Algorithms, Applications, and Reproducible Research</em>.</p>
+<p>The Second Edition expands the original work into an 18-chapter graduate-level treatment that integrates machine-learning foundations, algorithms, real-world applications, computer vision, modern AI, responsible practice, and reproducible research.</p>
+<p>Formal citation, licensing, version, repository, and archival information are provided with the publication resources accompanying this book.</p>
 
 
 </section>
@@ -442,7 +575,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -773,8 +906,8 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./part-01-foundations/01-machine-learning.html" class="pagination-link" aria-label="Machine Learning in the Age of Data and AI">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Machine Learning in the Age of Data and AI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./intro.html" class="pagination-link" aria-label="How to Use This Book">
+        <span class="nav-page-text">How to Use This Book</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

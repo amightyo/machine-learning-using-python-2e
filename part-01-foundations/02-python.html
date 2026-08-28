@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,42 +430,52 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">2.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">2.3</span> Real-World Problem</a></li>
-  <li><a href="#conceptual-foundations" id="toc-conceptual-foundations" class="nav-link" data-scroll-target="#conceptual-foundations"><span class="header-section-number">2.4</span> Conceptual Foundations</a>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">2.2</span> Why This Matters</a>
   <ul class="collapse">
-  <li><a href="#python-as-a-data-science-language" id="toc-python-as-a-data-science-language" class="nav-link" data-scroll-target="#python-as-a-data-science-language"><span class="header-section-number">2.4.1</span> Python as a Data Science Language</a></li>
-  <li><a href="#scripts-notebooks-and-quarto" id="toc-scripts-notebooks-and-quarto" class="nav-link" data-scroll-target="#scripts-notebooks-and-quarto"><span class="header-section-number">2.4.2</span> Scripts, Notebooks, and Quarto</a></li>
-  <li><a href="#objects-functions-and-modules" id="toc-objects-functions-and-modules" class="nav-link" data-scroll-target="#objects-functions-and-modules"><span class="header-section-number">2.4.3</span> Objects, Functions, and Modules</a></li>
-  <li><a href="#numpy" id="toc-numpy" class="nav-link" data-scroll-target="#numpy"><span class="header-section-number">2.4.4</span> NumPy</a></li>
-  <li><a href="#pandas" id="toc-pandas" class="nav-link" data-scroll-target="#pandas"><span class="header-section-number">2.4.5</span> pandas</a></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">2.4.6</span> Visualization</a></li>
-  <li><a href="#scikit-learn" id="toc-scikit-learn" class="nav-link" data-scroll-target="#scikit-learn"><span class="header-section-number">2.4.7</span> scikit-learn</a></li>
-  <li><a href="#environments-and-dependencies" id="toc-environments-and-dependencies" class="nav-link" data-scroll-target="#environments-and-dependencies"><span class="header-section-number">2.4.8</span> Environments and Dependencies</a></li>
-  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github"><span class="header-section-number">2.4.9</span> Git and GitHub</a></li>
+  <li><a href="#connection-to-chapter-1" id="toc-connection-to-chapter-1" class="nav-link" data-scroll-target="#connection-to-chapter-1"><span class="header-section-number">2.2.1</span> Connection to Chapter 1</a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">2.5</span> Python Implementation</a>
+  <li><a href="#why-python" id="toc-why-python" class="nav-link" data-scroll-target="#why-python"><span class="header-section-number">2.3</span> Why Python?</a></li>
+  <li><a href="#your-machine-learning-workspace" id="toc-your-machine-learning-workspace" class="nav-link" data-scroll-target="#your-machine-learning-workspace"><span class="header-section-number">2.4</span> Your Machine Learning Workspace</a></li>
+  <li><a href="#reproducible-python-environments" id="toc-reproducible-python-environments" class="nav-link" data-scroll-target="#reproducible-python-environments"><span class="header-section-number">2.5</span> Reproducible Python Environments</a></li>
+  <li><a href="#python-you-actually-need" id="toc-python-you-actually-need" class="nav-link" data-scroll-target="#python-you-actually-need"><span class="header-section-number">2.6</span> Python You Actually Need</a>
   <ul class="collapse">
-  <li><a href="#inspecting-the-environment" id="toc-inspecting-the-environment" class="nav-link" data-scroll-target="#inspecting-the-environment"><span class="header-section-number">2.5.1</span> Inspecting the Environment</a></li>
-  <li><a href="#loading-and-inspecting-data" id="toc-loading-and-inspecting-data" class="nav-link" data-scroll-target="#loading-and-inspecting-data"><span class="header-section-number">2.5.2</span> Loading and Inspecting Data</a></li>
-  <li><a href="#selecting-and-transforming-variables" id="toc-selecting-and-transforming-variables" class="nav-link" data-scroll-target="#selecting-and-transforming-variables"><span class="header-section-number">2.5.3</span> Selecting and Transforming Variables</a></li>
-  <li><a href="#visualization-1" id="toc-visualization-1" class="nav-link" data-scroll-target="#visualization-1"><span class="header-section-number">2.5.4</span> Visualization</a></li>
-  <li><a href="#a-minimal-scikit-learn-model" id="toc-a-minimal-scikit-learn-model" class="nav-link" data-scroll-target="#a-minimal-scikit-learn-model"><span class="header-section-number">2.5.5</span> A Minimal scikit-learn Model</a></li>
-  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">2.5.6</span> Pipelines</a></li>
+  <li><a href="#variables-and-objects" id="toc-variables-and-objects" class="nav-link" data-scroll-target="#variables-and-objects"><span class="header-section-number">2.6.1</span> Variables and Objects</a></li>
+  <li><a href="#lists-and-dictionaries" id="toc-lists-and-dictionaries" class="nav-link" data-scroll-target="#lists-and-dictionaries"><span class="header-section-number">2.6.2</span> Lists and Dictionaries</a></li>
+  <li><a href="#conditions" id="toc-conditions" class="nav-link" data-scroll-target="#conditions"><span class="header-section-number">2.6.3</span> Conditions</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">2.6.4</span> Functions</a></li>
   </ul></li>
-  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">2.6</span> Practitioner Track</a></li>
-  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">2.7</span> Researcher Track</a></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">2.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">2.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">2.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">2.11</span> Real-World Case Study</a>
+  <li><a href="#numpy-thinking-in-arrays" id="toc-numpy-thinking-in-arrays" class="nav-link" data-scroll-target="#numpy-thinking-in-arrays"><span class="header-section-number">2.7</span> NumPy: Thinking in Arrays</a></li>
+  <li><a href="#images-are-arrays-too" id="toc-images-are-arrays-too" class="nav-link" data-scroll-target="#images-are-arrays-too"><span class="header-section-number">2.8</span> Images Are Arrays Too</a></li>
+  <li><a href="#pandas-working-with-tabular-data" id="toc-pandas-working-with-tabular-data" class="nav-link" data-scroll-target="#pandas-working-with-tabular-data"><span class="header-section-number">2.9</span> pandas: Working with Tabular Data</a>
   <ul class="collapse">
-  <li><a href="#reproducing-an-analysis-on-another-computer" id="toc-reproducing-an-analysis-on-another-computer" class="nav-link" data-scroll-target="#reproducing-an-analysis-on-another-computer"><span class="header-section-number">2.11.1</span> Reproducing an Analysis on Another Computer</a></li>
+  <li><a href="#selecting-and-filtering" id="toc-selecting-and-filtering" class="nav-link" data-scroll-target="#selecting-and-filtering"><span class="header-section-number">2.9.1</span> Selecting and Filtering</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">2.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">2.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">2.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">2.15</span> Key Takeaways</a></li>
+  <li><a href="#from-a-dataframe-to-x-and-y" id="toc-from-a-dataframe-to-x-and-y" class="nav-link" data-scroll-target="#from-a-dataframe-to-x-and-y"><span class="header-section-number">2.10</span> From a DataFrame to (X) and (y)</a></li>
+  <li><a href="#data-types-are-analytical-decisions" id="toc-data-types-are-analytical-decisions" class="nav-link" data-scroll-target="#data-types-are-analytical-decisions"><span class="header-section-number">2.11</span> Data Types Are Analytical Decisions</a></li>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">2.12</span> Missing Data</a></li>
+  <li><a href="#exploratory-visualization" id="toc-exploratory-visualization" class="nav-link" data-scroll-target="#exploratory-visualization"><span class="header-section-number">2.13</span> Exploratory Visualization</a></li>
+  <li><a href="#data-provenance" id="toc-data-provenance" class="nav-link" data-scroll-target="#data-provenance"><span class="header-section-number">2.14</span> Data Provenance</a></li>
+  <li><a href="#three-data-tracks-in-practice" id="toc-three-data-tracks-in-practice" class="nav-link" data-scroll-target="#three-data-tracks-in-practice"><span class="header-section-number">2.15</span> Three Data Tracks in Practice</a>
+  <ul class="collapse">
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">2.15.1</span> Open ML Benchmark Track</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">2.15.2</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">2.15.3</span> Education Track</a></li>
+  </ul></li>
+  <li><a href="#beyond-the-algorithm-code-as-evidence" id="toc-beyond-the-algorithm-code-as-evidence" class="nav-link" data-scroll-target="#beyond-the-algorithm-code-as-evidence"><span class="header-section-number">2.16</span> Beyond the Algorithm: Code as Evidence</a></li>
+  <li><a href="#writing-reusable-analytical-code" id="toc-writing-reusable-analytical-code" class="nav-link" data-scroll-target="#writing-reusable-analytical-code"><span class="header-section-number">2.17</span> Writing Reusable Analytical Code</a></li>
+  <li><a href="#debugging-read-the-evidence" id="toc-debugging-read-the-evidence" class="nav-link" data-scroll-target="#debugging-read-the-evidence"><span class="header-section-number">2.18</span> Debugging: Read the Evidence</a></li>
+  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link" data-scroll-target="#git-and-github"><span class="header-section-number">2.19</span> Git and GitHub</a></li>
+  <li><a href="#quarto-narrative-computation-evidence" id="toc-quarto-narrative-computation-evidence" class="nav-link" data-scroll-target="#quarto-narrative-computation-evidence"><span class="header-section-number">2.20</span> Quarto: Narrative + Computation + Evidence</a></li>
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it"><span class="header-section-number">2.21</span> Try It</a></li>
+  <li><a href="#hands-on-lab-build-a-reproducible-mini-project" id="toc-hands-on-lab-build-a-reproducible-mini-project" class="nav-link" data-scroll-target="#hands-on-lab-build-a-reproducible-mini-project"><span class="header-section-number">2.22</span> Hands-On Lab: Build a Reproducible Mini-Project</a></li>
+  <li><a href="#ai-pair-programmer" id="toc-ai-pair-programmer" class="nav-link" data-scroll-target="#ai-pair-programmer"><span class="header-section-number">2.23</span> AI Pair Programmer</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">2.24</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">2.25</span> Researcher Track</a></li>
+  <li><a href="#professors-challenge-audit-the-analysis" id="toc-professors-challenge-audit-the-analysis" class="nav-link" data-scroll-target="#professors-challenge-audit-the-analysis"><span class="header-section-number">2.26</span> Professor’s Challenge: Audit the Analysis</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">2.27</span> Research Studio</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">2.28</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">2.29</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">2.30</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
@@ -368,131 +503,1015 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Configure a reproducible Python environment for machine learning.</li>
-<li>Work with NumPy arrays and pandas DataFrames.</li>
-<li>Visualize data for exploratory analysis.</li>
-<li>Use scikit-learn’s estimator and pipeline APIs.</li>
-<li>Organize machine learning code for reproducibility.</li>
+<li>configure a reproducible Python workspace for machine learning;</li>
+<li>use the Python language features most relevant to data science;</li>
+<li>work with NumPy arrays and pandas DataFrames;</li>
+<li>move from a DataFrame to feature matrix <span class="math inline">\(X\)</span> and target vector <span class="math inline">\(y\)</span>;</li>
+<li>distinguish storage types from measurement meaning;</li>
+<li>create purposeful exploratory visualizations;</li>
+<li>write reusable functions and debug systematically;</li>
+<li>document data provenance and transformations;</li>
+<li>use Git, GitHub, Quarto, and AI assistance as parts of a reproducible workflow;</li>
+<li>audit code that runs successfully but is analytically questionable.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">2.2</span> Why This Matters</h2>
-<p>Reliable machine learning depends on reliable computational workflows. Python provides a mature ecosystem for data manipulation, visualization, statistical modeling, machine learning, and deep learning.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">2.3</span> Real-World Problem</h2>
-<p>A colleague sends you a notebook that worked six months ago but no longer runs. How can environments, dependency management, version control, and reproducible code prevent this problem?</p>
-</section>
-<section id="conceptual-foundations" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="conceptual-foundations"><span class="header-section-number">2.4</span> Conceptual Foundations</h2>
-<section id="python-as-a-data-science-language" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="python-as-a-data-science-language"><span class="header-section-number">2.4.1</span> Python as a Data Science Language</h3>
-</section>
-<section id="scripts-notebooks-and-quarto" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="scripts-notebooks-and-quarto"><span class="header-section-number">2.4.2</span> Scripts, Notebooks, and Quarto</h3>
-</section>
-<section id="objects-functions-and-modules" class="level3" data-number="2.4.3">
-<h3 data-number="2.4.3" class="anchored" data-anchor-id="objects-functions-and-modules"><span class="header-section-number">2.4.3</span> Objects, Functions, and Modules</h3>
-</section>
-<section id="numpy" class="level3" data-number="2.4.4">
-<h3 data-number="2.4.4" class="anchored" data-anchor-id="numpy"><span class="header-section-number">2.4.4</span> NumPy</h3>
-</section>
-<section id="pandas" class="level3" data-number="2.4.5">
-<h3 data-number="2.4.5" class="anchored" data-anchor-id="pandas"><span class="header-section-number">2.4.5</span> pandas</h3>
-</section>
-<section id="visualization" class="level3" data-number="2.4.6">
-<h3 data-number="2.4.6" class="anchored" data-anchor-id="visualization"><span class="header-section-number">2.4.6</span> Visualization</h3>
-</section>
-<section id="scikit-learn" class="level3" data-number="2.4.7">
-<h3 data-number="2.4.7" class="anchored" data-anchor-id="scikit-learn"><span class="header-section-number">2.4.7</span> scikit-learn</h3>
-</section>
-<section id="environments-and-dependencies" class="level3" data-number="2.4.8">
-<h3 data-number="2.4.8" class="anchored" data-anchor-id="environments-and-dependencies"><span class="header-section-number">2.4.8</span> Environments and Dependencies</h3>
-</section>
-<section id="git-and-github" class="level3" data-number="2.4.9">
-<h3 data-number="2.4.9" class="anchored" data-anchor-id="git-and-github"><span class="header-section-number">2.4.9</span> Git and GitHub</h3>
+<p>A machine learning model is only as trustworthy as the computational process that produced it.</p>
+<p>Python makes it easy to move from an idea to executable analysis. That speed is valuable, but code can run successfully while embodying poor assumptions, undocumented transformations, leakage, fragile paths, or irreproducible dependencies.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>How do we move from exploratory Python code to a trustworthy, reproducible computational workflow for machine learning?</strong></p>
+</div>
+</div>
+<section id="connection-to-chapter-1" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="connection-to-chapter-1"><span class="header-section-number">2.2.1</span> Connection to Chapter 1</h3>
+<p>Chapter 1 framed machine learning as a complete evidence-building process rather than an exercise in calling algorithms. This chapter provides the computational language for that process. Python will be used not only to fit models, but also to represent data, automate transformations, visualize evidence, document decisions, and reproduce analyses across the chapters that follow.</p>
 </section>
 </section>
-<section id="python-implementation" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">2.5</span> Python Implementation</h2>
-<section id="inspecting-the-environment" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1" class="anchored" data-anchor-id="inspecting-the-environment"><span class="header-section-number">2.5.1</span> Inspecting the Environment</h3>
+<section id="why-python" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="why-python"><span class="header-section-number">2.3</span> Why Python?</h2>
+<p>Python combines a readable general-purpose language with a large scientific-computing ecosystem.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Library</th>
+<th>Primary role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NumPy</td>
+<td>numerical arrays and vectorized computation <span class="citation" data-cites="harris2020numpy">(<a href="../references.html#ref-harris2020numpy" role="doc-biblioref">Harris et al. 2020</a>)</span></td>
+</tr>
+<tr class="even">
+<td>pandas</td>
+<td>tabular data manipulation</td>
+</tr>
+<tr class="odd">
+<td>Matplotlib</td>
+<td>foundational plotting <span class="citation" data-cites="hunter2007matplotlib">(<a href="../references.html#ref-hunter2007matplotlib" role="doc-biblioref">Hunter 2007</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Plotly</td>
+<td>interactive visualization when interactivity adds value</td>
+</tr>
+<tr class="odd">
+<td>scikit-learn</td>
+<td>preprocessing, modeling, evaluation, pipelines <span class="citation" data-cites="pedregosa2011scikit">(<a href="../references.html#ref-pedregosa2011scikit" role="doc-biblioref">Pedregosa et al. 2011</a>)</span></td>
+</tr>
+<tr class="even">
+<td>SciPy</td>
+<td>scientific and numerical routines <span class="citation" data-cites="virtanen2020scipy">(<a href="../references.html#ref-virtanen2020scipy" role="doc-biblioref">Virtanen et al. 2020</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>statsmodels</td>
+<td>statistical modeling and inference in selected applications</td>
+</tr>
+</tbody>
+</table>
+<p>The goal is not to memorize library names. It is to understand how the tools participate in a coherent analytical workflow.</p>
 </section>
-<section id="loading-and-inspecting-data" class="level3" data-number="2.5.2">
-<h3 data-number="2.5.2" class="anchored" data-anchor-id="loading-and-inspecting-data"><span class="header-section-number">2.5.2</span> Loading and Inspecting Data</h3>
+<section id="your-machine-learning-workspace" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="your-machine-learning-workspace"><span class="header-section-number">2.4</span> Your Machine Learning Workspace</h2>
+<p>Our primary workflow uses <strong>VS Code</strong>, <strong>Python</strong>, <strong>Quarto</strong>, <strong>Git</strong>, and <strong>GitHub</strong>. Quarto can execute Python code embedded in Markdown so generating code remains connected to tables, figures, and interpretation <span class="citation" data-cites="quartoPython2026">(<a href="../references.html#ref-quartoPython2026" role="doc-biblioref">Quarto 2026</a>)</span>.</p>
+<p>A small project might look like:</p>
+<pre class="text"><code>my-ml-project/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── figures/
+├── src/
+│   └── prepare_data.py
+├── analysis.qmd
+├── README.md
+├── requirements.txt
+└── .gitignore</code></pre>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Preserve the Evidence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Raw data should normally remain raw.</strong> Write code that transforms source data into processed data rather than manually editing the source.</p>
+</div>
+</div>
 </section>
-<section id="selecting-and-transforming-variables" class="level3" data-number="2.5.3">
-<h3 data-number="2.5.3" class="anchored" data-anchor-id="selecting-and-transforming-variables"><span class="header-section-number">2.5.3</span> Selecting and Transforming Variables</h3>
+<section id="reproducible-python-environments" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="reproducible-python-environments"><span class="header-section-number">2.5</span> Reproducible Python Environments</h2>
+<p>Different projects can require different package versions. Python’s <code>venv</code> module creates isolated environments <span class="citation" data-cites="pythonVenv2026">(<a href="../references.html#ref-pythonVenv2026" role="doc-biblioref">Python Software Foundation 2026</a>)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Windows PowerShell:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>macOS/Linux:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Install packages:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy pandas matplotlib scikit-learn jupyter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Record dependencies:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Recreate them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A project should not depend silently on whatever happens to be installed on one computer.</p>
 </section>
-<section id="visualization-1" class="level3" data-number="2.5.4">
-<h3 data-number="2.5.4" class="anchored" data-anchor-id="visualization-1"><span class="header-section-number">2.5.4</span> Visualization</h3>
+<section id="python-you-actually-need" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="python-you-actually-need"><span class="header-section-number">2.6</span> Python You Actually Need</h2>
+<section id="variables-and-objects" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="variables-and-objects"><span class="header-section-number">2.6.1</span> Variables and Objects</h3>
+<div id="6f437517" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>course <span class="op">=</span> <span class="st">"Machine Learning"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>edition <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="fl">0.80</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>is_reproducible <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(course), <span class="bu">type</span>(edition), <span class="bu">type</span>(threshold), <span class="bu">type</span>(is_reproducible)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(str, int, float, bool)</code></pre>
+</div>
+</div>
 </section>
-<section id="a-minimal-scikit-learn-model" class="level3" data-number="2.5.5">
-<h3 data-number="2.5.5" class="anchored" data-anchor-id="a-minimal-scikit-learn-model"><span class="header-section-number">2.5.5</span> A Minimal scikit-learn Model</h3>
+<section id="lists-and-dictionaries" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="lists-and-dictionaries"><span class="header-section-number">2.6.2</span> Lists and Dictionaries</h3>
+<div id="a0a723ff" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">"age"</span>, <span class="st">"bmi"</span>, <span class="st">"sleep_hours"</span>, <span class="st">"activity_minutes"</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>study <span class="op">=</span> {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dataset"</span>: <span class="st">"NHANES"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"unit_of_analysis"</span>: <span class="st">"participant"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"target"</span>: <span class="st">"systolic_blood_pressure"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="pipelines" class="level3" data-number="2.5.6">
-<h3 data-number="2.5.6" class="anchored" data-anchor-id="pipelines"><span class="header-section-number">2.5.6</span> Pipelines</h3>
+<section id="conditions" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="conditions"><span class="header-section-number">2.6.3</span> Conditions</h3>
+<div id="850a0135" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="fl">0.87</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>interpretation <span class="op">=</span> <span class="st">"meets illustrative threshold"</span> <span class="cf">if</span> score <span class="op">&gt;=</span> <span class="fl">0.80</span> <span class="cf">else</span> <span class="st">"below threshold"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>interpretation</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>'meets illustrative threshold'</code></pre>
+</div>
+</div>
+</section>
+<section id="functions" class="level3" data-number="2.6.4">
+<h3 data-number="2.6.4" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.6.4</span> Functions</h3>
+<div id="ec7c40e4" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_absolute_error_manual(actual, predicted):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> [<span class="bu">abs</span>(a <span class="op">-</span> p) <span class="cf">for</span> a, p <span class="kw">in</span> <span class="bu">zip</span>(actual, predicted)]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(errors) <span class="op">/</span> <span class="bu">len</span>(errors)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>mean_absolute_error_manual([<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>], [<span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">15</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>1.3333333333333333</code></pre>
+</div>
+</div>
+<p>Functions convert repeated analytical logic into reusable, auditable units.</p>
 </section>
 </section>
-<section id="practitioner-track" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">2.6</span> Practitioner Track</h2>
-<p>Develop fluency with the core tools needed to build ML workflows.</p>
+<section id="numpy-thinking-in-arrays" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="numpy-thinking-in-arrays"><span class="header-section-number">2.7</span> NumPy: Thinking in Arrays</h2>
+<div id="ebe47b36" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">2.0</span>, <span class="fl">4.0</span>, <span class="fl">6.0</span>, <span class="fl">8.0</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>array([ 4.,  8., 12., 16.])</code></pre>
+</div>
+</div>
+<p>Vectorized operations allow us to operate on arrays as mathematical objects.</p>
+<div id="d57cf59f" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X_demo <span class="op">=</span> np.array([</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.2</span>, <span class="fl">3.1</span>],</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">2.4</span>, <span class="fl">1.8</span>],</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.0</span>, <span class="fl">4.2</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>X_demo.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>(3, 2)</code></pre>
+</div>
+</div>
+<p>This connects to</p>
+<p><span class="math display">\[
+X \in \mathbb{R}^{n \times p},
+\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of observations and <span class="math inline">\(p\)</span> the number of features.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Code and Mathematics Describe the Same Object
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <code>X.shape</code> returns <code>(800, 12)</code>, your feature matrix has <span class="math inline">\(n=800\)</span> observations and <span class="math inline">\(p=12\)</span> features.</p>
+</div>
+</div>
 </section>
-<section id="researcher-track" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">2.7</span> Researcher Track</h2>
-<p>Emphasize computational provenance, environment capture, deterministic execution, and auditable analysis.</p>
+<section id="images-are-arrays-too" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="images-are-arrays-too"><span class="header-section-number">2.8</span> Images Are Arrays Too</h2>
+<p>Tabular data are not the only data machine-learning systems consume. A grayscale image can be represented numerically as a two-dimensional array, while a color image is commonly represented with an additional channel dimension.</p>
+<p>For an image of height (H) and width (W),</p>
+<p><span class="math display">\[
+I\in\mathbb{R}^{H\times W}
+\]</span></p>
+<p>for grayscale data, while a color image can be represented as</p>
+<p><span class="math display">\[
+I\in\mathbb{R}^{H\times W\times C},
+\]</span></p>
+<p>where (C) is the number of channels.</p>
+<div id="acf026c8" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> load_digits()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> digits.images[<span class="dv">0</span>]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> digits.target[<span class="dv">0</span>]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>image.shape, label</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>((8, 8), np.int64(0))</code></pre>
+</div>
+</div>
+<div id="cell-fig-python-image-array" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(image, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Target label: </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-python-image-array" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Grayscale image of a handwritten digit reconstructed from its pixel-value array, with the true target label displayed above the image.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-python-image-array-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-python_files/figure-html/fig-python-image-array-output-1.png" alt="Grayscale image of a handwritten digit reconstructed from its pixel-value array, with the true target label displayed above the image." width="315" height="335" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-image-array-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: A handwritten digit represented as a numerical image array.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is an important bridge to computer vision: an image is visually meaningful to a person, but a learning algorithm receives a numerical representation.</p>
+<p>Flattening an (HW) image produces a vector with (HW) values:</p>
+<p><span class="math display">\[
+I\in\mathbb{R}^{H\times W}
+\rightarrow
+x_i\in\mathbb{R}^{HW}.
+\]</span></p>
+<p>That transformation preserves pixel values but makes the original two-dimensional neighborhood structure less explicit. Later chapters will examine why representation matters so much for visual learning.</p>
 </section>
-<section id="hands-on-practice" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">2.8</span> Hands-On Practice</h2>
-<p>Create a small reproducible analysis that loads a public dataset, summarizes it, visualizes key variables, and fits a baseline model.</p>
+<section id="pandas-working-with-tabular-data" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="pandas-working-with-tabular-data"><span class="header-section-number">2.9</span> pandas: Working with Tabular Data</h2>
+<p>pandas provides labeled tabular data structures for data manipulation and analysis <span class="citation" data-cites="pandasUserGuide2026">(<a href="../references.html#ref-pandasUserGuide2026" role="doc-biblioref">pandas development team 2026</a>)</span>.</p>
+<div id="b0bb2912" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"study_hours"</span>: [<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">6</span>],</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"attendance"</span>: [<span class="fl">0.82</span>, <span class="fl">0.94</span>, <span class="fl">0.71</span>, <span class="fl">0.97</span>, <span class="fl">0.88</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"exam_score"</span>: [<span class="dv">72</span>, <span class="dv">91</span>, <span class="dv">65</span>, <span class="dv">95</span>, <span class="dv">84</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>students</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">study_hours</th>
+<th data-quarto-table-cell-role="th">attendance</th>
+<th data-quarto-table-cell-role="th">exam_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>4</td>
+<td>0.82</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>7</td>
+<td>0.94</td>
+<td>91</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2</td>
+<td>0.71</td>
+<td>65</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>9</td>
+<td>0.97</td>
+<td>95</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>6</td>
+<td>0.88</td>
+<td>84</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Inspect before transforming:</p>
+<div id="898b73c6" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>students.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>(5, 3)</code></pre>
+</div>
+</div>
+<div id="9621c694" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>students.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>study_hours      int64
+attendance     float64
+exam_score       int64
+dtype: object</code></pre>
+</div>
+</div>
+<div id="1ea88a8a" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>students.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">study_hours</th>
+<th data-quarto-table-cell-role="th">attendance</th>
+<th data-quarto-table-cell-role="th">exam_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>5.000000</td>
+<td>5.000000</td>
+<td>5.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>5.600000</td>
+<td>0.864000</td>
+<td>81.400000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>2.701851</td>
+<td>0.103586</td>
+<td>12.660964</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>2.000000</td>
+<td>0.710000</td>
+<td>65.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>4.000000</td>
+<td>0.820000</td>
+<td>72.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>6.000000</td>
+<td>0.880000</td>
+<td>84.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>7.000000</td>
+<td>0.940000</td>
+<td>91.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>9.000000</td>
+<td>0.970000</td>
+<td>95.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Ask what one row represents, which columns are identifiers, which variable is the target, whether units are documented, and whether missingness has meaning.</p>
+<section id="selecting-and-filtering" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="selecting-and-filtering"><span class="header-section-number">2.9.1</span> Selecting and Filtering</h3>
+<div id="61b23e0e" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>students[[<span class="st">"study_hours"</span>, <span class="st">"exam_score"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">study_hours</th>
+<th data-quarto-table-cell-role="th">exam_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>4</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>7</td>
+<td>91</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2</td>
+<td>65</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>9</td>
+<td>95</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>6</td>
+<td>84</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c95b0bec" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>students.loc[students[<span class="st">"attendance"</span>] <span class="op">&gt;=</span> <span class="fl">0.90</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">study_hours</th>
+<th data-quarto-table-cell-role="th">attendance</th>
+<th data-quarto-table-cell-role="th">exam_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>7</td>
+<td>0.94</td>
+<td>91</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>9</td>
+<td>0.97</td>
+<td>95</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="common-mistakes" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">2.9</span> Common Mistakes</h2>
-<ul>
-<li>Installing packages into uncontrolled environments.</li>
-<li>Hard-coding local file paths.</li>
-<li>Mixing data cleaning and modeling without documentation.</li>
-<li>Failing to record package versions.</li>
-</ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">2.10</span> Knowledge Check</h2>
+<section id="from-a-dataframe-to-x-and-y" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="from-a-dataframe-to-x-and-y"><span class="header-section-number">2.10</span> From a DataFrame to (X) and (y)</h2>
+<div id="1c64cb3f" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> students[[<span class="st">"study_hours"</span>, <span class="st">"attendance"</span>]]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> students[<span class="st">"exam_score"</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X shape:"</span>, X.shape)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y shape:"</span>, y.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X shape: (5, 2)
+y shape: (5,)</code></pre>
+</div>
+</div>
+<p>Construct these intentionally. Leaving the target—or a post-outcome proxy—inside <span class="math inline">\(X\)</span> can create leakage.</p>
+</section>
+<section id="data-types-are-analytical-decisions" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="data-types-are-analytical-decisions"><span class="header-section-number">2.11</span> Data Types Are Analytical Decisions</h2>
+<p>A ZIP code can be stored as an integer without being a quantitative measurement. The same distinction applies to IDs, diagnosis codes, ordinal responses, dates, and text.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Storage Type ≠ Measurement Meaning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Never decide how to model a variable solely from <code>df.dtypes</code>. Ask what the variable <strong>represents</strong>.</p>
+</div>
+</div>
+</section>
+<section id="missing-data" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">2.12</span> Missing Data</h2>
+<div id="b139440a" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>example <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: [<span class="dv">22</span>, <span class="dv">35</span>, np.nan, <span class="dv">51</span>],</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"income"</span>: [<span class="dv">42000</span>, np.nan, <span class="dv">61000</span>, <span class="dv">79000</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>example.isna().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>age       1
+income    1
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Deleting every incomplete row or replacing every missing value with a mean is not automatically defensible. Later chapters will treat imputation within pipelines. Here, develop the habit of inspecting and documenting missingness before acting.</p>
+</section>
+<section id="exploratory-visualization" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="exploratory-visualization"><span class="header-section-number">2.13</span> Exploratory Visualization</h2>
+<p>Your current course material uses Plotly with Gapminder, Iris, and Tips to introduce bar, line, scatter, and histogram graphics. We retain the pedagogical value while shifting the emphasis from <strong>making charts</strong> to <strong>answering questions</strong>.</p>
+<div id="f82cd5b1" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(students[<span class="st">"study_hours"</span>], students[<span class="st">"exam_score"</span>])</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Study hours"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Exam score"</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Study Hours and Exam Score"</span>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-python_files/figure-html/cell-18-output-1.png" width="585" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ask:</p>
+<blockquote class="blockquote">
+<p><strong>What feature of the data am I trying to understand?</strong></p>
+</blockquote>
+<p>Interactive Plotly graphics are valuable when interaction materially improves understanding. Stable static figures are often preferable for publication artifacts.</p>
+</section>
+<section id="data-provenance" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="data-provenance"><span class="header-section-number">2.14</span> Data Provenance</h2>
+<p>A line such as <code>pd.read_csv("data.csv")</code> conceals the dataset’s history.</p>
+<p>Record at least:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>What to record</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Source</td>
+<td>authoritative provider</td>
+</tr>
+<tr class="even">
+<td>Dataset</td>
+<td>official dataset name</td>
+</tr>
+<tr class="odd">
+<td>Location/API</td>
+<td>source endpoint</td>
+</tr>
+<tr class="even">
+<td>Retrieval date</td>
+<td>when acquired</td>
+</tr>
+<tr class="odd">
+<td>Version/cycle</td>
+<td>release or survey cycle</td>
+</tr>
+<tr class="even">
+<td>Unit of analysis</td>
+<td>what one row represents</td>
+</tr>
+<tr class="odd">
+<td>Transformations</td>
+<td>raw-to-processed steps</td>
+</tr>
+<tr class="even">
+<td>License/terms</td>
+<td>applicable use conditions</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Provenance Principle
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>If an analytical decision can change the result, that decision belongs in the reproducible record.</strong></p>
+</div>
+</div>
+</section>
+<section id="three-data-tracks-in-practice" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="three-data-tracks-in-practice"><span class="header-section-number">2.15</span> Three Data Tracks in Practice</h2>
+<section id="open-ml-benchmark-track" class="level3" data-number="2.15.1">
+<h3 data-number="2.15.1" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">2.15.1</span> Open ML Benchmark Track</h3>
+<div id="2b1babad" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_wine</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> load_wine(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>wine.frame.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">alcohol</th>
+<th data-quarto-table-cell-role="th">malic_acid</th>
+<th data-quarto-table-cell-role="th">ash</th>
+<th data-quarto-table-cell-role="th">alcalinity_of_ash</th>
+<th data-quarto-table-cell-role="th">magnesium</th>
+<th data-quarto-table-cell-role="th">total_phenols</th>
+<th data-quarto-table-cell-role="th">flavanoids</th>
+<th data-quarto-table-cell-role="th">nonflavanoid_phenols</th>
+<th data-quarto-table-cell-role="th">proanthocyanins</th>
+<th data-quarto-table-cell-role="th">color_intensity</th>
+<th data-quarto-table-cell-role="th">hue</th>
+<th data-quarto-table-cell-role="th">od280/od315_of_diluted_wines</th>
+<th data-quarto-table-cell-role="th">proline</th>
+<th data-quarto-table-cell-role="th">target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>14.23</td>
+<td>1.71</td>
+<td>2.43</td>
+<td>15.6</td>
+<td>127.0</td>
+<td>2.80</td>
+<td>3.06</td>
+<td>0.28</td>
+<td>2.29</td>
+<td>5.64</td>
+<td>1.04</td>
+<td>3.92</td>
+<td>1065.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>13.20</td>
+<td>1.78</td>
+<td>2.14</td>
+<td>11.2</td>
+<td>100.0</td>
+<td>2.65</td>
+<td>2.76</td>
+<td>0.26</td>
+<td>1.28</td>
+<td>4.38</td>
+<td>1.05</td>
+<td>3.40</td>
+<td>1050.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>13.16</td>
+<td>2.36</td>
+<td>2.67</td>
+<td>18.6</td>
+<td>101.0</td>
+<td>2.80</td>
+<td>3.24</td>
+<td>0.30</td>
+<td>2.81</td>
+<td>5.68</td>
+<td>1.03</td>
+<td>3.17</td>
+<td>1185.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>14.37</td>
+<td>1.95</td>
+<td>2.50</td>
+<td>16.8</td>
+<td>113.0</td>
+<td>3.85</td>
+<td>3.49</td>
+<td>0.24</td>
+<td>2.18</td>
+<td>7.80</td>
+<td>0.86</td>
+<td>3.45</td>
+<td>1480.0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>13.24</td>
+<td>2.59</td>
+<td>2.87</td>
+<td>21.0</td>
+<td>118.0</td>
+<td>2.80</td>
+<td>2.69</td>
+<td>0.39</td>
+<td>1.82</td>
+<td>4.32</td>
+<td>1.04</td>
+<td>2.93</td>
+<td>735.0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Benchmark data are excellent for learning workflows and algorithms. Convenience alone does not create research novelty.</p>
+</section>
+<section id="health-track" class="level3" data-number="2.15.2">
+<h3 data-number="2.15.2" class="anchored" data-anchor-id="health-track"><span class="header-section-number">2.15.2</span> Health Track</h3>
+<p>NHANES provides public demographic, examination, laboratory, behavioral, and other health data <span class="citation" data-cites="cdcNHANES2024">(<a href="../references.html#ref-cdcNHANES2024" role="doc-biblioref">National Center for Health Statistics 2024</a>)</span>. Researchers must understand survey cycles, variable documentation, units, eligibility, missing codes, and the intended population.</p>
+</section>
+<section id="education-track" class="level3" data-number="2.15.3">
+<h3 data-number="2.15.3" class="anchored" data-anchor-id="education-track"><span class="header-section-number">2.15.3</span> Education Track</h3>
+<p>IPEDS and related public postsecondary data support institutional analyses involving enrollment, completions, graduation, finances, staffing, and other characteristics <span class="citation" data-cites="ncesIPEDS2026">(<a href="../references.html#ref-ncesIPEDS2026" role="doc-biblioref">National Center for Education Statistics 2026</a>)</span>. The unit of analysis may be an institution or institution-year rather than a person.</p>
+<p>The Python syntax can be similar across tracks. The scientific meaning is not.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-code-as-evidence" class="level2" data-number="2.16">
+<h2 data-number="2.16" class="anchored" data-anchor-id="beyond-the-algorithm-code-as-evidence"><span class="header-section-number">2.16</span> Beyond the Algorithm: Code as Evidence</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What Does Code Allow Us to Know?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In data science, code is not merely a set of instructions to a computer. It becomes part of the argument supporting an analytical claim.</p>
+<p>If a paper reports that a model achieved an AUC of 0.87, that statement depends on decisions embedded in code: exclusions, missing-data treatment, preprocessing order, data splitting, feature construction, and evaluation.</p>
+<p>Reproducible code does not guarantee a correct conclusion. But without a transparent computational record, it becomes harder to determine why the conclusion should be trusted.</p>
+<p><strong>Could another knowledgeable analyst reconstruct the path from raw evidence to reported claim?</strong></p>
+</div>
+</div>
+</section>
+<section id="writing-reusable-analytical-code" class="level2" data-number="2.17">
+<h2 data-number="2.17" class="anchored" data-anchor-id="writing-reusable-analytical-code"><span class="header-section-number">2.17</span> Writing Reusable Analytical Code</h2>
+<div id="e0531168" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize_numeric_column(df, column):</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"n"</span>: df[column].notna().<span class="bu">sum</span>(),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"missing"</span>: df[column].isna().<span class="bu">sum</span>(),</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mean"</span>: df[column].mean(),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"median"</span>: df[column].median()</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>summarize_numeric_column(students, <span class="st">"exam_score"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>{'n': np.int64(5),
+ 'missing': np.int64(0),
+ 'mean': np.float64(81.4),
+ 'median': np.float64(84.0)}</code></pre>
+</div>
+</div>
+<p>As an analysis stabilizes, repeated logic should migrate into functions.</p>
+</section>
+<section id="debugging-read-the-evidence" class="level2" data-number="2.18">
+<h2 data-number="2.18" class="anchored" data-anchor-id="debugging-read-the-evidence"><span class="header-section-number">2.18</span> Debugging: Read the Evidence</h2>
+<p>A disciplined process is:</p>
 <ol type="1">
-<li>What problem does a virtual environment solve?</li>
-<li>Why are pipelines useful?</li>
-<li>How do NumPy and pandas differ?</li>
-<li>Why should file paths be portable?</li>
+<li>read the final error message;</li>
+<li>identify the line that failed;</li>
+<li>inspect the relevant object;</li>
+<li>form a hypothesis;</li>
+<li>test the smallest correction;</li>
+<li>verify that the correction solves the analytical problem, not merely the syntax.</li>
+</ol>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A Traceback Is Evidence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not treat an error message as noise to paste immediately into an AI assistant. Read it first.</p>
+</div>
+</div>
+</section>
+<section id="git-and-github" class="level2" data-number="2.19">
+<h2 data-number="2.19" class="anchored" data-anchor-id="git-and-github"><span class="header-section-number">2.19</span> Git and GitHub</h2>
+<p>A minimal workflow:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Document Chapter 2 analysis workflow"</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Do not commit credentials, private data, or <code>.venv</code>.</p>
+</section>
+<section id="quarto-narrative-computation-evidence" class="level2" data-number="2.20">
+<h2 data-number="2.20" class="anchored" data-anchor-id="quarto-narrative-computation-evidence"><span class="header-section-number">2.20</span> Quarto: Narrative + Computation + Evidence</h2>
+<p>Quarto can execute Python within Markdown so code, output, prose, equations, and citations remain connected <span class="citation" data-cites="quartoPython2026">(<a href="../references.html#ref-quartoPython2026" role="doc-biblioref">Quarto 2026</a>)</span>.</p>
+<pre class="text"><code>#| label: fig-example
+#| fig-cap: "A meaningful caption"
+#| warning: false</code></pre>
+<p>The goal is to generate outputs reproducibly rather than copy them manually into a report.</p>
+</section>
+<section id="try-it" class="level2" data-number="2.21">
+<h2 data-number="2.21" class="anchored" data-anchor-id="try-it"><span class="header-section-number">2.21</span> Try It</h2>
+<p>Using the Wine dataset:</p>
+<ol type="1">
+<li>determine the number of observations and variables;</li>
+<li>identify the target;</li>
+<li>inspect data types;</li>
+<li>calculate descriptive statistics for three features;</li>
+<li>create one plot that answers a specific question;</li>
+<li>interpret it without making a causal claim.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">2.11</span> Real-World Case Study</h2>
-<section id="reproducing-an-analysis-on-another-computer" class="level3" data-number="2.11.1">
-<h3 data-number="2.11.1" class="anchored" data-anchor-id="reproducing-an-analysis-on-another-computer"><span class="header-section-number">2.11.1</span> Reproducing an Analysis on Another Computer</h3>
-<p>Package an analysis so that another researcher can clone the repository and reproduce the results.</p>
+<section id="hands-on-lab-build-a-reproducible-mini-project" class="level2" data-number="2.22">
+<h2 data-number="2.22" class="anchored" data-anchor-id="hands-on-lab-build-a-reproducible-mini-project"><span class="header-section-number">2.22</span> Hands-On Lab: Build a Reproducible Mini-Project</h2>
+<p>Create:</p>
+<pre class="text"><code>chapter02-lab/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── figures/
+├── src/
+├── analysis.qmd
+├── README.md
+├── requirements.txt
+└── .gitignore</code></pre>
+<p>Then create <code>.venv</code>, install packages, load a dataset, document provenance, inspect it, define <span class="math inline">\(X\)</span> and <span class="math inline">\(y\)</span>, create purposeful figures, move one repeated transformation into a function, render the Quarto analysis, and commit the project.</p>
+<p>The goal is not yet the best predictive model. It is a workflow another analyst can understand and reproduce.</p>
 </section>
+<section id="ai-pair-programmer" class="level2" data-number="2.23">
+<h2 data-number="2.23" class="anchored" data-anchor-id="ai-pair-programmer"><span class="header-section-number">2.23</span> AI Pair Programmer</h2>
+<p>Ask an AI coding assistant to generate a function that summarizes missing values in a DataFrame. Audit whether it reports counts and percentages correctly, handles edge cases, mutates data, and makes claims consistent with the code.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>AI-Generated Code Can Run and Still Be Wrong
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Successful execution is not validation.</p>
+</div>
+</div>
 </section>
-<section id="professors-challenge" class="level2" data-number="2.12">
-<h2 data-number="2.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">2.12</span> Professor’s Challenge</h2>
-<p>Your model gives different results on two computers. Develop a systematic debugging plan.</p>
+<section id="practitioner-track" class="level2" data-number="2.24">
+<h2 data-number="2.24" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">2.24</span> Practitioner Track</h2>
+<p>Focus on environments, project structure, arrays, DataFrames, visualization, feature/target construction, reusable functions, debugging, and version control.</p>
 </section>
-<section id="research-extension" class="level2" data-number="2.13">
-<h2 data-number="2.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">2.13</span> Research Extension</h2>
-<p>Evaluate reproducibility practices in a published open-source machine learning project.</p>
+<section id="researcher-track" class="level2" data-number="2.25">
+<h2 data-number="2.25" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">2.25</span> Researcher Track</h2>
+<p>Focus additionally on provenance, measurement meaning, preservation of raw data, auditable transformations, and a reproducible path from source evidence to reported output.</p>
 </section>
-<section id="reproducibility-check" class="level2" data-number="2.14">
-<h2 data-number="2.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">2.14</span> Reproducibility Check</h2>
-<p>Verify relative paths, dependencies, seeds, data provenance, and a clean end-to-end render.</p>
+<section id="professors-challenge-audit-the-analysis" class="level2" data-number="2.26">
+<h2 data-number="2.26" class="anchored" data-anchor-id="professors-challenge-audit-the-analysis"><span class="header-section-number">2.26</span> Professor’s Challenge: Audit the Analysis</h2>
+<p>Consider:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"student_data.csv"</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"student_id"</span>])</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"retained"</span>]</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RandomForestClassifier()</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.score(X_test, y_test))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The code may run. Audit it before rewriting it.</p>
+<p>Consider target leakage, undocumented row deletion, class imbalance, random vs stratified/grouped/temporal splitting, random seeds, post-outcome predictors, categorical representation, the meaning of <code>score()</code>, reliance on one split, provenance, population, and environment reproducibility.</p>
 </section>
-<section id="key-takeaways" class="level2" data-number="2.15">
-<h2 data-number="2.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">2.15</span> Key Takeaways</h2>
+<section id="research-studio" class="level2" data-number="2.27">
+<h2 data-number="2.27" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">2.27</span> Research Studio</h2>
+<p>Choose one track and create a data-intake memo containing dataset/source, analytical purpose, unit of analysis, target, feature families, measurement concerns, missingness, provenance, raw/processed structure, reproducible transformations, one leakage risk, and one question the dataset alone cannot answer.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="2.28">
+<h2 data-number="2.28" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">2.28</span> Knowledge Check</h2>
+<ol type="1">
+<li>Why use a virtual environment?</li>
+<li>What does <code>X.shape == (500, 12)</code> mean?</li>
+<li>How do NumPy arrays and pandas DataFrames differ conceptually?</li>
+<li>Why can an integer column represent a category?</li>
+<li>Why should raw data usually remain unchanged?</li>
+<li>What is data provenance?</li>
+<li>Why is <code>dropna()</code> not automatically defensible?</li>
+<li>Why use functions for repeated analytical logic?</li>
+<li>What does Quarto contribute to reproducibility?</li>
+<li>Why is code that executes without error not necessarily analytically correct?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="2.29">
+<h2 data-number="2.29" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">2.29</span> Reproducibility Check</h2>
+<p>Verify that your project reveals the Python environment, dependencies, data source, raw/processed distinction, transformations, construction of <span class="math inline">\(X\)</span> and <span class="math inline">\(y\)</span>, figure-generation code, result-generation code, and version history.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="2.30">
+<h2 data-number="2.30" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">2.30</span> Key Takeaways</h2>
 <ul>
-<li>Reproducibility is part of technical competence.</li>
-<li>Python’s ML ecosystem is strongest when tools are integrated into a disciplined workflow.</li>
-<li>Portable code reduces dependence on individual analysts.</li>
+<li>Python is most useful within a disciplined analytical workflow.</li>
+<li>Virtual environments isolate dependencies.</li>
+<li>NumPy and pandas provide complementary data representations.</li>
+<li>Variable meaning matters more than storage type.</li>
+<li>Data provenance is part of analytical evidence.</li>
+<li>Visualization should answer questions rather than decorate reports.</li>
+<li>Functions, debugging, Git, and Quarto improve transparency.</li>
+<li>AI coding assistance should be audited rather than trusted by default.</li>
+<li>Code that runs is not necessarily code that supports a valid conclusion.</li>
+<li>The computational path from evidence to claim matters.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-harris2020numpy" class="csl-entry" role="listitem">
+Harris, Charles R., K. Jarrod Millman, Stéfan J. van der Walt, Ralf Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, et al. 2020. <span>“Array Programming with <span>NumPy</span>.”</span> <em>Nature</em> 585: 357–62. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+</div>
+<div id="ref-hunter2007matplotlib" class="csl-entry" role="listitem">
+Hunter, John D. 2007. <span>“Matplotlib: A 2D Graphics Environment.”</span> <em>Computing in Science &amp; Engineering</em> 9 (3): 90–95. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
+</div>
+<div id="ref-ncesIPEDS2026" class="csl-entry" role="listitem">
+National Center for Education Statistics. 2026. <span>“About IPEDS.”</span> U.S. Department of Education. <a href="https://nces.ed.gov/ipeds/about-ipeds">https://nces.ed.gov/ipeds/about-ipeds</a>.
+</div>
+<div id="ref-cdcNHANES2024" class="csl-entry" role="listitem">
+National Center for Health Statistics. 2024. <span>“About NHANES.”</span> Centers for Disease Control; Prevention. <a href="https://www.cdc.gov/nchs/nhanes/about/index.html">https://www.cdc.gov/nchs/nhanes/about/index.html</a>.
+</div>
+<div id="ref-pandasUserGuide2026" class="csl-entry" role="listitem">
+pandas development team. 2026. <span>“Pandas User Guide.”</span> <a href="https://pandas.pydata.org/docs/user_guide/index.html">https://pandas.pydata.org/docs/user_guide/index.html</a>.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, et al. 2011. <span>“Scikit-Learn: Machine Learning in Python.”</span> <em>Journal of Machine Learning Research</em> 12 (85): 2825–30.
+</div>
+<div id="ref-pythonVenv2026" class="csl-entry" role="listitem">
+Python Software Foundation. 2026. <span>“Virtual Environments and Packages.”</span> <a href="https://docs.python.org/3/tutorial/venv.html">https://docs.python.org/3/tutorial/venv.html</a>.
+</div>
+<div id="ref-quartoPython2026" class="csl-entry" role="listitem">
+Quarto. 2026. <span>“Using Python.”</span> <a href="https://quarto.org/docs/computations/python.html">https://quarto.org/docs/computations/python.html</a>.
+</div>
+<div id="ref-virtanen2020scipy" class="csl-entry" role="listitem">
+Virtanen, Pauli, Ralf Gommers, Travis E. Oliphant, et al. 2020. <span>“<span>SciPy</span> 1.0: Fundamental Algorithms for Scientific Computing in Python.”</span> <em>Nature Methods</em> 17 (3): 261–72. <a href="https://doi.org/10.1038/s41592-019-0686-2">https://doi.org/10.1038/s41592-019-0686-2</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -569,7 +1588,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

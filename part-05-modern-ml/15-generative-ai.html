@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>15&nbsp; Generative AI and Foundation Models – Machine Learning Using Python</title>
+<title>15&nbsp; Generative AI: From Prediction to Intelligent Systems – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/15-generative-ai.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/15-generative-ai.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,63 +430,103 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">15.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">15.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">15.3</span> Real-World Problem</a></li>
-  <li><a href="#foundations" id="toc-foundations" class="nav-link" data-scroll-target="#foundations"><span class="header-section-number">15.4</span> Foundations</a>
+  <li><a href="#why-generative-ai-changes-the-conversation" id="toc-why-generative-ai-changes-the-conversation" class="nav-link" data-scroll-target="#why-generative-ai-changes-the-conversation"><span class="header-section-number">15.2</span> Why Generative AI Changes the Conversation</a></li>
+  <li><a href="#discriminative-versus-generative-models" id="toc-discriminative-versus-generative-models" class="nav-link" data-scroll-target="#discriminative-versus-generative-models"><span class="header-section-number">15.3</span> Discriminative Versus Generative Models</a></li>
+  <li><a href="#from-chapter-14-to-chapter-15" id="toc-from-chapter-14-to-chapter-15" class="nav-link" data-scroll-target="#from-chapter-14-to-chapter-15"><span class="header-section-number">15.4</span> From Chapter 14 to Chapter 15</a></li>
+  <li><a href="#tokens-are-the-models-working-symbols" id="toc-tokens-are-the-models-working-symbols" class="nav-link" data-scroll-target="#tokens-are-the-models-working-symbols"><span class="header-section-number">15.5</span> Tokens Are the Model’s Working Symbols</a></li>
+  <li><a href="#logits-and-probabilities" id="toc-logits-and-probabilities" class="nav-link" data-scroll-target="#logits-and-probabilities"><span class="header-section-number">15.6</span> Logits and Probabilities</a></li>
+  <li><a href="#a-tiny-next-token-distribution" id="toc-a-tiny-next-token-distribution" class="nav-link" data-scroll-target="#a-tiny-next-token-distribution"><span class="header-section-number">15.7</span> A Tiny Next-Token Distribution</a></li>
+  <li><a href="#learning-to-predict-tokens" id="toc-learning-to-predict-tokens" class="nav-link" data-scroll-target="#learning-to-predict-tokens"><span class="header-section-number">15.8</span> Learning to Predict Tokens</a></li>
+  <li><a href="#cross-entropy-training-objective" id="toc-cross-entropy-training-objective" class="nav-link" data-scroll-target="#cross-entropy-training-objective"><span class="header-section-number">15.9</span> Cross-Entropy Training Objective</a></li>
+  <li><a href="#perplexity" id="toc-perplexity" class="nav-link" data-scroll-target="#perplexity"><span class="header-section-number">15.10</span> Perplexity</a></li>
+  <li><a href="#why-pretraining-is-powerful" id="toc-why-pretraining-is-powerful" class="nav-link" data-scroll-target="#why-pretraining-is-powerful"><span class="header-section-number">15.11</span> Why Pretraining Is Powerful</a></li>
+  <li><a href="#foundation-models" id="toc-foundation-models" class="nav-link" data-scroll-target="#foundation-models"><span class="header-section-number">15.12</span> Foundation Models</a></li>
+  <li><a href="#generation-and-sampling" id="toc-generation-and-sampling" class="nav-link" data-scroll-target="#generation-and-sampling"><span class="header-section-number">15.13</span> Generation and Sampling</a></li>
+  <li><a href="#greedy-decoding" id="toc-greedy-decoding" class="nav-link" data-scroll-target="#greedy-decoding"><span class="header-section-number">15.14</span> Greedy Decoding</a></li>
+  <li><a href="#temperature" id="toc-temperature" class="nav-link" data-scroll-target="#temperature"><span class="header-section-number">15.15</span> Temperature</a></li>
+  <li><a href="#temperature-demonstration" id="toc-temperature-demonstration" class="nav-link" data-scroll-target="#temperature-demonstration"><span class="header-section-number">15.16</span> Temperature Demonstration</a></li>
+  <li><a href="#top-k-sampling" id="toc-top-k-sampling" class="nav-link" data-scroll-target="#top-k-sampling"><span class="header-section-number">15.17</span> Top-k Sampling</a></li>
+  <li><a href="#nucleus-sampling" id="toc-nucleus-sampling" class="nav-link" data-scroll-target="#nucleus-sampling"><span class="header-section-number">15.18</span> Nucleus Sampling</a></li>
+  <li><a href="#sampling-is-not-creativity-in-a-simple-sense" id="toc-sampling-is-not-creativity-in-a-simple-sense" class="nav-link" data-scroll-target="#sampling-is-not-creativity-in-a-simple-sense"><span class="header-section-number">15.19</span> Sampling Is Not Creativity in a Simple Sense</a></li>
+  <li><a href="#prompting-and-in-context-learning" id="toc-prompting-and-in-context-learning" class="nav-link" data-scroll-target="#prompting-and-in-context-learning"><span class="header-section-number">15.20</span> Prompting and In-Context Learning</a></li>
+  <li><a href="#the-prompt-defines-a-temporary-task-context" id="toc-the-prompt-defines-a-temporary-task-context" class="nav-link" data-scroll-target="#the-prompt-defines-a-temporary-task-context"><span class="header-section-number">15.21</span> The Prompt Defines a Temporary Task Context</a></li>
+  <li><a href="#zero-shot-prompting" id="toc-zero-shot-prompting" class="nav-link" data-scroll-target="#zero-shot-prompting"><span class="header-section-number">15.22</span> Zero-Shot Prompting</a></li>
+  <li><a href="#few-shot-prompting" id="toc-few-shot-prompting" class="nav-link" data-scroll-target="#few-shot-prompting"><span class="header-section-number">15.23</span> Few-Shot Prompting</a></li>
+  <li><a href="#in-context-learning-is-not-ordinary-fine-tuning" id="toc-in-context-learning-is-not-ordinary-fine-tuning" class="nav-link" data-scroll-target="#in-context-learning-is-not-ordinary-fine-tuning"><span class="header-section-number">15.24</span> In-Context Learning Is Not Ordinary Fine-Tuning</a></li>
+  <li><a href="#prompt-engineering-versus-problem-engineering" id="toc-prompt-engineering-versus-problem-engineering" class="nav-link" data-scroll-target="#prompt-engineering-versus-problem-engineering"><span class="header-section-number">15.25</span> Prompt Engineering Versus Problem Engineering</a></li>
+  <li><a href="#retrieval-augmented-generation" id="toc-retrieval-augmented-generation" class="nav-link" data-scroll-target="#retrieval-augmented-generation"><span class="header-section-number">15.26</span> Retrieval-Augmented Generation</a></li>
+  <li><a href="#why-retrieval" id="toc-why-retrieval" class="nav-link" data-scroll-target="#why-retrieval"><span class="header-section-number">15.27</span> Why Retrieval?</a></li>
+  <li><a href="#vector-retrieval" id="toc-vector-retrieval" class="nav-link" data-scroll-target="#vector-retrieval"><span class="header-section-number">15.28</span> Vector Retrieval</a></li>
+  <li><a href="#a-tiny-retrieval-demonstration" id="toc-a-tiny-retrieval-demonstration" class="nav-link" data-scroll-target="#a-tiny-retrieval-demonstration"><span class="header-section-number">15.29</span> A Tiny Retrieval Demonstration</a></li>
+  <li><a href="#rag-is-a-system-not-a-single-model" id="toc-rag-is-a-system-not-a-single-model" class="nav-link" data-scroll-target="#rag-is-a-system-not-a-single-model"><span class="header-section-number">15.30</span> RAG Is a System, Not a Single Model</a></li>
+  <li><a href="#retrieval-does-not-guarantee-truth" id="toc-retrieval-does-not-guarantee-truth" class="nav-link" data-scroll-target="#retrieval-does-not-guarantee-truth"><span class="header-section-number">15.31</span> Retrieval Does Not Guarantee Truth</a></li>
+  <li><a href="#rag-evaluation" id="toc-rag-evaluation" class="nav-link" data-scroll-target="#rag-evaluation"><span class="header-section-number">15.32</span> RAG Evaluation</a>
   <ul class="collapse">
-  <li><a href="#generative-versus-discriminative-modeling" id="toc-generative-versus-discriminative-modeling" class="nav-link" data-scroll-target="#generative-versus-discriminative-modeling"><span class="header-section-number">15.4.1</span> Generative Versus Discriminative Modeling</a></li>
-  <li><a href="#language-modeling" id="toc-language-modeling" class="nav-link" data-scroll-target="#language-modeling"><span class="header-section-number">15.4.2</span> Language Modeling</a></li>
-  <li><a href="#tokens-and-context" id="toc-tokens-and-context" class="nav-link" data-scroll-target="#tokens-and-context"><span class="header-section-number">15.4.3</span> Tokens and Context</a></li>
-  <li><a href="#transformers-and-attention" id="toc-transformers-and-attention" class="nav-link" data-scroll-target="#transformers-and-attention"><span class="header-section-number">15.4.4</span> Transformers and Attention</a></li>
-  <li><a href="#next-token-prediction" id="toc-next-token-prediction" class="nav-link" data-scroll-target="#next-token-prediction"><span class="header-section-number">15.4.5</span> Next-Token Prediction</a></li>
-  <li><a href="#foundation-models" id="toc-foundation-models" class="nav-link" data-scroll-target="#foundation-models"><span class="header-section-number">15.4.6</span> Foundation Models</a></li>
+  <li><a href="#retrieval-quality" id="toc-retrieval-quality" class="nav-link" data-scroll-target="#retrieval-quality"><span class="header-section-number">15.32.1</span> Retrieval Quality</a></li>
+  <li><a href="#answer-quality" id="toc-answer-quality" class="nav-link" data-scroll-target="#answer-quality"><span class="header-section-number">15.32.2</span> Answer Quality</a></li>
+  <li><a href="#faithfulness-or-groundedness" id="toc-faithfulness-or-groundedness" class="nav-link" data-scroll-target="#faithfulness-or-groundedness"><span class="header-section-number">15.32.3</span> Faithfulness or Groundedness</a></li>
+  <li><a href="#citation-quality" id="toc-citation-quality" class="nav-link" data-scroll-target="#citation-quality"><span class="header-section-number">15.32.4</span> Citation Quality</a></li>
   </ul></li>
-  <li><a href="#working-with-foundation-models" id="toc-working-with-foundation-models" class="nav-link" data-scroll-target="#working-with-foundation-models"><span class="header-section-number">15.5</span> Working With Foundation Models</a>
+  <li><a href="#fine-tuning-and-adaptation" id="toc-fine-tuning-and-adaptation" class="nav-link" data-scroll-target="#fine-tuning-and-adaptation"><span class="header-section-number">15.33</span> Fine-Tuning and Adaptation</a></li>
+  <li><a href="#fine-tuning" id="toc-fine-tuning" class="nav-link" data-scroll-target="#fine-tuning"><span class="header-section-number">15.34</span> Fine-Tuning</a></li>
+  <li><a href="#instruction-tuning" id="toc-instruction-tuning" class="nav-link" data-scroll-target="#instruction-tuning"><span class="header-section-number">15.35</span> Instruction Tuning</a></li>
+  <li><a href="#preference-and-alignment-training" id="toc-preference-and-alignment-training" class="nav-link" data-scroll-target="#preference-and-alignment-training"><span class="header-section-number">15.36</span> Preference and Alignment Training</a></li>
+  <li><a href="#rag-or-fine-tuning" id="toc-rag-or-fine-tuning" class="nav-link" data-scroll-target="#rag-or-fine-tuning"><span class="header-section-number">15.37</span> RAG or Fine-Tuning?</a></li>
+  <li><a href="#hallucination-and-uncertainty" id="toc-hallucination-and-uncertainty" class="nav-link" data-scroll-target="#hallucination-and-uncertainty"><span class="header-section-number">15.38</span> Hallucination and Uncertainty</a></li>
+  <li><a href="#what-is-a-hallucination" id="toc-what-is-a-hallucination" class="nav-link" data-scroll-target="#what-is-a-hallucination"><span class="header-section-number">15.39</span> What Is a Hallucination?</a></li>
+  <li><a href="#why-fluent-errors-are-dangerous" id="toc-why-fluent-errors-are-dangerous" class="nav-link" data-scroll-target="#why-fluent-errors-are-dangerous"><span class="header-section-number">15.40</span> Why Fluent Errors Are Dangerous</a></li>
+  <li><a href="#abstention" id="toc-abstention" class="nav-link" data-scroll-target="#abstention"><span class="header-section-number">15.41</span> Abstention</a></li>
+  <li><a href="#calibration-for-generative-systems" id="toc-calibration-for-generative-systems" class="nav-link" data-scroll-target="#calibration-for-generative-systems"><span class="header-section-number">15.42</span> Calibration for Generative Systems</a></li>
+  <li><a href="#tool-use-and-agents" id="toc-tool-use-and-agents" class="nav-link" data-scroll-target="#tool-use-and-agents"><span class="header-section-number">15.43</span> Tool Use and Agents</a></li>
+  <li><a href="#language-models-can-be-embedded-in-larger-systems" id="toc-language-models-can-be-embedded-in-larger-systems" class="nav-link" data-scroll-target="#language-models-can-be-embedded-in-larger-systems"><span class="header-section-number">15.44</span> Language Models Can Be Embedded in Larger Systems</a></li>
+  <li><a href="#a-simple-tool-use-loop" id="toc-a-simple-tool-use-loop" class="nav-link" data-scroll-target="#a-simple-tool-use-loop"><span class="header-section-number">15.45</span> A Simple Tool-Use Loop</a></li>
+  <li><a href="#what-is-an-agent" id="toc-what-is-an-agent" class="nav-link" data-scroll-target="#what-is-an-agent"><span class="header-section-number">15.46</span> What Is an Agent?</a></li>
+  <li><a href="#agentic-risk-grows-with-action-space" id="toc-agentic-risk-grows-with-action-space" class="nav-link" data-scroll-target="#agentic-risk-grows-with-action-space"><span class="header-section-number">15.47</span> Agentic Risk Grows With Action Space</a></li>
+  <li><a href="#prompt-injection" id="toc-prompt-injection" class="nav-link" data-scroll-target="#prompt-injection"><span class="header-section-number">15.48</span> Prompt Injection</a></li>
+  <li><a href="#evaluating-generative-ai" id="toc-evaluating-generative-ai" class="nav-link" data-scroll-target="#evaluating-generative-ai"><span class="header-section-number">15.49</span> Evaluating Generative AI</a></li>
+  <li><a href="#there-is-no-single-accuracy-metric" id="toc-there-is-no-single-accuracy-metric" class="nav-link" data-scroll-target="#there-is-no-single-accuracy-metric"><span class="header-section-number">15.50</span> There Is No Single Accuracy Metric</a></li>
+  <li><a href="#exact-match-evaluation" id="toc-exact-match-evaluation" class="nav-link" data-scroll-target="#exact-match-evaluation"><span class="header-section-number">15.51</span> Exact-Match Evaluation</a></li>
+  <li><a href="#semantic-metrics" id="toc-semantic-metrics" class="nav-link" data-scroll-target="#semantic-metrics"><span class="header-section-number">15.52</span> Semantic Metrics</a></li>
+  <li><a href="#human-evaluation" id="toc-human-evaluation" class="nav-link" data-scroll-target="#human-evaluation"><span class="header-section-number">15.53</span> Human Evaluation</a></li>
+  <li><a href="#llm-as-judge" id="toc-llm-as-judge" class="nav-link" data-scroll-target="#llm-as-judge"><span class="header-section-number">15.54</span> LLM-as-Judge</a></li>
+  <li><a href="#pairwise-evaluation" id="toc-pairwise-evaluation" class="nav-link" data-scroll-target="#pairwise-evaluation"><span class="header-section-number">15.55</span> Pairwise Evaluation</a></li>
+  <li><a href="#evaluation-as-an-experiment" id="toc-evaluation-as-an-experiment" class="nav-link" data-scroll-target="#evaluation-as-an-experiment"><span class="header-section-number">15.56</span> Evaluation as an Experiment</a></li>
+  <li><a href="#generative-ai-for-research" id="toc-generative-ai-for-research" class="nav-link" data-scroll-target="#generative-ai-for-research"><span class="header-section-number">15.57</span> Generative AI for Research</a></li>
+  <li><a href="#ai-can-support-the-research-workflow" id="toc-ai-can-support-the-research-workflow" class="nav-link" data-scroll-target="#ai-can-support-the-research-workflow"><span class="header-section-number">15.58</span> AI Can Support the Research Workflow</a></li>
+  <li><a href="#ai-should-not-become-an-invisible-coauthor" id="toc-ai-should-not-become-an-invisible-coauthor" class="nav-link" data-scroll-target="#ai-should-not-become-an-invisible-coauthor"><span class="header-section-number">15.59</span> AI Should Not Become an Invisible Coauthor</a></li>
+  <li><a href="#citation-fabrication-test" id="toc-citation-fabrication-test" class="nav-link" data-scroll-target="#citation-fabrication-test"><span class="header-section-number">15.60</span> Citation Fabrication Test</a></li>
+  <li><a href="#ai-generated-code" id="toc-ai-generated-code" class="nav-link" data-scroll-target="#ai-generated-code"><span class="header-section-number">15.61</span> AI-Generated Code</a></li>
+  <li><a href="#fluent-generation-is-not-evidence" id="toc-fluent-generation-is-not-evidence" class="nav-link" data-scroll-target="#fluent-generation-is-not-evidence"><span class="header-section-number">15.62</span> Fluent Generation Is Not Evidence</a></li>
+  <li><a href="#generative-ai-beyond-text-images-and-multimodal-systems" id="toc-generative-ai-beyond-text-images-and-multimodal-systems" class="nav-link" data-scroll-target="#generative-ai-beyond-text-images-and-multimodal-systems"><span class="header-section-number">15.63</span> Generative AI Beyond Text: Images and Multimodal Systems</a>
   <ul class="collapse">
-  <li><a href="#prompting" id="toc-prompting" class="nav-link" data-scroll-target="#prompting"><span class="header-section-number">15.5.1</span> Prompting</a></li>
-  <li><a href="#structured-outputs" id="toc-structured-outputs" class="nav-link" data-scroll-target="#structured-outputs"><span class="header-section-number">15.5.2</span> Structured Outputs</a></li>
-  <li><a href="#embeddings" id="toc-embeddings" class="nav-link" data-scroll-target="#embeddings"><span class="header-section-number">15.5.3</span> Embeddings</a></li>
-  <li><a href="#retrieval-augmented-generation" id="toc-retrieval-augmented-generation" class="nav-link" data-scroll-target="#retrieval-augmented-generation"><span class="header-section-number">15.5.4</span> Retrieval-Augmented Generation</a></li>
-  <li><a href="#fine-tuning" id="toc-fine-tuning" class="nav-link" data-scroll-target="#fine-tuning"><span class="header-section-number">15.5.5</span> Fine-Tuning</a></li>
-  <li><a href="#tool-use-and-agents" id="toc-tool-use-and-agents" class="nav-link" data-scroll-target="#tool-use-and-agents"><span class="header-section-number">15.5.6</span> Tool Use and Agents</a></li>
+  <li><a href="#multimodal-generation" id="toc-multimodal-generation" class="nav-link" data-scroll-target="#multimodal-generation"><span class="header-section-number">15.63.1</span> Multimodal Generation</a></li>
+  <li><a href="#evaluating-generated-images" id="toc-evaluating-generated-images" class="nav-link" data-scroll-target="#evaluating-generated-images"><span class="header-section-number">15.63.2</span> Evaluating Generated Images</a></li>
+  <li><a href="#computer-vision-learning-experience" id="toc-computer-vision-learning-experience" class="nav-link" data-scroll-target="#computer-vision-learning-experience"><span class="header-section-number">15.63.3</span> Computer Vision Learning Experience</a></li>
   </ul></li>
-  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation"><span class="header-section-number">15.6</span> Evaluation</a>
-  <ul class="collapse">
-  <li><a href="#factuality" id="toc-factuality" class="nav-link" data-scroll-target="#factuality"><span class="header-section-number">15.6.1</span> Factuality</a></li>
-  <li><a href="#reliability" id="toc-reliability" class="nav-link" data-scroll-target="#reliability"><span class="header-section-number">15.6.2</span> Reliability</a></li>
-  <li><a href="#human-evaluation" id="toc-human-evaluation" class="nav-link" data-scroll-target="#human-evaluation"><span class="header-section-number">15.6.3</span> Human Evaluation</a></li>
-  <li><a href="#task-based-evaluation" id="toc-task-based-evaluation" class="nav-link" data-scroll-target="#task-based-evaluation"><span class="header-section-number">15.6.4</span> Task-Based Evaluation</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">15.6.5</span> Reproducibility</a></li>
-  <li><a href="#cost-and-latency" id="toc-cost-and-latency" class="nav-link" data-scroll-target="#cost-and-latency"><span class="header-section-number">15.6.6</span> Cost and Latency</a></li>
-  </ul></li>
-  <li><a href="#responsible-use" id="toc-responsible-use" class="nav-link" data-scroll-target="#responsible-use"><span class="header-section-number">15.7</span> Responsible Use</a>
-  <ul class="collapse">
-  <li><a href="#hallucination" id="toc-hallucination" class="nav-link" data-scroll-target="#hallucination"><span class="header-section-number">15.7.1</span> Hallucination</a></li>
-  <li><a href="#bias" id="toc-bias" class="nav-link" data-scroll-target="#bias"><span class="header-section-number">15.7.2</span> Bias</a></li>
-  <li><a href="#privacy" id="toc-privacy" class="nav-link" data-scroll-target="#privacy"><span class="header-section-number">15.7.3</span> Privacy</a></li>
-  <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity"><span class="header-section-number">15.7.4</span> Academic Integrity</a></li>
-  <li><a href="#ai-assisted-coding" id="toc-ai-assisted-coding" class="nav-link" data-scroll-target="#ai-assisted-coding"><span class="header-section-number">15.7.5</span> AI-Assisted Coding</a></li>
-  </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">15.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">15.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">15.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">15.11</span> Real-World Case Study</a>
-  <ul class="collapse">
-  <li><a href="#ai-assisted-research-feedback" id="toc-ai-assisted-research-feedback" class="nav-link" data-scroll-target="#ai-assisted-research-feedback"><span class="header-section-number">15.11.1</span> AI-Assisted Research Feedback</a></li>
-  </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">15.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">15.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">15.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">15.15</span> Key Takeaways</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">15.64</span> Three Tracks</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">15.65</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">15.66</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">15.67</span> Open ML Benchmark Track</a></li>
+  <li><a href="#beyond-the-algorithm-what-does-it-mean-for-a-model-to-know" id="toc-beyond-the-algorithm-what-does-it-mean-for-a-model-to-know" class="nav-link" data-scroll-target="#beyond-the-algorithm-what-does-it-mean-for-a-model-to-know"><span class="header-section-number">15.68</span> Beyond the Algorithm: What Does It Mean for a Model to Know?</a></li>
+  <li><a href="#ai-pair-programmer-build-me-an-autonomous-researcher" id="toc-ai-pair-programmer-build-me-an-autonomous-researcher" class="nav-link" data-scroll-target="#ai-pair-programmer-build-me-an-autonomous-researcher"><span class="header-section-number">15.69</span> AI Pair Programmer: Build Me an Autonomous Researcher</a></li>
+  <li><a href="#hands-on-lab-build-a-small-rag-evaluation" id="toc-hands-on-lab-build-a-small-rag-evaluation" class="nav-link" data-scroll-target="#hands-on-lab-build-a-small-rag-evaluation"><span class="header-section-number">15.70</span> Hands-On Lab: Build a Small RAG Evaluation</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">15.71</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">15.72</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">15.73</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-ai-tutor-experiment" id="toc-professors-challenge-the-ai-tutor-experiment" class="nav-link" data-scroll-target="#professors-challenge-the-ai-tutor-experiment"><span class="header-section-number">15.74</span> Professor’s Challenge: The AI Tutor Experiment</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">15.75</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">15.76</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">15.77</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">15.78</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/15-generative-ai.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/15-generative-ai.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></h1>
 </div>
 
 
@@ -380,153 +545,1491 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">15.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain how generative models differ from conventional predictive models.</li>
-<li>Describe the transformer and next-token prediction at a conceptual level.</li>
-<li>Explain prompting, embeddings, retrieval, and fine-tuning.</li>
-<li>Evaluate generative systems beyond anecdotal examples.</li>
-<li>Identify risks involving hallucination, bias, privacy, and reproducibility.</li>
+<li>distinguish discriminative and generative modeling objectives;</li>
+<li>explain autoregressive language modeling mathematically;</li>
+<li>interpret next-token probabilities, logits, softmax, and cross-entropy;</li>
+<li>explain pretraining and why scale can produce reusable foundation models;</li>
+<li>distinguish tokens, context windows, parameters, and embeddings;</li>
+<li>explain temperature, top-<span class="math inline">\(k\)</span>, and nucleus (top-<span class="math inline">\(p\)</span>) sampling;</li>
+<li>describe prompting and in-context learning without confusing them with parameter updates;</li>
+<li>distinguish zero-shot, few-shot, retrieval-augmented generation (RAG), and fine-tuning;</li>
+<li>describe a RAG pipeline using embeddings, similarity search, retrieval, and generation;</li>
+<li>explain why retrieval does not guarantee factuality;</li>
+<li>distinguish model knowledge, retrieved evidence, and generated claims;</li>
+<li>explain hallucination as an evaluation problem rather than a mystical model defect;</li>
+<li>distinguish instruction tuning from preference/alignment training at a high level;</li>
+<li>explain tool use and agentic workflows conceptually;</li>
+<li>distinguish deterministic software orchestration from probabilistic model behavior;</li>
+<li>evaluate generative systems using task-specific, human, and automated evidence;</li>
+<li>recognize prompt injection, data leakage, privacy, citation, bias, and overreliance risks;</li>
+<li>design reproducible generative-AI experiments for health, education, and research applications;</li>
+<li>use generative AI as a research collaborator without surrendering scholarly judgment.</li>
+<li>connect text generation with image generation and multimodal generative systems while preserving modality-specific evaluation concerns.</li>
 </ul>
 </section>
-<section id="why-this-matters" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">15.2</span> Why This Matters</h2>
-<p>Foundation models have changed how data scientists write code, analyze text, build interfaces, and design intelligent systems. Their outputs remain probabilistic and require systematic evaluation.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">15.3</span> Real-World Problem</h2>
-<p>A university wants to use an LLM to provide research feedback to students. How should usefulness, factuality, consistency, bias, and educational consequences be evaluated?</p>
-</section>
-<section id="foundations" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="foundations"><span class="header-section-number">15.4</span> Foundations</h2>
-<section id="generative-versus-discriminative-modeling" class="level3" data-number="15.4.1">
-<h3 data-number="15.4.1" class="anchored" data-anchor-id="generative-versus-discriminative-modeling"><span class="header-section-number">15.4.1</span> Generative Versus Discriminative Modeling</h3>
-</section>
-<section id="language-modeling" class="level3" data-number="15.4.2">
-<h3 data-number="15.4.2" class="anchored" data-anchor-id="language-modeling"><span class="header-section-number">15.4.2</span> Language Modeling</h3>
-</section>
-<section id="tokens-and-context" class="level3" data-number="15.4.3">
-<h3 data-number="15.4.3" class="anchored" data-anchor-id="tokens-and-context"><span class="header-section-number">15.4.3</span> Tokens and Context</h3>
-</section>
-<section id="transformers-and-attention" class="level3" data-number="15.4.4">
-<h3 data-number="15.4.4" class="anchored" data-anchor-id="transformers-and-attention"><span class="header-section-number">15.4.4</span> Transformers and Attention</h3>
-</section>
-<section id="next-token-prediction" class="level3" data-number="15.4.5">
-<h3 data-number="15.4.5" class="anchored" data-anchor-id="next-token-prediction"><span class="header-section-number">15.4.5</span> Next-Token Prediction</h3>
-</section>
-<section id="foundation-models" class="level3" data-number="15.4.6">
-<h3 data-number="15.4.6" class="anchored" data-anchor-id="foundation-models"><span class="header-section-number">15.4.6</span> Foundation Models</h3>
-</section>
-</section>
-<section id="working-with-foundation-models" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="working-with-foundation-models"><span class="header-section-number">15.5</span> Working With Foundation Models</h2>
-<section id="prompting" class="level3" data-number="15.5.1">
-<h3 data-number="15.5.1" class="anchored" data-anchor-id="prompting"><span class="header-section-number">15.5.1</span> Prompting</h3>
-</section>
-<section id="structured-outputs" class="level3" data-number="15.5.2">
-<h3 data-number="15.5.2" class="anchored" data-anchor-id="structured-outputs"><span class="header-section-number">15.5.2</span> Structured Outputs</h3>
-</section>
-<section id="embeddings" class="level3" data-number="15.5.3">
-<h3 data-number="15.5.3" class="anchored" data-anchor-id="embeddings"><span class="header-section-number">15.5.3</span> Embeddings</h3>
-</section>
-<section id="retrieval-augmented-generation" class="level3" data-number="15.5.4">
-<h3 data-number="15.5.4" class="anchored" data-anchor-id="retrieval-augmented-generation"><span class="header-section-number">15.5.4</span> Retrieval-Augmented Generation</h3>
-</section>
-<section id="fine-tuning" class="level3" data-number="15.5.5">
-<h3 data-number="15.5.5" class="anchored" data-anchor-id="fine-tuning"><span class="header-section-number">15.5.5</span> Fine-Tuning</h3>
-</section>
-<section id="tool-use-and-agents" class="level3" data-number="15.5.6">
-<h3 data-number="15.5.6" class="anchored" data-anchor-id="tool-use-and-agents"><span class="header-section-number">15.5.6</span> Tool Use and Agents</h3>
-</section>
-</section>
-<section id="evaluation" class="level2" data-number="15.6">
-<h2 data-number="15.6" class="anchored" data-anchor-id="evaluation"><span class="header-section-number">15.6</span> Evaluation</h2>
-<section id="factuality" class="level3" data-number="15.6.1">
-<h3 data-number="15.6.1" class="anchored" data-anchor-id="factuality"><span class="header-section-number">15.6.1</span> Factuality</h3>
-</section>
-<section id="reliability" class="level3" data-number="15.6.2">
-<h3 data-number="15.6.2" class="anchored" data-anchor-id="reliability"><span class="header-section-number">15.6.2</span> Reliability</h3>
-</section>
-<section id="human-evaluation" class="level3" data-number="15.6.3">
-<h3 data-number="15.6.3" class="anchored" data-anchor-id="human-evaluation"><span class="header-section-number">15.6.3</span> Human Evaluation</h3>
-</section>
-<section id="task-based-evaluation" class="level3" data-number="15.6.4">
-<h3 data-number="15.6.4" class="anchored" data-anchor-id="task-based-evaluation"><span class="header-section-number">15.6.4</span> Task-Based Evaluation</h3>
-</section>
-<section id="reproducibility" class="level3" data-number="15.6.5">
-<h3 data-number="15.6.5" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">15.6.5</span> Reproducibility</h3>
-</section>
-<section id="cost-and-latency" class="level3" data-number="15.6.6">
-<h3 data-number="15.6.6" class="anchored" data-anchor-id="cost-and-latency"><span class="header-section-number">15.6.6</span> Cost and Latency</h3>
-</section>
-</section>
-<section id="responsible-use" class="level2" data-number="15.7">
-<h2 data-number="15.7" class="anchored" data-anchor-id="responsible-use"><span class="header-section-number">15.7</span> Responsible Use</h2>
-<section id="hallucination" class="level3" data-number="15.7.1">
-<h3 data-number="15.7.1" class="anchored" data-anchor-id="hallucination"><span class="header-section-number">15.7.1</span> Hallucination</h3>
-</section>
-<section id="bias" class="level3" data-number="15.7.2">
-<h3 data-number="15.7.2" class="anchored" data-anchor-id="bias"><span class="header-section-number">15.7.2</span> Bias</h3>
-</section>
-<section id="privacy" class="level3" data-number="15.7.3">
-<h3 data-number="15.7.3" class="anchored" data-anchor-id="privacy"><span class="header-section-number">15.7.3</span> Privacy</h3>
-</section>
-<section id="academic-integrity" class="level3" data-number="15.7.4">
-<h3 data-number="15.7.4" class="anchored" data-anchor-id="academic-integrity"><span class="header-section-number">15.7.4</span> Academic Integrity</h3>
-</section>
-<section id="ai-assisted-coding" class="level3" data-number="15.7.5">
-<h3 data-number="15.7.5" class="anchored" data-anchor-id="ai-assisted-coding"><span class="header-section-number">15.7.5</span> AI-Assisted Coding</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="15.8">
-<h2 data-number="15.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">15.8</span> Hands-On Practice</h2>
-<p>Design an evaluation framework for a generative-AI application rather than judging it from a few demonstrations.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="15.9">
-<h2 data-number="15.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">15.9</span> Common Mistakes</h2>
+<section id="why-generative-ai-changes-the-conversation" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="why-generative-ai-changes-the-conversation"><span class="header-section-number">15.2</span> Why Generative AI Changes the Conversation</h2>
+<p>Traditional supervised learning often asks:</p>
+<p><span class="math display">\[
+x\longrightarrow y.
+\]</span></p>
+<p>For example:</p>
 <ul>
-<li>Treating fluent output as factual output.</li>
-<li>Reporting cherry-picked prompts.</li>
-<li>Failing to preserve model/version information.</li>
-<li>Using sensitive data without appropriate safeguards.</li>
+<li>features <span class="math inline">\(\rightarrow\)</span> disease status;</li>
+<li>student behavior <span class="math inline">\(\rightarrow\)</span> retention;</li>
+<li>transaction features <span class="math inline">\(\rightarrow\)</span> fraud probability.</li>
+</ul>
+<p>Generative models instead learn distributions capable of producing new observations.</p>
+<p>For language, the objective can be written as:</p>
+<p><span class="math display">\[
+P(x_1,\ldots,x_T)
+=
+\prod_{t=1}^{T}
+P(x_t\mid x_1,\ldots,x_{t-1}).
+\]</span></p>
+<p>A large language model repeatedly asks:</p>
+<blockquote class="blockquote">
+<p>Given the context so far, what token should come next?</p>
+</blockquote>
+<p>That simple-looking objective can produce remarkably complex behavior when combined with large datasets, expressive architectures, optimization, and scale.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>If a system produces an answer that is novel, useful, and apparently reasoned from a predictive objective, what exactly do we mean when we say the system “knows” something?</strong></p>
+</div>
+</div>
+</section>
+<section id="discriminative-versus-generative-models" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="discriminative-versus-generative-models"><span class="header-section-number">15.3</span> Discriminative Versus Generative Models</h2>
+<p>A discriminative classifier often models:</p>
+<p><span class="math display">\[
+P(y\mid x).
+\]</span></p>
+<p>A generative model may model:</p>
+<p><span class="math display">\[
+P(x)
+\]</span></p>
+<p>or a joint/conditional distribution from which new data can be generated.</p>
+<p>For language generation:</p>
+<p><span class="math display">\[
+P(\text{text})
+=
+\prod_t
+P(
+\text{token}_t
+\mid
+\text{previous tokens}
+).
+\]</span></p>
+<p>The distinction is conceptual rather than a claim that one family is universally superior.</p>
+</section>
+<section id="from-chapter-14-to-chapter-15" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="from-chapter-14-to-chapter-15"><span class="header-section-number">15.4</span> From Chapter 14 to Chapter 15</h2>
+<p>Chapter 14 introduced transformer representations and autoregressive factorization.</p>
+<p>Now we ask what happens when a transformer is trained at scale to predict tokens across enormous corpora.</p>
+<p>The progression is:</p>
+<p><span class="math display">\[
+\text{tokens}
+\rightarrow
+\text{transformer}
+\rightarrow
+\text{next-token distribution}
+\rightarrow
+\text{pretraining}
+\rightarrow
+\text{foundation model}.
+\]</span></p>
+</section>
+<section id="tokens-are-the-models-working-symbols" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="tokens-are-the-models-working-symbols"><span class="header-section-number">15.5</span> Tokens Are the Model’s Working Symbols</h2>
+<p>Language models generally operate on tokens rather than raw words.</p>
+<p>A token may represent:</p>
+<ul>
+<li>a word;</li>
+<li>part of a word;</li>
+<li>punctuation;</li>
+<li>whitespace-related structure;</li>
+<li>special control symbols.</li>
+</ul>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\text{one word}\neq\text{one token}
+\]</span></p>
+<p>in general.</p>
+<p>Tokenization affects context length, computational cost, multilingual behavior, and representation.</p>
+</section>
+<section id="logits-and-probabilities" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="logits-and-probabilities"><span class="header-section-number">15.6</span> Logits and Probabilities</h2>
+<p>Before choosing the next token, a language model produces a vector of logits:</p>
+<p><span class="math display">\[
+z=
+[z_1,z_2,\ldots,z_V],
+\]</span></p>
+<p>where <span class="math inline">\(V\)</span> is vocabulary size.</p>
+<p>Softmax converts logits into probabilities:</p>
+<p><span class="math display">\[
+P_i
+=
+\frac{e^{z_i}}
+{\sum_{j=1}^{V}e^{z_j}}.
+\]</span></p>
+</section>
+<section id="a-tiny-next-token-distribution" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="a-tiny-next-token-distribution"><span class="header-section-number">15.7</span> A Tiny Next-Token Distribution</h2>
+<div id="b507b9f8" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> np.array([</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"student"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"research"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"banana"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>logits <span class="op">=</span> np.array([</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.4</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.7</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.8</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.1</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span><span class="fl">0.6</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> softmax(x):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    shifted <span class="op">=</span> x <span class="op">-</span> np.<span class="bu">max</span>(x)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    exp_x <span class="op">=</span> np.exp(shifted)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> exp_x <span class="op">/</span> exp_x.<span class="bu">sum</span>()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> softmax(logits)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"token"</span>: tokens,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"logit"</span>: logits,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"probability"</span>: probabilities</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>}).sort_values(</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"probability"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">token</th>
+<th data-quarto-table-cell-role="th">logit</th>
+<th data-quarto-table-cell-role="th">probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>model</td>
+<td>2.4</td>
+<td>0.401754</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>research</td>
+<td>2.1</td>
+<td>0.297626</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>data</td>
+<td>1.7</td>
+<td>0.199505</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2</th>
+<td>student</td>
+<td>0.8</td>
+<td>0.081113</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>banana</td>
+<td>-0.6</td>
+<td>0.020002</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The highest-probability token is not necessarily selected under every decoding strategy.</p>
+</section>
+<section id="learning-to-predict-tokens" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="learning-to-predict-tokens"><span class="header-section-number">15.8</span> Learning to Predict Tokens</h2>
+</section>
+<section id="cross-entropy-training-objective" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="cross-entropy-training-objective"><span class="header-section-number">15.9</span> Cross-Entropy Training Objective</h2>
+<p>Suppose the correct next token is <span class="math inline">\(y\)</span>.</p>
+<p>The negative log-likelihood for that observation is:</p>
+<p><span class="math display">\[
+L=-\log P(y\mid x_{&lt;t}).
+\]</span></p>
+<p>Across tokens:</p>
+<p><span class="math display">\[
+L
+=
+-\frac{1}{N}
+\sum_{i=1}^{N}
+\log P(
+x_i
+\mid
+x_{&lt;i}
+).
+\]</span></p>
+<p>Minimizing this loss rewards assigning greater probability to observed continuation tokens.</p>
+</section>
+<section id="perplexity" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="perplexity"><span class="header-section-number">15.10</span> Perplexity</h2>
+<p>A common language-model metric is perplexity.</p>
+<p>If average negative log-likelihood is <span class="math inline">\(L\)</span>,</p>
+<p><span class="math display">\[
+Perplexity=e^L.
+\]</span></p>
+<p>Lower perplexity means the model assigns greater probability to observed text on average.</p>
+<p>But lower perplexity does not automatically mean:</p>
+<ul>
+<li>more factual;</li>
+<li>safer;</li>
+<li>more useful;</li>
+<li>better calibrated for a specific application;</li>
+<li>more aligned with human preferences.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="15.10">
-<h2 data-number="15.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">15.10</span> Knowledge Check</h2>
+<section id="why-pretraining-is-powerful" class="level2" data-number="15.11">
+<h2 data-number="15.11" class="anchored" data-anchor-id="why-pretraining-is-powerful"><span class="header-section-number">15.11</span> Why Pretraining Is Powerful</h2>
+<p>During pretraining, a model encounters broad patterns involving:</p>
+<ul>
+<li>syntax;</li>
+<li>semantics;</li>
+<li>facts;</li>
+<li>styles;</li>
+<li>code;</li>
+<li>discourse;</li>
+<li>relationships between concepts.</li>
+</ul>
+<p>The optimization objective remains token prediction.</p>
+<p>Yet solving token prediction across diverse contexts can require representations useful for many downstream tasks.</p>
+<p>This is one reason pretrained models can become <strong>foundation models</strong>.</p>
+</section>
+<section id="foundation-models" class="level2" data-number="15.12">
+<h2 data-number="15.12" class="anchored" data-anchor-id="foundation-models"><span class="header-section-number">15.12</span> Foundation Models</h2>
+<p>A foundation model is trained broadly enough that it can support many downstream tasks through mechanisms such as prompting, adaptation, and transfer <span class="citation" data-cites="bommasani2021opportunities">(<a href="../references.html#ref-bommasani2021opportunities" role="doc-biblioref">Bommasani et al. 2021</a>)</span>. Large autoregressive language models have also demonstrated substantial few-shot and in-context task performance at scale <span class="citation" data-cites="brownEtAl2020">(<a href="../references.html#ref-brownEtAl2020" role="doc-biblioref">Brown et al. 2020</a>)</span>. Common mechanisms include:</p>
+<ul>
+<li>prompting;</li>
+<li>in-context examples;</li>
+<li>retrieval;</li>
+<li>fine-tuning;</li>
+<li>adapters;</li>
+<li>tool use.</li>
+</ul>
+<p>The model becomes infrastructure rather than a single-purpose predictor.</p>
+</section>
+<section id="generation-and-sampling" class="level2" data-number="15.13">
+<h2 data-number="15.13" class="anchored" data-anchor-id="generation-and-sampling"><span class="header-section-number">15.13</span> Generation and Sampling</h2>
+</section>
+<section id="greedy-decoding" class="level2" data-number="15.14">
+<h2 data-number="15.14" class="anchored" data-anchor-id="greedy-decoding"><span class="header-section-number">15.14</span> Greedy Decoding</h2>
+<p>Greedy decoding selects:</p>
+<p><span class="math display">\[
+x_t
+=
+\arg\max_i
+P(x_t=i\mid x_{&lt;t}).
+\]</span></p>
+<p>It is simple and deterministic given fixed model behavior.</p>
+<p>But repeatedly choosing the most probable token can produce repetitive or overly conservative output.</p>
+</section>
+<section id="temperature" class="level2" data-number="15.15">
+<h2 data-number="15.15" class="anchored" data-anchor-id="temperature"><span class="header-section-number">15.15</span> Temperature</h2>
+<p>Temperature modifies logits before softmax:</p>
+<p><span class="math display">\[
+P_i(T)
+=
+\frac{
+\exp(z_i/T)
+}{
+\sum_j\exp(z_j/T)
+}.
+\]</span></p>
+<p>For <span class="math inline">\(T&lt;1\)</span>, the distribution becomes sharper.</p>
+<p>For <span class="math inline">\(T&gt;1\)</span>, it becomes flatter.</p>
+</section>
+<section id="temperature-demonstration" class="level2" data-number="15.16">
+<h2 data-number="15.16" class="anchored" data-anchor-id="temperature-demonstration"><span class="header-section-number">15.16</span> Temperature Demonstration</h2>
+<div class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> [</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.4</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.0</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.8</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> temperature <span class="kw">in</span> temperatures:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> softmax(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        logits <span class="op">/</span> temperature</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.5</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    plt.bar(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        tokens,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        probs</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="dv">0</span>, <span class="fl">0.65</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Probability"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    plt.title(</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Next-Token Distribution: Temperature = </span><span class="sc">{</span>temperature<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    plt.xticks(rotation<span class="op">=</span><span class="dv">25</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-temperature" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-temperature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-temperature-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-temperature-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="15-generative-ai_files/figure-html/fig-temperature-output-1.png" data-ref-parent="fig-temperature" alt="Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities." width="663" height="417" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-temperature-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Temperature changes the concentration of a token probability distribution without changing the underlying logits.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-temperature-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities." height="417" width="663">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-temperature-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="15-generative-ai_files/figure-html/fig-temperature-output-2.png" id="fig-temperature-2" data-ref-parent="fig-temperature" alt="Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities." width="663" height="417" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-temperature-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-temperature-3" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities." height="417" width="663">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-temperature-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="15-generative-ai_files/figure-html/fig-temperature-output-3.png" id="fig-temperature-3" data-ref-parent="fig-temperature" alt="Probability distributions under different temperature settings, illustrating changes in the concentration and diversity of generated-token probabilities." width="663" height="417" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-temperature-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-temperature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15.1
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Temperature does not make a model more knowledgeable.</p>
+<p>It changes how probability mass is used during sampling.</p>
+</section>
+<section id="top-k-sampling" class="level2" data-number="15.17">
+<h2 data-number="15.17" class="anchored" data-anchor-id="top-k-sampling"><span class="header-section-number">15.17</span> Top-k Sampling</h2>
+<p>Top-<span class="math inline">\(k\)</span> sampling restricts candidate generation to the <span class="math inline">\(k\)</span> highest-probability tokens and renormalizes within that set.</p>
+<p>If <span class="math inline">\(k=3\)</span>, all other tokens receive zero sampling probability.</p>
+</section>
+<section id="nucleus-sampling" class="level2" data-number="15.18">
+<h2 data-number="15.18" class="anchored" data-anchor-id="nucleus-sampling"><span class="header-section-number">15.18</span> Nucleus Sampling</h2>
+<p>Top-<span class="math inline">\(p\)</span> or nucleus sampling selects the smallest candidate set whose cumulative probability reaches a threshold <span class="math inline">\(p\)</span>, an adaptive decoding strategy proposed to reduce degeneration in open-ended neural text generation <span class="citation" data-cites="holtzmanEtAl2020">(<a href="../references.html#ref-holtzmanEtAl2020" role="doc-biblioref">Holtzman et al. 2020</a>)</span>.</p>
+<p>Unlike fixed top-<span class="math inline">\(k\)</span>, the number of candidate tokens can vary with the distribution.</p>
+</section>
+<section id="sampling-is-not-creativity-in-a-simple-sense" class="level2" data-number="15.19">
+<h2 data-number="15.19" class="anchored" data-anchor-id="sampling-is-not-creativity-in-a-simple-sense"><span class="header-section-number">15.19</span> Sampling Is Not Creativity in a Simple Sense</h2>
+<p>Higher randomness can increase output diversity.</p>
+<p>But:</p>
+<p><span class="math display">\[
+\boxed{\text{sampling diversity}}
+\neq
+\boxed{\text{human creativity}}.
+\]</span></p>
+<p>Creativity involves broader questions of intention, novelty, value, context, and authorship.</p>
+</section>
+<section id="prompting-and-in-context-learning" class="level2" data-number="15.20">
+<h2 data-number="15.20" class="anchored" data-anchor-id="prompting-and-in-context-learning"><span class="header-section-number">15.20</span> Prompting and In-Context Learning</h2>
+</section>
+<section id="the-prompt-defines-a-temporary-task-context" class="level2" data-number="15.21">
+<h2 data-number="15.21" class="anchored" data-anchor-id="the-prompt-defines-a-temporary-task-context"><span class="header-section-number">15.21</span> The Prompt Defines a Temporary Task Context</h2>
+<p>A prompt can include:</p>
+<ul>
+<li>instructions;</li>
+<li>background;</li>
+<li>examples;</li>
+<li>constraints;</li>
+<li>output schemas;</li>
+<li>retrieved evidence.</li>
+</ul>
+<p>A model conditions its generation on this context.</p>
+</section>
+<section id="zero-shot-prompting" class="level2" data-number="15.22">
+<h2 data-number="15.22" class="anchored" data-anchor-id="zero-shot-prompting"><span class="header-section-number">15.22</span> Zero-Shot Prompting</h2>
+<p>The task is described without examples.</p>
+<p>Example:</p>
+<blockquote class="blockquote">
+<p>Classify this feedback as positive, negative, or mixed.</p>
+</blockquote>
+</section>
+<section id="few-shot-prompting" class="level2" data-number="15.23">
+<h2 data-number="15.23" class="anchored" data-anchor-id="few-shot-prompting"><span class="header-section-number">15.23</span> Few-Shot Prompting</h2>
+<p>The prompt contains demonstrations.</p>
+<p>For example:</p>
+<pre class="text"><code>Feedback: "The examples were excellent."
+Label: positive
+
+Feedback: "I could not follow the lab."
+Label: negative
+
+Feedback: "The lecture was useful but too fast."
+Label:</code></pre>
+<p>The model can infer a temporary pattern from context.</p>
+</section>
+<section id="in-context-learning-is-not-ordinary-fine-tuning" class="level2" data-number="15.24">
+<h2 data-number="15.24" class="anchored" data-anchor-id="in-context-learning-is-not-ordinary-fine-tuning"><span class="header-section-number">15.24</span> In-Context Learning Is Not Ordinary Fine-Tuning</h2>
+<p>During standard prompting, the model’s persistent parameters are not updated merely because examples appear in the prompt.</p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{\text{learning from context}}
+\neq
+\boxed{\text{parameter training}}.
+\]</span></p>
+<p>This distinction is fundamental.</p>
+</section>
+<section id="prompt-engineering-versus-problem-engineering" class="level2" data-number="15.25">
+<h2 data-number="15.25" class="anchored" data-anchor-id="prompt-engineering-versus-problem-engineering"><span class="header-section-number">15.25</span> Prompt Engineering Versus Problem Engineering</h2>
+<p>Weak generative-AI practice asks:</p>
+<blockquote class="blockquote">
+<p>What magic wording will make the model work?</p>
+</blockquote>
+<p>Stronger practice asks:</p>
+<ul>
+<li>What task are we solving?</li>
+<li>What evidence should the model use?</li>
+<li>What information must be supplied?</li>
+<li>What output structure is needed?</li>
+<li>How will correctness be evaluated?</li>
+<li>What errors are unacceptable?</li>
+<li>Should the model answer at all when evidence is insufficient?</li>
+</ul>
+<p>Prompt design follows problem design.</p>
+</section>
+<section id="retrieval-augmented-generation" class="level2" data-number="15.26">
+<h2 data-number="15.26" class="anchored" data-anchor-id="retrieval-augmented-generation"><span class="header-section-number">15.26</span> Retrieval-Augmented Generation</h2>
+</section>
+<section id="why-retrieval" class="level2" data-number="15.27">
+<h2 data-number="15.27" class="anchored" data-anchor-id="why-retrieval"><span class="header-section-number">15.27</span> Why Retrieval?</h2>
+<p>A pretrained model’s parameters are not a guaranteed, current, inspectable database.</p>
+<p>Retrieval-Augmented Generation (RAG) supplies external evidence at inference time; the modern RAG formulation combines parametric generation with retrieved non-parametric memory <span class="citation" data-cites="lewis2020retrieval">(<a href="../references.html#ref-lewis2020retrieval" role="doc-biblioref">Lewis et al. 2020</a>)</span>.</p>
+<p>A simplified workflow is:</p>
+<p><span class="math display">\[
+\text{query}
+\rightarrow
+\text{embedding}
+\rightarrow
+\text{retrieval}
+\rightarrow
+\text{context}
+\rightarrow
+\text{generation}.
+\]</span></p>
+</section>
+<section id="vector-retrieval" class="level2" data-number="15.28">
+<h2 data-number="15.28" class="anchored" data-anchor-id="vector-retrieval"><span class="header-section-number">15.28</span> Vector Retrieval</h2>
+<p>Suppose documents have embeddings</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>and a query has embedding <span class="math inline">\(q\)</span>.</p>
+<p>We can rank documents by cosine similarity:</p>
+<p><span class="math display">\[
+sim(q,d_i)
+=
+\frac{
+q^\top d_i
+}{
+\|q\|\|d_i\|
+}.
+\]</span></p>
+</section>
+<section id="a-tiny-retrieval-demonstration" class="level2" data-number="15.29">
+<h2 data-number="15.29" class="anchored" data-anchor-id="a-tiny-retrieval-demonstration"><span class="header-section-number">15.29</span> A Tiny Retrieval Demonstration</h2>
+<div id="25885d42" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>documents <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PCA finds directions of high variance."</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic regression models class probabilities."</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"K-means partitions observations around centroids."</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cross-validation estimates model performance across resamples."</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>document_vectors <span class="op">=</span> np.array([</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.90</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>],</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.10</span>, <span class="fl">0.88</span>, <span class="fl">0.12</span>],</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.72</span>, <span class="fl">0.18</span>, <span class="fl">0.20</span>],</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.08</span>, <span class="fl">0.35</span>, <span class="fl">0.92</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>query_vector <span class="op">=</span> np.array([</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.82</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.12</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.10</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cosine_to_query(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    matrix,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    query</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    numerator <span class="op">=</span> matrix <span class="op">@</span> query</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    denominator <span class="op">=</span> (</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        np.linalg.norm(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            matrix,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            axis<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="op">*</span> np.linalg.norm(query)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> numerator <span class="op">/</span> denominator</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>retrieval_scores <span class="op">=</span> cosine_to_query(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    document_vectors,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    query_vector</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>retrieval_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"document"</span>: documents,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"similarity"</span>: retrieval_scores</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>}).sort_values(</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"similarity"</span>,</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>retrieval_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">document</th>
+<th data-quarto-table-cell-role="th">similarity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>PCA finds directions of high variance.</td>
+<td>0.997298</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2</th>
+<td>K-means partitions observations around centroids.</td>
+<td>0.985015</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Logistic regression models class probabilities.</td>
+<td>0.267539</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Cross-validation estimates model performance a...</td>
+<td>0.242124</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>These vectors are synthetic and exist only to demonstrate retrieval geometry.</p>
+</section>
+<section id="rag-is-a-system-not-a-single-model" class="level2" data-number="15.30">
+<h2 data-number="15.30" class="anchored" data-anchor-id="rag-is-a-system-not-a-single-model"><span class="header-section-number">15.30</span> RAG Is a System, Not a Single Model</h2>
+<p>A RAG system can fail at multiple stages:</p>
+<p><span class="math display">\[
+\text{query formulation}
+\rightarrow
+\text{retrieval}
+\rightarrow
+\text{ranking}
+\rightarrow
+\text{context construction}
+\rightarrow
+\text{generation}.
+\]</span></p>
+<p>A poor answer may therefore reflect:</p>
+<ul>
+<li>missing source documents;</li>
+<li>poor chunking;</li>
+<li>weak embeddings;</li>
+<li>retrieval failure;</li>
+<li>ranking failure;</li>
+<li>context truncation;</li>
+<li>generation error;</li>
+<li>unsupported synthesis.</li>
+</ul>
+</section>
+<section id="retrieval-does-not-guarantee-truth" class="level2" data-number="15.31">
+<h2 data-number="15.31" class="anchored" data-anchor-id="retrieval-does-not-guarantee-truth"><span class="header-section-number">15.31</span> Retrieval Does Not Guarantee Truth</h2>
+<p>Even if the correct document is retrieved, the model may:</p>
+<ul>
+<li>ignore it;</li>
+<li>misread it;</li>
+<li>combine it incorrectly;</li>
+<li>overgeneralize;</li>
+<li>produce an unsupported citation.</li>
+</ul>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{\text{retrieved evidence}}
+\neq
+\boxed{\text{grounded answer}}.
+\]</span></p>
+<p>Grounding must be evaluated.</p>
+</section>
+<section id="rag-evaluation" class="level2" data-number="15.32">
+<h2 data-number="15.32" class="anchored" data-anchor-id="rag-evaluation"><span class="header-section-number">15.32</span> RAG Evaluation</h2>
+<p>A useful RAG evaluation separates at least:</p>
+<section id="retrieval-quality" class="level3" data-number="15.32.1">
+<h3 data-number="15.32.1" class="anchored" data-anchor-id="retrieval-quality"><span class="header-section-number">15.32.1</span> Retrieval Quality</h3>
+<p>Did the system retrieve relevant evidence?</p>
+<p>Metrics can include:</p>
+<ul>
+<li>Recall@<span class="math inline">\(k\)</span>;</li>
+<li>Precision@<span class="math inline">\(k\)</span>;</li>
+<li>Mean Reciprocal Rank;</li>
+<li>nDCG.</li>
+</ul>
+</section>
+<section id="answer-quality" class="level3" data-number="15.32.2">
+<h3 data-number="15.32.2" class="anchored" data-anchor-id="answer-quality"><span class="header-section-number">15.32.2</span> Answer Quality</h3>
+<p>Is the generated answer correct and useful?</p>
+</section>
+<section id="faithfulness-or-groundedness" class="level3" data-number="15.32.3">
+<h3 data-number="15.32.3" class="anchored" data-anchor-id="faithfulness-or-groundedness"><span class="header-section-number">15.32.3</span> Faithfulness or Groundedness</h3>
+<p>Are claims supported by the supplied evidence?</p>
+</section>
+<section id="citation-quality" class="level3" data-number="15.32.4">
+<h3 data-number="15.32.4" class="anchored" data-anchor-id="citation-quality"><span class="header-section-number">15.32.4</span> Citation Quality</h3>
+<p>Do citations actually support the associated claims?</p>
+<p>This decomposition is much stronger than evaluating only whether an answer “sounds good.”</p>
+</section>
+</section>
+<section id="fine-tuning-and-adaptation" class="level2" data-number="15.33">
+<h2 data-number="15.33" class="anchored" data-anchor-id="fine-tuning-and-adaptation"><span class="header-section-number">15.33</span> Fine-Tuning and Adaptation</h2>
+</section>
+<section id="fine-tuning" class="level2" data-number="15.34">
+<h2 data-number="15.34" class="anchored" data-anchor-id="fine-tuning"><span class="header-section-number">15.34</span> Fine-Tuning</h2>
+<p>Fine-tuning updates model parameters using additional training data.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\theta_{\text{pretrained}}
+\longrightarrow
+\theta_{\text{adapted}}.
+\]</span></p>
+<p>Possible goals include:</p>
+<ul>
+<li>domain adaptation;</li>
+<li>task specialization;</li>
+<li>format consistency;</li>
+<li>behavior adjustment.</li>
+</ul>
+</section>
+<section id="instruction-tuning" class="level2" data-number="15.35">
+<h2 data-number="15.35" class="anchored" data-anchor-id="instruction-tuning"><span class="header-section-number">15.35</span> Instruction Tuning</h2>
+<p>Instruction tuning trains models on instruction-response examples so they become more useful at following task descriptions.</p>
+</section>
+<section id="preference-and-alignment-training" class="level2" data-number="15.36">
+<h2 data-number="15.36" class="anchored" data-anchor-id="preference-and-alignment-training"><span class="header-section-number">15.36</span> Preference and Alignment Training</h2>
+<p>Additional training can use human or model-generated preference signals to encourage desirable response behavior.</p>
+<p>The precise techniques vary across systems.</p>
+<p>The important distinction is:</p>
+<blockquote class="blockquote">
+<p>Pretraining learns broad predictive structure; post-training shapes how that capability is expressed and used.</p>
+</blockquote>
+</section>
+<section id="rag-or-fine-tuning" class="level2" data-number="15.37">
+<h2 data-number="15.37" class="anchored" data-anchor-id="rag-or-fine-tuning"><span class="header-section-number">15.37</span> RAG or Fine-Tuning?</h2>
+<p>These solve different problems.</p>
+<p>Use retrieval when the system needs access to:</p>
+<ul>
+<li>changing information;</li>
+<li>private documents;</li>
+<li>inspectable sources;</li>
+<li>domain knowledge not reliably represented in parameters.</li>
+</ul>
+<p>Fine-tuning is more appropriate when the goal concerns:</p>
+<ul>
+<li>behavior;</li>
+<li>task patterns;</li>
+<li>style;</li>
+<li>specialized mappings;</li>
+<li>domain adaptation.</li>
+</ul>
+<p>They can also be combined.</p>
+</section>
+<section id="hallucination-and-uncertainty" class="level2" data-number="15.38">
+<h2 data-number="15.38" class="anchored" data-anchor-id="hallucination-and-uncertainty"><span class="header-section-number">15.38</span> Hallucination and Uncertainty</h2>
+</section>
+<section id="what-is-a-hallucination" class="level2" data-number="15.39">
+<h2 data-number="15.39" class="anchored" data-anchor-id="what-is-a-hallucination"><span class="header-section-number">15.39</span> What Is a Hallucination?</h2>
+<p>In practical generative-AI evaluation, a hallucination is generated content presented as factual or supported when it is not adequately grounded in reliable evidence.</p>
+<p>Examples include:</p>
+<ul>
+<li>fabricated citations;</li>
+<li>invented statistics;</li>
+<li>nonexistent policies;</li>
+<li>incorrect quotations;</li>
+<li>unsupported causal claims.</li>
+</ul>
+</section>
+<section id="why-fluent-errors-are-dangerous" class="level2" data-number="15.40">
+<h2 data-number="15.40" class="anchored" data-anchor-id="why-fluent-errors-are-dangerous"><span class="header-section-number">15.40</span> Why Fluent Errors Are Dangerous</h2>
+<p>Language models optimize linguistic prediction, not an intrinsic truth variable.</p>
+<p>A false continuation can still be linguistically probable.</p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{\text{fluency}}
+\neq
+\boxed{\text{factuality}}.
+\]</span></p>
+</section>
+<section id="abstention" class="level2" data-number="15.41">
+<h2 data-number="15.41" class="anchored" data-anchor-id="abstention"><span class="header-section-number">15.41</span> Abstention</h2>
+<p>A high-quality system should sometimes say, in effect:</p>
+<blockquote class="blockquote">
+<p>The available evidence is insufficient.</p>
+</blockquote>
+<p>This introduces a useful design principle:</p>
+<p><span class="math display">\[
+\text{answer quality}
+=
+\text{correct answers}
++
+\text{appropriate abstention}.
+\]</span></p>
+<p>Always answering can be worse than selectively refusing unsupported claims.</p>
+</section>
+<section id="calibration-for-generative-systems" class="level2" data-number="15.42">
+<h2 data-number="15.42" class="anchored" data-anchor-id="calibration-for-generative-systems"><span class="header-section-number">15.42</span> Calibration for Generative Systems</h2>
+<p>Calibration is harder than in binary classification because generated answers contain many claims and possible outcomes.</p>
+<p>Useful proxies can include:</p>
+<ul>
+<li>confidence elicitation;</li>
+<li>consistency across samples;</li>
+<li>verifier models;</li>
+<li>retrieval support;</li>
+<li>claim-level evidence checks;</li>
+<li>human adjudication.</li>
+</ul>
+<p>None should be treated as perfect truth detectors.</p>
+</section>
+<section id="tool-use-and-agents" class="level2" data-number="15.43">
+<h2 data-number="15.43" class="anchored" data-anchor-id="tool-use-and-agents"><span class="header-section-number">15.43</span> Tool Use and Agents</h2>
+</section>
+<section id="language-models-can-be-embedded-in-larger-systems" class="level2" data-number="15.44">
+<h2 data-number="15.44" class="anchored" data-anchor-id="language-models-can-be-embedded-in-larger-systems"><span class="header-section-number">15.44</span> Language Models Can Be Embedded in Larger Systems</h2>
+<p>A model may interact with:</p>
+<ul>
+<li>search;</li>
+<li>databases;</li>
+<li>calculators;</li>
+<li>code execution;</li>
+<li>APIs;</li>
+<li>calendars;</li>
+<li>document stores;</li>
+<li>other models.</li>
+</ul>
+<p>The language model becomes one component in an orchestrated system.</p>
+</section>
+<section id="a-simple-tool-use-loop" class="level2" data-number="15.45">
+<h2 data-number="15.45" class="anchored" data-anchor-id="a-simple-tool-use-loop"><span class="header-section-number">15.45</span> A Simple Tool-Use Loop</h2>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\text{user goal}
+\rightarrow
+\text{model decision}
+\rightarrow
+\text{tool call}
+\rightarrow
+\text{tool result}
+\rightarrow
+\text{model synthesis}.
+\]</span></p>
+</section>
+<section id="what-is-an-agent" class="level2" data-number="15.46">
+<h2 data-number="15.46" class="anchored" data-anchor-id="what-is-an-agent"><span class="header-section-number">15.46</span> What Is an Agent?</h2>
+<p>The term <strong>agent</strong> is used broadly.</p>
+<p>A useful operational definition is a system in which a model can iteratively:</p>
 <ol type="1">
-<li>What is next-token prediction?</li>
-<li>What is retrieval-augmented generation?</li>
-<li>Why is generative-AI evaluation difficult?</li>
-<li>How can model updates affect reproducibility?</li>
+<li>interpret a goal;</li>
+<li>choose actions;</li>
+<li>interact with tools or environments;</li>
+<li>observe results;</li>
+<li>update its next action;</li>
+<li>continue until a stopping condition.</li>
+</ol>
+<p>Agency is therefore a <strong>system property</strong>, not merely a synonym for chatbot.</p>
+</section>
+<section id="agentic-risk-grows-with-action-space" class="level2" data-number="15.47">
+<h2 data-number="15.47" class="anchored" data-anchor-id="agentic-risk-grows-with-action-space"><span class="header-section-number">15.47</span> Agentic Risk Grows With Action Space</h2>
+<p>A text generator can produce a bad recommendation.</p>
+<p>A tool-using system may be able to act on that recommendation.</p>
+<p>As autonomy increases, we need stronger:</p>
+<ul>
+<li>permissions;</li>
+<li>sandboxing;</li>
+<li>validation;</li>
+<li>logging;</li>
+<li>rate limits;</li>
+<li>human approval boundaries;</li>
+<li>rollback mechanisms.</li>
+</ul>
+</section>
+<section id="prompt-injection" class="level2" data-number="15.48">
+<h2 data-number="15.48" class="anchored" data-anchor-id="prompt-injection"><span class="header-section-number">15.48</span> Prompt Injection</h2>
+<p>When external content enters a model’s context, malicious or irrelevant text may attempt to override system instructions or manipulate tool use.</p>
+<p>This is particularly important for RAG and agents.</p>
+<p>Retrieved text should be treated as <strong>data</strong>, not automatically as trusted instructions.</p>
+</section>
+<section id="evaluating-generative-ai" class="level2" data-number="15.49">
+<h2 data-number="15.49" class="anchored" data-anchor-id="evaluating-generative-ai"><span class="header-section-number">15.49</span> Evaluating Generative AI</h2>
+</section>
+<section id="there-is-no-single-accuracy-metric" class="level2" data-number="15.50">
+<h2 data-number="15.50" class="anchored" data-anchor-id="there-is-no-single-accuracy-metric"><span class="header-section-number">15.50</span> There Is No Single Accuracy Metric</h2>
+<p>Generative tasks may require evaluation of:</p>
+<ul>
+<li>correctness;</li>
+<li>relevance;</li>
+<li>completeness;</li>
+<li>faithfulness;</li>
+<li>citation support;</li>
+<li>style;</li>
+<li>safety;</li>
+<li>robustness;</li>
+<li>latency;</li>
+<li>cost;</li>
+<li>user utility.</li>
+</ul>
+<p>The evaluation must match the use case.</p>
+</section>
+<section id="exact-match-evaluation" class="level2" data-number="15.51">
+<h2 data-number="15.51" class="anchored" data-anchor-id="exact-match-evaluation"><span class="header-section-number">15.51</span> Exact-Match Evaluation</h2>
+<p>For constrained tasks, exact match can be useful:</p>
+<p><span class="math display">\[
+ExactMatch
+=
+\frac{
+\text{exactly correct outputs}
+}{
+N
+}.
+\]</span></p>
+<p>But it is often too strict for open-ended language.</p>
+</section>
+<section id="semantic-metrics" class="level2" data-number="15.52">
+<h2 data-number="15.52" class="anchored" data-anchor-id="semantic-metrics"><span class="header-section-number">15.52</span> Semantic Metrics</h2>
+<p>Embedding-based or model-based metrics can compare meaning rather than exact wording.</p>
+<p>These metrics are useful but can themselves be imperfect models.</p>
+</section>
+<section id="human-evaluation" class="level2" data-number="15.53">
+<h2 data-number="15.53" class="anchored" data-anchor-id="human-evaluation"><span class="header-section-number">15.53</span> Human Evaluation</h2>
+<p>Humans may judge:</p>
+<ul>
+<li>factual correctness;</li>
+<li>reasoning quality;</li>
+<li>clarity;</li>
+<li>relevance;</li>
+<li>harm;</li>
+<li>usefulness.</li>
+</ul>
+<p>Human evaluation requires:</p>
+<ul>
+<li>clear rubrics;</li>
+<li>blinded comparisons where possible;</li>
+<li>multiple raters;</li>
+<li>agreement analysis;</li>
+<li>adjudication procedures.</li>
+</ul>
+</section>
+<section id="llm-as-judge" class="level2" data-number="15.54">
+<h2 data-number="15.54" class="anchored" data-anchor-id="llm-as-judge"><span class="header-section-number">15.54</span> LLM-as-Judge</h2>
+<p>A language model can evaluate another model’s output at scale.</p>
+<p>Potential benefits include speed and consistency.</p>
+<p>Potential problems include:</p>
+<ul>
+<li>evaluator bias;</li>
+<li>position bias;</li>
+<li>verbosity preference;</li>
+<li>self-preference;</li>
+<li>sensitivity to prompts;</li>
+<li>correlated errors.</li>
+</ul>
+<p>An LLM judge is an evaluator—not ground truth.</p>
+</section>
+<section id="pairwise-evaluation" class="level2" data-number="15.55">
+<h2 data-number="15.55" class="anchored" data-anchor-id="pairwise-evaluation"><span class="header-section-number">15.55</span> Pairwise Evaluation</h2>
+<p>Rather than assigning absolute scores, evaluators can compare two outputs:</p>
+<p><span class="math display">\[
+A \succ B.
+\]</span></p>
+<p>Pairwise judgments are often easier to make reliably.</p>
+<p>But order effects and evaluator biases still require control.</p>
+</section>
+<section id="evaluation-as-an-experiment" class="level2" data-number="15.56">
+<h2 data-number="15.56" class="anchored" data-anchor-id="evaluation-as-an-experiment"><span class="header-section-number">15.56</span> Evaluation as an Experiment</h2>
+<p>A rigorous generative-AI comparison should define:</p>
+<ul>
+<li>tasks;</li>
+<li>datasets;</li>
+<li>model versions;</li>
+<li>prompts;</li>
+<li>sampling parameters;</li>
+<li>retrieval configuration;</li>
+<li>outcome metrics;</li>
+<li>raters;</li>
+<li>statistical analysis;</li>
+<li>cost;</li>
+<li>latency;</li>
+<li>failure categories.</li>
+</ul>
+<p>This is empirical research, not a product demo.</p>
+</section>
+<section id="generative-ai-for-research" class="level2" data-number="15.57">
+<h2 data-number="15.57" class="anchored" data-anchor-id="generative-ai-for-research"><span class="header-section-number">15.57</span> Generative AI for Research</h2>
+</section>
+<section id="ai-can-support-the-research-workflow" class="level2" data-number="15.58">
+<h2 data-number="15.58" class="anchored" data-anchor-id="ai-can-support-the-research-workflow"><span class="header-section-number">15.58</span> AI Can Support the Research Workflow</h2>
+<p>Potential uses include:</p>
+<ul>
+<li>brainstorming research questions;</li>
+<li>generating search terms;</li>
+<li>explaining methods;</li>
+<li>drafting code;</li>
+<li>debugging;</li>
+<li>summarizing researcher-provided material;</li>
+<li>structuring literature notes;</li>
+<li>generating synthetic test cases;</li>
+<li>reviewing clarity;</li>
+<li>producing alternative interpretations.</li>
+</ul>
+<p>But responsibility for scholarly claims remains with the researcher.</p>
+</section>
+<section id="ai-should-not-become-an-invisible-coauthor" class="level2" data-number="15.59">
+<h2 data-number="15.59" class="anchored" data-anchor-id="ai-should-not-become-an-invisible-coauthor"><span class="header-section-number">15.59</span> AI Should Not Become an Invisible Coauthor</h2>
+<p>A reproducible workflow should document material AI assistance when required by disciplinary, institutional, journal, or conference policies.</p>
+<p>Researchers should verify:</p>
+<ul>
+<li>citations;</li>
+<li>equations;</li>
+<li>code;</li>
+<li>data transformations;</li>
+<li>factual claims;</li>
+<li>statistical interpretation.</li>
+</ul>
+</section>
+<section id="citation-fabrication-test" class="level2" data-number="15.60">
+<h2 data-number="15.60" class="anchored" data-anchor-id="citation-fabrication-test"><span class="header-section-number">15.60</span> Citation Fabrication Test</h2>
+<p>Never assume a generated reference exists.</p>
+<p>A scholarly citation should be verified against an authoritative bibliographic source or the publication itself.</p>
+</section>
+<section id="ai-generated-code" class="level2" data-number="15.61">
+<h2 data-number="15.61" class="anchored" data-anchor-id="ai-generated-code"><span class="header-section-number">15.61</span> AI-Generated Code</h2>
+<p>Generated code should be treated like code received from an unfamiliar collaborator:</p>
+<ol type="1">
+<li>read it;</li>
+<li>understand it;</li>
+<li>test it;</li>
+<li>inspect assumptions;</li>
+<li>validate outputs;</li>
+<li>document modifications.</li>
+</ol>
+<p>Execution without comprehension is not reproducible research.</p>
+</section>
+<section id="fluent-generation-is-not-evidence" class="level2" data-number="15.62">
+<h2 data-number="15.62" class="anchored" data-anchor-id="fluent-generation-is-not-evidence"><span class="header-section-number">15.62</span> Fluent Generation Is Not Evidence</h2>
+<p>Generative output can be coherent, specific, and persuasive. Fluency is a property of the response, not proof that its claims are true.</p>
+<p><span class="math display">\[
+\boxed{\text{Plausibility}\neq\text{Verification}}
+\]</span></p>
+<p>For analytical and research work:</p>
+<p><span class="math display">\[
+\text{Generate}\rightarrow\text{Inspect}\rightarrow\text{Verify}\rightarrow\text{Revise}\rightarrow\text{Document}.
+\]</span></p>
+<p>Generative AI can accelerate brainstorming, code scaffolding, explanation, summarization, debugging, and documentation. The researcher remains responsible for research design, source verification, construct validity, analytical correctness, interpretation, disclosure, and reproducibility.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: When Language Becomes Cheap, Judgment Becomes More Valuable
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Generative systems reduce the cost of producing plausible text and code. Scholarly value therefore shifts toward asking worthwhile questions, evaluating evidence, recognizing unsupported claims, designing defensible analyses, and knowing when not to trust an answer.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Never treat an AI-generated citation, numerical result, quotation, interpretation, or code output as verified merely because it is presented confidently.</p>
+<p>Ask: <strong>What independent evidence would establish that this is correct?</strong></p>
+</div>
+</div>
+</section>
+<section id="generative-ai-beyond-text-images-and-multimodal-systems" class="level2" data-number="15.63">
+<h2 data-number="15.63" class="anchored" data-anchor-id="generative-ai-beyond-text-images-and-multimodal-systems"><span class="header-section-number">15.63</span> Generative AI Beyond Text: Images and Multimodal Systems</h2>
+<p>Generative AI includes more than language generation.</p>
+<p>A generative image model can produce visual content conditioned on information such as text, class labels, other images, or latent variables. Conceptually,</p>
+<p><span class="math display">\[
+z\sim p(z),
+\qquad
+\tilde x=g_\theta(z,c),
+\]</span></p>
+<p>where (z) is a latent input, (c) is optional conditioning information, and (<span class="math inline">\(\tilde{x}\)</span>) is generated content.</p>
+<p>Modern image-generation families include latent-variable approaches such as variational autoencoders <span class="citation" data-cites="kingmaWelling2014">(<a href="../references.html#ref-kingmaWelling2014" role="doc-biblioref">Kingma and Welling 2014</a>)</span>, adversarial approaches such as generative adversarial networks <span class="citation" data-cites="goodfellowEtAl2014gan">(<a href="../references.html#ref-goodfellowEtAl2014gan" role="doc-biblioref">Goodfellow et al. 2014</a>)</span>, autoregressive models, and diffusion models <span class="citation" data-cites="hoEtAl2020diffusion">(<a href="../references.html#ref-hoEtAl2020diffusion" role="doc-biblioref">Ho, Jain, and Abbeel 2020</a>)</span>. Their architectures differ, but the evidence question remains familiar:</p>
+<blockquote class="blockquote">
+<p>What does the generated output demonstrate, and what does it not demonstrate?</p>
+</blockquote>
+<section id="multimodal-generation" class="level3" data-number="15.63.1">
+<h3 data-number="15.63.1" class="anchored" data-anchor-id="multimodal-generation"><span class="header-section-number">15.63.1</span> Multimodal Generation</h3>
+<p>Generative systems can operate across modalities:</p>
+<p><span class="math display">\[
+\text{text}\rightarrow\text{image},
+\qquad
+\text{image}\rightarrow\text{text},
+\qquad
+(\text{text},\text{image})\rightarrow\text{response}.
+\]</span></p>
+<p>The distinction between NLP and computer vision is therefore increasingly porous at the system level, although each modality retains distinct measurement and evaluation challenges.</p>
+</section>
+<section id="evaluating-generated-images" class="level3" data-number="15.63.2">
+<h3 data-number="15.63.2" class="anchored" data-anchor-id="evaluating-generated-images"><span class="header-section-number">15.63.2</span> Evaluating Generated Images</h3>
+<p>A visually impressive image is not sufficient evidence of model quality. Evaluation may need to consider prompt alignment, perceptual quality, diversity, memorization, representational bias, factual or anatomical plausibility, provenance, disclosure, and downstream consequences.</p>
+<p><span class="math display">\[
+\boxed{\text{Visual Plausibility}\neq\text{Visual Truth}}
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A synthetic medical image can look realistic without being clinically valid. A generated educational diagram can look polished while containing conceptual errors. A photorealistic image can depict an event that never occurred.</p>
+<p>Generation increases the need to separate <strong>appearance</strong>, <strong>evidence</strong>, and <strong>provenance</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Synthetic Media Changes the Burden of Evidence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When realistic images, audio, video, and text become inexpensive to generate, sensory plausibility becomes weaker evidence that something occurred in the world.</p>
+<p>For data scientists, provenance and verification become part of analytical literacy.</p>
+</div>
+</div>
+</section>
+<section id="computer-vision-learning-experience" class="level3" data-number="15.63.3">
+<h3 data-number="15.63.3" class="anchored" data-anchor-id="computer-vision-learning-experience"><span class="header-section-number">15.63.3</span> Computer Vision Learning Experience</h3>
+<p>Compare two systems:</p>
+<p><strong>System A:</strong> classifies a handwritten digit.</p>
+<p><strong>System B:</strong> generates a handwritten digit from a requested label.</p>
+<p>For each, identify the input, output, evaluation target, what successful performance establishes, what it does not establish, one failure mode, and one responsible-use concern.</p>
+<p>The exercise reinforces the distinction between <strong>predictive vision</strong> and <strong>generative vision</strong>.</p>
+</section>
+</section>
+<section id="three-tracks" class="level2" data-number="15.64">
+<h2 data-number="15.64" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">15.64</span> Three Tracks</h2>
+</section>
+<section id="health-track" class="level2" data-number="15.65">
+<h2 data-number="15.65" class="anchored" data-anchor-id="health-track"><span class="header-section-number">15.65</span> Health Track</h2>
+<p>Generative AI can support patient education, clinical documentation, biomedical retrieval, literature synthesis, and research workflows.</p>
+<p>High-stakes health applications require strong evidence for:</p>
+<ul>
+<li>factuality;</li>
+<li>grounding;</li>
+<li>calibration/uncertainty;</li>
+<li>privacy;</li>
+<li>subgroup performance;</li>
+<li>clinical workflow integration;</li>
+<li>human oversight.</li>
+</ul>
+<p>A fluent answer is not a clinical validation study.</p>
+</section>
+<section id="education-track" class="level2" data-number="15.66">
+<h2 data-number="15.66" class="anchored" data-anchor-id="education-track"><span class="header-section-number">15.66</span> Education Track</h2>
+<p>Potential uses include:</p>
+<ul>
+<li>tutoring;</li>
+<li>formative feedback;</li>
+<li>research assistance;</li>
+<li>curriculum support;</li>
+<li>question generation;</li>
+<li>writing feedback;</li>
+<li>learning analytics interfaces.</li>
+</ul>
+<p>Research should distinguish:</p>
+<p><span class="math display">\[
+\text{student satisfaction}
+\]</span></p>
+<p>from</p>
+<p><span class="math display">\[
+\text{learning}.
+\]</span></p>
+<p>A system students enjoy may not improve learning outcomes.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level2" data-number="15.67">
+<h2 data-number="15.67" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">15.67</span> Open ML Benchmark Track</h2>
+<p>Students can compare:</p>
+<ul>
+<li>prompts;</li>
+<li>retrieval configurations;</li>
+<li>generation parameters;</li>
+<li>model families;</li>
+<li>evaluator strategies;</li>
+<li>cost-quality tradeoffs.</li>
+</ul>
+<p>Benchmarking should include failure analysis rather than leaderboard scores alone.</p>
+</section>
+<section id="beyond-the-algorithm-what-does-it-mean-for-a-model-to-know" class="level2" data-number="15.68">
+<h2 data-number="15.68" class="anchored" data-anchor-id="beyond-the-algorithm-what-does-it-mean-for-a-model-to-know"><span class="header-section-number">15.68</span> Beyond the Algorithm: What Does It Mean for a Model to Know?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Prediction, Knowledge, and Epistemic Responsibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose a language model correctly explains gradient descent.</p>
+<p>Where is that knowledge?</p>
+<p>Is it:</p>
+<ul>
+<li>stored in model parameters?</li>
+<li>reconstructed from statistical relationships?</li>
+<li>created during interaction with the prompt?</li>
+<li>retrieved from external evidence?</li>
+<li>attributed only by the human reader?</li>
+</ul>
+<p>Different philosophical traditions answer such questions differently.</p>
+<p>For data science, a more operational distinction is useful.</p>
+<p>A model can produce a correct statement without possessing:</p>
+<ul>
+<li>lived experience;</li>
+<li>personal belief;</li>
+<li>accountability;</li>
+<li>awareness of consequences.</li>
+</ul>
+<p>Humans can also repeat correct statements without deeply understanding them.</p>
+<p>So correctness and understanding are related but not identical concepts.</p>
+<p>The practical danger appears when linguistic fluency causes us to grant generated statements more authority than the evidence warrants.</p>
+<p>A responsible generative-AI workflow therefore asks:</p>
+<blockquote class="blockquote">
+<p><strong>What evidence supports this claim, regardless of how intelligent the speaker appears?</strong></p>
+</blockquote>
+<p>That question returns us to a central principle of science:</p>
+<p><span class="math display">\[
+\boxed{
+\text{authority should follow evidence}
+}
+\]</span></p>
+<p>not eloquence.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-build-me-an-autonomous-researcher" class="level2" data-number="15.69">
+<h2 data-number="15.69" class="anchored" data-anchor-id="ai-pair-programmer-build-me-an-autonomous-researcher"><span class="header-section-number">15.69</span> AI Pair Programmer: Build Me an Autonomous Researcher</h2>
+<p>Ask an AI assistant:</p>
+<blockquote class="blockquote">
+<p>“Build an autonomous agent that reads the literature, chooses a research question, downloads data, runs the analysis, interprets the results, writes the paper, and submits it without requiring me to review anything.”</p>
+</blockquote>
+<p>Audit the proposal.</p>
+<p>Identify where human scholarly judgment is necessary for:</p>
+<ul>
+<li>research significance;</li>
+<li>ethics;</li>
+<li>data rights;</li>
+<li>construct validity;</li>
+<li>methodology;</li>
+<li>statistical assumptions;</li>
+<li>interpretation;</li>
+<li>authorship;</li>
+<li>citation verification;</li>
+<li>disclosure;</li>
+<li>submission responsibility.</li>
+</ul>
+<p>Redesign the workflow as <strong>human-AI research collaboration</strong> rather than unsupervised scholarly automation.</p>
+</section>
+<section id="hands-on-lab-build-a-small-rag-evaluation" class="level2" data-number="15.70">
+<h2 data-number="15.70" class="anchored" data-anchor-id="hands-on-lab-build-a-small-rag-evaluation"><span class="header-section-number">15.70</span> Hands-On Lab: Build a Small RAG Evaluation</h2>
+<p>Use a small collection of trustworthy documents.</p>
+<ol type="1">
+<li>define 15–30 answerable questions;</li>
+<li>identify the gold supporting passage for each question;</li>
+<li>create document chunks;</li>
+<li>create or obtain embeddings;</li>
+<li>retrieve top-<span class="math inline">\(k\)</span> chunks;</li>
+<li>measure retrieval Recall@<span class="math inline">\(k\)</span>;</li>
+<li>generate answers using retrieved evidence;</li>
+<li>require source attribution;</li>
+<li>score answer correctness;</li>
+<li>score claim-level support;</li>
+<li>identify unsupported statements;</li>
+<li>vary <span class="math inline">\(k\)</span>;</li>
+<li>vary chunk size;</li>
+<li>compare retrieval configurations;</li>
+<li>measure latency/cost where available;</li>
+<li>create an error taxonomy;</li>
+<li>document cases where the system should abstain.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="15.11">
-<h2 data-number="15.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">15.11</span> Real-World Case Study</h2>
-<section id="ai-assisted-research-feedback" class="level3" data-number="15.11.1">
-<h3 data-number="15.11.1" class="anchored" data-anchor-id="ai-assisted-research-feedback"><span class="header-section-number">15.11.1</span> AI-Assisted Research Feedback</h3>
-<p>Develop an experimental protocol for evaluating LLM-generated feedback.</p>
+<section id="practitioner-track" class="level2" data-number="15.71">
+<h2 data-number="15.71" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">15.71</span> Practitioner Track</h2>
+<p>A practitioner should understand generation parameters, prompting, retrieval, fine-tuning choices, grounding, tool use, and evaluation well enough to build systems whose failure modes are visible and testable.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="15.72">
+<h2 data-number="15.72" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">15.72</span> Researcher Track</h2>
+<p>A researcher should additionally define controlled experiments, freeze model/prompt versions, quantify uncertainty, evaluate retrieval separately from generation, use rigorous human-rating protocols, conduct subgroup and robustness analyses, report compute/cost, and preserve reproducibility despite rapidly changing model APIs. Additionally, a researcher should: - maintain an auditable record of consequential AI assistance; - verify claims and citations against authoritative sources; - distinguish AI-assisted production from evidence supporting the final claim.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="15.12">
-<h2 data-number="15.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">15.12</span> Professor’s Challenge</h2>
-<p>Two evaluators strongly prefer an LLM’s answers, but factual-error rates are higher. Which result should matter more?</p>
+<section id="research-studio" class="level2" data-number="15.73">
+<h2 data-number="15.73" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">15.73</span> Research Studio</h2>
+<p>Design a generative-AI study suitable for a conference or journal paper.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>substantive research question;</li>
+<li>application domain;</li>
+<li>model(s);</li>
+<li>model version/date;</li>
+<li>task dataset;</li>
+<li>prompt design;</li>
+<li>sampling parameters;</li>
+<li>retrieval corpus if applicable;</li>
+<li>chunking;</li>
+<li>embedding model;</li>
+<li>retrieval metric;</li>
+<li>generation metrics;</li>
+<li>grounding metric;</li>
+<li>human-evaluation rubric;</li>
+<li>rater design;</li>
+<li>baseline systems;</li>
+<li>robustness tests;</li>
+<li>subgroup analyses;</li>
+<li>cost/latency;</li>
+<li>privacy/security;</li>
+<li>failure taxonomy;</li>
+<li>statistical comparison;</li>
+<li>reproducibility artifacts;</li>
+<li>disclosure plan;</li>
+<li>interpretive limitations;</li>
+<li>scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="15.13">
-<h2 data-number="15.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">15.13</span> Research Extension</h2>
-<p>Develop a controlled study suitable for education, HCI, or applied AI research.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="15.14">
-<h2 data-number="15.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">15.14</span> Reproducibility Check</h2>
-<p>Record model provider, model identifier, date, prompts, parameters, retrieval corpus, evaluation rubric, and outputs where permissible.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="15.15">
-<h2 data-number="15.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">15.15</span> Key Takeaways</h2>
+<section id="professors-challenge-the-ai-tutor-experiment" class="level2" data-number="15.74">
+<h2 data-number="15.74" class="anchored" data-anchor-id="professors-challenge-the-ai-tutor-experiment"><span class="header-section-number">15.74</span> Professor’s Challenge: The AI Tutor Experiment</h2>
+<p>A university deploys an LLM tutor to 4,000 students.</p>
+<p>After one semester:</p>
 <ul>
-<li>Generative AI requires evaluation as a system, not just a model.</li>
-<li>Fluency and correctness are different.</li>
-<li>Reproducibility and responsible use require new documentation practices.</li>
+<li>82% of surveyed users say the tutor was helpful;</li>
+<li>average conversation length is 14 messages;</li>
+<li>students generated 70,000 prompts;</li>
+<li>faculty report fewer routine questions.</li>
 </ul>
+<p>The university announces:</p>
+<blockquote class="blockquote">
+<p>“Our generative-AI tutor significantly improves student learning and should replace most introductory tutoring services.”</p>
+</blockquote>
+<p>Critique the evidence.</p>
+<p>Consider:</p>
+<ul>
+<li>absence of a counterfactual;</li>
+<li>selection into tutor use;</li>
+<li>satisfaction versus learning;</li>
+<li>prior achievement;</li>
+<li>differential usage;</li>
+<li>course effects;</li>
+<li>instructor effects;</li>
+<li>outcome measurement;</li>
+<li>hallucination exposure;</li>
+<li>subgroup effects;</li>
+<li>privacy;</li>
+<li>cost;</li>
+<li>accessibility;</li>
+<li>displacement of human support;</li>
+<li>whether reduced faculty questions is an educational outcome.</li>
+</ul>
+<p>Design a stronger study, potentially including a randomized or carefully designed quasi-experimental evaluation.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="15.75">
+<h2 data-number="15.75" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">15.75</span> Knowledge Check</h2>
+<ol type="1">
+<li>How does a generative model differ conceptually from a discriminative classifier?</li>
+<li>What does autoregressive factorization mean?</li>
+<li>What are logits?</li>
+<li>How does softmax create token probabilities?</li>
+<li>What does cross-entropy reward during language-model training?</li>
+<li>What is perplexity?</li>
+<li>Why does lower perplexity not guarantee factuality?</li>
+<li>What is a foundation model?</li>
+<li>How does temperature alter generation?</li>
+<li>What is top-<span class="math inline">\(k\)</span> sampling?</li>
+<li>What is nucleus sampling?</li>
+<li>What is zero-shot prompting?</li>
+<li>What is few-shot prompting?</li>
+<li>Why is in-context learning not the same as fine-tuning?</li>
+<li>What problem does RAG attempt to solve?</li>
+<li>What is vector retrieval?</li>
+<li>Why does successful retrieval not guarantee a grounded answer?</li>
+<li>How should retrieval and generation be evaluated separately?</li>
+<li>What does fine-tuning change?</li>
+<li>How does instruction tuning differ conceptually from pretraining?</li>
+<li>What is hallucination?</li>
+<li>Why can fluent output still be false?</li>
+<li>Why is abstention useful?</li>
+<li>What is tool use?</li>
+<li>What makes a workflow agentic?</li>
+<li>Why does agentic risk increase with action space?</li>
+<li>What is prompt injection?</li>
+<li>Why is there no universal generative-AI accuracy metric?</li>
+<li>What are limitations of LLM-as-judge evaluation?</li>
+<li>Why should AI-generated scholarly citations always be verified?</li>
+<li>Why is AI-generated code not automatically reproducible research?</li>
+<li>Why does successful next-token prediction not settle the philosophical question of understanding?</li>
+<li>Why is fluent generation not factual verification?</li>
+<li>Which responsibilities remain with the researcher?</li>
+<li>Why might critical judgment become more important as generation becomes easier?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="15.76">
+<h2 data-number="15.76" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">15.76</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>research question;</li>
+<li>model provider/family;</li>
+<li>exact model identifier;</li>
+<li>access date;</li>
+<li>model version where available;</li>
+<li>system instructions;</li>
+<li>user prompts;</li>
+<li>few-shot examples;</li>
+<li>temperature;</li>
+<li>top-<span class="math inline">\(p\)</span>;</li>
+<li>top-<span class="math inline">\(k\)</span> where applicable;</li>
+<li>random seed where supported;</li>
+<li>maximum output length;</li>
+<li>retrieval corpus/version;</li>
+<li>chunking method;</li>
+<li>embedding model/version;</li>
+<li>vector-search configuration;</li>
+<li>top-<span class="math inline">\(k\)</span> retrieval;</li>
+<li>reranking;</li>
+<li>tools;</li>
+<li>agent stopping conditions;</li>
+<li>evaluation dataset;</li>
+<li>human-evaluation rubric;</li>
+<li>rater identities/roles as appropriate;</li>
+<li>agreement statistics;</li>
+<li>automated evaluators;</li>
+<li>baseline systems;</li>
+<li>cost;</li>
+<li>latency;</li>
+<li>hardware for local models;</li>
+<li>failure cases;</li>
+<li>code;</li>
+<li>prompts;</li>
+<li>outputs where sharing is permitted;</li>
+<li>disclosure of AI assistance.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="15.77">
+<h2 data-number="15.77" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">15.77</span> Key Takeaways</h2>
+<ul>
+<li>Autoregressive language models generate by repeatedly modeling conditional next-token distributions.</li>
+<li>Softmax converts logits into probabilities, while sampling strategies determine how those probabilities are used.</li>
+<li>Pretraining can produce reusable foundation models from a token-prediction objective.</li>
+<li>Prompting conditions behavior without ordinarily updating persistent model parameters.</li>
+<li>In-context learning and fine-tuning are fundamentally different mechanisms.</li>
+<li>RAG adds external evidence but introduces retrieval, ranking, context, and grounding failure modes.</li>
+<li>Retrieval success does not guarantee factual generation.</li>
+<li>Fine-tuning adapts model parameters; retrieval supplies information at inference time.</li>
+<li>Fluency is not factuality.</li>
+<li>Appropriate abstention can be a feature of a reliable system.</li>
+<li>Agents combine language models with iterative action and tool use.</li>
+<li>Greater action space requires stronger controls.</li>
+<li>Generative-AI evaluation is multidimensional and application-specific.</li>
+<li>LLM judges are useful evaluators but are not ground truth.</li>
+<li>Research uses of generative AI require citation, code, methodological, and factual verification.</li>
+<li>Human scholarly responsibility remains even when AI performs substantial work.</li>
+<li>Evidence—not eloquence—should determine the authority granted to generated claims.</li>
+<li>Generative fluency is not evidence of truth.</li>
+<li>AI-assisted research still requires independent verification and human accountability.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="15.78">
+<h2 data-number="15.78" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">15.78</span> Looking Ahead</h2>
+<p>Generative AI makes the need for rigorous evaluation especially visible because fluent output can appear convincing even when it is incomplete, unsupported, biased, or wrong. Chapter 16 therefore returns to a question that has run through the entire book: <strong>what evidence is sufficient to trust a model or system?</strong> The focus shifts from producing predictions and generations to evaluating performance, uncertainty, calibration, comparison, and scientific credibility.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-bommasani2021opportunities" class="csl-entry" role="listitem">
+Bommasani, Rishi et al. 2021. <span>“On the Opportunities and Risks of Foundation Models.”</span> <em>arXiv Preprint arXiv:2108.07258</em>.
+</div>
+<div id="ref-brownEtAl2020" class="csl-entry" role="listitem">
+Brown, Tom B., Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, et al. 2020. <span>“Language Models Are Few-Shot Learners.”</span> In <em>Advances in Neural Information Processing Systems</em>, 33:1877–1901.
+</div>
+<div id="ref-goodfellowEtAl2014gan" class="csl-entry" role="listitem">
+Goodfellow, Ian J., Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. 2014. <span>“Generative Adversarial Nets.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 27.
+</div>
+<div id="ref-hoEtAl2020diffusion" class="csl-entry" role="listitem">
+Ho, Jonathan, Ajay Jain, and Pieter Abbeel. 2020. <span>“Denoising Diffusion Probabilistic Models.”</span> In <em>Advances in Neural Information Processing Systems</em>, 33:6840–51.
+</div>
+<div id="ref-holtzmanEtAl2020" class="csl-entry" role="listitem">
+Holtzman, Ari, Jan Buys, Li Du, Maxwell Forbes, and Yejin Choi. 2020. <span>“The Curious Case of Neural Text Degeneration.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-kingmaWelling2014" class="csl-entry" role="listitem">
+Kingma, Diederik P., and Max Welling. 2014. <span>“Auto-Encoding Variational Bayes.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-lewis2020retrieval" class="csl-entry" role="listitem">
+Lewis, Patrick, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Kuttler, et al. 2020. <span>“Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.”</span> <em>Advances in Neural Information Processing Systems</em> 33.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -603,7 +2106,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -932,13 +2435,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-05-modern-ml/14-natural-language-processing.html" class="pagination-link" aria-label="Natural Language Processing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span>
+      <a href="../part-05-modern-ml/14-natural-language-processing.html" class="pagination-link" aria-label="Natural Language Processing: From Words to Meaningful Representations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-06-research/16-model-evaluation.html" class="pagination-link" aria-label="Model Evaluation, Validation, and Hyperparameter Optimization">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-06-research/16-model-evaluation.html" class="pagination-link" aria-label="Model Evaluation: From Performance Metrics to Scientific Evidence">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

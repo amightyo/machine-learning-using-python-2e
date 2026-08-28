@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Support Vector Machines and Kernel Methods – Machine Learning Using Python</title>
+<title>9&nbsp; Support Vector Machines: Margins, Geometry, and Kernels – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,7 +167,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/09-support-vector-machines.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/09-support-vector-machines.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,6 +183,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -141,6 +199,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -184,7 +248,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -207,31 +271,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,13 +312,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -271,19 +335,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +355,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -300,19 +364,48 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -335,41 +428,69 @@ window.Quarto = {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">9.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">9.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">9.3</span> Real-World Problem</a></li>
-  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations"><span class="header-section-number">9.4</span> Mathematical Foundations</a>
+  <li><a href="#classification-as-geometry" id="toc-classification-as-geometry" class="nav-link" data-scroll-target="#classification-as-geometry"><span class="header-section-number">9.3</span> Classification as Geometry</a></li>
+  <li><a href="#many-boundaries-can-separate-the-same-data" id="toc-many-boundaries-can-separate-the-same-data" class="nav-link" data-scroll-target="#many-boundaries-can-separate-the-same-data"><span class="header-section-number">9.4</span> Many Boundaries Can Separate the Same Data</a></li>
+  <li><a href="#hard-margin-svm" id="toc-hard-margin-svm" class="nav-link" data-scroll-target="#hard-margin-svm"><span class="header-section-number">9.5</span> Hard-Margin SVM</a></li>
+  <li><a href="#support-vectors" id="toc-support-vectors" class="nav-link" data-scroll-target="#support-vectors"><span class="header-section-number">9.6</span> Support Vectors</a></li>
+  <li><a href="#visual-experiment-maximum-margin-classification" id="toc-visual-experiment-maximum-margin-classification" class="nav-link" data-scroll-target="#visual-experiment-maximum-margin-classification"><span class="header-section-number">9.7</span> Visual Experiment: Maximum-Margin Classification</a></li>
+  <li><a href="#soft-margins-allowing-imperfection" id="toc-soft-margins-allowing-imperfection" class="nav-link" data-scroll-target="#soft-margins-allowing-imperfection"><span class="header-section-number">9.8</span> Soft Margins: Allowing Imperfection</a>
   <ul class="collapse">
-  <li><a href="#hyperplanes" id="toc-hyperplanes" class="nav-link" data-scroll-target="#hyperplanes"><span class="header-section-number">9.4.1</span> Hyperplanes</a></li>
-  <li><a href="#margins" id="toc-margins" class="nav-link" data-scroll-target="#margins"><span class="header-section-number">9.4.2</span> Margins</a></li>
-  <li><a href="#support-vectors" id="toc-support-vectors" class="nav-link" data-scroll-target="#support-vectors"><span class="header-section-number">9.4.3</span> Support Vectors</a></li>
-  <li><a href="#maximum-margin-optimization" id="toc-maximum-margin-optimization" class="nav-link" data-scroll-target="#maximum-margin-optimization"><span class="header-section-number">9.4.4</span> Maximum-Margin Optimization</a></li>
+  <li><a href="#intuition-for-c" id="toc-intuition-for-c" class="nav-link" data-scroll-target="#intuition-for-c"><span class="header-section-number">9.8.1</span> Intuition for <span class="math inline">\(C\)</span></a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">9.5</span> Python Implementation</a>
+  <li><a href="#hinge-loss" id="toc-hinge-loss" class="nav-link" data-scroll-target="#hinge-loss"><span class="header-section-number">9.9</span> Hinge Loss</a></li>
+  <li><a href="#why-scaling-matters" id="toc-why-scaling-matters" class="nav-link" data-scroll-target="#why-scaling-matters"><span class="header-section-number">9.10</span> Why Scaling Matters</a></li>
+  <li><a href="#leakage-safe-svm-pipeline" id="toc-leakage-safe-svm-pipeline" class="nav-link" data-scroll-target="#leakage-safe-svm-pipeline"><span class="header-section-number">9.11</span> Leakage-Safe SVM Pipeline</a></li>
+  <li><a href="#the-decision-function-is-not-a-probability" id="toc-the-decision-function-is-not-a-probability" class="nav-link" data-scroll-target="#the-decision-function-is-not-a-probability"><span class="header-section-number">9.12</span> The Decision Function Is Not a Probability</a></li>
+  <li><a href="#when-a-straight-boundary-is-not-enough" id="toc-when-a-straight-boundary-is-not-enough" class="nav-link" data-scroll-target="#when-a-straight-boundary-is-not-enough"><span class="header-section-number">9.13</span> When a Straight Boundary Is Not Enough</a></li>
+  <li><a href="#feature-maps" id="toc-feature-maps" class="nav-link" data-scroll-target="#feature-maps"><span class="header-section-number">9.14</span> Feature Maps</a></li>
+  <li><a href="#the-kernel-trick" id="toc-the-kernel-trick" class="nav-link" data-scroll-target="#the-kernel-trick"><span class="header-section-number">9.15</span> The Kernel Trick</a></li>
+  <li><a href="#representation-can-change-the-difficulty-of-the-problem" id="toc-representation-can-change-the-difficulty-of-the-problem" class="nav-link" data-scroll-target="#representation-can-change-the-difficulty-of-the-problem"><span class="header-section-number">9.16</span> Representation Can Change the Difficulty of the Problem</a>
   <ul class="collapse">
-  <li><a href="#scaling" id="toc-scaling" class="nav-link" data-scroll-target="#scaling"><span class="header-section-number">9.5.1</span> Scaling</a></li>
-  <li><a href="#svc" id="toc-svc" class="nav-link" data-scroll-target="#svc"><span class="header-section-number">9.5.2</span> SVC</a></li>
-  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">9.5.3</span> Hyperparameter Tuning</a></li>
-  <li><a href="#probability-estimates" id="toc-probability-estimates" class="nav-link" data-scroll-target="#probability-estimates"><span class="header-section-number">9.5.4</span> Probability Estimates</a></li>
+  <li><a href="#a-simple-feature-map" id="toc-a-simple-feature-map" class="nav-link" data-scroll-target="#a-simple-feature-map"><span class="header-section-number">9.16.1</span> A Simple Feature Map</a></li>
+  <li><a href="#kernel-as-an-implicit-representation" id="toc-kernel-as-an-implicit-representation" class="nav-link" data-scroll-target="#kernel-as-an-implicit-representation"><span class="header-section-number">9.16.2</span> Kernel as an Implicit Representation</a></li>
+  <li><a href="#bridge-to-representation-learning" id="toc-bridge-to-representation-learning" class="nav-link" data-scroll-target="#bridge-to-representation-learning"><span class="header-section-number">9.16.3</span> Bridge to Representation Learning</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">9.6</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">9.7</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">9.8</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">9.9</span> Real-World Case Study</a>
+  <li><a href="#common-kernels" id="toc-common-kernels" class="nav-link" data-scroll-target="#common-kernels"><span class="header-section-number">9.17</span> Common Kernels</a>
   <ul class="collapse">
-  <li><a href="#nonlinear-classification" id="toc-nonlinear-classification" class="nav-link" data-scroll-target="#nonlinear-classification"><span class="header-section-number">9.9.1</span> Nonlinear Classification</a></li>
+  <li><a href="#linear-kernel" id="toc-linear-kernel" class="nav-link" data-scroll-target="#linear-kernel"><span class="header-section-number">9.17.1</span> Linear Kernel</a></li>
+  <li><a href="#polynomial-kernel" id="toc-polynomial-kernel" class="nav-link" data-scroll-target="#polynomial-kernel"><span class="header-section-number">9.17.2</span> Polynomial Kernel</a></li>
+  <li><a href="#radial-basis-function-kernel" id="toc-radial-basis-function-kernel" class="nav-link" data-scroll-target="#radial-basis-function-kernel"><span class="header-section-number">9.17.3</span> Radial Basis Function Kernel</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">9.10</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">9.11</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">9.12</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">9.13</span> Key Takeaways</a></li>
+  <li><a href="#understanding-gamma" id="toc-understanding-gamma" class="nav-link" data-scroll-target="#understanding-gamma"><span class="header-section-number">9.18</span> Understanding <span class="math inline">\(\gamma\)</span></a></li>
+  <li><a href="#visual-experiment-the-kernel-changes-the-boundary" id="toc-visual-experiment-the-kernel-changes-the-boundary" class="nav-link" data-scroll-target="#visual-experiment-the-kernel-changes-the-boundary"><span class="header-section-number">9.19</span> Visual Experiment: The Kernel Changes the Boundary</a></li>
+  <li><a href="#visual-experiment-c-and-gamma" id="toc-visual-experiment-c-and-gamma" class="nav-link" data-scroll-target="#visual-experiment-c-and-gamma"><span class="header-section-number">9.20</span> Visual Experiment: <span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span></a></li>
+  <li><a href="#compare-logistic-regression-linear-svm-and-rbf-svm" id="toc-compare-logistic-regression-linear-svm-and-rbf-svm" class="nav-link" data-scroll-target="#compare-logistic-regression-linear-svm-and-rbf-svm"><span class="header-section-number">9.21</span> Compare Logistic Regression, Linear SVM, and RBF SVM</a></li>
+  <li><a href="#computer-vision-learning-experience-an-rbf-svm-on-handwritten-digits" id="toc-computer-vision-learning-experience-an-rbf-svm-on-handwritten-digits" class="nav-link" data-scroll-target="#computer-vision-learning-experience-an-rbf-svm-on-handwritten-digits"><span class="header-section-number">9.22</span> Computer Vision Learning Experience: An RBF SVM on Handwritten Digits</a>
+  <ul class="collapse">
+  <li><a href="#what-did-the-kernel-add" id="toc-what-did-the-kernel-add" class="nav-link" data-scroll-target="#what-did-the-kernel-add"><span class="header-section-number">9.22.1</span> What Did the Kernel Add?</a></li>
+  </ul></li>
+  <li><a href="#computational-considerations" id="toc-computational-considerations" class="nav-link" data-scroll-target="#computational-considerations"><span class="header-section-number">9.23</span> Computational Considerations</a></li>
+  <li><a href="#svm-for-regression" id="toc-svm-for-regression" class="nav-link" data-scroll-target="#svm-for-regression"><span class="header-section-number">9.24</span> SVM for Regression</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">9.25</span> Three Tracks</a>
+  <ul class="collapse">
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">9.25.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">9.25.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">9.25.3</span> Open ML Benchmark Track</a></li>
+  </ul></li>
+  <li><a href="#beyond-the-algorithm-change-the-representation-change-the-problem" id="toc-beyond-the-algorithm-change-the-representation-change-the-problem" class="nav-link" data-scroll-target="#beyond-the-algorithm-change-the-representation-change-the-problem"><span class="header-section-number">9.26</span> Beyond the Algorithm: Change the Representation, Change the Problem</a></li>
+  <li><a href="#ai-pair-programmer-the-kernel-made-it-true" id="toc-ai-pair-programmer-the-kernel-made-it-true" class="nav-link" data-scroll-target="#ai-pair-programmer-the-kernel-made-it-true"><span class="header-section-number">9.27</span> AI Pair Programmer: The Kernel Made It True</a></li>
+  <li><a href="#hands-on-lab-from-hyperplane-to-kernel" id="toc-hands-on-lab-from-hyperplane-to-kernel" class="nav-link" data-scroll-target="#hands-on-lab-from-hyperplane-to-kernel"><span class="header-section-number">9.28</span> Hands-On Lab: From Hyperplane to Kernel</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">9.29</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">9.30</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">9.31</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-perfect-kernel" id="toc-professors-challenge-the-perfect-kernel" class="nav-link" data-scroll-target="#professors-challenge-the-perfect-kernel"><span class="header-section-number">9.32</span> Professor’s Challenge: The Perfect Kernel</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">9.33</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">9.34</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">9.35</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/09-support-vector-machines.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/09-support-vector-machines.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></h1>
 </div>
 
 
@@ -388,107 +509,1211 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">9.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain margins and support vectors.</li>
-<li>Describe hard- and soft-margin classification.</li>
-<li>Explain the kernel trick conceptually.</li>
-<li>Tune SVM hyperparameters using validation.</li>
-<li>Recognize when feature scaling is essential.</li>
+<li>express a linear decision boundary as a hyperplane;</li>
+<li>explain why the margin matters in support vector classification;</li>
+<li>identify support vectors and explain their special role;</li>
+<li>distinguish hard-margin and soft-margin classification;</li>
+<li>interpret slack variables and the regularization parameter <span class="math inline">\(C\)</span>;</li>
+<li>explain hinge loss conceptually and mathematically;</li>
+<li>explain why feature scaling is especially important for SVMs;</li>
+<li>fit linear and nonlinear SVM classifiers with leakage-safe pipelines;</li>
+<li>explain the kernel trick without explicitly constructing every transformed feature;</li>
+<li>distinguish linear, polynomial, and radial basis function kernels;</li>
+<li>interpret the role of <span class="math inline">\(\gamma\)</span> in an RBF kernel;</li>
+<li>visualize nonlinear decision boundaries;</li>
+<li>compare SVMs with logistic regression and tree-based models;</li>
+<li>explain why probability estimates from an SVM require additional modeling;</li>
+<li>apply SVM reasoning to classification and regression problems;</li>
+<li>distinguish geometric separability from scientific explanation.</li>
+<li>evaluate an RBF-kernel SVM as a classical computer-vision baseline.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">9.2</span> Why This Matters</h2>
-<p>Support vector machines illustrate how geometry, optimization, and nonlinear feature spaces combine to produce powerful predictive models.</p>
+<p>Earlier chapters introduced two very different ways of learning.</p>
+<p>Linear and logistic regression estimate weighted combinations of features. Decision trees recursively partition the feature space.</p>
+<p>Support Vector Machines (SVMs) introduce a third perspective:</p>
+<blockquote class="blockquote">
+<p><strong>Find a boundary that separates observations while maximizing geometric separation from the nearest cases.</strong></p>
+</blockquote>
+<p>The observations closest to the boundary become especially important. These are the <strong>support vectors</strong>.</p>
+<p>Even more strikingly, when a straight boundary is inadequate, kernels allow us to solve a nonlinear problem by working with similarities corresponding to a richer feature space.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>What if the difficulty of a classification problem depends not only on the algorithm, but on the geometry of the space in which we represent it?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">9.3</span> Real-World Problem</h2>
-<p>Can a nonlinear boundary separate complex patient or student profiles better than a linear classifier?</p>
-</section>
-<section id="mathematical-foundations" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="mathematical-foundations"><span class="header-section-number">9.4</span> Mathematical Foundations</h2>
-<section id="hyperplanes" class="level3" data-number="9.4.1">
-<h3 data-number="9.4.1" class="anchored" data-anchor-id="hyperplanes"><span class="header-section-number">9.4.1</span> Hyperplanes</h3>
-</section>
-<section id="margins" class="level3" data-number="9.4.2">
-<h3 data-number="9.4.2" class="anchored" data-anchor-id="margins"><span class="header-section-number">9.4.2</span> Margins</h3>
-</section>
-<section id="support-vectors" class="level3" data-number="9.4.3">
-<h3 data-number="9.4.3" class="anchored" data-anchor-id="support-vectors"><span class="header-section-number">9.4.3</span> Support Vectors</h3>
-</section>
-<section id="maximum-margin-optimization" class="level3" data-number="9.4.4">
-<h3 data-number="9.4.4" class="anchored" data-anchor-id="maximum-margin-optimization"><span class="header-section-number">9.4.4</span> Maximum-Margin Optimization</h3>
+<section id="classification-as-geometry" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="classification-as-geometry"><span class="header-section-number">9.3</span> Classification as Geometry</h2>
+<p>For two features, a linear decision boundary can be written</p>
 <p><span class="math display">\[
-\min_{w,b} \frac{1}{2}\lVert w\rVert^2
-\]</span> subject to <span class="math display">\[
-y_i(w^Tx_i+b) \ge 1
-\]</span> ### Soft Margins ### Kernels ### Linear, Polynomial, and RBF Kernels</p>
+w_1x_1+w_2x_2+b=0.
+\]</span></p>
+<p>More generally,</p>
+<p><span class="math display">\[
+w^\top x+b=0.
+\]</span></p>
+<p>The vector <span class="math inline">\(w\)</span> determines the orientation of the hyperplane, while <span class="math inline">\(b\)</span> shifts its location.</p>
+<p>A classifier may use the sign of</p>
+<p><span class="math display">\[
+f(x)=w^\top x+b
+\]</span></p>
+<p>to assign classes.</p>
+<p>For labels <span class="math inline">\(y_i\in\{-1,+1\}\)</span>,</p>
+<p><span class="math display">\[
+\hat y_i=\operatorname{sign}(w^\top x_i+b).
+\]</span></p>
+</section>
+<section id="many-boundaries-can-separate-the-same-data" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="many-boundaries-can-separate-the-same-data"><span class="header-section-number">9.4</span> Many Boundaries Can Separate the Same Data</h2>
+<p>Suppose a dataset is linearly separable. There may be many hyperplanes that classify every training observation correctly.</p>
+<p>Which one should we choose?</p>
+<p>SVMs prefer a boundary with a <strong>large margin</strong>: a wide region between the classes and the decision boundary.</p>
+<p>For the canonical SVM scaling, the two supporting hyperplanes are</p>
+<p><span class="math display">\[
+w^\top x+b=1
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+w^\top x+b=-1.
+\]</span></p>
+<p>The distance between them is</p>
+<p><span class="math display">\[
+\frac{2}{\|w\|}.
+\]</span></p>
+<p>Maximizing the margin is therefore equivalent to minimizing <span class="math inline">\(\|w\|\)</span>.</p>
+</section>
+<section id="hard-margin-svm" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="hard-margin-svm"><span class="header-section-number">9.5</span> Hard-Margin SVM</h2>
+<p>Support-vector machines formalize classification around maximum-margin separation, with the canonical support-vector network formulation developed by Cortes and Vapnik <span class="citation" data-cites="cortesVapnik1995">(<a href="../references.html#ref-cortesVapnik1995" role="doc-biblioref">Cortes and Vapnik 1995</a>)</span>.</p>
+<p>For perfectly separable data, the optimization can be written</p>
+<p><span class="math display">\[
+\min_{w,b}\frac{1}{2}\|w\|^2
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+y_i(w^\top x_i+b)\ge 1
+\qquad
+\text{for all }i.
+\]</span></p>
+<p>This demands perfect separation with the required margin.</p>
+<p>Real datasets rarely behave so politely.</p>
+</section>
+<section id="support-vectors" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="support-vectors"><span class="header-section-number">9.6</span> Support Vectors</h2>
+<p>The observations nearest the separating boundary determine the margin.</p>
+<p>These observations are the <strong>support vectors</strong>.</p>
+<p>Moving a distant observation slightly may not change the fitted boundary at all. Moving a support vector may change it substantially.</p>
+<p>This is one of the most distinctive ideas in SVMs:</p>
+<blockquote class="blockquote">
+<p><strong>Not every training observation plays an equal geometric role in defining the final boundary.</strong></p>
+</blockquote>
+</section>
+<section id="visual-experiment-maximum-margin-classification" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="visual-experiment-maximum-margin-classification"><span class="header-section-number">9.7</span> Visual Experiment: Maximum-Margin Classification</h2>
+<div id="cell-fig-linear-svm" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X_demo, y_demo <span class="op">=</span> make_blobs(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">70</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    centers<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    cluster_std<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">7</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>linear_svm <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">"linear"</span>, C<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>linear_svm.fit(X_demo, y_demo)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    X_demo[:, <span class="dv">0</span>],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    X_demo[:, <span class="dv">1</span>],</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y_demo,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"k"</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> ax.get_xlim()</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>ylim <span class="op">=</span> ax.get_ylim()</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>xx <span class="op">=</span> np.linspace(xlim[<span class="dv">0</span>], xlim[<span class="dv">1</span>], <span class="dv">200</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>yy <span class="op">=</span> np.linspace(ylim[<span class="dv">0</span>], ylim[<span class="dv">1</span>], <span class="dv">200</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>YY, XX <span class="op">=</span> np.meshgrid(yy, xx)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.c_[XX.ravel(), YY.ravel()]</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> linear_svm.decision_function(grid).reshape(XX.shape)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax.contour(</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    XX, YY, Z,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    levels<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    linestyles<span class="op">=</span>[<span class="st">"--"</span>, <span class="st">"-"</span>, <span class="st">"--"</span>]</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    linear_svm.support_vectors_[:, <span class="dv">0</span>],</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    linear_svm.support_vectors_[:, <span class="dv">1</span>],</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">180</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    facecolors<span class="op">=</span><span class="st">"none"</span>,</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Support vectors"</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Maximum-Margin Linear Classifier"</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-linear-svm" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-class scatterplot with a linear SVM separating hyperplane, two parallel margin boundaries, and support vectors outlined with large circles. The support vectors lie closest to the margin and determine the fitted maximum-margin boundary.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linear-svm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-linear-svm-output-1.png" alt="Two-class scatterplot with a linear SVM separating hyperplane, two parallel margin boundaries, and support vectors outlined with large circles. The support vectors lie closest to the margin and determine the fitted maximum-margin boundary." width="651" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear-svm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: A linear SVM chooses a separating hyperplane whose margin is determined by support vectors.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="soft-margins-allowing-imperfection" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="soft-margins-allowing-imperfection"><span class="header-section-number">9.8</span> Soft Margins: Allowing Imperfection</h2>
+<p>Perfect separation can be undesirable or impossible.</p>
+<p>Soft-margin SVM introduces slack variables <span class="math inline">\(\xi_i\ge0\)</span>:</p>
+<p><span class="math display">\[
+y_i(w^\top x_i+b)\ge1-\xi_i.
+\]</span></p>
+<p>The optimization becomes</p>
+<p><span class="math display">\[
+\min_{w,b,\xi}
+\frac{1}{2}\|w\|^2
++
+C\sum_{i=1}^{n}\xi_i
+\]</span></p>
+<p>subject to the soft-margin constraints.</p>
+<p>The parameter <span class="math inline">\(C\)</span> controls the penalty for margin violations.</p>
+<section id="intuition-for-c" class="level3" data-number="9.8.1">
+<h3 data-number="9.8.1" class="anchored" data-anchor-id="intuition-for-c"><span class="header-section-number">9.8.1</span> Intuition for <span class="math inline">\(C\)</span></h3>
+<p>A <strong>large <span class="math inline">\(C\)</span></strong> penalizes violations strongly and pushes the model to fit training observations more aggressively.</p>
+<p>A <strong>small <span class="math inline">\(C\)</span></strong> allows more violations in exchange for a wider, more regularized margin.</p>
+<p>Thus,</p>
+<p><span class="math display">\[
+C\uparrow
+\Rightarrow
+\text{less tolerance for violations},
+\]</span></p>
+<p>while</p>
+<p><span class="math display">\[
+C\downarrow
+\Rightarrow
+\text{stronger regularization}.
+\]</span></p>
+<p>The exact effect depends on the data and kernel.</p>
 </section>
 </section>
-<section id="python-implementation" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">9.5</span> Python Implementation</h2>
-<section id="scaling" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="scaling"><span class="header-section-number">9.5.1</span> Scaling</h3>
+<section id="hinge-loss" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="hinge-loss"><span class="header-section-number">9.9</span> Hinge Loss</h2>
+<p>Soft-margin classification can also be understood through hinge loss:</p>
+<p><span class="math display">\[
+L_{\text{hinge}}
+=
+\max(0,1-yf(x)).
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+f(x)=w^\top x+b.
+\]</span></p>
+<p>If an observation is correctly classified and sufficiently far beyond the margin, hinge loss is zero.</p>
+<p>Observations inside the margin or on the wrong side incur loss.</p>
+<div id="cell-fig-hinge-loss" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>margin <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">400</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>hinge <span class="op">=</span> np.maximum(<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span> margin)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.plot(margin, hinge)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Signed margin: y f(x)"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Hinge loss"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Hinge Loss"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-hinge-loss" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Piecewise hinge-loss curve plotted against signed margin. Loss decreases linearly for margins below one and becomes zero once the signed margin reaches or exceeds one, marked by a vertical reference line.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hinge-loss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-hinge-loss-output-1.png" alt="Piecewise hinge-loss curve plotted against signed margin. Loss decreases linearly for margins below one and becomes zero once the signed margin reaches or exceeds one, marked by a vertical reference line." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hinge-loss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.2: Hinge loss becomes zero once the signed margin reaches one.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="svc" class="level3" data-number="9.5.2">
-<h3 data-number="9.5.2" class="anchored" data-anchor-id="svc"><span class="header-section-number">9.5.2</span> SVC</h3>
+<section id="why-scaling-matters" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="why-scaling-matters"><span class="header-section-number">9.10</span> Why Scaling Matters</h2>
+<p>SVM geometry depends on distances and inner products.</p>
+<p>Suppose one feature ranges from 0 to 1 and another from 0 to 100,000. Without scaling, the larger-scale feature can dominate the geometry.</p>
+<p>Standardization,</p>
+<p><span class="math display">\[
+z_j=
+\frac{x_j-\mu_{j,\text{train}}}
+{\sigma_{j,\text{train}}},
+\]</span></p>
+<p>places features on more comparable scales.</p>
+<p>As in earlier chapters, scaling parameters must be learned from training data.</p>
 </section>
-<section id="hyperparameter-tuning" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">9.5.3</span> Hyperparameter Tuning</h3>
+<section id="leakage-safe-svm-pipeline" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="leakage-safe-svm-pipeline"><span class="header-section-number">9.11</span> Leakage-Safe SVM Pipeline</h2>
+<div id="0d534f29" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.data</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (data.target <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)  <span class="co"># malignant = 1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>svm_linear <span class="op">=</span> Pipeline([</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"svc"</span>, SVC(kernel<span class="op">=</span><span class="st">"linear"</span>, C<span class="op">=</span><span class="fl">1.0</span>))</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>svm_linear.fit(X_train, y_train)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>decision_scores <span class="op">=</span> svm_linear.decision_function(X_test)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>linear_auc <span class="op">=</span> roc_auc_score(y_test, decision_scores)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>linear_auc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>np.float64(0.9928721174004193)</code></pre>
+</div>
+</div>
+<p>Notice that ROC-AUC can use the decision scores. We do not need calibrated probabilities merely to evaluate ranking.</p>
 </section>
-<section id="probability-estimates" class="level3" data-number="9.5.4">
-<h3 data-number="9.5.4" class="anchored" data-anchor-id="probability-estimates"><span class="header-section-number">9.5.4</span> Probability Estimates</h3>
+<section id="the-decision-function-is-not-a-probability" class="level2" data-number="9.12">
+<h2 data-number="9.12" class="anchored" data-anchor-id="the-decision-function-is-not-a-probability"><span class="header-section-number">9.12</span> The Decision Function Is Not a Probability</h2>
+<p>An SVM naturally produces a signed decision score:</p>
+<p><span class="math display">\[
+f(x)=w^\top x+b
+\]</span></p>
+<p>for the linear case.</p>
+<p>The sign indicates the predicted side of the boundary, while magnitude relates to geometric position relative to the boundary under the model.</p>
+<p>But</p>
+<p><span class="math display">\[
+f(x)=2.1
+\]</span></p>
+<p>does <strong>not</strong> mean a 210% probability or a 0.21 probability.</p>
+<p>If probability estimates are requested from <code>SVC</code>, additional probability estimation is performed and adds computational cost <span class="citation" data-cites="sklearnSVM2026">(<a href="../references.html#ref-sklearnSVM2026" role="doc-biblioref">scikit-learn developers 2026</a>)</span>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Score ≠ Probability
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not interpret <code>decision_function()</code> output as a probability.</p>
+<p>When calibrated probabilities are required for decisions, evaluate their calibration explicitly.</p>
+</div>
+</div>
+</section>
+<section id="when-a-straight-boundary-is-not-enough" class="level2" data-number="9.13">
+<h2 data-number="9.13" class="anchored" data-anchor-id="when-a-straight-boundary-is-not-enough"><span class="header-section-number">9.13</span> When a Straight Boundary Is Not Enough</h2>
+<p>Consider a dataset in which one class forms an inner region and another surrounds it.</p>
+<p>No straight line can separate the classes well in the original two-dimensional space.</p>
+<div id="cell-fig-circles" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X_circle, y_circle <span class="op">=</span> make_circles(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    factor<span class="op">=</span><span class="fl">0.35</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    noise<span class="op">=</span><span class="fl">0.08</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    X_circle[:, <span class="dv">0</span>],</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    X_circle[:, <span class="dv">1</span>],</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y_circle,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.8</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"A Nonlinear Classification Problem"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-circles" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot of two classes arranged as noisy concentric circles. Because one class surrounds the other, no single straight line can separate the classes in the original two-dimensional representation.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-circles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-circles-output-1.png" alt="Scatterplot of two classes arranged as noisy concentric circles. Because one class surrounds the other, no single straight line can separate the classes in the original two-dimensional representation." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-circles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3: Some classification problems are not linearly separable in their original representation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>One possibility is to construct nonlinear features explicitly.</p>
+<p>For example,</p>
+<p><span class="math display">\[
+z=x_1^2+x_2^2.
+\]</span></p>
+<p>In the transformed representation, the classes may become much easier to separate.</p>
+<p>This leads to one of the central ideas in machine learning: <strong>representation can change difficulty</strong>.</p>
+</section>
+<section id="feature-maps" class="level2" data-number="9.14">
+<h2 data-number="9.14" class="anchored" data-anchor-id="feature-maps"><span class="header-section-number">9.14</span> Feature Maps</h2>
+<p>Suppose we map an observation through</p>
+<p><span class="math display">\[
+\phi(x).
+\]</span></p>
+<p>A linear classifier in the transformed feature space has the form</p>
+<p><span class="math display">\[
+f(x)=w^\top\phi(x)+b.
+\]</span></p>
+<p>The transformed space may be much higher-dimensional than the original one.</p>
+<p>Computing <span class="math inline">\(\phi(x)\)</span> explicitly can be expensive.</p>
+</section>
+<section id="the-kernel-trick" class="level2" data-number="9.15">
+<h2 data-number="9.15" class="anchored" data-anchor-id="the-kernel-trick"><span class="header-section-number">9.15</span> The Kernel Trick</h2>
+<p>SVM optimization depends heavily on inner products between observations.</p>
+<p>A kernel function computes</p>
+<p><span class="math display">\[
+K(x_i,x_j)
+=
+\langle
+\phi(x_i),
+\phi(x_j)
+\rangle
+\]</span></p>
+<p>without requiring us to explicitly construct every transformed coordinate.</p>
+<p>This is the <strong>kernel trick</strong>, a central idea in kernel methods that allows algorithms to operate through inner products in an implicit feature space <span class="citation" data-cites="scholkopfSmola2002">(<a href="../references.html#ref-scholkopfSmola2002" role="doc-biblioref">Schölkopf and Smola 2002</a>)</span>.</p>
+<p>It allows a linear separator in a transformed feature space to correspond to a nonlinear boundary in the original feature space.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The Important Idea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The kernel does not magically make the data “nonlinear.”</p>
+<p>It changes the similarity representation used by the algorithm so that a linear solution in the induced feature space can represent nonlinear structure in the original space.</p>
+</div>
+</div>
+</section>
+<section id="representation-can-change-the-difficulty-of-the-problem" class="level2" data-number="9.16">
+<h2 data-number="9.16" class="anchored" data-anchor-id="representation-can-change-the-difficulty-of-the-problem"><span class="header-section-number">9.16</span> Representation Can Change the Difficulty of the Problem</h2>
+<p>A classification problem can appear difficult partly because of the coordinates in which it is expressed.</p>
+<p>A transformation</p>
+<p><span class="math display">\[
+x\rightarrow\phi(x)
+\]</span></p>
+<p>can make structure easier to separate.</p>
+<section id="a-simple-feature-map" class="level3" data-number="9.16.1">
+<h3 data-number="9.16.1" class="anchored" data-anchor-id="a-simple-feature-map"><span class="header-section-number">9.16.1</span> A Simple Feature Map</h3>
+<div class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>rng_rep <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>x_rep <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">180</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>y_rep <span class="op">=</span> (np.<span class="bu">abs</span>(x_rep) <span class="op">&gt;</span> <span class="fl">1.4</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>x_rep_noisy <span class="op">=</span> x_rep <span class="op">+</span> rng_rep.normal(scale<span class="op">=</span><span class="fl">0.08</span>, size<span class="op">=</span><span class="bu">len</span>(x_rep))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.5</span>))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    x_rep_noisy,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    np.zeros_like(x_rep_noisy),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y_rep,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">28</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Original feature x"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Original One-Dimensional Representation"</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    x_rep_noisy,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    x_rep_noisy<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>y_rep,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">28</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Transformed Representation"</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-feature-map-svm" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-feature-map-svm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-feature-map-svm-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two related scatterplots showing a nonlinear feature transformation. In the original one-dimensional representation, class membership changes at both ends of the axis; after adding the squared feature, the classes become geometrically easier to separate.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-feature-map-svm-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-feature-map-svm-output-1.png" data-ref-parent="fig-feature-map-svm" alt="Two related scatterplots showing a nonlinear feature transformation. In the original one-dimensional representation, class membership changes at both ends of the axis; after adding the squared feature, the classes become geometrically easier to separate." width="614" height="413" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-feature-map-svm-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) A nonlinear feature map can reveal a simpler geometry than the original representation.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-feature-map-svm-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two related scatterplots showing a nonlinear feature transformation. In the original one-dimensional representation, class membership changes at both ends of the axis; after adding the squared feature, the classes become geometrically easier to separate." width="652" height="449">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-feature-map-svm-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-feature-map-svm-output-2.png" id="fig-feature-map-svm-2" data-ref-parent="fig-feature-map-svm" alt="Two related scatterplots showing a nonlinear feature transformation. In the original one-dimensional representation, class membership changes at both ends of the axis; after adding the squared feature, the classes become geometrically easier to separate." width="652" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-feature-map-svm-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-feature-map-svm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The observations did not change. The geometry available to the learner did.</p>
+</section>
+<section id="kernel-as-an-implicit-representation" class="level3" data-number="9.16.2">
+<h3 data-number="9.16.2" class="anchored" data-anchor-id="kernel-as-an-implicit-representation"><span class="header-section-number">9.16.2</span> Kernel as an Implicit Representation</h3>
+<p>A kernel computes</p>
+<p><span class="math display">\[
+K(x_i,x_j)=\langle\phi(x_i),\phi(x_j)\rangle
+\]</span></p>
+<p>without always constructing ((x)) explicitly.</p>
+<p>Kernel choice is therefore not merely a tuning option. It is an assumption about similarity and geometry.</p>
+<p><span class="math display">\[
+\boxed{\text{Kernel Choice}=\text{Assumption About Representation}}.
+\]</span></p>
+</section>
+<section id="bridge-to-representation-learning" class="level3" data-number="9.16.3">
+<h3 data-number="9.16.3" class="anchored" data-anchor-id="bridge-to-representation-learning"><span class="header-section-number">9.16.3</span> Bridge to Representation Learning</h3>
+<p>Kernel methods motivate the broader progression</p>
+<p><span class="math display">\[
+\text{feature engineering}
+\rightarrow
+\text{kernel-induced representation}
+\rightarrow
+\text{learned representation}.
+\]</span></p>
+<p>Neural networks later learn intermediate representations:</p>
+<p><span class="math display">\[
+x\rightarrow h^{(1)}\rightarrow h^{(2)}\rightarrow\cdots\rightarrow h^{(L)}.
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Is Complexity in the World or in the Representation?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A boundary can look complicated in one coordinate system and simple in another.</p>
+<p>A model never sees reality directly. It sees a representation.</p>
+<p>Part of machine learning is therefore deciding <strong>what geometry the model should be allowed to perceive</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If one kernel strongly outperforms another, do not conclude only that it is “better.” Ask what the result suggests about the geometry and representation of the problem, and whether that advantage persists under resampling and external validation.</p>
+</div>
+</div>
 </section>
 </section>
-<section id="hands-on-practice" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">9.6</span> Hands-On Practice</h2>
-<p>Compare linear and RBF SVMs using cross-validation.</p>
+<section id="common-kernels" class="level2" data-number="9.17">
+<h2 data-number="9.17" class="anchored" data-anchor-id="common-kernels"><span class="header-section-number">9.17</span> Common Kernels</h2>
+<section id="linear-kernel" class="level3" data-number="9.17.1">
+<h3 data-number="9.17.1" class="anchored" data-anchor-id="linear-kernel"><span class="header-section-number">9.17.1</span> Linear Kernel</h3>
+<p><span class="math display">\[
+K(x,z)=x^\top z.
+\]</span></p>
+<p>Useful when a linear boundary is appropriate, especially in high-dimensional settings.</p>
 </section>
-<section id="common-mistakes" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">9.7</span> Common Mistakes</h2>
+<section id="polynomial-kernel" class="level3" data-number="9.17.2">
+<h3 data-number="9.17.2" class="anchored" data-anchor-id="polynomial-kernel"><span class="header-section-number">9.17.2</span> Polynomial Kernel</h3>
+<p><span class="math display">\[
+K(x,z)
+=
+(\gamma x^\top z+r)^d.
+\]</span></p>
+<p>The degree <span class="math inline">\(d\)</span> controls polynomial complexity.</p>
+</section>
+<section id="radial-basis-function-kernel" class="level3" data-number="9.17.3">
+<h3 data-number="9.17.3" class="anchored" data-anchor-id="radial-basis-function-kernel"><span class="header-section-number">9.17.3</span> Radial Basis Function Kernel</h3>
+<p>The RBF kernel is</p>
+<p><span class="math display">\[
+K(x,z)
+=
+\exp\left(-\gamma\|x-z\|^2\right).
+\]</span></p>
+<p>Nearby observations have similarity closer to 1; distant observations have similarity closer to 0.</p>
+</section>
+</section>
+<section id="understanding-gamma" class="level2" data-number="9.18">
+<h2 data-number="9.18" class="anchored" data-anchor-id="understanding-gamma"><span class="header-section-number">9.18</span> Understanding <span class="math inline">\(\gamma\)</span></h2>
+<p>For the RBF kernel, <span class="math inline">\(\gamma\)</span> controls how rapidly similarity decays with distance.</p>
+<p>A <strong>small <span class="math inline">\(\gamma\)</span></strong> gives each observation a broad region of influence and often produces smoother boundaries.</p>
+<p>A <strong>large <span class="math inline">\(\gamma\)</span></strong> gives each observation a narrow region of influence and can create highly flexible boundaries.</p>
+<p>Conceptually,</p>
+<p><span class="math display">\[
+\gamma\uparrow
+\Rightarrow
+\text{more local influence},
+\]</span></p>
+<p>while</p>
+<p><span class="math display">\[
+\gamma\downarrow
+\Rightarrow
+\text{broader influence}.
+\]</span></p>
+<p>The interaction between <span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span> is crucial.</p>
+</section>
+<section id="visual-experiment-the-kernel-changes-the-boundary" class="level2" data-number="9.19">
+<h2 data-number="9.19" class="anchored" data-anchor-id="visual-experiment-the-kernel-changes-the-boundary"><span class="header-section-number">9.19</span> Visual Experiment: The Kernel Changes the Boundary</h2>
+<div class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>linear_circle <span class="op">=</span> make_pipeline(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    SVC(kernel<span class="op">=</span><span class="st">"linear"</span>, C<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>rbf_circle <span class="op">=</span> make_pipeline(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>, C<span class="op">=</span><span class="fl">1.0</span>, gamma<span class="op">=</span><span class="st">"scale"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>linear_circle.fit(X_circle, y_circle)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>rbf_circle.fit(X_circle, y_circle)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>x1_min, x1_max <span class="op">=</span> X_circle[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="fl">0.4</span>, X_circle[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="fl">0.4</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>x2_min, x2_max <span class="op">=</span> X_circle[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="fl">0.4</span>, X_circle[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="fl">0.4</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>xx, yy <span class="op">=</span> np.meshgrid(</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    np.linspace(x1_min, x1_max, <span class="dv">350</span>),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    np.linspace(x2_min, x2_max, <span class="dv">350</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.c_[xx.ravel(), yy.ravel()]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fitted_model, title <span class="kw">in</span> [</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    (linear_circle, <span class="st">"Linear SVM"</span>),</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    (rbf_circle, <span class="st">"RBF-Kernel SVM"</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>]:</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    zz <span class="op">=</span> fitted_model.decision_function(grid).reshape(xx.shape)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    plt.contourf(xx, yy, zz <span class="op">&gt;</span> <span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, cmap<span class="op">=</span><span class="st">"coolwarm"</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    plt.contour(xx, yy, zz, levels<span class="op">=</span>[<span class="dv">0</span>], linewidths<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        X_circle[:, <span class="dv">0</span>],</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>        X_circle[:, <span class="dv">1</span>],</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>y_circle,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>        edgecolors<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">30</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-kernel-boundaries" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kernel-boundaries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-kernel-boundaries-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Comparison of decision boundaries for linear and radial-basis-function SVMs on concentric-circle data. The linear model cannot follow the circular class structure, whereas the RBF model forms a curved boundary that separates the inner and outer classes.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-kernel-boundaries-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-kernel-boundaries-output-1.png" data-ref-parent="fig-kernel-boundaries" alt="Comparison of decision boundaries for linear and radial-basis-function SVMs on concentric-circle data. The linear model cannot follow the circular class structure, whereas the RBF model forms a curved boundary that separates the inner and outer classes." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-kernel-boundaries-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) A linear kernel cannot represent the circular structure, while an RBF kernel can create a nonlinear decision boundary.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-kernel-boundaries-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Comparison of decision boundaries for linear and radial-basis-function SVMs on concentric-circle data. The linear model cannot follow the circular class structure, whereas the RBF model forms a curved boundary that separates the inner and outer classes." width="600" height="523">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-kernel-boundaries-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-kernel-boundaries-output-2.png" id="fig-kernel-boundaries-2" data-ref-parent="fig-kernel-boundaries" alt="Comparison of decision boundaries for linear and radial-basis-function SVMs on concentric-circle data. The linear model cannot follow the circular class structure, whereas the RBF model forms a curved boundary that separates the inner and outer classes." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-kernel-boundaries-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-kernel-boundaries-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.5
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The RBF model does not prove that the underlying scientific mechanism is radial. It demonstrates that this similarity representation can fit the observed decision structure.</p>
+</section>
+<section id="visual-experiment-c-and-gamma" class="level2" data-number="9.20">
+<h2 data-number="9.20" class="anchored" data-anchor-id="visual-experiment-c-and-gamma"><span class="header-section-number">9.20</span> Visual Experiment: <span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span></h2>
+<div class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> [</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    (<span class="fl">0.1</span>, <span class="fl">0.5</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">100</span>, <span class="fl">0.5</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="fl">0.05</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">20</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> C_value, gamma_value <span class="kw">in</span> settings:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> make_pipeline(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        StandardScaler(),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>, C<span class="op">=</span>C_value, gamma<span class="op">=</span>gamma_value)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    m.fit(X_circle, y_circle)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    zz <span class="op">=</span> m.decision_function(grid).reshape(xx.shape)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    plt.contourf(xx, yy, zz <span class="op">&gt;</span> <span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, cmap<span class="op">=</span><span class="st">"coolwarm"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    plt.contour(xx, yy, zz, levels<span class="op">=</span>[<span class="dv">0</span>], linewidths<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        X_circle[:, <span class="dv">0</span>],</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        X_circle[:, <span class="dv">1</span>],</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>y_circle,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        edgecolors<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">28</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"RBF SVM: C=</span><span class="sc">{</span>C_value<span class="sc">}</span><span class="ss">, gamma=</span><span class="sc">{</span>gamma_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-c-gamma" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-c-gamma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-c-gamma-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-c-gamma-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-c-gamma-output-1.png" data-ref-parent="fig-c-gamma" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-c-gamma-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) C and gamma jointly control the flexibility of an RBF SVM.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-c-gamma-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-c-gamma-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-c-gamma-output-2.png" id="fig-c-gamma-2" data-ref-parent="fig-c-gamma" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-c-gamma-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-c-gamma-3" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-c-gamma-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-c-gamma-output-3.png" id="fig-c-gamma-3" data-ref-parent="fig-c-gamma" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-c-gamma-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-c-gamma-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-c-gamma-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-support-vector-machines_files/figure-html/fig-c-gamma-output-4.png" id="fig-c-gamma-4" data-ref-parent="fig-c-gamma" alt="Four RBF-SVM decision-boundary plots using different combinations of C and gamma. Lower values produce smoother, less flexible boundaries, while larger values can produce tighter and more locally responsive boundaries around the training observations." width="600" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-c-gamma-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-c-gamma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.6
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Do not choose these values by looking at final test performance repeatedly. Hyperparameter selection belongs inside the resampling workflow developed fully in Chapter 16.</p>
+</section>
+<section id="compare-logistic-regression-linear-svm-and-rbf-svm" class="level2" data-number="9.21">
+<h2 data-number="9.21" class="anchored" data-anchor-id="compare-logistic-regression-linear-svm-and-rbf-svm"><span class="header-section-number">9.21</span> Compare Logistic Regression, Linear SVM, and RBF SVM</h2>
+<div id="dae7e856" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic regression"</span>: Pipeline([</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Linear SVM"</span>: Pipeline([</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>, SVC(kernel<span class="op">=</span><span class="st">"linear"</span>, C<span class="op">=</span><span class="fl">1.0</span>))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RBF SVM"</span>: Pipeline([</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>, SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>, C<span class="op">=</span><span class="fl">1.0</span>, gamma<span class="op">=</span><span class="st">"scale"</span>))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> {}</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, m <span class="kw">in</span> models.items():</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    m.fit(X_train, y_train)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(m[<span class="op">-</span><span class="dv">1</span>], <span class="st">"predict_proba"</span>):</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> m.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> m.decision_function(X_test)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    comparison[name] <span class="op">=</span> roc_auc_score(y_test, score)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>{'Logistic regression': np.float64(0.9962264150943396),
+ 'Linear SVM': np.float64(0.9928721174004193),
+ 'RBF SVM': np.float64(0.9966457023060796)}</code></pre>
+</div>
+</div>
+<p>A model family should not be selected because it sounds more sophisticated. It should earn its complexity through appropriate validation and practical usefulness.</p>
+</section>
+<section id="computer-vision-learning-experience-an-rbf-svm-on-handwritten-digits" class="level2" data-number="9.22">
+<h2 data-number="9.22" class="anchored" data-anchor-id="computer-vision-learning-experience-an-rbf-svm-on-handwritten-digits"><span class="header-section-number">9.22</span> Computer Vision Learning Experience: An RBF SVM on Handwritten Digits</h2>
+<p>Support Vector Machines have a natural connection to computer vision because image representations can be high dimensional and class boundaries can be nonlinear.</p>
+<p>We can revisit the handwritten-digits workload with an RBF-kernel SVM.</p>
+<div id="7e05302d" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>digits_svm_cv <span class="op">=</span> load_digits()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>X_svm_cv <span class="op">=</span> digits_svm_cv.data</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>y_svm_cv <span class="op">=</span> digits_svm_cv.target</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>X_train_svm_cv, X_test_svm_cv, y_train_svm_cv, y_test_svm_cv <span class="op">=</span> train_test_split(</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    X_svm_cv,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    y_svm_cv,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y_svm_cv</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>vision_svm <span class="op">=</span> Pipeline([</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        SVC(</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>            kernel<span class="op">=</span><span class="st">"rbf"</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>            C<span class="op">=</span><span class="fl">3.0</span>,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>            gamma<span class="op">=</span><span class="st">"scale"</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>vision_svm.fit(</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    X_train_svm_cv,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    y_train_svm_cv</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>pred_svm_cv <span class="op">=</span> vision_svm.predict(</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    X_test_svm_cv</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>accuracy_score(</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    y_test_svm_cv,</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    pred_svm_cv</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>0.98</code></pre>
+</div>
+</div>
+<section id="what-did-the-kernel-add" class="level3" data-number="9.22.1">
+<h3 data-number="9.22.1" class="anchored" data-anchor-id="what-did-the-kernel-add"><span class="header-section-number">9.22.1</span> What Did the Kernel Add?</h3>
+<p>The input remains a flattened (64)-pixel representation. The RBF kernel changes the geometry in which similarity is evaluated.</p>
+<p>That makes this an important comparison with Chapter 7:</p>
 <ul>
-<li>Failing to scale features.</li>
-<li>Tuning on the test set.</li>
-<li>Using complex kernels without justification.</li>
-<li>Treating SVM scores as calibrated probabilities.</li>
+<li>Chapter 7 used a linear logistic-regression decision structure;</li>
+<li>this chapter allows a nonlinear kernel boundary;</li>
+<li>Chapter 13 will later introduce <strong>learned</strong> representations.</li>
+</ul>
+<p>The learning progression is therefore:</p>
+<p><span class="math display">\[
+\text{Flattened Pixels}
+\rightarrow
+\text{Linear Classifier}
+\rightarrow
+\text{Kernel Geometry}
+\rightarrow
+\text{Learned Visual Representation}.
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the RBF SVM outperforms logistic regression, the evidence supports a difference in predictive performance under this benchmark and validation design.</p>
+<p>It does not prove that the RBF representation captures the “true” geometry of handwritten digits.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="computational-considerations" class="level2" data-number="9.23">
+<h2 data-number="9.23" class="anchored" data-anchor-id="computational-considerations"><span class="header-section-number">9.23</span> Computational Considerations</h2>
+<p>Kernel SVMs can become computationally demanding as the number of observations grows because training depends on relationships among training cases.</p>
+<p>For large datasets, alternatives may include:</p>
+<ul>
+<li>linear SVM formulations;</li>
+<li>stochastic optimization;</li>
+<li>approximate kernel methods;</li>
+<li>tree ensembles;</li>
+<li>neural networks;</li>
+<li>other scalable estimators.</li>
+</ul>
+<p>The right model depends on dimensionality, sample size, sparsity, deployment requirements, and validation evidence.</p>
+</section>
+<section id="svm-for-regression" class="level2" data-number="9.24">
+<h2 data-number="9.24" class="anchored" data-anchor-id="svm-for-regression"><span class="header-section-number">9.24</span> SVM for Regression</h2>
+<p>Support Vector Regression (SVR) extends margin-based reasoning to continuous outcomes.</p>
+<p>Instead of demanding that predictions match every observation exactly, SVR can use an <span class="math inline">\(\epsilon\)</span>-insensitive region.</p>
+<p>Conceptually, errors within an <span class="math inline">\(\epsilon\)</span>-tube are not penalized:</p>
+<p><span class="math display">\[
+L_\epsilon(y,f(x))
+=
+\max(0,|y-f(x)|-\epsilon).
+\]</span></p>
+<p>This produces a regression formulation focused on deviations outside a tolerance band.</p>
+<div id="fd77891f" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVR</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>diabetes <span class="op">=</span> load_diabetes(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Xr <span class="op">=</span> diabetes.data</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>yr <span class="op">=</span> diabetes.target</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>Xr_train, Xr_test, yr_train, yr_test <span class="op">=</span> train_test_split(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    Xr, yr, test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>svr <span class="op">=</span> Pipeline([</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, SVR(kernel<span class="op">=</span><span class="st">"rbf"</span>, C<span class="op">=</span><span class="dv">10</span>, epsilon<span class="op">=</span><span class="fl">0.1</span>))</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>svr.fit(Xr_train, yr_train)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>svr_pred <span class="op">=</span> svr.predict(Xr_test)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(yr_test, svr_pred))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>np.float64(51.91511845782987)</code></pre>
+</div>
+</div>
+<p>The values above are demonstrations, not tuned recommendations.</p>
+</section>
+<section id="three-tracks" class="level2" data-number="9.25">
+<h2 data-number="9.25" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">9.25</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="9.25.1">
+<h3 data-number="9.25.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">9.25.1</span> Health Track</h3>
+<p>An SVM might classify a health outcome using many correlated measurements or high-dimensional features. Scaling, calibration, external validation, subgroup performance, and clinical action remain more important than the sophistication of the kernel.</p>
+</section>
+<section id="education-track" class="level3" data-number="9.25.2">
+<h3 data-number="9.25.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">9.25.2</span> Education Track</h3>
+<p>An SVM may identify complex boundaries among academic, engagement, and institutional features. A nonlinear boundary can improve prediction without yielding an easily interpretable explanation of why a student experiences an outcome.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="9.25.3">
+<h3 data-number="9.25.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">9.25.3</span> Open ML Benchmark Track</h3>
+<p>Benchmark datasets allow controlled experiments with class overlap, nonlinear geometry, scaling, <span class="math inline">\(C\)</span>, <span class="math inline">\(\gamma\)</span>, kernels, and support-vector counts.</p>
+<p>This track is especially useful for understanding <strong>algorithmic geometry</strong>.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-change-the-representation-change-the-problem" class="level2" data-number="9.26">
+<h2 data-number="9.26" class="anchored" data-anchor-id="beyond-the-algorithm-change-the-representation-change-the-problem"><span class="header-section-number">9.26</span> Beyond the Algorithm: Change the Representation, Change the Problem</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A Problem Can Look Different in Another Space
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Two classes may appear hopelessly intertwined in the variables we initially observe.</p>
+<p>A transformation may reveal structure.</p>
+<p>This raises a broader intellectual question:</p>
+<p><strong>When we say a problem is difficult, are we describing the phenomenon—or our current representation of it?</strong></p>
+<p>Machine learning repeatedly teaches us that representation matters.</p>
+<p>A useful coordinate system can make a complex pattern simple. A poor representation can make a simple phenomenon look complicated.</p>
+<p>But representation also changes interpretation.</p>
+<p>A high-dimensional kernel space may improve prediction while making the learned reasoning harder to explain in substantive terms.</p>
+<p>So the goal is not:</p>
+<blockquote class="blockquote">
+<p>“Transform until the model wins.”</p>
+</blockquote>
+<p>The deeper goal is:</p>
+<blockquote class="blockquote">
+<p><strong>Choose representations that improve useful generalization while remaining defensible for the scientific or operational purpose.</strong></p>
+</blockquote>
+<p>The geometry we choose influences the patterns the algorithm is capable of seeing.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-the-kernel-made-it-true" class="level2" data-number="9.27">
+<h2 data-number="9.27" class="anchored" data-anchor-id="ai-pair-programmer-the-kernel-made-it-true"><span class="header-section-number">9.27</span> AI Pair Programmer: The Kernel Made It True</h2>
+<p>Ask an AI assistant to interpret an RBF SVM that substantially outperforms logistic regression.</p>
+<p>Give it this claim:</p>
+<blockquote class="blockquote">
+<p>“Because the RBF SVM has higher test AUC, the true relationship between the predictors and outcome must be nonlinear and the RBF kernel has discovered the underlying mechanism.”</p>
+</blockquote>
+<p>Audit the response.</p>
+<p>A strong critique should distinguish:</p>
+<ul>
+<li>predictive performance from mechanism;</li>
+<li>nonlinear predictive structure from causal structure;</li>
+<li>kernel representation from scientific theory;</li>
+<li>one test sample from external validity;</li>
+<li>hyperparameter selection from final evaluation;</li>
+<li>discrimination from calibration.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">9.8</span> Knowledge Check</h2>
+<section id="hands-on-lab-from-hyperplane-to-kernel" class="level2" data-number="9.28">
+<h2 data-number="9.28" class="anchored" data-anchor-id="hands-on-lab-from-hyperplane-to-kernel"><span class="header-section-number">9.28</span> Hands-On Lab: From Hyperplane to Kernel</h2>
+<p>Using a classification dataset:</p>
 <ol type="1">
-<li>What is a support vector?</li>
-<li>What does the margin represent?</li>
-<li>Why is scaling important?</li>
-<li>What does the kernel trick accomplish?</li>
+<li>complete the Problem Framing Canvas;</li>
+<li>complete the Feature Ledger;</li>
+<li>establish a baseline;</li>
+<li>fit logistic regression;</li>
+<li>fit a linear SVM inside a scaling pipeline;</li>
+<li>compare held-out discrimination;</li>
+<li>inspect the number of support vectors;</li>
+<li>fit an RBF SVM;</li>
+<li>examine several <span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span> combinations using training/resampling data;</li>
+<li>compare linear and nonlinear decision behavior;</li>
+<li>evaluate whether probabilities are actually needed;</li>
+<li>if probabilities are used, inspect calibration;</li>
+<li>compare SVM results with the tree/forest results from Chapter 8;</li>
+<li>document computational cost;</li>
+<li>state what the model cannot establish scientifically.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">9.9</span> Real-World Case Study</h2>
-<section id="nonlinear-classification" class="level3" data-number="9.9.1">
-<h3 data-number="9.9.1" class="anchored" data-anchor-id="nonlinear-classification"><span class="header-section-number">9.9.1</span> Nonlinear Classification</h3>
-<p>Benchmark SVM against logistic regression and a tree-based method.</p>
+<section id="practitioner-track" class="level2" data-number="9.29">
+<h2 data-number="9.29" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">9.29</span> Practitioner Track</h2>
+<p>A practitioner should be able to build scaling-safe SVM pipelines, choose between linear and kernel formulations, understand <span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span>, evaluate decision scores, and recognize computational constraints.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="9.30">
+<h2 data-number="9.30" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">9.30</span> Researcher Track</h2>
+<p>A researcher should additionally justify the representation, separate predictive geometry from scientific mechanism, validate hyperparameters without test contamination, evaluate calibration when probabilities matter, and examine generalization across relevant populations.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">9.10</span> Professor’s Challenge</h2>
-<p>An RBF SVM wins cross-validation by a small margin but requires much more computation. Is the gain meaningful?</p>
+<section id="research-studio" class="level2" data-number="9.31">
+<h2 data-number="9.31" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">9.31</span> Research Studio</h2>
+<p>Design a study in which SVMs are plausible because of high dimensionality or nonlinear structure.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>research or operational problem;</li>
+<li>target and prediction time;</li>
+<li>baseline;</li>
+<li>feature representation;</li>
+<li>reason scaling matters;</li>
+<li>linear SVM;</li>
+<li>candidate kernel;</li>
+<li><span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span> search strategy;</li>
+<li>validation design;</li>
+<li>discrimination metric;</li>
+<li>calibration requirement;</li>
+<li>computational constraints;</li>
+<li>comparison model;</li>
+<li>interpretive limitations;</li>
+<li>potential scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">9.11</span> Research Extension</h2>
-<p>Study performance, calibration, and computational tradeoffs across kernels.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="9.12">
-<h2 data-number="9.12" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">9.12</span> Reproducibility Check</h2>
-<p>Document scaling, search spaces, validation folds, seeds, and final untouched test evaluation.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="9.13">
-<h2 data-number="9.13" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">9.13</span> Key Takeaways</h2>
+<section id="professors-challenge-the-perfect-kernel" class="level2" data-number="9.32">
+<h2 data-number="9.32" class="anchored" data-anchor-id="professors-challenge-the-perfect-kernel"><span class="header-section-number">9.32</span> Professor’s Challenge: The Perfect Kernel</h2>
+<p>A research team tries 40 combinations of <span class="math inline">\(C\)</span> and <span class="math inline">\(\gamma\)</span> on the test set. They select the combination with the highest test AUC and report that AUC as final performance.</p>
+<p>They then write:</p>
+<blockquote class="blockquote">
+<p>“The RBF SVM significantly outperformed logistic regression, proving that the true data-generating process is nonlinear. The most difficult observations are the support vectors, which represent the most scientifically important cases.”</p>
+</blockquote>
+<p>Critique:</p>
 <ul>
-<li>SVMs connect geometry and optimization.</li>
-<li>Kernel methods enable nonlinear decision boundaries.</li>
-<li>Proper scaling and validation are essential.</li>
+<li>test-set tuning;</li>
+<li>optimistic performance estimation;</li>
+<li>the meaning of “significantly”;</li>
+<li>nonlinear prediction versus data-generating mechanism;</li>
+<li>support vectors versus scientific importance;</li>
+<li>scaling;</li>
+<li>calibration;</li>
+<li>uncertainty;</li>
+<li>external validation;</li>
+<li>computational reproducibility.</li>
+</ul>
+<p>Redesign the experiment using nested or otherwise properly separated model selection and final evaluation.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="9.33">
+<h2 data-number="9.33" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">9.33</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is a hyperplane?</li>
+<li>What is the SVM margin?</li>
+<li>Why does minimizing <span class="math inline">\(\|w\|\)</span> relate to maximizing margin?</li>
+<li>What are support vectors?</li>
+<li>Why is hard-margin classification often unrealistic?</li>
+<li>What do slack variables represent?</li>
+<li>What does <span class="math inline">\(C\)</span> control?</li>
+<li>What is hinge loss?</li>
+<li>Why does feature scaling matter for SVMs?</li>
+<li>Why is an SVM decision score not automatically a probability?</li>
+<li>What is a feature map?</li>
+<li>What does a kernel compute?</li>
+<li>What is the kernel trick?</li>
+<li>How does the RBF kernel use distance?</li>
+<li>What does <span class="math inline">\(\gamma\)</span> control?</li>
+<li>Why can large <span class="math inline">\(\gamma\)</span> create highly flexible boundaries?</li>
+<li>What is SVR’s <span class="math inline">\(\epsilon\)</span>-insensitive idea?</li>
+<li>Why does better RBF performance not prove the true scientific mechanism is nonlinear?</li>
+<li>How can nonlinear transformation simplify a classification problem?</li>
+<li>What does a kernel compute conceptually?</li>
+<li>Why is kernel choice a representational assumption?</li>
+<li>How do kernels bridge classical feature engineering and neural representation learning?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="9.34">
+<h2 data-number="9.34" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">9.34</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>problem specification;</li>
+<li>feature ledger;</li>
+<li>preprocessing/scaling pipeline;</li>
+<li>split and resampling design;</li>
+<li>baseline;</li>
+<li>kernel;</li>
+<li><span class="math inline">\(C\)</span>;</li>
+<li><span class="math inline">\(\gamma\)</span> where applicable;</li>
+<li>polynomial degree where applicable;</li>
+<li>class weighting if used;</li>
+<li>probability-estimation method if used;</li>
+<li>calibration assessment;</li>
+<li>support-vector counts;</li>
+<li>evaluation metrics;</li>
+<li>computational environment;</li>
+<li>random seeds where applicable;</li>
+<li>package versions;</li>
+<li>all model-selection boundaries;</li>
+<li>code generating every result.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="9.35">
+<h2 data-number="9.35" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">9.35</span> Key Takeaways</h2>
+<ul>
+<li>SVMs frame classification as a geometric separation problem.</li>
+<li>The maximum-margin principle favors boundaries separated from nearby observations.</li>
+<li>Support vectors play a special role in defining the boundary.</li>
+<li>Soft margins balance margin width against violations.</li>
+<li><span class="math inline">\(C\)</span> controls the strength of the penalty for violations.</li>
+<li>Hinge loss penalizes observations that fail to achieve sufficient signed margin.</li>
+<li>Scaling is essential because SVM geometry depends on feature representation.</li>
+<li>Kernels allow nonlinear decision boundaries through implicit feature-space similarities.</li>
+<li><span class="math inline">\(\gamma\)</span> controls the locality of RBF influence.</li>
+<li>Decision scores are not automatically probabilities.</li>
+<li>Kernel SVMs can be computationally expensive on large datasets.</li>
+<li>SVR extends margin-based reasoning to continuous outcomes.</li>
+<li>Better nonlinear prediction does not establish a nonlinear causal mechanism.</li>
+<li>Changing the representation can change the apparent difficulty of a problem.</li>
+<li>Problem difficulty depends partly on representation.</li>
+<li>Kernels define similarity in implicit feature spaces.</li>
+<li>Kernel choice expresses an assumption about geometry.</li>
+<li>Kernel methods provide a bridge to learned representations.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cortesVapnik1995" class="csl-entry" role="listitem">
+Cortes, Corinna, and Vladimir Vapnik. 1995. <span>“Support-Vector Networks.”</span> <em>Machine Learning</em> 20: 273–97. <a href="https://doi.org/10.1007/BF00994018">https://doi.org/10.1007/BF00994018</a>.
+</div>
+<div id="ref-scholkopfSmola2002" class="csl-entry" role="listitem">
+Schölkopf, Bernhard, and Alexander J. Smola. 2002. <em>Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond</em>. Cambridge, MA: MIT Press.
+</div>
+<div id="ref-sklearnSVM2026" class="csl-entry" role="listitem">
+scikit-learn developers. 2026. <span>“Support Vector Machines.”</span> <a href="https://scikit-learn.org/stable/modules/svm.html">https://scikit-learn.org/stable/modules/svm.html</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -565,7 +1790,7 @@ y_i(w^Tx_i+b) \ge 1
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -894,13 +2119,13 @@ y_i(w^Tx_i+b) \ge 1
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-03-supervised/08-trees-random-forests.html" class="pagination-link" aria-label="Decision Trees and Random Forests">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span>
+      <a href="../part-03-supervised/08-trees-random-forests.html" class="pagination-link" aria-label="Decision Trees and Random Forests: Learning by Partitioning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-03-supervised/10-ensemble-learning.html" class="pagination-link" aria-label="Ensemble Learning and Gradient Boosting">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-03-supervised/10-ensemble-learning.html" class="pagination-link" aria-label="Ensemble Learning: From Many Models to Stronger Predictions">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

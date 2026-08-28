@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; From Research Question to Machine Learning Problem – Machine Learning Using Python</title>
+<title>4&nbsp; Framing Machine Learning Problems – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html">Part II — The Machine Learning Workflow</a></li><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html">Part II — The Machine Learning Workflow</a></li><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +183,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +199,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +271,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +312,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +335,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +364,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,53 +427,62 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">4.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">4.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">4.3</span> Real-World Problem</a></li>
-  <li><a href="#problem-formulation" id="toc-problem-formulation" class="nav-link" data-scroll-target="#problem-formulation"><span class="header-section-number">4.4</span> Problem Formulation</a>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">4.2</span> Why This Matters</a>
   <ul class="collapse">
-  <li><a href="#start-with-the-decision" id="toc-start-with-the-decision" class="nav-link" data-scroll-target="#start-with-the-decision"><span class="header-section-number">4.4.1</span> Start With the Decision</a></li>
-  <li><a href="#define-the-unit-of-analysis" id="toc-define-the-unit-of-analysis" class="nav-link" data-scroll-target="#define-the-unit-of-analysis"><span class="header-section-number">4.4.2</span> Define the Unit of Analysis</a></li>
-  <li><a href="#define-the-target" id="toc-define-the-target" class="nav-link" data-scroll-target="#define-the-target"><span class="header-section-number">4.4.3</span> Define the Target</a></li>
-  <li><a href="#define-the-prediction-time" id="toc-define-the-prediction-time" class="nav-link" data-scroll-target="#define-the-prediction-time"><span class="header-section-number">4.4.4</span> Define the Prediction Time</a></li>
-  <li><a href="#identify-available-features" id="toc-identify-available-features" class="nav-link" data-scroll-target="#identify-available-features"><span class="header-section-number">4.4.5</span> Identify Available Features</a></li>
-  <li><a href="#establish-a-baseline" id="toc-establish-a-baseline" class="nav-link" data-scroll-target="#establish-a-baseline"><span class="header-section-number">4.4.6</span> Establish a Baseline</a></li>
-  <li><a href="#choose-evaluation-criteria" id="toc-choose-evaluation-criteria" class="nav-link" data-scroll-target="#choose-evaluation-criteria"><span class="header-section-number">4.4.7</span> Choose Evaluation Criteria</a></li>
-  <li><a href="#consider-consequences-of-errors" id="toc-consider-consequences-of-errors" class="nav-link" data-scroll-target="#consider-consequences-of-errors"><span class="header-section-number">4.4.8</span> Consider Consequences of Errors</a></li>
+  <li><a href="#connection-to-the-foundations" id="toc-connection-to-the-foundations" class="nav-link" data-scroll-target="#connection-to-the-foundations"><span class="header-section-number">4.2.1</span> Connection to the Foundations</a></li>
   </ul></li>
-  <li><a href="#prediction-inference-and-causation" id="toc-prediction-inference-and-causation" class="nav-link" data-scroll-target="#prediction-inference-and-causation"><span class="header-section-number">4.5</span> Prediction, Inference, and Causation</a>
+  <li><a href="#start-with-the-problem-not-the-algorithm" id="toc-start-with-the-problem-not-the-algorithm" class="nav-link" data-scroll-target="#start-with-the-problem-not-the-algorithm"><span class="header-section-number">4.3</span> Start With the Problem, Not the Algorithm</a></li>
+  <li><a href="#a-machine-learning-problem-specification" id="toc-a-machine-learning-problem-specification" class="nav-link" data-scroll-target="#a-machine-learning-problem-specification"><span class="header-section-number">4.4</span> A Machine Learning Problem Specification</a></li>
+  <li><a href="#unit-of-analysis" id="toc-unit-of-analysis" class="nav-link" data-scroll-target="#unit-of-analysis"><span class="header-section-number">4.5</span> Unit of Analysis</a>
   <ul class="collapse">
-  <li><a href="#predictive-questions" id="toc-predictive-questions" class="nav-link" data-scroll-target="#predictive-questions"><span class="header-section-number">4.5.1</span> Predictive Questions</a></li>
-  <li><a href="#explanatory-questions" id="toc-explanatory-questions" class="nav-link" data-scroll-target="#explanatory-questions"><span class="header-section-number">4.5.2</span> Explanatory Questions</a></li>
-  <li><a href="#causal-questions" id="toc-causal-questions" class="nav-link" data-scroll-target="#causal-questions"><span class="header-section-number">4.5.3</span> Causal Questions</a></li>
-  <li><a href="#descriptive-and-exploratory-questions" id="toc-descriptive-and-exploratory-questions" class="nav-link" data-scroll-target="#descriptive-and-exploratory-questions"><span class="header-section-number">4.5.4</span> Descriptive and Exploratory Questions</a></li>
+  <li><a href="#try-it-find-the-unit" id="toc-try-it-find-the-unit" class="nav-link" data-scroll-target="#try-it-find-the-unit"><span class="header-section-number">4.5.1</span> Try It: Find the Unit</a></li>
   </ul></li>
-  <li><a href="#research-design-connection" id="toc-research-design-connection" class="nav-link" data-scroll-target="#research-design-connection"><span class="header-section-number">4.6</span> Research Design Connection</a>
+  <li><a href="#defining-the-target" id="toc-defining-the-target" class="nav-link" data-scroll-target="#defining-the-target"><span class="header-section-number">4.6</span> Defining the Target</a></li>
+  <li><a href="#from-construct-to-operational-target" id="toc-from-construct-to-operational-target" class="nav-link" data-scroll-target="#from-construct-to-operational-target"><span class="header-section-number">4.7</span> From Construct to Operational Target</a>
   <ul class="collapse">
-  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions"><span class="header-section-number">4.6.1</span> Research Questions</a></li>
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">4.6.2</span> Hypotheses</a></li>
-  <li><a href="#theory-and-feature-selection" id="toc-theory-and-feature-selection" class="nav-link" data-scroll-target="#theory-and-feature-selection"><span class="header-section-number">4.6.3</span> Theory and Feature Selection</a></li>
-  <li><a href="#external-validity" id="toc-external-validity" class="nav-link" data-scroll-target="#external-validity"><span class="header-section-number">4.6.4</span> External Validity</a></li>
+  <li><a href="#three-tracks-same-problem-different-proxy" id="toc-three-tracks-same-problem-different-proxy" class="nav-link" data-scroll-target="#three-tracks-same-problem-different-proxy"><span class="header-section-number">4.7.1</span> Three Tracks: Same Problem, Different Proxy</a></li>
+  <li><a href="#construct-validity-as-an-ml-design-problem" id="toc-construct-validity-as-an-ml-design-problem" class="nav-link" data-scroll-target="#construct-validity-as-an-ml-design-problem"><span class="header-section-number">4.7.2</span> Construct Validity as an ML Design Problem</a></li>
+  <li><a href="#try-it-audit-the-target" id="toc-try-it-audit-the-target" class="nav-link" data-scroll-target="#try-it-audit-the-target"><span class="header-section-number">4.7.3</span> Try It: Audit the Target</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">4.7</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">4.8</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">4.9</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">4.10</span> Real-World Case Study</a>
+  <li><a href="#prediction-time-and-horizon" id="toc-prediction-time-and-horizon" class="nav-link" data-scroll-target="#prediction-time-and-horizon"><span class="header-section-number">4.8</span> Prediction Time and Horizon</a>
   <ul class="collapse">
-  <li><a href="#predicting-institutional-retention-outcomes" id="toc-predicting-institutional-retention-outcomes" class="nav-link" data-scroll-target="#predicting-institutional-retention-outcomes"><span class="header-section-number">4.10.1</span> Predicting Institutional Retention Outcomes</a></li>
+  <li><a href="#the-availability-test" id="toc-the-availability-test" class="nav-link" data-scroll-target="#the-availability-test"><span class="header-section-number">4.8.1</span> The Availability Test</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">4.11</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">4.12</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">4.13</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">4.14</span> Key Takeaways</a></li>
+  <li><a href="#leakage-begins-with-framing" id="toc-leakage-begins-with-framing" class="nav-link" data-scroll-target="#leakage-begins-with-framing"><span class="header-section-number">4.9</span> Leakage Begins With Framing</a></li>
+  <li><a href="#prediction-is-not-intervention" id="toc-prediction-is-not-intervention" class="nav-link" data-scroll-target="#prediction-is-not-intervention"><span class="header-section-number">4.10</span> Prediction Is Not Intervention</a></li>
+  <li><a href="#different-analytical-purposes" id="toc-different-analytical-purposes" class="nav-link" data-scroll-target="#different-analytical-purposes"><span class="header-section-number">4.11</span> Different Analytical Purposes</a></li>
+  <li><a href="#computer-vision-is-a-workload-not-a-problem-specification" id="toc-computer-vision-is-a-workload-not-a-problem-specification" class="nav-link" data-scroll-target="#computer-vision-is-a-workload-not-a-problem-specification"><span class="header-section-number">4.12</span> Computer Vision Is a Workload, Not a Problem Specification</a></li>
+  <li><a href="#baselines-what-must-the-model-beat" id="toc-baselines-what-must-the-model-beat" class="nav-link" data-scroll-target="#baselines-what-must-the-model-beat"><span class="header-section-number">4.13</span> Baselines: What Must the Model Beat?</a></li>
+  <li><a href="#error-costs-and-thresholds" id="toc-error-costs-and-thresholds" class="nav-link" data-scroll-target="#error-costs-and-thresholds"><span class="header-section-number">4.14</span> Error Costs and Thresholds</a></li>
+  <li><a href="#evaluation-must-match-intended-use" id="toc-evaluation-must-match-intended-use" class="nav-link" data-scroll-target="#evaluation-must-match-intended-use"><span class="header-section-number">4.15</span> Evaluation Must Match Intended Use</a></li>
+  <li><a href="#the-problem-framing-canvas" id="toc-the-problem-framing-canvas" class="nav-link" data-scroll-target="#the-problem-framing-canvas"><span class="header-section-number">4.16</span> The Problem Framing Canvas</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">4.17</span> Three Tracks</a>
+  <ul class="collapse">
+  <li><a href="#health" id="toc-health" class="nav-link" data-scroll-target="#health"><span class="header-section-number">4.17.1</span> Health</a></li>
+  <li><a href="#education" id="toc-education" class="nav-link" data-scroll-target="#education"><span class="header-section-number">4.17.2</span> Education</a></li>
+  <li><a href="#open-benchmark" id="toc-open-benchmark" class="nav-link" data-scroll-target="#open-benchmark"><span class="header-section-number">4.17.3</span> Open Benchmark</a></li>
+  </ul></li>
+  <li><a href="#a-small-framing-experiment" id="toc-a-small-framing-experiment" class="nav-link" data-scroll-target="#a-small-framing-experiment"><span class="header-section-number">4.18</span> A Small Framing Experiment</a></li>
+  <li><a href="#beyond-the-algorithm-what-should-we-choose-to-predict" id="toc-beyond-the-algorithm-what-should-we-choose-to-predict" class="nav-link" data-scroll-target="#beyond-the-algorithm-what-should-we-choose-to-predict"><span class="header-section-number">4.19</span> Beyond the Algorithm: What Should We Choose to Predict?</a></li>
+  <li><a href="#responsible-framing" id="toc-responsible-framing" class="nav-link" data-scroll-target="#responsible-framing"><span class="header-section-number">4.20</span> Responsible Framing</a></li>
+  <li><a href="#ai-pair-programmer" id="toc-ai-pair-programmer" class="nav-link" data-scroll-target="#ai-pair-programmer"><span class="header-section-number">4.21</span> AI Pair Programmer</a></li>
+  <li><a href="#hands-on-lab-build-an-ml-problem-specification" id="toc-hands-on-lab-build-an-ml-problem-specification" class="nav-link" data-scroll-target="#hands-on-lab-build-an-ml-problem-specification"><span class="header-section-number">4.22</span> Hands-On Lab: Build an ML Problem Specification</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">4.23</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">4.24</span> Researcher Track</a></li>
+  <li><a href="#research-studio-from-topic-to-research-question" id="toc-research-studio-from-topic-to-research-question" class="nav-link" data-scroll-target="#research-studio-from-topic-to-research-question"><span class="header-section-number">4.25</span> Research Studio: From Topic to Research Question</a></li>
+  <li><a href="#professors-challenge-the-95-accurate-model" id="toc-professors-challenge-the-95-accurate-model" class="nav-link" data-scroll-target="#professors-challenge-the-95-accurate-model"><span class="header-section-number">4.26</span> Professor’s Challenge: The 95% Accurate Model</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">4.27</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">4.28</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">4.29</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html">Part II — The Machine Learning Workflow</a></li><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html">Part II — The Machine Learning Workflow</a></li><li class="breadcrumb-item"><a href="../part-02-workflow/04-ml-problems.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></h1>
 </div>
 
 
@@ -370,129 +501,695 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Translate substantive questions into well-defined ML tasks.</li>
-<li>Define units of analysis, targets, features, and prediction horizons.</li>
-<li>Distinguish predictive, inferential, descriptive, and causal questions.</li>
-<li>Develop defensible baseline and evaluation strategies.</li>
-<li>Identify leakage and target-definition problems before modeling.</li>
+<li>translate a substantive problem into a machine-learning specification;</li>
+<li>distinguish a prediction target from the broader construct it represents;</li>
+<li>define unit of analysis, prediction time, prediction horizon, and target population;</li>
+<li>identify features legitimately available at prediction time;</li>
+<li>distinguish prediction, forecasting, ranking, explanation, and causal questions;</li>
+<li>select meaningful baselines and evaluation criteria;</li>
+<li>reason about asymmetric errors and decision thresholds;</li>
+<li>identify target leakage before model development;</li>
+<li>distinguish predictive performance from decision usefulness.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">4.2</span> Why This Matters</h2>
-<p>Many failed ML projects begin with an algorithm instead of a clearly defined problem.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">4.3</span> Real-World Problem</h2>
-<p>A university asks: “Which students will struggle?” Convert this vague request into a precise, ethical, and evaluable machine learning problem.</p>
-</section>
-<section id="problem-formulation" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="problem-formulation"><span class="header-section-number">4.4</span> Problem Formulation</h2>
-<section id="start-with-the-decision" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="start-with-the-decision"><span class="header-section-number">4.4.1</span> Start With the Decision</h3>
-</section>
-<section id="define-the-unit-of-analysis" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="define-the-unit-of-analysis"><span class="header-section-number">4.4.2</span> Define the Unit of Analysis</h3>
-</section>
-<section id="define-the-target" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="define-the-target"><span class="header-section-number">4.4.3</span> Define the Target</h3>
-</section>
-<section id="define-the-prediction-time" class="level3" data-number="4.4.4">
-<h3 data-number="4.4.4" class="anchored" data-anchor-id="define-the-prediction-time"><span class="header-section-number">4.4.4</span> Define the Prediction Time</h3>
-</section>
-<section id="identify-available-features" class="level3" data-number="4.4.5">
-<h3 data-number="4.4.5" class="anchored" data-anchor-id="identify-available-features"><span class="header-section-number">4.4.5</span> Identify Available Features</h3>
-</section>
-<section id="establish-a-baseline" class="level3" data-number="4.4.6">
-<h3 data-number="4.4.6" class="anchored" data-anchor-id="establish-a-baseline"><span class="header-section-number">4.4.6</span> Establish a Baseline</h3>
-</section>
-<section id="choose-evaluation-criteria" class="level3" data-number="4.4.7">
-<h3 data-number="4.4.7" class="anchored" data-anchor-id="choose-evaluation-criteria"><span class="header-section-number">4.4.7</span> Choose Evaluation Criteria</h3>
-</section>
-<section id="consider-consequences-of-errors" class="level3" data-number="4.4.8">
-<h3 data-number="4.4.8" class="anchored" data-anchor-id="consider-consequences-of-errors"><span class="header-section-number">4.4.8</span> Consider Consequences of Errors</h3>
+<p>A sophisticated algorithm cannot rescue a poorly framed problem.</p>
+<p>Projects often begin too late: “Which model should we use?” A stronger project asks: <strong>What problem exists? What decision or knowledge need does it create? What exactly should be predicted, for whom, at what point in time, using which information, and how will success be judged?</strong></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Before choosing an algorithm, how do we translate a real-world problem into a machine-learning problem that is actually worth solving?</strong></p>
+</div>
+</div>
+<section id="connection-to-the-foundations" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="connection-to-the-foundations"><span class="header-section-number">4.2.1</span> Connection to the Foundations</h3>
+<p>Chapters 1–3 established what machine learning is, the Python environment in which we will work, and the mathematical and statistical ideas that support model reasoning. We now move from foundations to the first major workflow decision: translating a substantive question into a machine-learning problem that can be evaluated with appropriate data and evidence.</p>
 </section>
 </section>
-<section id="prediction-inference-and-causation" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="prediction-inference-and-causation"><span class="header-section-number">4.5</span> Prediction, Inference, and Causation</h2>
-<section id="predictive-questions" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="predictive-questions"><span class="header-section-number">4.5.1</span> Predictive Questions</h3>
+<section id="start-with-the-problem-not-the-algorithm" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="start-with-the-problem-not-the-algorithm"><span class="header-section-number">4.3</span> Start With the Problem, Not the Algorithm</h2>
+<p>Compare:</p>
+<blockquote class="blockquote">
+<p>“I want to use Random Forest to study student retention.”</p>
+</blockquote>
+<p>with:</p>
+<blockquote class="blockquote">
+<p>“At the end of a student’s second week, can we identify students at elevated risk of not returning the following term using only information available by that prediction time?”</p>
+</blockquote>
+<p>The second formulation exposes unit, target, timing, horizon, information availability, intervention context, error costs, and generalization.</p>
 </section>
-<section id="explanatory-questions" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="explanatory-questions"><span class="header-section-number">4.5.2</span> Explanatory Questions</h3>
+<section id="a-machine-learning-problem-specification" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="a-machine-learning-problem-specification"><span class="header-section-number">4.4</span> A Machine Learning Problem Specification</h2>
+<p>We will use</p>
+<p><span class="math display">\[
+\mathcal{P}=(U,Y,X_t,t,H,L,E,C),
+\]</span></p>
+<p>where <span class="math inline">\(U\)</span> is unit of analysis; <span class="math inline">\(Y\)</span> the target; <span class="math inline">\(X_t\)</span> information legitimately available at prediction time <span class="math inline">\(t\)</span>; <span class="math inline">\(H\)</span> the horizon; <span class="math inline">\(L\)</span> the loss/utility objective; <span class="math inline">\(E\)</span> the evaluation design; and <span class="math inline">\(C\)</span> constraints and context.</p>
+<p>This is a pedagogical framework, not a universal mathematical law.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Problem Specification Before Model Specification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not begin with <span class="math inline">\(f_\theta(X)\)</span>. Begin by deciding what <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are allowed to mean.</p>
+</div>
+</div>
 </section>
-<section id="causal-questions" class="level3" data-number="4.5.3">
-<h3 data-number="4.5.3" class="anchored" data-anchor-id="causal-questions"><span class="header-section-number">4.5.3</span> Causal Questions</h3>
-</section>
-<section id="descriptive-and-exploratory-questions" class="level3" data-number="4.5.4">
-<h3 data-number="4.5.4" class="anchored" data-anchor-id="descriptive-and-exploratory-questions"><span class="header-section-number">4.5.4</span> Descriptive and Exploratory Questions</h3>
-</section>
-</section>
-<section id="research-design-connection" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="research-design-connection"><span class="header-section-number">4.6</span> Research Design Connection</h2>
-<section id="research-questions" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">4.6.1</span> Research Questions</h3>
-</section>
-<section id="hypotheses" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="hypotheses"><span class="header-section-number">4.6.2</span> Hypotheses</h3>
-</section>
-<section id="theory-and-feature-selection" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="theory-and-feature-selection"><span class="header-section-number">4.6.3</span> Theory and Feature Selection</h3>
-</section>
-<section id="external-validity" class="level3" data-number="4.6.4">
-<h3 data-number="4.6.4" class="anchored" data-anchor-id="external-validity"><span class="header-section-number">4.6.4</span> External Validity</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">4.7</span> Hands-On Practice</h2>
-<p>Rewrite five vague analytics requests as formal ML problem statements.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">4.8</span> Common Mistakes</h2>
-<ul>
-<li>Predicting information that is already known at prediction time.</li>
-<li>Using future information as a feature.</li>
-<li>Defining targets inconsistently.</li>
-<li>Optimizing a metric unrelated to the actual decision.</li>
-</ul>
-</section>
-<section id="knowledge-check" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">4.9</span> Knowledge Check</h2>
+<section id="unit-of-analysis" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="unit-of-analysis"><span class="header-section-number">4.5</span> Unit of Analysis</h2>
+<p>One row might represent a patient, student, university, transaction, document, institution-year, patient-visit, or student-course enrollment. Changing the unit can change the question.</p>
+<section id="try-it-find-the-unit" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="try-it-find-the-unit"><span class="header-section-number">4.5.1</span> Try It: Find the Unit</h3>
+<p>Identify the defensible unit for:</p>
 <ol type="1">
-<li>What is the unit of analysis?</li>
-<li>What is a prediction horizon?</li>
-<li>How can target leakage occur?</li>
-<li>Why should a baseline be established before complex modeling?</li>
+<li>30-day patient readmission;</li>
+<li>next-year university enrollment;</li>
+<li>news-topic classification;</li>
+<li>fraudulent transactions;</li>
+<li>course-level student passing.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="4.10">
-<h2 data-number="4.10" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">4.10</span> Real-World Case Study</h2>
-<section id="predicting-institutional-retention-outcomes" class="level3" data-number="4.10.1">
-<h3 data-number="4.10.1" class="anchored" data-anchor-id="predicting-institutional-retention-outcomes"><span class="header-section-number">4.10.1</span> Predicting Institutional Retention Outcomes</h3>
-<p>Formulate an education analytics problem using public institutional data.</p>
+</section>
+<section id="defining-the-target" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="defining-the-target"><span class="header-section-number">4.6</span> Defining the Target</h2>
+<p>“Student success” is not yet a target. Operationalizations might include next-term retention, six-year graduation, first-year credits earned, or course completion.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Target ≠ Construct
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A measurable target is often a proxy for something broader. Predicting the proxy accurately does not prove that the full construct has been captured.</p>
+</div>
+</div>
+</section>
+<section id="from-construct-to-operational-target" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="from-construct-to-operational-target"><span class="header-section-number">4.7</span> From Construct to Operational Target</h2>
+<p>Many machine-learning problems begin with an idea that cannot be observed directly: learning, health need, engagement, readiness, quality, satisfaction, or resilience. This connects machine-learning design to the tradition of construct validity and to contemporary measurement modeling in computational systems <span class="citation" data-cites="cronbachMeehl1955 jacobsWallach2021">(<a href="../references.html#ref-cronbachMeehl1955" role="doc-biblioref">Cronbach and Meehl 1955</a>; <a href="../references.html#ref-jacobsWallach2021" role="doc-biblioref">Jacobs and Wallach 2021</a>)</span>.</p>
+<p>A model cannot ingest a construct directly. The construct passes through operational decisions:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Construct}
+\rightarrow
+\text{Operational Definition}
+\rightarrow
+\text{Measurement}
+\rightarrow
+\text{Recorded Variable}
+\rightarrow
+\text{ML Target}
+}
+\]</span></p>
+<p>Each arrow introduces assumptions.</p>
+<p>If an education study wants to predict <strong>learning</strong> but uses final course grade, it implicitly proposes</p>
+<p><span class="math display">\[
+\text{Learning}\approx\text{Final Course Grade}.
+\]</span></p>
+<p>Yet grades can also reflect assessment design, attendance policies, late penalties, prior preparation, revision opportunities, and instructor practices. The grade may still be useful; the question is whether it is defensible for the intended claim.</p>
+<section id="three-tracks-same-problem-different-proxy" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="three-tracks-same-problem-different-proxy"><span class="header-section-number">4.7.1</span> Three Tracks: Same Problem, Different Proxy</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Track</th>
+<th>Construct</th>
+<th>Possible proxy</th>
+<th>Validity question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Health</td>
+<td>health need</td>
+<td>healthcare utilization</td>
+<td>Does utilization also reflect access and care-seeking behavior?</td>
+</tr>
+<tr class="even">
+<td>Education</td>
+<td>learning</td>
+<td>final course grade</td>
+<td>Does the grade combine learning with policy and opportunity?</td>
+</tr>
+<tr class="odd">
+<td>Open ML</td>
+<td>customer satisfaction</td>
+<td>support contacts</td>
+<td>Do contacts indicate dissatisfaction, engagement, complexity, or access?</td>
+</tr>
+</tbody>
+</table>
+<p>Let (C) denote the construct and (Y) the operational target. Strong prediction of (Y) does not establish</p>
+<p><span class="math display">\[
+Y=C.
+\]</span></p>
+</section>
+<section id="construct-validity-as-an-ml-design-problem" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="construct-validity-as-an-ml-design-problem"><span class="header-section-number">4.7.2</span> Construct Validity as an ML Design Problem</h3>
+<p>Before fitting a model, ask:</p>
+<ol type="1">
+<li>What broader construct matters?</li>
+<li>Why should this target represent it?</li>
+<li>What dimensions does the target omit?</li>
+<li>What other processes influence the recorded target?</li>
+<li>Does the target mean the same thing across groups, sites, or time?</li>
+<li>Could optimizing the proxy distort the substantive goal?</li>
+</ol>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An AUC of 0.95 says nothing by itself about whether the target validly represents the construct named in the research question.</p>
+<p><strong>Excellent prediction of the wrong operational target is still excellent prediction of the wrong target.</strong></p>
+</div>
+</div>
+</section>
+<section id="try-it-audit-the-target" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="try-it-audit-the-target"><span class="header-section-number">4.7.3</span> Try It: Audit the Target</h3>
+<p>For one proposed ML problem, identify: 1. the construct; 2. the operational definition; 3. the recorded target; 4. two other processes that could influence the target; 5. an alternative operationalization; 6. how conclusions might change under that alternative.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Target form</th>
+<th>Example</th>
+<th>Typical task</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>continuous</td>
+<td>systolic blood pressure</td>
+<td>regression</td>
+</tr>
+<tr class="even">
+<td>binary</td>
+<td>retained/not retained</td>
+<td>classification</td>
+</tr>
+<tr class="odd">
+<td>multiclass</td>
+<td>diagnostic category</td>
+<td>multiclass classification</td>
+</tr>
+<tr class="even">
+<td>count</td>
+<td>emergency visits</td>
+<td>count/regression</td>
+</tr>
+<tr class="odd">
+<td>time-to-event</td>
+<td>time until readmission</td>
+<td>survival analysis</td>
+</tr>
+<tr class="even">
+<td>ordered category</td>
+<td>risk level</td>
+<td>ordinal modeling</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
-<section id="professors-challenge" class="level2" data-number="4.11">
-<h2 data-number="4.11" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">4.11</span> Professor’s Challenge</h2>
-<p>A feature dramatically improves performance but is only observed after the outcome occurs. Can it be used?</p>
+<section id="prediction-time-and-horizon" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="prediction-time-and-horizon"><span class="header-section-number">4.8</span> Prediction Time and Horizon</h2>
+<p>Let <span class="math inline">\(t\)</span> be when a prediction is produced and <span class="math inline">\(H\)</span> how far beyond <span class="math inline">\(t\)</span> the outcome occurs.</p>
+<p><span class="math display">\[
+t=\text{end of Week 2}, \qquad H=\text{retention to next term}.
+\]</span></p>
+<section id="the-availability-test" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="the-availability-test"><span class="header-section-number">4.8.1</span> The Availability Test</h3>
+<blockquote class="blockquote">
+<p><strong>Would I actually know this value at the moment the model is supposed to make its prediction?</strong></p>
+</blockquote>
+<p>If not, it may create leakage. Leakage can produce systematically overoptimistic estimates of model performance and has become an important reproducibility concern in machine-learning-based science <span class="citation" data-cites="kapoorNarayanan2023">(<a href="../references.html#ref-kapoorNarayanan2023" role="doc-biblioref">Kapoor and Narayanan 2023</a>)</span>.</p>
 </section>
-<section id="research-extension" class="level2" data-number="4.12">
-<h2 data-number="4.12" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">4.12</span> Research Extension</h2>
-<p>Develop a research question and contribution statement around the case study.</p>
 </section>
-<section id="reproducibility-check" class="level2" data-number="4.13">
-<h2 data-number="4.13" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">4.13</span> Reproducibility Check</h2>
-<p>Version the problem statement and document target, features, exclusions, timing, and evaluation plan.</p>
+<section id="leakage-begins-with-framing" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="leakage-begins-with-framing"><span class="header-section-number">4.9</span> Leakage Begins With Framing</h2>
+<p>Predicting course completion using prior GPA and first-week attendance may be legitimate. Using final course grade for an early-warning model is not.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Temporal Integrity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A model should not learn from information that arrives after the decision point it is meant to support.</strong></p>
+</div>
+</div>
 </section>
-<section id="key-takeaways" class="level2" data-number="4.14">
-<h2 data-number="4.14" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">4.14</span> Key Takeaways</h2>
+<section id="prediction-is-not-intervention" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="prediction-is-not-intervention"><span class="header-section-number">4.10</span> Prediction Is Not Intervention</h2>
+<p>A high predicted attrition risk does not identify which intervention will help. A health risk predictor does not prove that modifying an important feature will cause risk to fall.</p>
+<p>Prediction concerns <span class="math inline">\(P(Y\mid X)\)</span>. Intervention requires different causal reasoning <span class="citation" data-cites="hernanRobins2020">(<a href="../references.html#ref-hernanRobins2020" role="doc-biblioref">Hernán and Robins 2020</a>)</span>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Risk Factor ≠ Treatment Recommendation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A predictor can identify risk without identifying an effective intervention.</p>
+</div>
+</div>
+</section>
+<section id="different-analytical-purposes" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="different-analytical-purposes"><span class="header-section-number">4.11</span> Different Analytical Purposes</h2>
+<p><strong>Prediction</strong> estimates unknown outcomes. <strong>Forecasting</strong> predicts future values with temporal structure. <strong>Classification</strong> estimates categories/probabilities. <strong>Ranking</strong> orders observations. <strong>Discovery</strong> characterizes structure. <strong>Explanation</strong> investigates relationships or mechanisms. <strong>Causal estimation</strong> asks what would happen under alternative interventions.</p>
+</section>
+<section id="computer-vision-is-a-workload-not-a-problem-specification" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="computer-vision-is-a-workload-not-a-problem-specification"><span class="header-section-number">4.12</span> Computer Vision Is a Workload, Not a Problem Specification</h2>
+<p>“Use computer vision” is not yet a machine-learning problem.</p>
+<p>A vision workload can contain very different targets, units, outputs, and evaluation requirements:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vision task</th>
+<th>Possible unit</th>
+<th>Target/output</th>
+<th>Example evaluation concern</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>image classification</td>
+<td>image</td>
+<td>class label</td>
+<td>class imbalance and subgroup performance</td>
+</tr>
+<tr class="even">
+<td>object detection</td>
+<td>image/object</td>
+<td>class + bounding box</td>
+<td>localization and detection quality</td>
+</tr>
+<tr class="odd">
+<td>semantic segmentation</td>
+<td>pixel/region</td>
+<td>class per pixel</td>
+<td>boundary quality and class imbalance</td>
+</tr>
+<tr class="even">
+<td>visual anomaly detection</td>
+<td>image/region</td>
+<td>anomaly score</td>
+<td>rare-event validation</td>
+</tr>
+<tr class="odd">
+<td>image retrieval</td>
+<td>query-image pair</td>
+<td>similarity/ranking</td>
+<td>relevance and ranking quality</td>
+</tr>
+</tbody>
+</table>
+<p>A health study might classify a medical image, an education application might analyze handwritten work, and an Open ML experiment might classify benchmark images. The workload does not determine whether the study is scientifically valid.</p>
+<p>The same framing questions still apply:</p>
 <ul>
-<li>Problem formulation precedes algorithm selection.</li>
-<li>Time and data availability determine whether a prediction is legitimate.</li>
-<li>Evaluation metrics must reflect the decision context.</li>
+<li>What does one observation represent?</li>
+<li>What is the target or output?</li>
+<li>When is the prediction made?</li>
+<li>Which visual information is legitimately available then?</li>
+<li>What is the baseline?</li>
+<li>What errors matter?</li>
+<li>To what cameras, sites, populations, devices, or acquisition conditions should performance generalize?</li>
+</ul>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>High image-classification accuracy does not establish that a vision system will generalize to new devices, lighting conditions, institutions, populations, or image-acquisition protocols.</p>
+<p>In computer vision, <strong>domain shift can be visual</strong>.</p>
+</div>
+</div>
+</section>
+<section id="baselines-what-must-the-model-beat" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="baselines-what-must-the-model-beat"><span class="header-section-number">4.13</span> Baselines: What Must the Model Beat?</h2>
+<div id="b31d6a67" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">0</span>] <span class="op">*</span> <span class="dv">90</span> <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">10</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">max</span>(np.mean(y <span class="op">==</span> <span class="dv">0</span>), np.mean(y <span class="op">==</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>np.float64(0.9)</code></pre>
+</div>
+</div>
+<p>Always predicting the majority class already achieves 90% accuracy here.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Baselines Create Meaning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Accuracy = 0.91” is incomplete. “Accuracy = 0.91 versus a 0.90 naive baseline” tells a different story.</p>
+</div>
+</div>
+</section>
+<section id="error-costs-and-thresholds" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="error-costs-and-thresholds"><span class="header-section-number">4.14</span> Error Costs and Thresholds</h2>
+<p>A predicted probability becomes an action only after a decision rule is applied. A default threshold such as 0.50 is not automatically appropriate.</p>
+<p>A simple expected-cost representation is</p>
+<p><span class="math display">\[
+\text{Expected Cost}=C_{FP}P(FP)+C_{FN}P(FN).
+\]</span></p>
+<p>This does not imply every consequence should be monetized. It makes explicit that errors can matter differently.</p>
+</section>
+<section id="evaluation-must-match-intended-use" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="evaluation-must-match-intended-use"><span class="header-section-number">4.15</span> Evaluation Must Match Intended Use</h2>
+<p>Evaluation may require random, stratified, grouped, temporal, geographic, or external validation. Random splitting can mislead when people repeat, institutions repeat across years, future prediction is the goal, or deployment occurs elsewhere.</p>
+<p>Ask:</p>
+<blockquote class="blockquote">
+<p><strong>To whom, where, and when do we hope this model will generalize?</strong></p>
+</blockquote>
+</section>
+<section id="the-problem-framing-canvas" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="the-problem-framing-canvas"><span class="header-section-number">4.16</span> The Problem Framing Canvas</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Substantive problem</td>
+<td>What real-world problem exists?</td>
+</tr>
+<tr class="even">
+<td>Stakeholder</td>
+<td>Who needs the evidence?</td>
+</tr>
+<tr class="odd">
+<td>Decision/use</td>
+<td>What could happen because of the output?</td>
+</tr>
+<tr class="even">
+<td>Unit</td>
+<td>What does one row represent?</td>
+</tr>
+<tr class="odd">
+<td>Target</td>
+<td>What exactly is predicted?</td>
+</tr>
+<tr class="even">
+<td>Construct</td>
+<td>What broader phenomenon do we actually care about?</td>
+</tr>
+<tr class="odd">
+<td>Operationalization</td>
+<td>Why should this target represent that construct?</td>
+</tr>
+<tr class="even">
+<td>Proxy limitations</td>
+<td>What does the target omit or confound?</td>
+</tr>
+<tr class="odd">
+<td>Prediction time</td>
+<td>When is prediction made?</td>
+</tr>
+<tr class="even">
+<td>Horizon</td>
+<td>How far ahead is the outcome?</td>
+</tr>
+<tr class="odd">
+<td>Available features</td>
+<td>What is known then?</td>
+</tr>
+<tr class="even">
+<td>Baseline</td>
+<td>What simple strategy must be beaten?</td>
+</tr>
+<tr class="odd">
+<td>Error costs</td>
+<td>Which mistakes matter?</td>
+</tr>
+<tr class="even">
+<td>Evaluation</td>
+<td>How will generalization be tested?</td>
+</tr>
+<tr class="odd">
+<td>Target population</td>
+<td>To whom should results generalize?</td>
+</tr>
+<tr class="even">
+<td>Constraints</td>
+<td>Privacy, fairness, latency, resources?</td>
+</tr>
+<tr class="odd">
+<td>Intended use</td>
+<td>What is the model designed to support?</td>
+</tr>
+<tr class="even">
+<td>Unsupported claims</td>
+<td>What must not be concluded?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="three-tracks" class="level2" data-number="4.17">
+<h2 data-number="4.17" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">4.17</span> Three Tracks</h2>
+<section id="health" class="level3" data-number="4.17.1">
+<h3 data-number="4.17.1" class="anchored" data-anchor-id="health"><span class="header-section-number">4.17.1</span> Health</h3>
+<p>Rather than “use NHANES to predict diabetes,” specify population, operational diabetes criterion, information available at the analytical time point, validation design, and intended claim.</p>
+</section>
+<section id="education" class="level3" data-number="4.17.2">
+<h3 data-number="4.17.2" class="anchored" data-anchor-id="education"><span class="header-section-number">4.17.2</span> Education</h3>
+<p>Rather than “use IPEDS to predict retention,” specify institution-level unit, outcome period, prediction time, available prior-period features, and temporal validation.</p>
+</section>
+<section id="open-benchmark" class="level3" data-number="4.17.3">
+<h3 data-number="4.17.3" class="anchored" data-anchor-id="open-benchmark"><span class="header-section-number">4.17.3</span> Open Benchmark</h3>
+<p>Rather than “compare five classifiers on Wine,” specify a common evaluation protocol and a pedagogical question such as how scaling and model family affect out-of-sample performance.</p>
+</section>
+</section>
+<section id="a-small-framing-experiment" class="level2" data-number="4.18">
+<h2 data-number="4.18" class="anchored" data-anchor-id="a-small-framing-experiment"><span class="header-section-number">4.18</span> A Small Framing Experiment</h2>
+<div id="cell-fig-prevalence-accuracy" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>positive_prevalence <span class="op">=</span> np.linspace(<span class="fl">0.01</span>, <span class="fl">0.50</span>, <span class="dv">50</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>majority_accuracy <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> positive_prevalence</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.plot(positive_prevalence, majority_accuracy)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Positive-class prevalence"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Accuracy of always predicting negative"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"A Naive Classifier Can Look Accurate"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="fl">0.45</span>, <span class="fl">1.01</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-prevalence-accuracy" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart showing that the accuracy of always predicting the negative class increases as positive-class prevalence decreases. The plot demonstrates how a naive classifier can appear highly accurate when the positive outcome is rare.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prevalence-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ml-problems_files/figure-html/fig-prevalence-accuracy-output-1.png" alt="Line chart showing that the accuracy of always predicting the negative class increases as positive-class prevalence decreases. The plot demonstrates how a naive classifier can appear highly accurate when the positive outcome is rare." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prevalence-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Majority-class accuracy increases as the positive outcome becomes rarer.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A rare outcome can make a useless classifier appear impressive. Evaluation metrics must be chosen in context.</p>
+</section>
+<section id="beyond-the-algorithm-what-should-we-choose-to-predict" class="level2" data-number="4.19">
+<h2 data-number="4.19" class="anchored" data-anchor-id="beyond-the-algorithm-what-should-we-choose-to-predict"><span class="header-section-number">4.19</span> Beyond the Algorithm: What Should We Choose to Predict?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Predictability Is Not Permission
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Machine learning encourages us to ask what can be predicted. A more mature question is whether the target is appropriate to predict for the intended purpose.</p>
+<p>A target is a choice. When we operationalize “risk,” “success,” “quality,” “readiness,” or “potential,” that choice can influence who receives resources, scrutiny, attention, or opportunity.</p>
+<p>Ask:</p>
+<ol type="1">
+<li><strong>Can this be predicted?</strong></li>
+<li><strong>Can it be predicted reliably?</strong></li>
+<li><strong>Should it be predicted for this purpose?</strong></li>
+<li><strong>What decisions should—and should not—follow?</strong></li>
+</ol>
+<p>The algorithm enters only after these questions begin to have defensible answers.</p>
+</div>
+</div>
+</section>
+<section id="responsible-framing" class="level2" data-number="4.20">
+<h2 data-number="4.20" class="anchored" data-anchor-id="responsible-framing"><span class="header-section-number">4.20</span> Responsible Framing</h2>
+<p>Responsible AI considerations belong in design, development, deployment, use, and evaluation <span class="citation" data-cites="nistAIRMF2023">(<a href="../references.html#ref-nistAIRMF2023" role="doc-biblioref">National Institute of Standards and Technology 2023</a>)</span>. Consider legitimacy, problematic historical targets, sensitive proxies, uneven error consequences, over-trust, scope creep, and whether a simpler non-ML solution is preferable.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Sometimes the Best ML Decision Is Not to Build an ML Model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A rule, descriptive analysis, experiment, process redesign, or policy change may be more appropriate than prediction.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer" class="level2" data-number="4.21">
+<h2 data-number="4.21" class="anchored" data-anchor-id="ai-pair-programmer"><span class="header-section-number">4.21</span> AI Pair Programmer</h2>
+<p>Prompt an AI assistant: “Build a machine-learning model to predict college student success.”</p>
+<p>Audit whether it clarifies success, unit, prediction time, horizon, decision, population, feature availability, leakage, baseline, error costs, evaluation, ethics, and causal versus predictive claims. Rewrite the prompt so model selection cannot sensibly begin before framing is complete.</p>
+</section>
+<section id="hands-on-lab-build-an-ml-problem-specification" class="level2" data-number="4.22">
+<h2 data-number="4.22" class="anchored" data-anchor-id="hands-on-lab-build-an-ml-problem-specification"><span class="header-section-number">4.22</span> Hands-On Lab: Build an ML Problem Specification</h2>
+<p>Choose one track—or a computer-vision workload within a track—and express it as</p>
+<p><span class="math display">\[
+\mathcal{P}=(U,Y,X_t,t,H,L,E,C).
+\]</span></p>
+<p>Include substantive problem, stakeholder, unit, target, prediction time/horizon, feature-availability rules, leakage example, baseline, metrics, error costs, validation design, target population, constraints, and at least three unsupported claims. <strong>No model fitting is required.</strong></p>
+</section>
+<section id="practitioner-track" class="level2" data-number="4.23">
+<h2 data-number="4.23" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">4.23</span> Practitioner Track</h2>
+<p>Define the operational decision; specify target, timing, horizon, and information; identify leakage; choose baselines; align evaluation with deployment; reason about error costs; document intended use.</p>
+</section>
+<section id="researcher-track" class="level2" data-number="4.24">
+<h2 data-number="4.24" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">4.24</span> Researcher Track</h2>
+<p>Additionally distinguish constructs from targets, define generalization populations, separate predictive from causal claims, justify evaluation as research design, and explain contribution beyond model comparison.</p>
+</section>
+<section id="research-studio-from-topic-to-research-question" class="level2" data-number="4.25">
+<h2 data-number="4.25" class="anchored" data-anchor-id="research-studio-from-topic-to-research-question"><span class="header-section-number">4.25</span> Research Studio: From Topic to Research Question</h2>
+<p>Transform a broad topic such as cardiovascular health, student retention, institutional outcomes, or classifier benchmarking into a substantive gap/decision problem, population, unit, target, timing, research question, evaluation design, contribution, and unsupported causal claim.</p>
+<p>A useful predictive template is:</p>
+<blockquote class="blockquote">
+<p><strong>Among [population/unit], how well can [information available at time (t)] predict [target] over [horizon], and how well does performance generalize across [time/group/site/context]?</strong></p>
+</blockquote>
+<p>Use this to expose assumptions, not as a mandatory formula.</p>
+<ul>
+<li>one construct-to-target validity argument;</li>
+<li>one alternative operationalization and how it could change the study.</li>
+</ul>
+</section>
+<section id="professors-challenge-the-95-accurate-model" class="level2" data-number="4.26">
+<h2 data-number="4.26" class="anchored" data-anchor-id="professors-challenge-the-95-accurate-model"><span class="header-section-number">4.26</span> Professor’s Challenge: The 95% Accurate Model</h2>
+<p>A university reports 95% dropout-prediction accuracy and recommends automatic mandatory interventions. Only 6% dropped out; <code>final_term_status</code> is in the data; repeated student records may cross a random split; no baseline is reported; 0.50 is used as the default threshold; error costs and subgroup performance are ignored; years are randomly mixed; and feature importance is called “causes.”</p>
+<p>Critique accuracy, leakage, unit ambiguity, temporal validity, baseline, threshold, error costs, subgroup evaluation, causation, intervention logic, evaluation design, and the problem statement.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="4.27">
+<h2 data-number="4.27" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">4.27</span> Knowledge Check</h2>
+<ol type="1">
+<li>Why frame before selecting an algorithm?</li>
+<li>What is a unit of analysis?</li>
+<li>Construct versus operational target?</li>
+<li>Prediction time versus horizon?</li>
+<li>What is the availability test?</li>
+<li>Why is post-outcome information leakage?</li>
+<li>Why does prediction not identify intervention effects?</li>
+<li>Why use a baseline?</li>
+<li>How can prevalence make accuracy misleading?</li>
+<li>Why might 0.50 be inappropriate?</li>
+<li>What does deployment-aligned evaluation mean?</li>
+<li>Why might framing end with no ML model?</li>
+<li>Why is construct validity relevant even when predictive performance is high?</li>
+<li>Distinguish a construct, operational definition, and recorded target.</li>
+<li>How can optimizing a proxy conflict with the substantive goal?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="4.28">
+<h2 data-number="4.28" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">4.28</span> Reproducibility Check</h2>
+<p>Version the substantive problem, stakeholder, intended use, unit, target, prediction time, horizon, feature-availability rule, exclusions, baseline, error assumptions, metrics, validation design, target population, constraints, and unsupported claims.</p>
+<p>If framing changes, document <strong>what changed and why</strong>.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="4.29">
+<h2 data-number="4.29" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">4.29</span> Key Takeaways</h2>
+<ul>
+<li>A sophisticated algorithm cannot rescue a poorly framed problem.</li>
+<li>Targets operationalize constructs; they are not the constructs themselves.</li>
+<li>Prediction time determines legitimate information.</li>
+<li>Leakage can often be identified before coding.</li>
+<li>Prediction does not establish causation or intervention effectiveness.</li>
+<li>Baselines contextualize metrics.</li>
+<li>Thresholds and error costs should reflect use.</li>
+<li>Evaluation design is part of problem formulation.</li>
+<li>Generalization must be defined across people, places, times, or settings.</li>
+<li>Technical predictability does not determine whether something should be predicted.</li>
+<li>Sometimes the best decision is not to build an ML model.</li>
+<li>Target selection is a measurement decision as well as a modeling decision.</li>
+<li>Predictive accuracy for a proxy does not establish validity for the broader construct.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cronbachMeehl1955" class="csl-entry" role="listitem">
+Cronbach, Lee J., and Paul E. Meehl. 1955. <span>“Construct Validity in Psychological Tests.”</span> <em>Psychological Bulletin</em> 52 (4): 281–302. <a href="https://doi.org/10.1037/h0040957">https://doi.org/10.1037/h0040957</a>.
+</div>
+<div id="ref-hernanRobins2020" class="csl-entry" role="listitem">
+Hernán, Miguel A., and James M. Robins. 2020. <em>Causal Inference: What If</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-jacobsWallach2021" class="csl-entry" role="listitem">
+Jacobs, Abigail Z., and Hanna Wallach. 2021. <span>“Measurement and Fairness.”</span> In <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency</em>, 375–85. <a href="https://doi.org/10.1145/3442188.3445901">https://doi.org/10.1145/3442188.3445901</a>.
+</div>
+<div id="ref-kapoorNarayanan2023" class="csl-entry" role="listitem">
+Kapoor, Sayash, and Arvind Narayanan. 2023. <span>“Leakage and the Reproducibility Crisis in Machine-Learning-Based Science.”</span> <em>Patterns</em> 4 (9): 100804. <a href="https://doi.org/10.1016/j.patter.2023.100804">https://doi.org/10.1016/j.patter.2023.100804</a>.
+</div>
+<div id="ref-nistAIRMF2023" class="csl-entry" role="listitem">
+National Institute of Standards and Technology. 2023. <span>“Artificial Intelligence Risk Management Framework (AI RMF 1.0).”</span> NIST AI 100-1. NIST. <a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -569,7 +1266,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

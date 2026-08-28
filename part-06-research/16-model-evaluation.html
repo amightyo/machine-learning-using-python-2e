@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>16&nbsp; Model Evaluation, Validation, and Hyperparameter Optimization – Machine Learning Using Python</title>
+<title>16&nbsp; Model Evaluation: From Performance Metrics to Scientific Evidence – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Research, Responsibility, and Reproducibility</a></li><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,58 +430,114 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">16.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">16.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">16.3</span> Real-World Problem</a></li>
-  <li><a href="#evaluation-foundations" id="toc-evaluation-foundations" class="nav-link" data-scroll-target="#evaluation-foundations"><span class="header-section-number">16.4</span> Evaluation Foundations</a>
+  <li><a href="#what-does-it-mean-for-a-model-to-work" id="toc-what-does-it-mean-for-a-model-to-work" class="nav-link" data-scroll-target="#what-does-it-mean-for-a-model-to-work"><span class="header-section-number">16.2</span> What Does It Mean for a Model to Work?</a>
   <ul class="collapse">
-  <li><a href="#generalization-error" id="toc-generalization-error" class="nav-link" data-scroll-target="#generalization-error"><span class="header-section-number">16.4.1</span> Generalization Error</a></li>
-  <li><a href="#train-validation-and-test-sets" id="toc-train-validation-and-test-sets" class="nav-link" data-scroll-target="#train-validation-and-test-sets"><span class="header-section-number">16.4.2</span> Train, Validation, and Test Sets</a></li>
-  <li><a href="#k-fold-cross-validation" id="toc-k-fold-cross-validation" class="nav-link" data-scroll-target="#k-fold-cross-validation"><span class="header-section-number">16.4.3</span> K-Fold Cross-Validation</a></li>
-  <li><a href="#stratification" id="toc-stratification" class="nav-link" data-scroll-target="#stratification"><span class="header-section-number">16.4.4</span> Stratification</a></li>
-  <li><a href="#grouped-and-time-based-splits" id="toc-grouped-and-time-based-splits" class="nav-link" data-scroll-target="#grouped-and-time-based-splits"><span class="header-section-number">16.4.5</span> Grouped and Time-Based Splits</a></li>
-  <li><a href="#repeated-cross-validation" id="toc-repeated-cross-validation" class="nav-link" data-scroll-target="#repeated-cross-validation"><span class="header-section-number">16.4.6</span> Repeated Cross-Validation</a></li>
-  <li><a href="#nested-cross-validation" id="toc-nested-cross-validation" class="nav-link" data-scroll-target="#nested-cross-validation"><span class="header-section-number">16.4.7</span> Nested Cross-Validation</a></li>
+  <li><a href="#from-building-systems-to-evaluating-evidence" id="toc-from-building-systems-to-evaluating-evidence" class="nav-link" data-scroll-target="#from-building-systems-to-evaluating-evidence"><span class="header-section-number">16.2.1</span> From Building Systems to Evaluating Evidence</a></li>
   </ul></li>
-  <li><a href="#hyperparameter-optimization" id="toc-hyperparameter-optimization" class="nav-link" data-scroll-target="#hyperparameter-optimization"><span class="header-section-number">16.5</span> Hyperparameter Optimization</a>
+  <li><a href="#evaluation-begins-with-the-claim" id="toc-evaluation-begins-with-the-claim" class="nav-link" data-scroll-target="#evaluation-begins-with-the-claim"><span class="header-section-number">16.3</span> Evaluation Begins With the Claim</a></li>
+  <li><a href="#generalization-error" id="toc-generalization-error" class="nav-link" data-scroll-target="#generalization-error"><span class="header-section-number">16.4</span> Generalization Error</a></li>
+  <li><a href="#training-error-is-optimistic" id="toc-training-error-is-optimistic" class="nav-link" data-scroll-target="#training-error-is-optimistic"><span class="header-section-number">16.5</span> Training Error Is Optimistic</a></li>
+  <li><a href="#three-data-roles" id="toc-three-data-roles" class="nav-link" data-scroll-target="#three-data-roles"><span class="header-section-number">16.6</span> Three Data Roles</a></li>
+  <li><a href="#the-test-set-is-not-a-development-tool" id="toc-the-test-set-is-not-a-development-tool" class="nav-link" data-scroll-target="#the-test-set-is-not-a-development-tool"><span class="header-section-number">16.7</span> The Test Set Is Not a Development Tool</a></li>
+  <li><a href="#classification-evaluation" id="toc-classification-evaluation" class="nav-link" data-scroll-target="#classification-evaluation"><span class="header-section-number">16.8</span> Classification Evaluation</a></li>
+  <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix"><span class="header-section-number">16.9</span> Confusion Matrix</a></li>
+  <li><a href="#accuracy" id="toc-accuracy" class="nav-link" data-scroll-target="#accuracy"><span class="header-section-number">16.10</span> Accuracy</a></li>
+  <li><a href="#sensitivity" id="toc-sensitivity" class="nav-link" data-scroll-target="#sensitivity"><span class="header-section-number">16.11</span> Sensitivity</a></li>
+  <li><a href="#specificity" id="toc-specificity" class="nav-link" data-scroll-target="#specificity"><span class="header-section-number">16.12</span> Specificity</a></li>
+  <li><a href="#precision" id="toc-precision" class="nav-link" data-scroll-target="#precision"><span class="header-section-number">16.13</span> Precision</a></li>
+  <li><a href="#f1-score" id="toc-f1-score" class="nav-link" data-scroll-target="#f1-score"><span class="header-section-number">16.14</span> F1 Score</a></li>
+  <li><a href="#compute-classification-metrics" id="toc-compute-classification-metrics" class="nav-link" data-scroll-target="#compute-classification-metrics"><span class="header-section-number">16.15</span> Compute Classification Metrics</a></li>
+  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve"><span class="header-section-number">16.16</span> ROC Curve</a></li>
+  <li><a href="#roc-auc" id="toc-roc-auc" class="nav-link" data-scroll-target="#roc-auc"><span class="header-section-number">16.17</span> ROC-AUC</a></li>
+  <li><a href="#plot-the-roc-curve" id="toc-plot-the-roc-curve" class="nav-link" data-scroll-target="#plot-the-roc-curve"><span class="header-section-number">16.18</span> Plot the ROC Curve</a></li>
+  <li><a href="#precision-recall-curve" id="toc-precision-recall-curve" class="nav-link" data-scroll-target="#precision-recall-curve"><span class="header-section-number">16.19</span> Precision-Recall Curve</a></li>
+  <li><a href="#roc-auc-versus-pr-auc" id="toc-roc-auc-versus-pr-auc" class="nav-link" data-scroll-target="#roc-auc-versus-pr-auc"><span class="header-section-number">16.20</span> ROC-AUC Versus PR-AUC</a></li>
+  <li><a href="#calibration" id="toc-calibration" class="nav-link" data-scroll-target="#calibration"><span class="header-section-number">16.21</span> Calibration</a></li>
+  <li><a href="#discrimination-is-not-calibration" id="toc-discrimination-is-not-calibration" class="nav-link" data-scroll-target="#discrimination-is-not-calibration"><span class="header-section-number">16.22</span> Discrimination Is Not Calibration</a></li>
+  <li><a href="#brier-score" id="toc-brier-score" class="nav-link" data-scroll-target="#brier-score"><span class="header-section-number">16.23</span> Brier Score</a></li>
+  <li><a href="#calibration-curve" id="toc-calibration-curve" class="nav-link" data-scroll-target="#calibration-curve"><span class="header-section-number">16.24</span> Calibration Curve</a></li>
+  <li><a href="#calibration-depends-on-context" id="toc-calibration-depends-on-context" class="nav-link" data-scroll-target="#calibration-depends-on-context"><span class="header-section-number">16.25</span> Calibration Depends on Context</a></li>
+  <li><a href="#decision-thresholds" id="toc-decision-thresholds" class="nav-link" data-scroll-target="#decision-thresholds"><span class="header-section-number">16.26</span> Decision Thresholds</a></li>
+  <li><a href="#probability-is-not-the-decision" id="toc-probability-is-not-the-decision" class="nav-link" data-scroll-target="#probability-is-not-the-decision"><span class="header-section-number">16.27</span> Probability Is Not the Decision</a></li>
+  <li><a href="#threshold-tradeoffs" id="toc-threshold-tradeoffs" class="nav-link" data-scroll-target="#threshold-tradeoffs"><span class="header-section-number">16.28</span> Threshold Tradeoffs</a></li>
+  <li><a href="#visualize-threshold-tradeoffs" id="toc-visualize-threshold-tradeoffs" class="nav-link" data-scroll-target="#visualize-threshold-tradeoffs"><span class="header-section-number">16.29</span> Visualize Threshold Tradeoffs</a></li>
+  <li><a href="#error-costs" id="toc-error-costs" class="nav-link" data-scroll-target="#error-costs"><span class="header-section-number">16.30</span> Error Costs</a></li>
+  <li><a href="#regression-evaluation" id="toc-regression-evaluation" class="nav-link" data-scroll-target="#regression-evaluation"><span class="header-section-number">16.31</span> Regression Evaluation</a></li>
+  <li><a href="#mean-absolute-error" id="toc-mean-absolute-error" class="nav-link" data-scroll-target="#mean-absolute-error"><span class="header-section-number">16.32</span> Mean Absolute Error</a></li>
+  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">16.33</span> Mean Squared Error</a></li>
+  <li><a href="#root-mean-squared-error" id="toc-root-mean-squared-error" class="nav-link" data-scroll-target="#root-mean-squared-error"><span class="header-section-number">16.34</span> Root Mean Squared Error</a></li>
+  <li><a href="#coefficient-of-determination" id="toc-coefficient-of-determination" class="nav-link" data-scroll-target="#coefficient-of-determination"><span class="header-section-number">16.35</span> Coefficient of Determination</a></li>
+  <li><a href="#metric-choice-encodes-values" id="toc-metric-choice-encodes-values" class="nav-link" data-scroll-target="#metric-choice-encodes-values"><span class="header-section-number">16.36</span> Metric Choice Encodes Values</a></li>
+  <li><a href="#evaluation-is-an-argument-about-future-performance" id="toc-evaluation-is-an-argument-about-future-performance" class="nav-link" data-scroll-target="#evaluation-is-an-argument-about-future-performance"><span class="header-section-number">16.37</span> Evaluation Is an Argument About Future Performance</a></li>
+  <li><a href="#resampling-and-cross-validation" id="toc-resampling-and-cross-validation" class="nav-link" data-scroll-target="#resampling-and-cross-validation"><span class="header-section-number">16.38</span> Resampling and Cross-Validation</a></li>
+  <li><a href="#why-a-single-split-is-unstable" id="toc-why-a-single-split-is-unstable" class="nav-link" data-scroll-target="#why-a-single-split-is-unstable"><span class="header-section-number">16.39</span> Why a Single Split Is Unstable</a></li>
+  <li><a href="#cross-validation-demonstration" id="toc-cross-validation-demonstration" class="nav-link" data-scroll-target="#cross-validation-demonstration"><span class="header-section-number">16.40</span> Cross-Validation Demonstration</a></li>
+  <li><a href="#standard-deviation-across-folds-is-not-a-confidence-interval" id="toc-standard-deviation-across-folds-is-not-a-confidence-interval" class="nav-link" data-scroll-target="#standard-deviation-across-folds-is-not-a-confidence-interval"><span class="header-section-number">16.41</span> Standard Deviation Across Folds Is Not a Confidence Interval</a></li>
+  <li><a href="#repeated-cross-validation" id="toc-repeated-cross-validation" class="nav-link" data-scroll-target="#repeated-cross-validation"><span class="header-section-number">16.42</span> Repeated Cross-Validation</a></li>
+  <li><a href="#hyperparameter-tuning-and-nested-cross-validation" id="toc-hyperparameter-tuning-and-nested-cross-validation" class="nav-link" data-scroll-target="#hyperparameter-tuning-and-nested-cross-validation"><span class="header-section-number">16.43</span> Hyperparameter Tuning and Nested Cross-Validation</a></li>
+  <li><a href="#selection-creates-optimism" id="toc-selection-creates-optimism" class="nav-link" data-scroll-target="#selection-creates-optimism"><span class="header-section-number">16.44</span> Selection Creates Optimism</a></li>
+  <li><a href="#nested-cross-validation" id="toc-nested-cross-validation" class="nav-link" data-scroll-target="#nested-cross-validation"><span class="header-section-number">16.45</span> Nested Cross-Validation</a></li>
+  <li><a href="#nested-cv-example" id="toc-nested-cv-example" class="nav-link" data-scroll-target="#nested-cv-example"><span class="header-section-number">16.46</span> Nested CV Example</a></li>
+  <li><a href="#uncertainty-in-performance" id="toc-uncertainty-in-performance" class="nav-link" data-scroll-target="#uncertainty-in-performance"><span class="header-section-number">16.47</span> Uncertainty in Performance</a></li>
+  <li><a href="#a-metric-without-uncertainty-is-incomplete" id="toc-a-metric-without-uncertainty-is-incomplete" class="nav-link" data-scroll-target="#a-metric-without-uncertainty-is-incomplete"><span class="header-section-number">16.48</span> A Metric Without Uncertainty Is Incomplete</a></li>
+  <li><a href="#bootstrap-confidence-interval-for-test-set-auc" id="toc-bootstrap-confidence-interval-for-test-set-auc" class="nav-link" data-scroll-target="#bootstrap-confidence-interval-for-test-set-auc"><span class="header-section-number">16.49</span> Bootstrap Confidence Interval for Test-Set AUC</a></li>
+  <li><a href="#visualize-bootstrap-performance" id="toc-visualize-bootstrap-performance" class="nav-link" data-scroll-target="#visualize-bootstrap-performance"><span class="header-section-number">16.50</span> Visualize Bootstrap Performance</a></li>
+  <li><a href="#comparing-models" id="toc-comparing-models" class="nav-link" data-scroll-target="#comparing-models"><span class="header-section-number">16.51</span> Comparing Models</a></li>
+  <li><a href="#tiny-differences-need-context" id="toc-tiny-differences-need-context" class="nav-link" data-scroll-target="#tiny-differences-need-context"><span class="header-section-number">16.52</span> Tiny Differences Need Context</a></li>
+  <li><a href="#paired-evaluation" id="toc-paired-evaluation" class="nav-link" data-scroll-target="#paired-evaluation"><span class="header-section-number">16.53</span> Paired Evaluation</a></li>
+  <li><a href="#statistical-significance-is-not-practical-significance" id="toc-statistical-significance-is-not-practical-significance" class="nav-link" data-scroll-target="#statistical-significance-is-not-practical-significance"><span class="header-section-number">16.54</span> Statistical Significance Is Not Practical Significance</a></li>
+  <li><a href="#validation-beyond-random-splits" id="toc-validation-beyond-random-splits" class="nav-link" data-scroll-target="#validation-beyond-random-splits"><span class="header-section-number">16.55</span> Validation Beyond Random Splits</a></li>
+  <li><a href="#internal-validation" id="toc-internal-validation" class="nav-link" data-scroll-target="#internal-validation"><span class="header-section-number">16.56</span> Internal Validation</a></li>
+  <li><a href="#temporal-validation" id="toc-temporal-validation" class="nav-link" data-scroll-target="#temporal-validation"><span class="header-section-number">16.57</span> Temporal Validation</a></li>
+  <li><a href="#geographic-or-site-validation" id="toc-geographic-or-site-validation" class="nav-link" data-scroll-target="#geographic-or-site-validation"><span class="header-section-number">16.58</span> Geographic or Site Validation</a></li>
+  <li><a href="#external-validation" id="toc-external-validation" class="nav-link" data-scroll-target="#external-validation"><span class="header-section-number">16.59</span> External Validation</a></li>
+  <li><a href="#external-validation-is-not-a-ceremonial-final-step" id="toc-external-validation-is-not-a-ceremonial-final-step" class="nav-link" data-scroll-target="#external-validation-is-not-a-ceremonial-final-step"><span class="header-section-number">16.60</span> External Validation Is Not a Ceremonial Final Step</a></li>
+  <li><a href="#distribution-shift" id="toc-distribution-shift" class="nav-link" data-scroll-target="#distribution-shift"><span class="header-section-number">16.61</span> Distribution Shift</a></li>
+  <li><a href="#the-data-generating-process-can-change" id="toc-the-data-generating-process-can-change" class="nav-link" data-scroll-target="#the-data-generating-process-can-change"><span class="header-section-number">16.62</span> The Data-Generating Process Can Change</a></li>
+  <li><a href="#covariate-shift" id="toc-covariate-shift" class="nav-link" data-scroll-target="#covariate-shift"><span class="header-section-number">16.63</span> Covariate Shift</a></li>
+  <li><a href="#label-shift" id="toc-label-shift" class="nav-link" data-scroll-target="#label-shift"><span class="header-section-number">16.64</span> Label Shift</a></li>
+  <li><a href="#concept-shift" id="toc-concept-shift" class="nav-link" data-scroll-target="#concept-shift"><span class="header-section-number">16.65</span> Concept Shift</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">16.66</span> Examples</a></li>
+  <li><a href="#subgroup-evaluation" id="toc-subgroup-evaluation" class="nav-link" data-scroll-target="#subgroup-evaluation"><span class="header-section-number">16.67</span> Subgroup Evaluation</a></li>
+  <li><a href="#overall-performance-can-hide-important-differences" id="toc-overall-performance-can-hide-important-differences" class="nav-link" data-scroll-target="#overall-performance-can-hide-important-differences"><span class="header-section-number">16.68</span> Overall Performance Can Hide Important Differences</a></li>
+  <li><a href="#evaluate-relevant-groups" id="toc-evaluate-relevant-groups" class="nav-link" data-scroll-target="#evaluate-relevant-groups"><span class="header-section-number">16.69</span> Evaluate Relevant Groups</a></li>
+  <li><a href="#small-groups-produce-noisy-estimates" id="toc-small-groups-produce-noisy-estimates" class="nav-link" data-scroll-target="#small-groups-produce-noisy-estimates"><span class="header-section-number">16.70</span> Small Groups Produce Noisy Estimates</a></li>
+  <li><a href="#subgroup-metrics-do-not-solve-fairness" id="toc-subgroup-metrics-do-not-solve-fairness" class="nav-link" data-scroll-target="#subgroup-metrics-do-not-solve-fairness"><span class="header-section-number">16.71</span> Subgroup Metrics Do Not Solve Fairness</a></li>
+  <li><a href="#evaluation-under-dependence" id="toc-evaluation-under-dependence" class="nav-link" data-scroll-target="#evaluation-under-dependence"><span class="header-section-number">16.72</span> Evaluation Under Dependence</a></li>
+  <li><a href="#observations-are-often-clustered" id="toc-observations-are-often-clustered" class="nav-link" data-scroll-target="#observations-are-often-clustered"><span class="header-section-number">16.73</span> Observations Are Often Clustered</a></li>
+  <li><a href="#split-at-the-generalization-unit" id="toc-split-at-the-generalization-unit" class="nav-link" data-scroll-target="#split-at-the-generalization-unit"><span class="header-section-number">16.74</span> Split at the Generalization Unit</a></li>
+  <li><a href="#leaderboards-and-adaptive-overfitting" id="toc-leaderboards-and-adaptive-overfitting" class="nav-link" data-scroll-target="#leaderboards-and-adaptive-overfitting"><span class="header-section-number">16.75</span> Leaderboards and Adaptive Overfitting</a></li>
+  <li><a href="#public-test-sets-can-become-training-data-indirectly" id="toc-public-test-sets-can-become-training-data-indirectly" class="nav-link" data-scroll-target="#public-test-sets-can-become-training-data-indirectly"><span class="header-section-number">16.76</span> Public Test Sets Can Become Training Data Indirectly</a></li>
+  <li><a href="#benchmark-performance-is-not-scientific-universality" id="toc-benchmark-performance-is-not-scientific-universality" class="nav-link" data-scroll-target="#benchmark-performance-is-not-scientific-universality"><span class="header-section-number">16.77</span> Benchmark Performance Is Not Scientific Universality</a></li>
+  <li><a href="#computer-vision-learning-experience-when-does-a-vision-model-generalize" id="toc-computer-vision-learning-experience-when-does-a-vision-model-generalize" class="nav-link" data-scroll-target="#computer-vision-learning-experience-when-does-a-vision-model-generalize"><span class="header-section-number">16.78</span> Computer Vision Learning Experience: When Does a Vision Model Generalize?</a>
   <ul class="collapse">
-  <li><a href="#grid-search" id="toc-grid-search" class="nav-link" data-scroll-target="#grid-search"><span class="header-section-number">16.5.1</span> Grid Search</a></li>
-  <li><a href="#randomized-search" id="toc-randomized-search" class="nav-link" data-scroll-target="#randomized-search"><span class="header-section-number">16.5.2</span> Randomized Search</a></li>
-  <li><a href="#bayesian-optimization" id="toc-bayesian-optimization" class="nav-link" data-scroll-target="#bayesian-optimization"><span class="header-section-number">16.5.3</span> Bayesian Optimization</a></li>
-  <li><a href="#search-budgets" id="toc-search-budgets" class="nav-link" data-scroll-target="#search-budgets"><span class="header-section-number">16.5.4</span> Search Budgets</a></li>
+  <li><a href="#visual-domain-shift" id="toc-visual-domain-shift" class="nav-link" data-scroll-target="#visual-domain-shift"><span class="header-section-number">16.78.1</span> Visual Domain Shift</a></li>
+  <li><a href="#beyond-overall-accuracy" id="toc-beyond-overall-accuracy" class="nav-link" data-scroll-target="#beyond-overall-accuracy"><span class="header-section-number">16.78.2</span> Beyond Overall Accuracy</a></li>
   </ul></li>
-  <li><a href="#comparing-models" id="toc-comparing-models" class="nav-link" data-scroll-target="#comparing-models"><span class="header-section-number">16.6</span> Comparing Models</a>
-  <ul class="collapse">
-  <li><a href="#baselines" id="toc-baselines" class="nav-link" data-scroll-target="#baselines"><span class="header-section-number">16.6.1</span> Baselines</a></li>
-  <li><a href="#performance-distributions" id="toc-performance-distributions" class="nav-link" data-scroll-target="#performance-distributions"><span class="header-section-number">16.6.2</span> Performance Distributions</a></li>
-  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">16.6.3</span> Confidence Intervals</a></li>
-  <li><a href="#practical-versus-statistical-differences" id="toc-practical-versus-statistical-differences" class="nav-link" data-scroll-target="#practical-versus-statistical-differences"><span class="header-section-number">16.6.4</span> Practical Versus Statistical Differences</a></li>
-  <li><a href="#external-validation" id="toc-external-validation" class="nav-link" data-scroll-target="#external-validation"><span class="header-section-number">16.6.5</span> External Validation</a></li>
-  </ul></li>
-  <li><a href="#learning-curves" id="toc-learning-curves" class="nav-link" data-scroll-target="#learning-curves"><span class="header-section-number">16.7</span> Learning Curves</a>
-  <ul class="collapse">
-  <li><a href="#diagnosing-bias" id="toc-diagnosing-bias" class="nav-link" data-scroll-target="#diagnosing-bias"><span class="header-section-number">16.7.1</span> Diagnosing Bias</a></li>
-  <li><a href="#diagnosing-variance" id="toc-diagnosing-variance" class="nav-link" data-scroll-target="#diagnosing-variance"><span class="header-section-number">16.7.2</span> Diagnosing Variance</a></li>
-  </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">16.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">16.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">16.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">16.11</span> Real-World Case Study</a>
-  <ul class="collapse">
-  <li><a href="#a-reproducible-model-benchmark" id="toc-a-reproducible-model-benchmark" class="nav-link" data-scroll-target="#a-reproducible-model-benchmark"><span class="header-section-number">16.11.1</span> A Reproducible Model Benchmark</a></li>
-  </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">16.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">16.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">16.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">16.15</span> Key Takeaways</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">16.79</span> Three Tracks</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">16.80</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">16.81</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">16.82</span> Open ML Benchmark Track</a></li>
+  <li><a href="#beyond-the-algorithm-evidence-is-always-conditional" id="toc-beyond-the-algorithm-evidence-is-always-conditional" class="nav-link" data-scroll-target="#beyond-the-algorithm-evidence-is-always-conditional"><span class="header-section-number">16.83</span> Beyond the Algorithm: Evidence Is Always Conditional</a></li>
+  <li><a href="#ai-pair-programmer-declare-the-winner" id="toc-ai-pair-programmer-declare-the-winner" class="nav-link" data-scroll-target="#ai-pair-programmer-declare-the-winner"><span class="header-section-number">16.84</span> AI Pair Programmer: Declare the Winner</a></li>
+  <li><a href="#hands-on-lab-evaluation-audit" id="toc-hands-on-lab-evaluation-audit" class="nav-link" data-scroll-target="#hands-on-lab-evaluation-audit"><span class="header-section-number">16.85</span> Hands-On Lab: Evaluation Audit</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">16.86</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">16.87</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">16.88</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-94-accurate-early-warning-system" id="toc-professors-challenge-the-94-accurate-early-warning-system" class="nav-link" data-scroll-target="#professors-challenge-the-94-accurate-early-warning-system"><span class="header-section-number">16.89</span> Professor’s Challenge: The 94% Accurate Early-Warning System</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">16.90</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">16.91</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">16.92</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">16.93</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Reliable and Research-Ready Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html">Part VI — Research, Responsibility, and Reproducibility</a></li><li class="breadcrumb-item"><a href="../part-06-research/16-model-evaluation.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></h1>
 </div>
 
 
@@ -375,138 +556,1864 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">16.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Distinguish training, validation, and test data.</li>
-<li>Apply cross-validation appropriately.</li>
-<li>Explain nested cross-validation.</li>
-<li>Tune hyperparameters without contaminating final evaluation.</li>
-<li>Quantify uncertainty in model performance.</li>
+<li><p>distinguish training, validation, and test performance;</p></li>
+<li><p>explain generalization error as an estimand rather than merely a score;</p></li>
+<li><p>choose evaluation metrics that align with the decision problem;</p></li>
+<li><p>interpret confusion matrices, sensitivity, specificity, precision, F1, ROC-AUC, and PR-AUC;</p></li>
+<li><p>explain why accuracy can fail under class imbalance;</p></li>
+<li><p>distinguish discrimination from calibration;</p></li>
+<li><p>calculate and interpret the Brier score;</p></li>
+<li><p>reason about decision thresholds and asymmetric error costs;</p></li>
+<li><p>explain cross-validation and repeated cross-validation;</p></li>
+<li><p>distinguish model assessment from hyperparameter selection;</p></li>
+<li><p>explain why nested cross-validation reduces selection bias;</p></li>
+<li><p>quantify uncertainty around performance estimates;</p></li>
+<li><p>compare models without overinterpreting tiny metric differences;</p></li>
+<li><p>distinguish internal, temporal, geographic, and external validation;</p></li>
+<li><p>identify distribution shift and dataset shift;</p></li>
+<li><p>evaluate subgroup performance without confusing group averages with individual fairness;</p></li>
+<li><p>design evaluation around deployment conditions;</p></li>
+<li><p>recognize test-set contamination and leaderboard overfitting;</p></li>
+<li><p>distinguish predictive evidence from causal or scientific claims;</p></li>
+<li><p>design a research-grade evaluation protocol for health, education, and open ML applications.</p></li>
+<li><p>design computer-vision evaluation protocols that account for grouped images, visual domain shift, class-specific errors, and deployment conditions.</p></li>
 </ul>
 </section>
-<section id="why-this-matters" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">16.2</span> Why This Matters</h2>
-<p>A sophisticated model evaluated incorrectly can produce less credible evidence than a simple model evaluated rigorously.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">16.3</span> Real-World Problem</h2>
-<p>After trying dozens of models, an analyst reports only the best test-set result. Why is that result no longer a trustworthy estimate of generalization?</p>
-</section>
-<section id="evaluation-foundations" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="evaluation-foundations"><span class="header-section-number">16.4</span> Evaluation Foundations</h2>
-<section id="generalization-error" class="level3" data-number="16.4.1">
-<h3 data-number="16.4.1" class="anchored" data-anchor-id="generalization-error"><span class="header-section-number">16.4.1</span> Generalization Error</h3>
-</section>
-<section id="train-validation-and-test-sets" class="level3" data-number="16.4.2">
-<h3 data-number="16.4.2" class="anchored" data-anchor-id="train-validation-and-test-sets"><span class="header-section-number">16.4.2</span> Train, Validation, and Test Sets</h3>
-</section>
-<section id="k-fold-cross-validation" class="level3" data-number="16.4.3">
-<h3 data-number="16.4.3" class="anchored" data-anchor-id="k-fold-cross-validation"><span class="header-section-number">16.4.3</span> K-Fold Cross-Validation</h3>
-</section>
-<section id="stratification" class="level3" data-number="16.4.4">
-<h3 data-number="16.4.4" class="anchored" data-anchor-id="stratification"><span class="header-section-number">16.4.4</span> Stratification</h3>
-</section>
-<section id="grouped-and-time-based-splits" class="level3" data-number="16.4.5">
-<h3 data-number="16.4.5" class="anchored" data-anchor-id="grouped-and-time-based-splits"><span class="header-section-number">16.4.5</span> Grouped and Time-Based Splits</h3>
-</section>
-<section id="repeated-cross-validation" class="level3" data-number="16.4.6">
-<h3 data-number="16.4.6" class="anchored" data-anchor-id="repeated-cross-validation"><span class="header-section-number">16.4.6</span> Repeated Cross-Validation</h3>
-</section>
-<section id="nested-cross-validation" class="level3" data-number="16.4.7">
-<h3 data-number="16.4.7" class="anchored" data-anchor-id="nested-cross-validation"><span class="header-section-number">16.4.7</span> Nested Cross-Validation</h3>
-</section>
-</section>
-<section id="hyperparameter-optimization" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="hyperparameter-optimization"><span class="header-section-number">16.5</span> Hyperparameter Optimization</h2>
-<section id="grid-search" class="level3" data-number="16.5.1">
-<h3 data-number="16.5.1" class="anchored" data-anchor-id="grid-search"><span class="header-section-number">16.5.1</span> Grid Search</h3>
-</section>
-<section id="randomized-search" class="level3" data-number="16.5.2">
-<h3 data-number="16.5.2" class="anchored" data-anchor-id="randomized-search"><span class="header-section-number">16.5.2</span> Randomized Search</h3>
-</section>
-<section id="bayesian-optimization" class="level3" data-number="16.5.3">
-<h3 data-number="16.5.3" class="anchored" data-anchor-id="bayesian-optimization"><span class="header-section-number">16.5.3</span> Bayesian Optimization</h3>
-</section>
-<section id="search-budgets" class="level3" data-number="16.5.4">
-<h3 data-number="16.5.4" class="anchored" data-anchor-id="search-budgets"><span class="header-section-number">16.5.4</span> Search Budgets</h3>
-</section>
-</section>
-<section id="comparing-models" class="level2" data-number="16.6">
-<h2 data-number="16.6" class="anchored" data-anchor-id="comparing-models"><span class="header-section-number">16.6</span> Comparing Models</h2>
-<section id="baselines" class="level3" data-number="16.6.1">
-<h3 data-number="16.6.1" class="anchored" data-anchor-id="baselines"><span class="header-section-number">16.6.1</span> Baselines</h3>
-</section>
-<section id="performance-distributions" class="level3" data-number="16.6.2">
-<h3 data-number="16.6.2" class="anchored" data-anchor-id="performance-distributions"><span class="header-section-number">16.6.2</span> Performance Distributions</h3>
-</section>
-<section id="confidence-intervals" class="level3" data-number="16.6.3">
-<h3 data-number="16.6.3" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">16.6.3</span> Confidence Intervals</h3>
-</section>
-<section id="practical-versus-statistical-differences" class="level3" data-number="16.6.4">
-<h3 data-number="16.6.4" class="anchored" data-anchor-id="practical-versus-statistical-differences"><span class="header-section-number">16.6.4</span> Practical Versus Statistical Differences</h3>
-</section>
-<section id="external-validation" class="level3" data-number="16.6.5">
-<h3 data-number="16.6.5" class="anchored" data-anchor-id="external-validation"><span class="header-section-number">16.6.5</span> External Validation</h3>
-</section>
-</section>
-<section id="learning-curves" class="level2" data-number="16.7">
-<h2 data-number="16.7" class="anchored" data-anchor-id="learning-curves"><span class="header-section-number">16.7</span> Learning Curves</h2>
-<section id="diagnosing-bias" class="level3" data-number="16.7.1">
-<h3 data-number="16.7.1" class="anchored" data-anchor-id="diagnosing-bias"><span class="header-section-number">16.7.1</span> Diagnosing Bias</h3>
-</section>
-<section id="diagnosing-variance" class="level3" data-number="16.7.2">
-<h3 data-number="16.7.2" class="anchored" data-anchor-id="diagnosing-variance"><span class="header-section-number">16.7.2</span> Diagnosing Variance</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="16.8">
-<h2 data-number="16.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">16.8</span> Hands-On Practice</h2>
-<p>Compare several models under identical repeated cross-validation and preserve an untouched final test set.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="16.9">
-<h2 data-number="16.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">16.9</span> Common Mistakes</h2>
+<section id="what-does-it-mean-for-a-model-to-work" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="what-does-it-mean-for-a-model-to-work"><span class="header-section-number">16.2</span> What Does It Mean for a Model to Work?</h2>
+<p>Suppose a classifier achieves:</p>
+<p><span class="math display">\[
+Accuracy=0.93.
+\]</span></p>
+<p>Is it good?</p>
+<p>We cannot answer until we know:</p>
 <ul>
-<li>Repeatedly checking test performance.</li>
-<li>Selecting folds that violate the data structure.</li>
-<li>Reporting only the winning configuration.</li>
-<li>Ignoring uncertainty around metrics.</li>
+<li>the class distribution;</li>
+<li>the comparison baseline;</li>
+<li>how the data were split;</li>
+<li>whether tuning used the test set;</li>
+<li>whether observations are independent;</li>
+<li>the costs of false positives and false negatives;</li>
+<li>calibration;</li>
+<li>uncertainty;</li>
+<li>subgroup performance;</li>
+<li>whether future data resemble the evaluation data.</li>
+</ul>
+<p>A performance number is not evidence in isolation.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>When we say that a model “works,” what evidence should be sufficient for us to believe that claim?</strong></p>
+</div>
+</div>
+<section id="from-building-systems-to-evaluating-evidence" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="from-building-systems-to-evaluating-evidence"><span class="header-section-number">16.2.1</span> From Building Systems to Evaluating Evidence</h3>
+<p>The preceding chapters developed increasingly flexible models, from linear methods and trees to ensembles, neural networks, NLP systems, and generative AI. Flexibility expands what models can do, but it also raises the standard of evidence required to justify their use. This chapter consolidates evaluation as a scientific process: not merely reporting a score, but determining what a result means, how uncertain it is, what it should be compared with, and whether it is likely to generalize.</p>
+</section>
+</section>
+<section id="evaluation-begins-with-the-claim" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="evaluation-begins-with-the-claim"><span class="header-section-number">16.3</span> Evaluation Begins With the Claim</h2>
+<p>Different claims require different evidence.</p>
+<blockquote class="blockquote">
+<p>“This model predicts held-out observations from the same dataset.”</p>
+</blockquote>
+<p>is weaker than:</p>
+<blockquote class="blockquote">
+<p>“This model generalizes to future students at other universities.”</p>
+</blockquote>
+<p>And that is different from:</p>
+<blockquote class="blockquote">
+<p>“Using this model improves student outcomes.”</p>
+</blockquote>
+<p>The first two are predictive claims.</p>
+<p>The third is causal and intervention-oriented.</p>
+<p>No evaluation metric can silently transform one claim into another.</p>
+</section>
+<section id="generalization-error" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="generalization-error"><span class="header-section-number">16.4</span> Generalization Error</h2>
+<p>Let <span class="math inline">\(f\)</span> be a fitted prediction rule and <span class="math inline">\(L\)</span> a loss function.</p>
+<p>The population generalization risk is:</p>
+<p><span class="math display">\[
+R(f)
+=
+\mathbb{E}_{(X,Y)\sim P}
+[
+L(Y,f(X))
+].
+\]</span></p>
+<p>We do not observe the full population distribution <span class="math inline">\(P\)</span>.</p>
+<p>Evaluation methods estimate performance using finite samples.</p>
+<p>Therefore every reported metric is an estimate.</p>
+</section>
+<section id="training-error-is-optimistic" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="training-error-is-optimistic"><span class="header-section-number">16.5</span> Training Error Is Optimistic</h2>
+<p>A model is optimized using training data.</p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\widehat R_{train}
+\]</span></p>
+<p>usually underestimates the error expected on genuinely new observations.</p>
+<p>This motivates validation and test data.</p>
+</section>
+<section id="three-data-roles" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="three-data-roles"><span class="header-section-number">16.6</span> Three Data Roles</h2>
+<p>A clean conceptual separation is:</p>
+<p><span class="math display">\[
+\boxed{
+\text{training}
+\rightarrow
+\text{model fitting}
+}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\text{validation}
+\rightarrow
+\text{model/hyperparameter selection}
+}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\text{test}
+\rightarrow
+\text{final assessment}
+}
+\]</span></p>
+<p>Cross-validation can replace a single validation split, but the distinction between <strong>selection</strong> and <strong>final assessment</strong> remains.</p>
+</section>
+<section id="the-test-set-is-not-a-development-tool" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="the-test-set-is-not-a-development-tool"><span class="header-section-number">16.7</span> The Test Set Is Not a Development Tool</h2>
+<p>If we repeatedly inspect test performance and change the model, then the test set has influenced model development.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\text{repeated test feedback}
+\rightarrow
+\text{implicit tuning}
+\rightarrow
+\text{optimistic test estimate}.
+\]</span></p>
+<p>The test set is no longer truly untouched.</p>
+</section>
+<section id="classification-evaluation" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="classification-evaluation"><span class="header-section-number">16.8</span> Classification Evaluation</h2>
+</section>
+<section id="confusion-matrix" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="confusion-matrix"><span class="header-section-number">16.9</span> Confusion Matrix</h2>
+<p>For binary classification:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Predicted Positive</th>
+<th style="text-align: right;">Predicted Negative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual Positive</td>
+<td style="text-align: right;">True Positive (TP)</td>
+<td style="text-align: right;">False Negative (FN)</td>
+</tr>
+<tr class="even">
+<td>Actual Negative</td>
+<td style="text-align: right;">False Positive (FP)</td>
+<td style="text-align: right;">True Negative (TN)</td>
+</tr>
+</tbody>
+</table>
+<p>Many classification metrics are different summaries of these four quantities.</p>
+</section>
+<section id="accuracy" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="accuracy"><span class="header-section-number">16.10</span> Accuracy</h2>
+<p><span class="math display">\[
+Accuracy
+=
+\frac{TP+TN}
+{TP+TN+FP+FN}.
+\]</span></p>
+<p>Accuracy is intuitive but can be misleading under imbalance.</p>
+<p>If disease prevalence is 2%, a classifier predicting everyone as negative achieves:</p>
+<p><span class="math display">\[
+Accuracy=98\%.
+\]</span></p>
+<p>Yet it identifies no cases.</p>
+</section>
+<section id="sensitivity" class="level2" data-number="16.11">
+<h2 data-number="16.11" class="anchored" data-anchor-id="sensitivity"><span class="header-section-number">16.11</span> Sensitivity</h2>
+<p>Also called recall or true-positive rate:</p>
+<p><span class="math display">\[
+Sensitivity
+=
+\frac{TP}
+{TP+FN}.
+\]</span></p>
+<p>Sensitivity asks:</p>
+<blockquote class="blockquote">
+<p>Among actual positives, what proportion did we identify?</p>
+</blockquote>
+</section>
+<section id="specificity" class="level2" data-number="16.12">
+<h2 data-number="16.12" class="anchored" data-anchor-id="specificity"><span class="header-section-number">16.12</span> Specificity</h2>
+<p><span class="math display">\[
+Specificity
+=
+\frac{TN}
+{TN+FP}.
+\]</span></p>
+<p>Specificity asks:</p>
+<blockquote class="blockquote">
+<p>Among actual negatives, what proportion did we correctly reject?</p>
+</blockquote>
+</section>
+<section id="precision" class="level2" data-number="16.13">
+<h2 data-number="16.13" class="anchored" data-anchor-id="precision"><span class="header-section-number">16.13</span> Precision</h2>
+<p>Also called positive predictive value:</p>
+<p><span class="math display">\[
+Precision
+=
+\frac{TP}
+{TP+FP}.
+\]</span></p>
+<p>Precision asks:</p>
+<blockquote class="blockquote">
+<p>Among predicted positives, what proportion were actually positive?</p>
+</blockquote>
+<p>Precision depends strongly on prevalence.</p>
+</section>
+<section id="f1-score" class="level2" data-number="16.14">
+<h2 data-number="16.14" class="anchored" data-anchor-id="f1-score"><span class="header-section-number">16.14</span> F1 Score</h2>
+<p><span class="math display">\[
+F1
+=
+2
+\frac{
+Precision\times Recall
+}{
+Precision+Recall
+}.
+\]</span></p>
+<p>F1 balances precision and recall through their harmonic mean.</p>
+<p>But it does not incorporate true negatives directly.</p>
+</section>
+<section id="compute-classification-metrics" class="level2" data-number="16.15">
+<h2 data-number="16.15" class="anchored" data-anchor-id="compute-classification-metrics"><span class="header-section-number">16.15</span> Compute Classification Metrics</h2>
+<div id="9a05cf07" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    confusion_matrix,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    accuracy_score,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    precision_score,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    recall_score,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    f1_score,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    roc_auc_score,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    average_precision_score,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    brier_score_loss</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_breast_cancer(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    as_frame<span class="op">=</span><span class="va">True</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.data</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">## Define malignant as the positive class.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (data.target <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">.30</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        LogisticRegression(</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            max_iter<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>model.fit(</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    y_train</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> model.predict_proba(</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> (</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">&gt;=</span> <span class="fl">.50</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>).astype(<span class="bu">int</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>tn, fp, fn, tp <span class="op">=</span> confusion_matrix(</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    pred</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>).ravel()</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>specificity <span class="op">=</span> tn <span class="op">/</span> (tn <span class="op">+</span> fp)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accuracy"</span>: accuracy_score(y_test, pred),</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sensitivity"</span>: recall_score(y_test, pred),</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Specificity"</span>: specificity,</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Precision"</span>: precision_score(y_test, pred),</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">"F1"</span>: f1_score(y_test, pred),</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ROC-AUC"</span>: roc_auc_score(y_test, prob),</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PR-AUC"</span>: average_precision_score(y_test, prob),</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brier"</span>: brier_score_loss(y_test, prob)</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>Accuracy       0.971
+Sensitivity    0.938
+Specificity    0.991
+Precision      0.984
+F1             0.960
+ROC-AUC        0.998
+PR-AUC         0.996
+Brier          0.019
+dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="roc-curve" class="level2" data-number="16.16">
+<h2 data-number="16.16" class="anchored" data-anchor-id="roc-curve"><span class="header-section-number">16.16</span> ROC Curve</h2>
+<p>ROC analysis summarizes discrimination across thresholds by tracing the tradeoff between true-positive and false-positive rates <span class="citation" data-cites="fawcett2006roc">(<a href="../references.html#ref-fawcett2006roc" role="doc-biblioref">Fawcett 2006</a>)</span>.</p>
+<p>For threshold <span class="math inline">\(c\)</span>:</p>
+<p><span class="math display">\[
+Sensitivity(c)
+=
+P(\hat p\ge c\mid Y=1)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+FPR(c)
+=
+1-Specificity(c).
+\]</span></p>
+<p>The ROC curve evaluates sensitivity versus false-positive rate across thresholds.</p>
+</section>
+<section id="roc-auc" class="level2" data-number="16.17">
+<h2 data-number="16.17" class="anchored" data-anchor-id="roc-auc"><span class="header-section-number">16.17</span> ROC-AUC</h2>
+<p>ROC-AUC can be interpreted as the probability that a randomly chosen positive receives a higher score than a randomly chosen negative:</p>
+<p><span class="math display">\[
+AUC
+=
+P(
+S^+&gt;S^-
+).
+\]</span></p>
+<p>It measures <strong>ranking discrimination</strong>.</p>
+<p>It does not measure probability calibration.</p>
+</section>
+<section id="plot-the-roc-curve" class="level2" data-number="16.18">
+<h2 data-number="16.18" class="anchored" data-anchor-id="plot-the-roc-curve"><span class="header-section-number">16.18</span> Plot the ROC Curve</h2>
+<div id="cell-fig-roc" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fpr, tpr, roc_thresholds <span class="op">=</span> roc_curve(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    prob</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    fpr,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    tpr,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="ss">f"ROC-AUC = </span><span class="sc">{</span>roc_auc_score(y_test, prob)<span class="sc">:.3f}</span><span class="ss">"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Chance"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"False Positive Rate"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"True Positive Rate"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"ROC Curve"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-roc" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ROC curve plotting true positive rate against false positive rate across classification thresholds, with a diagonal chance-reference line and the model's ROC-AUC shown in the legend.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-roc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-model-evaluation_files/figure-html/fig-roc-output-1.png" alt="ROC curve plotting true positive rate against false positive rate across classification thresholds, with a diagonal chance-reference line and the model's ROC-AUC shown in the legend." width="589" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-roc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.1: The ROC curve summarizes discrimination across classification thresholds.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="precision-recall-curve" class="level2" data-number="16.19">
+<h2 data-number="16.19" class="anchored" data-anchor-id="precision-recall-curve"><span class="header-section-number">16.19</span> Precision-Recall Curve</h2>
+<p>When positive cases are uncommon, precision-recall analysis can be especially informative; precision-recall curves can reveal differences that ROC curves may obscure under substantial class imbalance <span class="citation" data-cites="saitoRehmsmeier2015">(<a href="../references.html#ref-saitoRehmsmeier2015" role="doc-biblioref">Saito and Rehmsmeier 2015</a>)</span>.</p>
+<div id="cell-fig-pr" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_recall_curve</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>precision_values, recall_values, pr_thresholds <span class="op">=</span> (</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    precision_recall_curve(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        prob</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    recall_values,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    precision_values,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="ss">f"PR-AUC = </span><span class="sc">{</span>average_precision_score(y_test, prob)<span class="sc">:.3f}</span><span class="ss">"</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Recall"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Precision"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Precision-Recall Curve"</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-pr" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Precision-recall curve plotting precision against recall across classification thresholds, with the model's average precision summarized in the legend.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-model-evaluation_files/figure-html/fig-pr-output-1.png" alt="Precision-recall curve plotting precision against recall across classification thresholds, with the model's average precision summarized in the legend." width="589" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.2: Precision-recall curves emphasize performance on the positive class.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="roc-auc-versus-pr-auc" class="level2" data-number="16.20">
+<h2 data-number="16.20" class="anchored" data-anchor-id="roc-auc-versus-pr-auc"><span class="header-section-number">16.20</span> ROC-AUC Versus PR-AUC</h2>
+<p>Neither metric is universally superior.</p>
+<p>ROC-AUC emphasizes ranking across positives and negatives.</p>
+<p>PR-AUC emphasizes the positive predictions and is sensitive to prevalence.</p>
+<p>Choose based on the scientific or operational problem.</p>
+</section>
+<section id="calibration" class="level2" data-number="16.21">
+<h2 data-number="16.21" class="anchored" data-anchor-id="calibration"><span class="header-section-number">16.21</span> Calibration</h2>
+<p>Probability calibration should be evaluated separately from discrimination when predicted probabilities will support decisions <span class="citation" data-cites="niculescuMizilCaruana2005">(<a href="../references.html#ref-niculescuMizilCaruana2005" role="doc-biblioref">Niculescu-Mizil and Caruana 2005</a>)</span>. Modern neural networks can be highly accurate while remaining poorly calibrated <span class="citation" data-cites="guoEtAl2017">(<a href="../references.html#ref-guoEtAl2017" role="doc-biblioref">Guo et al. 2017</a>)</span>.</p>
+</section>
+<section id="discrimination-is-not-calibration" class="level2" data-number="16.22">
+<h2 data-number="16.22" class="anchored" data-anchor-id="discrimination-is-not-calibration"><span class="header-section-number">16.22</span> Discrimination Is Not Calibration</h2>
+<p>Suppose among cases assigned probability <span class="math inline">\(0.80\)</span>, only 45% experience the outcome.</p>
+<p>The model may still rank observations well, but its probabilities are poorly calibrated.</p>
+<p>Calibration asks whether:</p>
+<p><span class="math display">\[
+P(Y=1\mid \hat p=p)
+\approx p.
+\]</span></p>
+</section>
+<section id="brier-score" class="level2" data-number="16.23">
+<h2 data-number="16.23" class="anchored" data-anchor-id="brier-score"><span class="header-section-number">16.23</span> Brier Score</h2>
+<p>The Brier score is a classic proper scoring rule for probabilistic forecasts <span class="citation" data-cites="brier1950">(<a href="../references.html#ref-brier1950" role="doc-biblioref">Brier 1950</a>)</span>.</p>
+<p>For binary outcomes:</p>
+<p><span class="math display">\[
+Brier
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(\hat p_i-y_i)^2.
+\]</span></p>
+<p>Lower is better.</p>
+<p>The Brier score reflects probability accuracy, combining aspects of calibration and discrimination.</p>
+</section>
+<section id="calibration-curve" class="level2" data-number="16.24">
+<h2 data-number="16.24" class="anchored" data-anchor-id="calibration-curve"><span class="header-section-number">16.24</span> Calibration Curve</h2>
+<div id="cell-fig-calibration" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>observed, predicted <span class="op">=</span> calibration_curve(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    prob,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    n_bins<span class="op">=</span><span class="dv">7</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    strategy<span class="op">=</span><span class="st">"quantile"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    predicted,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    observed,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Logistic regression"</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Perfect calibration"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Mean predicted probability"</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Observed positive fraction"</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Calibration Curve"</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-calibration" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Calibration curve comparing mean predicted probabilities with observed positive fractions across probability bins, alongside a diagonal line representing perfect calibration.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-model-evaluation_files/figure-html/fig-calibration-output-1.png" alt="Calibration curve comparing mean predicted probabilities with observed positive fractions across probability bins, alongside a diagonal line representing perfect calibration." width="589" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.3: Calibration compares predicted probabilities with observed outcome frequencies.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calibration-depends-on-context" class="level2" data-number="16.25">
+<h2 data-number="16.25" class="anchored" data-anchor-id="calibration-depends-on-context"><span class="header-section-number">16.25</span> Calibration Depends on Context</h2>
+<p>Calibration can change when prevalence or population characteristics change.</p>
+<p>A model calibrated in one hospital, university, year, or region may not remain calibrated elsewhere.</p>
+</section>
+<section id="decision-thresholds" class="level2" data-number="16.26">
+<h2 data-number="16.26" class="anchored" data-anchor-id="decision-thresholds"><span class="header-section-number">16.26</span> Decision Thresholds</h2>
+</section>
+<section id="probability-is-not-the-decision" class="level2" data-number="16.27">
+<h2 data-number="16.27" class="anchored" data-anchor-id="probability-is-not-the-decision"><span class="header-section-number">16.27</span> Probability Is Not the Decision</h2>
+<p>A model can estimate:</p>
+<p><span class="math display">\[
+P(Y=1\mid X)=0.37.
+\]</span></p>
+<p>Whether we act depends on the decision problem.</p>
+<p>The threshold is not a mathematical constant.</p>
+</section>
+<section id="threshold-tradeoffs" class="level2" data-number="16.28">
+<h2 data-number="16.28" class="anchored" data-anchor-id="threshold-tradeoffs"><span class="header-section-number">16.28</span> Threshold Tradeoffs</h2>
+<div id="90e26d23" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>threshold_rows <span class="op">=</span> []</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> threshold <span class="kw">in</span> np.linspace(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">.10</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">.90</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">9</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    threshold_pred <span class="op">=</span> (</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">&gt;=</span> threshold</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ).astype(<span class="bu">int</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    tn_i, fp_i, fn_i, tp_i <span class="op">=</span> confusion_matrix(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        threshold_pred,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    ).ravel()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    sensitivity_i <span class="op">=</span> (</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        tp_i <span class="op">/</span> (tp_i <span class="op">+</span> fn_i)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> tp_i <span class="op">+</span> fn_i <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> np.nan</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    specificity_i <span class="op">=</span> (</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        tn_i <span class="op">/</span> (tn_i <span class="op">+</span> fp_i)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> tn_i <span class="op">+</span> fp_i <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> np.nan</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    threshold_rows.append({</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Threshold"</span>: threshold,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Sensitivity"</span>: sensitivity_i,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Specificity"</span>: specificity_i,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"False Positives"</span>: fp_i,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"False Negatives"</span>: fn_i</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>threshold_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    threshold_rows</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>threshold_df.<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Threshold</th>
+<th data-quarto-table-cell-role="th">Sensitivity</th>
+<th data-quarto-table-cell-role="th">Specificity</th>
+<th data-quarto-table-cell-role="th">False Positives</th>
+<th data-quarto-table-cell-role="th">False Negatives</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.1</td>
+<td>0.984</td>
+<td>0.935</td>
+<td>7</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.2</td>
+<td>0.984</td>
+<td>0.972</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.3</td>
+<td>0.969</td>
+<td>0.991</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0.4</td>
+<td>0.953</td>
+<td>0.991</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>0.5</td>
+<td>0.938</td>
+<td>0.991</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>0.6</td>
+<td>0.922</td>
+<td>1.000</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>0.7</td>
+<td>0.922</td>
+<td>1.000</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>0.8</td>
+<td>0.875</td>
+<td>1.000</td>
+<td>0</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>0.9</td>
+<td>0.797</td>
+<td>1.000</td>
+<td>0</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-threshold-tradeoffs" class="level2" data-number="16.29">
+<h2 data-number="16.29" class="anchored" data-anchor-id="visualize-threshold-tradeoffs"><span class="header-section-number">16.29</span> Visualize Threshold Tradeoffs</h2>
+<div id="cell-fig-threshold-tradeoff" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    threshold_df[<span class="st">"Threshold"</span>],</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    threshold_df[<span class="st">"Sensitivity"</span>],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Sensitivity"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    threshold_df[<span class="st">"Threshold"</span>],</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    threshold_df[<span class="st">"Specificity"</span>],</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Specificity"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Decision threshold"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Metric value"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Threshold Tradeoff"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-threshold-tradeoff" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart showing sensitivity and specificity across decision thresholds, illustrating how increasing or decreasing the threshold changes the balance between the two metrics.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-threshold-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-model-evaluation_files/figure-html/fig-threshold-tradeoff-output-1.png" alt="Line chart showing sensitivity and specificity across decision thresholds, illustrating how increasing or decreasing the threshold changes the balance between the two metrics." width="680" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-threshold-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.4: Changing the classification threshold changes sensitivity and specificity.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="error-costs" class="level2" data-number="16.30">
+<h2 data-number="16.30" class="anchored" data-anchor-id="error-costs"><span class="header-section-number">16.30</span> Error Costs</h2>
+<p>Suppose a false negative costs <span class="math inline">\(C_{FN}\)</span> and a false positive costs <span class="math inline">\(C_{FP}\)</span>.</p>
+<p>A simple empirical cost is:</p>
+<p><span class="math display">\[
+Cost(c)
+=
+C_{FN}FN(c)
++
+C_{FP}FP(c).
+\]</span></p>
+<p>The preferred threshold may depend on these consequences.</p>
+<p>But assigning costs is a substantive decision—not merely a modeling choice.</p>
+</section>
+<section id="regression-evaluation" class="level2" data-number="16.31">
+<h2 data-number="16.31" class="anchored" data-anchor-id="regression-evaluation"><span class="header-section-number">16.31</span> Regression Evaluation</h2>
+</section>
+<section id="mean-absolute-error" class="level2" data-number="16.32">
+<h2 data-number="16.32" class="anchored" data-anchor-id="mean-absolute-error"><span class="header-section-number">16.32</span> Mean Absolute Error</h2>
+<p><span class="math display">\[
+MAE
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+|y_i-\hat y_i|.
+\]</span></p>
+<p>MAE is expressed in the outcome’s original units.</p>
+</section>
+<section id="mean-squared-error" class="level2" data-number="16.33">
+<h2 data-number="16.33" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">16.33</span> Mean Squared Error</h2>
+<p><span class="math display">\[
+MSE
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat y_i)^2.
+\]</span></p>
+<p>Squaring gives larger errors greater influence.</p>
+</section>
+<section id="root-mean-squared-error" class="level2" data-number="16.34">
+<h2 data-number="16.34" class="anchored" data-anchor-id="root-mean-squared-error"><span class="header-section-number">16.34</span> Root Mean Squared Error</h2>
+<p><span class="math display">\[
+RMSE
+=
+\sqrt{MSE}.
+\]</span></p>
+<p>RMSE returns to the original outcome units.</p>
+</section>
+<section id="coefficient-of-determination" class="level2" data-number="16.35">
+<h2 data-number="16.35" class="anchored" data-anchor-id="coefficient-of-determination"><span class="header-section-number">16.35</span> Coefficient of Determination</h2>
+<p><span class="math display">\[
+R^2
+=
+1-
+\frac{
+\sum_i(y_i-\hat y_i)^2
+}{
+\sum_i(y_i-\bar y)^2
+}.
+\]</span></p>
+<p><span class="math inline">\(R^2\)</span> compares squared error with a mean-prediction baseline.</p>
+<p>A negative test <span class="math inline">\(R^2\)</span> is possible.</p>
+</section>
+<section id="metric-choice-encodes-values" class="level2" data-number="16.36">
+<h2 data-number="16.36" class="anchored" data-anchor-id="metric-choice-encodes-values"><span class="header-section-number">16.36</span> Metric Choice Encodes Values</h2>
+<p>MAE and RMSE answer different questions.</p>
+<p>If rare large errors are especially consequential, RMSE may reflect that more strongly.</p>
+<p>Metric selection is partly a decision about what kinds of mistakes matter.</p>
+</section>
+<section id="evaluation-is-an-argument-about-future-performance" class="level2" data-number="16.37">
+<h2 data-number="16.37" class="anchored" data-anchor-id="evaluation-is-an-argument-about-future-performance"><span class="header-section-number">16.37</span> Evaluation Is an Argument About Future Performance</h2>
+<p>An evaluation result is evidence supporting a claim about behavior beyond the observations used to train the model.</p>
+<p><span class="math display">\[
+\boxed{
+\text{Claim}
+\leftarrow
+\text{Metric}+\text{Test Design}+\text{Comparison}+\text{Uncertainty}+\text{Target Population}
+}
+\]</span></p>
+<p>An AUC of 0.88 is incomplete without knowing where it was measured, whether evaluation data were independent of training and tuning, what population they represent, what comparison was used, and how uncertain or heterogeneous performance is.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Evaluation design</th>
+<th>Strongest reasonable question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>random holdout</td>
+<td>does performance generalize to similar observations from the same context?</td>
+</tr>
+<tr class="even">
+<td>cross-validation</td>
+<td>is performance reasonably stable across partitions of the available sample?</td>
+</tr>
+<tr class="odd">
+<td>temporal validation</td>
+<td>does performance generalize forward in time?</td>
+</tr>
+<tr class="even">
+<td>site/institution holdout</td>
+<td>does the model transfer to another organizational context?</td>
+</tr>
+<tr class="odd">
+<td>external dataset</td>
+<td>does performance generalize beyond the development dataset?</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Test-set performance” is not automatically “real-world generalization.” A test set from the same source, period, institution, measurement system, and sampling process may support a much narrower claim than deployment requires.</p>
+</div>
+</div>
+<p><strong>Research Studio addition:</strong> require a generalization statement naming the target population/setting, validation design, strongest supported claim, and one important unsupported claim.</p>
+</section>
+<section id="resampling-and-cross-validation" class="level2" data-number="16.38">
+<h2 data-number="16.38" class="anchored" data-anchor-id="resampling-and-cross-validation"><span class="header-section-number">16.38</span> Resampling and Cross-Validation</h2>
+</section>
+<section id="why-a-single-split-is-unstable" class="level2" data-number="16.39">
+<h2 data-number="16.39" class="anchored" data-anchor-id="why-a-single-split-is-unstable"><span class="header-section-number">16.39</span> Why a Single Split Is Unstable</h2>
+<p>One train/test split can be unusually easy or difficult.</p>
+<p>Cross-validation evaluates multiple partitions.</p>
+<p>For <span class="math inline">\(K\)</span>-fold cross-validation:</p>
+<p><span class="math display">\[
+\widehat R_{CV}
+=
+\frac{1}{K}
+\sum_{k=1}^{K}
+\widehat R_k.
+\]</span></p>
+<p>Each observation is used for validation in one fold and training in the others.</p>
+</section>
+<section id="cross-validation-demonstration" class="level2" data-number="16.40">
+<h2 data-number="16.40" class="anchored" data-anchor-id="cross-validation-demonstration"><span class="header-section-number">16.40</span> Cross-Validation Demonstration</h2>
+<div id="248f617d" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    StratifiedKFold,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    cross_val_score</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    n_splits<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>cv_auc <span class="op">=</span> cross_val_score(</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"roc_auc"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>pd.Series(</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    cv_auc,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"ROC-AUC"</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>0    0.995087
+1    0.997707
+2    0.985119
+3    1.000000
+4    0.998659
+Name: ROC-AUC, dtype: float64</code></pre>
+</div>
+</div>
+<div id="08a8b9e5" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean ROC-AUC"</span>: cv_auc.mean(),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SD across folds"</span>: cv_auc.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>Mean ROC-AUC       0.995
+SD across folds    0.006
+dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="standard-deviation-across-folds-is-not-a-confidence-interval" class="level2" data-number="16.41">
+<h2 data-number="16.41" class="anchored" data-anchor-id="standard-deviation-across-folds-is-not-a-confidence-interval"><span class="header-section-number">16.41</span> Standard Deviation Across Folds Is Not a Confidence Interval</h2>
+<p>Fold scores are dependent because training sets overlap.</p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\bar x\pm1.96\frac{s}{\sqrt K}
+\]</span></p>
+<p>should not automatically be presented as a valid confidence interval for cross-validation performance.</p>
+<p>Uncertainty estimation requires careful attention to the resampling design and target estimand.</p>
+</section>
+<section id="repeated-cross-validation" class="level2" data-number="16.42">
+<h2 data-number="16.42" class="anchored" data-anchor-id="repeated-cross-validation"><span class="header-section-number">16.42</span> Repeated Cross-Validation</h2>
+<p>Repeating shuffled <span class="math inline">\(K\)</span>-fold cross-validation can reveal sensitivity to partitioning.</p>
+<div id="ac1d08e7" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    RepeatedStratifiedKFold</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>repeated_cv <span class="op">=</span> RepeatedStratifiedKFold(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    n_splits<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    n_repeats<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>repeated_auc <span class="op">=</span> cross_val_score(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>repeated_cv,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"roc_auc"</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean ROC-AUC"</span>: repeated_auc.mean(),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SD of resampled scores"</span>: repeated_auc.std(ddof<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Minimum"</span>: repeated_auc.<span class="bu">min</span>(),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Maximum"</span>: repeated_auc.<span class="bu">max</span>()</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>Mean ROC-AUC              0.995
+SD of resampled scores    0.004
+Minimum                   0.985
+Maximum                   1.000
+dtype: float64</code></pre>
+</div>
+</div>
+<p>Repeated resampling describes variability across partitions, but inferential interpretation still depends on the design.</p>
+</section>
+<section id="hyperparameter-tuning-and-nested-cross-validation" class="level2" data-number="16.43">
+<h2 data-number="16.43" class="anchored" data-anchor-id="hyperparameter-tuning-and-nested-cross-validation"><span class="header-section-number">16.43</span> Hyperparameter Tuning and Nested Cross-Validation</h2>
+</section>
+<section id="selection-creates-optimism" class="level2" data-number="16.44">
+<h2 data-number="16.44" class="anchored" data-anchor-id="selection-creates-optimism"><span class="header-section-number">16.44</span> Selection Creates Optimism</h2>
+<p>Suppose we evaluate 100 hyperparameter configurations and report the best cross-validation score.</p>
+<p>Some configurations benefit from sampling noise.</p>
+<p>Selecting the maximum tends to produce optimism.</p>
+</section>
+<section id="nested-cross-validation" class="level2" data-number="16.45">
+<h2 data-number="16.45" class="anchored" data-anchor-id="nested-cross-validation"><span class="header-section-number">16.45</span> Nested Cross-Validation</h2>
+<p>Nested cross-validation separates model selection from model assessment, reducing the optimistic bias that arises when the same resampling process is used both to tune and to report performance <span class="citation" data-cites="varma2006bias">(<a href="../references.html#ref-varma2006bias" role="doc-biblioref">Varma and Simon 2006</a>)</span>.</p>
+<p>It separates:</p>
+<ul>
+<li><strong>inner loop:</strong> hyperparameter selection;</li>
+<li><strong>outer loop:</strong> model assessment.</li>
+</ul>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\boxed{
+\text{outer training set}
+\rightarrow
+\text{inner tuning}
+\rightarrow
+\text{selected model}
+\rightarrow
+\text{outer test fold}
+}
+\]</span></p>
+<p>The outer test fold is not used to choose hyperparameters.</p>
+</section>
+<section id="nested-cv-example" class="level2" data-number="16.46">
+<h2 data-number="16.46" class="anchored" data-anchor-id="nested-cv-example"><span class="header-section-number">16.46</span> Nested CV Example</h2>
+<div id="c0619ec8" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> (</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    GridSearchCV</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model__C"</span>: [</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="fl">.01</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="fl">.1</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="dv">10</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="dv">100</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>inner_cv <span class="op">=</span> StratifiedKFold(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    n_splits<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>outer_cv <span class="op">=</span> StratifiedKFold(</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    n_splits<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> GridSearchCV(</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    param_grid<span class="op">=</span>param_grid,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"roc_auc"</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>inner_cv</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>nested_auc <span class="op">=</span> cross_val_score(</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    search,</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>outer_cv,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"roc_auc"</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>pd.Series(</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    nested_auc,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"Outer-fold ROC-AUC"</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>0    0.998362
+1    0.997052
+2    0.985119
+3    0.999669
+4    0.998323
+Name: Outer-fold ROC-AUC, dtype: float64</code></pre>
+</div>
+</div>
+<div id="9c193152" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Nested CV mean ROC-AUC"</span>: nested_auc.mean(),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outer-fold SD"</span>: nested_auc.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>Nested CV mean ROC-AUC    0.996
+Outer-fold SD             0.006
+dtype: float64</code></pre>
+</div>
+</div>
+<p>Nested cross-validation estimates the performance of the <strong>model-selection procedure</strong>, not merely one fixed hyperparameter configuration.</p>
+</section>
+<section id="uncertainty-in-performance" class="level2" data-number="16.47">
+<h2 data-number="16.47" class="anchored" data-anchor-id="uncertainty-in-performance"><span class="header-section-number">16.47</span> Uncertainty in Performance</h2>
+</section>
+<section id="a-metric-without-uncertainty-is-incomplete" class="level2" data-number="16.48">
+<h2 data-number="16.48" class="anchored" data-anchor-id="a-metric-without-uncertainty-is-incomplete"><span class="header-section-number">16.48</span> A Metric Without Uncertainty Is Incomplete</h2>
+<p>Suppose:</p>
+<p><span class="math display">\[
+AUC=0.84.
+\]</span></p>
+<p>Would we interpret it differently if a plausible interval were:</p>
+<p><span class="math display">\[
+[0.83,0.85]
+\]</span></p>
+<p>versus:</p>
+<p><span class="math display">\[
+[0.68,0.95]?
+\]</span></p>
+<p>Point estimates conceal precision.</p>
+</section>
+<section id="bootstrap-confidence-interval-for-test-set-auc" class="level2" data-number="16.49">
+<h2 data-number="16.49" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-test-set-auc"><span class="header-section-number">16.49</span> Bootstrap Confidence Interval for Test-Set AUC</h2>
+<p>For a fixed trained model and an independent test set, we can bootstrap test observations.</p>
+<div id="2cfde595" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">42</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>bootstrap_auc <span class="op">=</span> []</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>y_test_array <span class="op">=</span> np.asarray(</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    y_test</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>prob_array <span class="op">=</span> np.asarray(</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    prob</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>n_test <span class="op">=</span> <span class="bu">len</span>(</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    y_test_array</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> rng.integers(</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        n_test,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        size<span class="op">=</span>n_test</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="op">=</span> y_test_array[</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        indices</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    p_boot <span class="op">=</span> prob_array[</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        indices</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ROC-AUC is undefined if a bootstrap</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sample contains only one class.</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.unique(</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>        y_boot</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    ).size <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    bootstrap_auc.append(</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>        roc_auc_score(</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>            y_boot,</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>            p_boot</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>auc_ci <span class="op">=</span> np.quantile(</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>    bootstrap_auc,</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">.025</span>, <span class="fl">.975</span>]</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Test ROC-AUC"</span>: roc_auc_score(</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>        prob</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"95% bootstrap lower"</span>: auc_ci[<span class="dv">0</span>],</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"95% bootstrap upper"</span>: auc_ci[<span class="dv">1</span>]</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>{'Test ROC-AUC': np.float64(0.997517523364486),
+ '95% bootstrap lower': np.float64(0.9928404119224694),
+ '95% bootstrap upper': np.float64(1.0)}</code></pre>
+</div>
+</div>
+<p>This interval reflects uncertainty from the finite test sample <strong>conditional on the fitted model and sampling assumptions</strong>.</p>
+<p>It does not automatically capture uncertainty from model development, dataset construction, hyperparameter search, or future distribution shift.</p>
+</section>
+<section id="visualize-bootstrap-performance" class="level2" data-number="16.50">
+<h2 data-number="16.50" class="anchored" data-anchor-id="visualize-bootstrap-performance"><span class="header-section-number">16.50</span> Visualize Bootstrap Performance</h2>
+<div id="cell-fig-bootstrap-auc" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.hist(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    bootstrap_auc,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.axvline(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    auc_ci[<span class="dv">0</span>],</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.axvline(</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    auc_ci[<span class="dv">1</span>],</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Bootstrap ROC-AUC"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Bootstrap Distribution of Test ROC-AUC"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-bootstrap-auc" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Histogram of bootstrap ROC-AUC estimates for the fixed fitted model, with dashed vertical lines marking the lower and upper confidence interval bounds.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bootstrap-auc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-model-evaluation_files/figure-html/fig-bootstrap-auc-output-1.png" alt="Histogram of bootstrap ROC-AUC estimates for the fixed fitted model, with dashed vertical lines marking the lower and upper confidence interval bounds." width="668" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bootstrap-auc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.5: Bootstrap resampling illustrates uncertainty in test-set ROC-AUC for a fixed fitted model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-models" class="level2" data-number="16.51">
+<h2 data-number="16.51" class="anchored" data-anchor-id="comparing-models"><span class="header-section-number">16.51</span> Comparing Models</h2>
+<p>When many algorithms are compared across datasets or repeated resampling results, apparent rank differences should not be overinterpreted without appropriate paired statistical comparison <span class="citation" data-cites="demsar2006">(<a href="../references.html#ref-demsar2006" role="doc-biblioref">Demšar 2006</a>)</span>.</p>
+</section>
+<section id="tiny-differences-need-context" class="level2" data-number="16.52">
+<h2 data-number="16.52" class="anchored" data-anchor-id="tiny-differences-need-context"><span class="header-section-number">16.52</span> Tiny Differences Need Context</h2>
+<p>Suppose:</p>
+<p><span class="math display">\[
+AUC_A=0.873
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+AUC_B=0.878.
+\]</span></p>
+<p>It is tempting to announce that Model B is superior.</p>
+<p>But ask:</p>
+<ul>
+<li>Is the difference stable?</li>
+<li>Is it practically meaningful?</li>
+<li>Was the same test set used?</li>
+<li>How much uncertainty surrounds the difference?</li>
+<li>Does Model B cost substantially more?</li>
+<li>Is calibration better or worse?</li>
+<li>Does subgroup performance change?</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="16.10">
-<h2 data-number="16.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">16.10</span> Knowledge Check</h2>
+<section id="paired-evaluation" class="level2" data-number="16.53">
+<h2 data-number="16.53" class="anchored" data-anchor-id="paired-evaluation"><span class="header-section-number">16.53</span> Paired Evaluation</h2>
+<p>When two models are evaluated on the same observations, their performance estimates are paired.</p>
+<p>A useful bootstrap strategy resamples observations and calculates:</p>
+<p><span class="math display">\[
+\Delta=AUC_B-AUC_A
+\]</span></p>
+<p>for each resample.</p>
+<p>The resulting distribution focuses directly on the performance difference.</p>
+</section>
+<section id="statistical-significance-is-not-practical-significance" class="level2" data-number="16.54">
+<h2 data-number="16.54" class="anchored" data-anchor-id="statistical-significance-is-not-practical-significance"><span class="header-section-number">16.54</span> Statistical Significance Is Not Practical Significance</h2>
+<p>Even a precisely estimated tiny improvement may not justify:</p>
+<ul>
+<li>greater latency;</li>
+<li>higher financial cost;</li>
+<li>reduced interpretability;</li>
+<li>more compute;</li>
+<li>greater maintenance burden;</li>
+<li>poorer calibration.</li>
+</ul>
+<p>Model selection is a multi-criteria decision.</p>
+</section>
+<section id="validation-beyond-random-splits" class="level2" data-number="16.55">
+<h2 data-number="16.55" class="anchored" data-anchor-id="validation-beyond-random-splits"><span class="header-section-number">16.55</span> Validation Beyond Random Splits</h2>
+</section>
+<section id="internal-validation" class="level2" data-number="16.56">
+<h2 data-number="16.56" class="anchored" data-anchor-id="internal-validation"><span class="header-section-number">16.56</span> Internal Validation</h2>
+<p>Internal validation estimates performance within the development data-generating environment.</p>
+<p>Examples include:</p>
+<ul>
+<li>cross-validation;</li>
+<li>bootstrap validation;</li>
+<li>held-out random test sets.</li>
+</ul>
+</section>
+<section id="temporal-validation" class="level2" data-number="16.57">
+<h2 data-number="16.57" class="anchored" data-anchor-id="temporal-validation"><span class="header-section-number">16.57</span> Temporal Validation</h2>
+<p>Train on earlier data and test on later data:</p>
+<p><span class="math display">\[
+\text{past}
+\rightarrow
+\text{future}.
+\]</span></p>
+<p>This often better approximates deployment.</p>
+</section>
+<section id="geographic-or-site-validation" class="level2" data-number="16.58">
+<h2 data-number="16.58" class="anchored" data-anchor-id="geographic-or-site-validation"><span class="header-section-number">16.58</span> Geographic or Site Validation</h2>
+<p>Train at some locations and test at another.</p>
+<p>This evaluates transportability across environments.</p>
+</section>
+<section id="external-validation" class="level2" data-number="16.59">
+<h2 data-number="16.59" class="anchored" data-anchor-id="external-validation"><span class="header-section-number">16.59</span> External Validation</h2>
+<p>External validation uses data collected independently from the development dataset.</p>
+<p>This can reveal failures invisible to internal resampling and is central to judging whether predictive performance transports beyond the development setting <span class="citation" data-cites="steyerberg2010assessing">(<a href="../references.html#ref-steyerberg2010assessing" role="doc-biblioref">Steyerberg et al. 2010</a>)</span>.</p>
+</section>
+<section id="external-validation-is-not-a-ceremonial-final-step" class="level2" data-number="16.60">
+<h2 data-number="16.60" class="anchored" data-anchor-id="external-validation-is-not-a-ceremonial-final-step"><span class="header-section-number">16.60</span> External Validation Is Not a Ceremonial Final Step</h2>
+<p>If a model will be used across institutions, populations, or time periods, external validation addresses the actual scientific claim.</p>
+</section>
+<section id="distribution-shift" class="level2" data-number="16.61">
+<h2 data-number="16.61" class="anchored" data-anchor-id="distribution-shift"><span class="header-section-number">16.61</span> Distribution Shift</h2>
+<p>Re-evaluation on newly collected benchmark data has shown that even strong computer-vision systems can lose accuracy when apparently similar test data are gathered under changed conditions <span class="citation" data-cites="recht2019imagenet">(<a href="../references.html#ref-recht2019imagenet" role="doc-biblioref">Recht et al. 2019</a>)</span>. This makes distribution shift an empirical evaluation problem rather than a purely theoretical possibility.</p>
+</section>
+<section id="the-data-generating-process-can-change" class="level2" data-number="16.62">
+<h2 data-number="16.62" class="anchored" data-anchor-id="the-data-generating-process-can-change"><span class="header-section-number">16.62</span> The Data-Generating Process Can Change</h2>
+<p>Training assumes future observations are sufficiently related to the development distribution.</p>
+<p>But:</p>
+<p><span class="math display">\[
+P_{train}(X,Y)
+\neq
+P_{deploy}(X,Y)
+\]</span></p>
+<p>may occur.</p>
+</section>
+<section id="covariate-shift" class="level2" data-number="16.63">
+<h2 data-number="16.63" class="anchored" data-anchor-id="covariate-shift"><span class="header-section-number">16.63</span> Covariate Shift</h2>
+<p>The predictor distribution changes:</p>
+<p><span class="math display">\[
+P_{train}(X)
+\neq
+P_{deploy}(X),
+\]</span></p>
+<p>while the conditional relationship may remain relatively stable.</p>
+</section>
+<section id="label-shift" class="level2" data-number="16.64">
+<h2 data-number="16.64" class="anchored" data-anchor-id="label-shift"><span class="header-section-number">16.64</span> Label Shift</h2>
+<p>Outcome prevalence changes:</p>
+<p><span class="math display">\[
+P_{train}(Y)
+\neq
+P_{deploy}(Y).
+\]</span></p>
+</section>
+<section id="concept-shift" class="level2" data-number="16.65">
+<h2 data-number="16.65" class="anchored" data-anchor-id="concept-shift"><span class="header-section-number">16.65</span> Concept Shift</h2>
+<p>The relationship between predictors and outcome changes:</p>
+<p><span class="math display">\[
+P_{train}(Y\mid X)
+\neq
+P_{deploy}(Y\mid X).
+\]</span></p>
+<p>This can be especially damaging.</p>
+</section>
+<section id="examples" class="level2" data-number="16.66">
+<h2 data-number="16.66" class="anchored" data-anchor-id="examples"><span class="header-section-number">16.66</span> Examples</h2>
+<p>Education:</p>
+<ul>
+<li>grading policy changes;</li>
+<li>new curriculum;</li>
+<li>different student populations;</li>
+<li>AI-assisted coursework changes behavioral traces.</li>
+</ul>
+<p>Health:</p>
+<ul>
+<li>new treatment protocols;</li>
+<li>coding changes;</li>
+<li>new diagnostic technology;</li>
+<li>changing disease prevalence.</li>
+</ul>
+<p>Finance:</p>
+<ul>
+<li>market regimes;</li>
+<li>regulation;</li>
+<li>macroeconomic shocks;</li>
+<li>adversarial adaptation.</li>
+</ul>
+<p>A static test score cannot guarantee future validity.</p>
+</section>
+<section id="subgroup-evaluation" class="level2" data-number="16.67">
+<h2 data-number="16.67" class="anchored" data-anchor-id="subgroup-evaluation"><span class="header-section-number">16.67</span> Subgroup Evaluation</h2>
+</section>
+<section id="overall-performance-can-hide-important-differences" class="level2" data-number="16.68">
+<h2 data-number="16.68" class="anchored" data-anchor-id="overall-performance-can-hide-important-differences"><span class="header-section-number">16.68</span> Overall Performance Can Hide Important Differences</h2>
+<p>Suppose overall sensitivity is 0.90.</p>
+<p>Subgroup sensitivities might be:</p>
+<p><span class="math display">\[
+0.96,\quad0.91,\quad0.72.
+\]</span></p>
+<p>The aggregate can conceal meaningful failures.</p>
+</section>
+<section id="evaluate-relevant-groups" class="level2" data-number="16.69">
+<h2 data-number="16.69" class="anchored" data-anchor-id="evaluate-relevant-groups"><span class="header-section-number">16.69</span> Evaluate Relevant Groups</h2>
+<p>Potential grouping variables depend on the scientific and deployment context.</p>
+<p>Subgroup evaluation should be:</p>
+<ul>
+<li>theoretically justified;</li>
+<li>adequately powered;</li>
+<li>interpreted with uncertainty;</li>
+<li>privacy-conscious;</li>
+<li>connected to possible mechanisms.</li>
+</ul>
+</section>
+<section id="small-groups-produce-noisy-estimates" class="level2" data-number="16.70">
+<h2 data-number="16.70" class="anchored" data-anchor-id="small-groups-produce-noisy-estimates"><span class="header-section-number">16.70</span> Small Groups Produce Noisy Estimates</h2>
+<p>If a subgroup has only 12 positive cases, one additional error can dramatically change sensitivity.</p>
+<p>Report denominators and uncertainty.</p>
+</section>
+<section id="subgroup-metrics-do-not-solve-fairness" class="level2" data-number="16.71">
+<h2 data-number="16.71" class="anchored" data-anchor-id="subgroup-metrics-do-not-solve-fairness"><span class="header-section-number">16.71</span> Subgroup Metrics Do Not Solve Fairness</h2>
+<p>Fairness involves:</p>
+<ul>
+<li>outcomes;</li>
+<li>opportunities;</li>
+<li>measurement;</li>
+<li>representation;</li>
+<li>decision processes;</li>
+<li>institutional context;</li>
+<li>consequences.</li>
+</ul>
+<p>Metric parity is one piece of a larger question.</p>
+</section>
+<section id="evaluation-under-dependence" class="level2" data-number="16.72">
+<h2 data-number="16.72" class="anchored" data-anchor-id="evaluation-under-dependence"><span class="header-section-number">16.72</span> Evaluation Under Dependence</h2>
+</section>
+<section id="observations-are-often-clustered" class="level2" data-number="16.73">
+<h2 data-number="16.73" class="anchored" data-anchor-id="observations-are-often-clustered"><span class="header-section-number">16.73</span> Observations Are Often Clustered</h2>
+<p>Data may contain:</p>
+<ul>
+<li>repeated visits per patient;</li>
+<li>multiple semesters per student;</li>
+<li>transactions per customer;</li>
+<li>images per person;</li>
+<li>posts per author.</li>
+</ul>
+<p>Random row splitting can leak identity or cluster-specific information.</p>
+</section>
+<section id="split-at-the-generalization-unit" class="level2" data-number="16.74">
+<h2 data-number="16.74" class="anchored" data-anchor-id="split-at-the-generalization-unit"><span class="header-section-number">16.74</span> Split at the Generalization Unit</h2>
+<p>If deployment is to new patients, split by patient.</p>
+<p>If the claim concerns new universities, split by university.</p>
+<p>If prediction concerns future semesters, split by time.</p>
+<p>The correct split follows the scientific claim.</p>
+</section>
+<section id="leaderboards-and-adaptive-overfitting" class="level2" data-number="16.75">
+<h2 data-number="16.75" class="anchored" data-anchor-id="leaderboards-and-adaptive-overfitting"><span class="header-section-number">16.75</span> Leaderboards and Adaptive Overfitting</h2>
+</section>
+<section id="public-test-sets-can-become-training-data-indirectly" class="level2" data-number="16.76">
+<h2 data-number="16.76" class="anchored" data-anchor-id="public-test-sets-can-become-training-data-indirectly"><span class="header-section-number">16.76</span> Public Test Sets Can Become Training Data Indirectly</h2>
+<p>If researchers repeatedly submit models to a leaderboard and modify methods based on scores, they adapt to the benchmark.</p>
+<p>Over time:</p>
+<p><span class="math display">\[
+\text{benchmark feedback}
+\rightarrow
+\text{community-level overfitting}.
+\]</span></p>
+<p>A famous benchmark can cease to represent truly unseen evidence.</p>
+</section>
+<section id="benchmark-performance-is-not-scientific-universality" class="level2" data-number="16.77">
+<h2 data-number="16.77" class="anchored" data-anchor-id="benchmark-performance-is-not-scientific-universality"><span class="header-section-number">16.77</span> Benchmark Performance Is Not Scientific Universality</h2>
+<p>A model that dominates one benchmark may fail under:</p>
+<ul>
+<li>different prevalence;</li>
+<li>different institutions;</li>
+<li>new time periods;</li>
+<li>alternative labeling;</li>
+<li>different costs;</li>
+<li>adversarial conditions.</li>
+</ul>
+<p>Benchmarks are useful instruments, not reality itself.</p>
+</section>
+<section id="computer-vision-learning-experience-when-does-a-vision-model-generalize" class="level2" data-number="16.78">
+<h2 data-number="16.78" class="anchored" data-anchor-id="computer-vision-learning-experience-when-does-a-vision-model-generalize"><span class="header-section-number">16.78</span> Computer Vision Learning Experience: When Does a Vision Model Generalize?</h2>
+<p>The recurring handwritten-digits examples make model comparison convenient, but a research-grade computer-vision evaluation asks a harder question:</p>
+<blockquote class="blockquote">
+<p><strong>To what visual conditions should the model generalize?</strong></p>
+</blockquote>
+<p>A random image split may be appropriate for a benchmark in which observations are independent and identically sampled. It can be misleading when images are grouped by person, device, institution, video, or acquisition session.</p>
+<p>Suppose (g_i) identifies the source group for image (i). If the deployment target is a new source, evaluation should protect that unit:</p>
+<p><span class="math display">\[
+g_i^{\text{train}}\cap g_i^{\text{test}}=\varnothing.
+\]</span></p>
+<p>The practical principle is:</p>
+<p><span class="math display">\[
+\boxed{\text{Split by the unit that must generalize}}
+\]</span></p>
+<section id="visual-domain-shift" class="level3" data-number="16.78.1">
+<h3 data-number="16.78.1" class="anchored" data-anchor-id="visual-domain-shift"><span class="header-section-number">16.78.1</span> Visual Domain Shift</h3>
+<p>Computer-vision systems may encounter shifts in:</p>
+<ul>
+<li>camera or scanner hardware;</li>
+<li>lighting and background;</li>
+<li>image resolution;</li>
+<li>acquisition protocol;</li>
+<li>institution or geographic setting;</li>
+<li>patient or student population;</li>
+<li>handwriting or visual style;</li>
+<li>preprocessing pipeline.</li>
+</ul>
+<p>A model can therefore perform strongly under internal random splitting and degrade under external visual conditions.</p>
+</section>
+<section id="beyond-overall-accuracy" class="level3" data-number="16.78.2">
+<h3 data-number="16.78.2" class="anchored" data-anchor-id="beyond-overall-accuracy"><span class="header-section-number">16.78.2</span> Beyond Overall Accuracy</h3>
+<p>For multiclass vision, inspect the class-specific error structure:</p>
+<p><span class="math display">\[
+C_{jk}
+=
+\sum_{i=1}^{n}
+\mathbb{1}(y_i=j,\hat y_i=k).
+\]</span></p>
+<p>The confusion matrix helps identify which visual categories are systematically confused.</p>
+<p>Then ask:</p>
+<ul>
+<li>Are particular classes disproportionately difficult?</li>
+<li>Are errors concentrated in ambiguous images?</li>
+<li>Does calibration matter for downstream decisions?</li>
+<li>Are subgroup or source-specific performance estimates stable?</li>
+<li>Does performance persist under plausible visual perturbations?</li>
+<li>Does an external image source reproduce the apparent advantage?</li>
+</ul>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A computer-vision model does not become deployment-ready because it achieves high benchmark accuracy.</p>
+<p>Evidence must match the intended claim:</p>
+<p><span class="math display">\[
+\boxed{\text{Evaluation Design}\rightarrow\text{Permissible Generalization Claim}}
+\]</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="three-tracks" class="level2" data-number="16.79">
+<h2 data-number="16.79" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">16.79</span> Three Tracks</h2>
+</section>
+<section id="health-track" class="level2" data-number="16.80">
+<h2 data-number="16.80" class="anchored" data-anchor-id="health-track"><span class="header-section-number">16.80</span> Health Track</h2>
+<p>Consider a model predicting a health outcome.</p>
+<p>A research-grade evaluation should examine:</p>
+<ul>
+<li>sensitivity and specificity;</li>
+<li>calibration;</li>
+<li>clinically meaningful thresholds;</li>
+<li>decision consequences;</li>
+<li>temporal validation;</li>
+<li>external validation;</li>
+<li>relevant subgroup performance;</li>
+<li>missingness and measurement changes.</li>
+</ul>
+<p>A high ROC-AUC alone is insufficient for clinical usefulness.</p>
+</section>
+<section id="education-track" class="level2" data-number="16.81">
+<h2 data-number="16.81" class="anchored" data-anchor-id="education-track"><span class="header-section-number">16.81</span> Education Track</h2>
+<p>Consider a model predicting student persistence.</p>
+<p>Evaluation should distinguish:</p>
+<ul>
+<li>prediction time;</li>
+<li>student-level splitting;</li>
+<li>institution-level transportability;</li>
+<li>calibration;</li>
+<li>intervention thresholds;</li>
+<li>subgroup performance;</li>
+<li>whether predictions lead to beneficial support.</li>
+</ul>
+<p>Predicting withdrawal is not equivalent to preventing withdrawal.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level2" data-number="16.82">
+<h2 data-number="16.82" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">16.82</span> Open ML Benchmark Track</h2>
+<p>Benchmark work can compare algorithms under controlled resampling.</p>
+<p>Students should report:</p>
+<ul>
+<li>repeated performance;</li>
+<li>uncertainty;</li>
+<li>computational cost;</li>
+<li>calibration;</li>
+<li>paired differences;</li>
+<li>sensitivity to preprocessing;</li>
+<li>robustness to distribution perturbation.</li>
+</ul>
+<p>The goal is not merely to identify a winner but to characterize when models succeed or fail.</p>
+</section>
+<section id="beyond-the-algorithm-evidence-is-always-conditional" class="level2" data-number="16.83">
+<h2 data-number="16.83" class="anchored" data-anchor-id="beyond-the-algorithm-evidence-is-always-conditional"><span class="header-section-number">16.83</span> Beyond the Algorithm: Evidence Is Always Conditional</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What Have We Actually Learned?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A model achieves 92% accuracy on a test set.</p>
+<p>The number appears objective.</p>
+<p>But its meaning depends on a chain of human decisions:</p>
+<ul>
+<li>who entered the dataset;</li>
+<li>what was measured;</li>
+<li>how the target was defined;</li>
+<li>when prediction occurred;</li>
+<li>how data were split;</li>
+<li>what metric was selected;</li>
+<li>what comparison was considered meaningful.</li>
+</ul>
+<p>Evaluation does not remove judgment.</p>
+<p>It disciplines judgment by making claims testable.</p>
+<p>Scientific humility therefore requires us to say:</p>
+<blockquote class="blockquote">
+<p><strong>This model performed this well, under these conditions, for this outcome, using this evaluation design.</strong></p>
+</blockquote>
+<p>That statement is less dramatic than:</p>
+<blockquote class="blockquote">
+<p>“The model works.”</p>
+</blockquote>
+<p>But it is much more informative.</p>
+<p>The goal of evaluation is not to produce certainty.</p>
+<p>It is to define the boundaries within which confidence is justified.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-declare-the-winner" class="level2" data-number="16.84">
+<h2 data-number="16.84" class="anchored" data-anchor-id="ai-pair-programmer-declare-the-winner"><span class="header-section-number">16.84</span> AI Pair Programmer: Declare the Winner</h2>
+<p>Ask an AI assistant:</p>
+<blockquote class="blockquote">
+<p>“Model A has ROC-AUC 0.901 and Model B has ROC-AUC 0.904. Model B is obviously better. Write a paragraph recommending that we deploy Model B.”</p>
+</blockquote>
+<p>Audit the response.</p>
+<p>A rigorous assistant should ask about:</p>
+<ul>
+<li>uncertainty;</li>
+<li>paired evaluation;</li>
+<li>calibration;</li>
+<li>threshold performance;</li>
+<li>subgroup performance;</li>
+<li>external validation;</li>
+<li>cost;</li>
+<li>latency;</li>
+<li>interpretability;</li>
+<li>operational consequences.</li>
+</ul>
+<p>Rewrite the recommendation using appropriately bounded evidence.</p>
+</section>
+<section id="hands-on-lab-evaluation-audit" class="level2" data-number="16.85">
+<h2 data-number="16.85" class="anchored" data-anchor-id="hands-on-lab-evaluation-audit"><span class="header-section-number">16.85</span> Hands-On Lab: Evaluation Audit</h2>
+<p>Using a classification problem:</p>
 <ol type="1">
-<li>What is the purpose of a validation set?</li>
-<li>Why use nested cross-validation?</li>
-<li>When is random K-fold inappropriate?</li>
-<li>Why should model comparisons include uncertainty?</li>
+<li>define the intended prediction claim;</li>
+<li>identify the true generalization unit;</li>
+<li>establish an untouched test set or external evaluation set;</li>
+<li>fit a baseline;</li>
+<li>report class prevalence;</li>
+<li>calculate a confusion matrix;</li>
+<li>report sensitivity, specificity, precision, and F1;</li>
+<li>report ROC-AUC and PR-AUC;</li>
+<li>assess calibration;</li>
+<li>calculate Brier score;</li>
+<li>examine several decision thresholds;</li>
+<li>define asymmetric error costs;</li>
+<li>use cross-validation for development;</li>
+<li>conduct nested CV when tuning;</li>
+<li>quantify uncertainty;</li>
+<li>compare models using paired observations;</li>
+<li>evaluate relevant subgroups;</li>
+<li>simulate or identify distribution shift;</li>
+<li>document computational cost;</li>
+<li>write a bounded conclusion stating exactly what the evidence supports.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="16.11">
-<h2 data-number="16.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">16.11</span> Real-World Case Study</h2>
-<section id="a-reproducible-model-benchmark" class="level3" data-number="16.11.1">
-<h3 data-number="16.11.1" class="anchored" data-anchor-id="a-reproducible-model-benchmark"><span class="header-section-number">16.11.1</span> A Reproducible Model Benchmark</h3>
-<p>Benchmark models on a public dataset using a preregistered evaluation protocol.</p>
+<section id="practitioner-track" class="level2" data-number="16.86">
+<h2 data-number="16.86" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">16.86</span> Practitioner Track</h2>
+<p>A practitioner should be able to select metrics, construct leakage-safe validation, assess calibration, choose thresholds based on consequences, compare models, and identify when deployment conditions differ from development conditions.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="16.87">
+<h2 data-number="16.87" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">16.87</span> Researcher Track</h2>
+<p>A researcher should additionally define the performance estimand, justify resampling, separate tuning from assessment, quantify uncertainty, conduct paired comparisons, perform temporal/external validation, analyze subgroup performance, document distribution shift, and constrain conclusions to the evaluation design.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="16.12">
-<h2 data-number="16.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">16.12</span> Professor’s Challenge</h2>
-<p>Model A’s mean AUC is 0.842 and Model B’s is 0.845. Is Model B meaningfully better?</p>
+<section id="research-studio" class="level2" data-number="16.88">
+<h2 data-number="16.88" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">16.88</span> Research Studio</h2>
+<p>Design a model-evaluation study suitable for a conference or journal paper.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>scientific claim;</li>
+<li>target population;</li>
+<li>unit of analysis;</li>
+<li>prediction timestamp;</li>
+<li>target definition;</li>
+<li>development dataset;</li>
+<li>external dataset if available;</li>
+<li>baseline;</li>
+<li>candidate models;</li>
+<li>preprocessing boundary;</li>
+<li>tuning procedure;</li>
+<li>inner validation;</li>
+<li>outer/final assessment;</li>
+<li>primary metric;</li>
+<li>secondary metrics;</li>
+<li>calibration;</li>
+<li>threshold strategy;</li>
+<li>decision costs;</li>
+<li>uncertainty method;</li>
+<li>paired comparison method;</li>
+<li>subgroup analyses;</li>
+<li>temporal validation;</li>
+<li>external validation;</li>
+<li>shift analysis;</li>
+<li>computational cost;</li>
+<li>reproducibility plan;</li>
+<li>unsupported claims;</li>
+<li>scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="16.13">
-<h2 data-number="16.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">16.13</span> Research Extension</h2>
-<p>Design a benchmarking paper with robust validation, uncertainty, and external replication.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="16.14">
-<h2 data-number="16.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">16.14</span> Reproducibility Check</h2>
-<p>Freeze split logic, folds, search spaces, metrics, seeds, and the final evaluation protocol before inspecting final results.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="16.15">
-<h2 data-number="16.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">16.15</span> Key Takeaways</h2>
+<section id="professors-challenge-the-94-accurate-early-warning-system" class="level2" data-number="16.89">
+<h2 data-number="16.89" class="anchored" data-anchor-id="professors-challenge-the-94-accurate-early-warning-system"><span class="header-section-number">16.89</span> Professor’s Challenge: The 94% Accurate Early-Warning System</h2>
+<p>A university develops a model to predict which students will fail a first-year quantitative course.</p>
+<p>The dataset contains 18,000 course enrollments collected over six years.</p>
+<p>Researchers randomly split individual rows into training and test sets.</p>
+<p>Some students appear in multiple semesters.</p>
+<p>The final model achieves:</p>
+<p><span class="math display">\[
+Accuracy=94\%
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+ROC\text{-}AUC=0.91.
+\]</span></p>
+<p>Researchers tune the model repeatedly while checking test-set AUC.</p>
+<p>They report no calibration analysis, no baseline comparison, and no subgroup results.</p>
+<p>The university proposes automatically sending students with predicted risk above 0.50 into a mandatory remedial program.</p>
+<p>Critique:</p>
 <ul>
-<li>Evaluation design determines the credibility of performance claims.</li>
-<li>The test set should approximate genuinely unseen data.</li>
-<li>Hyperparameter optimization must occur inside validation.</li>
+<li>row-level splitting;</li>
+<li>repeated students;</li>
+<li>test-set reuse;</li>
+<li>class prevalence;</li>
+<li>accuracy;</li>
+<li>threshold choice;</li>
+<li>calibration;</li>
+<li>uncertainty;</li>
+<li>subgroup performance;</li>
+<li>intervention consequences;</li>
+<li>temporal validation;</li>
+<li>external validity;</li>
+<li>whether prediction demonstrates that mandatory remediation helps.</li>
 </ul>
+<p>Redesign the complete evaluation.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="16.90">
+<h2 data-number="16.90" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">16.90</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is generalization error?</li>
+<li>Why is training performance optimistic?</li>
+<li>How do training, validation, and test data differ?</li>
+<li>How can repeated test-set inspection create leakage?</li>
+<li>When can accuracy be misleading?</li>
+<li>What is sensitivity?</li>
+<li>What is specificity?</li>
+<li>How does precision differ from sensitivity?</li>
+<li>What does F1 summarize?</li>
+<li>What does ROC-AUC measure?</li>
+<li>Why can PR-AUC be useful under class imbalance?</li>
+<li>What is calibration?</li>
+<li>How does calibration differ from discrimination?</li>
+<li>What does the Brier score measure?</li>
+<li>Why is 0.50 not a universal classification threshold?</li>
+<li>How can error costs affect threshold selection?</li>
+<li>How do MAE and RMSE differ?</li>
+<li>Why can test <span class="math inline">\(R^2\)</span> be negative?</li>
+<li>What does <span class="math inline">\(K\)</span>-fold cross-validation estimate?</li>
+<li>Why is one random split potentially unstable?</li>
+<li>Why is fold-score SD not automatically a confidence interval?</li>
+<li>What problem does nested cross-validation address?</li>
+<li>What does the outer loop of nested CV estimate?</li>
+<li>Why should performance estimates include uncertainty?</li>
+<li>Why should model comparisons be paired when evaluated on the same observations?</li>
+<li>How does practical significance differ from statistical significance?</li>
+<li>What is temporal validation?</li>
+<li>What is external validation?</li>
+<li>What is covariate shift?</li>
+<li>What is label shift?</li>
+<li>What is concept shift?</li>
+<li>Why can overall metrics hide subgroup failures?</li>
+<li>Why can row-level random splitting be invalid for clustered data?</li>
+<li>How can leaderboard use cause adaptive overfitting?</li>
+<li>Why does strong predictive evaluation not establish causal benefit?</li>
+<li>Why is a metric inseparable from its evaluation design?</li>
+<li>How does temporal validation support a different claim from random holdout?</li>
+<li>Why can test-set performance still be weak evidence for deployment elsewhere?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="16.91">
+<h2 data-number="16.91" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">16.91</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>scientific claim;</li>
+<li>target population;</li>
+<li>unit of analysis;</li>
+<li>prediction timestamp;</li>
+<li>outcome definition;</li>
+<li>inclusion/exclusion criteria;</li>
+<li>sample size;</li>
+<li>class prevalence;</li>
+<li>group/cluster structure;</li>
+<li>split strategy;</li>
+<li>preprocessing pipeline;</li>
+<li>baseline model;</li>
+<li>candidate models;</li>
+<li>hyperparameter search space;</li>
+<li>tuning procedure;</li>
+<li>cross-validation design;</li>
+<li>random seeds;</li>
+<li>final test set;</li>
+<li>external test set;</li>
+<li>primary metric;</li>
+<li>secondary metrics;</li>
+<li>calibration method;</li>
+<li>threshold strategy;</li>
+<li>uncertainty method;</li>
+<li>paired comparison procedure;</li>
+<li>subgroup definitions;</li>
+<li>temporal validation;</li>
+<li>shift analyses;</li>
+<li>compute time;</li>
+<li>hardware/software versions;</li>
+<li>code;</li>
+<li>data version;</li>
+<li>model artifacts;</li>
+<li>deviations from the preregistered plan where applicable.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="16.92">
+<h2 data-number="16.92" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">16.92</span> Key Takeaways</h2>
+<ul>
+<li>Evaluation begins with the claim the model is supposed to support.</li>
+<li>Training performance is not evidence of generalization.</li>
+<li>Validation supports selection; an untouched test set supports final assessment.</li>
+<li>Accuracy can conceal severe failure under imbalance.</li>
+<li>ROC-AUC measures ranking discrimination, not calibration.</li>
+<li>PR-AUC can be informative when positive cases are uncommon.</li>
+<li>Probability calibration and discrimination answer different questions.</li>
+<li>Classification thresholds should reflect consequences rather than habit.</li>
+<li>Cross-validation reduces dependence on one arbitrary split.</li>
+<li>Nested cross-validation separates hyperparameter selection from outer assessment.</li>
+<li>Performance estimates require uncertainty.</li>
+<li>Tiny metric differences should not automatically determine model choice.</li>
+<li>External and temporal validation address stronger generalization claims.</li>
+<li>Distribution shift can invalidate previously strong performance.</li>
+<li>Subgroup averages and overall averages can tell different stories.</li>
+<li>Evaluation splits must respect the real generalization unit.</li>
+<li>Repeated benchmark feedback can produce adaptive overfitting.</li>
+<li>Predictive performance does not establish causal benefit.</li>
+<li>Evaluation does not eliminate judgment; it makes the basis of judgment explicit.</li>
+<li>Evaluation is an evidence argument about generalization.</li>
+<li>Validation design determines the scope of the performance claim.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="16.93">
+<h2 data-number="16.93" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">16.93</span> Looking Ahead</h2>
+<p>Evaluation tells us how well a model performs and how uncertain that evidence may be, but performance alone does not determine whether a system should be used. Chapter 17 extends evaluation into responsibility by examining fairness, explainability, privacy, governance, human consequences, and the distribution of errors across people and contexts.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-brier1950" class="csl-entry" role="listitem">
+Brier, Glenn W. 1950. <span>“Verification of Forecasts Expressed in Terms of Probability.”</span> <em>Monthly Weather Review</em> 78 (1): 1–3. <a href="https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2">https://doi.org/10.1175/1520-0493(1950)078&lt;0001:VOFEIT&gt;2.0.CO;2</a>.
+</div>
+<div id="ref-demsar2006" class="csl-entry" role="listitem">
+Demšar, Janez. 2006. <span>“Statistical Comparisons of Classifiers over Multiple Data Sets.”</span> <em>Journal of Machine Learning Research</em> 7: 1–30.
+</div>
+<div id="ref-fawcett2006roc" class="csl-entry" role="listitem">
+Fawcett, Tom. 2006. <span>“An Introduction to <span>ROC</span> Analysis.”</span> <em>Pattern Recognition Letters</em> 27 (8): 861–74. <a href="https://doi.org/10.1016/j.patrec.2005.10.010">https://doi.org/10.1016/j.patrec.2005.10.010</a>.
+</div>
+<div id="ref-guoEtAl2017" class="csl-entry" role="listitem">
+Guo, Chuan, Geoff Pleiss, Yu Sun, and Kilian Q. Weinberger. 2017. <span>“On Calibration of Modern Neural Networks.”</span> In <em>Proceedings of the 34th International Conference on Machine Learning</em>, 70:1321–30. Proceedings of Machine Learning Research.
+</div>
+<div id="ref-niculescuMizilCaruana2005" class="csl-entry" role="listitem">
+Niculescu-Mizil, Alexandru, and Rich Caruana. 2005. <span>“Predicting Good Probabilities with Supervised Learning.”</span> In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 625–32. Association for Computing Machinery. <a href="https://doi.org/10.1145/1102351.1102430">https://doi.org/10.1145/1102351.1102430</a>.
+</div>
+<div id="ref-recht2019imagenet" class="csl-entry" role="listitem">
+Recht, Benjamin, Rebecca Roelofs, Ludwig Schmidt, and Vaishaal Shankar. 2019. <span>“Do ImageNet Classifiers Generalize to ImageNet?”</span> <em>Proceedings of the 36th International Conference on Machine Learning</em>.
+</div>
+<div id="ref-saitoRehmsmeier2015" class="csl-entry" role="listitem">
+Saito, Takaya, and Marc Rehmsmeier. 2015. <span>“The Precision-Recall Plot Is More Informative Than the <span>ROC</span> Plot When Evaluating Binary Classifiers on Imbalanced Datasets.”</span> <em>PLOS ONE</em> 10 (3): e0118432. <a href="https://doi.org/10.1371/journal.pone.0118432">https://doi.org/10.1371/journal.pone.0118432</a>.
+</div>
+<div id="ref-steyerberg2010assessing" class="csl-entry" role="listitem">
+Steyerberg, Ewout W., Andrew J. Vickers, Nancy R. Cook, Thomas Gerds, Mithat Gonen, Nancy Obuchowski, Michael J. Pencina, and Michael W. Kattan. 2010. <span>“Assessing the Performance of Prediction Models: A Framework for Traditional and Novel Measures.”</span> <em>Epidemiology</em> 21 (1): 128–38.
+</div>
+<div id="ref-varma2006bias" class="csl-entry" role="listitem">
+Varma, Sudhir, and Richard Simon. 2006. <span>“Bias in Error Estimation When Using Cross-Validation for Model Selection.”</span> <em>BMC Bioinformatics</em> 7 (91).
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -583,7 +2490,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -912,13 +2819,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-05-modern-ml/15-generative-ai.html" class="pagination-link" aria-label="Generative AI and Foundation Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span>
+      <a href="../part-05-modern-ml/15-generative-ai.html" class="pagination-link" aria-label="Generative AI: From Prediction to Intelligent Systems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-06-research/17-responsible-ml.html" class="pagination-link" aria-label="Explainable, Fair, and Responsible Machine Learning">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-06-research/17-responsible-ml.html" class="pagination-link" aria-label="Responsible Machine Learning: From Prediction to Consequence">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

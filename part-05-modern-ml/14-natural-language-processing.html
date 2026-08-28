@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14&nbsp; Natural Language Processing – Machine Learning Using Python</title>
+<title>14&nbsp; Natural Language Processing: From Words to Meaningful Representations – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/14-natural-language-processing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/14-natural-language-processing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -305,57 +430,96 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">14.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">14.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">14.3</span> Real-World Problem</a></li>
-  <li><a href="#text-representation" id="toc-text-representation" class="nav-link" data-scroll-target="#text-representation"><span class="header-section-number">14.4</span> Text Representation</a>
+  <li><a href="#why-language-is-different" id="toc-why-language-is-different" class="nav-link" data-scroll-target="#why-language-is-different"><span class="header-section-number">14.2</span> Why Language Is Different</a></li>
+  <li><a href="#the-unit-of-analysis" id="toc-the-unit-of-analysis" class="nav-link" data-scroll-target="#the-unit-of-analysis"><span class="header-section-number">14.3</span> The Unit of Analysis</a></li>
+  <li><a href="#core-vocabulary" id="toc-core-vocabulary" class="nav-link" data-scroll-target="#core-vocabulary"><span class="header-section-number">14.4</span> Core Vocabulary</a></li>
+  <li><a href="#tokenization" id="toc-tokenization" class="nav-link" data-scroll-target="#tokenization"><span class="header-section-number">14.5</span> Tokenization</a></li>
+  <li><a href="#a-simple-tokenization-demonstration" id="toc-a-simple-tokenization-demonstration" class="nav-link" data-scroll-target="#a-simple-tokenization-demonstration"><span class="header-section-number">14.6</span> A Simple Tokenization Demonstration</a></li>
+  <li><a href="#text-normalization" id="toc-text-normalization" class="nav-link" data-scroll-target="#text-normalization"><span class="header-section-number">14.7</span> Text Normalization</a></li>
+  <li><a href="#stop-words" id="toc-stop-words" class="nav-link" data-scroll-target="#stop-words"><span class="header-section-number">14.8</span> Stop Words</a></li>
+  <li><a href="#stemming-and-lemmatization" id="toc-stemming-and-lemmatization" class="nav-link" data-scroll-target="#stemming-and-lemmatization"><span class="header-section-number">14.9</span> Stemming and Lemmatization</a></li>
+  <li><a href="#bag-of-words-foundations" id="toc-bag-of-words-foundations" class="nav-link" data-scroll-target="#bag-of-words-foundations"><span class="header-section-number">14.10</span> Bag-of-Words Foundations</a></li>
+  <li><a href="#from-documents-to-counts" id="toc-from-documents-to-counts" class="nav-link" data-scroll-target="#from-documents-to-counts"><span class="header-section-number">14.11</span> From Documents to Counts</a></li>
+  <li><a href="#countvectorizer" id="toc-countvectorizer" class="nav-link" data-scroll-target="#countvectorizer"><span class="header-section-number">14.12</span> CountVectorizer</a></li>
+  <li><a href="#sparsity" id="toc-sparsity" class="nav-link" data-scroll-target="#sparsity"><span class="header-section-number">14.13</span> Sparsity</a></li>
+  <li><a href="#what-bag-of-words-forgets" id="toc-what-bag-of-words-forgets" class="nav-link" data-scroll-target="#what-bag-of-words-forgets"><span class="header-section-number">14.14</span> What Bag of Words Forgets</a></li>
+  <li><a href="#n-grams-restore-some-local-order" id="toc-n-grams-restore-some-local-order" class="nav-link" data-scroll-target="#n-grams-restore-some-local-order"><span class="header-section-number">14.15</span> N-Grams Restore Some Local Order</a></li>
+  <li><a href="#tf-idf" id="toc-tf-idf" class="nav-link" data-scroll-target="#tf-idf"><span class="header-section-number">14.16</span> TF-IDF</a></li>
+  <li><a href="#why-counts-are-not-enough" id="toc-why-counts-are-not-enough" class="nav-link" data-scroll-target="#why-counts-are-not-enough"><span class="header-section-number">14.17</span> Why Counts Are Not Enough</a></li>
+  <li><a href="#term-frequency" id="toc-term-frequency" class="nav-link" data-scroll-target="#term-frequency"><span class="header-section-number">14.18</span> Term Frequency</a></li>
+  <li><a href="#inverse-document-frequency" id="toc-inverse-document-frequency" class="nav-link" data-scroll-target="#inverse-document-frequency"><span class="header-section-number">14.19</span> Inverse Document Frequency</a></li>
+  <li><a href="#tf-idf-weight" id="toc-tf-idf-weight" class="nav-link" data-scroll-target="#tf-idf-weight"><span class="header-section-number">14.20</span> TF-IDF Weight</a></li>
+  <li><a href="#tf-idf-in-python" id="toc-tf-idf-in-python" class="nav-link" data-scroll-target="#tf-idf-in-python"><span class="header-section-number">14.21</span> TF-IDF in Python</a></li>
+  <li><a href="#cosine-similarity" id="toc-cosine-similarity" class="nav-link" data-scroll-target="#cosine-similarity"><span class="header-section-number">14.22</span> Cosine Similarity</a></li>
+  <li><a href="#document-similarity" id="toc-document-similarity" class="nav-link" data-scroll-target="#document-similarity"><span class="header-section-number">14.23</span> Document Similarity</a></li>
+  <li><a href="#text-classification" id="toc-text-classification" class="nav-link" data-scroll-target="#text-classification"><span class="header-section-number">14.24</span> Text Classification</a></li>
+  <li><a href="#a-public-benchmark" id="toc-a-public-benchmark" class="nav-link" data-scroll-target="#a-public-benchmark"><span class="header-section-number">14.25</span> A Public Benchmark</a></li>
+  <li><a href="#a-reproducible-teaching-corpus" id="toc-a-reproducible-teaching-corpus" class="nav-link" data-scroll-target="#a-reproducible-teaching-corpus"><span class="header-section-number">14.26</span> A Reproducible Teaching Corpus</a></li>
+  <li><a href="#leakage-safe-nlp-pipeline" id="toc-leakage-safe-nlp-pipeline" class="nav-link" data-scroll-target="#leakage-safe-nlp-pipeline"><span class="header-section-number">14.27</span> Leakage-Safe NLP Pipeline</a></li>
+  <li><a href="#evaluate-the-classifier" id="toc-evaluate-the-classifier" class="nav-link" data-scroll-target="#evaluate-the-classifier"><span class="header-section-number">14.28</span> Evaluate the Classifier</a></li>
+  <li><a href="#inspect-lexical-signals" id="toc-inspect-lexical-signals" class="nav-link" data-scroll-target="#inspect-lexical-signals"><span class="header-section-number">14.29</span> Inspect Lexical Signals</a></li>
+  <li><a href="#spurious-lexical-cues" id="toc-spurious-lexical-cues" class="nav-link" data-scroll-target="#spurious-lexical-cues"><span class="header-section-number">14.30</span> Spurious Lexical Cues</a></li>
+  <li><a href="#distributed-representations" id="toc-distributed-representations" class="nav-link" data-scroll-target="#distributed-representations"><span class="header-section-number">14.31</span> Distributed Representations</a></li>
+  <li><a href="#from-sparse-counts-to-dense-vectors" id="toc-from-sparse-counts-to-dense-vectors" class="nav-link" data-scroll-target="#from-sparse-counts-to-dense-vectors"><span class="header-section-number">14.32</span> From Sparse Counts to Dense Vectors</a></li>
+  <li><a href="#the-distributional-idea" id="toc-the-distributional-idea" class="nav-link" data-scroll-target="#the-distributional-idea"><span class="header-section-number">14.33</span> The Distributional Idea</a></li>
+  <li><a href="#one-hot-versus-dense-representation" id="toc-one-hot-versus-dense-representation" class="nav-link" data-scroll-target="#one-hot-versus-dense-representation"><span class="header-section-number">14.34</span> One-Hot Versus Dense Representation</a></li>
+  <li><a href="#word2vec-intuition" id="toc-word2vec-intuition" class="nav-link" data-scroll-target="#word2vec-intuition"><span class="header-section-number">14.35</span> Word2Vec Intuition</a></li>
+  <li><a href="#static-embeddings-have-a-limitation" id="toc-static-embeddings-have-a-limitation" class="nav-link" data-scroll-target="#static-embeddings-have-a-limitation"><span class="header-section-number">14.36</span> Static Embeddings Have a Limitation</a></li>
+  <li><a href="#attention" id="toc-attention" class="nav-link" data-scroll-target="#attention"><span class="header-section-number">14.37</span> Attention</a></li>
+  <li><a href="#why-context-requires-interaction" id="toc-why-context-requires-interaction" class="nav-link" data-scroll-target="#why-context-requires-interaction"><span class="header-section-number">14.38</span> Why Context Requires Interaction</a></li>
+  <li><a href="#scaled-dot-product-attention" id="toc-scaled-dot-product-attention" class="nav-link" data-scroll-target="#scaled-dot-product-attention"><span class="header-section-number">14.39</span> Scaled Dot-Product Attention</a></li>
+  <li><a href="#step-1-compare-queries-and-keys" id="toc-step-1-compare-queries-and-keys" class="nav-link" data-scroll-target="#step-1-compare-queries-and-keys"><span class="header-section-number">14.40</span> Step 1: Compare Queries and Keys</a></li>
+  <li><a href="#step-2-scale" id="toc-step-2-scale" class="nav-link" data-scroll-target="#step-2-scale"><span class="header-section-number">14.41</span> Step 2: Scale</a></li>
+  <li><a href="#step-3-softmax" id="toc-step-3-softmax" class="nav-link" data-scroll-target="#step-3-softmax"><span class="header-section-number">14.42</span> Step 3: Softmax</a></li>
+  <li><a href="#step-4-weighted-values" id="toc-step-4-weighted-values" class="nav-link" data-scroll-target="#step-4-weighted-values"><span class="header-section-number">14.43</span> Step 4: Weighted Values</a></li>
+  <li><a href="#attention-by-hand" id="toc-attention-by-hand" class="nav-link" data-scroll-target="#attention-by-hand"><span class="header-section-number">14.44</span> Attention by Hand</a></li>
+  <li><a href="#attention-is-not-automatically-explanation" id="toc-attention-is-not-automatically-explanation" class="nav-link" data-scroll-target="#attention-is-not-automatically-explanation"><span class="header-section-number">14.45</span> Attention Is Not Automatically Explanation</a></li>
+  <li><a href="#transformers" id="toc-transformers" class="nav-link" data-scroll-target="#transformers"><span class="header-section-number">14.46</span> Transformers</a></li>
+  <li><a href="#the-transformer-idea" id="toc-the-transformer-idea" class="nav-link" data-scroll-target="#the-transformer-idea"><span class="header-section-number">14.47</span> The Transformer Idea</a></li>
+  <li><a href="#multi-head-attention" id="toc-multi-head-attention" class="nav-link" data-scroll-target="#multi-head-attention"><span class="header-section-number">14.48</span> Multi-Head Attention</a></li>
+  <li><a href="#positional-information" id="toc-positional-information" class="nav-link" data-scroll-target="#positional-information"><span class="header-section-number">14.49</span> Positional Information</a></li>
+  <li><a href="#encoder-style-models" id="toc-encoder-style-models" class="nav-link" data-scroll-target="#encoder-style-models"><span class="header-section-number">14.50</span> Encoder-Style Models</a></li>
+  <li><a href="#decoder-style-models" id="toc-decoder-style-models" class="nav-link" data-scroll-target="#decoder-style-models"><span class="header-section-number">14.51</span> Decoder-Style Models</a></li>
+  <li><a href="#encoder-decoder-models" id="toc-encoder-decoder-models" class="nav-link" data-scroll-target="#encoder-decoder-models"><span class="header-section-number">14.52</span> Encoder-Decoder Models</a></li>
+  <li><a href="#from-nlp-to-foundation-models" id="toc-from-nlp-to-foundation-models" class="nav-link" data-scroll-target="#from-nlp-to-foundation-models"><span class="header-section-number">14.53</span> From NLP to Foundation Models</a></li>
+  <li><a href="#research-grade-nlp" id="toc-research-grade-nlp" class="nav-link" data-scroll-target="#research-grade-nlp"><span class="header-section-number">14.54</span> Research-Grade NLP</a></li>
+  <li><a href="#split-by-the-real-generalization-boundary" id="toc-split-by-the-real-generalization-boundary" class="nav-link" data-scroll-target="#split-by-the-real-generalization-boundary"><span class="header-section-number">14.55</span> Split by the Real Generalization Boundary</a></li>
+  <li><a href="#duplicate-and-near-duplicate-text" id="toc-duplicate-and-near-duplicate-text" class="nav-link" data-scroll-target="#duplicate-and-near-duplicate-text"><span class="header-section-number">14.56</span> Duplicate and Near-Duplicate Text</a></li>
+  <li><a href="#temporal-leakage" id="toc-temporal-leakage" class="nav-link" data-scroll-target="#temporal-leakage"><span class="header-section-number">14.57</span> Temporal Leakage</a></li>
+  <li><a href="#construct-validity" id="toc-construct-validity" class="nav-link" data-scroll-target="#construct-validity"><span class="header-section-number">14.58</span> Construct Validity</a></li>
+  <li><a href="#fairness-and-language-variation" id="toc-fairness-and-language-variation" class="nav-link" data-scroll-target="#fairness-and-language-variation"><span class="header-section-number">14.59</span> Fairness and Language Variation</a></li>
+  <li><a href="#from-nlp-to-multimodal-learning" id="toc-from-nlp-to-multimodal-learning" class="nav-link" data-scroll-target="#from-nlp-to-multimodal-learning"><span class="header-section-number">14.60</span> From NLP to Multimodal Learning</a>
   <ul class="collapse">
-  <li><a href="#tokenization" id="toc-tokenization" class="nav-link" data-scroll-target="#tokenization"><span class="header-section-number">14.4.1</span> Tokenization</a></li>
-  <li><a href="#bag-of-words" id="toc-bag-of-words" class="nav-link" data-scroll-target="#bag-of-words"><span class="header-section-number">14.4.2</span> Bag of Words</a></li>
-  <li><a href="#tf-idf" id="toc-tf-idf" class="nav-link" data-scroll-target="#tf-idf"><span class="header-section-number">14.4.3</span> TF-IDF</a></li>
-  <li><a href="#n-grams" id="toc-n-grams" class="nav-link" data-scroll-target="#n-grams"><span class="header-section-number">14.4.4</span> N-Grams</a></li>
-  <li><a href="#word-and-document-embeddings" id="toc-word-and-document-embeddings" class="nav-link" data-scroll-target="#word-and-document-embeddings"><span class="header-section-number">14.4.5</span> Word and Document Embeddings</a></li>
+  <li><a href="#shared-spaces-and-cross-modal-alignment" id="toc-shared-spaces-and-cross-modal-alignment" class="nav-link" data-scroll-target="#shared-spaces-and-cross-modal-alignment"><span class="header-section-number">14.60.1</span> Shared Spaces and Cross-Modal Alignment</a></li>
+  <li><a href="#learning-experience-design-a-multimodal-study" id="toc-learning-experience-design-a-multimodal-study" class="nav-link" data-scroll-target="#learning-experience-design-a-multimodal-study"><span class="header-section-number">14.60.2</span> Learning Experience: Design a Multimodal Study</a></li>
   </ul></li>
-  <li><a href="#modeling-text" id="toc-modeling-text" class="nav-link" data-scroll-target="#modeling-text"><span class="header-section-number">14.5</span> Modeling Text</a>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">14.61</span> Three Tracks</a>
   <ul class="collapse">
-  <li><a href="#naive-bayes" id="toc-naive-bayes" class="nav-link" data-scroll-target="#naive-bayes"><span class="header-section-number">14.5.1</span> Naive Bayes</a></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">14.5.2</span> Logistic Regression</a></li>
-  <li><a href="#linear-svm" id="toc-linear-svm" class="nav-link" data-scroll-target="#linear-svm"><span class="header-section-number">14.5.3</span> Linear SVM</a></li>
-  <li><a href="#neural-representations" id="toc-neural-representations" class="nav-link" data-scroll-target="#neural-representations"><span class="header-section-number">14.5.4</span> Neural Representations</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">14.61.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">14.61.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">14.61.3</span> Open ML Benchmark Track</a></li>
   </ul></li>
-  <li><a href="#transformers" id="toc-transformers" class="nav-link" data-scroll-target="#transformers"><span class="header-section-number">14.6</span> Transformers</a>
-  <ul class="collapse">
-  <li><a href="#attention" id="toc-attention" class="nav-link" data-scroll-target="#attention"><span class="header-section-number">14.6.1</span> Attention</a></li>
-  <li><a href="#contextual-embeddings" id="toc-contextual-embeddings" class="nav-link" data-scroll-target="#contextual-embeddings"><span class="header-section-number">14.6.2</span> Contextual Embeddings</a></li>
-  <li><a href="#pretrained-language-models" id="toc-pretrained-language-models" class="nav-link" data-scroll-target="#pretrained-language-models"><span class="header-section-number">14.6.3</span> Pretrained Language Models</a></li>
-  <li><a href="#fine-tuning-and-retrieval" id="toc-fine-tuning-and-retrieval" class="nav-link" data-scroll-target="#fine-tuning-and-retrieval"><span class="header-section-number">14.6.4</span> Fine-Tuning and Retrieval</a></li>
-  </ul></li>
-  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation"><span class="header-section-number">14.7</span> Evaluation</a>
-  <ul class="collapse">
-  <li><a href="#classification-metrics" id="toc-classification-metrics" class="nav-link" data-scroll-target="#classification-metrics"><span class="header-section-number">14.7.1</span> Classification Metrics</a></li>
-  <li><a href="#data-leakage-in-text" id="toc-data-leakage-in-text" class="nav-link" data-scroll-target="#data-leakage-in-text"><span class="header-section-number">14.7.2</span> Data Leakage in Text</a></li>
-  <li><a href="#domain-shift" id="toc-domain-shift" class="nav-link" data-scroll-target="#domain-shift"><span class="header-section-number">14.7.3</span> Domain Shift</a></li>
-  <li><a href="#human-evaluation" id="toc-human-evaluation" class="nav-link" data-scroll-target="#human-evaluation"><span class="header-section-number">14.7.4</span> Human Evaluation</a></li>
-  </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">14.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">14.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">14.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">14.11</span> Real-World Case Study</a>
-  <ul class="collapse">
-  <li><a href="#analyzing-educational-text" id="toc-analyzing-educational-text" class="nav-link" data-scroll-target="#analyzing-educational-text"><span class="header-section-number">14.11.1</span> Analyzing Educational Text</a></li>
-  </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">14.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">14.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">14.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">14.15</span> Key Takeaways</a></li>
+  <li><a href="#public-research-dataset-studio" id="toc-public-research-dataset-studio" class="nav-link" data-scroll-target="#public-research-dataset-studio"><span class="header-section-number">14.62</span> Public Research Dataset Studio</a></li>
+  <li><a href="#beyond-the-algorithm-does-a-vector-understand-a-word" id="toc-beyond-the-algorithm-does-a-vector-understand-a-word" class="nav-link" data-scroll-target="#beyond-the-algorithm-does-a-vector-understand-a-word"><span class="header-section-number">14.63</span> Beyond the Algorithm: Does a Vector Understand a Word?</a></li>
+  <li><a href="#text-is-not-the-same-as-meaning" id="toc-text-is-not-the-same-as-meaning" class="nav-link" data-scroll-target="#text-is-not-the-same-as-meaning"><span class="header-section-number">14.64</span> Text Is Not the Same as Meaning</a></li>
+  <li><a href="#ai-pair-programmer-the-model-understands-students" id="toc-ai-pair-programmer-the-model-understands-students" class="nav-link" data-scroll-target="#ai-pair-programmer-the-model-understands-students"><span class="header-section-number">14.65</span> AI Pair Programmer: The Model Understands Students</a></li>
+  <li><a href="#hands-on-lab-build-a-text-classifier" id="toc-hands-on-lab-build-a-text-classifier" class="nav-link" data-scroll-target="#hands-on-lab-build-a-text-classifier"><span class="header-section-number">14.66</span> Hands-On Lab: Build a Text Classifier</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">14.67</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">14.68</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">14.69</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-predicting-student-success-from-essays" id="toc-professors-challenge-predicting-student-success-from-essays" class="nav-link" data-scroll-target="#professors-challenge-predicting-student-success-from-essays"><span class="header-section-number">14.70</span> Professor’s Challenge: Predicting Student Success From Essays</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">14.71</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">14.72</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">14.73</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/14-natural-language-processing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/14-natural-language-processing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></h1>
 </div>
 
 
@@ -374,135 +538,1688 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">14.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain how text can be represented computationally.</li>
-<li>Build text-classification pipelines.</li>
-<li>Compare bag-of-words, TF-IDF, and embeddings.</li>
-<li>Explain the intuition behind transformers.</li>
-<li>Evaluate NLP models responsibly.</li>
+<li>explain why human language creates unusual machine-learning challenges;</li>
+<li>define corpus, document, token, vocabulary, n-gram, and document-term matrix;</li>
+<li>distinguish tokenization from normalization;</li>
+<li>explain the tradeoffs of stop-word removal, stemming, and lemmatization;</li>
+<li>construct bag-of-words and TF-IDF representations;</li>
+<li>derive and interpret term frequency and inverse document frequency;</li>
+<li>explain sparsity and high dimensionality in text data;</li>
+<li>use cosine similarity to compare document vectors;</li>
+<li>build leakage-safe text-classification pipelines;</li>
+<li>evaluate text classifiers with metrics appropriate to the task;</li>
+<li>inspect model coefficients to understand lexical signals;</li>
+<li>distinguish lexical association from semantic understanding;</li>
+<li>explain distributed word embeddings conceptually;</li>
+<li>connect embeddings to representation learning from Chapter 13;</li>
+<li>explain contextual embeddings and why a word can require different representations in different sentences;</li>
+<li>derive the intuition behind self-attention;</li>
+<li>explain queries, keys, values, and attention weights;</li>
+<li>describe the role of positional information in transformer models;</li>
+<li>distinguish encoder-style, decoder-style, and sequence-to-sequence transformer objectives at a high level;</li>
+<li>recognize data leakage, spurious lexical cues, subgroup harms, and construct-validity problems in NLP;</li>
+<li>design reproducible NLP studies using health, education, or public benchmark text.</li>
+<li>distinguish language-only NLP from multimodal learning that jointly represents text and visual information.</li>
 </ul>
 </section>
-<section id="why-this-matters" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">14.2</span> Why This Matters</h2>
-<p>A large share of human knowledge is stored as text. NLP enables machine learning with documents, responses, reports, and other unstructured language data.</p>
+<section id="why-language-is-different" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="why-language-is-different"><span class="header-section-number">14.2</span> Why Language Is Different</h2>
+<p>Most earlier chapters assumed that observations were already represented as columns of numbers.</p>
+<p>Language does not arrive that way.</p>
+<p>A student writes:</p>
+<blockquote class="blockquote">
+<p>“I understand the material, but I still feel lost when I try to apply it.”</p>
+</blockquote>
+<p>A patient writes:</p>
+<blockquote class="blockquote">
+<p>“The medication helped the pain, but I have been exhausted since Tuesday.”</p>
+</blockquote>
+<p>A scientific abstract contains arguments, terminology, uncertainty, relationships, and context.</p>
+<p>Before a machine-learning algorithm can operate on these texts, we must construct a numerical representation.</p>
+<p>The NLP pipeline therefore begins with a profound design problem:</p>
+<p><span class="math display">\[
+\text{language}
+\longrightarrow
+\text{representation}
+\longrightarrow
+\text{model}.
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>When language becomes numbers, which aspects of meaning survive the transformation—and which disappear?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">14.3</span> Real-World Problem</h2>
-<p>Can open-ended student responses or health narratives be analyzed reliably without reducing nuanced language to misleading labels?</p>
-</section>
-<section id="text-representation" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="text-representation"><span class="header-section-number">14.4</span> Text Representation</h2>
-<section id="tokenization" class="level3" data-number="14.4.1">
-<h3 data-number="14.4.1" class="anchored" data-anchor-id="tokenization"><span class="header-section-number">14.4.1</span> Tokenization</h3>
-</section>
-<section id="bag-of-words" class="level3" data-number="14.4.2">
-<h3 data-number="14.4.2" class="anchored" data-anchor-id="bag-of-words"><span class="header-section-number">14.4.2</span> Bag of Words</h3>
-</section>
-<section id="tf-idf" class="level3" data-number="14.4.3">
-<h3 data-number="14.4.3" class="anchored" data-anchor-id="tf-idf"><span class="header-section-number">14.4.3</span> TF-IDF</h3>
-</section>
-<section id="n-grams" class="level3" data-number="14.4.4">
-<h3 data-number="14.4.4" class="anchored" data-anchor-id="n-grams"><span class="header-section-number">14.4.4</span> N-Grams</h3>
-</section>
-<section id="word-and-document-embeddings" class="level3" data-number="14.4.5">
-<h3 data-number="14.4.5" class="anchored" data-anchor-id="word-and-document-embeddings"><span class="header-section-number">14.4.5</span> Word and Document Embeddings</h3>
-</section>
-</section>
-<section id="modeling-text" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="modeling-text"><span class="header-section-number">14.5</span> Modeling Text</h2>
-<section id="naive-bayes" class="level3" data-number="14.5.1">
-<h3 data-number="14.5.1" class="anchored" data-anchor-id="naive-bayes"><span class="header-section-number">14.5.1</span> Naive Bayes</h3>
-</section>
-<section id="logistic-regression" class="level3" data-number="14.5.2">
-<h3 data-number="14.5.2" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">14.5.2</span> Logistic Regression</h3>
-</section>
-<section id="linear-svm" class="level3" data-number="14.5.3">
-<h3 data-number="14.5.3" class="anchored" data-anchor-id="linear-svm"><span class="header-section-number">14.5.3</span> Linear SVM</h3>
-</section>
-<section id="neural-representations" class="level3" data-number="14.5.4">
-<h3 data-number="14.5.4" class="anchored" data-anchor-id="neural-representations"><span class="header-section-number">14.5.4</span> Neural Representations</h3>
-</section>
-</section>
-<section id="transformers" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="transformers"><span class="header-section-number">14.6</span> Transformers</h2>
-<section id="attention" class="level3" data-number="14.6.1">
-<h3 data-number="14.6.1" class="anchored" data-anchor-id="attention"><span class="header-section-number">14.6.1</span> Attention</h3>
-</section>
-<section id="contextual-embeddings" class="level3" data-number="14.6.2">
-<h3 data-number="14.6.2" class="anchored" data-anchor-id="contextual-embeddings"><span class="header-section-number">14.6.2</span> Contextual Embeddings</h3>
-</section>
-<section id="pretrained-language-models" class="level3" data-number="14.6.3">
-<h3 data-number="14.6.3" class="anchored" data-anchor-id="pretrained-language-models"><span class="header-section-number">14.6.3</span> Pretrained Language Models</h3>
-</section>
-<section id="fine-tuning-and-retrieval" class="level3" data-number="14.6.4">
-<h3 data-number="14.6.4" class="anchored" data-anchor-id="fine-tuning-and-retrieval"><span class="header-section-number">14.6.4</span> Fine-Tuning and Retrieval</h3>
-</section>
-</section>
-<section id="evaluation" class="level2" data-number="14.7">
-<h2 data-number="14.7" class="anchored" data-anchor-id="evaluation"><span class="header-section-number">14.7</span> Evaluation</h2>
-<section id="classification-metrics" class="level3" data-number="14.7.1">
-<h3 data-number="14.7.1" class="anchored" data-anchor-id="classification-metrics"><span class="header-section-number">14.7.1</span> Classification Metrics</h3>
-</section>
-<section id="data-leakage-in-text" class="level3" data-number="14.7.2">
-<h3 data-number="14.7.2" class="anchored" data-anchor-id="data-leakage-in-text"><span class="header-section-number">14.7.2</span> Data Leakage in Text</h3>
-</section>
-<section id="domain-shift" class="level3" data-number="14.7.3">
-<h3 data-number="14.7.3" class="anchored" data-anchor-id="domain-shift"><span class="header-section-number">14.7.3</span> Domain Shift</h3>
-</section>
-<section id="human-evaluation" class="level3" data-number="14.7.4">
-<h3 data-number="14.7.4" class="anchored" data-anchor-id="human-evaluation"><span class="header-section-number">14.7.4</span> Human Evaluation</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="14.8">
-<h2 data-number="14.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">14.8</span> Hands-On Practice</h2>
-<p>Build a reproducible text classifier and compare sparse and embedding-based representations.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="14.9">
-<h2 data-number="14.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">14.9</span> Common Mistakes</h2>
+<section id="the-unit-of-analysis" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="the-unit-of-analysis"><span class="header-section-number">14.3</span> The Unit of Analysis</h2>
+<p>Before tokenizing anything, identify the analytical unit.</p>
+<p>Possible units include:</p>
 <ul>
-<li>Leakage from duplicated or related documents.</li>
-<li>Random splitting when time or source matters.</li>
-<li>Ignoring class and language imbalance.</li>
-<li>Treating model-generated labels as ground truth.</li>
+<li>an entire document;</li>
+<li>a paragraph;</li>
+<li>a sentence;</li>
+<li>an utterance;</li>
+<li>a social-media post;</li>
+<li>a clinical note;</li>
+<li>a discussion-board contribution;</li>
+<li>a token.</li>
+</ul>
+<p>The unit must align with the research question.</p>
+<p>Predicting a document-level label from sentence fragments changes the problem.</p>
+</section>
+<section id="core-vocabulary" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="core-vocabulary"><span class="header-section-number">14.4</span> Core Vocabulary</h2>
+<p>A <strong>corpus</strong> is a collection of text documents.</p>
+<p>A <strong>document</strong> is one analytical text unit.</p>
+<p>A <strong>token</strong> is a unit produced by tokenization.</p>
+<p>A <strong>vocabulary</strong> is the set of distinct tokens/features represented by the model.</p>
+<p>An <strong>n-gram</strong> is a contiguous sequence of <span class="math inline">\(n\)</span> tokens.</p>
+<p>Examples:</p>
+<ul>
+<li>unigram: <code>machine</code></li>
+<li>bigram: <code>machine learning</code></li>
+<li>trigram: <code>machine learning model</code></li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="14.10">
-<h2 data-number="14.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">14.10</span> Knowledge Check</h2>
+<section id="tokenization" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="tokenization"><span class="header-section-number">14.5</span> Tokenization</h2>
+<p>Tokenization divides text into units.</p>
+<p>A simple whitespace tokenizer might turn:</p>
+<pre class="text"><code>Machine learning changes research.</code></pre>
+<p>into:</p>
+<pre class="text"><code>Machine
+learning
+changes
+research.</code></pre>
+<p>But real tokenization must confront:</p>
+<ul>
+<li>punctuation;</li>
+<li>contractions;</li>
+<li>hyphenation;</li>
+<li>URLs;</li>
+<li>emojis;</li>
+<li>hashtags;</li>
+<li>numbers;</li>
+<li>abbreviations;</li>
+<li>multilingual text;</li>
+<li>domain terminology.</li>
+</ul>
+<p>Modern subword tokenizers go further by representing words through reusable pieces.</p>
+<p>Tokenization is therefore not clerical preprocessing. It defines the symbols available to the model.</p>
+</section>
+<section id="a-simple-tokenization-demonstration" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="a-simple-tokenization-demonstration"><span class="header-section-number">14.6</span> A Simple Tokenization Demonstration</h2>
+<div id="c2d3c491" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">Machine learning can support research,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">but representation choices matter.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> re.findall(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"</span><span class="dv">\b</span><span class="pp">[</span><span class="dv">\w</span><span class="pp">'-]</span><span class="op">+</span><span class="dv">\b</span><span class="vs">"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    text.lower()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>tokens</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>['machine',
+ 'learning',
+ 'can',
+ 'support',
+ 'research',
+ 'but',
+ 'representation',
+ 'choices',
+ 'matter']</code></pre>
+</div>
+</div>
+<p>This tokenizer is intentionally simple. Production NLP systems often require more sophisticated rules or learned subword tokenizers.</p>
+</section>
+<section id="text-normalization" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="text-normalization"><span class="header-section-number">14.7</span> Text Normalization</h2>
+<p>Common transformations include:</p>
+<ul>
+<li>lowercasing;</li>
+<li>punctuation handling;</li>
+<li>number normalization;</li>
+<li>spelling normalization;</li>
+<li>stop-word removal;</li>
+<li>stemming;</li>
+<li>lemmatization.</li>
+</ul>
+<p>Each transformation changes the information available to the model.</p>
+<p>For example, removing the word <code>not</code> could reverse sentiment.</p>
+<p>Aggressive normalization can improve statistical efficiency while destroying useful meaning.</p>
+</section>
+<section id="stop-words" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="stop-words"><span class="header-section-number">14.8</span> Stop Words</h2>
+<p>Stop words are frequently occurring function words such as <code>the</code>, <code>and</code>, or <code>is</code>.</p>
+<p>Removing them can reduce dimensionality in some lexical models.</p>
+<p>But consider:</p>
+<blockquote class="blockquote">
+<p>“The treatment was effective.”</p>
+</blockquote>
+<p>versus</p>
+<blockquote class="blockquote">
+<p>“The treatment was <strong>not</strong> effective.”</p>
+</blockquote>
+<p>A generic stop-word list that removes negation could be disastrous.</p>
+<p>Domain context matters.</p>
+</section>
+<section id="stemming-and-lemmatization" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="stemming-and-lemmatization"><span class="header-section-number">14.9</span> Stemming and Lemmatization</h2>
+<p><strong>Stemming</strong> applies heuristic rules to reduce words to stems.</p>
+<p><strong>Lemmatization</strong> attempts to map inflected words to linguistically meaningful base forms.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+\{\text{learn},\text{learned},\text{learning}\}
+\rightarrow
+\text{learn}
+\]</span></p>
+<p>may be useful in some applications.</p>
+<p>But modern contextual models often operate without traditional stemming or lemmatization.</p>
+<p>Preprocessing should follow the representation and task.</p>
+</section>
+<section id="bag-of-words-foundations" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="bag-of-words-foundations"><span class="header-section-number">14.10</span> Bag-of-Words Foundations</h2>
+</section>
+<section id="from-documents-to-counts" class="level2" data-number="14.11">
+<h2 data-number="14.11" class="anchored" data-anchor-id="from-documents-to-counts"><span class="header-section-number">14.11</span> From Documents to Counts</h2>
+<p>Suppose our corpus contains:</p>
 <ol type="1">
-<li>What does TF-IDF represent?</li>
-<li>How are contextual embeddings different from bag-of-words features?</li>
-<li>What problem does attention address?</li>
-<li>Why can random splitting inflate NLP performance?</li>
+<li><code>machine learning supports research</code></li>
+<li><code>research supports learning</code></li>
+<li><code>machine learning requires data</code></li>
+</ol>
+<p>A bag-of-words representation records token counts while largely ignoring order.</p>
+<p>If the vocabulary is</p>
+<p><span class="math display">\[
+V=
+\{
+\text{machine},
+\text{learning},
+\text{supports},
+\text{research},
+\text{requires},
+\text{data}
+\},
+\]</span></p>
+<p>each document becomes a numerical vector.</p>
+</section>
+<section id="countvectorizer" class="level2" data-number="14.12">
+<h2 data-number="14.12" class="anchored" data-anchor-id="countvectorizer"><span class="header-section-number">14.12</span> CountVectorizer</h2>
+<div id="880d6e20" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>documents <span class="op">=</span> [</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"machine learning supports research"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"research supports learning"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"machine learning requires data"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>count_vectorizer <span class="op">=</span> CountVectorizer()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>X_count <span class="op">=</span> count_vectorizer.fit_transform(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    documents</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>count_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    X_count.toarray(),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>count_vectorizer.get_feature_names_out()</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>count_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">data</th>
+<th data-quarto-table-cell-role="th">learning</th>
+<th data-quarto-table-cell-role="th">machine</th>
+<th data-quarto-table-cell-role="th">requires</th>
+<th data-quarto-table-cell-role="th">research</th>
+<th data-quarto-table-cell-role="th">supports</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>This is a <strong>document-term matrix</strong>.</p>
+<p>Rows represent documents.</p>
+<p>Columns represent vocabulary features.</p>
+</section>
+<section id="sparsity" class="level2" data-number="14.13">
+<h2 data-number="14.13" class="anchored" data-anchor-id="sparsity"><span class="header-section-number">14.13</span> Sparsity</h2>
+<p>Real vocabularies can contain tens or hundreds of thousands of features.</p>
+<p>Any individual document uses only a small fraction of them.</p>
+<p>The resulting matrix is sparse.</p>
+<p>If</p>
+<p><span class="math display">\[
+X\in\mathbb{R}^{n\times p},
+\]</span></p>
+<p><span class="math inline">\(p\)</span> may be enormous while most entries equal zero.</p>
+<p>Sparse matrix representations avoid storing every zero explicitly.</p>
+<p>This is one reason we should generally avoid converting large text matrices with <code>.toarray()</code>.</p>
+<p>We did so above only because the teaching example is tiny.</p>
+</section>
+<section id="what-bag-of-words-forgets" class="level2" data-number="14.14">
+<h2 data-number="14.14" class="anchored" data-anchor-id="what-bag-of-words-forgets"><span class="header-section-number">14.14</span> What Bag of Words Forgets</h2>
+<p>Compare:</p>
+<blockquote class="blockquote">
+<p><code>student understands model</code></p>
+</blockquote>
+<p>and</p>
+<blockquote class="blockquote">
+<p><code>model understands student</code></p>
+</blockquote>
+<p>A unigram bag-of-words representation can treat them identically.</p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{\text{same token counts}}
+\not\Rightarrow
+\boxed{\text{same meaning}}.
+\]</span></p>
+</section>
+<section id="n-grams-restore-some-local-order" class="level2" data-number="14.15">
+<h2 data-number="14.15" class="anchored" data-anchor-id="n-grams-restore-some-local-order"><span class="header-section-number">14.15</span> N-Grams Restore Some Local Order</h2>
+<div id="441f868f" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bigram_vectorizer <span class="op">=</span> CountVectorizer(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ngram_range<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>X_bigram <span class="op">=</span> bigram_vectorizer.fit_transform(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    documents</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>bigram_vectorizer.get_feature_names_out()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>array(['data', 'learning', 'learning requires', 'learning supports',
+       'machine', 'machine learning', 'requires', 'requires data',
+       'research', 'research supports', 'supports', 'supports learning',
+       'supports research'], dtype=object)</code></pre>
+</div>
+</div>
+<p>Bigrams can preserve phrases such as <code>machine learning</code>.</p>
+<p>But vocabulary size grows rapidly.</p>
+<p>This creates a tradeoff between richer local context and dimensionality/sparsity.</p>
+</section>
+<section id="tf-idf" class="level2" data-number="14.16">
+<h2 data-number="14.16" class="anchored" data-anchor-id="tf-idf"><span class="header-section-number">14.16</span> TF-IDF</h2>
+</section>
+<section id="why-counts-are-not-enough" class="level2" data-number="14.17">
+<h2 data-number="14.17" class="anchored" data-anchor-id="why-counts-are-not-enough"><span class="header-section-number">14.17</span> Why Counts Are Not Enough</h2>
+<p>A term appearing frequently in every document may be less discriminating than a term concentrated in a smaller subset.</p>
+<p>TF-IDF combines term-specific evidence with corpus-level rarity, reflecting a long information-retrieval tradition of term weighting <span class="citation" data-cites="saltonBuckley1988">(<a href="../references.html#ref-saltonBuckley1988" role="doc-biblioref">Salton and Buckley 1988</a>)</span>:</p>
+<ul>
+<li><strong>term frequency</strong> — importance within a document;</li>
+<li><strong>inverse document frequency</strong> — rarity across documents.</li>
+</ul>
+</section>
+<section id="term-frequency" class="level2" data-number="14.18">
+<h2 data-number="14.18" class="anchored" data-anchor-id="term-frequency"><span class="header-section-number">14.18</span> Term Frequency</h2>
+<p>A simple term frequency is</p>
+<p><span class="math display">\[
+TF(t,d)
+=
+\text{count of term }t\text{ in document }d.
+\]</span></p>
+<p>Variants normalize by document length or use sublinear scaling.</p>
+</section>
+<section id="inverse-document-frequency" class="level2" data-number="14.19">
+<h2 data-number="14.19" class="anchored" data-anchor-id="inverse-document-frequency"><span class="header-section-number">14.19</span> Inverse Document Frequency</h2>
+<p>A common smoothed form is</p>
+<p><span class="math display">\[
+IDF(t)
+=
+\log
+\left(
+\frac{1+n}
+{1+df(t)}
+\right)
++1,
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(n\)</span> is the number of documents;</li>
+<li><span class="math inline">\(df(t)\)</span> is the number of documents containing term <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p>Terms appearing in fewer documents receive greater IDF weight.</p>
+</section>
+<section id="tf-idf-weight" class="level2" data-number="14.20">
+<h2 data-number="14.20" class="anchored" data-anchor-id="tf-idf-weight"><span class="header-section-number">14.20</span> TF-IDF Weight</h2>
+<p><span class="math display">\[
+TFIDF(t,d)
+=
+TF(t,d)\times IDF(t).
+\]</span></p>
+<p>The exact implementation can vary, so reproducible research should document the software and parameterization.</p>
+</section>
+<section id="tf-idf-in-python" class="level2" data-number="14.21">
+<h2 data-number="14.21" class="anchored" data-anchor-id="tf-idf-in-python"><span class="header-section-number">14.21</span> TF-IDF in Python</h2>
+<div id="1cd69ed2" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tfidf <span class="op">=</span> TfidfVectorizer()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X_tfidf <span class="op">=</span> tfidf.fit_transform(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    documents</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>tfidf_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    X_tfidf.toarray(),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>tfidf.get_feature_names_out()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>tfidf_df.<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">data</th>
+<th data-quarto-table-cell-role="th">learning</th>
+<th data-quarto-table-cell-role="th">machine</th>
+<th data-quarto-table-cell-role="th">requires</th>
+<th data-quarto-table-cell-role="th">research</th>
+<th data-quarto-table-cell-role="th">supports</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.000</td>
+<td>0.409</td>
+<td>0.527</td>
+<td>0.000</td>
+<td>0.527</td>
+<td>0.527</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.000</td>
+<td>0.481</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.620</td>
+<td>0.620</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.584</td>
+<td>0.345</td>
+<td>0.445</td>
+<td>0.584</td>
+<td>0.000</td>
+<td>0.000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="cosine-similarity" class="level2" data-number="14.22">
+<h2 data-number="14.22" class="anchored" data-anchor-id="cosine-similarity"><span class="header-section-number">14.22</span> Cosine Similarity</h2>
+<p>Text vectors are often compared using cosine similarity.</p>
+<p>For vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>,</p>
+<p><span class="math display">\[
+\cos(\theta)
+=
+\frac{x^\top y}
+{\|x\|_2\|y\|_2}.
+\]</span></p>
+<p>Cosine similarity focuses on orientation rather than raw vector magnitude.</p>
+</section>
+<section id="document-similarity" class="level2" data-number="14.23">
+<h2 data-number="14.23" class="anchored" data-anchor-id="document-similarity"><span class="header-section-number">14.23</span> Document Similarity</h2>
+<div id="8c20b4ad" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.pairwise <span class="im">import</span> cosine_similarity</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>similarities <span class="op">=</span> cosine_similarity(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    X_tfidf</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    similarities,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Doc 1"</span>, <span class="st">"Doc 2"</span>, <span class="st">"Doc 3"</span>],</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"Doc 1"</span>, <span class="st">"Doc 2"</span>, <span class="st">"Doc 3"</span>]</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Doc 1</th>
+<th data-quarto-table-cell-role="th">Doc 2</th>
+<th data-quarto-table-cell-role="th">Doc 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Doc 1</th>
+<td>1.000</td>
+<td>0.850</td>
+<td>0.375</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Doc 2</th>
+<td>0.850</td>
+<td>1.000</td>
+<td>0.166</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Doc 3</th>
+<td>0.375</td>
+<td>0.166</td>
+<td>1.000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>A high cosine similarity means the documents have similar vector directions under the chosen representation.</p>
+<p>It does not prove that humans would judge the documents semantically equivalent.</p>
+</section>
+<section id="text-classification" class="level2" data-number="14.24">
+<h2 data-number="14.24" class="anchored" data-anchor-id="text-classification"><span class="header-section-number">14.24</span> Text Classification</h2>
+</section>
+<section id="a-public-benchmark" class="level2" data-number="14.25">
+<h2 data-number="14.25" class="anchored" data-anchor-id="a-public-benchmark"><span class="header-section-number">14.25</span> A Public Benchmark</h2>
+<p>For an executable classification example, we use the scikit-learn 20 Newsgroups dataset.</p>
+<p>Because it is downloaded from the internet when first used, the main book should avoid requiring the download during every render.</p>
+<p>Instead, we will create a small synthetic corpus for guaranteed rendering and provide the public benchmark workflow as a research extension.</p>
+</section>
+<section id="a-reproducible-teaching-corpus" class="level2" data-number="14.26">
+<h2 data-number="14.26" class="anchored" data-anchor-id="a-reproducible-teaching-corpus"><span class="header-section-number">14.26</span> A Reproducible Teaching Corpus</h2>
+<div id="1d570788" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>texts <span class="op">=</span> [</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the course examples were clear and helpful"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I understood the lecture and enjoyed the project"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the assignment instructions were confusing"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I could not understand the coding exercise"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"excellent explanations and useful examples"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the project helped me apply machine learning"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the lecture moved too quickly and was unclear"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I struggled with the assignment requirements"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the examples made the concept easy to understand"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the instructions were vague and frustrating"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"helpful feedback improved my final project"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I was confused by the explanation of the model"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the hands on exercise was valuable"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the activity did not explain the concept well"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"clear examples helped me understand regression"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I could not follow the instructions for the lab"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the project was engaging and practical"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the lesson was difficult to follow"</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the coding demonstration was very useful"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the assignment description was unclear"</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here <code>1</code> indicates broadly positive/clear feedback and <code>0</code> indicates broadly negative/confusing feedback.</p>
+<p>This corpus is for workflow demonstration, not substantive research.</p>
+</section>
+<section id="leakage-safe-nlp-pipeline" class="level2" data-number="14.27">
+<h2 data-number="14.27" class="anchored" data-anchor-id="leakage-safe-nlp-pipeline"><span class="header-section-number">14.27</span> Leakage-Safe NLP Pipeline</h2>
+<p>The vectorizer must learn vocabulary and IDF weights from the training data only.</p>
+<div id="deeb907c" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    texts,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    labels,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">.30</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>labels</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>text_model <span class="op">=</span> Pipeline([</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tfidf"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        TfidfVectorizer(</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            ngram_range<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            min_df<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        LogisticRegression(</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>            max_iter<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>text_model.fit(</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    y_train</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>text_prob <span class="op">=</span> text_model.predict_proba(</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>text_pred <span class="op">=</span> text_model.predict(</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    X_test</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is the text equivalent of the leakage-safe pipelines developed earlier.</p>
+</section>
+<section id="evaluate-the-classifier" class="level2" data-number="14.28">
+<h2 data-number="14.28" class="anchored" data-anchor-id="evaluate-the-classifier"><span class="header-section-number">14.28</span> Evaluate the Classifier</h2>
+<div id="6b927529" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    accuracy_score,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    precision_score,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    recall_score,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    f1_score,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    roc_auc_score</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Accuracy"</span>: accuracy_score(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        text_pred</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Precision"</span>: precision_score(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        text_pred</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Recall"</span>: recall_score(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        text_pred</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"F1"</span>: f1_score(</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        text_pred</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ROC-AUC"</span>: roc_auc_score(</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        y_test,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        text_prob</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>{'Accuracy': 0.6666666666666666,
+ 'Precision': 1.0,
+ 'Recall': 0.3333333333333333,
+ 'F1': 0.5,
+ 'ROC-AUC': np.float64(0.5555555555555556)}</code></pre>
+</div>
+</div>
+<p>With a tiny synthetic corpus, these metrics are unstable.</p>
+<p>That instability is itself instructive: impressive percentages from small text samples should not be overinterpreted.</p>
+</section>
+<section id="inspect-lexical-signals" class="level2" data-number="14.29">
+<h2 data-number="14.29" class="anchored" data-anchor-id="inspect-lexical-signals"><span class="header-section-number">14.29</span> Inspect Lexical Signals</h2>
+<p>Linear models provide a useful window into which features are associated with predictions.</p>
+<div id="e8ce804f" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> (</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    text_model</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    .named_steps[<span class="st">"tfidf"</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    .get_feature_names_out()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>coefficients <span class="op">=</span> (</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    text_model</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    .named_steps[<span class="st">"model"</span>]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    .coef_[<span class="dv">0</span>]</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feature"</span>: feature_names,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span>: coefficients</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>coef_df.sort_values(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">feature</th>
+<th data-quarto-table-cell-role="th">coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">85</th>
+<td>project</td>
+<td>0.347821</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">103</th>
+<td>the project</td>
+<td>0.292112</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36</th>
+<td>examples</td>
+<td>0.275115</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">12</th>
+<td>clear</td>
+<td>0.209737</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">53</th>
+<td>helpful</td>
+<td>0.207823</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">52</th>
+<td>helped me</td>
+<td>0.204508</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">51</th>
+<td>helped</td>
+<td>0.204508</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">71</th>
+<td>me</td>
+<td>0.204508</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>and</td>
+<td>0.187348</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">33</th>
+<td>engaging and</td>
+<td>0.137968</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>And features associated with the opposite class:</p>
+<div id="52211950" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>coef_df.sort_values(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">feature</th>
+<th data-quarto-table-cell-role="th">coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">7</th>
+<td>assignment</td>
+<td>-0.247968</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">92</th>
+<td>the assignment</td>
+<td>-0.247968</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">115</th>
+<td>was</td>
+<td>-0.229688</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">109</th>
+<td>unclear</td>
+<td>-0.223887</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">119</th>
+<td>was unclear</td>
+<td>-0.223887</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">57</th>
+<td>instructions</td>
+<td>-0.216702</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">23</th>
+<td>could not</td>
+<td>-0.205611</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">22</th>
+<td>could</td>
+<td>-0.205611</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">79</th>
+<td>not</td>
+<td>-0.205611</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">47</th>
+<td>follow</td>
+<td>-0.205443</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>A coefficient indicates predictive association under this fitted model.</p>
+<p>It does not establish that a word caused the outcome or that the model “understands” the concept represented by the word.</p>
+</section>
+<section id="spurious-lexical-cues" class="level2" data-number="14.30">
+<h2 data-number="14.30" class="anchored" data-anchor-id="spurious-lexical-cues"><span class="header-section-number">14.30</span> Spurious Lexical Cues</h2>
+<p>Suppose all essays receiving low scores happened to contain a particular course code because one instructor used a different prompt.</p>
+<p>A classifier might learn the course code rather than writing quality.</p>
+<p>Text models are especially vulnerable to shortcuts involving:</p>
+<ul>
+<li>source;</li>
+<li>author;</li>
+<li>template;</li>
+<li>timestamp;</li>
+<li>institution;</li>
+<li>formatting;</li>
+<li>demographic proxies;</li>
+<li>label artifacts.</li>
+</ul>
+<p>High predictive accuracy can coexist with invalid measurement.</p>
+</section>
+<section id="distributed-representations" class="level2" data-number="14.31">
+<h2 data-number="14.31" class="anchored" data-anchor-id="distributed-representations"><span class="header-section-number">14.31</span> Distributed Representations</h2>
+</section>
+<section id="from-sparse-counts-to-dense-vectors" class="level2" data-number="14.32">
+<h2 data-number="14.32" class="anchored" data-anchor-id="from-sparse-counts-to-dense-vectors"><span class="header-section-number">14.32</span> From Sparse Counts to Dense Vectors</h2>
+<p>Bag-of-words and TF-IDF create sparse vectors whose dimensions correspond to vocabulary features.</p>
+<p>Distributed embeddings instead represent tokens using dense vectors:</p>
+<p><span class="math display">\[
+w
+\longrightarrow
+e_w\in\mathbb{R}^{d},
+\]</span></p>
+<p>where typically</p>
+<p><span class="math display">\[
+d\ll |V|.
+\]</span></p>
+<p>Words appearing in similar linguistic contexts can acquire nearby representations.</p>
+</section>
+<section id="the-distributional-idea" class="level2" data-number="14.33">
+<h2 data-number="14.33" class="anchored" data-anchor-id="the-distributional-idea"><span class="header-section-number">14.33</span> The Distributional Idea</h2>
+<p>A foundational intuition is:</p>
+<blockquote class="blockquote">
+<p>words used in similar contexts often have related meanings.</p>
+</blockquote>
+<p>Rather than manually defining semantic categories, representation learning can infer statistical regularities from large corpora.</p>
+<p>This changes the representation from:</p>
+<p><span class="math display">\[
+\text{word identity}
+\]</span></p>
+<p>toward:</p>
+<p><span class="math display">\[
+\text{position in a learned semantic space}.
+\]</span></p>
+</section>
+<section id="one-hot-versus-dense-representation" class="level2" data-number="14.34">
+<h2 data-number="14.34" class="anchored" data-anchor-id="one-hot-versus-dense-representation"><span class="header-section-number">14.34</span> One-Hot Versus Dense Representation</h2>
+<p>For a vocabulary of size <span class="math inline">\(V\)</span>, a one-hot vector contains one 1 and <span class="math inline">\(V-1\)</span> zeros.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+\text{data}
+\rightarrow
+[0,0,1,0,\ldots,0].
+\]</span></p>
+<p>The one-hot representation does not encode similarity directly.</p>
+<p>An embedding might instead be:</p>
+<p><span class="math display">\[
+\text{data}
+\rightarrow
+[0.18,-0.42,0.73,\ldots].
+\]</span></p>
+<p>The coordinates are learned rather than manually assigned.</p>
+</section>
+<section id="word2vec-intuition" class="level2" data-number="14.35">
+<h2 data-number="14.35" class="anchored" data-anchor-id="word2vec-intuition"><span class="header-section-number">14.35</span> Word2Vec Intuition</h2>
+<p>Word2Vec helped popularize efficient learning of distributed word representations from large corpora <span class="citation" data-cites="mikolov2013efficient">(<a href="../references.html#ref-mikolov2013efficient" role="doc-biblioref">Mikolov et al. 2013</a>)</span>. Two classic Word2Vec objectives are:</p>
+<ul>
+<li>Continuous Bag of Words (CBOW): predict a target word from surrounding context;</li>
+<li>Skip-Gram: predict surrounding context from a target word.</li>
+</ul>
+<p>The training task is instrumental.</p>
+<p>The learned embedding matrix becomes the useful artifact.</p>
+<p>This is an important pattern in modern machine learning:</p>
+<blockquote class="blockquote">
+<p><strong>A model can learn a representation through a prediction task different from the downstream task we ultimately care about.</strong></p>
+</blockquote>
+</section>
+<section id="static-embeddings-have-a-limitation" class="level2" data-number="14.36">
+<h2 data-number="14.36" class="anchored" data-anchor-id="static-embeddings-have-a-limitation"><span class="header-section-number">14.36</span> Static Embeddings Have a Limitation</h2>
+<p>Consider:</p>
+<blockquote class="blockquote">
+<p>“She deposited money at the <strong>bank</strong>.”</p>
+</blockquote>
+<p>and</p>
+<blockquote class="blockquote">
+<p>“They sat on the <strong>bank</strong> of the river.”</p>
+</blockquote>
+<p>A static embedding assigns one vector to <code>bank</code>.</p>
+<p>But meaning depends on context.</p>
+<p>We therefore want:</p>
+<p><span class="math display">\[
+e(\text{bank}\mid\text{sentence 1})
+\neq
+e(\text{bank}\mid\text{sentence 2}).
+\]</span></p>
+<p>This motivates <strong>contextual embeddings</strong>.</p>
+</section>
+<section id="attention" class="level2" data-number="14.37">
+<h2 data-number="14.37" class="anchored" data-anchor-id="attention"><span class="header-section-number">14.37</span> Attention</h2>
+</section>
+<section id="why-context-requires-interaction" class="level2" data-number="14.38">
+<h2 data-number="14.38" class="anchored" data-anchor-id="why-context-requires-interaction"><span class="header-section-number">14.38</span> Why Context Requires Interaction</h2>
+<p>To represent a word contextually, the model needs a mechanism through which tokens can influence one another.</p>
+<p>Attention provides such a mechanism.</p>
+<p>For each token representation, a model constructs:</p>
+<ul>
+<li>a <strong>query</strong>;</li>
+<li>a <strong>key</strong>;</li>
+<li>a <strong>value</strong>.</li>
+</ul>
+<p>For matrix <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+Q=XW_Q,
+\]</span></p>
+<p><span class="math display">\[
+K=XW_K,
+\]</span></p>
+<p><span class="math display">\[
+V=XW_V.
+\]</span></p>
+</section>
+<section id="scaled-dot-product-attention" class="level2" data-number="14.39">
+<h2 data-number="14.39" class="anchored" data-anchor-id="scaled-dot-product-attention"><span class="header-section-number">14.39</span> Scaled Dot-Product Attention</h2>
+<p>Attention is commonly written as</p>
+<p><span class="math display">\[
+Attention(Q,K,V)
+=
+softmax
+\left(
+\frac{QK^\top}{\sqrt{d_k}}
+\right)V.
+\]</span></p>
+<p>This compact equation is central to modern NLP.</p>
+<p>Let’s unpack it.</p>
+</section>
+<section id="step-1-compare-queries-and-keys" class="level2" data-number="14.40">
+<h2 data-number="14.40" class="anchored" data-anchor-id="step-1-compare-queries-and-keys"><span class="header-section-number">14.40</span> Step 1: Compare Queries and Keys</h2>
+<p>The matrix</p>
+<p><span class="math display">\[
+QK^\top
+\]</span></p>
+<p>contains compatibility scores between token queries and token keys.</p>
+<p>A large dot product suggests a stronger relationship under the learned projections.</p>
+</section>
+<section id="step-2-scale" class="level2" data-number="14.41">
+<h2 data-number="14.41" class="anchored" data-anchor-id="step-2-scale"><span class="header-section-number">14.41</span> Step 2: Scale</h2>
+<p>Divide by</p>
+<p><span class="math display">\[
+\sqrt{d_k}.
+\]</span></p>
+<p>Without scaling, dot products can become large as dimensionality increases, pushing softmax toward extreme values and making optimization less stable.</p>
+</section>
+<section id="step-3-softmax" class="level2" data-number="14.42">
+<h2 data-number="14.42" class="anchored" data-anchor-id="step-3-softmax"><span class="header-section-number">14.42</span> Step 3: Softmax</h2>
+<p>For each query, softmax converts scores into weights:</p>
+<p><span class="math display">\[
+\alpha_{ij}
+=
+\frac{
+\exp(s_{ij})
+}{
+\sum_m\exp(s_{im})
+}.
+\]</span></p>
+<p>The weights sum to one across the attended positions.</p>
+</section>
+<section id="step-4-weighted-values" class="level2" data-number="14.43">
+<h2 data-number="14.43" class="anchored" data-anchor-id="step-4-weighted-values"><span class="header-section-number">14.43</span> Step 4: Weighted Values</h2>
+<p>The contextual output for token <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[
+h_i
+=
+\sum_j
+\alpha_{ij}v_j.
+\]</span></p>
+<p>A token’s representation is therefore updated using information from other tokens.</p>
+</section>
+<section id="attention-by-hand" class="level2" data-number="14.44">
+<h2 data-number="14.44" class="anchored" data-anchor-id="attention-by-hand"><span class="header-section-number">14.44</span> Attention by Hand</h2>
+<div id="cell-fig-attention-matrix" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> [</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"student"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"understood"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> np.array([</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">2.2</span>, <span class="fl">1.0</span>, <span class="fl">0.2</span>, <span class="fl">0.8</span>],</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.7</span>, <span class="fl">2.1</span>, <span class="fl">0.1</span>, <span class="fl">1.8</span>],</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">1.4</span>, <span class="fl">0.6</span>],</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.9</span>, <span class="fl">1.7</span>, <span class="fl">0.2</span>, <span class="fl">2.3</span>]</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> row_softmax(matrix):</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    shifted <span class="op">=</span> matrix <span class="op">-</span> matrix.<span class="bu">max</span>(</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        axis<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        keepdims<span class="op">=</span><span class="va">True</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    exp_values <span class="op">=</span> np.exp(shifted)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> exp_values <span class="op">/</span> exp_values.<span class="bu">sum</span>(</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        axis<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        keepdims<span class="op">=</span><span class="va">True</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> row_softmax(</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    scores</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>plt.imshow(</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    attention_weights,</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    aspect<span class="op">=</span><span class="st">"auto"</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>plt.xticks(</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="bu">len</span>(tokens)),</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    tokens,</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    rotation<span class="op">=</span><span class="dv">30</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>plt.yticks(</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="bu">len</span>(tokens)),</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    tokens</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Key token"</span>)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Query token"</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Toy Attention Weights"</span>)</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">"Attention weight"</span>)</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-attention-matrix" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Attention-weight matrix showing the relative strength of relationships between token positions in a sequence.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-attention-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="14-natural-language-processing_files/figure-html/fig-attention-matrix-output-1.png" alt="Attention-weight matrix showing the relative strength of relationships between token positions in a sequence." width="633" height="486" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-attention-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.1: A toy attention matrix shows how each token can assign different weights to other tokens.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These weights are constructed for teaching rather than learned from a trained language model.</p>
+</section>
+<section id="attention-is-not-automatically-explanation" class="level2" data-number="14.45">
+<h2 data-number="14.45" class="anchored" data-anchor-id="attention-is-not-automatically-explanation"><span class="header-section-number">14.45</span> Attention Is Not Automatically Explanation</h2>
+<p>An attention weight tells us something about a model’s internal computation.</p>
+<p>It should not automatically be interpreted as:</p>
+<ul>
+<li>human reasoning;</li>
+<li>causal importance;</li>
+<li>psychological attention;</li>
+<li>a complete explanation of a prediction.</li>
+</ul>
+<p>Model internals and scientific explanations are different objects.</p>
+</section>
+<section id="transformers" class="level2" data-number="14.46">
+<h2 data-number="14.46" class="anchored" data-anchor-id="transformers"><span class="header-section-number">14.46</span> Transformers</h2>
+</section>
+<section id="the-transformer-idea" class="level2" data-number="14.47">
+<h2 data-number="14.47" class="anchored" data-anchor-id="the-transformer-idea"><span class="header-section-number">14.47</span> The Transformer Idea</h2>
+<p>The transformer architecture builds representations using attention rather than relying exclusively on recurrence <span class="citation" data-cites="vaswani2017attention">(<a href="../references.html#ref-vaswani2017attention" role="doc-biblioref">Vaswani et al. 2017</a>)</span>.</p>
+<p>A simplified transformer block includes:</p>
+<p><span class="math display">\[
+\text{token representations}
+\rightarrow
+\text{multi-head attention}
+\rightarrow
+\text{feed-forward network}
+\rightarrow
+\text{updated representations}.
+\]</span></p>
+<p>Residual connections and normalization support optimization.</p>
+</section>
+<section id="multi-head-attention" class="level2" data-number="14.48">
+<h2 data-number="14.48" class="anchored" data-anchor-id="multi-head-attention"><span class="header-section-number">14.48</span> Multi-Head Attention</h2>
+<p>Instead of computing one attention pattern, transformers can compute multiple heads:</p>
+<p><span class="math display">\[
+head_i
+=
+Attention(
+QW_i^Q,
+KW_i^K,
+VW_i^V
+).
+\]</span></p>
+<p>The heads are combined:</p>
+<p><span class="math display">\[
+MultiHead(Q,K,V)
+=
+Concat(head_1,\ldots,head_h)W^O.
+\]</span></p>
+<p>Different heads can learn different interaction patterns.</p>
+<p>We should be cautious about assigning simple linguistic meanings to individual heads without evidence.</p>
+</section>
+<section id="positional-information" class="level2" data-number="14.49">
+<h2 data-number="14.49" class="anchored" data-anchor-id="positional-information"><span class="header-section-number">14.49</span> Positional Information</h2>
+<p>Self-attention alone does not inherently encode token order in the same way recurrence does.</p>
+<p>Transformers therefore incorporate positional information.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\text{input representation}
+=
+\text{token embedding}
++
+\text{position representation}.
+\]</span></p>
+<p>Modern architectures implement positional information in several ways.</p>
+</section>
+<section id="encoder-style-models" class="level2" data-number="14.50">
+<h2 data-number="14.50" class="anchored" data-anchor-id="encoder-style-models"><span class="header-section-number">14.50</span> Encoder-Style Models</h2>
+<p>Encoder-style transformers are especially suited to constructing contextual representations from an input sequence.</p>
+<p>Typical applications include:</p>
+<ul>
+<li>classification;</li>
+<li>token labeling;</li>
+<li>semantic similarity;</li>
+<li>information extraction.</li>
+</ul>
+<p>BERT is a historically important example of this family <span class="citation" data-cites="devlin2019bert">(<a href="../references.html#ref-devlin2019bert" role="doc-biblioref">Devlin et al. 2019</a>)</span>.</p>
+</section>
+<section id="decoder-style-models" class="level2" data-number="14.51">
+<h2 data-number="14.51" class="anchored" data-anchor-id="decoder-style-models"><span class="header-section-number">14.51</span> Decoder-Style Models</h2>
+<p>Decoder-style transformers predict tokens autoregressively:</p>
+<p><span class="math display">\[
+P(x_1,\ldots,x_T)
+=
+\prod_{t=1}^{T}
+P(
+x_t
+\mid
+x_1,\ldots,x_{t-1}
+).
+\]</span></p>
+<p>This next-token-prediction structure forms a foundation for many modern generative language models.</p>
+<p>We develop that much more deeply in Chapter 15.</p>
+</section>
+<section id="encoder-decoder-models" class="level2" data-number="14.52">
+<h2 data-number="14.52" class="anchored" data-anchor-id="encoder-decoder-models"><span class="header-section-number">14.52</span> Encoder-Decoder Models</h2>
+<p>Sequence-to-sequence transformers can use an encoder to represent an input and a decoder to generate an output.</p>
+<p>Applications include:</p>
+<ul>
+<li>translation;</li>
+<li>summarization;</li>
+<li>structured generation.</li>
+</ul>
+</section>
+<section id="from-nlp-to-foundation-models" class="level2" data-number="14.53">
+<h2 data-number="14.53" class="anchored" data-anchor-id="from-nlp-to-foundation-models"><span class="header-section-number">14.53</span> From NLP to Foundation Models</h2>
+<p>The progression across this chapter can now be seen as a history of increasingly expressive representations:</p>
+<p><span class="math display">\[
+\text{counts}
+\rightarrow
+\text{TF-IDF}
+\rightarrow
+\text{static embeddings}
+\rightarrow
+\text{contextual embeddings}
+\rightarrow
+\text{transformers}.
+\]</span></p>
+<p>Each step preserves different information and introduces new assumptions, computational costs, and opportunities.</p>
+</section>
+<section id="research-grade-nlp" class="level2" data-number="14.54">
+<h2 data-number="14.54" class="anchored" data-anchor-id="research-grade-nlp"><span class="header-section-number">14.54</span> Research-Grade NLP</h2>
+</section>
+<section id="split-by-the-real-generalization-boundary" class="level2" data-number="14.55">
+<h2 data-number="14.55" class="anchored" data-anchor-id="split-by-the-real-generalization-boundary"><span class="header-section-number">14.55</span> Split by the Real Generalization Boundary</h2>
+<p>Randomly splitting documents is not always appropriate.</p>
+<p>Suppose several notes come from the same patient, essays from the same student, or posts from the same author.</p>
+<p>If documents from one person occur in both train and test sets, performance may partly reflect recognition of the person rather than generalization to new people.</p>
+<p>Possible split boundaries include:</p>
+<ul>
+<li>person;</li>
+<li>institution;</li>
+<li>course;</li>
+<li>instructor;</li>
+<li>time;</li>
+<li>geographic site;</li>
+<li>publication venue.</li>
+</ul>
+<p>The split should emulate the deployment or scientific generalization claim.</p>
+</section>
+<section id="duplicate-and-near-duplicate-text" class="level2" data-number="14.56">
+<h2 data-number="14.56" class="anchored" data-anchor-id="duplicate-and-near-duplicate-text"><span class="header-section-number">14.56</span> Duplicate and Near-Duplicate Text</h2>
+<p>Copied templates, boilerplate, repeated prompts, quoted material, and duplicated documents can inflate performance.</p>
+<p>Text research should inspect overlap before modeling.</p>
+</section>
+<section id="temporal-leakage" class="level2" data-number="14.57">
+<h2 data-number="14.57" class="anchored" data-anchor-id="temporal-leakage"><span class="header-section-number">14.57</span> Temporal Leakage</h2>
+<p>Language changes over time.</p>
+<p>A model may exploit information unavailable at the intended prediction time.</p>
+<p>Examples include:</p>
+<ul>
+<li>later clinical diagnoses appearing in notes;</li>
+<li>instructor feedback written after grading;</li>
+<li>references to final outcomes;</li>
+<li>retrospective summaries.</li>
+</ul>
+<p>Define the prediction timestamp before selecting text.</p>
+</section>
+<section id="construct-validity" class="level2" data-number="14.58">
+<h2 data-number="14.58" class="anchored" data-anchor-id="construct-validity"><span class="header-section-number">14.58</span> Construct Validity</h2>
+<p>Suppose a researcher predicts “student engagement” from discussion posts.</p>
+<p>What exactly is the label?</p>
+<p>Attendance?</p>
+<p>Instructor rating?</p>
+<p>Post frequency?</p>
+<p>Self-report?</p>
+<p>Course completion?</p>
+<p>The sophistication of the language model cannot repair a weak construct definition.</p>
+</section>
+<section id="fairness-and-language-variation" class="level2" data-number="14.59">
+<h2 data-number="14.59" class="anchored" data-anchor-id="fairness-and-language-variation"><span class="header-section-number">14.59</span> Fairness and Language Variation</h2>
+<p>Language reflects:</p>
+<ul>
+<li>culture;</li>
+<li>dialect;</li>
+<li>educational experience;</li>
+<li>profession;</li>
+<li>age;</li>
+<li>geography;</li>
+<li>disability-related communication patterns;</li>
+<li>multilingual backgrounds.</li>
+</ul>
+<p>A text model may interpret legitimate language variation as predictive signal.</p>
+<p>Responsible evaluation should examine relevant subgroups and avoid treating one linguistic norm as inherently superior.</p>
+</section>
+<section id="from-nlp-to-multimodal-learning" class="level2" data-number="14.60">
+<h2 data-number="14.60" class="anchored" data-anchor-id="from-nlp-to-multimodal-learning"><span class="header-section-number">14.60</span> From NLP to Multimodal Learning</h2>
+<p>Natural-language processing focuses on language, while computer vision focuses on visual information. Many modern systems operate across both.</p>
+<p>A multimodal system may learn from paired observations such as image-text pairs; contrastive vision-language systems such as CLIP demonstrate how aligned representations can be learned from large collections of such pairs <span class="citation" data-cites="radfordEtAl2021">(<a href="../references.html#ref-radfordEtAl2021" role="doc-biblioref">Radford et al. 2021</a>)</span>.</p>
+<p>For example, it may learn from</p>
+<p><span class="math display">\[
+(\text{image},\text{text}),
+\]</span></p>
+<p>or combine several modalities:</p>
+<p><span class="math display">\[
+x_i=
+\left(
+x_i^{\text{text}},
+x_i^{\text{image}},
+x_i^{\text{audio}}
+\right).
+\]</span></p>
+<p>Applications include image captioning, text-to-image retrieval, visual question answering, medical image–text analysis, and interpreting diagrams together with written explanations.</p>
+<section id="shared-spaces-and-cross-modal-alignment" class="level3" data-number="14.60.1">
+<h3 data-number="14.60.1" class="anchored" data-anchor-id="shared-spaces-and-cross-modal-alignment"><span class="header-section-number">14.60.1</span> Shared Spaces and Cross-Modal Alignment</h3>
+<p>One strategy is to learn representations in which related text and images are close in a shared embedding space. Conceptually,</p>
+<p><span class="math display">\[
+f_{\text{text}}(x_i^{\text{text}})
+\approx
+f_{\text{image}}(x_i^{\text{image}})
+\]</span></p>
+<p>when the observations describe related content.</p>
+<p>This bridges dimensionality reduction and representation learning with the language representations developed in this chapter.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A multimodal model that aligns an image with a caption has learned useful statistical correspondence. That does not establish that the system interprets either modality as a human does, nor that its representations are free from biases inherited from image-text data.</p>
+</div>
+</div>
+</section>
+<section id="learning-experience-design-a-multimodal-study" class="level3" data-number="14.60.2">
+<h3 data-number="14.60.2" class="anchored" data-anchor-id="learning-experience-design-a-multimodal-study"><span class="header-section-number">14.60.2</span> Learning Experience: Design a Multimodal Study</h3>
+<p>Choose one book track and specify the unit of analysis, text modality, visual modality, analytical objective, representation of each modality, alignment strategy, one leakage risk, one construct-validity concern, one domain-shift concern, and the evidence required before making a substantive claim.</p>
+</section>
+</section>
+<section id="three-tracks" class="level2" data-number="14.61">
+<h2 data-number="14.61" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">14.61</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="14.61.1">
+<h3 data-number="14.61.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">14.61.1</span> Health Track</h3>
+<p>Potential sources include public health narratives, biomedical abstracts, clinical text where access and governance permit, patient-generated text, and public datasets such as PubMed-derived corpora.</p>
+<p>Research questions might include:</p>
+<ul>
+<li>classifying biomedical abstracts;</li>
+<li>extracting health concepts;</li>
+<li>analyzing patient-reported experiences;</li>
+<li>predicting document categories;</li>
+<li>studying semantic change in health literature.</li>
+</ul>
+<p>Protected health information and clinical deployment require substantially stronger governance than public teaching datasets.</p>
+</section>
+<section id="education-track" class="level3" data-number="14.61.2">
+<h3 data-number="14.61.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">14.61.2</span> Education Track</h3>
+<p>Potential sources include:</p>
+<ul>
+<li>public educational datasets;</li>
+<li>course discussion text where ethically approved;</li>
+<li>open-ended survey responses;</li>
+<li>student writing;</li>
+<li>published abstracts from education research;</li>
+<li>publicly available institutional documents.</li>
+</ul>
+<p>Research possibilities include feedback classification, discourse analysis, semantic similarity, topic evolution, and responsible learning analytics.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="14.61.3">
+<h3 data-number="14.61.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">14.61.3</span> Open ML Benchmark Track</h3>
+<p>Useful public benchmarks include 20 Newsgroups and other openly licensed text-classification corpora.</p>
+<p>Benchmark work can compare:</p>
+<p><span class="math display">\[
+\text{TF-IDF + linear model}
+\]</span></p>
+<p>against</p>
+<p><span class="math display">\[
+\text{embedding-based models}
+\]</span></p>
+<p>and eventually transformer-based approaches.</p>
+</section>
+</section>
+<section id="public-research-dataset-studio" class="level2" data-number="14.62">
+<h2 data-number="14.62" class="anchored" data-anchor-id="public-research-dataset-studio"><span class="header-section-number">14.62</span> Public Research Dataset Studio</h2>
+<p>For publishable research, students should not merely download a famous dataset and chase accuracy.</p>
+<p>A stronger workflow is:</p>
+<ol type="1">
+<li>identify a substantive research question;</li>
+<li>establish the unit of analysis;</li>
+<li>document dataset provenance and license;</li>
+<li>define the construct and target;</li>
+<li>specify the real generalization boundary;</li>
+<li>create a transparent baseline;</li>
+<li>compare representations;</li>
+<li>conduct error analysis;</li>
+<li>examine robustness;</li>
+<li>evaluate subgroup performance where justified;</li>
+<li>quantify uncertainty;</li>
+<li>document computational resources;</li>
+<li>make code and derived artifacts reproducible where permitted.</li>
+</ol>
+<p>This creates a path from classroom NLP to conference-quality research.</p>
+</section>
+<section id="beyond-the-algorithm-does-a-vector-understand-a-word" class="level2" data-number="14.63">
+<h2 data-number="14.63" class="anchored" data-anchor-id="beyond-the-algorithm-does-a-vector-understand-a-word"><span class="header-section-number">14.63</span> Beyond the Algorithm: Does a Vector Understand a Word?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Representation and Meaning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose a model places two words close together in a 768-dimensional space.</p>
+<p>What has been demonstrated?</p>
+<p>At minimum, the model has learned a statistical representation in which the words behave similarly according to its training objective and data.</p>
+<p>That can be extraordinarily useful.</p>
+<p>But usefulness does not settle the philosophical question of understanding.</p>
+<p>Human language is connected to:</p>
+<ul>
+<li>embodied experience;</li>
+<li>intention;</li>
+<li>culture;</li>
+<li>social relationships;</li>
+<li>history;</li>
+<li>goals;</li>
+<li>consequences.</li>
+</ul>
+<p>A machine representation can encode remarkable linguistic regularities without giving us a simple answer to whether the system “understands” in the human sense.</p>
+<p>For data science, the practical lesson is not to resolve centuries of philosophy of language.</p>
+<p>It is to maintain conceptual discipline:</p>
+<p><span class="math display">\[
+\boxed{
+\text{successful representation}
+\neq
+\text{proof of human-like understanding}
+}
+\]</span></p>
+<p>A model should be credited for what evidence demonstrates—not for metaphysical properties we inferred from impressive output.</p>
+</div>
+</div>
+</section>
+<section id="text-is-not-the-same-as-meaning" class="level2" data-number="14.64">
+<h2 data-number="14.64" class="anchored" data-anchor-id="text-is-not-the-same-as-meaning"><span class="header-section-number">14.64</span> Text Is Not the Same as Meaning</h2>
+<p>Natural-language processing transforms language into representations algorithms can process:</p>
+<p><span class="math display">\[
+\text{Language}\rightarrow\text{Representation}\rightarrow\text{Model}\rightarrow\text{Prediction or Generation}.
+\]</span></p>
+<p>Every representation preserves some distinctions and transforms or discards others. Bag-of-words emphasizes lexical occurrence; embeddings encode learned relationships; contextual representations allow the same token to differ across contexts.</p>
+<p><span class="math display">\[
+\boxed{\text{Representation of Language}\neq\text{Language Itself}}
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>High accuracy on a text benchmark does not establish that a model understands the underlying human construct. Test whether performance depends on intended linguistic evidence or shortcuts such as formatting, source, demographic proxies, repeated phrases, or dataset artifacts.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-the-model-understands-students" class="level2" data-number="14.65">
+<h2 data-number="14.65" class="anchored" data-anchor-id="ai-pair-programmer-the-model-understands-students"><span class="header-section-number">14.65</span> AI Pair Programmer: The Model Understands Students</h2>
+<p>An AI assistant analyzes open-ended student comments and produces a classifier with high accuracy.</p>
+<p>It concludes:</p>
+<blockquote class="blockquote">
+<p>“The model understands how students feel about the course.”</p>
+</blockquote>
+<p>Audit the statement.</p>
+<p>Ask:</p>
+<ul>
+<li>What was the target?</li>
+<li>How was sentiment or experience operationalized?</li>
+<li>Who labeled the data?</li>
+<li>Could the model exploit lexical shortcuts?</li>
+<li>Were multiple comments from the same student separated across train and test?</li>
+<li>Are dialect and multilingual variation represented?</li>
+<li>Was performance evaluated by subgroup?</li>
+<li>Were probabilities calibrated?</li>
+<li>What errors matter most?</li>
+<li>Does predictive success establish understanding?</li>
+</ul>
+<p>Rewrite the conclusion into defensible scientific language.</p>
+</section>
+<section id="hands-on-lab-build-a-text-classifier" class="level2" data-number="14.66">
+<h2 data-number="14.66" class="anchored" data-anchor-id="hands-on-lab-build-a-text-classifier"><span class="header-section-number">14.66</span> Hands-On Lab: Build a Text Classifier</h2>
+<p>Using a public or ethically approved text dataset:</p>
+<ol type="1">
+<li>define the unit of analysis;</li>
+<li>define the target;</li>
+<li>audit class balance;</li>
+<li>inspect duplicates;</li>
+<li>establish the correct split boundary;</li>
+<li>tokenize/normalize only as justified;</li>
+<li>build a unigram count baseline;</li>
+<li>build a TF-IDF baseline;</li>
+<li>add bigrams;</li>
+<li>compare logistic regression or another linear classifier;</li>
+<li>evaluate task-relevant metrics;</li>
+<li>inspect influential lexical features;</li>
+<li>conduct manual error analysis;</li>
+<li>identify possible shortcut features;</li>
+<li>test sensitivity to preprocessing;</li>
+<li>document limitations;</li>
+<li>propose an embedding or transformer extension.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="14.11">
-<h2 data-number="14.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">14.11</span> Real-World Case Study</h2>
-<section id="analyzing-educational-text" class="level3" data-number="14.11.1">
-<h3 data-number="14.11.1" class="anchored" data-anchor-id="analyzing-educational-text"><span class="header-section-number">14.11.1</span> Analyzing Educational Text</h3>
-<p>Develop a research-safe NLP workflow using a publicly available text corpus.</p>
+<section id="practitioner-track" class="level2" data-number="14.67">
+<h2 data-number="14.67" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">14.67</span> Practitioner Track</h2>
+<p>A practitioner should be able to build leakage-safe lexical NLP pipelines, choose basic representations, evaluate classifiers, inspect lexical signals, and recognize when a modern transformer is warranted.</p>
 </section>
-</section>
-<section id="professors-challenge" class="level2" data-number="14.12">
-<h2 data-number="14.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">14.12</span> Professor’s Challenge</h2>
-<p>An automated text classifier agrees with human coders 85% of the time. Is that sufficient for research use?</p>
-</section>
-<section id="research-extension" class="level2" data-number="14.13">
-<h2 data-number="14.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">14.13</span> Research Extension</h2>
-<p>Compare human and machine coding, domain transfer, or robustness across populations.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="14.14">
-<h2 data-number="14.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">14.14</span> Reproducibility Check</h2>
-<p>Version corpora, document preprocessing, preserve split logic, and record model/checkpoint identifiers.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="14.15">
-<h2 data-number="14.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">14.15</span> Key Takeaways</h2>
+<section id="researcher-track" class="level2" data-number="14.68">
+<h2 data-number="14.68" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">14.68</span> Researcher Track</h2>
+<p>A researcher should additionally justify the unit of analysis and split boundary, examine duplicate contamination, establish construct validity, conduct error and subgroup analyses, compare strong baselines, document data provenance, and distinguish predictive performance from claims about meaning or cognition.</p>
 <ul>
-<li>Text representation strongly shapes NLP performance.</li>
-<li>Transformers provide contextual representations but introduce new reproducibility challenges.</li>
-<li>Human validation remains important.</li>
+<li>document text collection, cleaning, segmentation, and representation;</li>
+<li>distinguish performance on a linguistic proxy from validity for the substantive construct;</li>
+<li>test shortcut features and source-specific artifacts where feasible.</li>
+</ul>
+</section>
+<section id="research-studio" class="level2" data-number="14.69">
+<h2 data-number="14.69" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">14.69</span> Research Studio</h2>
+<p>Design an NLP study suitable for a conference or journal paper.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>substantive problem;</li>
+<li>corpus provenance;</li>
+<li>license/ethical constraints;</li>
+<li>unit of analysis;</li>
+<li>construct and target;</li>
+<li>labeling procedure;</li>
+<li>sample size;</li>
+<li>language(s);</li>
+<li>preprocessing;</li>
+<li>baseline representation;</li>
+<li>baseline model;</li>
+<li>advanced representation;</li>
+<li>train/validation/test boundary;</li>
+<li>duplicate control;</li>
+<li>temporal leakage controls;</li>
+<li>evaluation metrics;</li>
+<li>uncertainty;</li>
+<li>error analysis;</li>
+<li>subgroup analysis;</li>
+<li>robustness/sensitivity;</li>
+<li>compute;</li>
+<li>reproducibility plan;</li>
+<li>interpretive limits;</li>
+<li>scholarly contribution.</li>
+</ol>
+</section>
+<section id="professors-challenge-predicting-student-success-from-essays" class="level2" data-number="14.70">
+<h2 data-number="14.70" class="anchored" data-anchor-id="professors-challenge-predicting-student-success-from-essays"><span class="header-section-number">14.70</span> Professor’s Challenge: Predicting Student Success From Essays</h2>
+<p>Researchers collect admissions essays from 12,000 students and predict first-year retention.</p>
+<p>A transformer reaches ROC-AUC = 0.84.</p>
+<p>The researchers conclude:</p>
+<blockquote class="blockquote">
+<p>“The language model detects motivation, resilience, and academic potential directly from student writing and can improve admissions decisions.”</p>
+</blockquote>
+<p>Critique:</p>
+<ul>
+<li>target definition;</li>
+<li>admissions-selection effects;</li>
+<li>essay coaching;</li>
+<li>socioeconomic proxies;</li>
+<li>language background;</li>
+<li>disability-related variation;</li>
+<li>demographic proxies;</li>
+<li>institutional context;</li>
+<li>train/test split;</li>
+<li>temporal validation;</li>
+<li>construct validity;</li>
+<li>calibration;</li>
+<li>subgroup performance;</li>
+<li>causal interpretation;</li>
+<li>consequences of deployment;</li>
+<li>whether retention should be treated as student potential.</li>
+</ul>
+<p>Design a scientifically and ethically stronger study.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="14.71">
+<h2 data-number="14.71" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">14.71</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is a corpus?</li>
+<li>What is a token?</li>
+<li>Why is tokenization a modeling choice?</li>
+<li>What information can stop-word removal destroy?</li>
+<li>How do stemming and lemmatization differ?</li>
+<li>What is a document-term matrix?</li>
+<li>Why are text matrices sparse?</li>
+<li>What does bag of words discard?</li>
+<li>What is an n-gram?</li>
+<li>What does term frequency measure?</li>
+<li>Why does IDF downweight common terms?</li>
+<li>What is TF-IDF?</li>
+<li>What does cosine similarity measure?</li>
+<li>Why must a vectorizer be fitted inside the training pipeline?</li>
+<li>Why do lexical coefficients not establish causality?</li>
+<li>What is a distributed word representation?</li>
+<li>How does a dense embedding differ from one-hot encoding?</li>
+<li>What limitation do static embeddings have?</li>
+<li>What is a contextual embedding?</li>
+<li>What are queries, keys, and values in attention?</li>
+<li>Why is attention scaled by <span class="math inline">\(\sqrt{d_k}\)</span>?</li>
+<li>What does softmax do to attention scores?</li>
+<li>Why do transformers need positional information?</li>
+<li>What is multi-head attention?</li>
+<li>How do encoder- and decoder-style language models differ conceptually?</li>
+<li>Why can random document splitting create leakage?</li>
+<li>Why is construct validity still essential with transformers?</li>
+<li>Why does predictive language modeling not by itself prove human-like understanding?</li>
+<li>Why is a text representation not equivalent to language itself?</li>
+<li>How can an NLP model perform well using unintended shortcuts?</li>
+<li>Why should construct validity remain part of NLP evaluation?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="14.72">
+<h2 data-number="14.72" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">14.72</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>corpus source/version;</li>
+<li>license;</li>
+<li>collection dates;</li>
+<li>unit of analysis;</li>
+<li>inclusion/exclusion criteria;</li>
+<li>labels and annotators;</li>
+<li>annotation agreement where applicable;</li>
+<li>language(s);</li>
+<li>duplicate handling;</li>
+<li>preprocessing;</li>
+<li>tokenizer;</li>
+<li>vocabulary settings;</li>
+<li>n-gram range;</li>
+<li>TF-IDF settings;</li>
+<li>split boundary;</li>
+<li>random seeds;</li>
+<li>baseline models;</li>
+<li>advanced models;</li>
+<li>pretrained model/version if used;</li>
+<li>fine-tuning settings;</li>
+<li>evaluation metrics;</li>
+<li>confidence intervals;</li>
+<li>calibration;</li>
+<li>error analysis;</li>
+<li>subgroup analyses;</li>
+<li>hardware/compute;</li>
+<li>package versions;</li>
+<li>code and artifact availability.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="14.73">
+<h2 data-number="14.73" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">14.73</span> Key Takeaways</h2>
+<ul>
+<li>NLP begins by converting language into numerical representations.</li>
+<li>Tokenization and normalization determine what information becomes available to a model.</li>
+<li>Bag-of-words models are simple, sparse, and surprisingly strong baselines.</li>
+<li>TF-IDF balances within-document frequency against corpus-wide prevalence.</li>
+<li>Cosine similarity compares vector orientation rather than raw magnitude.</li>
+<li>Text vectorization belongs inside leakage-safe pipelines.</li>
+<li>High accuracy can arise from spurious lexical shortcuts.</li>
+<li>Dense embeddings learn distributed representations from statistical context.</li>
+<li>Contextual embeddings allow the representation of a token to depend on surrounding language.</li>
+<li>Self-attention uses learned query-key relationships to combine value representations.</li>
+<li>Transformers build contextual representations through attention and feed-forward transformations.</li>
+<li>Attention weights are not automatically explanations.</li>
+<li>NLP studies require careful unit-of-analysis, split-boundary, construct-validity, and duplicate-contamination decisions.</li>
+<li>Language variation creates important fairness considerations.</li>
+<li>Successful linguistic representation does not by itself establish human-like understanding.</li>
+<li>NLP performance depends on representational and data-design choices.</li>
+<li>Strong benchmark performance does not establish human-like understanding or construct validity.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-devlin2019bert" class="csl-entry" role="listitem">
+Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. <span>“BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding.”</span> In <em>Proceedings of NAACL-HLT</em>.
+</div>
+<div id="ref-mikolov2013efficient" class="csl-entry" role="listitem">
+Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. <span>“Efficient Estimation of Word Representations in Vector Space.”</span> <em>arXiv Preprint arXiv:1301.3781</em>.
+</div>
+<div id="ref-radfordEtAl2021" class="csl-entry" role="listitem">
+Radford, Alec, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al. 2021. <span>“Learning Transferable Visual Models from Natural Language Supervision.”</span> In <em>Proceedings of the 38th International Conference on Machine Learning</em>, 139:8748–63. Proceedings of Machine Learning Research.
+</div>
+<div id="ref-saltonBuckley1988" class="csl-entry" role="listitem">
+Salton, Gerard, and Christopher Buckley. 1988. <span>“Term-Weighting Approaches in Automatic Text Retrieval.”</span> <em>Information Processing &amp; Management</em> 24 (5): 513–23. <a href="https://doi.org/10.1016/0306-4573(88)90021-0">https://doi.org/10.1016/0306-4573(88)90021-0</a>.
+</div>
+<div id="ref-vaswani2017attention" class="csl-entry" role="listitem">
+Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017. <span>“Attention Is All You Need.”</span> <em>Advances in Neural Information Processing Systems</em> 30.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -579,7 +2296,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -908,13 +2625,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-05-modern-ml/13-neural-networks.html" class="pagination-link" aria-label="Neural Networks and Deep Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span>
+      <a href="../part-05-modern-ml/13-neural-networks.html" class="pagination-link" aria-label="Neural Networks: Learning Representations Through Layers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-05-modern-ml/15-generative-ai.html" class="pagination-link" aria-label="Generative AI and Foundation Models">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-05-modern-ml/15-generative-ai.html" class="pagination-link" aria-label="Generative AI: From Prediction to Intelligent Systems">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

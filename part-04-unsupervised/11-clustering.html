@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Clustering – Machine Learning Using Python</title>
+<title>11&nbsp; Clustering: Discovering Structure Without Labels – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,6 +125,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -112,7 +170,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,6 +186,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -141,6 +202,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -184,7 +251,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -207,31 +274,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,13 +315,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -271,19 +338,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +358,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -300,19 +367,48 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -334,58 +430,80 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">11.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">11.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">11.3</span> Real-World Problem</a></li>
-  <li><a href="#foundations" id="toc-foundations" class="nav-link" data-scroll-target="#foundations"><span class="header-section-number">11.4</span> Foundations</a>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">11.2</span> Why This Matters</a>
   <ul class="collapse">
-  <li><a href="#what-is-a-cluster" id="toc-what-is-a-cluster" class="nav-link" data-scroll-target="#what-is-a-cluster"><span class="header-section-number">11.4.1</span> What Is a Cluster?</a></li>
-  <li><a href="#distance-and-similarity" id="toc-distance-and-similarity" class="nav-link" data-scroll-target="#distance-and-similarity"><span class="header-section-number">11.4.2</span> Distance and Similarity</a></li>
-  <li><a href="#euclidean-distance" id="toc-euclidean-distance" class="nav-link" data-scroll-target="#euclidean-distance"><span class="header-section-number">11.4.3</span> Euclidean Distance</a></li>
-  <li><a href="#feature-scaling" id="toc-feature-scaling" class="nav-link" data-scroll-target="#feature-scaling"><span class="header-section-number">11.4.4</span> Feature Scaling</a></li>
+  <li><a href="#from-supervised-to-unsupervised-learning" id="toc-from-supervised-to-unsupervised-learning" class="nav-link" data-scroll-target="#from-supervised-to-unsupervised-learning"><span class="header-section-number">11.2.1</span> From Supervised to Unsupervised Learning</a></li>
   </ul></li>
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">11.5</span> K-Means</a>
+  <li><a href="#from-prediction-to-structure-discovery" id="toc-from-prediction-to-structure-discovery" class="nav-link" data-scroll-target="#from-prediction-to-structure-discovery"><span class="header-section-number">11.3</span> From Prediction to Structure Discovery</a></li>
+  <li><a href="#what-does-similar-mean" id="toc-what-does-similar-mean" class="nav-link" data-scroll-target="#what-does-similar-mean"><span class="header-section-number">11.4</span> What Does Similar Mean?</a>
   <ul class="collapse">
-  <li><a href="#centroids" id="toc-centroids" class="nav-link" data-scroll-target="#centroids"><span class="header-section-number">11.5.1</span> Centroids</a></li>
-  <li><a href="#objective-function" id="toc-objective-function" class="nav-link" data-scroll-target="#objective-function"><span class="header-section-number">11.5.2</span> Objective Function</a></li>
+  <li><a href="#euclidean-distance" id="toc-euclidean-distance" class="nav-link" data-scroll-target="#euclidean-distance"><span class="header-section-number">11.4.1</span> Euclidean Distance</a></li>
+  <li><a href="#manhattan-distance" id="toc-manhattan-distance" class="nav-link" data-scroll-target="#manhattan-distance"><span class="header-section-number">11.4.2</span> Manhattan Distance</a></li>
   </ul></li>
-  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">11.6</span> Hierarchical Clustering</a>
+  <li><a href="#distance-by-hand" id="toc-distance-by-hand" class="nav-link" data-scroll-target="#distance-by-hand"><span class="header-section-number">11.5</span> Distance by Hand</a></li>
+  <li><a href="#why-scaling-matters" id="toc-why-scaling-matters" class="nav-link" data-scroll-target="#why-scaling-matters"><span class="header-section-number">11.6</span> Why Scaling Matters</a></li>
+  <li><a href="#a-first-clustering-dataset" id="toc-a-first-clustering-dataset" class="nav-link" data-scroll-target="#a-first-clustering-dataset"><span class="header-section-number">11.7</span> A First Clustering Dataset</a></li>
+  <li><a href="#are-clusters-discovered-or-constructed" id="toc-are-clusters-discovered-or-constructed" class="nav-link" data-scroll-target="#are-clusters-discovered-or-constructed"><span class="header-section-number">11.8</span> Are Clusters Discovered or Constructed?</a>
   <ul class="collapse">
-  <li><a href="#linkage" id="toc-linkage" class="nav-link" data-scroll-target="#linkage"><span class="header-section-number">11.6.1</span> Linkage</a></li>
-  <li><a href="#dendrograms" id="toc-dendrograms" class="nav-link" data-scroll-target="#dendrograms"><span class="header-section-number">11.6.2</span> Dendrograms</a></li>
+  <li><a href="#the-same-observations-different-representations" id="toc-the-same-observations-different-representations" class="nav-link" data-scroll-target="#the-same-observations-different-representations"><span class="header-section-number">11.8.1</span> The Same Observations, Different Representations</a></li>
+  <li><a href="#clusters-are-analytical-claims" id="toc-clusters-are-analytical-claims" class="nav-link" data-scroll-target="#clusters-are-analytical-claims"><span class="header-section-number">11.8.2</span> Clusters Are Analytical Claims</a></li>
   </ul></li>
-  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan"><span class="header-section-number">11.7</span> DBSCAN</a>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering"><span class="header-section-number">11.9</span> <span class="math inline">\(k\)</span>-Means Clustering</a></li>
+  <li><a href="#the-k-means-algorithm" id="toc-the-k-means-algorithm" class="nav-link" data-scroll-target="#the-k-means-algorithm"><span class="header-section-number">11.10</span> The <span class="math inline">\(k\)</span>-Means Algorithm</a></li>
+  <li><a href="#fit-k-means" id="toc-fit-k-means" class="nav-link" data-scroll-target="#fit-k-means"><span class="header-section-number">11.11</span> Fit <span class="math inline">\(k\)</span>-Means</a></li>
+  <li><a href="#initialization-matters" id="toc-initialization-matters" class="nav-link" data-scroll-target="#initialization-matters"><span class="header-section-number">11.12</span> Initialization Matters</a></li>
+  <li><a href="#how-many-clusters" id="toc-how-many-clusters" class="nav-link" data-scroll-target="#how-many-clusters"><span class="header-section-number">11.13</span> How Many Clusters?</a></li>
+  <li><a href="#within-cluster-sum-of-squares-and-the-elbow" id="toc-within-cluster-sum-of-squares-and-the-elbow" class="nav-link" data-scroll-target="#within-cluster-sum-of-squares-and-the-elbow"><span class="header-section-number">11.14</span> Within-Cluster Sum of Squares and the Elbow</a></li>
+  <li><a href="#silhouette-analysis" id="toc-silhouette-analysis" class="nav-link" data-scroll-target="#silhouette-analysis"><span class="header-section-number">11.15</span> Silhouette Analysis</a></li>
+  <li><a href="#internal-validation-is-not-scientific-validation" id="toc-internal-validation-is-not-scientific-validation" class="nav-link" data-scroll-target="#internal-validation-is-not-scientific-validation"><span class="header-section-number">11.16</span> Internal Validation Is Not Scientific Validation</a></li>
+  <li><a href="#cluster-profiles" id="toc-cluster-profiles" class="nav-link" data-scroll-target="#cluster-profiles"><span class="header-section-number">11.17</span> Cluster Profiles</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">11.18</span> Hierarchical Clustering</a>
   <ul class="collapse">
-  <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density"><span class="header-section-number">11.7.1</span> Density</a></li>
-  <li><a href="#epsilon-and-minimum-samples" id="toc-epsilon-and-minimum-samples" class="nav-link" data-scroll-target="#epsilon-and-minimum-samples"><span class="header-section-number">11.7.2</span> Epsilon and Minimum Samples</a></li>
-  <li><a href="#noise-points" id="toc-noise-points" class="nav-link" data-scroll-target="#noise-points"><span class="header-section-number">11.7.3</span> Noise Points</a></li>
+  <li><a href="#agglomerative-strategy" id="toc-agglomerative-strategy" class="nav-link" data-scroll-target="#agglomerative-strategy"><span class="header-section-number">11.18.1</span> Agglomerative Strategy</a></li>
   </ul></li>
-  <li><a href="#cluster-evaluation" id="toc-cluster-evaluation" class="nav-link" data-scroll-target="#cluster-evaluation"><span class="header-section-number">11.8</span> Cluster Evaluation</a>
+  <li><a href="#linkage-strategies" id="toc-linkage-strategies" class="nav-link" data-scroll-target="#linkage-strategies"><span class="header-section-number">11.19</span> Linkage Strategies</a>
   <ul class="collapse">
-  <li><a href="#inertia" id="toc-inertia" class="nav-link" data-scroll-target="#inertia"><span class="header-section-number">11.8.1</span> Inertia</a></li>
-  <li><a href="#silhouette-score" id="toc-silhouette-score" class="nav-link" data-scroll-target="#silhouette-score"><span class="header-section-number">11.8.2</span> Silhouette Score</a></li>
-  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">11.8.3</span> Stability</a></li>
-  <li><a href="#external-and-substantive-validation" id="toc-external-and-substantive-validation" class="nav-link" data-scroll-target="#external-and-substantive-validation"><span class="header-section-number">11.8.4</span> External and Substantive Validation</a></li>
+  <li><a href="#single-linkage" id="toc-single-linkage" class="nav-link" data-scroll-target="#single-linkage"><span class="header-section-number">11.19.1</span> Single Linkage</a></li>
+  <li><a href="#complete-linkage" id="toc-complete-linkage" class="nav-link" data-scroll-target="#complete-linkage"><span class="header-section-number">11.19.2</span> Complete Linkage</a></li>
+  <li><a href="#average-linkage" id="toc-average-linkage" class="nav-link" data-scroll-target="#average-linkage"><span class="header-section-number">11.19.3</span> Average Linkage</a></li>
+  <li><a href="#ward-linkage" id="toc-ward-linkage" class="nav-link" data-scroll-target="#ward-linkage"><span class="header-section-number">11.19.4</span> Ward Linkage</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">11.9</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">11.10</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">11.11</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">11.12</span> Real-World Case Study</a>
+  <li><a href="#dendrogram" id="toc-dendrogram" class="nav-link" data-scroll-target="#dendrogram"><span class="header-section-number">11.20</span> Dendrogram</a></li>
+  <li><a href="#agglomerative-clustering-in-scikit-learn" id="toc-agglomerative-clustering-in-scikit-learn" class="nav-link" data-scroll-target="#agglomerative-clustering-in-scikit-learn"><span class="header-section-number">11.21</span> Agglomerative Clustering in scikit-learn</a></li>
+  <li><a href="#a-different-definition-of-structure-density" id="toc-a-different-definition-of-structure-density" class="nav-link" data-scroll-target="#a-different-definition-of-structure-density"><span class="header-section-number">11.22</span> A Different Definition of Structure: Density</a></li>
+  <li><a href="#why-k-means-can-struggle" id="toc-why-k-means-can-struggle" class="nav-link" data-scroll-target="#why-k-means-can-struggle"><span class="header-section-number">11.23</span> Why <span class="math inline">\(k\)</span>-Means Can Struggle</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan"><span class="header-section-number">11.24</span> DBSCAN</a></li>
+  <li><a href="#fit-dbscan" id="toc-fit-dbscan" class="nav-link" data-scroll-target="#fit-dbscan"><span class="header-section-number">11.25</span> Fit DBSCAN</a></li>
+  <li><a href="#compare-three-notions-of-a-cluster" id="toc-compare-three-notions-of-a-cluster" class="nav-link" data-scroll-target="#compare-three-notions-of-a-cluster"><span class="header-section-number">11.26</span> Compare Three Notions of a Cluster</a></li>
+  <li><a href="#cluster-stability" id="toc-cluster-stability" class="nav-link" data-scroll-target="#cluster-stability"><span class="header-section-number">11.27</span> Cluster Stability</a></li>
+  <li><a href="#external-variables-and-cluster-usefulness" id="toc-external-variables-and-cluster-usefulness" class="nav-link" data-scroll-target="#external-variables-and-cluster-usefulness"><span class="header-section-number">11.28</span> External Variables and Cluster Usefulness</a></li>
+  <li><a href="#can-clustering-find-groups-that-are-not-really-there" id="toc-can-clustering-find-groups-that-are-not-really-there" class="nav-link" data-scroll-target="#can-clustering-find-groups-that-are-not-really-there"><span class="header-section-number">11.29</span> Can Clustering Find Groups That Are Not Really There?</a></li>
+  <li><a href="#computer-vision-learning-experience-clustering-images-without-labels" id="toc-computer-vision-learning-experience-clustering-images-without-labels" class="nav-link" data-scroll-target="#computer-vision-learning-experience-clustering-images-without-labels"><span class="header-section-number">11.30</span> Computer Vision Learning Experience: Clustering Images Without Labels</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">11.31</span> Three Tracks</a>
   <ul class="collapse">
-  <li><a href="#institutional-profiles" id="toc-institutional-profiles" class="nav-link" data-scroll-target="#institutional-profiles"><span class="header-section-number">11.12.1</span> Institutional Profiles</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">11.31.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">11.31.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">11.31.3</span> Open ML Benchmark Track</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">11.13</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">11.14</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">11.15</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">11.16</span> Key Takeaways</a></li>
+  <li><a href="#beyond-the-algorithm-do-clusters-exist-before-we-name-them" id="toc-beyond-the-algorithm-do-clusters-exist-before-we-name-them" class="nav-link" data-scroll-target="#beyond-the-algorithm-do-clusters-exist-before-we-name-them"><span class="header-section-number">11.32</span> Beyond the Algorithm: Do Clusters Exist Before We Name Them?</a></li>
+  <li><a href="#ai-pair-programmer-name-these-clusters" id="toc-ai-pair-programmer-name-these-clusters" class="nav-link" data-scroll-target="#ai-pair-programmer-name-these-clusters"><span class="header-section-number">11.33</span> AI Pair Programmer: Name These Clusters</a></li>
+  <li><a href="#hands-on-lab-what-counts-as-a-cluster" id="toc-hands-on-lab-what-counts-as-a-cluster" class="nav-link" data-scroll-target="#hands-on-lab-what-counts-as-a-cluster"><span class="header-section-number">11.34</span> Hands-On Lab: What Counts as a Cluster?</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">11.35</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">11.36</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">11.37</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-four-types-of-students" id="toc-professors-challenge-four-types-of-students" class="nav-link" data-scroll-target="#professors-challenge-four-types-of-students"><span class="header-section-number">11.38</span> Professor’s Challenge: Four Types of Students</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">11.39</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">11.40</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">11.41</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html">Part IV — Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="../part-04-unsupervised/11-clustering.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></h1>
 </div>
 
 
@@ -404,135 +522,1299 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">11.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain the purpose and limitations of clustering.</li>
-<li>Apply K-means, hierarchical clustering, and DBSCAN.</li>
-<li>Select and interpret distance measures.</li>
-<li>Evaluate cluster stability and usefulness.</li>
-<li>Avoid treating discovered clusters as objective natural categories.</li>
+<li>explain how clustering differs from supervised classification;</li>
+<li>describe clustering as an exploratory modeling task rather than discovery of guaranteed “true” groups;</li>
+<li>explain why feature representation, scaling, and distance metrics define what similarity means;</li>
+<li>calculate and interpret Euclidean and Manhattan distance;</li>
+<li>derive the objective optimized by <span class="math inline">\(k\)</span>-means clustering;</li>
+<li>explain the roles of centroids, assignment, and iterative updating;</li>
+<li>use the elbow method and silhouette analysis critically;</li>
+<li>explain why the number of clusters is not determined by a single diagnostic;</li>
+<li>fit and interpret hierarchical clustering;</li>
+<li>distinguish linkage strategies and interpret a dendrogram;</li>
+<li>explain density-based clustering using DBSCAN;</li>
+<li>interpret the roles of <span class="math inline">\(\varepsilon\)</span> and <code>min_samples</code>;</li>
+<li>distinguish core, border, and noise observations;</li>
+<li>compare centroid-, hierarchy-, and density-based notions of structure;</li>
+<li>evaluate cluster stability and substantive usefulness;</li>
+<li>explain why clustering can create patterns even when meaningful groups do not exist;</li>
+<li>apply clustering to health, education, and open benchmark problems without turning descriptive segments into unsupported scientific categories.</li>
+<li>evaluate clustering of visual data as a representation-dependent exploratory task.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">11.2</span> Why This Matters</h2>
-<p>Clustering can reveal structure in unlabeled data, but the resulting groups depend heavily on representation, scaling, distance, and algorithmic assumptions.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">11.3</span> Real-World Problem</h2>
-<p>Can institutions, patients, or students be grouped into meaningful profiles without predefined labels?</p>
-</section>
-<section id="foundations" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="foundations"><span class="header-section-number">11.4</span> Foundations</h2>
-<section id="what-is-a-cluster" class="level3" data-number="11.4.1">
-<h3 data-number="11.4.1" class="anchored" data-anchor-id="what-is-a-cluster"><span class="header-section-number">11.4.1</span> What Is a Cluster?</h3>
-</section>
-<section id="distance-and-similarity" class="level3" data-number="11.4.2">
-<h3 data-number="11.4.2" class="anchored" data-anchor-id="distance-and-similarity"><span class="header-section-number">11.4.2</span> Distance and Similarity</h3>
-</section>
-<section id="euclidean-distance" class="level3" data-number="11.4.3">
-<h3 data-number="11.4.3" class="anchored" data-anchor-id="euclidean-distance"><span class="header-section-number">11.4.3</span> Euclidean Distance</h3>
-</section>
-<section id="feature-scaling" class="level3" data-number="11.4.4">
-<h3 data-number="11.4.4" class="anchored" data-anchor-id="feature-scaling"><span class="header-section-number">11.4.4</span> Feature Scaling</h3>
-</section>
-</section>
-<section id="k-means" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="k-means"><span class="header-section-number">11.5</span> K-Means</h2>
-<section id="centroids" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="centroids"><span class="header-section-number">11.5.1</span> Centroids</h3>
-</section>
-<section id="objective-function" class="level3" data-number="11.5.2">
-<h3 data-number="11.5.2" class="anchored" data-anchor-id="objective-function"><span class="header-section-number">11.5.2</span> Objective Function</h3>
+<p>Supervised learning begins with a target:</p>
 <p><span class="math display">\[
-J = \sum_{k=1}^{K}\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert^2
-\]</span> ### Choosing K</p>
+(X,Y)\longrightarrow \hat f.
+\]</span></p>
+<p>In clustering, the labels disappear:</p>
+<p><span class="math display">\[
+X\longrightarrow \text{structure?}
+\]</span></p>
+<p>That question mark matters.</p>
+<p>A clustering algorithm can always organize observations according to its mathematical definition of similarity. But the resulting groups are not automatically natural kinds, diagnoses, learning types, customer archetypes, or causal populations.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>If no labels tell us what the correct groups are, what does it mean for a clustering solution to be good?</strong></p>
+</div>
+</div>
+<section id="from-supervised-to-unsupervised-learning" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="from-supervised-to-unsupervised-learning"><span class="header-section-number">11.2.1</span> From Supervised to Unsupervised Learning</h3>
+<p>Chapters 6–10 learned mappings from predictors to known outcomes. Clustering begins a different kind of inquiry. Without a supplied target, the algorithm must organize observations using patterns in the representation itself. This makes questions of scaling, distance, feature construction, validation, and interpretation even more central—not less.</p>
 </section>
 </section>
-<section id="hierarchical-clustering" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">11.6</span> Hierarchical Clustering</h2>
-<section id="linkage" class="level3" data-number="11.6.1">
-<h3 data-number="11.6.1" class="anchored" data-anchor-id="linkage"><span class="header-section-number">11.6.1</span> Linkage</h3>
+<section id="from-prediction-to-structure-discovery" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="from-prediction-to-structure-discovery"><span class="header-section-number">11.3</span> From Prediction to Structure Discovery</h2>
+<p>In classification, an observed label gives us a criterion against which predictions can be evaluated.</p>
+<p>In clustering, we usually do not have such an answer key.</p>
+<p>Instead, we choose:</p>
+<ol type="1">
+<li>a set of observations;</li>
+<li>a feature representation;</li>
+<li>preprocessing;</li>
+<li>a similarity or distance concept;</li>
+<li>a clustering algorithm;</li>
+<li>algorithm-specific parameters;</li>
+<li>criteria for interpreting the resulting structure.</li>
+</ol>
+<p>Thus clustering is not simply:</p>
+<blockquote class="blockquote">
+<p>“Let the data speak.”</p>
+</blockquote>
+<p>The analyst has already made consequential decisions about the language in which the data are allowed to speak.</p>
 </section>
-<section id="dendrograms" class="level3" data-number="11.6.2">
-<h3 data-number="11.6.2" class="anchored" data-anchor-id="dendrograms"><span class="header-section-number">11.6.2</span> Dendrograms</h3>
+<section id="what-does-similar-mean" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="what-does-similar-mean"><span class="header-section-number">11.4</span> What Does Similar Mean?</h2>
+<p>Suppose observations are represented by vectors</p>
+<p><span class="math display">\[
+x_i=(x_{i1},x_{i2},\ldots,x_{ip}).
+\]</span></p>
+<p>A clustering method needs some notion of similarity or dissimilarity.</p>
+<section id="euclidean-distance" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="euclidean-distance"><span class="header-section-number">11.4.1</span> Euclidean Distance</h3>
+<p><span class="math display">\[
+d(x_i,x_j)
+=
+\sqrt{
+\sum_{k=1}^{p}
+(x_{ik}-x_{jk})^2
+}.
+\]</span></p>
+<p>Euclidean distance corresponds to straight-line distance in feature space.</p>
+</section>
+<section id="manhattan-distance" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="manhattan-distance"><span class="header-section-number">11.4.2</span> Manhattan Distance</h3>
+<p><span class="math display">\[
+d_1(x_i,x_j)
+=
+\sum_{k=1}^{p}
+|x_{ik}-x_{jk}|.
+\]</span></p>
+<p>Different distance functions encode different geometric ideas about what it means for observations to be close.</p>
 </section>
 </section>
-<section id="dbscan" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="dbscan"><span class="header-section-number">11.7</span> DBSCAN</h2>
-<section id="density" class="level3" data-number="11.7.1">
-<h3 data-number="11.7.1" class="anchored" data-anchor-id="density"><span class="header-section-number">11.7.1</span> Density</h3>
+<section id="distance-by-hand" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="distance-by-hand"><span class="header-section-number">11.5</span> Distance by Hand</h2>
+<div id="d57df1e1" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>np.array([<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b<span class="op">=</span>np.array([<span class="dv">5</span>,<span class="dv">8</span>])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>euclidean<span class="op">=</span>np.sqrt(np.<span class="bu">sum</span>((a<span class="op">-</span>b)<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>manhattan<span class="op">=</span>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(a<span class="op">-</span>b))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>euclidean, manhattan</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(np.float64(5.0), np.int64(7))</code></pre>
+</div>
+</div>
 </section>
-<section id="epsilon-and-minimum-samples" class="level3" data-number="11.7.2">
-<h3 data-number="11.7.2" class="anchored" data-anchor-id="epsilon-and-minimum-samples"><span class="header-section-number">11.7.2</span> Epsilon and Minimum Samples</h3>
+<section id="why-scaling-matters" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="why-scaling-matters"><span class="header-section-number">11.6</span> Why Scaling Matters</h2>
+<p>Suppose one variable ranges from 0 to 5 and another from 0 to 100,000.</p>
+<p>Under Euclidean distance, the second feature may dominate.</p>
+<p>Standardization gives</p>
+<p><span class="math display">\[
+z_{ij}
+=
+\frac{x_{ij}-\mu_j}{\sigma_j}.
+\]</span></p>
+<p>But standardization is not philosophically neutral either. It changes the geometry by giving variables comparable variance-based scale.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scaling Is a Modeling Decision
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ask not only <strong>“Should I scale?”</strong> but:</p>
+<p><strong>“What definition of similarity do I want the resulting geometry to express?”</strong></p>
+</div>
+</div>
 </section>
-<section id="noise-points" class="level3" data-number="11.7.3">
-<h3 data-number="11.7.3" class="anchored" data-anchor-id="noise-points"><span class="header-section-number">11.7.3</span> Noise Points</h3>
+<section id="a-first-clustering-dataset" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="a-first-clustering-dataset"><span class="header-section-number">11.7</span> A First Clustering Dataset</h2>
+<div id="d1b708fd" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_demo,y_hidden<span class="op">=</span>make_blobs(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">450</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    centers<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    cluster_std<span class="op">=</span>[<span class="fl">0.7</span>,<span class="fl">1.0</span>,<span class="fl">0.6</span>,<span class="fl">0.9</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_demo[:,<span class="dv">0</span>],X_demo[:,<span class="dv">1</span>],s<span class="op">=</span><span class="dv">25</span>,alpha<span class="op">=</span><span class="fl">.75</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Unlabeled Observations"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-clustering_files/figure-html/cell-4-output-1.png" width="679" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We retain <code>y_hidden</code> only because this is simulated instructional data. The clustering algorithm will not receive it.</p>
 </section>
+<section id="are-clusters-discovered-or-constructed" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="are-clusters-discovered-or-constructed"><span class="header-section-number">11.8</span> Are Clusters Discovered or Constructed?</h2>
+<p>Clustering language often suggests that groups already exist in the data and the algorithm simply discovers them.</p>
+<p>Sometimes that is a useful approximation.</p>
+<p>But a clustering result depends on analytical choices such as</p>
+<p><span class="math display">\[
+\boxed{
+\text{Features}
++
+\text{Scaling}
++
+\text{Distance}
++
+\text{Algorithm}
++
+\text{Hyperparameters}
+\rightarrow
+\text{Clusters}
+}
+\]</span></p>
+<p>Change those choices and the apparent groups may change.</p>
+<section id="the-same-observations-different-representations" class="level3" data-number="11.8.1">
+<h3 data-number="11.8.1" class="anchored" data-anchor-id="the-same-observations-different-representations"><span class="header-section-number">11.8.1</span> The Same Observations, Different Representations</h3>
+<p>Consider observations measured on two variables with very different scales.</p>
+<div class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>rng_cr <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>group_a_cr <span class="op">=</span> np.column_stack([</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    rng_cr.normal(<span class="dv">0</span>, <span class="fl">0.6</span>, <span class="dv">120</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    rng_cr.normal(<span class="dv">20</span>, <span class="dv">7</span>, <span class="dv">120</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>group_b_cr <span class="op">=</span> np.column_stack([</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    rng_cr.normal(<span class="dv">3</span>, <span class="fl">0.6</span>, <span class="dv">120</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    rng_cr.normal(<span class="dv">35</span>, <span class="dv">7</span>, <span class="dv">120</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>X_cr <span class="op">=</span> np.vstack([</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    group_a_cr,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    group_b_cr</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>labels_raw_cr <span class="op">=</span> KMeans(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>).fit_predict(X_cr)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>X_scaled_cr <span class="op">=</span> StandardScaler().fit_transform(X_cr)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>labels_scaled_cr <span class="op">=</span> KMeans(</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>).fit_predict(X_scaled_cr)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    X_cr[:, <span class="dv">0</span>],</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    X_cr[:, <span class="dv">1</span>],</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>labels_raw_cr,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">24</span>,</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"k-Means Using the Raw Representation"</span>)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    X_scaled_cr[:, <span class="dv">0</span>],</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    X_scaled_cr[:, <span class="dv">1</span>],</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>labels_scaled_cr,</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">24</span>,</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Standardized feature 1"</span>)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Standardized feature 2"</span>)</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"k-Means After Standardization"</span>)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-clustering-representation" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-clustering-representation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-clustering-representation-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-clustering-representation-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-clustering-representation-output-1.png" data-ref-parent="fig-clustering-representation" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data." width="660" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-clustering-representation-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Clustering can change when feature scaling changes the geometry used by the algorithm.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-clustering-representation-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data." width="662" height="449">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-clustering-representation-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-clustering-representation-output-2.png" id="fig-clustering-representation-2" data-ref-parent="fig-clustering-representation" alt="Scatterplot showing observations grouped into distinct regions, illustrating how clustering identifies structure in unlabeled data." width="662" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-clustering-representation-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-clustering-representation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The observations are the same. The geometry supplied to the algorithm is different.</p>
 </section>
-<section id="cluster-evaluation" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="cluster-evaluation"><span class="header-section-number">11.8</span> Cluster Evaluation</h2>
-<section id="inertia" class="level3" data-number="11.8.1">
-<h3 data-number="11.8.1" class="anchored" data-anchor-id="inertia"><span class="header-section-number">11.8.1</span> Inertia</h3>
-</section>
-<section id="silhouette-score" class="level3" data-number="11.8.2">
-<h3 data-number="11.8.2" class="anchored" data-anchor-id="silhouette-score"><span class="header-section-number">11.8.2</span> Silhouette Score</h3>
-</section>
-<section id="stability" class="level3" data-number="11.8.3">
-<h3 data-number="11.8.3" class="anchored" data-anchor-id="stability"><span class="header-section-number">11.8.3</span> Stability</h3>
-</section>
-<section id="external-and-substantive-validation" class="level3" data-number="11.8.4">
-<h3 data-number="11.8.4" class="anchored" data-anchor-id="external-and-substantive-validation"><span class="header-section-number">11.8.4</span> External and Substantive Validation</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="11.9">
-<h2 data-number="11.9" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">11.9</span> Hands-On Practice</h2>
-<p>Cluster institutions or health profiles using multiple algorithms and compare solutions.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="11.10">
-<h2 data-number="11.10" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">11.10</span> Common Mistakes</h2>
+<section id="clusters-are-analytical-claims" class="level3" data-number="11.8.2">
+<h3 data-number="11.8.2" class="anchored" data-anchor-id="clusters-are-analytical-claims"><span class="header-section-number">11.8.2</span> Clusters Are Analytical Claims</h3>
+<p>A cluster should not automatically be interpreted as a naturally occurring type.</p>
+<p>In health analytics, a cluster of patients may reflect measurement choices rather than distinct biological subtypes.</p>
+<p>In education, student clusters may reflect institutional variables and scaling choices rather than fixed “types of learners.”</p>
+<p>In Open ML, customer segments may change when behavioral, demographic, or transactional features are added or removed.</p>
+<p>Therefore, cluster interpretation should include:</p>
 <ul>
-<li>Clustering unscaled variables.</li>
-<li>Treating an elbow plot as definitive.</li>
-<li>Naming clusters without substantive validation.</li>
-<li>Assuming clusters are stable across samples.</li>
+<li>stability under resampling;</li>
+<li>sensitivity to scaling;</li>
+<li>sensitivity to feature selection;</li>
+<li>comparison across algorithms;</li>
+<li>internal validity;</li>
+<li>external or substantive validity;</li>
+<li>domain interpretation.</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Categories Can Become Real Through Use
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once analysts name clusters, organizations may begin treating them as meaningful categories.</p>
+<p>Labels such as “high-risk learner,” “complex patient,” or “premium customer” can influence interventions, resources, and expectations.</p>
+<p>This creates an important responsibility: a computational grouping can become socially consequential even when its boundaries were analytically constructed.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Finding (k=3) clusters does not demonstrate that three natural populations exist.</p>
+<p>A defensible claim is narrower:</p>
+<blockquote class="blockquote">
+<p>Under this representation, distance measure, algorithm, and validation procedure, a three-cluster solution produced useful structure.</p>
+</blockquote>
+<p>That is a stronger scientific statement because it makes the assumptions visible.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="k-means-clustering" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">11.9</span> <span class="math inline">\(k\)</span>-Means Clustering</h2>
+<p><span class="math inline">\(k\)</span>-means seeks <span class="math inline">\(K\)</span> cluster centers, or centroids, following one of the foundational formulations of partition-based clustering <span class="citation" data-cites="macqueen1967">(<a href="../references.html#ref-macqueen1967" role="doc-biblioref">MacQueen 1967</a>)</span>:</p>
+<p><span class="math display">\[
+\mu_1,\mu_2,\ldots,\mu_K.
+\]</span></p>
+<p>It minimizes the within-cluster sum of squares:</p>
+<p><span class="math display">\[
+J
+=
+\sum_{k=1}^{K}
+\sum_{x_i\in C_k}
+\|x_i-\mu_k\|^2.
+\]</span></p>
+<p>This objective encodes a particular notion of a good cluster:</p>
+<blockquote class="blockquote">
+<p>observations should be close to their assigned centroid under squared Euclidean distance.</p>
+</blockquote>
+</section>
+<section id="the-k-means-algorithm" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="the-k-means-algorithm"><span class="header-section-number">11.10</span> The <span class="math inline">\(k\)</span>-Means Algorithm</h2>
+<p>A simplified iteration is:</p>
+<ol type="1">
+<li>initialize <span class="math inline">\(K\)</span> centroids;</li>
+<li>assign each observation to its nearest centroid;</li>
+<li>recompute each centroid from assigned observations;</li>
+<li>repeat until assignments or centroids stabilize sufficiently.</li>
+</ol>
+<p>The centroid for cluster <span class="math inline">\(C_k\)</span> is</p>
+<p><span class="math display">\[
+\mu_k
+=
+\frac{1}{|C_k|}
+\sum_{x_i\in C_k}x_i.
+\]</span></p>
+</section>
+<section id="fit-k-means" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="fit-k-means"><span class="header-section-number">11.11</span> Fit <span class="math inline">\(k\)</span>-Means</h2>
+<div id="6f44375b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>kmeans<span class="op">=</span>KMeans(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="st">"auto"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>labels<span class="op">=</span>kmeans.fit_predict(X_demo)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>centers<span class="op">=</span>kmeans.cluster_centers_</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    X_demo[:,<span class="dv">0</span>],</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    X_demo[:,<span class="dv">1</span>],</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>labels,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">25</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">.75</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    centers[:,<span class="dv">0</span>],</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    centers[:,<span class="dv">1</span>],</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"X"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">220</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="fl">1.5</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"$k$-Means Clustering"</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-clustering_files/figure-html/cell-6-output-1.png" width="679" height="524" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Cluster numbers such as 0, 1, 2, and 3 are arbitrary identifiers. Cluster 3 is not inherently “greater” than Cluster 1.</p>
+</section>
+<section id="initialization-matters" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="initialization-matters"><span class="header-section-number">11.12</span> Initialization Matters</h2>
+<p>The <span class="math inline">\(k\)</span>-means objective is nonconvex. Different initial centroids can lead to different local solutions.</p>
+<p>Modern implementations use careful initialization strategies and multiple starts to improve robustness.</p>
+<p>This is why reproducibility requires documenting:</p>
+<ul>
+<li>initialization strategy;</li>
+<li>number of initializations;</li>
+<li>random seed;</li>
+<li>software version.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="11.11">
-<h2 data-number="11.11" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">11.11</span> Knowledge Check</h2>
+<section id="how-many-clusters" class="level2" data-number="11.13">
+<h2 data-number="11.13" class="anchored" data-anchor-id="how-many-clusters"><span class="header-section-number">11.13</span> How Many Clusters?</h2>
+<p>One of the most common mistakes in clustering is treating <span class="math inline">\(K\)</span> as if the data contain a single objectively correct answer waiting to be revealed.</p>
+<p>Usually, choosing <span class="math inline">\(K\)</span> requires multiple forms of evidence.</p>
+</section>
+<section id="within-cluster-sum-of-squares-and-the-elbow" class="level2" data-number="11.14">
+<h2 data-number="11.14" class="anchored" data-anchor-id="within-cluster-sum-of-squares-and-the-elbow"><span class="header-section-number">11.14</span> Within-Cluster Sum of Squares and the Elbow</h2>
+<p>As <span class="math inline">\(K\)</span> increases, within-cluster sum of squares cannot increase.</p>
+<div id="cell-fig-elbow" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ks<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">11</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>inertia<span class="op">=</span>[]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> ks:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>KMeans(n_clusters<span class="op">=</span>k,n_init<span class="op">=</span><span class="st">"auto"</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    m.fit(X_demo)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    inertia.append(m.inertia_)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">list</span>(ks),inertia,marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of clusters, K"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Within-cluster sum of squares"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Elbow Analysis"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-elbow" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Elbow plot of within-cluster variation across values of k, with diminishing improvement as additional clusters are added.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-elbow-output-1.png" alt="Elbow plot of within-cluster variation across values of k, with diminishing improvement as additional clusters are added." width="684" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elbow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: Within-cluster sum of squares decreases as more clusters are allowed; the analyst looks for diminishing returns rather than a mathematically guaranteed elbow.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The elbow method is a heuristic. Some datasets have no obvious elbow; analysts can disagree about where it occurs.</p>
+</section>
+<section id="silhouette-analysis" class="level2" data-number="11.15">
+<h2 data-number="11.15" class="anchored" data-anchor-id="silhouette-analysis"><span class="header-section-number">11.15</span> Silhouette Analysis</h2>
+<p>Silhouette analysis provides an internal diagnostic of how well an observation fits its assigned cluster relative to neighboring clusters <span class="citation" data-cites="rousseeuw1987">(<a href="../references.html#ref-rousseeuw1987" role="doc-biblioref">Rousseeuw 1987</a>)</span>.</p>
+<p>For observation <span class="math inline">\(i\)</span>, let:</p>
+<ul>
+<li><span class="math inline">\(a(i)\)</span> be its average dissimilarity to observations in its own cluster;</li>
+<li><span class="math inline">\(b(i)\)</span> be the smallest average dissimilarity to another cluster.</li>
+</ul>
+<p>The silhouette coefficient is</p>
+<p><span class="math display">\[
+s(i)
+=
+\frac{b(i)-a(i)}
+{\max\{a(i),b(i)\}}.
+\]</span></p>
+<p>Values approach 1 when an observation is well matched to its cluster and separated from alternatives.</p>
+<p>Values near 0 suggest boundary ambiguity.</p>
+<p>Negative values suggest that another cluster may be closer on average.</p>
+<div id="d056abbf" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>silhouette_results<span class="op">=</span>{}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">11</span>):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>KMeans(n_clusters<span class="op">=</span>k,n_init<span class="op">=</span><span class="st">"auto"</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    lab<span class="op">=</span>m.fit_predict(X_demo)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    silhouette_results[k]<span class="op">=</span>silhouette_score(X_demo,lab)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>silhouette_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>{2: np.float64(0.6088044351869154),
+ 3: np.float64(0.7802566243321948),
+ 4: np.float64(0.8330144678792226),
+ 5: np.float64(0.7080931183466258),
+ 6: np.float64(0.6966266351282295),
+ 7: np.float64(0.5545070229283066),
+ 8: np.float64(0.4838105325521525),
+ 9: np.float64(0.33827775339131916),
+ 10: np.float64(0.3376676801209995)}</code></pre>
+</div>
+</div>
+<div id="cell-fig-silhouette-k" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(silhouette_results.keys()),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(silhouette_results.values()),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of clusters, K"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Mean silhouette score"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Silhouette Analysis"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-silhouette-k" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Silhouette scores across candidate numbers of clusters, used to compare cluster separation and cohesion.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-silhouette-k-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-silhouette-k-output-1.png" alt="Silhouette scores across candidate numbers of clusters, used to compare cluster separation and cohesion." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-silhouette-k-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.3: Silhouette scores provide one internal view of cohesion and separation across candidate values of K.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A high silhouette score does not prove that the clusters are substantively meaningful.</p>
+</section>
+<section id="internal-validation-is-not-scientific-validation" class="level2" data-number="11.16">
+<h2 data-number="11.16" class="anchored" data-anchor-id="internal-validation-is-not-scientific-validation"><span class="header-section-number">11.16</span> Internal Validation Is Not Scientific Validation</h2>
+<p>Internal criteria evaluate properties created by the same representation and distance structure used to construct the clusters.</p>
+<p>A clustering solution may have excellent compactness and separation while being:</p>
+<ul>
+<li>unstable across samples;</li>
+<li>irrelevant to the substantive problem;</li>
+<li>driven by a nuisance variable;</li>
+<li>impossible to reproduce externally;</li>
+<li>misleading when interpreted as a real-world taxonomy.</li>
+</ul>
+<p>Thus,</p>
+<p><span class="math display">\[
+\boxed{\text{geometric separation}}
+\neq
+\boxed{\text{substantive validity}}.
+\]</span></p>
+</section>
+<section id="cluster-profiles" class="level2" data-number="11.17">
+<h2 data-number="11.17" class="anchored" data-anchor-id="cluster-profiles"><span class="header-section-number">11.17</span> Cluster Profiles</h2>
+<p>After clustering, analysts often summarize feature values by cluster.</p>
+<div id="3acc5bbd" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>demo_df<span class="op">=</span>pd.DataFrame(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    X_demo,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"feature_1"</span>,<span class="st">"feature_2"</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>demo_df[<span class="st">"cluster"</span>]<span class="op">=</span>labels</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>demo_df.groupby(<span class="st">"cluster"</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">feature_1</th>
+<th data-quarto-table-cell-role="th">feature_2</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">cluster</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>-2.572844</td>
+<td>9.058350</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>-6.896603</td>
+<td>-6.920223</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>4.707056</td>
+<td>1.955797</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>-8.777294</td>
+<td>7.456918</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Profiles describe the fitted partition.</p>
+<p>They do not establish why the groups exist or whether the same groups will appear in another sample.</p>
+</section>
+<section id="hierarchical-clustering" class="level2" data-number="11.18">
+<h2 data-number="11.18" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">11.18</span> Hierarchical Clustering</h2>
+<p>Hierarchical clustering creates a nested sequence of groupings rather than requiring a single flat partition from the beginning.</p>
+<section id="agglomerative-strategy" class="level3" data-number="11.18.1">
+<h3 data-number="11.18.1" class="anchored" data-anchor-id="agglomerative-strategy"><span class="header-section-number">11.18.1</span> Agglomerative Strategy</h3>
+<p>Agglomerative clustering begins with each observation as its own cluster and repeatedly merges clusters.</p>
+<p>Conceptually,</p>
+<p><span class="math display">\[
+n\text{ clusters}
+\rightarrow
+n-1
+\rightarrow
+n-2
+\rightarrow
+\cdots
+\rightarrow
+1.
+\]</span></p>
+<p>The critical question becomes:</p>
+<blockquote class="blockquote">
+<p><strong>How do we measure distance between clusters?</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="linkage-strategies" class="level2" data-number="11.19">
+<h2 data-number="11.19" class="anchored" data-anchor-id="linkage-strategies"><span class="header-section-number">11.19</span> Linkage Strategies</h2>
+<section id="single-linkage" class="level3" data-number="11.19.1">
+<h3 data-number="11.19.1" class="anchored" data-anchor-id="single-linkage"><span class="header-section-number">11.19.1</span> Single Linkage</h3>
+<p>Distance between the closest pair of observations across two clusters.</p>
+</section>
+<section id="complete-linkage" class="level3" data-number="11.19.2">
+<h3 data-number="11.19.2" class="anchored" data-anchor-id="complete-linkage"><span class="header-section-number">11.19.2</span> Complete Linkage</h3>
+<p>Distance between the farthest pair.</p>
+</section>
+<section id="average-linkage" class="level3" data-number="11.19.3">
+<h3 data-number="11.19.3" class="anchored" data-anchor-id="average-linkage"><span class="header-section-number">11.19.3</span> Average Linkage</h3>
+<p>Average pairwise distance between observations across clusters.</p>
+</section>
+<section id="ward-linkage" class="level3" data-number="11.19.4">
+<h3 data-number="11.19.4" class="anchored" data-anchor-id="ward-linkage"><span class="header-section-number">11.19.4</span> Ward Linkage</h3>
+<p>Merges clusters to minimize the increase in within-cluster variance.</p>
+<p>Different linkage definitions can produce very different structures.</p>
+</section>
+</section>
+<section id="dendrogram" class="level2" data-number="11.20">
+<h2 data-number="11.20" class="anchored" data-anchor-id="dendrogram"><span class="header-section-number">11.20</span> Dendrogram</h2>
+<p>A dendrogram visualizes the hierarchy of merges.</p>
+<div id="cell-fig-dendrogram" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> linkage,dendrogram</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sample<span class="op">=</span>X_demo[:<span class="dv">80</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Z<span class="op">=</span>linkage(sample,method<span class="op">=</span><span class="st">"ward"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>dendrogram(Z,no_labels<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observations"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Merge distance"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Hierarchical Clustering Dendrogram"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-dendrogram" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Hierarchical clustering dendrogram showing successive merges of observations and clusters at increasing linkage distances.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dendrogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-dendrogram-output-1.png" alt="Hierarchical clustering dendrogram showing successive merges of observations and clusters at increasing linkage distances." width="957" height="501" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dendrogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.4: A dendrogram represents a hierarchy of merges; choosing where to cut the tree is an analytical decision.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A horizontal cut produces a particular number of clusters, but the dendrogram itself does not dictate one universally correct cut.</p>
+</section>
+<section id="agglomerative-clustering-in-scikit-learn" class="level2" data-number="11.21">
+<h2 data-number="11.21" class="anchored" data-anchor-id="agglomerative-clustering-in-scikit-learn"><span class="header-section-number">11.21</span> Agglomerative Clustering in scikit-learn</h2>
+<div id="bd34942a" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>agg<span class="op">=</span>AgglomerativeClustering(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    linkage<span class="op">=</span><span class="st">"ward"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>agg_labels<span class="op">=</span>agg.fit_predict(X_demo)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    X_demo[:,<span class="dv">0</span>],</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    X_demo[:,<span class="dv">1</span>],</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>agg_labels,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">25</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">.75</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Agglomerative Clustering"</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-clustering_files/figure-html/cell-12-output-1.png" width="679" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="a-different-definition-of-structure-density" class="level2" data-number="11.22">
+<h2 data-number="11.22" class="anchored" data-anchor-id="a-different-definition-of-structure-density"><span class="header-section-number">11.22</span> A Different Definition of Structure: Density</h2>
+<p><span class="math inline">\(k\)</span>-means prefers compact centroid-centered clusters.</p>
+<p>But what if clusters are curved or irregular?</p>
+<p>Consider two interlocking moons.</p>
+<div id="cell-fig-moons" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_moons,_<span class="op">=</span>make_moons(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    noise<span class="op">=</span><span class="fl">.07</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_moons[:,<span class="dv">0</span>],X_moons[:,<span class="dv">1</span>],s<span class="op">=</span><span class="dv">22</span>,alpha<span class="op">=</span><span class="fl">.75</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Unlabeled Nonconvex Structure"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-moons" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two interleaving crescent-shaped groups of observations illustrating a nonlinear cluster structure.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-moons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-moons-output-1.png" alt="Two interleaving crescent-shaped groups of observations illustrating a nonlinear cluster structure." width="683" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5: Nonconvex cluster structure challenges centroid-based clustering.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="why-k-means-can-struggle" class="level2" data-number="11.23">
+<h2 data-number="11.23" class="anchored" data-anchor-id="why-k-means-can-struggle"><span class="header-section-number">11.23</span> Why <span class="math inline">\(k\)</span>-Means Can Struggle</h2>
+<div id="cell-fig-kmeans-moons" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>moon_kmeans<span class="op">=</span>KMeans(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="st">"auto"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>moon_k_labels<span class="op">=</span>moon_kmeans.fit_predict(X_moons)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    X_moons[:,<span class="dv">0</span>],</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    X_moons[:,<span class="dv">1</span>],</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>moon_k_labels,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">22</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"$k$-Means on Two Moons"</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-kmeans-moons" class="quarto-float quarto-figure quarto-figure-center anchored" alt="K-means assignments on the two-moons data, showing partitions that do not fully capture the curved cluster structure.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kmeans-moons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-kmeans-moons-output-1.png" alt="K-means assignments on the two-moons data, showing partitions that do not fully capture the curved cluster structure." width="683" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kmeans-moons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: <span class="math inline">\(k\)</span>-means imposes centroid-centered partitions that may not match nonconvex structure.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is not a failure of optimization. It is a mismatch between the algorithm’s notion of cluster structure and the geometry of the data.</p>
+</section>
+<section id="dbscan" class="level2" data-number="11.24">
+<h2 data-number="11.24" class="anchored" data-anchor-id="dbscan"><span class="header-section-number">11.24</span> DBSCAN</h2>
+<p>DBSCAN—Density-Based Spatial Clustering of Applications with Noise—defines clusters through regions of sufficient local density.</p>
+<p>Two important parameters are:</p>
+<ul>
+<li><span class="math inline">\(\varepsilon\)</span> (<code>eps</code>) — neighborhood radius;</li>
+<li><code>min_samples</code> — minimum observations required for a sufficiently dense neighborhood.</li>
+</ul>
+<p>For an observation <span class="math inline">\(x_i\)</span>, define its <span class="math inline">\(\varepsilon\)</span>-neighborhood:</p>
+<p><span class="math display">\[
+N_\varepsilon(x_i)
+=
+\{x_j:d(x_i,x_j)\le\varepsilon\}.
+\]</span></p>
+<p>A <strong>core point</strong> has sufficiently many observations in this neighborhood.</p>
+<p>A <strong>border point</strong> is reachable from a core region but does not itself meet the core density requirement.</p>
+<p>A <strong>noise point</strong> is not assigned to a cluster under the fitted density rule.</p>
+</section>
+<section id="fit-dbscan" class="level2" data-number="11.25">
+<h2 data-number="11.25" class="anchored" data-anchor-id="fit-dbscan"><span class="header-section-number">11.25</span> Fit DBSCAN</h2>
+<div id="458afb0c" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>X_moons_scaled<span class="op">=</span>StandardScaler().fit_transform(X_moons)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>dbscan<span class="op">=</span>DBSCAN(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    eps<span class="op">=</span><span class="fl">.25</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    min_samples<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>db_labels<span class="op">=</span>dbscan.fit_predict(X_moons_scaled)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    X_moons[:,<span class="dv">0</span>],</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    X_moons[:,<span class="dv">1</span>],</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>db_labels,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">22</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"DBSCAN on Two Moons"</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-clustering_files/figure-html/cell-15-output-1.png" width="683" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>DBSCAN can discover irregularly shaped clusters and explicitly label some observations as noise.</p>
+<p>But it is sensitive to the density scale implied by <code>eps</code>, <code>min_samples</code>, preprocessing, and the data distribution.</p>
+</section>
+<section id="compare-three-notions-of-a-cluster" class="level2" data-number="11.26">
+<h2 data-number="11.26" class="anchored" data-anchor-id="compare-three-notions-of-a-cluster"><span class="header-section-number">11.26</span> Compare Three Notions of a Cluster</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>A cluster is approximately…</th>
+<th>Key assumptions/choices</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(k\)</span>-means</td>
+<td>observations near a centroid</td>
+<td><span class="math inline">\(K\)</span>, squared Euclidean geometry</td>
+</tr>
+<tr class="even">
+<td>hierarchical</td>
+<td>observations joined within a merge hierarchy</td>
+<td>distance, linkage, cut</td>
+</tr>
+<tr class="odd">
+<td>DBSCAN</td>
+<td>a connected region of sufficient density</td>
+<td><code>eps</code>, <code>min_samples</code>, distance</td>
+</tr>
+</tbody>
+</table>
+<p>These algorithms are not merely alternative software commands.</p>
+<p>They encode different answers to:</p>
+<blockquote class="blockquote">
+<p><strong>What kind of structure counts as a group?</strong></p>
+</blockquote>
+</section>
+<section id="cluster-stability" class="level2" data-number="11.27">
+<h2 data-number="11.27" class="anchored" data-anchor-id="cluster-stability"><span class="header-section-number">11.27</span> Cluster Stability</h2>
+<p>If small changes in the data produce completely different clusters, interpretation should be cautious.</p>
+<p>A practical stability investigation might:</p>
 <ol type="1">
-<li>What objective does K-means minimize?</li>
-<li>Why does scaling matter?</li>
-<li>How does DBSCAN differ from K-means?</li>
-<li>What does silhouette score measure?</li>
+<li>resample observations;</li>
+<li>refit clustering;</li>
+<li>align resulting partitions where possible;</li>
+<li>compare pairwise co-membership or adjusted agreement;</li>
+<li>inspect whether substantive profiles persist.</li>
+</ol>
+<p>For two partitions with known correspondence, the Adjusted Rand Index (ARI) is one possible agreement measure:</p>
+<div id="499273f2" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> adjusted_rand_score</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>rng<span class="op">=</span>np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>indices<span class="op">=</span>rng.choice(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(X_demo),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="bu">int</span>(<span class="fl">.9</span><span class="op">*</span><span class="bu">len</span>(X_demo)),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    replace<span class="op">=</span><span class="va">False</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>m_full<span class="op">=</span>KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>,n_init<span class="op">=</span><span class="st">"auto"</span>,random_state<span class="op">=</span><span class="dv">42</span>).fit(X_demo)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>m_subset<span class="op">=</span>KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>,n_init<span class="op">=</span><span class="st">"auto"</span>,random_state<span class="op">=</span><span class="dv">42</span>).fit(X_demo[indices])</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>full_labels_on_subset<span class="op">=</span>m_full.predict(X_demo[indices])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>subset_labels<span class="op">=</span>m_subset.labels_</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>adjusted_rand_score(full_labels_on_subset,subset_labels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+<p>This demonstration is intentionally simple. Rigorous cluster stability can require more careful resampling and label-alignment strategies.</p>
+</section>
+<section id="external-variables-and-cluster-usefulness" class="level2" data-number="11.28">
+<h2 data-number="11.28" class="anchored" data-anchor-id="external-variables-and-cluster-usefulness"><span class="header-section-number">11.28</span> External Variables and Cluster Usefulness</h2>
+<p>Sometimes variables not used to construct clusters can help assess whether a partition has external relevance.</p>
+<p>For example, after clustering on pre-intervention measurements, researchers might compare clusters on a later outcome.</p>
+<p>But caution is essential:</p>
+<ul>
+<li>post hoc comparisons can inflate false discoveries;</li>
+<li>external association does not validate every interpretation;</li>
+<li>using an outcome both to construct and “validate” clusters is circular;</li>
+<li>association with an external variable does not make clusters causal entities.</li>
+</ul>
+</section>
+<section id="can-clustering-find-groups-that-are-not-really-there" class="level2" data-number="11.29">
+<h2 data-number="11.29" class="anchored" data-anchor-id="can-clustering-find-groups-that-are-not-really-there"><span class="header-section-number">11.29</span> Can Clustering Find Groups That Are Not Really There?</h2>
+<p>Yes.</p>
+<p>If you ask <span class="math inline">\(k\)</span>-means for <span class="math inline">\(K=4\)</span>, it will return four clusters even when the underlying distribution is continuous and contains no natural four-group structure.</p>
+<div id="cell-fig-forced-clusters" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rng<span class="op">=</span>np.random.default_rng(<span class="dv">10</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>continuous<span class="op">=</span>rng.multivariate_normal(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    mean<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">0</span>],</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    cov<span class="op">=</span>[[<span class="dv">1</span>,<span class="fl">.75</span>],[<span class="fl">.75</span>,<span class="dv">1</span>]],</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">500</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>forced<span class="op">=</span>KMeans(</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="st">"auto"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>).fit_predict(continuous)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    continuous[:,<span class="dv">0</span>],</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    continuous[:,<span class="dv">1</span>],</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>forced,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">22</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Four Clusters Imposed on Continuous Structure"</span>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-forced-clusters" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Clustering result illustrating how an unsuitable number of clusters can force artificial groupings in the data.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forced-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-clustering_files/figure-html/fig-forced-clusters-output-1.png" alt="Clustering result illustrating how an unsuitable number of clusters can force artificial groupings in the data." width="662" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forced-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.7: A clustering algorithm can partition continuous structure even when discrete natural groups are not evident.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The colors are real outputs of the algorithm.</p>
+<p>That does not mean four natural populations existed before we requested them.</p>
+</section>
+<section id="computer-vision-learning-experience-clustering-images-without-labels" class="level2" data-number="11.30">
+<h2 data-number="11.30" class="anchored" data-anchor-id="computer-vision-learning-experience-clustering-images-without-labels"><span class="header-section-number">11.30</span> Computer Vision Learning Experience: Clustering Images Without Labels</h2>
+<p>Computer vision also contains unsupervised workloads. Suppose image labels are unavailable and we ask whether visually similar observations form useful groups.</p>
+<p>Using handwritten digits, we can cluster flattened images without supplying digit labels to (k)-means. Known labels are retained only for <strong>post hoc evaluation</strong>, not fitting.</p>
+<div id="47857b07" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> adjusted_rand_score</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>digits_cluster_cv <span class="op">=</span> load_digits()</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>X_cluster_cv <span class="op">=</span> digits_cluster_cv.data</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>y_cluster_cv <span class="op">=</span> digits_cluster_cv.target</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>X_cluster_scaled_cv <span class="op">=</span> StandardScaler().fit_transform(X_cluster_cv)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>kmeans_digits_cv <span class="op">=</span> KMeans(</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>clusters_digits_cv <span class="op">=</span> kmeans_digits_cv.fit_predict(X_cluster_scaled_cv)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>adjusted_rand_score(y_cluster_cv, clusters_digits_cv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>0.4779623470372548</code></pre>
+</div>
+</div>
+<p>The adjusted Rand index compares the discovered partition with known labels while accounting for agreement expected by chance. Cluster numbers do not need to match digit numbers.</p>
+<p>A modest score would not necessarily mean clustering “failed.” (k)-means optimizes geometric compactness, not semantic digit identity.</p>
+<p><span class="math display">\[
+\boxed{\text{Visual Similarity Under a Representation}\neq\text{Semantic Identity}}
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If image clusters resemble known classes, that is evidence that the chosen representation contains class-related structure. It does not establish that the clusters are natural visual kinds or that the same structure will appear under another representation.</p>
+</div>
+</div>
+</section>
+<section id="three-tracks" class="level2" data-number="11.31">
+<h2 data-number="11.31" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">11.31</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="11.31.1">
+<h3 data-number="11.31.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">11.31.1</span> Health Track</h3>
+<p>Potential applications include exploratory phenotyping, behavioral profiles, or patterns of health measurements. Avoid turning clusters into diagnoses without clinical validation. Consider measurement scale, missingness, stability, external replication, and whether continuous variation is being artificially discretized.</p>
+</section>
+<section id="education-track" class="level3" data-number="11.31.2">
+<h3 data-number="11.31.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">11.31.2</span> Education Track</h3>
+<p>Clustering may explore patterns of engagement, course-taking, or academic behavior. Avoid labels such as “at-risk learner type” unless the evidence supports a stable and useful construct. Student segments can become self-fulfilling if descriptive clusters are treated as identities.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="11.31.3">
+<h3 data-number="11.31.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">11.31.3</span> Open ML Benchmark Track</h3>
+<p>Simulated blobs, moons, circles, and varying-density datasets allow students to test which definitions of structure are favored by <span class="math inline">\(k\)</span>-means, hierarchical methods, and DBSCAN.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-do-clusters-exist-before-we-name-them" class="level2" data-number="11.32">
+<h2 data-number="11.32" class="anchored" data-anchor-id="beyond-the-algorithm-do-clusters-exist-before-we-name-them"><span class="header-section-number">11.32</span> Beyond the Algorithm: Do Clusters Exist Before We Name Them?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Discovery or Construction?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Clustering is often described as “discovering natural groups in the data.”</p>
+<p>Sometimes meaningful group structure may indeed exist.</p>
+<p>But every clustering analysis also contains construction:</p>
+<ul>
+<li>which people or objects were included;</li>
+<li>which variables represented them;</li>
+<li>how those variables were measured;</li>
+<li>how missing values were handled;</li>
+<li>how features were scaled;</li>
+<li>what distance meant;</li>
+<li>which algorithm was chosen;</li>
+<li>which parameters were set;</li>
+<li>where the analyst decided one cluster ended and another began.</li>
+</ul>
+<p>This does not make clustering arbitrary.</p>
+<p>It makes clustering <strong>model-dependent</strong>.</p>
+<p>A useful philosophical distinction is:</p>
+<p><span class="math display">\[
+\boxed{\text{pattern in data}}
+\neq
+\boxed{\text{natural category in the world}}.
+\]</span></p>
+<p>The responsible analyst therefore asks:</p>
+<p><strong>Are we discovering a stable structure that matters—or constructing a convenient partition that helps us think?</strong></p>
+<p>Both can be useful.</p>
+<p>They are not the same claim.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-name-these-clusters" class="level2" data-number="11.33">
+<h2 data-number="11.33" class="anchored" data-anchor-id="ai-pair-programmer-name-these-clusters"><span class="header-section-number">11.33</span> AI Pair Programmer: Name These Clusters</h2>
+<p>Give an AI assistant a table of cluster means and ask it to name each cluster.</p>
+<p>It may quickly produce labels such as:</p>
+<ul>
+<li>“high achievers”;</li>
+<li>“disengaged students”;</li>
+<li>“healthy lifestyle group”;</li>
+<li>“high-risk patients.”</li>
+</ul>
+<p>Audit those labels.</p>
+<p>Ask:</p>
+<ol type="1">
+<li>Which features actually support the label?</li>
+<li>Does the label introduce moral or causal meaning not present in the data?</li>
+<li>Are differences large enough to justify distinct names?</li>
+<li>Are clusters stable?</li>
+<li>Would the labels remain appropriate in another sample?</li>
+<li>Could continuous variation be masquerading as categories?</li>
+</ol>
+<p>Rewrite the labels descriptively before using interpretive names.</p>
+</section>
+<section id="hands-on-lab-what-counts-as-a-cluster" class="level2" data-number="11.34">
+<h2 data-number="11.34" class="anchored" data-anchor-id="hands-on-lab-what-counts-as-a-cluster"><span class="header-section-number">11.34</span> Hands-On Lab: What Counts as a Cluster?</h2>
+<p>Using a health, education, or benchmark dataset:</p>
+<ol type="1">
+<li>define the exploratory purpose;</li>
+<li>construct a Feature Ledger;</li>
+<li>identify variables that should not enter the clustering;</li>
+<li>examine distributions and missingness;</li>
+<li>justify scaling;</li>
+<li>define the distance concept;</li>
+<li>fit <span class="math inline">\(k\)</span>-means for several values of <span class="math inline">\(K\)</span>;</li>
+<li>inspect inertia and silhouette scores;</li>
+<li>profile candidate clusters;</li>
+<li>fit hierarchical clustering;</li>
+<li>compare at least two linkage strategies;</li>
+<li>fit DBSCAN where appropriate;</li>
+<li>compare the different notions of structure;</li>
+<li>conduct a stability check;</li>
+<li>use an external variable cautiously if available;</li>
+<li>write a substantive interpretation;</li>
+<li>write a competing interpretation in which the structure is continuous rather than categorical;</li>
+<li>document unsupported claims.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="11.12">
-<h2 data-number="11.12" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">11.12</span> Real-World Case Study</h2>
-<section id="institutional-profiles" class="level3" data-number="11.12.1">
-<h3 data-number="11.12.1" class="anchored" data-anchor-id="institutional-profiles"><span class="header-section-number">11.12.1</span> Institutional Profiles</h3>
-<p>Cluster higher-education institutions using public IPEDS or College Scorecard features.</p>
+<section id="practitioner-track" class="level2" data-number="11.35">
+<h2 data-number="11.35" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">11.35</span> Practitioner Track</h2>
+<p>A practitioner should be able to choose clustering methods based on the desired notion of similarity, scale features appropriately, use internal diagnostics without treating them as proof, and communicate clusters as operational segments rather than unquestioned truths.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="11.36">
+<h2 data-number="11.36" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">11.36</span> Researcher Track</h2>
+<p>A researcher should additionally examine stability, external replication, sensitivity to preprocessing and algorithm choice, uncertainty in cluster interpretation, and whether discrete groups are scientifically defensible relative to continuous alternatives.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="11.13">
-<h2 data-number="11.13" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">11.13</span> Professor’s Challenge</h2>
-<p>Two clustering algorithms produce very different groups. Which result is “correct”?</p>
+<section id="research-studio" class="level2" data-number="11.37">
+<h2 data-number="11.37" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">11.37</span> Research Studio</h2>
+<p>Design a clustering study suitable for a conference or journal paper.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>substantive research question;</li>
+<li>population and sampling frame;</li>
+<li>feature-selection rationale;</li>
+<li>variables intentionally excluded;</li>
+<li>preprocessing;</li>
+<li>similarity/distance definition;</li>
+<li>candidate clustering algorithms;</li>
+<li>parameter-selection strategy;</li>
+<li>internal validation;</li>
+<li>stability assessment;</li>
+<li>external validation variables;</li>
+<li>replication strategy;</li>
+<li>cluster-labeling protocol;</li>
+<li>sensitivity analyses;</li>
+<li>continuous alternative explanation;</li>
+<li>ethical implications of assigning cluster labels;</li>
+<li>potential scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="11.14">
-<h2 data-number="11.14" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">11.14</span> Research Extension</h2>
-<p>Assess cluster stability across years, samples, or alternative feature representations.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="11.15">
-<h2 data-number="11.15" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">11.15</span> Reproducibility Check</h2>
-<p>Document scaling, distance metrics, algorithm parameters, feature selection, and stability analysis.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="11.16">
-<h2 data-number="11.16" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">11.16</span> Key Takeaways</h2>
+<section id="professors-challenge-four-types-of-students" class="level2" data-number="11.38">
+<h2 data-number="11.38" class="anchored" data-anchor-id="professors-challenge-four-types-of-students"><span class="header-section-number">11.38</span> Professor’s Challenge: Four Types of Students</h2>
+<p>A university clusters 20,000 students using attendance, LMS activity, GPA, financial holds, advising contacts, and course withdrawals.</p>
+<p>The analyst runs <span class="math inline">\(k\)</span>-means with <span class="math inline">\(K=4\)</span> because administrators requested “four student types.” The four resulting groups are labeled:</p>
+<ol type="1">
+<li>Thriving Students</li>
+<li>Quiet Achievers</li>
+<li>Disengaged Students</li>
+<li>High-Risk Students</li>
+</ol>
+<p>The mean silhouette score is 0.41.</p>
+<p>Administrators propose automatically assigning different advising interventions based on cluster membership.</p>
+<p>Critique:</p>
 <ul>
-<li>Clusters are model-dependent representations of structure.</li>
-<li>Validation must go beyond visual appeal.</li>
-<li>Substantive interpretation is essential.</li>
+<li>the predetermined choice of <span class="math inline">\(K\)</span>;</li>
+<li>scaling and feature weighting;</li>
+<li>the meaning of Euclidean distance;</li>
+<li>use of financial variables;</li>
+<li>whether the labels are descriptive or judgmental;</li>
+<li>silhouette interpretation;</li>
+<li>cluster stability;</li>
+<li>continuous versus categorical structure;</li>
+<li>temporal ordering;</li>
+<li>external validation;</li>
+<li>subgroup composition;</li>
+<li>intervention consequences;</li>
+<li>whether clustering is sufficient evidence for differential treatment.</li>
+</ul>
+<p>Design a stronger exploratory study before deployment.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="11.39">
+<h2 data-number="11.39" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">11.39</span> Knowledge Check</h2>
+<ol type="1">
+<li>How does clustering differ from classification?</li>
+<li>What does a distance metric encode?</li>
+<li>What is Euclidean distance?</li>
+<li>Why can scaling change a clustering solution?</li>
+<li>What objective does <span class="math inline">\(k\)</span>-means minimize?</li>
+<li>What is a centroid?</li>
+<li>Why can <span class="math inline">\(k\)</span>-means produce different solutions across initializations?</li>
+<li>Why does inertia always decline as <span class="math inline">\(K\)</span> increases?</li>
+<li>What does the silhouette coefficient measure?</li>
+<li>Why does a high silhouette score not establish substantive validity?</li>
+<li>What is agglomerative clustering?</li>
+<li>How do linkage methods differ?</li>
+<li>What does a dendrogram represent?</li>
+<li>What does DBSCAN mean by a dense region?</li>
+<li>What roles do <code>eps</code> and <code>min_samples</code> play?</li>
+<li>What is a noise point?</li>
+<li>Why might <span class="math inline">\(k\)</span>-means fail on two interlocking moons?</li>
+<li>Why can an algorithm return clusters when no natural categories exist?</li>
+<li>What is cluster stability?</li>
+<li>Why should cluster labels be treated cautiously?</li>
+<li>Why can feature scaling change a clustering solution?</li>
+<li>In what sense can clusters be partly constructed rather than merely discovered?</li>
+<li>What evidence would strengthen a claim that a cluster solution is substantively meaningful?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="11.40">
+<h2 data-number="11.40" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">11.40</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>research/exploratory purpose;</li>
+<li>analytic sample;</li>
+<li>feature inclusion/exclusion;</li>
+<li>missing-data handling;</li>
+<li>transformations;</li>
+<li>scaling;</li>
+<li>distance metric;</li>
+<li>clustering algorithm;</li>
+<li><span class="math inline">\(K\)</span> or density parameters;</li>
+<li>initialization;</li>
+<li>number of starts;</li>
+<li>random seeds;</li>
+<li>linkage method;</li>
+<li>internal metrics;</li>
+<li>stability procedure;</li>
+<li>external validation variables;</li>
+<li>cluster-labeling procedure;</li>
+<li>software/package versions;</li>
+<li>all code producing tables and figures.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="11.41">
+<h2 data-number="11.41" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">11.41</span> Key Takeaways</h2>
+<ul>
+<li>Clustering seeks structure without observed target labels.</li>
+<li>Similarity is defined through representation, scaling, and distance.</li>
+<li><span class="math inline">\(k\)</span>-means minimizes within-cluster squared distance to centroids.</li>
+<li>The elbow method and silhouette score are diagnostics, not truth detectors.</li>
+<li>Hierarchical clustering represents nested relationships among observations.</li>
+<li>Linkage determines what “close clusters” means.</li>
+<li>DBSCAN defines structure through local density and can identify noise.</li>
+<li>Different algorithms embody different definitions of a cluster.</li>
+<li>Internal separation does not establish substantive validity.</li>
+<li>Stability and external replication strengthen cluster interpretations.</li>
+<li>Clustering can impose discrete groups on continuous variation.</li>
+<li>Cluster labels can introduce meaning not contained in the algorithm.</li>
+<li>A useful partition and a natural category are different scientific claims.</li>
+<li>Clusters depend on representation, distance, algorithm, and tuning choices.</li>
+<li>Cluster labels should not automatically be treated as natural categories.</li>
+<li>Stability and substantive validity matter alongside internal clustering metrics.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-macqueen1967" class="csl-entry" role="listitem">
+MacQueen, James. 1967. <span>“Some Methods for Classification and Analysis of Multivariate Observations.”</span> In <em>Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability</em>, 1:281–97. Berkeley, CA: University of California Press.
+</div>
+<div id="ref-rousseeuw1987" class="csl-entry" role="listitem">
+Rousseeuw, Peter J. 1987. <span>“Silhouettes: A Graphical Aid to the Interpretation and Validation of Cluster Analysis.”</span> <em>Journal of Computational and Applied Mathematics</em> 20: 53–65. <a href="https://doi.org/10.1016/0377-0427(87)90125-7">https://doi.org/10.1016/0377-0427(87)90125-7</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -609,7 +1891,7 @@ J = \sum_{k=1}^{K}\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert^2
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -938,13 +2220,13 @@ J = \sum_{k=1}^{K}\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert^2
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-03-supervised/10-ensemble-learning.html" class="pagination-link" aria-label="Ensemble Learning and Gradient Boosting">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span>
+      <a href="../part-03-supervised/10-ensemble-learning.html" class="pagination-link" aria-label="Ensemble Learning: From Many Models to Stronger Predictions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="pagination-link" aria-label="Dimensionality Reduction">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="pagination-link" aria-label="Dimensionality Reduction: Compressing Data Without Losing the Story">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

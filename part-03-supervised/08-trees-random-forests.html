@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Decision Trees and Random Forests – Machine Learning Using Python</title>
+<title>8&nbsp; Decision Trees and Random Forests: Learning by Partitioning – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,7 +167,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/08-trees-random-forests.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/08-trees-random-forests.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,6 +183,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -141,6 +199,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -184,7 +248,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -207,31 +271,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,13 +312,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -271,19 +335,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +355,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -300,19 +364,48 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -335,51 +428,62 @@ window.Quarto = {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">8.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">8.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">8.3</span> Real-World Problem</a></li>
-  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">8.4</span> Decision Trees</a>
+  <li><a href="#from-linear-boundaries-to-partitions" id="toc-from-linear-boundaries-to-partitions" class="nav-link" data-scroll-target="#from-linear-boundaries-to-partitions"><span class="header-section-number">8.3</span> From Linear Boundaries to Partitions</a></li>
+  <li><a href="#anatomy-of-a-tree" id="toc-anatomy-of-a-tree" class="nav-link" data-scroll-target="#anatomy-of-a-tree"><span class="header-section-number">8.4</span> Anatomy of a Tree</a></li>
+  <li><a href="#classification-impurity" id="toc-classification-impurity" class="nav-link" data-scroll-target="#classification-impurity"><span class="header-section-number">8.5</span> Classification Impurity</a>
   <ul class="collapse">
-  <li><a href="#recursive-partitioning" id="toc-recursive-partitioning" class="nav-link" data-scroll-target="#recursive-partitioning"><span class="header-section-number">8.4.1</span> Recursive Partitioning</a></li>
-  <li><a href="#splits-and-leaves" id="toc-splits-and-leaves" class="nav-link" data-scroll-target="#splits-and-leaves"><span class="header-section-number">8.4.2</span> Splits and Leaves</a></li>
-  <li><a href="#gini-impurity" id="toc-gini-impurity" class="nav-link" data-scroll-target="#gini-impurity"><span class="header-section-number">8.4.3</span> Gini Impurity</a></li>
+  <li><a href="#gini-impurity" id="toc-gini-impurity" class="nav-link" data-scroll-target="#gini-impurity"><span class="header-section-number">8.5.1</span> Gini Impurity</a></li>
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy"><span class="header-section-number">8.5.2</span> Entropy</a></li>
   </ul></li>
-  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests"><span class="header-section-number">8.5</span> Random Forests</a>
+  <li><a href="#split-improvement" id="toc-split-improvement" class="nav-link" data-scroll-target="#split-improvement"><span class="header-section-number">8.6</span> Split Improvement</a></li>
+  <li><a href="#calculate-impurity" id="toc-calculate-impurity" class="nav-link" data-scroll-target="#calculate-impurity"><span class="header-section-number">8.7</span> Calculate Impurity</a></li>
+  <li><a href="#fit-a-classification-tree" id="toc-fit-a-classification-tree" class="nav-link" data-scroll-target="#fit-a-classification-tree"><span class="header-section-number">8.8</span> Fit a Classification Tree</a></li>
+  <li><a href="#visualize-the-tree" id="toc-visualize-the-tree" class="nav-link" data-scroll-target="#visualize-the-tree"><span class="header-section-number">8.9</span> Visualize the Tree</a></li>
+  <li><a href="#regression-trees" id="toc-regression-trees" class="nav-link" data-scroll-target="#regression-trees"><span class="header-section-number">8.10</span> Regression Trees</a></li>
+  <li><a href="#why-trees-overfit" id="toc-why-trees-overfit" class="nav-link" data-scroll-target="#why-trees-overfit"><span class="header-section-number">8.11</span> Why Trees Overfit</a></li>
+  <li><a href="#controlling-tree-complexity" id="toc-controlling-tree-complexity" class="nav-link" data-scroll-target="#controlling-tree-complexity"><span class="header-section-number">8.12</span> Controlling Tree Complexity</a></li>
+  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="header-section-number">8.13</span> Cost-Complexity Pruning</a></li>
+  <li><a href="#instability-a-trees-hidden-weakness" id="toc-instability-a-trees-hidden-weakness" class="nav-link" data-scroll-target="#instability-a-trees-hidden-weakness"><span class="header-section-number">8.14</span> Instability: A Tree’s Hidden Weakness</a></li>
+  <li><a href="#bagging-many-unstable-models-can-become-stable-together" id="toc-bagging-many-unstable-models-can-become-stable-together" class="nav-link" data-scroll-target="#bagging-many-unstable-models-can-become-stable-together"><span class="header-section-number">8.15</span> Bagging: Many Unstable Models Can Become Stable Together</a></li>
+  <li><a href="#interpretable-does-not-mean-stable" id="toc-interpretable-does-not-mean-stable" class="nav-link" data-scroll-target="#interpretable-does-not-mean-stable"><span class="header-section-number">8.16</span> Interpretable Does Not Mean Stable</a>
   <ul class="collapse">
-  <li><a href="#bootstrap-aggregation" id="toc-bootstrap-aggregation" class="nav-link" data-scroll-target="#bootstrap-aggregation"><span class="header-section-number">8.5.1</span> Bootstrap Aggregation</a></li>
-  <li><a href="#random-feature-selection" id="toc-random-feature-selection" class="nav-link" data-scroll-target="#random-feature-selection"><span class="header-section-number">8.5.2</span> Random Feature Selection</a></li>
-  <li><a href="#out-of-bag-samples" id="toc-out-of-bag-samples" class="nav-link" data-scroll-target="#out-of-bag-samples"><span class="header-section-number">8.5.3</span> Out-of-Bag Samples</a></li>
-  <li><a href="#bias-variance-intuition" id="toc-bias-variance-intuition" class="nav-link" data-scroll-target="#bias-variance-intuition"><span class="header-section-number">8.5.4</span> Bias-Variance Intuition</a></li>
+  <li><a href="#bootstrap-the-root-split" id="toc-bootstrap-the-root-split" class="nav-link" data-scroll-target="#bootstrap-the-root-split"><span class="header-section-number">8.16.1</span> Bootstrap the Root Split</a></li>
   </ul></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">8.6</span> Interpretation</a>
+  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests"><span class="header-section-number">8.17</span> Random Forests</a></li>
+  <li><a href="#fit-a-random-forest" id="toc-fit-a-random-forest" class="nav-link" data-scroll-target="#fit-a-random-forest"><span class="header-section-number">8.18</span> Fit a Random Forest</a></li>
+  <li><a href="#why-a-forest-can-generalize-better" id="toc-why-a-forest-can-generalize-better" class="nav-link" data-scroll-target="#why-a-forest-can-generalize-better"><span class="header-section-number">8.19</span> Why a Forest Can Generalize Better</a></li>
+  <li><a href="#out-of-bag-evaluation" id="toc-out-of-bag-evaluation" class="nav-link" data-scroll-target="#out-of-bag-evaluation"><span class="header-section-number">8.20</span> Out-of-Bag Evaluation</a></li>
+  <li><a href="#feature-importance-important-in-what-sense" id="toc-feature-importance-important-in-what-sense" class="nav-link" data-scroll-target="#feature-importance-important-in-what-sense"><span class="header-section-number">8.21</span> Feature Importance: Important in What Sense?</a></li>
+  <li><a href="#permutation-importance" id="toc-permutation-importance" class="nav-link" data-scroll-target="#permutation-importance"><span class="header-section-number">8.22</span> Permutation Importance</a></li>
+  <li><a href="#compare-importance-measures" id="toc-compare-importance-measures" class="nav-link" data-scroll-target="#compare-importance-measures"><span class="header-section-number">8.23</span> Compare Importance Measures</a></li>
+  <li><a href="#partial-dependence-model-behavior-not-causal-effect" id="toc-partial-dependence-model-behavior-not-causal-effect" class="nav-link" data-scroll-target="#partial-dependence-model-behavior-not-causal-effect"><span class="header-section-number">8.24</span> Partial Dependence: Model Behavior, Not Causal Effect</a></li>
+  <li><a href="#computer-vision-learning-experience-pixel-importance-is-model-dependence" id="toc-computer-vision-learning-experience-pixel-importance-is-model-dependence" class="nav-link" data-scroll-target="#computer-vision-learning-experience-pixel-importance-is-model-dependence"><span class="header-section-number">8.25</span> Computer Vision Learning Experience: Pixel Importance Is Model Dependence</a></li>
+  <li><a href="#single-tree-versus-forest" id="toc-single-tree-versus-forest" class="nav-link" data-scroll-target="#single-tree-versus-forest"><span class="header-section-number">8.26</span> Single Tree Versus Forest</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">8.27</span> Three Tracks</a>
   <ul class="collapse">
-  <li><a href="#impurity-based-importance" id="toc-impurity-based-importance" class="nav-link" data-scroll-target="#impurity-based-importance"><span class="header-section-number">8.6.1</span> Impurity-Based Importance</a></li>
-  <li><a href="#permutation-importance" id="toc-permutation-importance" class="nav-link" data-scroll-target="#permutation-importance"><span class="header-section-number">8.6.2</span> Permutation Importance</a></li>
-  <li><a href="#limits-of-feature-importance" id="toc-limits-of-feature-importance" class="nav-link" data-scroll-target="#limits-of-feature-importance"><span class="header-section-number">8.6.3</span> Limits of Feature Importance</a></li>
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">8.27.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">8.27.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">8.27.3</span> Open ML Benchmark Track</a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">8.7</span> Python Implementation</a>
-  <ul class="collapse">
-  <li><a href="#decisiontreeclassifier-and-regressor" id="toc-decisiontreeclassifier-and-regressor" class="nav-link" data-scroll-target="#decisiontreeclassifier-and-regressor"><span class="header-section-number">8.7.1</span> DecisionTreeClassifier and Regressor</a></li>
-  <li><a href="#randomforestclassifier-and-regressor" id="toc-randomforestclassifier-and-regressor" class="nav-link" data-scroll-target="#randomforestclassifier-and-regressor"><span class="header-section-number">8.7.2</span> RandomForestClassifier and Regressor</a></li>
-  </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">8.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">8.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">8.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">8.11</span> Real-World Case Study</a>
-  <ul class="collapse">
-  <li><a href="#predicting-an-education-outcome" id="toc-predicting-an-education-outcome" class="nav-link" data-scroll-target="#predicting-an-education-outcome"><span class="header-section-number">8.11.1</span> Predicting an Education Outcome</a></li>
-  </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">8.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">8.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">8.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">8.15</span> Key Takeaways</a></li>
+  <li><a href="#beyond-the-algorithm-what-does-important-mean" id="toc-beyond-the-algorithm-what-does-important-mean" class="nav-link" data-scroll-target="#beyond-the-algorithm-what-does-important-mean"><span class="header-section-number">8.28</span> Beyond the Algorithm: What Does “Important” Mean?</a></li>
+  <li><a href="#ai-pair-programmer-explain-my-forest" id="toc-ai-pair-programmer-explain-my-forest" class="nav-link" data-scroll-target="#ai-pair-programmer-explain-my-forest"><span class="header-section-number">8.29</span> AI Pair Programmer: Explain My Forest</a></li>
+  <li><a href="#hands-on-lab-from-one-tree-to-a-forest" id="toc-hands-on-lab-from-one-tree-to-a-forest" class="nav-link" data-scroll-target="#hands-on-lab-from-one-tree-to-a-forest"><span class="header-section-number">8.30</span> Hands-On Lab: From One Tree to a Forest</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">8.31</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">8.32</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">8.33</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-most-important-predictor" id="toc-professors-challenge-the-most-important-predictor" class="nav-link" data-scroll-target="#professors-challenge-the-most-important-predictor"><span class="header-section-number">8.34</span> Professor’s Challenge: The Most Important Predictor</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">8.35</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">8.36</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">8.37</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/08-trees-random-forests.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/08-trees-random-forests.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></h1>
 </div>
 
 
@@ -398,125 +502,1025 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain recursive partitioning.</li>
-<li>Calculate and interpret impurity measures.</li>
-<li>Control tree complexity.</li>
-<li>Explain bagging and random forests.</li>
-<li>Evaluate feature importance cautiously.</li>
+<li>explain recursive partitioning as a supervised-learning strategy;</li>
+<li>distinguish root nodes, internal nodes, branches, and leaves;</li>
+<li>calculate and interpret Gini impurity and entropy;</li>
+<li>explain information gain and regression split criteria;</li>
+<li>fit classification and regression trees with scikit-learn;</li>
+<li>explain why unrestricted trees overfit;</li>
+<li>control tree complexity through depth, leaf-size, and pruning parameters;</li>
+<li>explain cost-complexity pruning;</li>
+<li>describe bootstrap aggregation (bagging);</li>
+<li>explain how Random Forests decorrelate trees through feature subsampling;</li>
+<li>interpret out-of-bag evaluation conceptually;</li>
+<li>distinguish impurity-based from permutation feature importance;</li>
+<li>explain why feature importance does not imply causal importance;</li>
+<li>use partial dependence cautiously as a model-behavior tool;</li>
+<li>compare single trees and forests using out-of-sample evidence;</li>
+<li>connect tree models to health, education, and benchmark research problems.</li>
+<li>interpret pixel-level feature importance cautiously in a computer-vision example.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">8.2</span> Why This Matters</h2>
-<p>Tree-based models capture nonlinearities and interactions with relatively little preprocessing and form the foundation of many powerful ensemble methods.</p>
+<p>Linear and logistic regression represent outcomes through weighted combinations of features. Decision trees take a different approach: they repeatedly divide the feature space into regions.</p>
+<p>A tree asks a sequence of questions:</p>
+<blockquote class="blockquote">
+<p>Is <span class="math inline">\(x_j \le s\)</span>?</p>
+</blockquote>
+<p>Each answer routes an observation toward another question or a terminal prediction.</p>
+<p>This makes trees intuitive, nonlinear, and capable of discovering interactions without requiring us to specify every interaction in advance.</p>
+<p>But that flexibility comes with a cost: a deep tree can memorize noise.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>How can recursive partitioning discover nonlinear structure while avoiding the temptation to memorize the training data?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">8.3</span> Real-World Problem</h2>
-<p>Can nonlinear combinations of demographic and behavioral variables improve prediction beyond a linear baseline?</p>
-</section>
-<section id="decision-trees" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">8.4</span> Decision Trees</h2>
-<section id="recursive-partitioning" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="recursive-partitioning"><span class="header-section-number">8.4.1</span> Recursive Partitioning</h3>
-</section>
-<section id="splits-and-leaves" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="splits-and-leaves"><span class="header-section-number">8.4.2</span> Splits and Leaves</h3>
-</section>
-<section id="gini-impurity" class="level3" data-number="8.4.3">
-<h3 data-number="8.4.3" class="anchored" data-anchor-id="gini-impurity"><span class="header-section-number">8.4.3</span> Gini Impurity</h3>
+<section id="from-linear-boundaries-to-partitions" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="from-linear-boundaries-to-partitions"><span class="header-section-number">8.3</span> From Linear Boundaries to Partitions</h2>
+<p>A logistic-regression classifier may separate classes using a linear boundary in the represented feature space.</p>
+<p>A decision tree instead partitions the space into rectangles or regions.</p>
+<p>For a split on feature <span class="math inline">\(x_j\)</span> at threshold <span class="math inline">\(s\)</span>,</p>
 <p><span class="math display">\[
-G = 1 - \sum_k p_k^2
-\]</span> ### Entropy <span class="math display">\[
-H = -\sum_k p_k\log_2(p_k)
-\]</span> ### Tree Depth and Pruning</p>
+R_1(j,s)=\{x:x_j\le s\},
+\]</span></p>
+<p><span class="math display">\[
+R_2(j,s)=\{x:x_j&gt;s\}.
+\]</span></p>
+<p>The algorithm searches for a feature and threshold that improve the purity or predictive quality of the resulting regions.</p>
 </section>
-</section>
-<section id="random-forests" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="random-forests"><span class="header-section-number">8.5</span> Random Forests</h2>
-<section id="bootstrap-aggregation" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="bootstrap-aggregation"><span class="header-section-number">8.5.1</span> Bootstrap Aggregation</h3>
-</section>
-<section id="random-feature-selection" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="random-feature-selection"><span class="header-section-number">8.5.2</span> Random Feature Selection</h3>
-</section>
-<section id="out-of-bag-samples" class="level3" data-number="8.5.3">
-<h3 data-number="8.5.3" class="anchored" data-anchor-id="out-of-bag-samples"><span class="header-section-number">8.5.3</span> Out-of-Bag Samples</h3>
-</section>
-<section id="bias-variance-intuition" class="level3" data-number="8.5.4">
-<h3 data-number="8.5.4" class="anchored" data-anchor-id="bias-variance-intuition"><span class="header-section-number">8.5.4</span> Bias-Variance Intuition</h3>
-</section>
-</section>
-<section id="interpretation" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">8.6</span> Interpretation</h2>
-<section id="impurity-based-importance" class="level3" data-number="8.6.1">
-<h3 data-number="8.6.1" class="anchored" data-anchor-id="impurity-based-importance"><span class="header-section-number">8.6.1</span> Impurity-Based Importance</h3>
-</section>
-<section id="permutation-importance" class="level3" data-number="8.6.2">
-<h3 data-number="8.6.2" class="anchored" data-anchor-id="permutation-importance"><span class="header-section-number">8.6.2</span> Permutation Importance</h3>
-</section>
-<section id="limits-of-feature-importance" class="level3" data-number="8.6.3">
-<h3 data-number="8.6.3" class="anchored" data-anchor-id="limits-of-feature-importance"><span class="header-section-number">8.6.3</span> Limits of Feature Importance</h3>
-</section>
-</section>
-<section id="python-implementation" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">8.7</span> Python Implementation</h2>
-<section id="decisiontreeclassifier-and-regressor" class="level3" data-number="8.7.1">
-<h3 data-number="8.7.1" class="anchored" data-anchor-id="decisiontreeclassifier-and-regressor"><span class="header-section-number">8.7.1</span> DecisionTreeClassifier and Regressor</h3>
-</section>
-<section id="randomforestclassifier-and-regressor" class="level3" data-number="8.7.2">
-<h3 data-number="8.7.2" class="anchored" data-anchor-id="randomforestclassifier-and-regressor"><span class="header-section-number">8.7.2</span> RandomForestClassifier and Regressor</h3>
-</section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">8.8</span> Hands-On Practice</h2>
-<p>Compare a decision tree and random forest with a linear baseline.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">8.9</span> Common Mistakes</h2>
+<section id="anatomy-of-a-tree" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="anatomy-of-a-tree"><span class="header-section-number">8.4</span> Anatomy of a Tree</h2>
+<p>The modern classification-and-regression-tree framework is classically associated with CART <span class="citation" data-cites="breimanEtAl1984cart">(<a href="../references.html#ref-breimanEtAl1984cart" role="doc-biblioref">Breiman et al. 1984</a>)</span>.</p>
+<p>A decision tree contains:</p>
 <ul>
-<li>Allowing unrestricted tree growth.</li>
-<li>Treating feature importance as causality.</li>
-<li>Ignoring correlated predictors.</li>
-<li>Comparing models on different splits.</li>
+<li><strong>root node</strong> — the first split;</li>
+<li><strong>internal nodes</strong> — subsequent decision rules;</li>
+<li><strong>branches</strong> — outcomes of those rules;</li>
+<li><strong>leaves</strong> — terminal predictions.</li>
+</ul>
+<p>A path from root to leaf can be read as a conditional rule.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+\text{if age}\le 45
+\quad\text{and}\quad
+\text{measure}&gt;12.7
+\quad\Rightarrow\quad
+\hat y=1.
+\]</span></p>
+<p>A tree therefore represents prediction as a hierarchy of conditional partitions.</p>
+</section>
+<section id="classification-impurity" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="classification-impurity"><span class="header-section-number">8.5</span> Classification Impurity</h2>
+<p>A classification tree needs a way to measure how mixed the classes are within a node.</p>
+<section id="gini-impurity" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="gini-impurity"><span class="header-section-number">8.5.1</span> Gini Impurity</h3>
+<p>For <span class="math inline">\(K\)</span> classes,</p>
+<p><span class="math display">\[
+Gini=1-\sum_{k=1}^{K}p_k^2,
+\]</span></p>
+<p>where <span class="math inline">\(p_k\)</span> is the proportion of observations in class <span class="math inline">\(k\)</span>.</p>
+<p>For a binary node with 50% positive and 50% negative,</p>
+<p><span class="math display">\[
+Gini=1-(0.5^2+0.5^2)=0.5.
+\]</span></p>
+<p>A pure node has Gini impurity 0.</p>
+</section>
+<section id="entropy" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="entropy"><span class="header-section-number">8.5.2</span> Entropy</h3>
+<p>Entropy is</p>
+<p><span class="math display">\[
+H=-\sum_{k=1}^{K}p_k\log_2(p_k).
+\]</span></p>
+<p>A pure node has entropy 0. Greater class mixture produces greater entropy.</p>
+</section>
+</section>
+<section id="split-improvement" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="split-improvement"><span class="header-section-number">8.6</span> Split Improvement</h2>
+<p>A candidate split can be evaluated through the weighted impurity after splitting:</p>
+<p><span class="math display">\[
+I_{\text{split}}
+=
+\frac{n_L}{n}I_L+
+\frac{n_R}{n}I_R.
+\]</span></p>
+<p>The impurity reduction is</p>
+<p><span class="math display">\[
+\Delta I
+=
+I_{\text{parent}}-I_{\text{split}}.
+\]</span></p>
+<p>The algorithm seeks splits that produce useful reductions.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Greedy Does Not Mean Globally Optimal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Standard tree construction is greedy: at each node, it chooses a locally favorable split. It does not generally search every possible complete tree and prove that the final tree is globally optimal.</p>
+</div>
+</div>
+</section>
+<section id="calculate-impurity" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="calculate-impurity"><span class="header-section-number">8.7</span> Calculate Impurity</h2>
+<div id="37338d7d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gini(proportions):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span>np.asarray(proportions)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">-</span>np.<span class="bu">sum</span>(p<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> entropy(proportions):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span>np.asarray(proportions)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span>p[p<span class="op">&gt;</span><span class="dv">0</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.<span class="bu">sum</span>(p<span class="op">*</span>np.log2(p))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>gini([<span class="fl">0.5</span>,<span class="fl">0.5</span>]), entropy([<span class="fl">0.5</span>,<span class="fl">0.5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(np.float64(0.5), np.float64(1.0))</code></pre>
+</div>
+</div>
+<div id="e4cd9ae2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gini([<span class="fl">0.9</span>,<span class="fl">0.1</span>]), entropy([<span class="fl">0.9</span>,<span class="fl">0.1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(np.float64(0.17999999999999994), np.float64(0.4689955935892812))</code></pre>
+</div>
+</div>
+<p>Both measures recognize that a 90/10 node is purer than a 50/50 node.</p>
+</section>
+<section id="fit-a-classification-tree" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="fit-a-classification-tree"><span class="header-section-number">8.8</span> Fit a Classification Tree</h2>
+<div id="e7e45a86" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>data.data</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>(data.target<span class="op">==</span><span class="dv">0</span>).astype(<span class="bu">int</span>)  <span class="co"># malignant = 1</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>X_train,X_test,y_train,y_test<span class="op">=</span>train_test_split(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    X,y,test_size<span class="op">=</span><span class="fl">.25</span>,random_state<span class="op">=</span><span class="dv">42</span>,stratify<span class="op">=</span>y</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>tree<span class="op">=</span>DecisionTreeClassifier(</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train,y_train)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>tree.score(X_train,y_train), tree.score(X_test,y_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(0.9671361502347418, 0.8881118881118881)</code></pre>
+</div>
+</div>
+<p>Unlike logistic regression, ordinary decision trees generally do not require standardization because splits depend on ordering and thresholds rather than Euclidean scale.</p>
+</section>
+<section id="visualize-the-tree" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="visualize-the-tree"><span class="header-section-number">8.9</span> Visualize the Tree</h2>
+<div id="cell-fig-tree" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> plot_tree</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>,<span class="dv">8</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plot_tree(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    tree,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>X.columns,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>[<span class="st">"Benign"</span>,<span class="st">"Malignant"</span>],</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    filled<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    rounded<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">8</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"A Shallow Classification Tree"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-tree" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagram of a shallow classification tree. Internal nodes show a hierarchy of feature-threshold splits, branches show the resulting decisions, and terminal nodes summarize the predicted class composition.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08-trees-random-forests_files/figure-html/fig-tree-output-1.png" alt="Diagram of a shallow classification tree. Internal nodes show a hierarchy of feature-threshold splits, branches show the resulting decisions, and terminal nodes summarize the predicted class composition." width="1210" height="631" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: A shallow decision tree exposes the hierarchy of learned splits.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The tree is readable partly because we constrained its depth. Interpretability can disappear quickly as trees grow.</p>
+</section>
+<section id="regression-trees" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="regression-trees"><span class="header-section-number">8.10</span> Regression Trees</h2>
+<p>Trees also predict continuous outcomes.</p>
+<p>Within a terminal region <span class="math inline">\(R_m\)</span>, a regression tree commonly predicts the mean:</p>
+<p><span class="math display">\[
+\hat y_{R_m}
+=
+\frac{1}{|R_m|}
+\sum_{i:x_i\in R_m}y_i.
+\]</span></p>
+<p>Splits can be chosen to reduce squared error:</p>
+<p><span class="math display">\[
+\sum_{i:x_i\in R_1}(y_i-\bar y_{R_1})^2
++
+\sum_{i:x_i\in R_2}(y_i-\bar y_{R_2})^2.
+\]</span></p>
+<p>The resulting function is piecewise constant.</p>
+</section>
+<section id="why-trees-overfit" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="why-trees-overfit"><span class="header-section-number">8.11</span> Why Trees Overfit</h2>
+<p>An unrestricted tree can keep splitting until leaves contain very few observations.</p>
+<p>Training error may fall dramatically:</p>
+<p><span class="math display">\[
+\text{complexity}\uparrow
+\Rightarrow
+\text{training error}\downarrow,
+\]</span></p>
+<p>but test error need not continue falling.</p>
+<div id="cell-fig-depth-overfit" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>depths<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">16</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>train_scores<span class="op">=</span>[]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>test_scores<span class="op">=</span>[]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> depth <span class="kw">in</span> depths:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>DecisionTreeClassifier(max_depth<span class="op">=</span>depth,random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    m.fit(X_train,y_train)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    train_scores.append(accuracy_score(y_train,m.predict(X_train)))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    test_scores.append(accuracy_score(y_test,m.predict(X_test)))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.plot(depths,train_scores,marker<span class="op">=</span><span class="st">"o"</span>,label<span class="op">=</span><span class="st">"Training accuracy"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.plot(depths,test_scores,marker<span class="op">=</span><span class="st">"o"</span>,label<span class="op">=</span><span class="st">"Test accuracy"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Maximum tree depth"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Accuracy"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Tree Complexity and Generalization"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-depth-overfit" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Training and test accuracy plotted across increasing maximum tree depth. Training accuracy rises as depth increases, while test accuracy improves only to a point and then levels off or deteriorates, illustrating overfitting.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-depth-overfit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08-trees-random-forests_files/figure-html/fig-depth-overfit-output-1.png" alt="Training and test accuracy plotted across increasing maximum tree depth. Training accuracy rises as depth increases, while test accuracy improves only to a point and then levels off or deteriorates, illustrating overfitting." width="672" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-depth-overfit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: Increasing tree depth can reduce training error while eventually harming generalization.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is a concrete bias–variance lesson: flexibility can reduce bias while increasing variance.</p>
+</section>
+<section id="controlling-tree-complexity" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="controlling-tree-complexity"><span class="header-section-number">8.12</span> Controlling Tree Complexity</h2>
+<p>Important parameters include:</p>
+<ul>
+<li><code>max_depth</code>;</li>
+<li><code>min_samples_split</code>;</li>
+<li><code>min_samples_leaf</code>;</li>
+<li><code>max_leaf_nodes</code>;</li>
+<li><code>ccp_alpha</code>.</li>
+</ul>
+<p>These are not merely tuning knobs. They define how much structure the tree is allowed to learn.</p>
+</section>
+<section id="cost-complexity-pruning" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">8.13</span> Cost-Complexity Pruning</h2>
+<p>A large tree can be pruned by balancing fit against complexity.</p>
+<p>A conceptual objective is</p>
+<p><span class="math display">\[
+R_\alpha(T)
+=
+R(T)+\alpha|T|,
+\]</span></p>
+<p>where <span class="math inline">\(R(T)\)</span> measures tree error, <span class="math inline">\(|T|\)</span> represents the number of terminal leaves, and <span class="math inline">\(\alpha\)</span> penalizes complexity.</p>
+<p>Larger <span class="math inline">\(\alpha\)</span> favors smaller trees.</p>
+<div id="d2535f1b" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>path<span class="op">=</span>DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">42</span>).cost_complexity_pruning_path(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    X_train,y_train</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>path.ccp_alphas[:<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>array([0.        , 0.00231856, 0.00233016, 0.00438185, 0.00459228])</code></pre>
+</div>
+</div>
+<p>Hyperparameter selection should occur within resampling rather than by repeatedly checking the final test set. Chapter 16 will formalize that workflow.</p>
+</section>
+<section id="instability-a-trees-hidden-weakness" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="instability-a-trees-hidden-weakness"><span class="header-section-number">8.14</span> Instability: A Tree’s Hidden Weakness</h2>
+<p>A small change in training observations can sometimes produce a substantially different tree.</p>
+<p>This happens because early split choices affect every split below them.</p>
+<p>Single trees can therefore have relatively high variance.</p>
+<p>This weakness motivates ensemble methods.</p>
+</section>
+<section id="bagging-many-unstable-models-can-become-stable-together" class="level2" data-number="8.15">
+<h2 data-number="8.15" class="anchored" data-anchor-id="bagging-many-unstable-models-can-become-stable-together"><span class="header-section-number">8.15</span> Bagging: Many Unstable Models Can Become Stable Together</h2>
+<p>Bagging reduces variance by aggregating predictors fitted to bootstrap samples, an approach introduced by Breiman <span class="citation" data-cites="breiman1996bagging">(<a href="../references.html#ref-breiman1996bagging" role="doc-biblioref">Breiman 1996</a>)</span>.</p>
+<p>Bootstrap aggregation, or <strong>bagging</strong>, repeatedly samples training observations with replacement, fits a model to each bootstrap sample, and aggregates predictions.</p>
+<p>For regression,</p>
+<p><span class="math display">\[
+\hat f_{\text{bag}}(x)
+=
+\frac{1}{B}
+\sum_{b=1}^{B}\hat f^{(b)}(x).
+\]</span></p>
+<p>For classification, aggregation may use majority vote or averaged class probabilities.</p>
+<p>The central idea is that averaging can reduce variance.</p>
+</section>
+<section id="interpretable-does-not-mean-stable" class="level2" data-number="8.16">
+<h2 data-number="8.16" class="anchored" data-anchor-id="interpretable-does-not-mean-stable"><span class="header-section-number">8.16</span> Interpretable Does Not Mean Stable</h2>
+<p>Decision trees are readable because their split structure can be visualized. But readability and stability are different properties.</p>
+<p><span class="math display">\[
+\boxed{\text{Readable Model}\neq\text{Stable Explanation}}.
+\]</span></p>
+<p>Small sample changes can alter the root feature, threshold, and every downstream branch.</p>
+<section id="bootstrap-the-root-split" class="level3" data-number="8.16.1">
+<h3 data-number="8.16.1" class="anchored" data-anchor-id="bootstrap-the-root-split"><span class="header-section-number">8.16.1</span> Bootstrap the Root Split</h3>
+<div class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>rng_ts <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>root_features_ts <span class="op">=</span> []</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">250</span>):</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    idx_ts <span class="op">=</span> rng_ts.choice(<span class="bu">len</span>(X_train), size<span class="op">=</span><span class="bu">len</span>(X_train), replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    X_boot_ts <span class="op">=</span> X_train.iloc[idx_ts] <span class="cf">if</span> <span class="bu">hasattr</span>(X_train, <span class="st">"iloc"</span>) <span class="cf">else</span> X_train[idx_ts]</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    y_boot_ts <span class="op">=</span> y_train.iloc[idx_ts] <span class="cf">if</span> <span class="bu">hasattr</span>(y_train, <span class="st">"iloc"</span>) <span class="cf">else</span> np.asarray(y_train)[idx_ts]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    tree_ts <span class="op">=</span> DecisionTreeClassifier(</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        max_depth<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        min_samples_leaf<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    ).fit(X_boot_ts, y_boot_ts)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    root_idx_ts <span class="op">=</span> tree_ts.tree_.feature[<span class="dv">0</span>]</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(X_train, <span class="st">"columns"</span>):</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        root_name_ts <span class="op">=</span> X_train.columns[root_idx_ts]</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        root_name_ts <span class="op">=</span> <span class="ss">f"feature_</span><span class="sc">{</span>root_idx_ts<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    root_features_ts.append(root_name_ts)</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>root_counts_ts <span class="op">=</span> pd.Series(root_features_ts).value_counts().head(<span class="dv">10</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>root_counts_ts.sort_values().plot(kind<span class="op">=</span><span class="st">"barh"</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Bootstrap selections at root"</span>)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature"</span>)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"How Stable Is the First Tree Split?"</span>)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>root_counts_ts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-tree-root-stability" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tree-root-stability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-tree-root-stability-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Horizontal bar chart showing how often each feature is selected as the root split across 250 bootstrap samples. A dominant bar indicates a stable first split, while several similarly sized bars would indicate root-feature instability.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-tree-root-stability-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08-trees-random-forests_files/figure-html/fig-tree-root-stability-output-1.png" data-ref-parent="fig-tree-root-stability" alt="Horizontal bar chart showing how often each feature is selected as the root split across 250 bootstrap samples. A dominant bar indicates a stable first split, while several similarly sized bars would indicate root-feature instability." width="757" height="470" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-tree-root-stability-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Bootstrap resampling reveals whether a tree repeatedly selects the same feature at the root.
+</figcaption>
+</figure>
+</div>
+</div>
+<div id="fig-tree-root-stability-2" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-tree-root-stability-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<pre><code>worst perimeter         142
+worst radius             39
+mean concave points      32
+worst concave points     21
+worst area               15
+mean concavity            1
+Name: count, dtype: int64</code></pre>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-tree-root-stability-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-tree-root-stability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3
+</figcaption>
+</figure>
+</div>
+</div>
+<p>If several features frequently compete for the root, substantive interpretation should be cautious.</p>
+<p>Random forests reduce variance by aggregating many trees, producing a tradeoff:</p>
+<p><span class="math display">\[
+\text{single-tree interpretability}
+\leftrightarrow
+\text{ensemble stability and predictive strength}.
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A tree diagram is visually persuasive, but visual clarity is not evidence that the structure is unique, stable, causal, or reproducible.</p>
+<p><strong>An explanation should be evaluated, not merely displayed.</strong></p>
+</div>
+</div>
+</section>
+</section>
+<section id="random-forests" class="level2" data-number="8.17">
+<h2 data-number="8.17" class="anchored" data-anchor-id="random-forests"><span class="header-section-number">8.17</span> Random Forests</h2>
+<p>Random Forests extend bagging by adding <strong>feature randomness</strong>, reducing correlation among trees while retaining the variance-reduction benefits of aggregation <span class="citation" data-cites="breiman2001randomForests">(<a href="../references.html#ref-breiman2001randomForests" role="doc-biblioref">Breiman 2001</a>)</span>.</p>
+<p>At each candidate split, a tree considers only a random subset of predictors rather than all predictors.</p>
+<p>Why?</p>
+<p>If one predictor is overwhelmingly strong, ordinary bagged trees may repeatedly choose similar early splits. Their errors become correlated.</p>
+<p>Random feature selection encourages diversity.</p>
+<p>Conceptually,</p>
+<p><span class="math display">\[
+\text{Forest quality}
+\approx
+\text{strong individual trees}
++
+\text{low correlation among trees}.
+\]</span></p>
+<p>The exact tradeoff depends on the problem.</p>
+</section>
+<section id="fit-a-random-forest" class="level2" data-number="8.18">
+<h2 data-number="8.18" class="anchored" data-anchor-id="fit-a-random-forest"><span class="header-section-number">8.18</span> Fit a Random Forest</h2>
+<div id="e4d471d8" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>forest<span class="op">=</span>RandomForestClassifier(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>forest.fit(X_train,y_train)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>forest_prob<span class="op">=</span>forest.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>forest_auc<span class="op">=</span>roc_auc_score(y_test,forest_prob)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>forest.score(X_test,y_test), forest_auc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>(0.965034965034965, np.float64(0.9954926624737945))</code></pre>
+</div>
+</div>
+<p>Random Forest implementations and tree parameters are documented in scikit-learn’s ensemble and tree modules <span class="citation" data-cites="sklearnForests2026 sklearnTrees2026">(<a href="../references.html#ref-sklearnForests2026" role="doc-biblioref">scikit-learn developers 2026b</a>, <a href="../references.html#ref-sklearnTrees2026" role="doc-biblioref">2026a</a>)</span>.</p>
+</section>
+<section id="why-a-forest-can-generalize-better" class="level2" data-number="8.19">
+<h2 data-number="8.19" class="anchored" data-anchor-id="why-a-forest-can-generalize-better"><span class="header-section-number">8.19</span> Why a Forest Can Generalize Better</h2>
+<p>Suppose individual tree errors have variance <span class="math inline">\(\sigma^2\)</span> and pairwise correlation <span class="math inline">\(\rho\)</span>. A useful intuition for the variance of an average of <span class="math inline">\(B\)</span> similarly distributed estimators is</p>
+<p><span class="math display">\[
+Var(\bar f)
+\approx
+\rho\sigma^2+
+\frac{1-\rho}{B}\sigma^2.
+\]</span></p>
+<p>As <span class="math inline">\(B\)</span> grows, the second term shrinks. But highly correlated trees limit the benefit.</p>
+<p>Random feature selection helps attack <span class="math inline">\(\rho\)</span>.</p>
+</section>
+<section id="out-of-bag-evaluation" class="level2" data-number="8.20">
+<h2 data-number="8.20" class="anchored" data-anchor-id="out-of-bag-evaluation"><span class="header-section-number">8.20</span> Out-of-Bag Evaluation</h2>
+<p>Each bootstrap tree is trained on a sample drawn with replacement. Some training observations are omitted from that tree’s bootstrap sample.</p>
+<p>These <strong>out-of-bag (OOB)</strong> observations can be predicted by trees that did not train on them.</p>
+<div id="d83873b4" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>forest_oob<span class="op">=</span>RandomForestClassifier(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    oob_score<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>forest_oob.fit(X_train,y_train)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>forest_oob.oob_score_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>0.9553990610328639</code></pre>
+</div>
+</div>
+<p>OOB evaluation is useful, but it does not eliminate the need to think carefully about temporal, grouped, external, or final held-out validation.</p>
+</section>
+<section id="feature-importance-important-in-what-sense" class="level2" data-number="8.21">
+<h2 data-number="8.21" class="anchored" data-anchor-id="feature-importance-important-in-what-sense"><span class="header-section-number">8.21</span> Feature Importance: Important in What Sense?</h2>
+<p>Random Forests commonly expose impurity-based feature importance.</p>
+<div id="43475c9d" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>importance<span class="op">=</span>pd.Series(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    forest.feature_importances_,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>X.columns</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>).sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>importance.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>worst perimeter         0.138356
+worst area              0.128520
+worst concave points    0.101787
+mean concave points     0.094897
+worst radius            0.093003
+mean radius             0.060332
+mean perimeter          0.050482
+mean area               0.049681
+mean concavity          0.044149
+area error              0.035416
+dtype: float64</code></pre>
+</div>
+</div>
+<p>This answers something like:</p>
+<blockquote class="blockquote">
+<p>Which features contributed strongly to impurity reduction across this fitted forest?</p>
+</blockquote>
+<p>It does <strong>not</strong> automatically answer:</p>
+<ul>
+<li>Which variable causes the outcome?</li>
+<li>Which variable should we intervene on?</li>
+<li>Which variable is scientifically most important?</li>
+<li>Which variable will remain important in another population?</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">8.10</span> Knowledge Check</h2>
+<section id="permutation-importance" class="level2" data-number="8.22">
+<h2 data-number="8.22" class="anchored" data-anchor-id="permutation-importance"><span class="header-section-number">8.22</span> Permutation Importance</h2>
+<p>Permutation importance asks how much predictive performance deteriorates when a feature’s values are shuffled.</p>
+<div id="7994d87b" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>perm<span class="op">=</span>permutation_importance(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    forest,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    X_test,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    n_repeats<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"roc_auc"</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>perm_importance<span class="op">=</span>pd.Series(</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    perm.importances_mean,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>X.columns</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>).sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>perm_importance.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>worst area              0.009644
+worst concave points    0.009193
+worst perimeter         0.007243
+worst radius            0.005545
+mean concave points     0.004413
+area error              0.002977
+mean area               0.001719
+worst texture           0.001363
+mean texture            0.001038
+worst concavity         0.000765
+dtype: float64</code></pre>
+</div>
+</div>
+<p>This is closer to:</p>
+<blockquote class="blockquote">
+<p>How much does this fitted model’s predictive performance depend on this feature under this evaluation setup?</p>
+</blockquote>
+<p>Even this is not causal importance. Correlated predictors can also complicate interpretation because information may be shared across features.</p>
+</section>
+<section id="compare-importance-measures" class="level2" data-number="8.23">
+<h2 data-number="8.23" class="anchored" data-anchor-id="compare-importance-measures"><span class="header-section-number">8.23</span> Compare Importance Measures</h2>
+<div id="cell-fig-feature-importance" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>compare<span class="op">=</span>pd.DataFrame({</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Impurity importance"</span>: importance,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Permutation importance"</span>: perm_importance</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}).dropna().head(<span class="dv">10</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>compare.sort_values(<span class="st">"Permutation importance"</span>).plot(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"barh"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">9</span>,<span class="dv">6</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Importance"</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Two Meanings of Feature Importance"</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-feature-importance" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Grouped horizontal bar chart comparing impurity-based importance with permutation importance for leading features. Differences between paired bars show that the two importance methods can rank model dependence differently.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-feature-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08-trees-random-forests_files/figure-html/fig-feature-importance-output-1.png" alt="Grouped horizontal bar chart comparing impurity-based importance with permutation importance for leading features. Differences between paired bars show that the two importance methods can rank model dependence differently." width="856" height="523" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feature-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.4: Impurity-based and permutation importance can tell different stories about model dependence.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Different importance methods answer different questions.</p>
+</section>
+<section id="partial-dependence-model-behavior-not-causal-effect" class="level2" data-number="8.24">
+<h2 data-number="8.24" class="anchored" data-anchor-id="partial-dependence-model-behavior-not-causal-effect"><span class="header-section-number">8.24</span> Partial Dependence: Model Behavior, Not Causal Effect</h2>
+<p>Partial dependence can summarize how model predictions change as a feature varies while averaging over the observed distribution of other features.</p>
+<div id="fe9c84b3" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> PartialDependenceDisplay</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>top_feature<span class="op">=</span>perm_importance.index[<span class="dv">0</span>]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>PartialDependenceDisplay.from_estimator(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    forest,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    X_test,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    [top_feature]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="ss">f"Partial Dependence: </span><span class="sc">{</span>top_feature<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-trees-random-forests_files/figure-html/cell-14-output-1.png" width="662" height="475" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interpret this as a description of the fitted model’s behavior—not automatically as the effect of changing the feature in the real world.</p>
+</section>
+<section id="computer-vision-learning-experience-pixel-importance-is-model-dependence" class="level2" data-number="8.25">
+<h2 data-number="8.25" class="anchored" data-anchor-id="computer-vision-learning-experience-pixel-importance-is-model-dependence"><span class="header-section-number">8.25</span> Computer Vision Learning Experience: Pixel Importance Is Model Dependence</h2>
+<p>For flattened images, each pixel becomes a feature. Tree-based models can therefore assign feature importance to pixel locations.</p>
+<p>Using the same handwritten-digits workload introduced in Chapter 7, a Random Forest can produce a (64)-element importance vector. Reshaping that vector to (8) makes the model’s dependence visually inspectable.</p>
+<div id="cell-fig-digits-pixel-importance" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>digits_tree_cv <span class="op">=</span> load_digits()</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>X_tree_cv <span class="op">=</span> digits_tree_cv.data</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>y_tree_cv <span class="op">=</span> digits_tree_cv.target</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>X_train_tree_cv, X_test_tree_cv, y_train_tree_cv, y_test_tree_cv <span class="op">=</span> train_test_split(</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    X_tree_cv,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    y_tree_cv,</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y_tree_cv</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>forest_tree_cv <span class="op">=</span> RandomForestClassifier(</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>forest_tree_cv.fit(</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    X_train_tree_cv,</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    y_train_tree_cv</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>pixel_importance_cv <span class="op">=</span> forest_tree_cv.feature_importances_.reshape(</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">8</span>,</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="dv">8</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>plt.imshow(</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>    pixel_importance_cv,</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>plt.colorbar(</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Impurity importance"</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Pixel Importance for Digit Classification"</span>)</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-digits-pixel-importance" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Eight-by-eight heatmap of Random-Forest impurity importance reshaped to the original handwritten-digit image geometry. Stronger cells indicate pixel locations on which the fitted forest depends more heavily for classification.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-digits-pixel-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08-trees-random-forests_files/figure-html/fig-digits-pixel-importance-output-1.png" alt="Eight-by-eight heatmap of Random-Forest impurity importance reshaped to the original handwritten-digit image geometry. Stronger cells indicate pixel locations on which the fitted forest depends more heavily for classification." width="474" height="411" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-digits-pixel-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.5: Random-Forest impurity importance reshaped into the original 8 × 8 image geometry.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The heatmap is useful, but it should not be interpreted as a causal map of which pixels “make” a digit what it is.</p>
+<p>Importance is conditional on:</p>
+<ul>
+<li>this dataset;</li>
+<li>this representation;</li>
+<li>this fitted Random Forest;</li>
+<li>correlated pixel structure;</li>
+<li>the impurity-importance definition.</li>
+</ul>
+<p><span class="math display">\[
+\boxed{
+\text{Visually Salient Importance}
+\neq
+\text{Causal Visual Explanation}
+}
+\]</span></p>
+<p>A useful extension is to compare this heatmap with permutation importance or with importance patterns from another fitted model.</p>
+</section>
+<section id="single-tree-versus-forest" class="level2" data-number="8.26">
+<h2 data-number="8.26" class="anchored" data-anchor-id="single-tree-versus-forest"><span class="header-section-number">8.26</span> Single Tree Versus Forest</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Single Tree</th>
+<th>Random Forest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>nonlinear relationships</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>interactions</td>
+<td>automatic</td>
+<td>automatic</td>
+</tr>
+<tr class="odd">
+<td>scaling usually required</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>easy global visualization</td>
+<td>often, if shallow</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>variance</td>
+<td>often high</td>
+<td>reduced by averaging</td>
+</tr>
+<tr class="even">
+<td>predictive strength</td>
+<td>useful baseline</td>
+<td>often stronger</td>
+</tr>
+<tr class="odd">
+<td>individual decision path</td>
+<td>easy to inspect</td>
+<td>distributed across trees</td>
+</tr>
+<tr class="even">
+<td>feature importance</td>
+<td>available</td>
+<td>available, but interpret cautiously</td>
+</tr>
+</tbody>
+</table>
+<p>A forest often gains predictive stability by sacrificing the simplicity of a single visible tree.</p>
+</section>
+<section id="three-tracks" class="level2" data-number="8.27">
+<h2 data-number="8.27" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">8.27</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="8.27.1">
+<h3 data-number="8.27.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">8.27.1</span> Health Track</h3>
+<p>Tree models can discover nonlinear risk structure and interactions among measurements. But an “important” biomarker is not automatically a treatment target. Validate across relevant populations and inspect calibration and subgroup behavior when probabilities drive decisions.</p>
+</section>
+<section id="education-track" class="level3" data-number="8.27.2">
+<h3 data-number="8.27.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">8.27.2</span> Education Track</h3>
+<p>Trees can identify combinations of prior academic or institutional characteristics associated with retention or completion. Avoid turning predictive rules into deterministic labels about students. Prediction timing and intervention consequences remain central.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="8.27.3">
+<h3 data-number="8.27.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">8.27.3</span> Open ML Benchmark Track</h3>
+<p>Benchmark datasets are ideal for comparing tree depth, pruning, instability, bagging, and Random Forests under controlled changes in noise and feature relevance.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-what-does-important-mean" class="level2" data-number="8.28">
+<h2 data-number="8.28" class="anchored" data-anchor-id="beyond-the-algorithm-what-does-important-mean"><span class="header-section-number">8.28</span> Beyond the Algorithm: What Does “Important” Mean?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Importance Is Always Relative to a Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose a Random Forest reports that Feature A has the highest importance.</p>
+<p>It is tempting to conclude:</p>
+<blockquote class="blockquote">
+<p>“Feature A is the most important determinant of the outcome.”</p>
+</blockquote>
+<p>But importance can mean many things:</p>
+<ul>
+<li>frequently used for impurity reduction;</li>
+<li>strongly relied upon for prediction;</li>
+<li>useful because it proxies another variable;</li>
+<li>useful only in interactions;</li>
+<li>useful only in this sample;</li>
+<li>useful because of how the variable was measured.</li>
+</ul>
+<p>None of these definitions automatically means <strong>causal influence</strong>.</p>
+<p>A feature can be highly predictive precisely because it records the consequences of a process rather than its causes.</p>
+<p>The deeper question is:</p>
+<p><strong>Important for what—prediction, explanation, intervention, measurement, or policy?</strong></p>
+<p>Machine learning becomes more intellectually rigorous when the word “importance” is never allowed to stand alone.</p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-explain-my-forest" class="level2" data-number="8.29">
+<h2 data-number="8.29" class="anchored" data-anchor-id="ai-pair-programmer-explain-my-forest"><span class="header-section-number">8.29</span> AI Pair Programmer: Explain My Forest</h2>
+<p>Ask an AI assistant to interpret the top five Random Forest feature importances.</p>
+<p>Audit whether it:</p>
+<ul>
+<li>names the importance method;</li>
+<li>distinguishes predictive from causal importance;</li>
+<li>notices correlated features;</li>
+<li>acknowledges sample and model dependence;</li>
+<li>treats ranks as exact scientific truths;</li>
+<li>recommends interventions from predictive importance alone.</li>
+</ul>
+<p>Then rewrite the interpretation.</p>
+</section>
+<section id="hands-on-lab-from-one-tree-to-a-forest" class="level2" data-number="8.30">
+<h2 data-number="8.30" class="anchored" data-anchor-id="hands-on-lab-from-one-tree-to-a-forest"><span class="header-section-number">8.30</span> Hands-On Lab: From One Tree to a Forest</h2>
+<p>Using a classification dataset:</p>
 <ol type="1">
-<li>What does Gini impurity measure?</li>
-<li>Why do random forests decorrelate trees?</li>
-<li>What is bagging?</li>
-<li>Why can feature importance be misleading?</li>
+<li>complete the Problem Framing Canvas and Feature Ledger;</li>
+<li>establish a baseline;</li>
+<li>fit a shallow decision tree;</li>
+<li>visualize the tree;</li>
+<li>compare training and held-out performance;</li>
+<li>increase tree depth and observe overfitting;</li>
+<li>examine a cost-complexity pruning path;</li>
+<li>fit a Random Forest;</li>
+<li>compare tree and forest discrimination;</li>
+<li>obtain OOB performance;</li>
+<li>compare impurity and permutation importance;</li>
+<li>inspect partial dependence for one feature;</li>
+<li>explain why none of these results establishes causality;</li>
+<li>document reproducibility decisions.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">8.11</span> Real-World Case Study</h2>
-<section id="predicting-an-education-outcome" class="level3" data-number="8.11.1">
-<h3 data-number="8.11.1" class="anchored" data-anchor-id="predicting-an-education-outcome"><span class="header-section-number">8.11.1</span> Predicting an Education Outcome</h3>
-<p>Compare interpretable and ensemble tree models using public education data.</p>
+<section id="practitioner-track" class="level2" data-number="8.31">
+<h2 data-number="8.31" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">8.31</span> Practitioner Track</h2>
+<p>A practitioner should be able to control tree complexity, compare a single tree with a forest, use OOB information appropriately, and communicate feature importance without overclaiming.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="8.32">
+<h2 data-number="8.32" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">8.32</span> Researcher Track</h2>
+<p>A researcher should additionally justify the validation design, examine model stability, treat importance measures as model-dependent quantities, investigate correlated predictors, and distinguish predictive discovery from explanatory or causal inference.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">8.12</span> Professor’s Challenge</h2>
-<p>A random forest outperforms logistic regression by one percentage point but is much harder to explain. Which model should be used?</p>
+<section id="research-studio" class="level2" data-number="8.33">
+<h2 data-number="8.33" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">8.33</span> Research Studio</h2>
+<p>Design a health, education, or benchmark study comparing a linear/logistic model with tree-based models.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>substantive rationale;</li>
+<li>target and timing;</li>
+<li>baseline;</li>
+<li>expected nonlinearities/interactions;</li>
+<li>single-tree specification;</li>
+<li>Random Forest specification;</li>
+<li>validation strategy;</li>
+<li>performance metrics;</li>
+<li>stability analysis;</li>
+<li>importance method;</li>
+<li>interpretive limitations;</li>
+<li>potential scholarly contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">8.13</span> Research Extension</h2>
-<p>Test whether performance differences persist under repeated or external validation.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="8.14">
-<h2 data-number="8.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">8.14</span> Reproducibility Check</h2>
-<p>Record seeds, split rules, hyperparameters, feature definitions, and evaluation protocol.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="8.15">
-<h2 data-number="8.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">8.15</span> Key Takeaways</h2>
+<section id="professors-challenge-the-most-important-predictor" class="level2" data-number="8.34">
+<h2 data-number="8.34" class="anchored" data-anchor-id="professors-challenge-the-most-important-predictor"><span class="header-section-number">8.34</span> Professor’s Challenge: The Most Important Predictor</h2>
+<p>A research team fits a Random Forest and reports:</p>
+<blockquote class="blockquote">
+<p>“Attendance is the most important cause of student retention because it has the highest Random Forest feature importance. Therefore, requiring more attendance will increase retention.”</p>
+</blockquote>
+<p>The model has strong test-set AUC. Attendance is correlated with prior achievement, course engagement, and financial stability. Importance is based only on impurity reduction. No permutation analysis, uncertainty assessment, causal design, or external validation is reported.</p>
+<p>Critique:</p>
 <ul>
-<li>Trees model nonlinear decision boundaries naturally.</li>
-<li>Ensembles reduce instability but increase complexity.</li>
-<li>Importance measures require careful interpretation.</li>
+<li>the meaning of impurity importance;</li>
+<li>correlation and shared predictive information;</li>
+<li>predictive versus causal claims;</li>
+<li>intervention logic;</li>
+<li>model dependence;</li>
+<li>stability of the importance ranking;</li>
+<li>external validity;</li>
+<li>whether strong AUC strengthens the causal conclusion.</li>
+</ul>
+<p>Design a stronger predictive analysis and explain what additional research design would be needed for a causal intervention claim.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="8.35">
+<h2 data-number="8.35" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">8.35</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is recursive partitioning?</li>
+<li>What does Gini impurity measure?</li>
+<li>What does entropy measure?</li>
+<li>What is impurity reduction?</li>
+<li>Why is tree construction described as greedy?</li>
+<li>How does a regression tree produce leaf predictions?</li>
+<li>Why do deep trees overfit?</li>
+<li>What does cost-complexity pruning do?</li>
+<li>Why can a single tree be unstable?</li>
+<li>What is bagging?</li>
+<li>How does a Random Forest differ from ordinary bagging?</li>
+<li>Why does reducing correlation among trees matter?</li>
+<li>What are out-of-bag observations?</li>
+<li>What does impurity-based importance measure?</li>
+<li>What does permutation importance measure?</li>
+<li>Why does feature importance not imply causation?</li>
+<li>What does partial dependence describe?</li>
+<li>Why might a forest outperform a single tree while being less globally interpretable?</li>
+<li>Why can a small data change produce a different tree?</li>
+<li>Why is an interpretable tree not automatically a stable explanation?</li>
+<li>What interpretability/stability tradeoff does a random forest create?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="8.36">
+<h2 data-number="8.36" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">8.36</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>problem specification;</li>
+<li>feature ledger;</li>
+<li>train/validation/test design;</li>
+<li>baseline;</li>
+<li>tree criterion;</li>
+<li>depth and leaf constraints;</li>
+<li>pruning parameters;</li>
+<li>forest tree count;</li>
+<li>feature-subsampling settings;</li>
+<li>bootstrap/OOB settings;</li>
+<li>random seeds;</li>
+<li>evaluation metrics;</li>
+<li>feature-importance method;</li>
+<li>permutation scoring metric and repeats;</li>
+<li>software versions;</li>
+<li>all code producing figures and tables.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="8.37">
+<h2 data-number="8.37" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">8.37</span> Key Takeaways</h2>
+<ul>
+<li>Trees learn nonlinear decision rules through recursive partitioning.</li>
+<li>Gini impurity and entropy quantify class mixture.</li>
+<li>Greedy splitting produces locally useful decisions but not guaranteed globally optimal trees.</li>
+<li>Deep trees can memorize training noise.</li>
+<li>Pruning and structural constraints manage complexity.</li>
+<li>Bagging reduces variance by averaging models trained on bootstrap samples.</li>
+<li>Random Forests add feature randomness to reduce correlation among trees.</li>
+<li>OOB predictions provide useful internal performance information.</li>
+<li>Impurity and permutation importance answer different questions.</li>
+<li>Feature importance is model-dependent and is not causal importance.</li>
+<li>Partial dependence describes fitted-model behavior, not intervention effects.</li>
+<li>Predictive complexity should be justified by improved generalization.</li>
+<li>Interpretability and stability are different properties.</li>
+<li>Tree structure can change under resampling.</li>
+<li>Ensembles can improve stability while reducing simple visual interpretability.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-breiman1996bagging" class="csl-entry" role="listitem">
+Breiman, Leo. 1996. <span>“Bagging Predictors.”</span> <em>Machine Learning</em> 24 (2): 123–40. <a href="https://doi.org/10.1007/BF00058655">https://doi.org/10.1007/BF00058655</a>.
+</div>
+<div id="ref-breiman2001randomForests" class="csl-entry" role="listitem">
+———. 2001. <span>“Random Forests.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>.
+</div>
+<div id="ref-breimanEtAl1984cart" class="csl-entry" role="listitem">
+Breiman, Leo, Jerome H. Friedman, Richard A. Olshen, and Charles J. Stone. 1984. <em>Classification and Regression Trees</em>. Belmont, CA: Wadsworth International Group.
+</div>
+<div id="ref-sklearnTrees2026" class="csl-entry" role="listitem">
+scikit-learn developers. 2026a. <span>“Decision Trees.”</span> <a href="https://scikit-learn.org/stable/modules/tree.html">https://scikit-learn.org/stable/modules/tree.html</a>.
+</div>
+<div id="ref-sklearnForests2026" class="csl-entry" role="listitem">
+———. 2026b. <span>“Forests of Randomized Trees.”</span> <a href="https://scikit-learn.org/stable/modules/ensemble.html#forest">https://scikit-learn.org/stable/modules/ensemble.html#forest</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -593,7 +1597,7 @@ H = -\sum_k p_k\log_2(p_k)
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -922,13 +1926,13 @@ H = -\sum_k p_k\log_2(p_k)
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-03-supervised/07-classification.html" class="pagination-link" aria-label="Classification and Logistic Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span>
+      <a href="../part-03-supervised/07-classification.html" class="pagination-link" aria-label="Classification: From Probability to Decision">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-03-supervised/09-support-vector-machines.html" class="pagination-link" aria-label="Support Vector Machines and Kernel Methods">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-03-supervised/09-support-vector-machines.html" class="pagination-link" aria-label="Support Vector Machines: Margins, Geometry, and Kernels">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

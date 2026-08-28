@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Ensemble Learning and Gradient Boosting – Machine Learning Using Python</title>
+<title>10&nbsp; Ensemble Learning: From Many Models to Stronger Predictions – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,7 +125,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/10-ensemble-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/10-ensemble-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,6 +186,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +274,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +338,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +367,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -306,49 +431,77 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">10.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">10.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">10.3</span> Real-World Problem</a></li>
-  <li><a href="#ensemble-foundations" id="toc-ensemble-foundations" class="nav-link" data-scroll-target="#ensemble-foundations"><span class="header-section-number">10.4</span> Ensemble Foundations</a>
+  <li><a href="#the-ensemble-principle" id="toc-the-ensemble-principle" class="nav-link" data-scroll-target="#the-ensemble-principle"><span class="header-section-number">10.3</span> The Ensemble Principle</a></li>
+  <li><a href="#four-major-ensemble-strategies" id="toc-four-major-ensemble-strategies" class="nav-link" data-scroll-target="#four-major-ensemble-strategies"><span class="header-section-number">10.4</span> Four Major Ensemble Strategies</a>
   <ul class="collapse">
-  <li><a href="#wisdom-of-multiple-models" id="toc-wisdom-of-multiple-models" class="nav-link" data-scroll-target="#wisdom-of-multiple-models"><span class="header-section-number">10.4.1</span> Wisdom of Multiple Models</a></li>
-  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging"><span class="header-section-number">10.4.2</span> Bagging</a></li>
-  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting"><span class="header-section-number">10.4.3</span> Boosting</a></li>
-  <li><a href="#stacking" id="toc-stacking" class="nav-link" data-scroll-target="#stacking"><span class="header-section-number">10.4.4</span> Stacking</a></li>
+  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging"><span class="header-section-number">10.4.1</span> Bagging</a></li>
+  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting"><span class="header-section-number">10.4.2</span> Boosting</a></li>
+  <li><a href="#voting" id="toc-voting" class="nav-link" data-scroll-target="#voting"><span class="header-section-number">10.4.3</span> Voting</a></li>
+  <li><a href="#stacking-learn-the-combination-rule" id="toc-stacking-learn-the-combination-rule" class="nav-link" data-scroll-target="#stacking-learn-the-combination-rule"><span class="header-section-number">10.4.4</span> Stacking: Learn the Combination Rule</a></li>
   </ul></li>
-  <li><a href="#gradient-boosting" id="toc-gradient-boosting" class="nav-link" data-scroll-target="#gradient-boosting"><span class="header-section-number">10.5</span> Gradient Boosting</a>
+  <li><a href="#bagging-revisited" id="toc-bagging-revisited" class="nav-link" data-scroll-target="#bagging-revisited"><span class="header-section-number">10.5</span> Bagging Revisited</a></li>
+  <li><a href="#correlated-errors-limit-the-wisdom-of-the-crowd" id="toc-correlated-errors-limit-the-wisdom-of-the-crowd" class="nav-link" data-scroll-target="#correlated-errors-limit-the-wisdom-of-the-crowd"><span class="header-section-number">10.6</span> Correlated Errors Limit the Wisdom of the Crowd</a></li>
+  <li><a href="#boosting-learn-from-what-is-still-wrong" id="toc-boosting-learn-from-what-is-still-wrong" class="nav-link" data-scroll-target="#boosting-learn-from-what-is-still-wrong"><span class="header-section-number">10.7</span> Boosting: Learn From What Is Still Wrong</a></li>
+  <li><a href="#adaboost" id="toc-adaboost" class="nav-link" data-scroll-target="#adaboost"><span class="header-section-number">10.8</span> AdaBoost</a></li>
+  <li><a href="#fit-adaboost" id="toc-fit-adaboost" class="nav-link" data-scroll-target="#fit-adaboost"><span class="header-section-number">10.9</span> Fit AdaBoost</a></li>
+  <li><a href="#why-focus-on-mistakes-can-be-dangerous" id="toc-why-focus-on-mistakes-can-be-dangerous" class="nav-link" data-scroll-target="#why-focus-on-mistakes-can-be-dangerous"><span class="header-section-number">10.10</span> Why “Focus on Mistakes” Can Be Dangerous</a></li>
+  <li><a href="#gradient-boosting-optimization-in-function-space" id="toc-gradient-boosting-optimization-in-function-space" class="nav-link" data-scroll-target="#gradient-boosting-optimization-in-function-space"><span class="header-section-number">10.11</span> Gradient Boosting: Optimization in Function Space</a></li>
+  <li><a href="#squared-error-example" id="toc-squared-error-example" class="nav-link" data-scroll-target="#squared-error-example"><span class="header-section-number">10.12</span> Squared-Error Example</a></li>
+  <li><a href="#visual-experiment-sequential-residual-correction" id="toc-visual-experiment-sequential-residual-correction" class="nav-link" data-scroll-target="#visual-experiment-sequential-residual-correction"><span class="header-section-number">10.13</span> Visual Experiment: Sequential Residual Correction</a></li>
+  <li><a href="#learning-rate-and-number-of-trees" id="toc-learning-rate-and-number-of-trees" class="nav-link" data-scroll-target="#learning-rate-and-number-of-trees"><span class="header-section-number">10.14</span> Learning Rate and Number of Trees</a></li>
+  <li><a href="#fit-gradient-boosting" id="toc-fit-gradient-boosting" class="nav-link" data-scroll-target="#fit-gradient-boosting"><span class="header-section-number">10.15</span> Fit Gradient Boosting</a></li>
+  <li><a href="#modern-histogram-based-gradient-boosting" id="toc-modern-histogram-based-gradient-boosting" class="nav-link" data-scroll-target="#modern-histogram-based-gradient-boosting"><span class="header-section-number">10.16</span> Modern Histogram-Based Gradient Boosting</a></li>
+  <li><a href="#the-modern-boosting-ecosystem" id="toc-the-modern-boosting-ecosystem" class="nav-link" data-scroll-target="#the-modern-boosting-ecosystem"><span class="header-section-number">10.17</span> The Modern Boosting Ecosystem</a>
   <ul class="collapse">
-  <li><a href="#sequential-error-correction" id="toc-sequential-error-correction" class="nav-link" data-scroll-target="#sequential-error-correction"><span class="header-section-number">10.5.1</span> Sequential Error Correction</a></li>
-  <li><a href="#learning-rate" id="toc-learning-rate" class="nav-link" data-scroll-target="#learning-rate"><span class="header-section-number">10.5.2</span> Learning Rate</a></li>
-  <li><a href="#number-of-estimators" id="toc-number-of-estimators" class="nav-link" data-scroll-target="#number-of-estimators"><span class="header-section-number">10.5.3</span> Number of Estimators</a></li>
-  <li><a href="#tree-depth" id="toc-tree-depth" class="nav-link" data-scroll-target="#tree-depth"><span class="header-section-number">10.5.4</span> Tree Depth</a></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">10.5.5</span> Regularization</a></li>
-  <li><a href="#xgboost-lightgbm-and-related-approaches" id="toc-xgboost-lightgbm-and-related-approaches" class="nav-link" data-scroll-target="#xgboost-lightgbm-and-related-approaches"><span class="header-section-number">10.5.6</span> XGBoost, LightGBM, and Related Approaches</a></li>
+  <li><a href="#what-actually-differs" id="toc-what-actually-differs" class="nav-link" data-scroll-target="#what-actually-differs"><span class="header-section-number">10.17.1</span> What Actually Differs?</a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">10.6</span> Python Implementation</a>
+  <li><a href="#boosting-and-overfitting" id="toc-boosting-and-overfitting" class="nav-link" data-scroll-target="#boosting-and-overfitting"><span class="header-section-number">10.18</span> Boosting and Overfitting</a></li>
+  <li><a href="#compare-several-supervised-models" id="toc-compare-several-supervised-models" class="nav-link" data-scroll-target="#compare-several-supervised-models"><span class="header-section-number">10.19</span> Compare Several Supervised Models</a></li>
+  <li><a href="#voting-ensembles" id="toc-voting-ensembles" class="nav-link" data-scroll-target="#voting-ensembles"><span class="header-section-number">10.20</span> Voting Ensembles</a>
   <ul class="collapse">
-  <li><a href="#gradientboosting" id="toc-gradientboosting" class="nav-link" data-scroll-target="#gradientboosting"><span class="header-section-number">10.6.1</span> GradientBoosting</a></li>
-  <li><a href="#histgradientboosting" id="toc-histgradientboosting" class="nav-link" data-scroll-target="#histgradientboosting"><span class="header-section-number">10.6.2</span> HistGradientBoosting</a></li>
-  <li><a href="#comparing-ensembles" id="toc-comparing-ensembles" class="nav-link" data-scroll-target="#comparing-ensembles"><span class="header-section-number">10.6.3</span> Comparing Ensembles</a></li>
+  <li><a href="#hard-voting" id="toc-hard-voting" class="nav-link" data-scroll-target="#hard-voting"><span class="header-section-number">10.20.1</span> Hard Voting</a></li>
+  <li><a href="#soft-voting" id="toc-soft-voting" class="nav-link" data-scroll-target="#soft-voting"><span class="header-section-number">10.20.2</span> Soft Voting</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">10.7</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">10.8</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">10.9</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">10.10</span> Real-World Case Study</a>
+  <li><a href="#fit-a-soft-voting-ensemble" id="toc-fit-a-soft-voting-ensemble" class="nav-link" data-scroll-target="#fit-a-soft-voting-ensemble"><span class="header-section-number">10.21</span> Fit a Soft-Voting Ensemble</a></li>
+  <li><a href="#stacking" id="toc-stacking" class="nav-link" data-scroll-target="#stacking"><span class="header-section-number">10.22</span> Stacking</a>
   <ul class="collapse">
-  <li><a href="#benchmarking-tabular-models" id="toc-benchmarking-tabular-models" class="nav-link" data-scroll-target="#benchmarking-tabular-models"><span class="header-section-number">10.10.1</span> Benchmarking Tabular Models</a></li>
+  <li><a href="#the-leakage-danger" id="toc-the-leakage-danger" class="nav-link" data-scroll-target="#the-leakage-danger"><span class="header-section-number">10.22.1</span> The Leakage Danger</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">10.11</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">10.12</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">10.13</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">10.14</span> Key Takeaways</a></li>
+  <li><a href="#fit-a-stacking-classifier" id="toc-fit-a-stacking-classifier" class="nav-link" data-scroll-target="#fit-a-stacking-classifier"><span class="header-section-number">10.23</span> Fit a Stacking Classifier</a></li>
+  <li><a href="#diversity-more-than-different-algorithm-names" id="toc-diversity-more-than-different-algorithm-names" class="nav-link" data-scroll-target="#diversity-more-than-different-algorithm-names"><span class="header-section-number">10.24</span> Diversity: More Than Different Algorithm Names</a></li>
+  <li><a href="#visual-experiment-when-averaging-helps" id="toc-visual-experiment-when-averaging-helps" class="nav-link" data-scroll-target="#visual-experiment-when-averaging-helps"><span class="header-section-number">10.25</span> Visual Experiment: When Averaging Helps</a></li>
+  <li><a href="#calibration-still-matters" id="toc-calibration-still-matters" class="nav-link" data-scroll-target="#calibration-still-matters"><span class="header-section-number">10.26</span> Calibration Still Matters</a></li>
+  <li><a href="#feature-importance-returnswith-the-same-warning" id="toc-feature-importance-returnswith-the-same-warning" class="nav-link" data-scroll-target="#feature-importance-returnswith-the-same-warning"><span class="header-section-number">10.27</span> Feature Importance Returns—With the Same Warning</a></li>
+  <li><a href="#computer-vision-learning-experience-a-small-vision-model-comparison" id="toc-computer-vision-learning-experience-a-small-vision-model-comparison" class="nav-link" data-scroll-target="#computer-vision-learning-experience-a-small-vision-model-comparison"><span class="header-section-number">10.28</span> Computer Vision Learning Experience: A Small Vision Model Comparison</a>
+  <ul class="collapse">
+  <li><a href="#do-not-turn-the-table-into-the-conclusion" id="toc-do-not-turn-the-table-into-the-conclusion" class="nav-link" data-scroll-target="#do-not-turn-the-table-into-the-conclusion"><span class="header-section-number">10.28.1</span> Do Not Turn the Table Into the Conclusion</a></li>
+  </ul></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">10.29</span> Three Tracks</a>
+  <ul class="collapse">
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">10.29.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">10.29.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">10.29.3</span> Open ML Benchmark Track</a></li>
+  </ul></li>
+  <li><a href="#beyond-the-algorithm-when-does-the-crowd-become-wise" id="toc-beyond-the-algorithm-when-does-the-crowd-become-wise" class="nav-link" data-scroll-target="#beyond-the-algorithm-when-does-the-crowd-become-wise"><span class="header-section-number">10.30</span> Beyond the Algorithm: When Does the Crowd Become Wise?</a></li>
+  <li><a href="#ai-pair-programmer-build-me-the-ultimate-ensemble" id="toc-ai-pair-programmer-build-me-the-ultimate-ensemble" class="nav-link" data-scroll-target="#ai-pair-programmer-build-me-the-ultimate-ensemble"><span class="header-section-number">10.31</span> AI Pair Programmer: Build Me the Ultimate Ensemble</a></li>
+  <li><a href="#hands-on-lab-bagging-to-stacking" id="toc-hands-on-lab-bagging-to-stacking" class="nav-link" data-scroll-target="#hands-on-lab-bagging-to-stacking"><span class="header-section-number">10.32</span> Hands-On Lab: Bagging to Stacking</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">10.33</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">10.34</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">10.35</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-the-12-model-super-ensemble" id="toc-professors-challenge-the-12-model-super-ensemble" class="nav-link" data-scroll-target="#professors-challenge-the-12-model-super-ensemble"><span class="header-section-number">10.36</span> Professor’s Challenge: The 12-Model Super Ensemble</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">10.37</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">10.38</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">10.39</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">10.40</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/10-ensemble-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-03-supervised/06-linear-regression.html">Part III — Supervised Learning</a></li><li class="breadcrumb-item"><a href="../part-03-supervised/10-ensemble-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></h1>
 </div>
 
 
@@ -367,120 +520,1186 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">10.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain why combining models can improve prediction.</li>
-<li>Distinguish bagging, boosting, and stacking.</li>
-<li>Describe gradient boosting conceptually.</li>
-<li>Tune ensemble models responsibly.</li>
-<li>Compare predictive gains with complexity and interpretability costs.</li>
+<li>explain why combining models can improve predictive performance;</li>
+<li>distinguish bagging, boosting, voting, and stacking;</li>
+<li>connect bagging to variance reduction and Random Forests;</li>
+<li>explain AdaBoost as sequential reweighting of difficult observations;</li>
+<li>derive the central intuition of gradient boosting as functional optimization;</li>
+<li>explain learning rate, tree depth, and number of estimators as interacting complexity controls;</li>
+<li>fit AdaBoost, Gradient Boosting, and HistGradientBoosting models;</li>
+<li>compare ensemble methods using leakage-safe evaluation;</li>
+<li>explain why boosting can overfit or amplify problematic signal;</li>
+<li>distinguish hard voting from soft voting;</li>
+<li>explain stacking and the need for out-of-fold meta-features;</li>
+<li>compare ensemble performance with simpler baselines;</li>
+<li>evaluate ensemble predictions using discrimination, calibration, and task-relevant metrics;</li>
+<li>distinguish predictive gains from scientific explanation;</li>
+<li>reason about diversity, correlated errors, and collective failure.</li>
+<li>compare simple and ensemble models on a reproducible computer-vision benchmark without treating the leaderboard as the research contribution.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">10.2</span> Why This Matters</h2>
-<p>Ensemble methods are among the strongest general-purpose approaches for structured/tabular data.</p>
+<p>Chapter 8 introduced one of machine learning’s most powerful ideas: a collection of unstable trees can become a strong predictor when their errors are averaged.</p>
+<p>Ensemble learning generalizes that idea.</p>
+<p>Instead of asking</p>
+<blockquote class="blockquote">
+<p><strong>Which single model should win?</strong></p>
+</blockquote>
+<p>we can ask</p>
+<blockquote class="blockquote">
+<p><strong>Can several models contribute different useful information to one prediction system?</strong></p>
+</blockquote>
+<p>Sometimes the answer is yes. But combining models is not automatically beneficial. If every model learns the same bias, uses the same leaked feature, or fails on the same subgroup, aggregation can make the system confidently wrong.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>When does combining imperfect learners create a stronger predictive system—and when does collective agreement merely reinforce shared error?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">10.3</span> Real-World Problem</h2>
-<p>A baseline model performs reasonably well, but stakeholders want better predictions. How much complexity is justified for an incremental performance gain?</p>
+<section id="the-ensemble-principle" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="the-ensemble-principle"><span class="header-section-number">10.3</span> The Ensemble Principle</h2>
+<p>Suppose we have <span class="math inline">\(M\)</span> regression models,</p>
+<p><span class="math display">\[
+\hat f_1(x),\hat f_2(x),\ldots,\hat f_M(x).
+\]</span></p>
+<p>A simple ensemble average is</p>
+<p><span class="math display">\[
+\hat f_{\text{ens}}(x)
+=
+\frac{1}{M}
+\sum_{m=1}^{M}\hat f_m(x).
+\]</span></p>
+<p>For classification, we might average class probabilities or combine class votes.</p>
+<p>The benefit depends partly on whether the models make <strong>different errors</strong>.</p>
+<p>If every model makes exactly the same mistake, averaging does not remove it.</p>
 </section>
-<section id="ensemble-foundations" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="ensemble-foundations"><span class="header-section-number">10.4</span> Ensemble Foundations</h2>
-<section id="wisdom-of-multiple-models" class="level3" data-number="10.4.1">
-<h3 data-number="10.4.1" class="anchored" data-anchor-id="wisdom-of-multiple-models"><span class="header-section-number">10.4.1</span> Wisdom of Multiple Models</h3>
+<section id="four-major-ensemble-strategies" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="four-major-ensemble-strategies"><span class="header-section-number">10.4</span> Four Major Ensemble Strategies</h2>
+<section id="bagging" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="bagging"><span class="header-section-number">10.4.1</span> Bagging</h3>
+<p>Fit models largely independently on resampled data, then aggregate.</p>
+<p>Primary intuition:</p>
+<p><span class="math display">\[
+\boxed{\text{variance reduction}}.
+\]</span></p>
 </section>
-<section id="bagging" class="level3" data-number="10.4.2">
-<h3 data-number="10.4.2" class="anchored" data-anchor-id="bagging"><span class="header-section-number">10.4.2</span> Bagging</h3>
+<section id="boosting" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="boosting"><span class="header-section-number">10.4.2</span> Boosting</h3>
+<p>Fit learners sequentially so later learners focus on what the current ensemble has not handled well.</p>
+<p>Primary intuition:</p>
+<p><span class="math display">\[
+\boxed{\text{sequential error correction}}.
+\]</span></p>
 </section>
-<section id="boosting" class="level3" data-number="10.4.3">
-<h3 data-number="10.4.3" class="anchored" data-anchor-id="boosting"><span class="header-section-number">10.4.3</span> Boosting</h3>
+<section id="voting" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="voting"><span class="header-section-number">10.4.3</span> Voting</h3>
+<p>Combine predictions from different fitted model families.</p>
+<p>Primary intuition:</p>
+<p><span class="math display">\[
+\boxed{\text{consensus across models}}.
+\]</span></p>
 </section>
-<section id="stacking" class="level3" data-number="10.4.4">
-<h3 data-number="10.4.4" class="anchored" data-anchor-id="stacking"><span class="header-section-number">10.4.4</span> Stacking</h3>
-</section>
-</section>
-<section id="gradient-boosting" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="gradient-boosting"><span class="header-section-number">10.5</span> Gradient Boosting</h2>
-<section id="sequential-error-correction" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="sequential-error-correction"><span class="header-section-number">10.5.1</span> Sequential Error Correction</h3>
-</section>
-<section id="learning-rate" class="level3" data-number="10.5.2">
-<h3 data-number="10.5.2" class="anchored" data-anchor-id="learning-rate"><span class="header-section-number">10.5.2</span> Learning Rate</h3>
-</section>
-<section id="number-of-estimators" class="level3" data-number="10.5.3">
-<h3 data-number="10.5.3" class="anchored" data-anchor-id="number-of-estimators"><span class="header-section-number">10.5.3</span> Number of Estimators</h3>
-</section>
-<section id="tree-depth" class="level3" data-number="10.5.4">
-<h3 data-number="10.5.4" class="anchored" data-anchor-id="tree-depth"><span class="header-section-number">10.5.4</span> Tree Depth</h3>
-</section>
-<section id="regularization" class="level3" data-number="10.5.5">
-<h3 data-number="10.5.5" class="anchored" data-anchor-id="regularization"><span class="header-section-number">10.5.5</span> Regularization</h3>
-</section>
-<section id="xgboost-lightgbm-and-related-approaches" class="level3" data-number="10.5.6">
-<h3 data-number="10.5.6" class="anchored" data-anchor-id="xgboost-lightgbm-and-related-approaches"><span class="header-section-number">10.5.6</span> XGBoost, LightGBM, and Related Approaches</h3>
-</section>
-</section>
-<section id="python-implementation" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">10.6</span> Python Implementation</h2>
-<section id="gradientboosting" class="level3" data-number="10.6.1">
-<h3 data-number="10.6.1" class="anchored" data-anchor-id="gradientboosting"><span class="header-section-number">10.6.1</span> GradientBoosting</h3>
-</section>
-<section id="histgradientboosting" class="level3" data-number="10.6.2">
-<h3 data-number="10.6.2" class="anchored" data-anchor-id="histgradientboosting"><span class="header-section-number">10.6.2</span> HistGradientBoosting</h3>
-</section>
-<section id="comparing-ensembles" class="level3" data-number="10.6.3">
-<h3 data-number="10.6.3" class="anchored" data-anchor-id="comparing-ensembles"><span class="header-section-number">10.6.3</span> Comparing Ensembles</h3>
+<section id="stacking-learn-the-combination-rule" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="stacking-learn-the-combination-rule"><span class="header-section-number">10.4.4</span> Stacking: Learn the Combination Rule</h3>
+<p>Train a meta-model to learn how to combine base-model predictions.</p>
+<p>Primary intuition:</p>
+<p><span class="math display">\[
+\boxed{\text{learn the combination rule}}.
+\]</span></p>
 </section>
 </section>
-<section id="hands-on-practice" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">10.7</span> Hands-On Practice</h2>
-<p>Benchmark linear, random forest, and gradient-boosting models using identical validation folds.</p>
+<section id="bagging-revisited" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="bagging-revisited"><span class="header-section-number">10.5</span> Bagging Revisited</h2>
+<p>Bagging combines predictors trained on bootstrap samples to reduce variance <span class="citation" data-cites="breiman1996bagging">(<a href="../references.html#ref-breiman1996bagging" role="doc-biblioref">Breiman 1996</a>)</span>. Random Forests extend this principle with randomized feature selection <span class="citation" data-cites="breiman2001randomForests">(<a href="../references.html#ref-breiman2001randomForests" role="doc-biblioref">Breiman 2001</a>)</span>.</p>
+<p>For bootstrap models <span class="math inline">\(\hat f^{(1)},\ldots,\hat f^{(B)}\)</span>,</p>
+<p><span class="math display">\[
+\hat f_{\text{bag}}(x)
+=
+\frac{1}{B}
+\sum_{b=1}^{B}\hat f^{(b)}(x).
+\]</span></p>
+<p>Bagging is especially useful for high-variance learners such as deep decision trees.</p>
+<p>Chapter 8 showed that Random Forests extend bagging by introducing random feature subsets to reduce correlation among trees.</p>
+<p>The ensemble lesson is broader:</p>
+<blockquote class="blockquote">
+<p><strong>Averaging helps most when component models are individually useful but not perfectly correlated.</strong></p>
+</blockquote>
 </section>
-<section id="common-mistakes" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">10.8</span> Common Mistakes</h2>
+<section id="correlated-errors-limit-the-wisdom-of-the-crowd" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="correlated-errors-limit-the-wisdom-of-the-crowd"><span class="header-section-number">10.6</span> Correlated Errors Limit the Wisdom of the Crowd</h2>
+<p>A useful variance intuition is</p>
+<p><span class="math display">\[
+Var(\bar f)
+\approx
+\rho\sigma^2+
+\frac{1-\rho}{M}\sigma^2,
+\]</span></p>
+<p>where <span class="math inline">\(\rho\)</span> represents average error correlation.</p>
+<p>As <span class="math inline">\(M\)</span> increases, the second term shrinks. The first does not.</p>
+<p>If <span class="math inline">\(\rho\)</span> is large, adding more similar models produces diminishing returns.</p>
+</section>
+<section id="boosting-learn-from-what-is-still-wrong" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="boosting-learn-from-what-is-still-wrong"><span class="header-section-number">10.7</span> Boosting: Learn From What Is Still Wrong</h2>
+<p>Boosting does not fit all learners independently.</p>
+<p>It builds an additive model:</p>
+<p><span class="math display">\[
+F_M(x)
+=
+\sum_{m=1}^{M}\alpha_m h_m(x),
+\]</span></p>
+<p>where <span class="math inline">\(h_m(x)\)</span> is a weak learner and <span class="math inline">\(\alpha_m\)</span> controls its contribution.</p>
+<p>Each stage attempts to improve the current ensemble.</p>
+</section>
+<section id="adaboost" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="adaboost"><span class="header-section-number">10.8</span> AdaBoost</h2>
+<p>AdaBoost increases attention to observations that previous learners classified incorrectly, building on the adaptive boosting framework developed by Freund and Schapire <span class="citation" data-cites="freundSchapire1997">(<a href="../references.html#ref-freundSchapire1997" role="doc-biblioref">Freund and Schapire 1997</a>)</span>.</p>
+<p>Begin with weights</p>
+<p><span class="math display">\[
+w_i^{(1)}=\frac{1}{n}.
+\]</span></p>
+<p>For learner <span class="math inline">\(m\)</span>, compute weighted error</p>
+<p><span class="math display">\[
+\epsilon_m
+=
+\frac{
+\sum_{i=1}^{n}w_i^{(m)}
+I(y_i\neq h_m(x_i))
+}{
+\sum_{i=1}^{n}w_i^{(m)}
+}.
+\]</span></p>
+<p>A common binary-classification learner weight is</p>
+<p><span class="math display">\[
+\alpha_m
+=
+\frac{1}{2}
+\log
+\left(
+\frac{1-\epsilon_m}{\epsilon_m}
+\right).
+\]</span></p>
+<p>Misclassified observations receive relatively greater emphasis for the next learner.</p>
+<p>Conceptually,</p>
+<p><span class="math display">\[
+\text{missed cases}
+\rightarrow
+\text{greater attention}
+\rightarrow
+\text{next weak learner}.
+\]</span></p>
+</section>
+<section id="fit-adaboost" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="fit-adaboost"><span class="header-section-number">10.9</span> Fit AdaBoost</h2>
+<div id="46d77506" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> AdaBoostClassifier</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>data.data</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>(data.target<span class="op">==</span><span class="dv">0</span>).astype(<span class="bu">int</span>)  <span class="co"># malignant = 1</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>X_train,X_test,y_train,y_test<span class="op">=</span>train_test_split(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    X,y,test_size<span class="op">=</span><span class="fl">.25</span>,random_state<span class="op">=</span><span class="dv">42</span>,stratify<span class="op">=</span>y</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>stump<span class="op">=</span>DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>ada<span class="op">=</span>AdaBoostClassifier(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>stump,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">.05</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ada.fit(X_train,y_train)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>ada_prob<span class="op">=</span>ada.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>roc_auc_score(y_test,ada_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>np.float64(0.9943396226415094)</code></pre>
+</div>
+</div>
+<p>Weak learners can combine into a substantially more expressive decision function.</p>
+</section>
+<section id="why-focus-on-mistakes-can-be-dangerous" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="why-focus-on-mistakes-can-be-dangerous"><span class="header-section-number">10.10</span> Why “Focus on Mistakes” Can Be Dangerous</h2>
+<p>Not every difficult observation represents useful structure.</p>
+<p>A difficult case may be:</p>
 <ul>
-<li>Comparing models under different evaluation protocols.</li>
-<li>Excessive hyperparameter searching.</li>
-<li>Reporting only the best result.</li>
-<li>Ignoring computational cost.</li>
+<li>mislabeled;</li>
+<li>corrupted;</li>
+<li>an extreme outlier;</li>
+<li>from a rare subgroup;</li>
+<li>structurally different from the training population.</li>
 </ul>
+<p>Boosting can devote increasing attention to observations that should instead trigger data-quality or distributional investigation.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Hard Cases Are Not Automatically Informative Cases
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An algorithm sees loss. A researcher must still ask <strong>why</strong> the loss is large.</p>
+</div>
+</div>
 </section>
-<section id="knowledge-check" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">10.9</span> Knowledge Check</h2>
+<section id="gradient-boosting-optimization-in-function-space" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="gradient-boosting-optimization-in-function-space"><span class="header-section-number">10.11</span> Gradient Boosting: Optimization in Function Space</h2>
+<p>Gradient boosting provides a broader view, interpreting boosting as stage-wise optimization in function space <span class="citation" data-cites="friedman2001gbm">(<a href="../references.html#ref-friedman2001gbm" role="doc-biblioref">Friedman 2001</a>)</span>.</p>
+<p>We seek a predictive function <span class="math inline">\(F(x)\)</span> minimizing a loss:</p>
+<p><span class="math display">\[
+\mathcal{L}
+=
+\sum_{i=1}^{n}
+L(y_i,F(x_i)).
+\]</span></p>
+<p>Start with an initial model <span class="math inline">\(F_0(x)\)</span>.</p>
+<p>At stage <span class="math inline">\(m\)</span>, compute pseudo-residuals:</p>
+<p><span class="math display">\[
+r_{im}
+=
+-
+\left[
+\frac{\partial L(y_i,F(x_i))}
+{\partial F(x_i)}
+\right]_{F=F_{m-1}}.
+\]</span></p>
+<p>Fit a weak learner <span class="math inline">\(h_m(x)\)</span> to approximate these negative gradients.</p>
+<p>Update:</p>
+<p><span class="math display">\[
+F_m(x)
+=
+F_{m-1}(x)
++
+\eta\,h_m(x),
+\]</span></p>
+<p>where <span class="math inline">\(\eta\)</span> is the learning rate.</p>
+<p>This is why gradient boosting can be understood as <strong>gradient descent over functions</strong>.</p>
+</section>
+<section id="squared-error-example" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="squared-error-example"><span class="header-section-number">10.12</span> Squared-Error Example</h2>
+<p>For</p>
+<p><span class="math display">\[
+L(y,F)=\frac12(y-F)^2,
+\]</span></p>
+<p>the negative gradient is</p>
+<p><span class="math display">\[
+-\frac{\partial L}{\partial F}
+=
+y-F.
+\]</span></p>
+<p>So for squared-error regression, pseudo-residuals are ordinary residuals.</p>
+<p>That gives a useful intuition:</p>
+<blockquote class="blockquote">
+<p>Fit the next learner to what the current ensemble still gets wrong.</p>
+</blockquote>
+</section>
+<section id="visual-experiment-sequential-residual-correction" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="visual-experiment-sequential-residual-correction"><span class="header-section-number">10.13</span> Visual Experiment: Sequential Residual Correction</h2>
+<div id="cell-fig-boosting-residuals" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>rng<span class="op">=</span>np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.linspace(<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">120</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>np.sin(x)<span class="op">+</span><span class="fl">0.25</span><span class="op">*</span>x<span class="op">+</span>rng.normal(<span class="dv">0</span>,<span class="fl">.15</span>,<span class="bu">len</span>(x))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>X_demo<span class="op">=</span>x.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>prediction<span class="op">=</span>np.full_like(y,y.mean())</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>learning_rate<span class="op">=</span><span class="fl">.3</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.scatter(x,y,s<span class="op">=</span><span class="dv">18</span>,alpha<span class="op">=</span><span class="fl">.6</span>,label<span class="op">=</span><span class="st">"Observed"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> stage <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>):</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    residual<span class="op">=</span>y<span class="op">-</span>prediction</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    learner<span class="op">=</span>DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">2</span>,random_state<span class="op">=</span>stage)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    learner.fit(X_demo,residual)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">+=</span> learning_rate<span class="op">*</span>learner.predict(X_demo)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> stage <span class="kw">in</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>]:</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        plt.plot(x,prediction,label<span class="op">=</span><span class="ss">f"After </span><span class="sc">{</span>stage<span class="sc">}</span><span class="ss"> learner(s)"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Boosting as Sequential Error Correction"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-boosting-residuals" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot of observed nonlinear data with prediction curves after one, two, and four shallow boosting learners. Successive curves move closer to the observed pattern as each learner corrects residual structure left by the preceding ensemble.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boosting-residuals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-ensemble-learning_files/figure-html/fig-boosting-residuals-output-1.png" alt="Scatterplot of observed nonlinear data with prediction curves after one, two, and four shallow boosting learners. Successive curves move closer to the observed pattern as each learner corrects residual structure left by the preceding ensemble." width="672" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boosting-residuals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: A sequence of shallow trees can progressively model residual structure.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="learning-rate-and-number-of-trees" class="level2" data-number="10.14">
+<h2 data-number="10.14" class="anchored" data-anchor-id="learning-rate-and-number-of-trees"><span class="header-section-number">10.14</span> Learning Rate and Number of Trees</h2>
+<p>Gradient boosting often involves a tradeoff between:</p>
+<ul>
+<li>number of boosting stages;</li>
+<li>learning rate;</li>
+<li>complexity of each weak learner.</li>
+</ul>
+<p>A smaller learning rate makes each learner contribute less:</p>
+<p><span class="math display">\[
+F_m=F_{m-1}+\eta h_m.
+\]</span></p>
+<p>This often requires more learners.</p>
+<p>There is no universal best combination. These parameters belong inside a validation/model-selection procedure.</p>
+</section>
+<section id="fit-gradient-boosting" class="level2" data-number="10.15">
+<h2 data-number="10.15" class="anchored" data-anchor-id="fit-gradient-boosting"><span class="header-section-number">10.15</span> Fit Gradient Boosting</h2>
+<div id="a0604113" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingClassifier</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>gb<span class="op">=</span>GradientBoostingClassifier(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">.05</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>gb.fit(X_train,y_train)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>gb_prob<span class="op">=</span>gb.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>roc_auc_score(y_test,gb_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>np.float64(0.9943396226415094)</code></pre>
+</div>
+</div>
+</section>
+<section id="modern-histogram-based-gradient-boosting" class="level2" data-number="10.16">
+<h2 data-number="10.16" class="anchored" data-anchor-id="modern-histogram-based-gradient-boosting"><span class="header-section-number">10.16</span> Modern Histogram-Based Gradient Boosting</h2>
+<p>Histogram-based methods discretize continuous feature values into bins, which can improve computational efficiency on larger datasets.</p>
+<div id="502ae531" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prevent a Windows-specific joblib/loky physical-core detection warning.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># One core is sufficient for this small instructional example.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingClassifier</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>hgb <span class="op">=</span> HistGradientBoostingClassifier(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">.08</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    max_iter<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    max_leaf_nodes<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>hgb.fit(X_train, y_train)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>hgb_prob <span class="op">=</span> hgb.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>hgb_auc <span class="op">=</span> roc_auc_score(y_test, hgb_prob)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>hgb_auc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>np.float64(0.9968553459119497)</code></pre>
+</div>
+</div>
+<p>scikit-learn provides AdaBoost, Gradient Boosting, histogram-based boosting, voting, and stacking estimators <span class="citation" data-cites="sklearnEnsembles2026">(<a href="../references.html#ref-sklearnEnsembles2026" role="doc-biblioref">scikit-learn developers 2026</a>)</span>.</p>
+</section>
+<section id="the-modern-boosting-ecosystem" class="level2" data-number="10.17">
+<h2 data-number="10.17" class="anchored" data-anchor-id="the-modern-boosting-ecosystem"><span class="header-section-number">10.17</span> The Modern Boosting Ecosystem</h2>
+<p>Gradient boosting is not a single implementation. Modern libraries share the core idea of sequentially improving an ensemble, but differ in how they construct trees, represent features, handle categories, regularize learning, and scale computation.</p>
+<p>A useful conceptual map is:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ecosystem</th>
+<th>Distinguishing emphasis</th>
+<th>Typical reason to encounter it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>scikit-learn HistGradientBoosting</td>
+<td>native scikit-learn workflow and histogram-based efficiency</td>
+<td>strong general-purpose baseline inside sklearn pipelines</td>
+</tr>
+<tr class="even">
+<td>XGBoost <span class="citation" data-cites="chenGuestrin2016">(<a href="../references.html#ref-chenGuestrin2016" role="doc-biblioref">Chen and Guestrin 2016</a>)</span></td>
+<td>regularized boosting, mature ecosystem, broad deployment history</td>
+<td>tabular prediction and established production/research workflows</td>
+</tr>
+<tr class="odd">
+<td>LightGBM <span class="citation" data-cites="keEtAl2017">(<a href="../references.html#ref-keEtAl2017" role="doc-biblioref">Ke et al. 2017</a>)</span></td>
+<td>histogram methods and efficient leaf-wise growth</td>
+<td>large tabular datasets and computational efficiency</td>
+</tr>
+<tr class="even">
+<td>CatBoost <span class="citation" data-cites="prokhorenkovaEtAl2018">(<a href="../references.html#ref-prokhorenkovaEtAl2018" role="doc-biblioref">Prokhorenkova et al. 2018</a>)</span></td>
+<td>ordered boosting and strong categorical-feature handling</td>
+<td>datasets with important categorical predictors</td>
+</tr>
+</tbody>
+</table>
+<p>These are not four unrelated algorithms. They are engineering and statistical variations on a shared boosting family.</p>
+<section id="what-actually-differs" class="level3" data-number="10.17.1">
+<h3 data-number="10.17.1" class="anchored" data-anchor-id="what-actually-differs"><span class="header-section-number">10.17.1</span> What Actually Differs?</h3>
+<p>When comparing boosting systems, examine:</p>
+<ul>
+<li>tree-growth strategy;</li>
+<li>treatment of categorical variables;</li>
+<li>missing-value handling;</li>
+<li>regularization;</li>
+<li>sampling;</li>
+<li>histogram/binning strategy;</li>
+<li>computational scaling;</li>
+<li>GPU support;</li>
+<li>reproducibility controls;</li>
+<li>probability calibration;</li>
+<li>ecosystem and deployment constraints.</li>
+</ul>
+<p>The practical question is therefore not:</p>
+<blockquote class="blockquote">
+<p>Which boosting library is universally best?</p>
+</blockquote>
+<p>but:</p>
+<blockquote class="blockquote">
+<p>Which implementation best matches the data, validation design, computational constraints, and deployment environment?</p>
+</blockquote>
+<p><span class="math display">\[
+\boxed{
+\text{Algorithm Family}
++
+\text{Implementation Choices}
++
+\text{Validation Design}
+\rightarrow
+\text{Observed Performance}
+}
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A paper that compares XGBoost, LightGBM, CatBoost, and another gradient booster has not necessarily compared four fundamentally different scientific ideas.</p>
+<p>If the research contribution rests only on which library wins on one dataset, ask what generalizable knowledge the comparison produces.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="boosting-and-overfitting" class="level2" data-number="10.18">
+<h2 data-number="10.18" class="anchored" data-anchor-id="boosting-and-overfitting"><span class="header-section-number">10.18</span> Boosting and Overfitting</h2>
+<p>Boosting is powerful but not invulnerable.</p>
+<p>Potential controls include:</p>
+<ul>
+<li>learning rate;</li>
+<li>number of stages;</li>
+<li>tree depth;</li>
+<li>leaf size;</li>
+<li>subsampling;</li>
+<li>regularization;</li>
+<li>early stopping where supported.</li>
+</ul>
+<p>The central principle remains:</p>
+<blockquote class="blockquote">
+<p><strong>Complexity should be chosen using validation evidence, not final-test experimentation.</strong></p>
+</blockquote>
+</section>
+<section id="compare-several-supervised-models" class="level2" data-number="10.19">
+<h2 data-number="10.19" class="anchored" data-anchor-id="compare-several-supervised-models"><span class="header-section-number">10.19</span> Compare Several Supervised Models</h2>
+<div id="95216980" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>candidate_models<span class="op">=</span>{</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic regression"</span>:Pipeline([</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>,LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random Forest"</span>:RandomForestClassifier(</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">500</span>,random_state<span class="op">=</span><span class="dv">42</span>,n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RBF SVM"</span>:Pipeline([</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>,SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>,probability<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">42</span>))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AdaBoost"</span>:ada,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gradient Boosting"</span>:gb,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Histogram GB"</span>:hgb</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>auc_results<span class="op">=</span>{}</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name,m <span class="kw">in</span> candidate_models.items():</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    m.fit(X_train,y_train)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    prob_m<span class="op">=</span>m.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    auc_results[name]<span class="op">=</span>roc_auc_score(y_test,prob_m)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>auc_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>{'Logistic regression': np.float64(0.9962264150943396),
+ 'Random Forest': np.float64(0.9954926624737945),
+ 'RBF SVM': np.float64(0.9966457023060796),
+ 'AdaBoost': np.float64(0.9943396226415094),
+ 'Gradient Boosting': np.float64(0.9943396226415094),
+ 'Histogram GB': np.float64(0.9968553459119497)}</code></pre>
+</div>
+</div>
+<p>This is a demonstration, not a proper final model-selection experiment. Chapter 16 will formalize repeated resampling, tuning, comparison uncertainty, and final evaluation.</p>
+</section>
+<section id="voting-ensembles" class="level2" data-number="10.20">
+<h2 data-number="10.20" class="anchored" data-anchor-id="voting-ensembles"><span class="header-section-number">10.20</span> Voting Ensembles</h2>
+<p>Suppose models produce class predictions</p>
+<p><span class="math display">\[
+\hat y_1,\hat y_2,\ldots,\hat y_M.
+\]</span></p>
+<section id="hard-voting" class="level3" data-number="10.20.1">
+<h3 data-number="10.20.1" class="anchored" data-anchor-id="hard-voting"><span class="header-section-number">10.20.1</span> Hard Voting</h3>
+<p>Choose the class receiving the most votes.</p>
+</section>
+<section id="soft-voting" class="level3" data-number="10.20.2">
+<h3 data-number="10.20.2" class="anchored" data-anchor-id="soft-voting"><span class="header-section-number">10.20.2</span> Soft Voting</h3>
+<p>Average predicted class probabilities:</p>
+<p><span class="math display">\[
+\hat p_{\text{ens}}
+=
+\sum_{m=1}^{M}w_m\hat p_m,
+\]</span></p>
+<p>then classify using the resulting probability and decision rule.</p>
+<p>Soft voting assumes the component probability outputs are meaningful enough to combine.</p>
+</section>
+</section>
+<section id="fit-a-soft-voting-ensemble" class="level2" data-number="10.21">
+<h2 data-number="10.21" class="anchored" data-anchor-id="fit-a-soft-voting-ensemble"><span class="header-section-number">10.21</span> Fit a Soft-Voting Ensemble</h2>
+<div id="7cb1e864" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> VotingClassifier</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>voting<span class="op">=</span>VotingClassifier(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    estimators<span class="op">=</span>[</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"logit"</span>,Pipeline([</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>,LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        ])),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"rf"</span>,RandomForestClassifier(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            n_estimators<span class="op">=</span><span class="dv">300</span>,random_state<span class="op">=</span><span class="dv">42</span>,n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"gb"</span>,GradientBoostingClassifier(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            n_estimators<span class="op">=</span><span class="dv">150</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            learning_rate<span class="op">=</span><span class="fl">.05</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            max_depth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        ))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    voting<span class="op">=</span><span class="st">"soft"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>voting.fit(X_train,y_train)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>voting_prob<span class="op">=</span>voting.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>roc_auc_score(y_test,voting_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>np.float64(0.9974842767295597)</code></pre>
+</div>
+</div>
+<p>A voting ensemble is useful only if its components add complementary information.</p>
+</section>
+<section id="stacking" class="level2" data-number="10.22">
+<h2 data-number="10.22" class="anchored" data-anchor-id="stacking"><span class="header-section-number">10.22</span> Stacking</h2>
+<p>Stacking uses predictions from base models as inputs to a meta-model, following the stacked-generalization framework introduced by Wolpert <span class="citation" data-cites="wolpert1992stacking">(<a href="../references.html#ref-wolpert1992stacking" role="doc-biblioref">Wolpert 1992</a>)</span>.</p>
+<p>Conceptually,</p>
+<p><span class="math display">\[
+X
+\rightarrow
+\begin{bmatrix}
+\hat f_1(X)\\
+\hat f_2(X)\\
+\vdots\\
+\hat f_M(X)
+\end{bmatrix}
+\rightarrow
+g(\cdot)
+\rightarrow
+\hat y.
+\]</span></p>
+<p>The meta-model <span class="math inline">\(g\)</span> learns how to combine base-model outputs.</p>
+<section id="the-leakage-danger" class="level3" data-number="10.22.1">
+<h3 data-number="10.22.1" class="anchored" data-anchor-id="the-leakage-danger"><span class="header-section-number">10.22.1</span> The Leakage Danger</h3>
+<p>If base models predict the same observations they were trained on, the meta-model receives unrealistically optimistic features.</p>
+<p>Proper stacking therefore uses <strong>out-of-fold predictions</strong> for training the meta-model.</p>
+</section>
+</section>
+<section id="fit-a-stacking-classifier" class="level2" data-number="10.23">
+<h2 data-number="10.23" class="anchored" data-anchor-id="fit-a-stacking-classifier"><span class="header-section-number">10.23</span> Fit a Stacking Classifier</h2>
+<div id="faa9e4f0" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> StackingClassifier</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>base_estimators<span class="op">=</span>[</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"logit"</span>,Pipeline([</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>,LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    ])),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"rf"</span>,RandomForestClassifier(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">300</span>,random_state<span class="op">=</span><span class="dv">42</span>,n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"gb"</span>,GradientBoostingClassifier(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">150</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        learning_rate<span class="op">=</span><span class="fl">.05</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        max_depth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>stack<span class="op">=</span>StackingClassifier(</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    estimators<span class="op">=</span>base_estimators,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    final_estimator<span class="op">=</span>LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    stack_method<span class="op">=</span><span class="st">"predict_proba"</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>stack.fit(X_train,y_train)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>stack_prob<span class="op">=</span>stack.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>roc_auc_score(y_test,stack_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>np.float64(0.9974842767295597)</code></pre>
+</div>
+</div>
+<p>The cross-validation parameter controls how predictions used to train the final estimator are generated.</p>
+</section>
+<section id="diversity-more-than-different-algorithm-names" class="level2" data-number="10.24">
+<h2 data-number="10.24" class="anchored" data-anchor-id="diversity-more-than-different-algorithm-names"><span class="header-section-number">10.24</span> Diversity: More Than Different Algorithm Names</h2>
+<p>An ensemble of logistic regression, Random Forest, and boosting sounds diverse.</p>
+<p>But algorithm labels do not guarantee meaningful diversity.</p>
+<p>Models may still share:</p>
+<ul>
+<li>the same leakage;</li>
+<li>the same target-definition error;</li>
+<li>the same missing population;</li>
+<li>the same measurement bias;</li>
+<li>the same proxy variables;</li>
+<li>the same distribution shift.</li>
+</ul>
+<p>True ensemble diversity concerns <strong>error structure</strong>, not merely model branding.</p>
+</section>
+<section id="visual-experiment-when-averaging-helps" class="level2" data-number="10.25">
+<h2 data-number="10.25" class="anchored" data-anchor-id="visual-experiment-when-averaging-helps"><span class="header-section-number">10.25</span> Visual Experiment: When Averaging Helps</h2>
+<div id="cell-fig-ensemble-errors" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rng<span class="op">=</span>np.random.default_rng(<span class="dv">7</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span><span class="dv">1000</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>true<span class="op">=</span>np.zeros(n)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>shared<span class="op">=</span>rng.normal(<span class="dv">0</span>,<span class="dv">1</span>,n)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>independent_errors<span class="op">=</span>[</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.3</span><span class="op">*</span>shared <span class="op">+</span> rng.normal(<span class="dv">0</span>,<span class="dv">1</span>,n)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>ensemble_sizes<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">21</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>mse<span class="op">=</span>[]</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> ensemble_sizes:</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    avg<span class="op">=</span>np.mean(independent_errors[:m],axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    mse.append(np.mean((true<span class="op">-</span>avg)<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">list</span>(ensemble_sizes),mse,marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of component models"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Mean squared error"</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Averaging Partly Independent Errors"</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-ensemble-errors" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line plot of mean squared error as the number of averaged component models increases from one to twenty. Error drops rapidly as partly independent errors are averaged and then levels off because a shared correlated error component cannot be removed by averaging.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ensemble-errors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-ensemble-learning_files/figure-html/fig-ensemble-errors-output-1.png" alt="Line plot of mean squared error as the number of averaged component models increases from one to twenty. Error drops rapidly as partly independent errors are averaged and then levels off because a shared correlated error component cannot be removed by averaging." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ensemble-errors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Averaging reduces error most effectively when component errors are not perfectly correlated.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The remaining shared component illustrates why correlated error does not disappear simply by adding models.</p>
+</section>
+<section id="calibration-still-matters" class="level2" data-number="10.26">
+<h2 data-number="10.26" class="anchored" data-anchor-id="calibration-still-matters"><span class="header-section-number">10.26</span> Calibration Still Matters</h2>
+<p>An ensemble can have excellent discrimination and poor calibration. Calibration should therefore be evaluated separately when probabilities matter <span class="citation" data-cites="niculescuMizilCaruana2005">(<a href="../references.html#ref-niculescuMizilCaruana2005" role="doc-biblioref">Niculescu-Mizil and Caruana 2005</a>)</span>.</p>
+<p>If probabilities drive decisions, evaluate calibration just as in Chapter 7.</p>
+<div id="8f296a0e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> brier_score_loss</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>fraction_positive,mean_predicted<span class="op">=</span>calibration_curve(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    y_test,gb_prob,n_bins<span class="op">=</span><span class="dv">6</span>,strategy<span class="op">=</span><span class="st">"quantile"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>brier<span class="op">=</span>brier_score_loss(y_test,gb_prob)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    mean_predicted,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    fraction_positive,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="ss">f"Gradient Boosting (Brier=</span><span class="sc">{</span>brier<span class="sc">:.3f}</span><span class="ss">)"</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">1</span>],linestyle<span class="op">=</span><span class="st">"--"</span>,label<span class="op">=</span><span class="st">"Perfect calibration"</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Mean predicted probability"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Observed positive fraction"</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Boosted Models Still Need Calibration Assessment"</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10-ensemble-learning_files/figure-html/cell-10-output-1.png" width="589" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-importance-returnswith-the-same-warning" class="level2" data-number="10.27">
+<h2 data-number="10.27" class="anchored" data-anchor-id="feature-importance-returnswith-the-same-warning"><span class="header-section-number">10.27</span> Feature Importance Returns—With the Same Warning</h2>
+<p>Tree-based boosting can provide feature-importance measures. Permutation importance can also be used.</p>
+<p>But Chapter 8’s principle remains:</p>
+<p><span class="math display">\[
+\boxed{\text{Predictive importance}\neq\text{causal importance}}.
+\]</span></p>
+<p>A boosted ensemble can model complex associations exceptionally well while telling us little about what would happen under intervention.</p>
+</section>
+<section id="computer-vision-learning-experience-a-small-vision-model-comparison" class="level2" data-number="10.28">
+<h2 data-number="10.28" class="anchored" data-anchor-id="computer-vision-learning-experience-a-small-vision-model-comparison"><span class="header-section-number">10.28</span> Computer Vision Learning Experience: A Small Vision Model Comparison</h2>
+<p>The handwritten-digits workload now gives us a recurring benchmark across several chapters.</p>
+<p>Rather than introducing a new dataset, we can ask a more mature question:</p>
+<blockquote class="blockquote">
+<p><strong>What do different model families contribute when the data, split, and evaluation metric are held constant?</strong></p>
+</blockquote>
+<p>The following comparison uses the same train/test split for a linear model, an RBF SVM, a Random Forest, and histogram-based gradient boosting.</p>
+<div id="e73a070e" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier, HistGradientBoostingClassifier</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>digits_ens_cv <span class="op">=</span> load_digits()</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>X_ens_cv <span class="op">=</span> digits_ens_cv.data</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>y_ens_cv <span class="op">=</span> digits_ens_cv.target</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>X_train_ens_cv, X_test_ens_cv, y_train_ens_cv, y_test_ens_cv <span class="op">=</span> train_test_split(</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    X_ens_cv,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    y_ens_cv,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y_ens_cv</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>models_ens_cv <span class="op">=</span> {</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic regression"</span>: Pipeline([</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RBF SVM"</span>: Pipeline([</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>, SVC(kernel<span class="op">=</span><span class="st">"rbf"</span>, C<span class="op">=</span><span class="fl">3.0</span>, gamma<span class="op">=</span><span class="st">"scale"</span>))</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random Forest"</span>: RandomForestClassifier(</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>        n_jobs<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Histogram boosting"</span>: HistGradientBoostingClassifier(</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>        learning_rate<span class="op">=</span><span class="fl">0.08</span>,</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>        max_iter<span class="op">=</span><span class="dv">180</span>,</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>vision_results <span class="op">=</span> []</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> model_name_cv, model_cv <span class="kw">in</span> models_ens_cv.items():</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    model_cv.fit(</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>        X_train_ens_cv,</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>        y_train_ens_cv</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    pred_model_cv <span class="op">=</span> model_cv.predict(</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>        X_test_ens_cv</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>    vision_results.append({</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Model"</span>: model_name_cv,</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>: accuracy_score(</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>            y_test_ens_cv,</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>            pred_model_cv</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>vision_results_df <span class="op">=</span> (</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame(vision_results)</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    .sort_values(</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>,</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>        ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>vision_results_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1</th>
+<td>RBF SVM</td>
+<td>0.980000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Logistic regression</td>
+<td>0.977778</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Random Forest</td>
+<td>0.968889</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Histogram boosting</td>
+<td>0.962222</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="do-not-turn-the-table-into-the-conclusion" class="level3" data-number="10.28.1">
+<h3 data-number="10.28.1" class="anchored" data-anchor-id="do-not-turn-the-table-into-the-conclusion"><span class="header-section-number">10.28.1</span> Do Not Turn the Table Into the Conclusion</h3>
+<p>The highest accuracy is not automatically the best scientific or operational choice.</p>
+<p>Ask:</p>
+<ul>
+<li>How stable is the ranking under another split or repeated resampling?</li>
+<li>Which errors differ by digit class?</li>
+<li>How much more compute does the more complex model require?</li>
+<li>Are probability estimates needed?</li>
+<li>Which representation assumptions differ?</li>
+<li>Would the ranking survive visual domain shift?</li>
+<li>What new knowledge does the comparison produce?</li>
+</ul>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Model A achieved the highest accuracy on handwritten digits” is a result.</p>
+<p>By itself, it is not yet a meaningful research contribution.</p>
+<p>A publishable study needs a substantive or methodological question whose answer extends beyond the leaderboard.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="three-tracks" class="level2" data-number="10.29">
+<h2 data-number="10.29" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">10.29</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="10.29.1">
+<h3 data-number="10.29.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">10.29.1</span> Health Track</h3>
+<p>Boosting can capture nonlinearities and interactions among health measurements. Evaluate calibration, external validity, subgroup performance, and whether difficult observations reflect rare but important cases or data-quality problems.</p>
+</section>
+<section id="education-track" class="level3" data-number="10.29.2">
+<h3 data-number="10.29.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">10.29.2</span> Education Track</h3>
+<p>An ensemble may improve early-warning predictions, but combining models does not resolve questions about intervention capacity, student labeling, temporal leakage, or whether predictive features are actionable.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="10.29.3">
+<h3 data-number="10.29.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">10.29.3</span> Open ML Benchmark Track</h3>
+<p>Benchmark datasets allow controlled comparison of bagging, boosting, voting, and stacking while manipulating noise, class overlap, redundant features, and component-model diversity.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-when-does-the-crowd-become-wise" class="level2" data-number="10.30">
+<h2 data-number="10.30" class="anchored" data-anchor-id="beyond-the-algorithm-when-does-the-crowd-become-wise"><span class="header-section-number">10.30</span> Beyond the Algorithm: When Does the Crowd Become Wise?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Agreement Is Not the Same as Truth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ensemble learning resembles a broader idea: multiple imperfect judgments can sometimes outperform a single judgment.</p>
+<p>But collective intelligence depends on conditions.</p>
+<p>If members of the ensemble bring partly independent information, aggregation can cancel some individual errors.</p>
+<p>If they all inherit the same flawed evidence, aggregation can reinforce the flaw.</p>
+<p>A thousand models trained on leaked data do not create trustworthy evidence.</p>
+<p>A hundred models trained on a systematically unrepresentative population do not create external validity.</p>
+<p>Ten algorithms using the same proxy for an unmeasured construct do not create causal understanding.</p>
+<p>The lesson extends beyond machine learning:</p>
+<blockquote class="blockquote">
+<p><strong>Diversity of voices matters only when it creates diversity of information and error.</strong></p>
+</blockquote>
+<p>The right question is not:</p>
+<p><strong>“How many models agree?”</strong></p>
+<p>It is:</p>
+<p><strong>“Why do they agree, where do their errors differ, and what assumptions do they share?”</strong></p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-build-me-the-ultimate-ensemble" class="level2" data-number="10.31">
+<h2 data-number="10.31" class="anchored" data-anchor-id="ai-pair-programmer-build-me-the-ultimate-ensemble"><span class="header-section-number">10.31</span> AI Pair Programmer: Build Me the Ultimate Ensemble</h2>
+<p>Ask an AI assistant to combine every available classifier into one large ensemble.</p>
+<p>Audit whether it asks:</p>
+<ul>
+<li>whether component errors are complementary;</li>
+<li>whether all models were evaluated on the same valid split;</li>
+<li>whether probabilities are calibrated;</li>
+<li>whether stacking uses out-of-fold predictions;</li>
+<li>whether added complexity improves performance meaningfully;</li>
+<li>whether latency or computational cost matters;</li>
+<li>whether shared leakage or bias exists;</li>
+<li>whether uncertainty in the performance difference is known.</li>
+</ul>
+<p>Then redesign the ensemble to be simpler and evidence-driven.</p>
+</section>
+<section id="hands-on-lab-bagging-to-stacking" class="level2" data-number="10.32">
+<h2 data-number="10.32" class="anchored" data-anchor-id="hands-on-lab-bagging-to-stacking"><span class="header-section-number">10.32</span> Hands-On Lab: Bagging to Stacking</h2>
+<p>Using a classification dataset:</p>
 <ol type="1">
-<li>How does boosting differ from bagging?</li>
-<li>What does the learning rate control?</li>
-<li>Why can boosting overfit?</li>
-<li>What is stacking?</li>
+<li>complete the Problem Framing Canvas;</li>
+<li>complete the Feature Ledger;</li>
+<li>establish a simple baseline;</li>
+<li>fit logistic regression;</li>
+<li>fit a single decision tree;</li>
+<li>fit Random Forest;</li>
+<li>fit AdaBoost;</li>
+<li>fit Gradient Boosting;</li>
+<li>compare discrimination;</li>
+<li>inspect calibration for probability-producing models;</li>
+<li>build a soft-voting ensemble;</li>
+<li>build a stacking ensemble with out-of-fold meta-features;</li>
+<li>compare performance and computational cost;</li>
+<li>determine whether ensemble complexity earns its place;</li>
+<li>identify shared failure modes;</li>
+<li>document unsupported causal claims.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="10.10">
-<h2 data-number="10.10" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">10.10</span> Real-World Case Study</h2>
-<section id="benchmarking-tabular-models" class="level3" data-number="10.10.1">
-<h3 data-number="10.10.1" class="anchored" data-anchor-id="benchmarking-tabular-models"><span class="header-section-number">10.10.1</span> Benchmarking Tabular Models</h3>
-<p>Conduct a transparent benchmark on a public health or education dataset.</p>
+<section id="practitioner-track" class="level2" data-number="10.33">
+<h2 data-number="10.33" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">10.33</span> Practitioner Track</h2>
+<p>A practitioner should be able to choose among bagging, boosting, voting, and stacking; control ensemble complexity; prevent stacking leakage; justify added computational cost with validated gains; and treat library choice as an engineering and validation decision rather than a popularity contest.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="10.34">
+<h2 data-number="10.34" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">10.34</span> Researcher Track</h2>
+<p>A researcher should additionally investigate uncertainty, calibration, stability, external validity, shared biases among component models, whether ensemble gains support prediction only or a broader scientific claim, distinguish comparison of algorithmic principles from comparison of software implementations; and document implementation versions, important hyperparameters, seeds, and evaluation design.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="10.11">
-<h2 data-number="10.11" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">10.11</span> Professor’s Challenge</h2>
-<p>After testing 100 model configurations, one improves AUC by 0.003. Is this evidence of a better model?</p>
+<section id="research-studio" class="level2" data-number="10.35">
+<h2 data-number="10.35" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">10.35</span> Research Studio</h2>
+<p>Design an ensemble study in health, education, or a benchmark domain.</p>
+<p>Specify:</p>
+<ol type="1">
+<li>target and prediction time;</li>
+<li>baseline;</li>
+<li>candidate component models;</li>
+<li>reason each model may contribute complementary structure;</li>
+<li>bagging or boosting rationale;</li>
+<li>voting or stacking rationale;</li>
+<li>leakage-safe meta-learning strategy;</li>
+<li>tuning strategy;</li>
+<li>validation design;</li>
+<li>discrimination and/or regression metrics;</li>
+<li>calibration requirement;</li>
+<li>computational constraints;</li>
+<li>error-correlation analysis;</li>
+<li>external validation;</li>
+<li>interpretive limitations;</li>
+<li>potential conference or journal contribution.</li>
+</ol>
 </section>
-<section id="research-extension" class="level2" data-number="10.12">
-<h2 data-number="10.12" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">10.12</span> Research Extension</h2>
-<p>Design a rigorous benchmarking study with repeated or nested validation and uncertainty around performance differences.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="10.13">
-<h2 data-number="10.13" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">10.13</span> Reproducibility Check</h2>
-<p>Preserve all candidate models, search spaces, folds, seeds, runtimes, and selection rules.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="10.14">
-<h2 data-number="10.14" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">10.14</span> Key Takeaways</h2>
+<section id="professors-challenge-the-12-model-super-ensemble" class="level2" data-number="10.36">
+<h2 data-number="10.36" class="anchored" data-anchor-id="professors-challenge-the-12-model-super-ensemble"><span class="header-section-number">10.36</span> Professor’s Challenge: The 12-Model Super Ensemble</h2>
+<p>A team trains 12 classifiers. Every model uses the same dataset and feature set. Hyperparameters are selected using the test set. The five highest-scoring models are stacked using their predictions on the same training observations used to fit them.</p>
+<p>The resulting ensemble improves test AUC from .91 to .925.</p>
+<p>The authors conclude:</p>
+<blockquote class="blockquote">
+<p>“The ensemble’s agreement across diverse algorithms demonstrates robustness, eliminates model bias, and provides stronger evidence that the top-ranked features cause the outcome.”</p>
+</blockquote>
+<p>Critique:</p>
 <ul>
-<li>Ensembles can substantially improve tabular prediction.</li>
-<li>Fair benchmarking requires identical evaluation conditions.</li>
-<li>Small gains must be interpreted in context.</li>
+<li>test-set tuning;</li>
+<li>selection bias;</li>
+<li>stacking leakage;</li>
+<li>magnitude and uncertainty of the apparent improvement;</li>
+<li>algorithm diversity versus error diversity;</li>
+<li>shared data and measurement bias;</li>
+<li>calibration;</li>
+<li>external validity;</li>
+<li>causal claims;</li>
+<li>feature importance;</li>
+<li>computational complexity;</li>
+<li>whether .015 AUC improvement is operationally meaningful.</li>
 </ul>
+<p>Redesign the experiment.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="10.37">
+<h2 data-number="10.37" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">10.37</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is ensemble learning?</li>
+<li>Why can averaging reduce variance?</li>
+<li>Why does correlated error limit ensemble gains?</li>
+<li>How does bagging differ from boosting?</li>
+<li>How does AdaBoost respond to misclassified observations?</li>
+<li>What does the AdaBoost learner weight represent conceptually?</li>
+<li>What are pseudo-residuals in gradient boosting?</li>
+<li>Why is gradient boosting described as optimization in function space?</li>
+<li>What does learning rate control?</li>
+<li>Why do learning rate and number of estimators interact?</li>
+<li>How does hard voting differ from soft voting?</li>
+<li>What assumption makes soft voting meaningful?</li>
+<li>What is stacking?</li>
+<li>Why must meta-model training use out-of-fold predictions?</li>
+<li>Why do different algorithm names not guarantee useful diversity?</li>
+<li>Why can boosting amplify data problems?</li>
+<li>Why does ensemble performance not establish causal explanation?</li>
+<li>What conditions make a “crowd” of models genuinely useful?</li>
+<li>What ideas do modern boosting libraries share?</li>
+<li>Why is comparing software packages not automatically equivalent to comparing fundamentally different algorithms?</li>
+<li>What data and operational characteristics can make one boosting implementation more suitable than another?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="10.38">
+<h2 data-number="10.38" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">10.38</span> Reproducibility Check</h2>
+<p>Record:</p>
+<ul>
+<li>problem specification;</li>
+<li>feature ledger;</li>
+<li>baseline;</li>
+<li>component estimators;</li>
+<li>preprocessing for each component;</li>
+<li>bootstrap settings;</li>
+<li>number of estimators;</li>
+<li>learning rates;</li>
+<li>tree complexity;</li>
+<li>subsampling settings;</li>
+<li>voting weights;</li>
+<li>stacking folds and meta-model;</li>
+<li>hyperparameter search boundaries;</li>
+<li>calibration assessment;</li>
+<li>evaluation metrics;</li>
+<li>random seeds;</li>
+<li>computational environment;</li>
+<li>training time where relevant;</li>
+<li>package versions;</li>
+<li>final test boundary;</li>
+<li>all code generating reported results.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="10.39">
+<h2 data-number="10.39" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">10.39</span> Key Takeaways</h2>
+<ul>
+<li>Ensembles combine multiple models to improve prediction or stability.</li>
+<li>Bagging primarily reduces variance through aggregation.</li>
+<li>Random Forests improve bagging by reducing correlation among trees.</li>
+<li>AdaBoost sequentially emphasizes difficult observations.</li>
+<li>Gradient boosting fits learners to negative loss gradients.</li>
+<li>Learning rate and ensemble size jointly control boosting behavior.</li>
+<li>Hard voting combines labels; soft voting combines probability estimates.</li>
+<li>Stacking learns a combination rule from out-of-fold base-model predictions.</li>
+<li>Algorithm diversity is not the same as error diversity.</li>
+<li>Shared leakage and shared bias survive aggregation.</li>
+<li>Ensembles still require calibration, validation, and external-validity analysis.</li>
+<li>More models do not automatically mean more trustworthy evidence.</li>
+<li>Ensemble complexity should earn its place through meaningful, reproducible improvement.</li>
+<li>Modern boosting systems share a common algorithmic lineage while differing in important implementation choices.</li>
+<li>Package-level performance comparisons require careful validation and should produce insight beyond a leaderboard.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="10.40">
+<h2 data-number="10.40" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">10.40</span> Looking Ahead</h2>
+<p>Chapters 6–10 assumed that labeled outcomes were available for supervised learning. Chapter 11 removes that assumption and begins unsupervised learning, asking a different question: when no target label is supplied, what structure can the data reveal—and how do we determine whether that apparent structure is meaningful rather than an artifact of representation or method?</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-breiman1996bagging" class="csl-entry" role="listitem">
+Breiman, Leo. 1996. <span>“Bagging Predictors.”</span> <em>Machine Learning</em> 24 (2): 123–40. <a href="https://doi.org/10.1007/BF00058655">https://doi.org/10.1007/BF00058655</a>.
+</div>
+<div id="ref-breiman2001randomForests" class="csl-entry" role="listitem">
+———. 2001. <span>“Random Forests.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>.
+</div>
+<div id="ref-chenGuestrin2016" class="csl-entry" role="listitem">
+Chen, Tianqi, and Carlos Guestrin. 2016. <span>“<span>XGBoost</span>: A Scalable Tree Boosting System.”</span> In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 785–94. Association for Computing Machinery. <a href="https://doi.org/10.1145/2939672.2939785">https://doi.org/10.1145/2939672.2939785</a>.
+</div>
+<div id="ref-freundSchapire1997" class="csl-entry" role="listitem">
+Freund, Yoav, and Robert E. Schapire. 1997. <span>“A Decision-Theoretic Generalization of on-Line Learning and an Application to Boosting.”</span> <em>Journal of Computer and System Sciences</em> 55 (1): 119–39. <a href="https://doi.org/10.1006/jcss.1997.1504">https://doi.org/10.1006/jcss.1997.1504</a>.
+</div>
+<div id="ref-friedman2001gbm" class="csl-entry" role="listitem">
+Friedman, Jerome H. 2001. <span>“Greedy Function Approximation: A Gradient Boosting Machine.”</span> <em>The Annals of Statistics</em> 29 (5): 1189–1232. <a href="https://doi.org/10.1214/aos/1013203451">https://doi.org/10.1214/aos/1013203451</a>.
+</div>
+<div id="ref-keEtAl2017" class="csl-entry" role="listitem">
+Ke, Guolin, Qi Meng, Thomas Finley, Taifeng Wang, Wei Chen, Weidong Ma, Qiwei Ye, and Tie-Yan Liu. 2017. <span>“<span>LightGBM</span>: A Highly Efficient Gradient Boosting Decision Tree.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 30.
+</div>
+<div id="ref-niculescuMizilCaruana2005" class="csl-entry" role="listitem">
+Niculescu-Mizil, Alexandru, and Rich Caruana. 2005. <span>“Predicting Good Probabilities with Supervised Learning.”</span> In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 625–32. Association for Computing Machinery. <a href="https://doi.org/10.1145/1102351.1102430">https://doi.org/10.1145/1102351.1102430</a>.
+</div>
+<div id="ref-prokhorenkovaEtAl2018" class="csl-entry" role="listitem">
+Prokhorenkova, Liudmila, Gleb Gusev, Aleksandr Vorobev, Anna Veronika Dorogush, and Andrey Gulin. 2018. <span>“<span>CatBoost</span>: Unbiased Boosting with Categorical Features.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 31.
+</div>
+<div id="ref-sklearnEnsembles2026" class="csl-entry" role="listitem">
+scikit-learn developers. 2026. <span>“Ensemble Methods.”</span> <a href="https://scikit-learn.org/stable/modules/ensemble.html">https://scikit-learn.org/stable/modules/ensemble.html</a>.
+</div>
+<div id="ref-wolpert1992stacking" class="csl-entry" role="listitem">
+Wolpert, David H. 1992. <span>“Stacked Generalization.”</span> <em>Neural Networks</em> 5 (2): 241–59. <a href="https://doi.org/10.1016/S0893-6080(05)80023-1">https://doi.org/10.1016/S0893-6080(05)80023-1</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -557,7 +1776,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -886,13 +2105,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-03-supervised/09-support-vector-machines.html" class="pagination-link" aria-label="Support Vector Machines and Kernel Methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span>
+      <a href="../part-03-supervised/09-support-vector-machines.html" class="pagination-link" aria-label="Support Vector Machines: Margins, Geometry, and Kernels">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-04-unsupervised/11-clustering.html" class="pagination-link" aria-label="Clustering">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-04-unsupervised/11-clustering.html" class="pagination-link" aria-label="Clustering: Discovering Structure Without Labels">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

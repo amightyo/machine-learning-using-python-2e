@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../part-01-foundations/02-python.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,6 +183,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +199,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +271,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +312,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +335,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +364,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -306,45 +428,50 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">1.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">1.3</span> Real-World Problem</a></li>
-  <li><a href="#conceptual-foundations" id="toc-conceptual-foundations" class="nav-link" data-scroll-target="#conceptual-foundations"><span class="header-section-number">1.4</span> Conceptual Foundations</a>
+  <li><a href="#a-conceptual-map-of-modern-machine-learning" id="toc-a-conceptual-map-of-modern-machine-learning" class="nav-link" data-scroll-target="#a-conceptual-map-of-modern-machine-learning"><span class="header-section-number">1.3</span> A Conceptual Map of Modern Machine Learning</a></li>
+  <li><a href="#what-does-it-mean-for-a-machine-to-learn" id="toc-what-does-it-mean-for-a-machine-to-learn" class="nav-link" data-scroll-target="#what-does-it-mean-for-a-machine-to-learn"><span class="header-section-number">1.4</span> What Does It Mean for a Machine to Learn?</a></li>
+  <li><a href="#the-vocabulary-of-an-ml-problem" id="toc-the-vocabulary-of-an-ml-problem" class="nav-link" data-scroll-target="#the-vocabulary-of-an-ml-problem"><span class="header-section-number">1.5</span> The Vocabulary of an ML Problem</a></li>
+  <li><a href="#ways-machine-learning-systems-learn" id="toc-ways-machine-learning-systems-learn" class="nav-link" data-scroll-target="#ways-machine-learning-systems-learn"><span class="header-section-number">1.6</span> Ways Machine Learning Systems Learn</a>
   <ul class="collapse">
-  <li><a href="#artificial-intelligence-machine-learning-and-data-science" id="toc-artificial-intelligence-machine-learning-and-data-science" class="nav-link" data-scroll-target="#artificial-intelligence-machine-learning-and-data-science"><span class="header-section-number">1.4.1</span> Artificial Intelligence, Machine Learning, and Data Science</a></li>
-  <li><a href="#what-does-it-mean-for-a-machine-to-learn" id="toc-what-does-it-mean-for-a-machine-to-learn" class="nav-link" data-scroll-target="#what-does-it-mean-for-a-machine-to-learn"><span class="header-section-number">1.4.2</span> What Does It Mean for a Machine to Learn?</a></li>
-  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning"><span class="header-section-number">1.4.3</span> Supervised Learning</a></li>
-  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning"><span class="header-section-number">1.4.4</span> Unsupervised Learning</a></li>
-  <li><a href="#semi-supervised-and-self-supervised-learning" id="toc-semi-supervised-and-self-supervised-learning" class="nav-link" data-scroll-target="#semi-supervised-and-self-supervised-learning"><span class="header-section-number">1.4.5</span> Semi-Supervised and Self-Supervised Learning</a></li>
-  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning"><span class="header-section-number">1.4.6</span> Reinforcement Learning</a></li>
-  <li><a href="#deep-learning-and-foundation-models" id="toc-deep-learning-and-foundation-models" class="nav-link" data-scroll-target="#deep-learning-and-foundation-models"><span class="header-section-number">1.4.7</span> Deep Learning and Foundation Models</a></li>
-  <li><a href="#prediction-versus-explanation" id="toc-prediction-versus-explanation" class="nav-link" data-scroll-target="#prediction-versus-explanation"><span class="header-section-number">1.4.8</span> Prediction Versus Explanation</a></li>
-  <li><a href="#machine-learning-as-an-experimental-process" id="toc-machine-learning-as-an-experimental-process" class="nav-link" data-scroll-target="#machine-learning-as-an-experimental-process"><span class="header-section-number">1.4.9</span> Machine Learning as an Experimental Process</a></li>
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning"><span class="header-section-number">1.6.1</span> Supervised Learning</a></li>
+  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning"><span class="header-section-number">1.6.2</span> Unsupervised Learning</a></li>
+  <li><a href="#semi-supervised-learning" id="toc-semi-supervised-learning" class="nav-link" data-scroll-target="#semi-supervised-learning"><span class="header-section-number">1.6.3</span> Semi-Supervised Learning</a></li>
+  <li><a href="#self-supervised-learning" id="toc-self-supervised-learning" class="nav-link" data-scroll-target="#self-supervised-learning"><span class="header-section-number">1.6.4</span> Self-Supervised Learning</a></li>
+  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning"><span class="header-section-number">1.6.5</span> Reinforcement Learning</a></li>
   </ul></li>
-  <li><a href="#mathematical-and-statistical-foundations" id="toc-mathematical-and-statistical-foundations" class="nav-link" data-scroll-target="#mathematical-and-statistical-foundations"><span class="header-section-number">1.5</span> Mathematical and Statistical Foundations</a>
+  <li><a href="#machine-learning-workloads-where-computer-vision-fits" id="toc-machine-learning-workloads-where-computer-vision-fits" class="nav-link" data-scroll-target="#machine-learning-workloads-where-computer-vision-fits"><span class="header-section-number">1.7</span> Machine Learning Workloads: Where Computer Vision Fits</a></li>
+  <li><a href="#why-generalization-matters" id="toc-why-generalization-matters" class="nav-link" data-scroll-target="#why-generalization-matters"><span class="header-section-number">1.8</span> Why Generalization Matters</a>
   <ul class="collapse">
-  <li><a href="#inputs-outputs-features-and-targets" id="toc-inputs-outputs-features-and-targets" class="nav-link" data-scroll-target="#inputs-outputs-features-and-targets"><span class="header-section-number">1.5.1</span> Inputs, Outputs, Features, and Targets</a></li>
-  <li><a href="#functions-and-models" id="toc-functions-and-models" class="nav-link" data-scroll-target="#functions-and-models"><span class="header-section-number">1.5.2</span> Functions and Models</a></li>
-  <li><a href="#loss-and-objective-functions" id="toc-loss-and-objective-functions" class="nav-link" data-scroll-target="#loss-and-objective-functions"><span class="header-section-number">1.5.3</span> Loss and Objective Functions</a></li>
-  <li><a href="#generalization" id="toc-generalization" class="nav-link" data-scroll-target="#generalization"><span class="header-section-number">1.5.4</span> Generalization</a></li>
-  <li><a href="#bias-and-variance" id="toc-bias-and-variance" class="nav-link" data-scroll-target="#bias-and-variance"><span class="header-section-number">1.5.5</span> Bias and Variance</a></li>
+  <li><a href="#a-first-generalization-experiment" id="toc-a-first-generalization-experiment" class="nav-link" data-scroll-target="#a-first-generalization-experiment"><span class="header-section-number">1.8.1</span> A First Generalization Experiment</a></li>
   </ul></li>
-  <li><a href="#python-connection" id="toc-python-connection" class="nav-link" data-scroll-target="#python-connection"><span class="header-section-number">1.6</span> Python Connection</a>
+  <li><a href="#statistics-you-need" id="toc-statistics-you-need" class="nav-link" data-scroll-target="#statistics-you-need"><span class="header-section-number">1.9</span> Statistics You Need</a></li>
+  <li><a href="#prediction-explanation-inference-and-causation" id="toc-prediction-explanation-inference-and-causation" class="nav-link" data-scroll-target="#prediction-explanation-inference-and-causation"><span class="header-section-number">1.10</span> Prediction, Explanation, Inference, and Causation</a></li>
+  <li><a href="#three-learning-and-research-tracks" id="toc-three-learning-and-research-tracks" class="nav-link" data-scroll-target="#three-learning-and-research-tracks"><span class="header-section-number">1.11</span> Three Learning and Research Tracks</a>
   <ul class="collapse">
-  <li><a href="#the-python-machine-learning-ecosystem" id="toc-the-python-machine-learning-ecosystem" class="nav-link" data-scroll-target="#the-python-machine-learning-ecosystem"><span class="header-section-number">1.6.1</span> The Python Machine Learning Ecosystem</a></li>
-  <li><a href="#a-first-scikit-learn-workflow" id="toc-a-first-scikit-learn-workflow" class="nav-link" data-scroll-target="#a-first-scikit-learn-workflow"><span class="header-section-number">1.6.2</span> A First scikit-learn Workflow</a></li>
+  <li><a href="#health-track-nhanes" id="toc-health-track-nhanes" class="nav-link" data-scroll-target="#health-track-nhanes"><span class="header-section-number">1.11.1</span> Health Track — NHANES</a></li>
+  <li><a href="#education-track-ipeds-and-college-scorecard" id="toc-education-track-ipeds-and-college-scorecard" class="nav-link" data-scroll-target="#education-track-ipeds-and-college-scorecard"><span class="header-section-number">1.11.2</span> Education Track — IPEDS and College Scorecard</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">1.11.3</span> Open ML Benchmark Track</a></li>
   </ul></li>
-  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">1.7</span> Practitioner Track</a></li>
-  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">1.8</span> Researcher Track</a></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">1.9</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">1.10</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">1.11</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">1.12</span> Real-World Case Study</a>
+  <li><a href="#a-disciplined-machine-learning-workflow" id="toc-a-disciplined-machine-learning-workflow" class="nav-link" data-scroll-target="#a-disciplined-machine-learning-workflow"><span class="header-section-number">1.12</span> A Disciplined Machine Learning Workflow</a></li>
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it"><span class="header-section-number">1.13</span> Try It</a></li>
+  <li><a href="#hands-on-lab" id="toc-hands-on-lab" class="nav-link" data-scroll-target="#hands-on-lab"><span class="header-section-number">1.14</span> Hands-On Lab</a>
   <ul class="collapse">
-  <li><a href="#student-success-as-a-machine-learning-problem" id="toc-student-success-as-a-machine-learning-problem" class="nav-link" data-scroll-target="#student-success-as-a-machine-learning-problem"><span class="header-section-number">1.12.1</span> Student Success as a Machine Learning Problem</a></li>
+  <li><a href="#computer-vision-preview" id="toc-computer-vision-preview" class="nav-link" data-scroll-target="#computer-vision-preview"><span class="header-section-number">1.14.1</span> Computer Vision Preview</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">1.13</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">1.14</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">1.15</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">1.16</span> Key Takeaways</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">1.15</span> Research Studio</a></li>
+  <li><a href="#ai-pair-programmer" id="toc-ai-pair-programmer" class="nav-link" data-scroll-target="#ai-pair-programmer"><span class="header-section-number">1.16</span> AI Pair Programmer</a></li>
+  <li><a href="#responsible-machine-learning-begins-before-modeling" id="toc-responsible-machine-learning-begins-before-modeling" class="nav-link" data-scroll-target="#responsible-machine-learning-begins-before-modeling"><span class="header-section-number">1.17</span> Responsible Machine Learning Begins Before Modeling</a></li>
+  <li><a href="#from-model-fitting-to-research" id="toc-from-model-fitting-to-research" class="nav-link" data-scroll-target="#from-model-fitting-to-research"><span class="header-section-number">1.18</span> From Model Fitting to Research</a>
+  <ul class="collapse">
+  <li><a href="#a-research-ladder" id="toc-a-research-ladder" class="nav-link" data-scroll-target="#a-research-ladder"><span class="header-section-number">1.18.1</span> A Research Ladder</a></li>
+  </ul></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">1.19</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">1.20</span> Researcher Track</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">1.21</span> Knowledge Check</a></li>
+  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">1.22</span> Professor’s Challenge</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">1.23</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">1.24</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">1.25</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
@@ -372,138 +499,494 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Define machine learning and distinguish it from related areas of artificial intelligence.</li>
-<li>Differentiate supervised, unsupervised, semi-supervised, and reinforcement learning.</li>
-<li>Distinguish prediction, explanation, inference, and decision-making objectives.</li>
-<li>Describe the end-to-end machine learning lifecycle.</li>
-<li>Identify opportunities and limitations of machine learning in real-world settings.</li>
+<li>define machine learning in terms of data, models, loss, and generalization;</li>
+<li>distinguish AI, machine learning, deep learning, foundation models, and generative AI;</li>
+<li>distinguish supervised, unsupervised, semi-supervised, self-supervised, and reinforcement learning;</li>
+<li>identify observations, features, targets, predictions, parameters, and hyperparameters;</li>
+<li>explain why performance on unseen data is central to machine learning;</li>
+<li>distinguish prediction, explanation, inference, and causation;</li>
+<li>formulate problems using health, education, and benchmark-data tracks;</li>
+<li>distinguish model fitting from a potential research contribution.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">1.2</span> Why This Matters</h2>
-<p>Machine learning now supports decisions across health, education, finance, science, business, and public policy. Effective data scientists need more than the ability to call an algorithm: they must understand what problem is being solved, what evidence a model provides, and when machine learning is inappropriate.</p>
+<p>Machine learning supports predictive systems, scientific discovery, decision support, and modern AI. The ability to call <code>fit()</code> is not the same as understanding machine learning.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>How do we build models that learn from data—and how do we know they will work appropriately on data they have never seen?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">1.3</span> Real-World Problem</h2>
-<p>Consider a university seeking to identify students who may need additional academic support. What can a predictive model legitimately tell decision-makers, and what can it not tell them?</p>
+<section id="a-conceptual-map-of-modern-machine-learning" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="a-conceptual-map-of-modern-machine-learning"><span class="header-section-number">1.3</span> A Conceptual Map of Modern Machine Learning</h2>
+<div id="fig-ai-ml-map" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="A conceptual map of AI, machine learning, and modern learning paradigms.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ai-ml-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/figure-01-01-ai-ml-map.png" class="img-fluid figure-img" data-fig-cap="A conceptual map of AI, machine learning, and modern learning paradigms.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ai-ml-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Conceptual map of AI and modern machine learning.
+</figcaption>
+</figure>
+</div>
+<p><strong>Artificial intelligence (AI)</strong> is the broadest concept here. <strong>Machine learning (ML)</strong> is a major approach to AI in which models learn patterns from data <span class="citation" data-cites="mitchell1997">(<a href="../references.html#ref-mitchell1997" role="doc-biblioref">Mitchell 1997</a>)</span>. <strong>Deep learning</strong> uses multilayer neural networks to learn representations <span class="citation" data-cites="goodfellow2016">(<a href="../references.html#ref-goodfellow2016" role="doc-biblioref">Goodfellow, Bengio, and Courville 2016</a>)</span>. <strong>Foundation models</strong> are trained at scale on broad data and adapted to downstream tasks <span class="citation" data-cites="bommasani2021opportunities">(<a href="../references.html#ref-bommasani2021opportunities" role="doc-biblioref">Bommasani et al. 2021</a>)</span>. <strong>Generative AI</strong> creates new content such as text, images, audio, video, or code.</p>
+<p>Modern generative systems do not make classical machine learning obsolete. Regression, trees, ensembles, clustering, and related techniques remain central to structured problems in health, education, finance, operations, and science.</p>
 </section>
-<section id="conceptual-foundations" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="conceptual-foundations"><span class="header-section-number">1.4</span> Conceptual Foundations</h2>
-<section id="artificial-intelligence-machine-learning-and-data-science" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="artificial-intelligence-machine-learning-and-data-science"><span class="header-section-number">1.4.1</span> Artificial Intelligence, Machine Learning, and Data Science</h3>
+<section id="what-does-it-mean-for-a-machine-to-learn" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="what-does-it-mean-for-a-machine-to-learn"><span class="header-section-number">1.4</span> What Does It Mean for a Machine to Learn?</h2>
+<p>We say that a machine learns, but the word deserves examination. A machine learning system does not necessarily understand a phenomenon in the way a human researcher understands it. It identifies patterns in representations of observations and uses those patterns to perform a task.</p>
+<p>This distinction raises an important question: When a model predicts accurately, what has it actually learned?</p>
+<p>A model may discover a stable relationship, exploit a proxy variable, reproduce a historical pattern, or capitalize on an artifact of data collection. Predictive success alone cannot tell us which explanation is true.</p>
+<p>This is why machine learning is concerned with evidence and not just computation. We must ask what the data represent, what the model has access to, where the pattern came from, whether it generalizes, and what conclusions the evidence permits.</p>
+<p>A useful habit for the data scientist is therefore:</p>
+<p>Do not ask only, “Does the model work?” Ask, “What does its success allow me to know?”</p>
+<p>Suppose we observe</p>
+<p><span class="math display">\[
+\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{n}.
+\]</span></p>
+<p>A supervised model estimates</p>
+<p><span class="math display">\[
+f_{\theta}:\mathcal{X}\rightarrow\mathcal{Y},
+\]</span></p>
+<p>and predicts</p>
+<p><span class="math display">\[
+\hat y=f_{\theta}(x).
+\]</span></p>
+<p>Many algorithms learn parameters by minimizing a loss:</p>
+<p><span class="math display">\[
+\hat{\theta}=\arg\min_{\theta}\frac{1}{n}\sum_{i=1}^{n}L(y_i,f_{\theta}(x_i)).
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Read the Equation Before Solving It
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For now, read the pattern conceptually:</p>
+<p><strong>data → model → prediction → error → learning</strong></p>
+<p>Chapter 3 develops the mathematics.</p>
+</div>
+</div>
 </section>
-<section id="what-does-it-mean-for-a-machine-to-learn" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="what-does-it-mean-for-a-machine-to-learn"><span class="header-section-number">1.4.2</span> What Does It Mean for a Machine to Learn?</h3>
+<section id="the-vocabulary-of-an-ml-problem" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="the-vocabulary-of-an-ml-problem"><span class="header-section-number">1.5</span> The Vocabulary of an ML Problem</h2>
+<p>An <strong>observation</strong> is the unit represented by a row of modeling data. A <strong>feature</strong> is an input variable available to the model. A <strong>target</strong> is the outcome a supervised model attempts to predict. A <strong>prediction</strong>, <span class="math inline">\(\hat y\)</span>, is the model’s estimate.</p>
+<p>A <strong>parameter</strong> is learned from training data. A <strong>hyperparameter</strong> controls an aspect of the learning process and is generally selected through validation.</p>
 </section>
-<section id="supervised-learning" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="supervised-learning"><span class="header-section-number">1.4.3</span> Supervised Learning</h3>
+<section id="ways-machine-learning-systems-learn" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="ways-machine-learning-systems-learn"><span class="header-section-number">1.6</span> Ways Machine Learning Systems Learn</h2>
+<section id="supervised-learning" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="supervised-learning"><span class="header-section-number">1.6.1</span> Supervised Learning</h3>
+<p>Uses labeled outcomes. Major tasks are <strong>regression</strong> and <strong>classification</strong>.</p>
 </section>
-<section id="unsupervised-learning" class="level3" data-number="1.4.4">
-<h3 data-number="1.4.4" class="anchored" data-anchor-id="unsupervised-learning"><span class="header-section-number">1.4.4</span> Unsupervised Learning</h3>
+<section id="unsupervised-learning" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="unsupervised-learning"><span class="header-section-number">1.6.2</span> Unsupervised Learning</h3>
+<p>Searches for structure without a predefined target. Common tasks include clustering, dimensionality reduction, and anomaly detection.</p>
 </section>
-<section id="semi-supervised-and-self-supervised-learning" class="level3" data-number="1.4.5">
-<h3 data-number="1.4.5" class="anchored" data-anchor-id="semi-supervised-and-self-supervised-learning"><span class="header-section-number">1.4.5</span> Semi-Supervised and Self-Supervised Learning</h3>
+<section id="semi-supervised-learning" class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3" class="anchored" data-anchor-id="semi-supervised-learning"><span class="header-section-number">1.6.3</span> Semi-Supervised Learning</h3>
+<p>Combines a smaller labeled dataset with a larger collection of unlabeled observations.</p>
 </section>
-<section id="reinforcement-learning" class="level3" data-number="1.4.6">
-<h3 data-number="1.4.6" class="anchored" data-anchor-id="reinforcement-learning"><span class="header-section-number">1.4.6</span> Reinforcement Learning</h3>
+<section id="self-supervised-learning" class="level3" data-number="1.6.4">
+<h3 data-number="1.6.4" class="anchored" data-anchor-id="self-supervised-learning"><span class="header-section-number">1.6.4</span> Self-Supervised Learning</h3>
+<p>Constructs learning signals from the data themselves and is important in modern representation learning.</p>
 </section>
-<section id="deep-learning-and-foundation-models" class="level3" data-number="1.4.7">
-<h3 data-number="1.4.7" class="anchored" data-anchor-id="deep-learning-and-foundation-models"><span class="header-section-number">1.4.7</span> Deep Learning and Foundation Models</h3>
-</section>
-<section id="prediction-versus-explanation" class="level3" data-number="1.4.8">
-<h3 data-number="1.4.8" class="anchored" data-anchor-id="prediction-versus-explanation"><span class="header-section-number">1.4.8</span> Prediction Versus Explanation</h3>
-</section>
-<section id="machine-learning-as-an-experimental-process" class="level3" data-number="1.4.9">
-<h3 data-number="1.4.9" class="anchored" data-anchor-id="machine-learning-as-an-experimental-process"><span class="header-section-number">1.4.9</span> Machine Learning as an Experimental Process</h3>
-</section>
-</section>
-<section id="mathematical-and-statistical-foundations" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="mathematical-and-statistical-foundations"><span class="header-section-number">1.5</span> Mathematical and Statistical Foundations</h2>
-<section id="inputs-outputs-features-and-targets" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="inputs-outputs-features-and-targets"><span class="header-section-number">1.5.1</span> Inputs, Outputs, Features, and Targets</h3>
-</section>
-<section id="functions-and-models" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="functions-and-models"><span class="header-section-number">1.5.2</span> Functions and Models</h3>
-</section>
-<section id="loss-and-objective-functions" class="level3" data-number="1.5.3">
-<h3 data-number="1.5.3" class="anchored" data-anchor-id="loss-and-objective-functions"><span class="header-section-number">1.5.3</span> Loss and Objective Functions</h3>
-</section>
-<section id="generalization" class="level3" data-number="1.5.4">
-<h3 data-number="1.5.4" class="anchored" data-anchor-id="generalization"><span class="header-section-number">1.5.4</span> Generalization</h3>
-</section>
-<section id="bias-and-variance" class="level3" data-number="1.5.5">
-<h3 data-number="1.5.5" class="anchored" data-anchor-id="bias-and-variance"><span class="header-section-number">1.5.5</span> Bias and Variance</h3>
+<section id="reinforcement-learning" class="level3" data-number="1.6.5">
+<h3 data-number="1.6.5" class="anchored" data-anchor-id="reinforcement-learning"><span class="header-section-number">1.6.5</span> Reinforcement Learning</h3>
+<p>An agent interacts with an environment, takes actions, receives feedback, and learns a policy intended to maximize cumulative reward <span class="citation" data-cites="suttonBarto2018">(<a href="../references.html#ref-suttonBarto2018" role="doc-biblioref">Sutton and Barto 2018</a>)</span>.</p>
 </section>
 </section>
-<section id="python-connection" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="python-connection"><span class="header-section-number">1.6</span> Python Connection</h2>
-<section id="the-python-machine-learning-ecosystem" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="the-python-machine-learning-ecosystem"><span class="header-section-number">1.6.1</span> The Python Machine Learning Ecosystem</h3>
-</section>
-<section id="a-first-scikit-learn-workflow" class="level3" data-number="1.6.2">
-<h3 data-number="1.6.2" class="anchored" data-anchor-id="a-first-scikit-learn-workflow"><span class="header-section-number">1.6.2</span> A First scikit-learn Workflow</h3>
-</section>
-</section>
-<section id="practitioner-track" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">1.7</span> Practitioner Track</h2>
-<p>Focus on recognizing ML problem types, selecting appropriate workflows, and interpreting model outputs.</p>
-</section>
-<section id="researcher-track" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">1.8</span> Researcher Track</h2>
-<p>Focus additionally on research questions, generalization, benchmarking, uncertainty, reproducibility, and scientific contribution.</p>
-</section>
-<section id="hands-on-practice" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">1.9</span> Hands-On Practice</h2>
-<p>Classify a collection of real-world problems by learning type, target, unit of analysis, and appropriate evaluation strategy.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">1.10</span> Common Mistakes</h2>
+<section id="machine-learning-workloads-where-computer-vision-fits" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="machine-learning-workloads-where-computer-vision-fits"><span class="header-section-number">1.7</span> Machine Learning Workloads: Where Computer Vision Fits</h2>
+<p>Learning paradigms describe <strong>how a system learns</strong>. Workloads describe <strong>what kind of problem or data the system works with</strong>. These are different dimensions.</p>
+<p>For example, <strong>computer vision</strong> is a major machine-learning workload concerned with extracting useful information from images and video <span class="citation" data-cites="szeliski2022">(<a href="../references.html#ref-szeliski2022" role="doc-biblioref">Szeliski 2022</a>)</span>. A vision system may use supervised, self-supervised, semi-supervised, or other learning paradigms.</p>
+<p>Common computer-vision tasks include:</p>
 <ul>
-<li>Treating every data problem as a machine learning problem.</li>
-<li>Confusing prediction with causation.</li>
-<li>Choosing an algorithm before defining the problem.</li>
-<li>Reporting accuracy without considering the decision context.</li>
+<li><strong>image classification</strong> — assign a label to an image;</li>
+<li><strong>object detection</strong> — identify and locate objects;</li>
+<li><strong>image segmentation</strong> — assign labels to pixels or regions;</li>
+<li><strong>image retrieval and similarity</strong> — find visually related images;</li>
+<li><strong>visual anomaly detection</strong> — identify unusual visual patterns;</li>
+<li><strong>image generation and transformation</strong> — create or modify visual content.</li>
 </ul>
+<p>Other important ML workloads include natural-language processing, forecasting, recommendation, anomaly detection, ranking, and multimodal learning.</p>
+<p>The distinction matters:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Learning Paradigm}
+\neq
+\text{Workload}
+}
+\]</span></p>
+<p>A computer-vision application is not automatically “deep learning,” although modern vision systems often use neural networks. Classical ML can also operate on image features, and later chapters will show how representation learning changes what can be learned from visual data.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Computer Vision Learning Thread
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Computer vision will appear as a recurring learning experience in this book. We begin with images as numerical arrays, then revisit visual representation, classification, neural networks, evaluation, responsible use, and reproducibility.</p>
+<p>The goal is not merely to run a vision model. It is to understand how an image becomes data, how representations affect learning, and what evidence is required before a visual prediction should be trusted.</p>
+</div>
+</div>
 </section>
-<section id="knowledge-check" class="level2" data-number="1.11">
-<h2 data-number="1.11" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">1.11</span> Knowledge Check</h2>
+<section id="why-generalization-matters" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="why-generalization-matters"><span class="header-section-number">1.8</span> Why Generalization Matters</h2>
+<p>A model can memorize training observations and perform poorly on new data. This is <strong>overfitting</strong>.</p>
+<p>We distinguish <strong>training data</strong>, used to estimate parameters; <strong>validation data</strong>, used for model selection and tuning; and <strong>test data</strong>, protected for final evaluation.</p>
+<section id="a-first-generalization-experiment" class="level3" data-number="1.8.1">
+<h3 data-number="1.8.1" class="anchored" data-anchor-id="a-first-generalization-experiment"><span class="header-section-number">1.8.1</span> A First Generalization Experiment</h3>
+<p>This experiment fits decision trees of increasing complexity to a nonlinear classification problem.</p>
+<div id="cell-fig-generalization" class="cell" data-message="false" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_moons(n_samples<span class="op">=</span><span class="dv">800</span>, noise<span class="op">=</span><span class="fl">0.30</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.30</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>depths <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">21</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>train_scores, test_scores <span class="op">=</span> [], []</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> depth <span class="kw">in</span> depths:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span>depth, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    model.fit(X_train, y_train)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    train_scores.append(model.score(X_train, y_train))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    test_scores.append(model.score(X_test, y_test))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.plot(depths, train_scores, marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span><span class="st">"Training accuracy"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.plot(depths, test_scores, marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span><span class="st">"Test accuracy"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Maximum tree depth"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Accuracy"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Model Complexity and Generalization"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-generalization" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line chart of decision-tree accuracy by maximum depth. Training accuracy rises steadily toward perfect fit, while test accuracy peaks at moderate depth and then levels off or declines, illustrating overfitting as complexity increases.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-generalization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-machine-learning_files/figure-html/fig-generalization-output-1.png" alt="Line chart of decision-tree accuracy by maximum depth. Training accuracy rises steadily toward perfect fit, while test accuracy peaks at moderate depth and then levels off or declines, illustrating overfitting as complexity increases." width="680" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-generalization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Training and test accuracy as decision-tree complexity increases.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As flexibility increases, training performance tends to rise. Test performance can improve initially and then flatten or deteriorate.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key Idea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>The best model is not the model that performs best on training data. It is the model that generalizes appropriately to new data for its intended use.</strong></p>
+</div>
+</div>
+</section>
+</section>
+<section id="statistics-you-need" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="statistics-you-need"><span class="header-section-number">1.9</span> Statistics You Need</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Foundation</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Probability</td>
+<td>uncertainty and probabilistic prediction</td>
+</tr>
+<tr class="even">
+<td>Distributions</td>
+<td>variables, errors, sampling, assumptions</td>
+</tr>
+<tr class="odd">
+<td>Descriptive statistics</td>
+<td>center, spread, relationships</td>
+</tr>
+<tr class="even">
+<td>Sampling and estimation</td>
+<td>populations, uncertainty, generalization</td>
+</tr>
+<tr class="odd">
+<td>Correlation and covariance</td>
+<td>relationships among variables</td>
+</tr>
+<tr class="even">
+<td>Linear algebra</td>
+<td>vectors, matrices, transformations</td>
+</tr>
+<tr class="odd">
+<td>Functions</td>
+<td>mappings from inputs to outputs</td>
+</tr>
+<tr class="even">
+<td>Derivatives and gradients</td>
+<td>optimization and parameter learning</td>
+</tr>
+</tbody>
+</table>
+<p>You do not need to master these before continuing. Chapter 3 develops them as needed.</p>
+</section>
+<section id="prediction-explanation-inference-and-causation" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="prediction-explanation-inference-and-causation"><span class="header-section-number">1.10</span> Prediction, Explanation, Inference, and Causation</h2>
+<p>A model can predict well without identifying causal relationships.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Predictive Importance Is Not Causal Importance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>High feature importance does <strong>not</strong> establish that intervening on that feature will change the outcome.</p>
+</div>
+</div>
+</section>
+<section id="three-learning-and-research-tracks" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="three-learning-and-research-tracks"><span class="header-section-number">1.11</span> Three Learning and Research Tracks</h2>
+<section id="health-track-nhanes" class="level3" data-number="1.11.1">
+<h3 data-number="1.11.1" class="anchored" data-anchor-id="health-track-nhanes"><span class="header-section-number">1.11.1</span> Health Track — NHANES</h3>
+<p>Use individual-level public health data for themes such as cardiometabolic risk, physical activity, sleep, nutrition, biomarkers, and health outcomes <span class="citation" data-cites="cdcNHANES2024">(<a href="../references.html#ref-cdcNHANES2024" role="doc-biblioref">National Center for Health Statistics 2024</a>)</span>.</p>
+</section>
+<section id="education-track-ipeds-and-college-scorecard" class="level3" data-number="1.11.2">
+<h3 data-number="1.11.2" class="anchored" data-anchor-id="education-track-ipeds-and-college-scorecard"><span class="header-section-number">1.11.2</span> Education Track — IPEDS and College Scorecard</h3>
+<p>Use public postsecondary data for themes such as retention, enrollment, completion, institutional characteristics, finance, and student outcomes <span class="citation" data-cites="ncesIPEDS2026">(<a href="../references.html#ref-ncesIPEDS2026" role="doc-biblioref">National Center for Education Statistics 2026</a>)</span>.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="1.11.3">
+<h3 data-number="1.11.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">1.11.3</span> Open ML Benchmark Track</h3>
+<p>Use UCI, OpenML, scikit-learn, and other suitable benchmarks to isolate algorithm behavior, compare methods, debug pipelines, and reproduce experiments.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Dataset for Learning ≠ Dataset for Research
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A dataset can be excellent for understanding an algorithm without being sufficient for a novel research contribution.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="a-disciplined-machine-learning-workflow" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="a-disciplined-machine-learning-workflow"><span class="header-section-number">1.12</span> A Disciplined Machine Learning Workflow</h2>
 <ol type="1">
-<li>How does supervised learning differ from unsupervised learning?</li>
-<li>What is generalization?</li>
-<li>Why does prediction not establish causation?</li>
-<li>When might a simple model be preferable to a complex model?</li>
+<li>Define the substantive problem.</li>
+<li>Specify the unit of analysis and target.</li>
+<li>Identify information available at prediction time.</li>
+<li>Understand data provenance and limitations.</li>
+<li>Design the evaluation strategy.</li>
+<li>Establish a simple baseline.</li>
+<li>Prepare data without leakage.</li>
+<li>Fit candidate models.</li>
+<li>Evaluate on appropriate unseen data.</li>
+<li>Inspect errors, uncertainty, and subgroup behavior.</li>
+<li>Document limitations and intended use.</li>
+<li>Make the analysis reproducible.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="1.12">
-<h2 data-number="1.12" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">1.12</span> Real-World Case Study</h2>
-<section id="student-success-as-a-machine-learning-problem" class="level3" data-number="1.12.1">
-<h3 data-number="1.12.1" class="anchored" data-anchor-id="student-success-as-a-machine-learning-problem"><span class="header-section-number">1.12.1</span> Student Success as a Machine Learning Problem</h3>
-<p>Formulate a student-success problem using a public education dataset and identify the target, predictors, unit of analysis, risks, and evaluation strategy.</p>
+<section id="try-it" class="level2" data-number="1.13">
+<h2 data-number="1.13" class="anchored" data-anchor-id="try-it"><span class="header-section-number">1.13</span> Try It</h2>
+<p>Classify each problem as supervised, unsupervised, self-supervised, or reinforcement learning:</p>
+<ol type="1">
+<li>Predict systolic blood pressure.</li>
+<li>Group universities with similar profiles.</li>
+<li>Predict fraudulent transactions.</li>
+<li>Learn representations from a large unlabeled text corpus.</li>
+<li>Train an agent in a simulated environment.</li>
+</ol>
+</section>
+<section id="hands-on-lab" class="level2" data-number="1.14">
+<h2 data-number="1.14" class="anchored" data-anchor-id="hands-on-lab"><span class="header-section-number">1.14</span> Hands-On Lab</h2>
+<p>Using the generalization experiment:</p>
+<ol type="1">
+<li>Identify the depth with the highest test accuracy.</li>
+<li>Compare it with the deepest tree’s training accuracy.</li>
+<li>Explain why the deepest tree is not automatically preferable.</li>
+<li>Change <code>noise=0.30</code> to <code>0.15</code> and <code>0.45</code>.</li>
+<li>Explain how the data-generating process changes the result.</li>
+</ol>
+<section id="computer-vision-preview" class="level3" data-number="1.14.1">
+<h3 data-number="1.14.1" class="anchored" data-anchor-id="computer-vision-preview"><span class="header-section-number">1.14.1</span> Computer Vision Preview</h3>
+<p>Use <code>sklearn.datasets.load_digits</code> to inspect a small collection of handwritten-digit images.</p>
+<p>Without building a sophisticated vision model yet:</p>
+<ol type="1">
+<li>load the dataset;</li>
+<li>inspect the shape of the image array;</li>
+<li>display several images with their labels;</li>
+<li>explain what one observation, one feature, and the target mean in this setting;</li>
+<li>reshape one image into a feature vector and describe what information is preserved and what spatial structure becomes less explicit;</li>
+<li>identify whether digit recognition is a workload, a learning paradigm, or both.</li>
+</ol>
+<p>We will return to computer vision after developing the mathematical, data-preparation, classification, and neural-network foundations needed to evaluate it responsibly.</p>
 </section>
 </section>
-<section id="professors-challenge" class="level2" data-number="1.13">
-<h2 data-number="1.13" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">1.13</span> Professor’s Challenge</h2>
-<p>A model predicts student non-retention with 90% accuracy. Is that enough evidence to deploy it? Explain what else you would need to know.</p>
+<section id="research-studio" class="level2" data-number="1.15">
+<h2 data-number="1.15" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">1.15</span> Research Studio</h2>
+<p>Choose one track and specify the substantive problem, unit of analysis, target, feature families, prediction horizon, baseline, evaluation strategy, generalization concern, potential contribution, and claims the analysis cannot support.</p>
 </section>
-<section id="research-extension" class="level2" data-number="1.14">
-<h2 data-number="1.14" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">1.14</span> Research Extension</h2>
-<p>Identify a substantive gap that could transform the case study from a classroom prediction exercise into a research contribution.</p>
+<section id="ai-pair-programmer" class="level2" data-number="1.16">
+<h2 data-number="1.16" class="anchored" data-anchor-id="ai-pair-programmer"><span class="header-section-number">1.16</span> AI Pair Programmer</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Audit the AI, Not Just the Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ask an AI assistant to explain why a decision tree can achieve perfect training accuracy while performing worse on test data. Audit the response for correct treatment of generalization, test-set use, causation, and claims requiring verification.</p>
+</div>
+</div>
 </section>
-<section id="reproducibility-check" class="level2" data-number="1.15">
-<h2 data-number="1.15" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">1.15</span> Reproducibility Check</h2>
-<p>Document the problem definition, data source, target definition, assumptions, and intended use before modeling begins.</p>
+<section id="responsible-machine-learning-begins-before-modeling" class="level2" data-number="1.17">
+<h2 data-number="1.17" class="anchored" data-anchor-id="responsible-machine-learning-begins-before-modeling"><span class="header-section-number">1.17</span> Responsible Machine Learning Begins Before Modeling</h2>
+<p>Responsible ML begins with problem formulation, data, target construction, representation, evaluation, and intended use—not after the model has been built <span class="citation" data-cites="nistAIRMF2023">(<a href="../references.html#ref-nistAIRMF2023" role="doc-biblioref">National Institute of Standards and Technology 2023</a>)</span>.</p>
+<p>Ask who benefits, who bears error costs, whether the target is defensible, whether populations are represented, whether inequities may be reproduced, whether evaluation matches intended use, and whether another analyst can reproduce the result.</p>
 </section>
-<section id="key-takeaways" class="level2" data-number="1.16">
-<h2 data-number="1.16" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">1.16</span> Key Takeaways</h2>
+<section id="from-model-fitting-to-research" class="level2" data-number="1.18">
+<h2 data-number="1.18" class="anchored" data-anchor-id="from-model-fitting-to-research"><span class="header-section-number">1.18</span> From Model Fitting to Research</h2>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The Research Distinction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Using machine learning does not, by itself, make a study machine-learning research.</strong></p>
+<p>A contribution comes from the question, method, data, evaluation, setting, generalization evidence, reproducibility, insight, or methodological innovation—not merely from using an algorithm.</p>
+</div>
+</div>
+<section id="a-research-ladder" class="level3" data-number="1.18.1">
+<h3 data-number="1.18.1" class="anchored" data-anchor-id="a-research-ladder"><span class="header-section-number">1.18.1</span> A Research Ladder</h3>
+<p><strong>Level 1 — Reproduction:</strong> reproduce an existing analysis or benchmark.</p>
+<p><strong>Level 2 — Extension:</strong> defensibly change a population, period, outcome, representation, or dataset.</p>
+<p><strong>Level 3 — Rigorous Benchmarking:</strong> compare methods under a transparent common protocol.</p>
+<p><strong>Level 4 — Methodological Contribution:</strong> develop or materially adapt a method, representation, or evaluation procedure.</p>
+<p><strong>Level 5 — Substantive Contribution:</strong> use ML to generate credible new knowledge about an important problem.</p>
+</section>
+</section>
+<section id="practitioner-track" class="level2" data-number="1.19">
+<h2 data-number="1.19" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">1.19</span> Practitioner Track</h2>
+<p>Focus on problem formulation, preprocessing, baselines, model selection, evaluation, maintainability, monitoring, and reproducibility.</p>
+</section>
+<section id="researcher-track" class="level2" data-number="1.20">
+<h2 data-number="1.20" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">1.20</span> Researcher Track</h2>
+<p>Focus additionally on theory, sampling, measurement, uncertainty, external validity, temporal and subgroup generalization, benchmarking, novelty, and limitations.</p>
+</section>
+<section id="knowledge-check" class="level2" data-number="1.21">
+<h2 data-number="1.21" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">1.21</span> Knowledge Check</h2>
+<ol type="1">
+<li>What does it mean for a model to generalize?</li>
+<li>Why can perfect training accuracy be undesirable?</li>
+<li>How is a feature different from a target?</li>
+<li>How does self-supervised learning differ from supervised learning?</li>
+<li>Why should test data be protected during development?</li>
+<li>Why does predictive importance not establish causality?</li>
+<li>Why evaluate a simple baseline?</li>
+<li>When might a benchmark dataset be preferable to NHANES or IPEDS?</li>
+<li>What distinguishes a parameter from a hyperparameter?</li>
+<li>What distinguishes a model result from a research contribution?</li>
+</ol>
+</section>
+<section id="professors-challenge" class="level2" data-number="1.22">
+<h2 data-number="1.22" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">1.22</span> Professor’s Challenge</h2>
+<p>A team predicts student non-retention with <strong>92% accuracy</strong> and concludes that the model should be deployed to identify students who need intervention.</p>
+<p>Evaluate the conclusion as both a data scientist and researcher. Consider prevalence, naive baselines, sensitivity and specificity, error consequences, calibration, leakage, temporal validation, subgroup performance, target validity, intended use, and the difference between predicting risk and estimating intervention effects.</p>
+<p>Conclude with the additional evidence you would require before supporting deployment.</p>
+</section>
+<section id="reproducibility-check" class="level2" data-number="1.23">
+<h2 data-number="1.23" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">1.23</span> Reproducibility Check</h2>
+<p>Verify that you can explain the intended prediction problem, observation, target, information available at prediction time, protection of evaluation data, data provenance, supported and unsupported claims, and what another analyst needs to reproduce the work.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="1.24">
+<h2 data-number="1.24" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">1.24</span> Key Takeaways</h2>
 <ul>
-<li>Machine learning is a problem-solving framework, not merely a collection of algorithms.</li>
-<li>Prediction, inference, and causation answer different questions.</li>
-<li>Generalization to unseen data is central to machine learning.</li>
-<li>Responsible modeling begins before code is written.</li>
+<li>Machine learning is about learning useful patterns and evaluating generalization.</li>
+<li>Training performance is not evidence of real-world performance.</li>
+<li>AI, ML, deep learning, foundation models, and generative AI are related but distinct.</li>
+<li>Computer vision is a major ML workload that can use multiple learning paradigms.</li>
+<li>Statistics and mathematics provide the language for understanding learning and uncertainty.</li>
+<li>Prediction, explanation, inference, and causation require different evidence.</li>
+<li>Benchmark and domain research datasets serve different purposes.</li>
+<li>Responsible and reproducible ML begins with problem formulation.</li>
+<li>Using an ML algorithm does not by itself create a research contribution.</li>
 </ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="1.25">
+<h2 data-number="1.25" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">1.25</span> Looking Ahead</h2>
+<p>Chapter 1 established machine learning as a disciplined process of learning from data rather than merely selecting algorithms. Chapter 2 turns that perspective into practice by developing the Python foundations used throughout the book to represent data, express computational logic, inspect results, and build reproducible machine-learning workflows.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-bommasani2021opportunities" class="csl-entry" role="listitem">
+Bommasani, Rishi et al. 2021. <span>“On the Opportunities and Risks of Foundation Models.”</span> <em>arXiv Preprint arXiv:2108.07258</em>.
+</div>
+<div id="ref-goodfellow2016" class="csl-entry" role="listitem">
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep Learning</em>. Cambridge, MA: MIT Press.
+</div>
+<div id="ref-mitchell1997" class="csl-entry" role="listitem">
+Mitchell, Tom M. 1997. <em>Machine Learning</em>. McGraw-Hill.
+</div>
+<div id="ref-ncesIPEDS2026" class="csl-entry" role="listitem">
+National Center for Education Statistics. 2026. <span>“About IPEDS.”</span> U.S. Department of Education. <a href="https://nces.ed.gov/ipeds/about-ipeds">https://nces.ed.gov/ipeds/about-ipeds</a>.
+</div>
+<div id="ref-cdcNHANES2024" class="csl-entry" role="listitem">
+National Center for Health Statistics. 2024. <span>“About NHANES.”</span> Centers for Disease Control; Prevention. <a href="https://www.cdc.gov/nchs/nhanes/about/index.html">https://www.cdc.gov/nchs/nhanes/about/index.html</a>.
+</div>
+<div id="ref-nistAIRMF2023" class="csl-entry" role="listitem">
+National Institute of Standards and Technology. 2023. <span>“Artificial Intelligence Risk Management Framework (AI RMF 1.0).”</span> NIST AI 100-1. NIST. <a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a>.
+</div>
+<div id="ref-suttonBarto2018" class="csl-entry" role="listitem">
+Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.
+</div>
+<div id="ref-szeliski2022" class="csl-entry" role="listitem">
+Szeliski, Richard. 2022. <em>Computer Vision: Algorithms and Applications</em>. 2nd ed. Cham: Springer. <a href="https://doi.org/10.1007/978-3-030-34372-9">https://doi.org/10.1007/978-3-030-34372-9</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -580,7 +1063,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -909,8 +1392,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="../intro.html" class="pagination-link" aria-label="How to Use This Book">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How to Use This Book</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,6 +183,9 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,6 +199,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -155,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -178,31 +271,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,13 +312,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,19 +335,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -271,19 +364,48 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -306,53 +428,68 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</a></li>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">3.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">3.3</span> Real-World Problem</a></li>
-  <li><a href="#probability-and-statistics" id="toc-probability-and-statistics" class="nav-link" data-scroll-target="#probability-and-statistics"><span class="header-section-number">3.4</span> Probability and Statistics</a>
+  <li><a href="#from-data-to-mathematical-representation" id="toc-from-data-to-mathematical-representation" class="nav-link" data-scroll-target="#from-data-to-mathematical-representation"><span class="header-section-number">3.3</span> From Data to Mathematical Representation</a></li>
+  <li><a href="#describing-data-center-and-spread" id="toc-describing-data-center-and-spread" class="nav-link" data-scroll-target="#describing-data-center-and-spread"><span class="header-section-number">3.4</span> Describing Data: Center and Spread</a>
   <ul class="collapse">
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables"><span class="header-section-number">3.4.1</span> Random Variables</a></li>
-  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">3.4.2</span> Probability Distributions</a></li>
-  <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value"><span class="header-section-number">3.4.3</span> Expected Value</a></li>
-  <li><a href="#variance-and-standard-deviation" id="toc-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation"><span class="header-section-number">3.4.4</span> Variance and Standard Deviation</a></li>
-  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">3.4.5</span> Covariance and Correlation</a></li>
-  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability"><span class="header-section-number">3.4.6</span> Conditional Probability</a></li>
-  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem"><span class="header-section-number">3.4.7</span> Bayes’ Theorem</a></li>
-  <li><a href="#sampling-and-sampling-variability" id="toc-sampling-and-sampling-variability" class="nav-link" data-scroll-target="#sampling-and-sampling-variability"><span class="header-section-number">3.4.8</span> Sampling and Sampling Variability</a></li>
-  <li><a href="#confidence-intervals-and-hypothesis-tests" id="toc-confidence-intervals-and-hypothesis-tests" class="nav-link" data-scroll-target="#confidence-intervals-and-hypothesis-tests"><span class="header-section-number">3.4.9</span> Confidence Intervals and Hypothesis Tests</a></li>
-  <li><a href="#association-versus-causation" id="toc-association-versus-causation" class="nav-link" data-scroll-target="#association-versus-causation"><span class="header-section-number">3.4.10</span> Association Versus Causation</a></li>
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean"><span class="header-section-number">3.4.1</span> Mean</a></li>
+  <li><a href="#variance-and-standard-deviation" id="toc-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation"><span class="header-section-number">3.4.2</span> Variance and Standard Deviation</a></li>
   </ul></li>
-  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="header-section-number">3.5</span> Linear Algebra</a>
+  <li><a href="#visual-intuition-distribution-and-variation" id="toc-visual-intuition-distribution-and-variation" class="nav-link" data-scroll-target="#visual-intuition-distribution-and-variation"><span class="header-section-number">3.5</span> Visual Intuition: Distribution and Variation</a></li>
+  <li><a href="#probability-a-language-for-uncertainty" id="toc-probability-a-language-for-uncertainty" class="nav-link" data-scroll-target="#probability-a-language-for-uncertainty"><span class="header-section-number">3.6</span> Probability: A Language for Uncertainty</a>
   <ul class="collapse">
-  <li><a href="#scalars-vectors-and-matrices" id="toc-scalars-vectors-and-matrices" class="nav-link" data-scroll-target="#scalars-vectors-and-matrices"><span class="header-section-number">3.5.1</span> Scalars, Vectors, and Matrices</a></li>
-  <li><a href="#dot-products" id="toc-dot-products" class="nav-link" data-scroll-target="#dot-products"><span class="header-section-number">3.5.2</span> Dot Products</a></li>
-  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="header-section-number">3.5.3</span> Matrix Multiplication</a></li>
-  <li><a href="#transpose-and-inverse" id="toc-transpose-and-inverse" class="nav-link" data-scroll-target="#transpose-and-inverse"><span class="header-section-number">3.5.4</span> Transpose and Inverse</a></li>
-  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#eigenvalues-and-eigenvectors"><span class="header-section-number">3.5.5</span> Eigenvalues and Eigenvectors</a></li>
+  <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value"><span class="header-section-number">3.6.1</span> Expected Value</a></li>
   </ul></li>
-  <li><a href="#calculus-and-optimization" id="toc-calculus-and-optimization" class="nav-link" data-scroll-target="#calculus-and-optimization"><span class="header-section-number">3.6</span> Calculus and Optimization</a>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">3.7</span> Probability Distributions</a>
   <ul class="collapse">
-  <li><a href="#functions-and-slopes" id="toc-functions-and-slopes" class="nav-link" data-scroll-target="#functions-and-slopes"><span class="header-section-number">3.6.1</span> Functions and Slopes</a></li>
-  <li><a href="#derivatives" id="toc-derivatives" class="nav-link" data-scroll-target="#derivatives"><span class="header-section-number">3.6.2</span> Derivatives</a></li>
-  <li><a href="#partial-derivatives" id="toc-partial-derivatives" class="nav-link" data-scroll-target="#partial-derivatives"><span class="header-section-number">3.6.3</span> Partial Derivatives</a></li>
-  <li><a href="#gradients" id="toc-gradients" class="nav-link" data-scroll-target="#gradients"><span class="header-section-number">3.6.4</span> Gradients</a></li>
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">3.6.5</span> Gradient Descent</a></li>
+  <li><a href="#a-normal-distribution-in-python" id="toc-a-normal-distribution-in-python" class="nav-link" data-scroll-target="#a-normal-distribution-in-python"><span class="header-section-number">3.7.1</span> A Normal Distribution in Python</a></li>
   </ul></li>
-  <li><a href="#mathematical-connection-to-machine-learning" id="toc-mathematical-connection-to-machine-learning" class="nav-link" data-scroll-target="#mathematical-connection-to-machine-learning"><span class="header-section-number">3.7</span> Mathematical Connection to Machine Learning</a>
+  <li><a href="#population-sample-parameter-statistic" id="toc-population-sample-parameter-statistic" class="nav-link" data-scroll-target="#population-sample-parameter-statistic"><span class="header-section-number">3.8</span> Population, Sample, Parameter, Statistic</a>
   <ul class="collapse">
-  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions"><span class="header-section-number">3.7.1</span> Loss Functions</a></li>
-  <li><a href="#maximum-likelihood" id="toc-maximum-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood"><span class="header-section-number">3.7.2</span> Maximum Likelihood</a></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">3.7.3</span> Regularization</a></li>
+  <li><a href="#sampling-variation-by-simulation" id="toc-sampling-variation-by-simulation" class="nav-link" data-scroll-target="#sampling-variation-by-simulation"><span class="header-section-number">3.8.1</span> Sampling Variation by Simulation</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">3.8</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">3.9</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">3.10</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">3.11</span> Real-World Case Study</a>
+  <li><a href="#standard-error-and-uncertainty" id="toc-standard-error-and-uncertainty" class="nav-link" data-scroll-target="#standard-error-and-uncertainty"><span class="header-section-number">3.9</span> Standard Error and Uncertainty</a></li>
+  <li><a href="#prediction-inference-and-different-kinds-of-questions" id="toc-prediction-inference-and-different-kinds-of-questions" class="nav-link" data-scroll-target="#prediction-inference-and-different-kinds-of-questions"><span class="header-section-number">3.10</span> Prediction, Inference, and Different Kinds of Questions</a>
   <ul class="collapse">
-  <li><a href="#understanding-health-risk-variables" id="toc-understanding-health-risk-variables" class="nav-link" data-scroll-target="#understanding-health-risk-variables"><span class="header-section-number">3.11.1</span> Understanding Health Risk Variables</a></li>
+  <li><a href="#predictive-signal-without-a-unique-explanation" id="toc-predictive-signal-without-a-unique-explanation" class="nav-link" data-scroll-target="#predictive-signal-without-a-unique-explanation"><span class="header-section-number">3.10.1</span> Predictive Signal Without a Unique Explanation</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">3.12</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">3.13</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">3.14</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">3.15</span> Key Takeaways</a></li>
+  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">3.11</span> Covariance and Correlation</a></li>
+  <li><a href="#standardization-putting-features-on-comparable-scales" id="toc-standardization-putting-features-on-comparable-scales" class="nav-link" data-scroll-target="#standardization-putting-features-on-comparable-scales"><span class="header-section-number">3.12</span> Standardization: Putting Features on Comparable Scales</a></li>
+  <li><a href="#linear-algebra-the-language-of-many-models" id="toc-linear-algebra-the-language-of-many-models" class="nav-link" data-scroll-target="#linear-algebra-the-language-of-many-models"><span class="header-section-number">3.13</span> Linear Algebra: The Language of Many Models</a>
+  <ul class="collapse">
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="header-section-number">3.13.1</span> Vectors</a></li>
+  <li><a href="#matrix-vector-multiplication" id="toc-matrix-vector-multiplication" class="nav-link" data-scroll-target="#matrix-vector-multiplication"><span class="header-section-number">3.13.2</span> Matrix-Vector Multiplication</a></li>
+  </ul></li>
+  <li><a href="#distance-and-similarity" id="toc-distance-and-similarity" class="nav-link" data-scroll-target="#distance-and-similarity"><span class="header-section-number">3.14</span> Distance and Similarity</a>
+  <ul class="collapse">
+  <li><a href="#why-scaling-changes-distance" id="toc-why-scaling-changes-distance" class="nav-link" data-scroll-target="#why-scaling-changes-distance"><span class="header-section-number">3.14.1</span> Why Scaling Changes Distance</a></li>
+  </ul></li>
+  <li><a href="#functions-loss-and-learning" id="toc-functions-loss-and-learning" class="nav-link" data-scroll-target="#functions-loss-and-learning"><span class="header-section-number">3.15</span> Functions, Loss, and Learning</a></li>
+  <li><a href="#derivatives-measuring-local-change" id="toc-derivatives-measuring-local-change" class="nav-link" data-scroll-target="#derivatives-measuring-local-change"><span class="header-section-number">3.16</span> Derivatives: Measuring Local Change</a></li>
+  <li><a href="#gradients-change-in-multiple-dimensions" id="toc-gradients-change-in-multiple-dimensions" class="nav-link" data-scroll-target="#gradients-change-in-multiple-dimensions"><span class="header-section-number">3.17</span> Gradients: Change in Multiple Dimensions</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">3.18</span> Gradient Descent</a>
+  <ul class="collapse">
+  <li><a href="#watch-optimization-happen" id="toc-watch-optimization-happen" class="nav-link" data-scroll-target="#watch-optimization-happen"><span class="header-section-number">3.18.1</span> Watch Optimization Happen</a></li>
+  <li><a href="#learning-rate" id="toc-learning-rate" class="nav-link" data-scroll-target="#learning-rate"><span class="header-section-number">3.18.2</span> Learning Rate</a></li>
+  </ul></li>
+  <li><a href="#from-intuition-to-equation-to-python-to-ml" id="toc-from-intuition-to-equation-to-python-to-ml" class="nav-link" data-scroll-target="#from-intuition-to-equation-to-python-to-ml"><span class="header-section-number">3.19</span> From Intuition to Equation to Python to ML</a></li>
+  <li><a href="#beyond-the-algorithm-the-map-is-not-the-territory" id="toc-beyond-the-algorithm-the-map-is-not-the-territory" class="nav-link" data-scroll-target="#beyond-the-algorithm-the-map-is-not-the-territory"><span class="header-section-number">3.20</span> Beyond the Algorithm: The Map Is Not the Territory</a></li>
+  <li><a href="#three-tracks-same-mathematics-different-meaning" id="toc-three-tracks-same-mathematics-different-meaning" class="nav-link" data-scroll-target="#three-tracks-same-mathematics-different-meaning"><span class="header-section-number">3.21</span> Three Tracks: Same Mathematics, Different Meaning</a>
+  <ul class="collapse">
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">3.21.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">3.21.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">3.21.3</span> Open ML Benchmark Track</a></li>
+  </ul></li>
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it"><span class="header-section-number">3.22</span> Try It</a></li>
+  <li><a href="#hands-on-lab-mathematics-you-can-see" id="toc-hands-on-lab-mathematics-you-can-see" class="nav-link" data-scroll-target="#hands-on-lab-mathematics-you-can-see"><span class="header-section-number">3.23</span> Hands-On Lab: Mathematics You Can See</a></li>
+  <li><a href="#ai-pair-programmer" id="toc-ai-pair-programmer" class="nav-link" data-scroll-target="#ai-pair-programmer"><span class="header-section-number">3.24</span> AI Pair Programmer</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">3.25</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">3.26</span> Researcher Track</a></li>
+  <li><a href="#professors-challenge-when-mathematics-misleads" id="toc-professors-challenge-when-mathematics-misleads" class="nav-link" data-scroll-target="#professors-challenge-when-mathematics-misleads"><span class="header-section-number">3.27</span> Professor’s Challenge: When Mathematics Misleads</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">3.28</span> Research Studio</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">3.29</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">3.30</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">3.31</span> Key Takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">3.32</span> Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
@@ -380,154 +517,958 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="learning-objectives" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain the statistical concepts most frequently used in machine learning.</li>
-<li>Work with vectors, matrices, probabilities, expectations, and variance.</li>
-<li>Interpret covariance and correlation.</li>
-<li>Explain derivatives, gradients, and optimization conceptually.</li>
-<li>Connect probability and linear algebra to ML algorithms.</li>
+<li>explain how descriptive statistics summarize a sample without fully describing its data-generating process;</li>
+<li>interpret probability as a language for uncertainty;</li>
+<li>distinguish population quantities, sample statistics, parameters, and estimates;</li>
+<li>explain why sampling variation matters for machine learning;</li>
+<li>calculate and interpret mean, variance, standard deviation, covariance, and correlation;</li>
+<li>standardize features and explain why scaling matters for selected algorithms;</li>
+<li>represent observations, features, and model coefficients as vectors and matrices;</li>
+<li>calculate and interpret common distance measures and dot products;</li>
+<li>explain a loss function as a mathematical representation of model error;</li>
+<li>interpret derivatives and gradients as information about local change;</li>
+<li>implement gradient descent for a simple optimization problem;</li>
+<li>connect statistical and mathematical abstractions to machine-learning decisions;</li>
+<li>recognize that mathematical precision does not eliminate measurement, sampling, or modeling assumptions.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">3.2</span> Why This Matters</h2>
-<p>Machine learning algorithms encode mathematical assumptions. Understanding those assumptions makes it easier to diagnose models, choose methods, and interpret results.</p>
+<p>Machine learning can be used by calling library functions without understanding the mathematics underneath them. But technical fluency becomes much deeper when we can explain <strong>why</strong> an algorithm behaves as it does.</p>
+<p>Statistics helps us reason about variation, uncertainty, sampling, and relationships. Linear algebra gives us a compact language for representing many observations and features at once. Calculus helps us understand how model parameters can be adjusted to reduce error. Optimization connects those ideas to learning.</p>
+<p>This chapter is therefore not a detached mathematics review. Every concept will follow a recurring path:</p>
+<p><span class="math display">\[
+\boxed{\text{Intuition}}
+\rightarrow
+\boxed{\text{Equation}}
+\rightarrow
+\boxed{\text{Python}}
+\rightarrow
+\boxed{\text{Machine Learning Application}}.
+\]</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>What mathematical and statistical ideas allow us to understand what a machine-learning algorithm is actually doing?</strong></p>
+</div>
+</div>
 </section>
-<section id="real-world-problem" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">3.3</span> Real-World Problem</h2>
-<p>Two predictors are strongly correlated and a model’s coefficients become unstable. What mathematical and statistical concepts explain the problem?</p>
+<section id="from-data-to-mathematical-representation" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="from-data-to-mathematical-representation"><span class="header-section-number">3.3</span> From Data to Mathematical Representation</h2>
+<p>Suppose our data contain <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> features. We can represent the feature matrix as</p>
+<p><span class="math display">\[
+X =
+\begin{bmatrix}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p}\\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
+\end{bmatrix}
+\in \mathbb{R}^{n \times p}.
+\]</span></p>
+<p>The target can be represented as</p>
+<p><span class="math display">\[
+y =
+\begin{bmatrix}
+y_1\\
+y_2\\
+\vdots\\
+y_n
+\end{bmatrix}.
+\]</span></p>
+<p>This notation is not merely decorative. It allows us to describe entire learning algorithms compactly.</p>
 </section>
-<section id="probability-and-statistics" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="probability-and-statistics"><span class="header-section-number">3.4</span> Probability and Statistics</h2>
-<section id="random-variables" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="random-variables"><span class="header-section-number">3.4.1</span> Random Variables</h3>
+<section id="describing-data-center-and-spread" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="describing-data-center-and-spread"><span class="header-section-number">3.4</span> Describing Data: Center and Spread</h2>
+<p>Consider a sample <span class="math inline">\(x_1,\ldots,x_n\)</span>.</p>
+<section id="mean" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">3.4.1</span> Mean</h3>
+<p>The sample mean is</p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i.
+\]</span></p>
+<div id="720c391d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> np.array([<span class="dv">72</span>, <span class="dv">75</span>, <span class="dv">81</span>, <span class="dv">84</span>, <span class="dv">88</span>, <span class="dv">90</span>, <span class="dv">95</span>])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>scores.mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>np.float64(83.57142857142857)</code></pre>
+</div>
+</div>
+<p>The mean is a useful summary, but it does not reveal the entire distribution.</p>
 </section>
-<section id="probability-distributions" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">3.4.2</span> Probability Distributions</h3>
-</section>
-<section id="expected-value" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="expected-value"><span class="header-section-number">3.4.3</span> Expected Value</h3>
-</section>
-<section id="variance-and-standard-deviation" class="level3" data-number="3.4.4">
-<h3 data-number="3.4.4" class="anchored" data-anchor-id="variance-and-standard-deviation"><span class="header-section-number">3.4.4</span> Variance and Standard Deviation</h3>
-</section>
-<section id="covariance-and-correlation" class="level3" data-number="3.4.5">
-<h3 data-number="3.4.5" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">3.4.5</span> Covariance and Correlation</h3>
-</section>
-<section id="conditional-probability" class="level3" data-number="3.4.6">
-<h3 data-number="3.4.6" class="anchored" data-anchor-id="conditional-probability"><span class="header-section-number">3.4.6</span> Conditional Probability</h3>
-</section>
-<section id="bayes-theorem" class="level3" data-number="3.4.7">
-<h3 data-number="3.4.7" class="anchored" data-anchor-id="bayes-theorem"><span class="header-section-number">3.4.7</span> Bayes’ Theorem</h3>
-</section>
-<section id="sampling-and-sampling-variability" class="level3" data-number="3.4.8">
-<h3 data-number="3.4.8" class="anchored" data-anchor-id="sampling-and-sampling-variability"><span class="header-section-number">3.4.8</span> Sampling and Sampling Variability</h3>
-</section>
-<section id="confidence-intervals-and-hypothesis-tests" class="level3" data-number="3.4.9">
-<h3 data-number="3.4.9" class="anchored" data-anchor-id="confidence-intervals-and-hypothesis-tests"><span class="header-section-number">3.4.9</span> Confidence Intervals and Hypothesis Tests</h3>
-</section>
-<section id="association-versus-causation" class="level3" data-number="3.4.10">
-<h3 data-number="3.4.10" class="anchored" data-anchor-id="association-versus-causation"><span class="header-section-number">3.4.10</span> Association Versus Causation</h3>
-</section>
-</section>
-<section id="linear-algebra" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="linear-algebra"><span class="header-section-number">3.5</span> Linear Algebra</h2>
-<section id="scalars-vectors-and-matrices" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="scalars-vectors-and-matrices"><span class="header-section-number">3.5.1</span> Scalars, Vectors, and Matrices</h3>
-</section>
-<section id="dot-products" class="level3" data-number="3.5.2">
-<h3 data-number="3.5.2" class="anchored" data-anchor-id="dot-products"><span class="header-section-number">3.5.2</span> Dot Products</h3>
-</section>
-<section id="matrix-multiplication" class="level3" data-number="3.5.3">
-<h3 data-number="3.5.3" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">3.5.3</span> Matrix Multiplication</h3>
-</section>
-<section id="transpose-and-inverse" class="level3" data-number="3.5.4">
-<h3 data-number="3.5.4" class="anchored" data-anchor-id="transpose-and-inverse"><span class="header-section-number">3.5.4</span> Transpose and Inverse</h3>
-</section>
-<section id="eigenvalues-and-eigenvectors" class="level3" data-number="3.5.5">
-<h3 data-number="3.5.5" class="anchored" data-anchor-id="eigenvalues-and-eigenvectors"><span class="header-section-number">3.5.5</span> Eigenvalues and Eigenvectors</h3>
-</section>
-</section>
-<section id="calculus-and-optimization" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="calculus-and-optimization"><span class="header-section-number">3.6</span> Calculus and Optimization</h2>
-<section id="functions-and-slopes" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="functions-and-slopes"><span class="header-section-number">3.6.1</span> Functions and Slopes</h3>
-</section>
-<section id="derivatives" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">3.6.2</span> Derivatives</h3>
-</section>
-<section id="partial-derivatives" class="level3" data-number="3.6.3">
-<h3 data-number="3.6.3" class="anchored" data-anchor-id="partial-derivatives"><span class="header-section-number">3.6.3</span> Partial Derivatives</h3>
-</section>
-<section id="gradients" class="level3" data-number="3.6.4">
-<h3 data-number="3.6.4" class="anchored" data-anchor-id="gradients"><span class="header-section-number">3.6.4</span> Gradients</h3>
-</section>
-<section id="gradient-descent" class="level3" data-number="3.6.5">
-<h3 data-number="3.6.5" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">3.6.5</span> Gradient Descent</h3>
-</section>
-</section>
-<section id="mathematical-connection-to-machine-learning" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="mathematical-connection-to-machine-learning"><span class="header-section-number">3.7</span> Mathematical Connection to Machine Learning</h2>
-<section id="loss-functions" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="loss-functions"><span class="header-section-number">3.7.1</span> Loss Functions</h3>
-</section>
-<section id="maximum-likelihood" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="maximum-likelihood"><span class="header-section-number">3.7.2</span> Maximum Likelihood</h3>
-</section>
-<section id="regularization" class="level3" data-number="3.7.3">
-<h3 data-number="3.7.3" class="anchored" data-anchor-id="regularization"><span class="header-section-number">3.7.3</span> Regularization</h3>
+<section id="variance-and-standard-deviation" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="variance-and-standard-deviation"><span class="header-section-number">3.4.2</span> Variance and Standard Deviation</h3>
+<p>Sample variance is</p>
+<p><span class="math display">\[
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2.
+\]</span></p>
+<p>The sample standard deviation is</p>
+<p><span class="math display">\[
+s = \sqrt{s^2}.
+\]</span></p>
+<div id="07b4dde4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sample_variance <span class="op">=</span> np.var(scores, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sample_sd <span class="op">=</span> np.std(scores, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sample_variance, sample_sd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(np.float64(67.61904761904763), np.float64(8.223080178318076))</code></pre>
+</div>
+</div>
+<p>Variance measures squared dispersion; standard deviation returns that dispersion to the original measurement units.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Same Mean, Different Data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Two datasets can have the same mean and dramatically different variability, shape, outliers, and relationships. Summary statistics compress information. Compression is useful—but never neutral.</p>
+</div>
+</div>
 </section>
 </section>
-<section id="hands-on-practice" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">3.8</span> Hands-On Practice</h2>
-<p>Use Python to calculate descriptive statistics, correlations, matrix operations, and a simple gradient-descent update.</p>
+<section id="visual-intuition-distribution-and-variation" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="visual-intuition-distribution-and-variation"><span class="header-section-number">3.5</span> Visual Intuition: Distribution and Variation</h2>
+<div id="cell-fig-distributions" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>narrow <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">3</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.hist(narrow, bins<span class="op">=</span><span class="dv">35</span>, alpha<span class="op">=</span><span class="fl">0.55</span>, label<span class="op">=</span><span class="st">"SD ≈ 1"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.hist(wide, bins<span class="op">=</span><span class="dv">35</span>, alpha<span class="op">=</span><span class="fl">0.45</span>, label<span class="op">=</span><span class="st">"SD ≈ 3"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Value"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Similar Centers, Different Variation"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-distributions" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Overlapping histograms centered near the same value. One distribution is narrow with standard deviation about 1, while the other is much wider with standard deviation about 3, showing similar centers but very different variability.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-statistics-mathematics_files/figure-html/fig-distributions-output-1.png" alt="Overlapping histograms centered near the same value. One distribution is narrow with standard deviation about 1, while the other is much wider with standard deviation about 3, showing similar centers but very different variability." width="667" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Two samples can have similar centers while differing substantially in spread.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Variation matters in ML because algorithms respond not only to where variables are centered but also to their scales and distributions.</p>
 </section>
-<section id="common-mistakes" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">3.9</span> Common Mistakes</h2>
+<section id="probability-a-language-for-uncertainty" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="probability-a-language-for-uncertainty"><span class="header-section-number">3.6</span> Probability: A Language for Uncertainty</h2>
+<p>For an event <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+0 \le P(A) \le 1.
+\]</span></p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are events, conditional probability is</p>
+<p><span class="math display">\[
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+\qquad P(B)&gt;0.
+\]</span></p>
+<p>Conditional reasoning appears throughout machine learning. A classifier may estimate a probability such as</p>
+<p><span class="math display">\[
+P(Y=1\mid X=x).
+\]</span></p>
+<p>That is a statement about uncertainty conditional on the information represented by <span class="math inline">\(x\)</span>.</p>
+<section id="expected-value" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="expected-value"><span class="header-section-number">3.6.1</span> Expected Value</h3>
+<p>For a discrete random variable <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+E[X] = \sum_x xP(X=x).
+\]</span></p>
+<p>Expected value is a probability-weighted average. Many machine-learning objectives can be interpreted as attempts to minimize expected loss.</p>
+</section>
+</section>
+<section id="probability-distributions" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">3.7</span> Probability Distributions</h2>
+<p>A probability distribution describes how probability is allocated across possible values of a random variable. SciPy provides extensive tools for continuous and discrete probability distributions as well as sample statistics and statistical tests <span class="citation" data-cites="scipyStats2026">(<a href="../references.html#ref-scipyStats2026" role="doc-biblioref">SciPy Community 2026</a>)</span>.</p>
+<p>Common distributions we will encounter include:</p>
 <ul>
-<li>Treating correlation as causation.</li>
-<li>Assuming statistical significance implies predictive usefulness.</li>
-<li>Ignoring scale when distance is important.</li>
-<li>Applying formulas without understanding assumptions.</li>
+<li>Bernoulli — binary outcomes;</li>
+<li>Binomial — counts of successes across trials;</li>
+<li>Normal — continuous measurements and error models;</li>
+<li>Poisson — event counts;</li>
+<li>empirical distributions — distributions represented directly by observed data.</li>
 </ul>
+<section id="a-normal-distribution-in-python" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="a-normal-distribution-in-python"><span class="header-section-number">3.7.1</span> A Normal Distribution in Python</h3>
+<div id="ce624c72" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>probability <span class="op">=</span> norm.cdf(<span class="fl">1.96</span>) <span class="op">-</span> norm.cdf(<span class="op">-</span><span class="fl">1.96</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>probability</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>np.float64(0.950004209703559)</code></pre>
+</div>
+</div>
+<p>The code computes the probability that a standard normal random variable falls between -1.96 and 1.96.</p>
+<p>The important lesson is not memorizing 1.96. It is understanding that probability models provide mathematical representations of uncertainty.</p>
 </section>
-<section id="knowledge-check" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">3.10</span> Knowledge Check</h2>
+</section>
+<section id="population-sample-parameter-statistic" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="population-sample-parameter-statistic"><span class="header-section-number">3.8</span> Population, Sample, Parameter, Statistic</h2>
+<p>Suppose we want to know the mean sleep duration of a target population.</p>
+<p>The <strong>population</strong> is the full set of units about which we want to make a statement.</p>
+<p>A <strong>sample</strong> is the subset observed.</p>
+<p>A <strong>parameter</strong> is a population quantity such as <span class="math inline">\(\mu\)</span>.</p>
+<p>A <strong>statistic</strong> is a sample quantity such as <span class="math inline">\(\bar{x}\)</span>.</p>
+<p>We use statistics to learn about parameters, but the statistic changes from sample to sample.</p>
+<section id="sampling-variation-by-simulation" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="sampling-variation-by-simulation"><span class="header-section-number">3.8.1</span> Sampling Variation by Simulation</h3>
+<div id="cell-fig-sampling-distribution" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="fl">7.0</span>, scale<span class="op">=</span><span class="fl">1.5</span>, size<span class="op">=</span><span class="dv">100_000</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sample_means <span class="op">=</span> []</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2000</span>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    sample <span class="op">=</span> rng.choice(population, size<span class="op">=</span><span class="dv">100</span>, replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    sample_means.append(sample.mean())</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.hist(sample_means, bins<span class="op">=</span><span class="dv">35</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.axvline(np.mean(population), linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Population mean"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Sample mean"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Repeated Samples Produce Different Estimates"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-sampling-distribution" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Histogram of sample means from 2,000 repeated samples of size 100. The estimates cluster around the population mean, marked by a vertical dashed line, illustrating sampling variability.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-statistics-mathematics_files/figure-html/fig-sampling-distribution-output-1.png" alt="Histogram of sample means from 2,000 repeated samples of size 100. The estimates cluster around the population mean, marked by a vertical dashed line, illustrating sampling variability." width="667" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Sampling distribution of the mean across repeated samples.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The same sampling process does not produce exactly the same estimate every time.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Connection to Machine Learning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Training data are samples. Model performance, fitted parameters, feature importance, and selected hyperparameters can therefore vary with the sample.</p>
+<p>A single train/test split is one realization—not a law of nature.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="standard-error-and-uncertainty" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="standard-error-and-uncertainty"><span class="header-section-number">3.9</span> Standard Error and Uncertainty</h2>
+<p>For an independent sample, the estimated standard error of the mean is commonly written</p>
+<p><span class="math display">\[
+SE(\bar{x}) = \frac{s}{\sqrt{n}}.
+\]</span></p>
+<p>As <span class="math inline">\(n\)</span> grows, the standard error generally becomes smaller, all else equal.</p>
+<p>But large samples do not automatically solve poor measurement, biased sampling, leakage, confounding, or dataset shift.</p>
+</section>
+<section id="prediction-inference-and-different-kinds-of-questions" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="prediction-inference-and-different-kinds-of-questions"><span class="header-section-number">3.10</span> Prediction, Inference, and Different Kinds of Questions</h2>
+<p>Statistics and machine learning may use the same data and even the same models while asking different questions. In particular, explanatory and predictive modeling pursue distinct goals and can imply different modeling choices <span class="citation" data-cites="shmueli2010explain">(<a href="../references.html#ref-shmueli2010explain" role="doc-biblioref">Shmueli 2010</a>)</span>.</p>
+<p><strong>Prediction:</strong> How accurately can information in (X) predict (Y) for observations not used to fit the model?</p>
+<p><strong>Statistical inference:</strong> What does the observed sample permit us to conclude about a population parameter or relationship?</p>
+<p><strong>Causal inference:</strong> What would happen to (Y) if we intervened to change (X)?</p>
+<p><span class="math display">\[
+\boxed{\text{Prediction}\neq\text{Statistical Inference}\neq\text{Causal Inference}}
+\]</span></p>
+<p>A model can predict well even when individual coefficients are difficult to interpret. Conversely, a precisely estimated association may add little predictive value. The evidence required depends on the claim.</p>
+<section id="predictive-signal-without-a-unique-explanation" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="predictive-signal-without-a-unique-explanation"><span class="header-section-number">3.10.1</span> Predictive Signal Without a Unique Explanation</h3>
+<p>Correlated predictors can preserve predictive signal while making allocation of that signal across individual coefficients unstable.</p>
+<div id="cell-fig-correlated-predictors" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>rng_pi <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>n_pi <span class="op">=</span> <span class="dv">600</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>x1_pi <span class="op">=</span> rng_pi.normal(size<span class="op">=</span>n_pi)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>x2_pi <span class="op">=</span> x1_pi <span class="op">+</span> rng_pi.normal(scale<span class="op">=</span><span class="fl">0.12</span>, size<span class="op">=</span>n_pi)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>y_pi <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> x1_pi <span class="op">+</span> rng_pi.normal(scale<span class="op">=</span><span class="fl">1.0</span>, size<span class="op">=</span>n_pi)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>X_pi <span class="op">=</span> np.column_stack([x1_pi, x2_pi])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>Xtr_pi, Xte_pi, ytr_pi, yte_pi <span class="op">=</span> train_test_split(</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    X_pi, y_pi, test_size<span class="op">=</span><span class="fl">0.30</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>model_pi <span class="op">=</span> LinearRegression().fit(Xtr_pi, ytr_pi)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>pred_pi <span class="op">=</span> model_pi.predict(Xte_pi)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>rmse_pi <span class="op">=</span> np.sqrt(mean_squared_error(yte_pi, pred_pi))</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>coef_pi <span class="op">=</span> []</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">250</span>):</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    idx_pi <span class="op">=</span> rng_pi.choice(<span class="bu">len</span>(Xtr_pi), <span class="bu">len</span>(Xtr_pi), replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    coef_pi.append(</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        LinearRegression().fit(Xtr_pi[idx_pi], ytr_pi[idx_pi]).coef_</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>coef_pi <span class="op">=</span> np.asarray(coef_pi)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>plt.scatter(coef_pi[:, <span class="dv">0</span>], coef_pi[:, <span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.45</span>, s<span class="op">=</span><span class="dv">22</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"Estimated coefficient for </span><span class="dv">$</span><span class="vs">x_1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"Estimated coefficient for </span><span class="dv">$</span><span class="vs">x_2</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Correlated Predictors and Coefficient Instability"</span>)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE: </span><span class="sc">{</span>rmse_pi<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fitted coefficients:"</span>, model_pi.coef_)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-correlated-predictors" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot of bootstrap coefficient estimates for two highly correlated predictors. The coefficient pairs vary substantially across resamples, showing instability in individual coefficients despite preserved overall predictive signal.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-correlated-predictors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-statistics-mathematics_files/figure-html/fig-correlated-predictors-output-1.png" alt="Scatterplot of bootstrap coefficient estimates for two highly correlated predictors. The coefficient pairs vary substantially across resamples, showing instability in individual coefficients despite preserved overall predictive signal." width="676" height="451" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-correlated-predictors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Correlated predictors can preserve predictive signal while individual coefficient estimates vary across bootstrap samples.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test RMSE: 0.965
+Fitted coefficients: [2.9705437  0.08362775]</code></pre>
+</div>
+</div>
+<p>The model can retain useful predictive information while repeated samples redistribute the apparent contribution between (x_1) and (x_2).</p>
+<p><span class="math display">\[
+\boxed{\text{Stable prediction}\not\Rightarrow\text{stable interpretation of every parameter}}
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Uncertainty Is Information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Uncertainty is not an embarrassment that disappears when a model becomes sophisticated. Sampling variation, measurement error, model specification, hyperparameter selection, and distribution shift can all matter.</p>
+<p>Ask not only <strong>What is my estimate?</strong> but also <strong>How much could this conclusion change under another defensible sample, split, specification, or population?</strong></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Strong predictive performance does not, by itself, demonstrate that predictors cause the outcome, coefficients are stable scientific effects, the model reveals the true data-generating mechanism, or the same relationships hold elsewhere.</p>
+<p><strong>Match the strength of the claim to the design and strength of the evidence.</strong></p>
+</div>
+</div>
+</section>
+</section>
+<section id="covariance-and-correlation" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">3.11</span> Covariance and Correlation</h2>
+<p>Covariance describes how two variables vary together:</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+=
+\frac{1}{n-1}
+\sum_{i=1}^{n}
+(x_i-\bar{x})(y_i-\bar{y}).
+\]</span></p>
+<p>Correlation standardizes covariance:</p>
+<p><span class="math display">\[
+r_{XY}
+=
+\frac{\operatorname{Cov}(X,Y)}{s_Xs_Y}.
+\]</span></p>
+<p>For Pearson correlation,</p>
+<p><span class="math display">\[
+-1 \le r \le 1.
+\]</span></p>
+<div id="8d220d84" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>study_hours <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>exam_score <span class="op">=</span> np.array([<span class="dv">61</span>, <span class="dv">66</span>, <span class="dv">74</span>, <span class="dv">78</span>, <span class="dv">88</span>, <span class="dv">92</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>np.corrcoef(study_hours, exam_score)[<span class="dv">0</span>, <span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>np.float64(0.999252397692809)</code></pre>
+</div>
+</div>
+<p>Correlation can be useful for exploration, feature analysis, and understanding redundancy. It does not establish causation.</p>
+</section>
+<section id="standardization-putting-features-on-comparable-scales" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="standardization-putting-features-on-comparable-scales"><span class="header-section-number">3.12</span> Standardization: Putting Features on Comparable Scales</h2>
+<p>A standard score is</p>
+<p><span class="math display">\[
+z_i=\frac{x_i-\bar{x}}{s}.
+\]</span></p>
+<p>In machine-learning implementations, scaling statistics should be learned from the <strong>training data</strong> and then applied to later data. scikit-learn’s <code>StandardScaler</code> centers features and scales them using statistics learned during <code>fit</code> <span class="citation" data-cites="sklearnStandardScaler2026">(<a href="../references.html#ref-sklearnStandardScaler2026" role="doc-biblioref">scikit-learn developers 2026</a>)</span>.</p>
+<div id="ce63e132" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_scale_demo <span class="op">=</span> np.array([</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">18</span>, <span class="dv">22000</span>],</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">25</span>, <span class="dv">48000</span>],</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">40</span>, <span class="dv">76000</span>],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">55</span>, <span class="dv">110000</span>]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X_scale_demo)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>X_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>array([[-1.15736053, -1.28397747],
+       [-0.66635909, -0.48913427],
+       [ 0.38578684,  0.3668507 ],
+       [ 1.43793278,  1.40626103]])</code></pre>
+</div>
+</div>
+<p>Why can scaling matter? Many learning objectives depend on distances, dot products, gradients, or regularization. A feature whose numerical scale is orders of magnitude larger than another can disproportionately influence such calculations. scikit-learn explicitly notes this issue for algorithms involving RBF kernels and L1/L2 regularization <span class="citation" data-cites="sklearnStandardScaler2026">(<a href="../references.html#ref-sklearnStandardScaler2026" role="doc-biblioref">scikit-learn developers 2026</a>)</span>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Statistical Calculation Can Become Leakage
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do <strong>not</strong> compute scaling parameters using the entire dataset before evaluation. The test set must not influence training-time preprocessing.</p>
+<p>We will solve this systematically with pipelines in Chapter 5.</p>
+</div>
+</div>
+</section>
+<section id="linear-algebra-the-language-of-many-models" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="linear-algebra-the-language-of-many-models"><span class="header-section-number">3.13</span> Linear Algebra: The Language of Many Models</h2>
+<p>NumPy provides operations for dot products, matrix multiplication, norms, decompositions, and other linear-algebra routines <span class="citation" data-cites="numpyLinearAlgebra2026">(<a href="../references.html#ref-numpyLinearAlgebra2026" role="doc-biblioref">NumPy Developers 2026</a>)</span>.</p>
+<section id="vectors" class="level3" data-number="3.13.1">
+<h3 data-number="3.13.1" class="anchored" data-anchor-id="vectors"><span class="header-section-number">3.13.1</span> Vectors</h3>
+<p>A feature vector for observation (i) might be</p>
+<p><span class="math display">\[
+x_i =
+\begin{bmatrix}
+x_{i1}\\x_{i2}\\x_{i3}
+\end{bmatrix}.
+\]</span></p>
+<p>A coefficient vector might be</p>
+<p><span class="math display">\[
+\beta =
+\begin{bmatrix}
+\beta_1\\\beta_2\\\beta_3
+\end{bmatrix}.
+\]</span></p>
+<p>Their dot product is</p>
+<p><span class="math display">\[
+x_i^\top\beta
+=
+\sum_{j=1}^{p}x_{ij}\beta_j.
+\]</span></p>
+<div id="9d9c2744" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">2.0</span>, <span class="fl">5.0</span>, <span class="fl">1.5</span>])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.array([<span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.1</span>])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>np.dot(x, beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>np.float64(2.25)</code></pre>
+</div>
+</div>
+<p>This operation appears throughout linear models, neural networks, similarity calculations, and many other methods.</p>
+</section>
+<section id="matrix-vector-multiplication" class="level3" data-number="3.13.2">
+<h3 data-number="3.13.2" class="anchored" data-anchor-id="matrix-vector-multiplication"><span class="header-section-number">3.13.2</span> Matrix-Vector Multiplication</h3>
+<p>For many observations,</p>
+<p><span class="math display">\[
+\hat{y}=X\beta.
+\]</span></p>
+<div id="6b1e78e3" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X_demo <span class="op">=</span> np.array([</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.0</span>, <span class="fl">2.0</span>],</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.0</span>, <span class="fl">4.0</span>],</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.0</span>, <span class="fl">6.0</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.array([<span class="fl">3.0</span>, <span class="fl">1.5</span>])</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>X_demo <span class="op">@</span> beta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>array([ 6.,  9., 12.])</code></pre>
+</div>
+</div>
+<p>The same equation produces predictions for all observations at once.</p>
+</section>
+</section>
+<section id="distance-and-similarity" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="distance-and-similarity"><span class="header-section-number">3.14</span> Distance and Similarity</h2>
+<p>For vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span>, Euclidean distance is</p>
+<p><span class="math display">\[
+d(x,z)
+=
+\sqrt{\sum_{j=1}^{p}(x_j-z_j)^2}.
+\]</span></p>
+<div id="27361175" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.array([<span class="fl">4.0</span>, <span class="fl">6.0</span>])</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(x <span class="op">-</span> z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>np.float64(5.0)</code></pre>
+</div>
+</div>
+<p>Distance is central to methods such as nearest neighbors, clustering, and some anomaly-detection approaches.</p>
+<section id="why-scaling-changes-distance" class="level3" data-number="3.14.1">
+<h3 data-number="3.14.1" class="anchored" data-anchor-id="why-scaling-changes-distance"><span class="header-section-number">3.14.1</span> Why Scaling Changes Distance</h3>
+<div id="8c9ff12f" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>person_a <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">30_000</span>])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>person_b <span class="op">=</span> np.array([<span class="dv">50</span>, <span class="dv">31_000</span>])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(person_a <span class="op">-</span> person_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>np.float64(1000.4498987955369)</code></pre>
+</div>
+</div>
+<p>The income difference dominates the age difference numerically. This does not necessarily mean income is substantively more important.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Distance Is a Modeling Choice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before asking which observations are “close,” ask:</p>
+<p><strong>Close according to which representation, scale, and metric?</strong></p>
+</div>
+</div>
+</section>
+</section>
+<section id="functions-loss-and-learning" class="level2" data-number="3.15">
+<h2 data-number="3.15" class="anchored" data-anchor-id="functions-loss-and-learning"><span class="header-section-number">3.15</span> Functions, Loss, and Learning</h2>
+<p>For observation (i), a supervised model can be written as</p>
+<p><span class="math display">\[
+\hat{y}_i=f_\theta(x_i).
+\]</span></p>
+<p>To learn <span class="math inline">\(\theta\)</span>, we need a way to quantify error.</p>
+<p>For regression, mean squared error is</p>
+<p><span class="math display">\[
+\operatorname{MSE}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+(y_i-\hat{y}_i)^2.
+\]</span></p>
+<div id="4a724c5c" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> np.array([<span class="fl">3.0</span>, <span class="fl">5.0</span>, <span class="fl">7.0</span>])</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> np.array([<span class="fl">2.5</span>, <span class="fl">5.5</span>, <span class="fl">8.0</span>])</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> np.mean((y_true <span class="op">-</span> y_pred) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>mse</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>np.float64(0.5)</code></pre>
+</div>
+</div>
+<p>The loss function translates the vague instruction “fit the data well” into a mathematical objective.</p>
+<p>That translation has consequences. Different loss functions value errors differently.</p>
+</section>
+<section id="derivatives-measuring-local-change" class="level2" data-number="3.16">
+<h2 data-number="3.16" class="anchored" data-anchor-id="derivatives-measuring-local-change"><span class="header-section-number">3.16</span> Derivatives: Measuring Local Change</h2>
+<p>For a function <span class="math inline">\(f(\theta)\)</span>, the derivative</p>
+<p><span class="math display">\[
+\frac{df}{d\theta}
+\]</span></p>
+<p>describes how the function changes locally as <span class="math inline">\(\theta\)</span> changes.</p>
+<p>Consider</p>
+<p><span class="math display">\[
+J(\theta)=(\theta-3)^2.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\frac{dJ}{d\theta}=2(\theta-3).
+\]</span></p>
+<p>If <span class="math inline">\(\theta&gt;3\)</span>, the derivative is positive. If <span class="math inline">\(\theta&lt;3\)</span>, it is negative. At <span class="math inline">\(\theta=3\)</span>, the derivative is zero.</p>
+</section>
+<section id="gradients-change-in-multiple-dimensions" class="level2" data-number="3.17">
+<h2 data-number="3.17" class="anchored" data-anchor-id="gradients-change-in-multiple-dimensions"><span class="header-section-number">3.17</span> Gradients: Change in Multiple Dimensions</h2>
+<p>For parameters</p>
+<p><span class="math display">\[
+\theta =
+\begin{bmatrix}
+\theta_1\\
+\theta_2\\
+\vdots\\
+\theta_p
+\end{bmatrix},
+\]</span></p>
+<p>the gradient is</p>
+<p><span class="math display">\[
+\nabla J(\theta)
+=
+\begin{bmatrix}
+\frac{\partial J}{\partial\theta_1}\\
+\frac{\partial J}{\partial\theta_2}\\
+\vdots\\
+\frac{\partial J}{\partial\theta_p}
+\end{bmatrix}.
+\]</span></p>
+<p>The gradient points in the direction of steepest local increase. To reduce a differentiable objective, we move in the opposite direction.</p>
+</section>
+<section id="gradient-descent" class="level2" data-number="3.18">
+<h2 data-number="3.18" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">3.18</span> Gradient Descent</h2>
+<p>A basic update is</p>
+<p><span class="math display">\[
+\theta_{t+1}
+=
+\theta_t
+-
+\eta\nabla J(\theta_t),
+\]</span></p>
+<p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong>.</p>
+<section id="watch-optimization-happen" class="level3" data-number="3.18.1">
+<h3 data-number="3.18.1" class="anchored" data-anchor-id="watch-optimization-happen"><span class="header-section-number">3.18.1</span> Watch Optimization Happen</h3>
+<div id="cell-fig-gradient-descent" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="op">-</span><span class="fl">4.0</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>learning_rate <span class="op">=</span> <span class="fl">0.15</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> [theta]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    gradient <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (theta <span class="op">-</span> <span class="dv">3</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> theta <span class="op">-</span> learning_rate <span class="op">*</span> gradient</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    history.append(theta)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">300</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> (grid <span class="op">-</span> <span class="dv">3</span>) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.plot(grid, loss, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">J</span><span class="kw">(</span><span class="ch">\t</span><span class="vs">heta</span><span class="kw">)</span><span class="vs">=</span><span class="kw">(</span><span class="ch">\t</span><span class="vs">heta-3</span><span class="kw">)</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(history, [(h <span class="op">-</span> <span class="dv">3</span>) <span class="op">**</span> <span class="dv">2</span> <span class="cf">for</span> h <span class="kw">in</span> history], label<span class="op">=</span><span class="st">"Gradient descent steps"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="ch">\t</span><span class="vs">heta</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Loss"</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Learning by Following the Gradient"</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-gradient-descent" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Curve of the quadratic loss J(theta) = (theta minus 3) squared with successive gradient-descent steps marked along the curve. The steps move from an initial value near minus 4 toward the minimum at theta equals 3.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gradient-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-statistics-mathematics_files/figure-html/fig-gradient-descent-output-1.png" alt="Curve of the quadratic loss J(theta) = (theta minus 3) squared with successive gradient-descent steps marked along the curve. The steps move from an initial value near minus 4 toward the minimum at theta equals 3." width="659" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gradient-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Gradient descent iteratively approaches the minimum of a simple loss function.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The algorithm does not “know” that the answer is 3. It repeatedly uses local information about the slope to update the parameter.</p>
+</section>
+<section id="learning-rate" class="level3" data-number="3.18.2">
+<h3 data-number="3.18.2" class="anchored" data-anchor-id="learning-rate"><span class="header-section-number">3.18.2</span> Learning Rate</h3>
+<p>If <span class="math inline">\(\eta\)</span> is too small, learning can be slow. If it is too large, updates may overshoot or diverge.</p>
+<p>This simple idea will reappear in neural networks and other optimization-based methods.</p>
+</section>
+</section>
+<section id="from-intuition-to-equation-to-python-to-ml" class="level2" data-number="3.19">
+<h2 data-number="3.19" class="anchored" data-anchor-id="from-intuition-to-equation-to-python-to-ml"><span class="header-section-number">3.19</span> From Intuition to Equation to Python to ML</h2>
+<p>Consider feature standardization.</p>
+<p><strong>Intuition:</strong> features measured on very different scales may distort distance- or optimization-based learning.</p>
+<p><strong>Equation:</strong></p>
+<p><span class="math display">\[
+z=\frac{x-\mu}{\sigma}.
+\]</span></p>
+<p><strong>Python:</strong></p>
+<div id="61a27dd9" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>ML application:</strong> support vector machines, regularized linear models, nearest-neighbor methods, neural networks, and other methods can be sensitive to feature scale.</p>
+<p>This four-part pattern is how we will use mathematics throughout the book.</p>
+</section>
+<section id="beyond-the-algorithm-the-map-is-not-the-territory" class="level2" data-number="3.20">
+<h2 data-number="3.20" class="anchored" data-anchor-id="beyond-the-algorithm-the-map-is-not-the-territory"><span class="header-section-number">3.20</span> Beyond the Algorithm: The Map Is Not the Territory</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Mathematical Precision and Substantive Truth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A model can be mathematically precise and still represent the world poorly.</p>
+<p>When we write a person as a vector,</p>
+<p><span class="math display">\[
+x=[x_1,x_2,\ldots,x_p],
+\]</span></p>
+<p>we have not represented the person. We have represented selected measurements about that person.</p>
+<p>When we minimize a loss function, we have not defined everything society or a scientific discipline values. We have defined a mathematical criterion.</p>
+<p>Abstraction is one of the great powers of data science because it allows complex phenomena to become computationally tractable. But abstraction also removes information.</p>
+<p>The disciplined data scientist therefore asks two questions:</p>
 <ol type="1">
-<li>What does covariance measure?</li>
-<li>How is correlation different from covariance?</li>
-<li>What does a gradient represent?</li>
-<li>Why are eigenvectors important in PCA?</li>
-<li>What is conditional probability?</li>
+<li><strong>Is the mathematics correct?</strong></li>
+<li><strong>Is the mathematical representation appropriate for the phenomenon and decision?</strong></li>
+</ol>
+<p>The first question concerns computation. The second requires domain knowledge, measurement, judgment, and sometimes ethics.</p>
+<p><strong>The map can be extraordinarily useful without becoming the territory.</strong></p>
+</div>
+</div>
+</section>
+<section id="three-tracks-same-mathematics-different-meaning" class="level2" data-number="3.21">
+<h2 data-number="3.21" class="anchored" data-anchor-id="three-tracks-same-mathematics-different-meaning"><span class="header-section-number">3.21</span> Three Tracks: Same Mathematics, Different Meaning</h2>
+<section id="health-track" class="level3" data-number="3.21.1">
+<h3 data-number="3.21.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">3.21.1</span> Health Track</h3>
+<p>Suppose systolic blood pressure and age are positively correlated in a sample. The correlation summarizes an observed relationship. It does not establish that changing age would cause blood pressure to change in an intervention-like sense.</p>
+<p>Scaling biomarkers may help an algorithm computationally, but it does not make different biomarkers substantively equivalent.</p>
+</section>
+<section id="education-track" class="level3" data-number="3.21.2">
+<h3 data-number="3.21.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">3.21.2</span> Education Track</h3>
+<p>Institutional tuition, enrollment, retention, and completion may have dramatically different scales. Standardization can help certain algorithms, but the meaning of a one-standard-deviation difference depends on the variable and population.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="3.21.3">
+<h3 data-number="3.21.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">3.21.3</span> Open ML Benchmark Track</h3>
+<p>Benchmark datasets are useful for isolating mathematical behavior. We can intentionally rescale one feature and observe how a distance-based algorithm changes. This makes benchmark data especially useful for controlled learning experiments.</p>
+</section>
+</section>
+<section id="try-it" class="level2" data-number="3.22">
+<h2 data-number="3.22" class="anchored" data-anchor-id="try-it"><span class="header-section-number">3.22</span> Try It</h2>
+<p>For the vector</p>
+<p><span class="math display">\[
+x=[2,4,6,8,10],
+\]</span></p>
+<ol type="1">
+<li>calculate the mean;</li>
+<li>calculate the sample variance;</li>
+<li>calculate the sample standard deviation;</li>
+<li>standardize each value;</li>
+<li>verify that the standardized values have mean approximately zero;</li>
+<li>explain why this transformation changes units but not ordering.</li>
+</ol>
+<p>Then reproduce your calculations with NumPy.</p>
+</section>
+<section id="hands-on-lab-mathematics-you-can-see" class="level2" data-number="3.23">
+<h2 data-number="3.23" class="anchored" data-anchor-id="hands-on-lab-mathematics-you-can-see"><span class="header-section-number">3.23</span> Hands-On Lab: Mathematics You Can See</h2>
+<p>Use a public or built-in dataset with several numeric features.</p>
+<ol type="1">
+<li>inspect feature means and standard deviations;</li>
+<li>create distributions for two features;</li>
+<li>calculate a correlation matrix;</li>
+<li>select two observations and calculate Euclidean distance;</li>
+<li>standardize the features using <strong>training data only</strong>;</li>
+<li>recalculate the distance;</li>
+<li>explain why it changed;</li>
+<li>fit a simple k-nearest-neighbors classifier before and after scaling;</li>
+<li>compare performance;</li>
+<li>explain why the result is algorithm-dependent rather than proof that scaling always improves ML.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">3.11</span> Real-World Case Study</h2>
-<section id="understanding-health-risk-variables" class="level3" data-number="3.11.1">
-<h3 data-number="3.11.1" class="anchored" data-anchor-id="understanding-health-risk-variables"><span class="header-section-number">3.11.1</span> Understanding Health Risk Variables</h3>
-<p>Explore relationships among demographic, behavioral, and biometric variables in a public health dataset.</p>
-</section>
-</section>
-<section id="professors-challenge" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">3.12</span> Professor’s Challenge</h2>
-<p>A variable is statistically significant but adds almost no out-of-sample predictive performance. Should it remain in a predictive model?</p>
-</section>
-<section id="research-extension" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">3.13</span> Research Extension</h2>
-<p>Formulate a study comparing inferential and predictive conclusions from the same dataset.</p>
-</section>
-<section id="reproducibility-check" class="level2" data-number="3.14">
-<h2 data-number="3.14" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">3.14</span> Reproducibility Check</h2>
-<p>Record transformations, statistical assumptions, and all computational choices.</p>
-</section>
-<section id="key-takeaways" class="level2" data-number="3.15">
-<h2 data-number="3.15" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">3.15</span> Key Takeaways</h2>
+<section id="ai-pair-programmer" class="level2" data-number="3.24">
+<h2 data-number="3.24" class="anchored" data-anchor-id="ai-pair-programmer"><span class="header-section-number">3.24</span> AI Pair Programmer</h2>
+<p>Ask an AI assistant:</p>
+<blockquote class="blockquote">
+<p>“Explain why standardization improves every machine-learning algorithm.”</p>
+</blockquote>
+<p>The premise is intentionally flawed.</p>
+<p>Audit the response:</p>
 <ul>
-<li>Statistics, linear algebra, probability, and optimization form the language of machine learning.</li>
-<li>Mathematical understanding improves model selection and diagnosis.</li>
-<li>Predictive and inferential usefulness are not identical.</li>
+<li>Does it challenge the word <strong>every</strong>?</li>
+<li>Does it distinguish distance/gradient-sensitive models from tree-based models?</li>
+<li>Does it explain why scaling must be learned from training data?</li>
+<li>Does it confuse standardization with normalization?</li>
+<li>Does it claim that standardized features become normally distributed?</li>
+<li>Which claims require verification?</li>
 </ul>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Mathematical Language Can Make Wrong Answers Sound More Convincing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Equations and technical vocabulary do not substitute for valid reasoning.</p>
+</div>
+</div>
+</section>
+<section id="practitioner-track" class="level2" data-number="3.25">
+<h2 data-number="3.25" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">3.25</span> Practitioner Track</h2>
+<p>A practitioner should be able to:</p>
+<ul>
+<li>summarize distributions and relationships;</li>
+<li>identify when scale matters;</li>
+<li>reason about vectors, matrices, and distances;</li>
+<li>interpret loss functions;</li>
+<li>understand optimization at a conceptual level;</li>
+<li>recognize sampling variability in model results.</li>
+</ul>
+</section>
+<section id="researcher-track" class="level2" data-number="3.26">
+<h2 data-number="3.26" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">3.26</span> Researcher Track</h2>
+<p>A researcher should additionally be able to:</p>
+<ul>
+<li>distinguish samples from target populations;</li>
+<li>reason about uncertainty and sampling;</li>
+<li>separate association from causation;</li>
+<li>connect mathematical representations to measurement assumptions;</li>
+<li>recognize that estimates and model metrics vary across samples;</li>
+<li>justify mathematical choices in relation to the research question</li>
+<li>distinguish predictive, inferential, and causal questions before interpreting model output;</li>
+<li>report uncertainty appropriate to the scientific claim.</li>
+</ul>
+</section>
+<section id="professors-challenge-when-mathematics-misleads" class="level2" data-number="3.27">
+<h2 data-number="3.27" class="anchored" data-anchor-id="professors-challenge-when-mathematics-misleads"><span class="header-section-number">3.27</span> Professor’s Challenge: When Mathematics Misleads</h2>
+<p>A research team compares two classifiers for predicting a health outcome.</p>
+<p>Model A has an accuracy of 0.91.</p>
+<p>Model B has an accuracy of 0.88.</p>
+<p>The team concludes:</p>
+<blockquote class="blockquote">
+<p>“Model A is mathematically superior and should therefore be used.”</p>
+</blockquote>
+<p>Critique the conclusion.</p>
+<p>Your analysis should address:</p>
+<ul>
+<li>outcome prevalence;</li>
+<li>sampling variation;</li>
+<li>uncertainty in the performance estimates;</li>
+<li>sensitivity and specificity;</li>
+<li>calibration;</li>
+<li>asymmetric error costs;</li>
+<li>subgroup performance;</li>
+<li>external validity;</li>
+<li>whether the same test observations were used for both models;</li>
+<li>whether preprocessing was fitted only on training data;</li>
+<li>whether a three-percentage-point difference is practically meaningful;</li>
+<li>whether mathematical superiority can be defined by a single metric.</li>
+</ul>
+<p>Conclude by explaining what additional evidence is required before choosing between the models.</p>
+</section>
+<section id="research-studio" class="level2" data-number="3.28">
+<h2 data-number="3.28" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">3.28</span> Research Studio</h2>
+<p>Choose one of the three tracks.</p>
+<p>Identify a candidate research problem and write a mathematical specification containing:</p>
+<ol type="1">
+<li>unit of analysis;</li>
+<li>target variable;</li>
+<li>feature matrix <span class="math inline">\(X\)</span>;</li>
+<li>target vector <span class="math inline">\(y\)</span>;</li>
+<li>at least three numeric features and their units;</li>
+<li>at least one potential scaling issue;</li>
+<li>one expected association;</li>
+<li>one association that should <strong>not</strong> be interpreted causally;</li>
+<li>a candidate loss or evaluation function;</li>
+<li>the target population to which you hope the result will generalize;</li>
+<li>one source of sampling uncertainty;</li>
+<li>one way the mathematical representation simplifies the real phenomenon.</li>
+</ol>
+</section>
+<section id="knowledge-check" class="level2" data-number="3.29">
+<h2 data-number="3.29" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">3.29</span> Knowledge Check</h2>
+<ol type="1">
+<li>What is the difference between a parameter and a statistic?</li>
+<li>Why does sample variance use squared deviations?</li>
+<li>What does standard deviation communicate that variance does not?</li>
+<li>What does <span class="math inline">\(P(Y=1\mid X=x)\)</span> represent?</li>
+<li>Why do repeated samples produce different estimates?</li>
+<li>What does correlation fail to establish?</li>
+<li>Why can feature scaling matter for Euclidean distance?</li>
+<li>What does a dot product do?</li>
+<li>What does a loss function contribute to machine learning?</li>
+<li>What information does a derivative provide?</li>
+<li>Why does gradient descent move opposite the gradient?</li>
+<li>Why can a mathematically correct model still support a poor substantive conclusion?</li>
+<li>How can a model predict well while individual coefficient interpretations remain unstable?</li>
+<li>Why does strong out-of-sample prediction not establish causality?</li>
+<li>What does uncertainty communicate beyond a point estimate?</li>
+</ol>
+</section>
+<section id="reproducibility-check" class="level2" data-number="3.30">
+<h2 data-number="3.30" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">3.30</span> Reproducibility Check</h2>
+<p>Before leaving this chapter, verify that your analysis records:</p>
+<ul>
+<li>whether statistics use population or sample conventions;</li>
+<li>random seeds for simulations;</li>
+<li>feature units;</li>
+<li>scaling procedures;</li>
+<li>which data were used to estimate scaling parameters;</li>
+<li>distance metrics;</li>
+<li>loss functions;</li>
+<li>optimization settings such as learning rate;</li>
+<li>code used to produce mathematical figures and numerical results.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2" data-number="3.31">
+<h2 data-number="3.31" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">3.31</span> Key Takeaways</h2>
+<ul>
+<li>Statistics provides a language for variation, relationships, sampling, and uncertainty.</li>
+<li>Probability represents uncertainty mathematically.</li>
+<li>Samples provide imperfect information about populations.</li>
+<li>Correlation measures association, not causation.</li>
+<li>Scaling changes numerical representation and can materially affect some algorithms.</li>
+<li>Linear algebra compactly represents observations, features, parameters, and predictions.</li>
+<li>Distance depends on representation, scale, and metric.</li>
+<li>Loss functions translate modeling goals into mathematical objectives.</li>
+<li>Derivatives and gradients describe local change.</li>
+<li>Gradient descent uses local information to iteratively reduce a loss.</li>
+<li>Mathematical correctness is necessary but not sufficient for scientific or practical validity.</li>
+<li>Predictive, inferential, and causal questions require different forms of evidence.</li>
+<li>Strong prediction does not establish stable parameter interpretation or causality.</li>
+<li>Uncertainty communicates limits and stability of analytical conclusions.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2" data-number="3.32">
+<h2 data-number="3.32" class="anchored" data-anchor-id="looking-ahead"><span class="header-section-number">3.32</span> Looking Ahead</h2>
+<p>The mathematical and statistical ideas in this chapter become useful only when they are connected to a well-defined analytical problem. Chapter 4 therefore shifts from foundations to formulation: defining the unit of analysis, target, predictors, prediction horizon, decision context, baseline, and evidence required before modeling begins.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-numpyLinearAlgebra2026" class="csl-entry" role="listitem">
+NumPy Developers. 2026. <span>“Linear Algebra.”</span> <a href="https://numpy.org/doc/stable/reference/routines.linalg.html">https://numpy.org/doc/stable/reference/routines.linalg.html</a>.
+</div>
+<div id="ref-sklearnStandardScaler2026" class="csl-entry" role="listitem">
+scikit-learn developers. 2026. <span>“StandardScaler.”</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html</a>.
+</div>
+<div id="ref-scipyStats2026" class="csl-entry" role="listitem">
+SciPy Community. 2026. <span>“Statistics (Scipy.stats).”</span> <a href="https://docs.scipy.org/doc/scipy/tutorial/stats.html">https://docs.scipy.org/doc/scipy/tutorial/stats.html</a>.
+</div>
+<div id="ref-shmueli2010explain" class="csl-entry" role="listitem">
+Shmueli, Galit. 2010. <span>“To Explain or to Predict?”</span> <em>Statistical Science</em> 25 (3): 289–310. <a href="https://doi.org/10.1214/10-STS330">https://doi.org/10.1214/10-STS330</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -604,7 +1545,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -938,8 +1879,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-02-workflow/04-ml-problems.html" class="pagination-link" aria-label="From Research Question to Machine Learning Problem">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-02-workflow/04-ml-problems.html" class="pagination-link" aria-label="Framing Machine Learning Problems">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

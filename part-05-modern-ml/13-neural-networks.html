@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Neural Networks and Deep Learning – Machine Learning Using Python</title>
+<title>13&nbsp; Neural Networks: Learning Representations Through Layers – Machine Learning Using Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,7 +167,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,6 +183,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Machine Learning Using Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/amightyo/machine-learning-using-python-2e" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -141,6 +199,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use This Book</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -184,7 +248,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-02-workflow/04-ml-problems.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">From Research Question to Machine Learning Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Framing Machine Learning Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -207,31 +271,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/06-linear-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression: From Relationship to Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/07-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification and Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification: From Probability to Decision</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/08-trees-random-forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Decision Trees and Random Forests: Learning by Partitioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/09-support-vector-machines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines and Kernel Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machines: Margins, Geometry, and Kernels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-03-supervised/10-ensemble-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning and Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ensemble Learning: From Many Models to Stronger Predictions</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,13 +312,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/11-clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Clustering: Discovering Structure Without Labels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span></a>
   </div>
 </li>
       </ul>
@@ -271,19 +335,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/13-neural-networks.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/14-natural-language-processing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-05-modern-ml/15-generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI and Foundation Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Generative AI: From Prediction to Intelligent Systems</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +355,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Part VI — Reliable and Research-Ready Machine Learning</span></a>
+ <span class="menu-text">Part VI — Research, Responsibility, and Reproducibility</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -300,19 +364,48 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/16-model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation, Validation, and Hyperparameter Optimization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Model Evaluation: From Performance Metrics to Scientific Evidence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/17-responsible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Explainable, Fair, and Responsible Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Responsible Machine Learning: From Prediction to Consequence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part-06-research/18-reproducible-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning and Research Communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reproducible Machine Learning: From Analysis to Scientific Knowledge</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../teaching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching with This Book</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../citation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation, Edition, and License</span></a>
   </div>
 </li>
       </ul>
@@ -334,47 +427,81 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">13.1</span> Learning Objectives</a></li>
-  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">13.2</span> Why This Matters</a></li>
-  <li><a href="#real-world-problem" id="toc-real-world-problem" class="nav-link" data-scroll-target="#real-world-problem"><span class="header-section-number">13.3</span> Real-World Problem</a></li>
-  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations"><span class="header-section-number">13.4</span> Mathematical Foundations</a>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">13.2</span> Why This Matters</a>
   <ul class="collapse">
-  <li><a href="#the-artificial-neuron" id="toc-the-artificial-neuron" class="nav-link" data-scroll-target="#the-artificial-neuron"><span class="header-section-number">13.4.1</span> The Artificial Neuron</a></li>
+  <li><a href="#from-representation-to-representation-learning" id="toc-from-representation-to-representation-learning" class="nav-link" data-scroll-target="#from-representation-to-representation-learning"><span class="header-section-number">13.2.1</span> From Representation to Representation Learning</a></li>
   </ul></li>
-  <li><a href="#deep-learning-practice" id="toc-deep-learning-practice" class="nav-link" data-scroll-target="#deep-learning-practice"><span class="header-section-number">13.5</span> Deep Learning Practice</a>
+  <li><a href="#from-logistic-regression-to-a-neuron" id="toc-from-logistic-regression-to-a-neuron" class="nav-link" data-scroll-target="#from-logistic-regression-to-a-neuron"><span class="header-section-number">13.3</span> From Logistic Regression to a Neuron</a></li>
+  <li><a href="#a-neuron-by-hand" id="toc-a-neuron-by-hand" class="nav-link" data-scroll-target="#a-neuron-by-hand"><span class="header-section-number">13.4</span> A Neuron by Hand</a></li>
+  <li><a href="#hidden-layers-and-representation-learning" id="toc-hidden-layers-and-representation-learning" class="nav-link" data-scroll-target="#hidden-layers-and-representation-learning"><span class="header-section-number">13.5</span> Hidden Layers and Representation Learning</a></li>
+  <li><a href="#why-nonlinearity-is-essential" id="toc-why-nonlinearity-is-essential" class="nav-link" data-scroll-target="#why-nonlinearity-is-essential"><span class="header-section-number">13.6</span> Why Nonlinearity Is Essential</a></li>
+  <li><a href="#activation-functions" id="toc-activation-functions" class="nav-link" data-scroll-target="#activation-functions"><span class="header-section-number">13.7</span> Activation Functions</a>
   <ul class="collapse">
-  <li><a href="#training-and-validation" id="toc-training-and-validation" class="nav-link" data-scroll-target="#training-and-validation"><span class="header-section-number">13.5.1</span> Training and Validation</a></li>
-  <li><a href="#epochs-and-batches" id="toc-epochs-and-batches" class="nav-link" data-scroll-target="#epochs-and-batches"><span class="header-section-number">13.5.2</span> Epochs and Batches</a></li>
-  <li><a href="#learning-rates" id="toc-learning-rates" class="nav-link" data-scroll-target="#learning-rates"><span class="header-section-number">13.5.3</span> Learning Rates</a></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">13.5.4</span> Regularization</a></li>
-  <li><a href="#dropout" id="toc-dropout" class="nav-link" data-scroll-target="#dropout"><span class="header-section-number">13.5.5</span> Dropout</a></li>
-  <li><a href="#early-stopping" id="toc-early-stopping" class="nav-link" data-scroll-target="#early-stopping"><span class="header-section-number">13.5.6</span> Early Stopping</a></li>
+  <li><a href="#sigmoid" id="toc-sigmoid" class="nav-link" data-scroll-target="#sigmoid"><span class="header-section-number">13.7.1</span> Sigmoid</a></li>
+  <li><a href="#hyperbolic-tangent" id="toc-hyperbolic-tangent" class="nav-link" data-scroll-target="#hyperbolic-tangent"><span class="header-section-number">13.7.2</span> Hyperbolic Tangent</a></li>
+  <li><a href="#relu" id="toc-relu" class="nav-link" data-scroll-target="#relu"><span class="header-section-number">13.7.3</span> ReLU</a></li>
+  <li><a href="#softmax" id="toc-softmax" class="nav-link" data-scroll-target="#softmax"><span class="header-section-number">13.7.4</span> Softmax</a></li>
   </ul></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation"><span class="header-section-number">13.6</span> Python Implementation</a>
+  <li><a href="#visualize-common-activations" id="toc-visualize-common-activations" class="nav-link" data-scroll-target="#visualize-common-activations"><span class="header-section-number">13.8</span> Visualize Common Activations</a></li>
+  <li><a href="#forward-propagation-by-hand" id="toc-forward-propagation-by-hand" class="nav-link" data-scroll-target="#forward-propagation-by-hand"><span class="header-section-number">13.9</span> Forward Propagation by Hand</a></li>
+  <li><a href="#neural-networks-as-representation-learning" id="toc-neural-networks-as-representation-learning" class="nav-link" data-scroll-target="#neural-networks-as-representation-learning"><span class="header-section-number">13.10</span> Neural Networks as Representation Learning</a>
   <ul class="collapse">
-  <li><a href="#building-a-small-network" id="toc-building-a-small-network" class="nav-link" data-scroll-target="#building-a-small-network"><span class="header-section-number">13.6.1</span> Building a Small Network</a></li>
-  <li><a href="#training-curves" id="toc-training-curves" class="nav-link" data-scroll-target="#training-curves"><span class="header-section-number">13.6.2</span> Training Curves</a></li>
-  <li><a href="#evaluating-generalization" id="toc-evaluating-generalization" class="nav-link" data-scroll-target="#evaluating-generalization"><span class="header-section-number">13.6.3</span> Evaluating Generalization</a></li>
+  <li><a href="#from-feature-engineering-to-learned-features" id="toc-from-feature-engineering-to-learned-features" class="nav-link" data-scroll-target="#from-feature-engineering-to-learned-features"><span class="header-section-number">13.10.1</span> From Feature Engineering to Learned Features</a></li>
+  <li><a href="#what-might-a-hidden-representation-learn" id="toc-what-might-a-hidden-representation-learn" class="nav-link" data-scroll-target="#what-might-a-hidden-representation-learn"><span class="header-section-number">13.10.2</span> What Might a Hidden Representation Learn?</a></li>
+  <li><a href="#learned-does-not-mean-understood" id="toc-learned-does-not-mean-understood" class="nav-link" data-scroll-target="#learned-does-not-mean-understood"><span class="header-section-number">13.10.3</span> Learned Does Not Mean Understood</a></li>
+  <li><a href="#representation-quality-depends-on-the-objective" id="toc-representation-quality-depends-on-the-objective" class="nav-link" data-scroll-target="#representation-quality-depends-on-the-objective"><span class="header-section-number">13.10.4</span> Representation Quality Depends on the Objective</a></li>
+  <li><a href="#bridge-forward" id="toc-bridge-forward" class="nav-link" data-scroll-target="#bridge-forward"><span class="header-section-number">13.10.5</span> Bridge Forward</a></li>
   </ul></li>
-  <li><a href="#hands-on-practice" id="toc-hands-on-practice" class="nav-link" data-scroll-target="#hands-on-practice"><span class="header-section-number">13.7</span> Hands-On Practice</a></li>
-  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes"><span class="header-section-number">13.8</span> Common Mistakes</a></li>
-  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">13.9</span> Knowledge Check</a></li>
-  <li><a href="#real-world-case-study" id="toc-real-world-case-study" class="nav-link" data-scroll-target="#real-world-case-study"><span class="header-section-number">13.10</span> Real-World Case Study</a>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture"><span class="header-section-number">13.11</span> Architecture</a></li>
+  <li><a href="#loss-functions-give-the-network-a-goal" id="toc-loss-functions-give-the-network-a-goal" class="nav-link" data-scroll-target="#loss-functions-give-the-network-a-goal"><span class="header-section-number">13.12</span> Loss Functions Give the Network a Goal</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">13.13</span> Gradient Descent</a></li>
+  <li><a href="#gradient-descent-demonstration" id="toc-gradient-descent-demonstration" class="nav-link" data-scroll-target="#gradient-descent-demonstration"><span class="header-section-number">13.14</span> Gradient Descent Demonstration</a></li>
+  <li><a href="#the-chain-rule" id="toc-the-chain-rule" class="nav-link" data-scroll-target="#the-chain-rule"><span class="header-section-number">13.15</span> The Chain Rule</a></li>
+  <li><a href="#backpropagation" id="toc-backpropagation" class="nav-link" data-scroll-target="#backpropagation"><span class="header-section-number">13.16</span> Backpropagation</a></li>
+  <li><a href="#numerical-gradient-check" id="toc-numerical-gradient-check" class="nav-link" data-scroll-target="#numerical-gradient-check"><span class="header-section-number">13.17</span> Numerical Gradient Check</a></li>
+  <li><a href="#batches-and-epochs" id="toc-batches-and-epochs" class="nav-link" data-scroll-target="#batches-and-epochs"><span class="header-section-number">13.18</span> Batches and Epochs</a></li>
+  <li><a href="#vanishing-and-exploding-gradients" id="toc-vanishing-and-exploding-gradients" class="nav-link" data-scroll-target="#vanishing-and-exploding-gradients"><span class="header-section-number">13.19</span> Vanishing and Exploding Gradients</a></li>
+  <li><a href="#initialization" id="toc-initialization" class="nav-link" data-scroll-target="#initialization"><span class="header-section-number">13.20</span> Initialization</a></li>
+  <li><a href="#training-and-validation-curves" id="toc-training-and-validation-curves" class="nav-link" data-scroll-target="#training-and-validation-curves"><span class="header-section-number">13.21</span> Training and Validation Curves</a></li>
+  <li><a href="#build-an-mlp-with-scikit-learn" id="toc-build-an-mlp-with-scikit-learn" class="nav-link" data-scroll-target="#build-an-mlp-with-scikit-learn"><span class="header-section-number">13.22</span> Build an MLP With scikit-learn</a></li>
+  <li><a href="#inspect-the-learned-architecture" id="toc-inspect-the-learned-architecture" class="nav-link" data-scroll-target="#inspect-the-learned-architecture"><span class="header-section-number">13.23</span> Inspect the Learned Architecture</a></li>
+  <li><a href="#compare-with-a-simpler-baseline" id="toc-compare-with-a-simpler-baseline" class="nav-link" data-scroll-target="#compare-with-a-simpler-baseline"><span class="header-section-number">13.24</span> Compare With a Simpler Baseline</a></li>
+  <li><a href="#calibration" id="toc-calibration" class="nav-link" data-scroll-target="#calibration"><span class="header-section-number">13.25</span> Calibration</a></li>
+  <li><a href="#learned-representations" id="toc-learned-representations" class="nav-link" data-scroll-target="#learned-representations"><span class="header-section-number">13.26</span> Learned Representations</a></li>
+  <li><a href="#representation-learning-does-not-eliminate-feature-engineering" id="toc-representation-learning-does-not-eliminate-feature-engineering" class="nav-link" data-scroll-target="#representation-learning-does-not-eliminate-feature-engineering"><span class="header-section-number">13.27</span> Representation Learning Does Not Eliminate Feature Engineering</a></li>
+  <li><a href="#universal-approximationcarefully-interpreted" id="toc-universal-approximationcarefully-interpreted" class="nav-link" data-scroll-target="#universal-approximationcarefully-interpreted"><span class="header-section-number">13.28</span> Universal Approximation—Carefully Interpreted</a></li>
+  <li><a href="#neural-networks-for-regression" id="toc-neural-networks-for-regression" class="nav-link" data-scroll-target="#neural-networks-for-regression"><span class="header-section-number">13.29</span> Neural Networks for Regression</a></li>
+  <li><a href="#when-should-we-use-deep-learning" id="toc-when-should-we-use-deep-learning" class="nav-link" data-scroll-target="#when-should-we-use-deep-learning"><span class="header-section-number">13.30</span> When Should We Use Deep Learning?</a></li>
+  <li><a href="#deep-learning-ecosystem" id="toc-deep-learning-ecosystem" class="nav-link" data-scroll-target="#deep-learning-ecosystem"><span class="header-section-number">13.31</span> Deep Learning Ecosystem</a></li>
+  <li><a href="#computer-vision-learning-experience-from-pixels-to-a-neural-classifier" id="toc-computer-vision-learning-experience-from-pixels-to-a-neural-classifier" class="nav-link" data-scroll-target="#computer-vision-learning-experience-from-pixels-to-a-neural-classifier"><span class="header-section-number">13.32</span> Computer Vision Learning Experience: From Pixels to a Neural Classifier</a>
   <ul class="collapse">
-  <li><a href="#classical-ml-versus-neural-networks" id="toc-classical-ml-versus-neural-networks" class="nav-link" data-scroll-target="#classical-ml-versus-neural-networks"><span class="header-section-number">13.10.1</span> Classical ML Versus Neural Networks</a></li>
+  <li><a href="#why-convolution-changed-computer-vision" id="toc-why-convolution-changed-computer-vision" class="nav-link" data-scroll-target="#why-convolution-changed-computer-vision"><span class="header-section-number">13.32.1</span> Why Convolution Changed Computer Vision</a></li>
   </ul></li>
-  <li><a href="#professors-challenge" id="toc-professors-challenge" class="nav-link" data-scroll-target="#professors-challenge"><span class="header-section-number">13.11</span> Professor’s Challenge</a></li>
-  <li><a href="#research-extension" id="toc-research-extension" class="nav-link" data-scroll-target="#research-extension"><span class="header-section-number">13.12</span> Research Extension</a></li>
-  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">13.13</span> Reproducibility Check</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">13.14</span> Key Takeaways</a></li>
+  <li><a href="#three-tracks" id="toc-three-tracks" class="nav-link" data-scroll-target="#three-tracks"><span class="header-section-number">13.33</span> Three Tracks</a>
+  <ul class="collapse">
+  <li><a href="#health-track" id="toc-health-track" class="nav-link" data-scroll-target="#health-track"><span class="header-section-number">13.33.1</span> Health Track</a></li>
+  <li><a href="#education-track" id="toc-education-track" class="nav-link" data-scroll-target="#education-track"><span class="header-section-number">13.33.2</span> Education Track</a></li>
+  <li><a href="#open-ml-benchmark-track" id="toc-open-ml-benchmark-track" class="nav-link" data-scroll-target="#open-ml-benchmark-track"><span class="header-section-number">13.33.3</span> Open ML Benchmark Track</a></li>
+  </ul></li>
+  <li><a href="#beyond-the-algorithm-where-did-human-judgment-go" id="toc-beyond-the-algorithm-where-did-human-judgment-go" class="nav-link" data-scroll-target="#beyond-the-algorithm-where-did-human-judgment-go"><span class="header-section-number">13.34</span> Beyond the Algorithm: Where Did Human Judgment Go?</a></li>
+  <li><a href="#ai-pair-programmer-make-it-deeper" id="toc-ai-pair-programmer-make-it-deeper" class="nav-link" data-scroll-target="#ai-pair-programmer-make-it-deeper"><span class="header-section-number">13.35</span> AI Pair Programmer: Make It Deeper</a></li>
+  <li><a href="#hands-on-lab-from-neuron-to-network" id="toc-hands-on-lab-from-neuron-to-network" class="nav-link" data-scroll-target="#hands-on-lab-from-neuron-to-network"><span class="header-section-number">13.36</span> Hands-On Lab: From Neuron to Network</a></li>
+  <li><a href="#practitioner-track" id="toc-practitioner-track" class="nav-link" data-scroll-target="#practitioner-track"><span class="header-section-number">13.37</span> Practitioner Track</a></li>
+  <li><a href="#researcher-track" id="toc-researcher-track" class="nav-link" data-scroll-target="#researcher-track"><span class="header-section-number">13.38</span> Researcher Track</a></li>
+  <li><a href="#research-studio" id="toc-research-studio" class="nav-link" data-scroll-target="#research-studio"><span class="header-section-number">13.39</span> Research Studio</a></li>
+  <li><a href="#professors-challenge-deep-learning-must-be-better" id="toc-professors-challenge-deep-learning-must-be-better" class="nav-link" data-scroll-target="#professors-challenge-deep-learning-must-be-better"><span class="header-section-number">13.40</span> Professor’s Challenge: Deep Learning Must Be Better</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">13.41</span> Knowledge Check</a></li>
+  <li><a href="#reproducibility-check" id="toc-reproducibility-check" class="nav-link" data-scroll-target="#reproducibility-check"><span class="header-section-number">13.42</span> Reproducibility Check</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">13.43</span> Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html">Part V — Modern Machine Learning</a></li><li class="breadcrumb-item"><a href="../part-05-modern-ml/13-neural-networks.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks and Deep Learning</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Neural Networks: Learning Representations Through Layers</span></h1>
 </div>
 
 
@@ -393,116 +520,1039 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">13.1</span> Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
 <ul>
-<li>Explain neurons, layers, activations, and loss functions.</li>
-<li>Describe forward propagation and backpropagation.</li>
-<li>Explain gradient-based optimization.</li>
-<li>Build a small neural network.</li>
-<li>Diagnose overfitting and apply regularization.</li>
+<li>connect neural networks to linear and logistic models;</li>
+<li>describe a neuron using weights, bias, and an activation function;</li>
+<li>explain why nonlinear activation functions are necessary;</li>
+<li>calculate forward propagation through a small network;</li>
+<li>distinguish sigmoid, tanh, ReLU, and softmax;</li>
+<li>connect output layers to appropriate loss functions;</li>
+<li>explain gradient descent and learning rate;</li>
+<li>use the chain rule to explain backpropagation;</li>
+<li>distinguish epochs, batches, parameters, and hyperparameters;</li>
+<li>explain initialization, regularization, dropout, and early stopping;</li>
+<li>build and evaluate an MLP with scikit-learn;</li>
+<li>explain learned representations;</li>
+<li>recognize when a neural network is unnecessary.</li>
+<li>train a compact neural-network computer-vision model and connect it to learned visual representations.</li>
 </ul>
 </section>
 <section id="why-this-matters" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">13.2</span> Why This Matters</h2>
-<p>Deep learning powers many modern AI systems and provides a foundation for understanding computer vision, NLP, and foundation models.</p>
-</section>
-<section id="real-world-problem" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="real-world-problem"><span class="header-section-number">13.3</span> Real-World Problem</h2>
-<p>When does a neural network offer enough representational advantage to justify greater complexity than classical ML?</p>
-</section>
-<section id="mathematical-foundations" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="mathematical-foundations"><span class="header-section-number">13.4</span> Mathematical Foundations</h2>
-<section id="the-artificial-neuron" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="the-artificial-neuron"><span class="header-section-number">13.4.1</span> The Artificial Neuron</h3>
+<p>A linear model learns</p>
 <p><span class="math display">\[
-z=w^Tx+b
-\]</span> ### Activation Functions ### Network Layers ### Loss Functions ### Gradient Descent <span class="math display">\[
-\theta_{t+1}=\theta_t-\eta\nabla_\theta L(\theta_t)
-\]</span> ### Backpropagation</p>
+\hat y=w^\top x+b.
+\]</span></p>
+<p>A neural network composes familiar operations:</p>
+<p><span class="math display">\[
+\boxed{\text{weighted sums}\rightarrow\text{nonlinear transformations}\rightarrow\text{loss}\rightarrow\text{optimization}}.
+\]</span></p>
+<p>Hidden layers can construct new representations useful for prediction.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Central Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>When a model learns its own representations, have we removed human judgment—or moved human judgment into the architecture, data, objective, and evaluation?</strong></p>
+</div>
+</div>
+<section id="from-representation-to-representation-learning" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="from-representation-to-representation-learning"><span class="header-section-number">13.2.1</span> From Representation to Representation Learning</h3>
+<p>Chapter 12 showed that changing a representation can reveal, compress, or distort structure in data. Neural networks take the next step: rather than relying only on representations chosen in advance, they can learn intermediate representations jointly with the predictive task. This connection is central to understanding why deep learning became influential in vision, language, and other high-dimensional domains.</p>
 </section>
 </section>
-<section id="deep-learning-practice" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="deep-learning-practice"><span class="header-section-number">13.5</span> Deep Learning Practice</h2>
-<section id="training-and-validation" class="level3" data-number="13.5.1">
-<h3 data-number="13.5.1" class="anchored" data-anchor-id="training-and-validation"><span class="header-section-number">13.5.1</span> Training and Validation</h3>
+<section id="from-logistic-regression-to-a-neuron" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="from-logistic-regression-to-a-neuron"><span class="header-section-number">13.3</span> From Logistic Regression to a Neuron</h2>
+<p>Logistic regression computes</p>
+<p><span class="math display">\[
+z=w^\top x+b
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\hat p=\sigma(z)=\frac{1}{1+e^{-z}}.
+\]</span></p>
+<p>A neuron generalizes this pattern:</p>
+<p><span class="math display">\[
+z=\sum_{j=1}^{p}w_jx_j+b,
+\qquad
+a=\phi(z).
+\]</span></p>
 </section>
-<section id="epochs-and-batches" class="level3" data-number="13.5.2">
-<h3 data-number="13.5.2" class="anchored" data-anchor-id="epochs-and-batches"><span class="header-section-number">13.5.2</span> Epochs and Batches</h3>
+<section id="a-neuron-by-hand" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="a-neuron-by-hand"><span class="header-section-number">13.4</span> A Neuron by Hand</h2>
+<div id="de2d7e8b" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.array([<span class="fl">0.8</span>,<span class="op">-</span><span class="fl">0.4</span>,<span class="fl">1.2</span>])</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>w<span class="op">=</span>np.array([<span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.7</span>,<span class="fl">0.3</span>])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b<span class="op">=</span><span class="fl">0.1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>z<span class="op">=</span>w<span class="op">@</span>x<span class="op">+</span>b</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>np.float64(1.1400000000000001)</code></pre>
+</div>
+</div>
+<div id="a784bd5b" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sigmoid<span class="op">=</span><span class="kw">lambda</span> z: <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>z))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sigmoid(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>np.float64(0.7576796390037049)</code></pre>
+</div>
+</div>
 </section>
-<section id="learning-rates" class="level3" data-number="13.5.3">
-<h3 data-number="13.5.3" class="anchored" data-anchor-id="learning-rates"><span class="header-section-number">13.5.3</span> Learning Rates</h3>
+<section id="hidden-layers-and-representation-learning" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="hidden-layers-and-representation-learning"><span class="header-section-number">13.5</span> Hidden Layers and Representation Learning</h2>
+<p>A central strength of neural networks is their ability to learn intermediate representations rather than rely only on manually specified features <span class="citation" data-cites="bengioEtAl2013 goodfellow2016">(<a href="../references.html#ref-bengioEtAl2013" role="doc-biblioref">Bengio, Courville, and Vincent 2013</a>; <a href="../references.html#ref-goodfellow2016" role="doc-biblioref">Goodfellow, Bengio, and Courville 2016</a>)</span>.</p>
+<p>A hidden layer computes</p>
+<p><span class="math display">\[
+h=\phi(W^{(1)}x+b^{(1)}),
+\]</span></p>
+<p>followed by an output layer</p>
+<p><span class="math display">\[
+\hat y=g(W^{(2)}h+b^{(2)}).
+\]</span></p>
+<p>The hidden vector <span class="math inline">\(h\)</span> is a learned representation of the original input.</p>
 </section>
-<section id="regularization" class="level3" data-number="13.5.4">
-<h3 data-number="13.5.4" class="anchored" data-anchor-id="regularization"><span class="header-section-number">13.5.4</span> Regularization</h3>
+<section id="why-nonlinearity-is-essential" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="why-nonlinearity-is-essential"><span class="header-section-number">13.6</span> Why Nonlinearity Is Essential</h2>
+<p>Without nonlinear activation,</p>
+<p><span class="math display">\[
+h=W_1x+b_1
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+y=W_2h+b_2
+\]</span></p>
+<p>collapse to</p>
+<p><span class="math display">\[
+y=(W_2W_1)x+(W_2b_1+b_2),
+\]</span></p>
+<p>which is still linear.</p>
+<blockquote class="blockquote">
+<p><strong>Depth without nonlinearity collapses back into linearity.</strong></p>
+</blockquote>
 </section>
-<section id="dropout" class="level3" data-number="13.5.5">
-<h3 data-number="13.5.5" class="anchored" data-anchor-id="dropout"><span class="header-section-number">13.5.5</span> Dropout</h3>
+<section id="activation-functions" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="activation-functions"><span class="header-section-number">13.7</span> Activation Functions</h2>
+<section id="sigmoid" class="level3" data-number="13.7.1">
+<h3 data-number="13.7.1" class="anchored" data-anchor-id="sigmoid"><span class="header-section-number">13.7.1</span> Sigmoid</h3>
+<p><span class="math display">\[
+\sigma(z)=\frac{1}{1+e^{-z}},
+\qquad
+\sigma'(z)=\sigma(z)(1-\sigma(z)).
+\]</span></p>
 </section>
-<section id="early-stopping" class="level3" data-number="13.5.6">
-<h3 data-number="13.5.6" class="anchored" data-anchor-id="early-stopping"><span class="header-section-number">13.5.6</span> Early Stopping</h3>
+<section id="hyperbolic-tangent" class="level3" data-number="13.7.2">
+<h3 data-number="13.7.2" class="anchored" data-anchor-id="hyperbolic-tangent"><span class="header-section-number">13.7.2</span> Hyperbolic Tangent</h3>
+<p><span class="math display">\[
+\tanh(z)=\frac{e^z-e^{-z}}{e^z+e^{-z}}.
+\]</span></p>
+</section>
+<section id="relu" class="level3" data-number="13.7.3">
+<h3 data-number="13.7.3" class="anchored" data-anchor-id="relu"><span class="header-section-number">13.7.3</span> ReLU</h3>
+<p><span class="math display">\[
+ReLU(z)=\max(0,z).
+\]</span></p>
+</section>
+<section id="softmax" class="level3" data-number="13.7.4">
+<h3 data-number="13.7.4" class="anchored" data-anchor-id="softmax"><span class="header-section-number">13.7.4</span> Softmax</h3>
+<p>For multiclass logits,</p>
+<p><span class="math display">\[
+P(Y=k\mid x)=\frac{e^{z_k}}{\sum_{j=1}^{K}e^{z_j}}.
+\]</span></p>
 </section>
 </section>
-<section id="python-implementation" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="python-implementation"><span class="header-section-number">13.6</span> Python Implementation</h2>
-<section id="building-a-small-network" class="level3" data-number="13.6.1">
-<h3 data-number="13.6.1" class="anchored" data-anchor-id="building-a-small-network"><span class="header-section-number">13.6.1</span> Building a Small Network</h3>
+<section id="visualize-common-activations" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="visualize-common-activations"><span class="header-section-number">13.8</span> Visualize Common Activations</h2>
+<div class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>z_grid<span class="op">=</span>np.linspace(<span class="op">-</span><span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">500</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>functions<span class="op">=</span>{</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sigmoid"</span>:<span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>z_grid)),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tanh"</span>:np.tanh(z_grid),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ReLU"</span>:np.maximum(<span class="dv">0</span>,z_grid)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name,values <span class="kw">in</span> functions.items():</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="fl">4.5</span>))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(z_grid,values)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    plt.axhline(<span class="dv">0</span>,linewidth<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    plt.axvline(<span class="dv">0</span>,linewidth<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"z"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Activation"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    plt.title(name)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-activations" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-activations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-activations-1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Comparison of common neural-network activation functions across a range of input values.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-activations-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="13-neural-networks_files/figure-html/fig-activations-output-1.png" data-ref-parent="fig-activations" alt="Comparison of common neural-network activation functions across a range of input values." width="663" height="413" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-activations-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Common neural-network activation functions.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-activations-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="683" height="413" alt="Comparison of common neural-network activation functions across a range of input values.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-activations-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="13-neural-networks_files/figure-html/fig-activations-output-2.png" id="fig-activations-2" data-ref-parent="fig-activations" alt="Comparison of common neural-network activation functions across a range of input values." width="683" height="413" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-activations-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-activations-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="651" height="413" alt="Comparison of common neural-network activation functions across a range of input values.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-activations-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="13-neural-networks_files/figure-html/fig-activations-output-3.png" id="fig-activations-3" data-ref-parent="fig-activations" alt="Comparison of common neural-network activation functions across a range of input values." width="651" height="413" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-activations-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-activations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.1
+</figcaption>
+</figure>
+</div>
+</div>
 </section>
-<section id="training-curves" class="level3" data-number="13.6.2">
-<h3 data-number="13.6.2" class="anchored" data-anchor-id="training-curves"><span class="header-section-number">13.6.2</span> Training Curves</h3>
+<section id="forward-propagation-by-hand" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="forward-propagation-by-hand"><span class="header-section-number">13.9</span> Forward Propagation by Hand</h2>
+<div id="16e23991" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>np.array([<span class="fl">0.6</span>,<span class="op">-</span><span class="fl">1.2</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>W1<span class="op">=</span>np.array([[<span class="fl">0.4</span>,<span class="op">-</span><span class="fl">0.3</span>],[<span class="fl">0.7</span>,<span class="fl">0.2</span>],[<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.8</span>]])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b1<span class="op">=</span>np.array([<span class="fl">0.1</span>,<span class="op">-</span><span class="fl">0.2</span>,<span class="fl">0.05</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>W2<span class="op">=</span>np.array([[<span class="fl">0.6</span>,<span class="op">-</span><span class="fl">0.4</span>,<span class="fl">0.9</span>]])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>b2<span class="op">=</span>np.array([<span class="fl">0.15</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>z1<span class="op">=</span>W1<span class="op">@</span>x<span class="op">+</span>b1</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>h<span class="op">=</span>np.maximum(<span class="dv">0</span>,z1)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>z2<span class="op">=</span>W2<span class="op">@</span>h<span class="op">+</span>b2</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span>sigmoid(z2)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>z1,h,z2,p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>(array([ 0.7 , -0.02, -1.21]),
+ array([0.7, 0. , 0. ]),
+ array([0.57]),
+ array([0.63876318]))</code></pre>
+</div>
+</div>
+<p>Every value is inspectable. A neural network is a computational graph, not magic.</p>
 </section>
-<section id="evaluating-generalization" class="level3" data-number="13.6.3">
-<h3 data-number="13.6.3" class="anchored" data-anchor-id="evaluating-generalization"><span class="header-section-number">13.6.3</span> Evaluating Generalization</h3>
+<section id="neural-networks-as-representation-learning" class="level2" data-number="13.10">
+<h2 data-number="13.10" class="anchored" data-anchor-id="neural-networks-as-representation-learning"><span class="header-section-number">13.10</span> Neural Networks as Representation Learning</h2>
+<p>A neural network is more than a flexible nonlinear prediction function.</p>
+<p>Its hidden layers can learn intermediate representations of the input.</p>
+<p>For a feedforward network,</p>
+<p><span class="math display">\[
+h^{(1)}
+=
+g\left(
+W^{(1)}x+b^{(1)}
+\right),
+\]</span></p>
+<p>and later layers transform earlier representations:</p>
+<p><span class="math display">\[
+h^{(\ell)}
+=
+g\left(
+W^{(\ell)}h^{(\ell-1)}
++b^{(\ell)}
+\right).
+\]</span></p>
+<p>The network therefore constructs a sequence:</p>
+<p><span class="math display">\[
+\boxed{
+x
+\rightarrow
+h^{(1)}
+\rightarrow
+h^{(2)}
+\rightarrow
+\cdots
+\rightarrow
+h^{(L)}
+\rightarrow
+\hat y
+}
+\]</span></p>
+<section id="from-feature-engineering-to-learned-features" class="level3" data-number="13.10.1">
+<h3 data-number="13.10.1" class="anchored" data-anchor-id="from-feature-engineering-to-learned-features"><span class="header-section-number">13.10.1</span> From Feature Engineering to Learned Features</h3>
+<p>Earlier machine-learning methods often depend heavily on features designed by analysts.</p>
+<p>Support vector machines showed that changing representation can change the geometry of a problem:</p>
+<p><span class="math display">\[
+x\rightarrow\phi(x).
+\]</span></p>
+<p>Neural networks extend this idea by learning useful transformations from data.</p>
+<p>A useful conceptual progression is:</p>
+<p><span class="math display">\[
+\text{hand-crafted features}
+\rightarrow
+\text{kernel-induced features}
+\rightarrow
+\text{learned representations}.
+\]</span></p>
+<p>This is one reason deep learning became especially powerful for images, language, audio, and other high-dimensional data.</p>
 </section>
-</section>
-<section id="hands-on-practice" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="hands-on-practice"><span class="header-section-number">13.7</span> Hands-On Practice</h2>
-<p>Train a small neural network and compare it with a classical baseline.</p>
-</section>
-<section id="common-mistakes" class="level2" data-number="13.8">
-<h2 data-number="13.8" class="anchored" data-anchor-id="common-mistakes"><span class="header-section-number">13.8</span> Common Mistakes</h2>
+<section id="what-might-a-hidden-representation-learn" class="level3" data-number="13.10.2">
+<h3 data-number="13.10.2" class="anchored" data-anchor-id="what-might-a-hidden-representation-learn"><span class="header-section-number">13.10.2</span> What Might a Hidden Representation Learn?</h3>
+<p>Imagine a model trained on text.</p>
+<p>The raw input may begin as tokens or embeddings.</p>
+<p>Intermediate layers may encode increasingly useful patterns related to:</p>
 <ul>
-<li>Using deep learning because it is fashionable.</li>
-<li>Ignoring baseline models.</li>
-<li>Evaluating repeatedly on the test set.</li>
-<li>Failing to monitor validation loss.</li>
+<li>syntax;</li>
+<li>semantic similarity;</li>
+<li>topic;</li>
+<li>context;</li>
+<li>task-relevant distinctions.</li>
+</ul>
+<p>For images, early layers may respond to simple local patterns while later representations can support increasingly abstract visual distinctions.</p>
+<p>These interpretations should be treated cautiously: internal representations are distributed, context-dependent, and not guaranteed to correspond neatly to human concepts.</p>
+</section>
+<section id="learned-does-not-mean-understood" class="level3" data-number="13.10.3">
+<h3 data-number="13.10.3" class="anchored" data-anchor-id="learned-does-not-mean-understood"><span class="header-section-number">13.10.3</span> Learned Does Not Mean Understood</h3>
+<p>A network can learn a representation that improves prediction without providing a human-readable explanation for why that representation works.</p>
+<p>Thus:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Useful Representation}
+\neq
+\text{Human-Interpretable Representation}
+}
+\]</span></p>
+<p>This creates a recurring machine-learning tradeoff.</p>
+<p>Models can learn increasingly powerful internal representations while becoming harder to explain using simple human concepts.</p>
+</section>
+<section id="representation-quality-depends-on-the-objective" class="level3" data-number="13.10.4">
+<h3 data-number="13.10.4" class="anchored" data-anchor-id="representation-quality-depends-on-the-objective"><span class="header-section-number">13.10.4</span> Representation Quality Depends on the Objective</h3>
+<p>A network learns features useful for the objective it is trained to optimize.</p>
+<p>If the objective rewards a shortcut, the learned representation may encode the shortcut.</p>
+<p>If training data contain systematic biases, representations can preserve or amplify them.</p>
+<p>If deployment differs from training, representations may no longer organize the world in a useful way.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: What Does It Mean for a Machine to “Represent” Something?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A hidden layer does not necessarily contain a miniature human concept such as “health,” “learning,” or “trust.”</p>
+<p>Representation in machine learning is operational: internal states organize information in ways that support the optimization objective.</p>
+<p>The philosophical question is therefore not simply:</p>
+<blockquote class="blockquote">
+<p>What does this neuron mean?</p>
+</blockquote>
+<p>but:</p>
+<blockquote class="blockquote">
+<p>What distinctions has the system learned to preserve because they help it perform the task?</p>
+</blockquote>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Research Reality Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Strong neural-network performance does not prove that the model learned the intended concept.</p>
+<p>It may have learned proxies, artifacts, shortcuts, or site-specific signals.</p>
+<p>When the substantive interpretation matters, test the representation rather than inferring its meaning from predictive performance alone.</p>
+</div>
+</div>
+</section>
+<section id="bridge-forward" class="level3" data-number="13.10.5">
+<h3 data-number="13.10.5" class="anchored" data-anchor-id="bridge-forward"><span class="header-section-number">13.10.5</span> Bridge Forward</h3>
+<p>This idea prepares the reader for later chapters:</p>
+<ul>
+<li>NLP uses learned representations of language;</li>
+<li>generative AI relies on large-scale learned representations;</li>
+<li>model evaluation asks whether those representations generalize;</li>
+<li>responsible ML asks what unwanted structure they encode;</li>
+<li>reproducible ML asks whether the evidence supporting these claims can be reconstructed.</li>
 </ul>
 </section>
-<section id="knowledge-check" class="level2" data-number="13.9">
-<h2 data-number="13.9" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">13.9</span> Knowledge Check</h2>
+</section>
+<section id="architecture" class="level2" data-number="13.11">
+<h2 data-number="13.11" class="anchored" data-anchor-id="architecture"><span class="header-section-number">13.11</span> Architecture</h2>
+<p>An architecture</p>
+<p><span class="math display">\[
+30\rightarrow64\rightarrow32\rightarrow1
+\]</span></p>
+<p>contains 30 inputs, two hidden layers, and one output.</p>
+<p>Layer sizes are <strong>hyperparameters</strong>. Learned weights and biases are <strong>parameters</strong>.</p>
+</section>
+<section id="loss-functions-give-the-network-a-goal" class="level2" data-number="13.12">
+<h2 data-number="13.12" class="anchored" data-anchor-id="loss-functions-give-the-network-a-goal"><span class="header-section-number">13.12</span> Loss Functions Give the Network a Goal</h2>
+<p>For regression,</p>
+<p><span class="math display">\[
+MSE=\frac1n\sum_{i=1}^{n}(y_i-\hat y_i)^2.
+\]</span></p>
+<p>For binary classification,</p>
+<p><span class="math display">\[
+L=-\frac1n\sum_{i=1}^{n}
+[y_i\log\hat p_i+(1-y_i)\log(1-\hat p_i)].
+\]</span></p>
+<p>The loss tells optimization what kinds of errors to reduce.</p>
+</section>
+<section id="gradient-descent" class="level2" data-number="13.13">
+<h2 data-number="13.13" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">13.13</span> Gradient Descent</h2>
+<p>Let all parameters be <span class="math inline">\(\theta\)</span>. Training seeks</p>
+<p><span class="math display">\[
+\theta^*=\arg\min_\theta L(\theta).
+\]</span></p>
+<p>Gradient descent updates</p>
+<p><span class="math display">\[
+\theta_{t+1}=\theta_t-\eta\nabla_\theta L(\theta_t).
+\]</span></p>
+<p>The learning rate <span class="math inline">\(\eta\)</span> controls update size.</p>
+</section>
+<section id="gradient-descent-demonstration" class="level2" data-number="13.14">
+<h2 data-number="13.14" class="anchored" data-anchor-id="gradient-descent-demonstration"><span class="header-section-number">13.14</span> Gradient Descent Demonstration</h2>
+<p>For</p>
+<p><span class="math display">\[
+L(w)=(w-3)^2,
+\qquad
+\frac{dL}{dw}=2(w-3),
+\]</span></p>
+<p>we can watch optimization reduce loss.</p>
+<div id="cell-fig-nn-gradient-descent" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>w_value<span class="op">=-</span><span class="fl">4.0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>eta<span class="op">=</span><span class="fl">.15</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>history<span class="op">=</span>[]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> step <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">18</span>):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>(w_value<span class="op">-</span><span class="dv">3</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    history.append((step,w_value,loss))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    gradient<span class="op">=</span><span class="dv">2</span><span class="op">*</span>(w_value<span class="op">-</span><span class="dv">3</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    w_value<span class="op">-=</span>eta<span class="op">*</span>gradient</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>steps<span class="op">=</span>[r[<span class="dv">0</span>] <span class="cf">for</span> r <span class="kw">in</span> history]</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>losses<span class="op">=</span>[r[<span class="dv">2</span>] <span class="cf">for</span> r <span class="kw">in</span> history]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.plot(steps,losses,marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Optimization step"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Loss"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Gradient Descent Reduces Loss"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-nn-gradient-descent" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Illustration of gradient descent moving iteratively toward a lower value of a neural-network loss function.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nn-gradient-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="13-neural-networks_files/figure-html/fig-nn-gradient-descent-output-1.png" alt="Illustration of gradient descent moving iteratively toward a lower value of a neural-network loss function." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nn-gradient-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.2: Gradient descent iteratively moves toward a lower-loss region.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-chain-rule" class="level2" data-number="13.15">
+<h2 data-number="13.15" class="anchored" data-anchor-id="the-chain-rule"><span class="header-section-number">13.15</span> The Chain Rule</h2>
+<p>If</p>
+<p><span class="math display">\[
+L=L(a),\quad a=\phi(z),\quad z=wx+b,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial w}
+=
+\frac{\partial L}{\partial a}
+\frac{\partial a}{\partial z}
+\frac{\partial z}{\partial w}.
+\]</span></p>
+<p>This allows sensitivity to propagate backward through composed operations.</p>
+</section>
+<section id="backpropagation" class="level2" data-number="13.16">
+<h2 data-number="13.16" class="anchored" data-anchor-id="backpropagation"><span class="header-section-number">13.16</span> Backpropagation</h2>
+<p>Backpropagation is an efficient application of the chain rule for computing gradients through layered networks; its modern neural-network formulation was established by Rumelhart, Hinton, and Williams <span class="citation" data-cites="rumelhartEtAl1986">(<a href="../references.html#ref-rumelhartEtAl1986" role="doc-biblioref">Rumelhart, Hinton, and Williams 1986</a>)</span>:</p>
+<p><span class="math display">\[
+\boxed{\text{forward pass}\rightarrow\text{loss}\rightarrow\text{backward gradients}\rightarrow\text{parameter update}}.
+\]</span></p>
+<p>For sigmoid output with binary cross-entropy,</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial z}=\hat p-y,
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial w}=(\hat p-y)x
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial b}=\hat p-y.
+\]</span></p>
+</section>
+<section id="numerical-gradient-check" class="level2" data-number="13.17">
+<h2 data-number="13.17" class="anchored" data-anchor-id="numerical-gradient-check"><span class="header-section-number">13.17</span> Numerical Gradient Check</h2>
+<div id="a9bbc3cf" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> single_loss(w,x,y,b<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>(w<span class="op">*</span>x<span class="op">+</span>b)))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>(y<span class="op">*</span>np.log(p)<span class="op">+</span>(<span class="dv">1</span><span class="op">-</span>y)<span class="op">*</span>np.log(<span class="dv">1</span><span class="op">-</span>p))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>x_val<span class="op">=</span><span class="fl">.8</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>y_val<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>w_val<span class="op">=</span><span class="fl">.4</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>eps<span class="op">=</span><span class="fl">1e-5</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>p_val<span class="op">=</span><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>(w_val<span class="op">*</span>x_val)))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>analytical<span class="op">=</span>(p_val<span class="op">-</span>y_val)<span class="op">*</span>x_val</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>numerical<span class="op">=</span>(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    single_loss(w_val<span class="op">+</span>eps,x_val,y_val)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span>single_loss(w_val<span class="op">-</span>eps,x_val,y_val)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>)<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>eps)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>analytical,numerical</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>(np.float64(-0.3365405982810004), np.float64(-0.3365405982724834))</code></pre>
+</div>
+</div>
+</section>
+<section id="batches-and-epochs" class="level2" data-number="13.18">
+<h2 data-number="13.18" class="anchored" data-anchor-id="batches-and-epochs"><span class="header-section-number">13.18</span> Batches and Epochs</h2>
+<p><strong>Batch gradient descent</strong> uses all training observations per update.</p>
+<p><strong>Stochastic gradient descent</strong> uses one.</p>
+<p><strong>Mini-batch gradient descent</strong> uses a subset.</p>
+<p>An <strong>epoch</strong> is one pass through the training dataset.</p>
+<p>More epochs do not automatically mean better generalization.</p>
+</section>
+<section id="vanishing-and-exploding-gradients" class="level2" data-number="13.19">
+<h2 data-number="13.19" class="anchored" data-anchor-id="vanishing-and-exploding-gradients"><span class="header-section-number">13.19</span> Vanishing and Exploding Gradients</h2>
+<p>Backpropagation repeatedly multiplies derivatives through layers.</p>
+<p>Products of small derivatives can approach zero:</p>
+<p><span class="math display">\[
+\prod_{\ell=1}^{L}
+\frac{\partial h^{(\ell)}}{\partial h^{(\ell-1)}}
+\rightarrow0.
+\]</span></p>
+<p>Very large gradients can instead destabilize training.</p>
+</section>
+<section id="initialization" class="level2" data-number="13.20">
+<h2 data-number="13.20" class="anchored" data-anchor-id="initialization"><span class="header-section-number">13.20</span> Initialization</h2>
+<p>Initialization affects how signals and gradients propagate through a network; principled initialization schemes help avoid poorly scaled activations and gradients <span class="citation" data-cites="glorot2010understanding">(<a href="../references.html#ref-glorot2010understanding" role="doc-biblioref">Glorot and Bengio 2010</a>)</span>. and Regularization</p>
+<p>Random initialization breaks symmetry among neurons. Initialization scale also affects optimization.</p>
+<p>L2 regularization adds a penalty:</p>
+<p><span class="math display">\[
+L_{reg}=L+\lambda\sum_jw_j^2.
+\]</span></p>
+<p><strong>Dropout</strong> randomly suppresses activations during training, providing a widely used regularization strategy for reducing co-adaptation and overfitting in neural networks <span class="citation" data-cites="srivastava2014dropout">(<a href="../references.html#ref-srivastava2014dropout" role="doc-biblioref">Srivastava et al. 2014</a>)</span>.</p>
+<p><strong>Early stopping</strong> halts training when validation performance stops improving meaningfully.</p>
+</section>
+<section id="training-and-validation-curves" class="level2" data-number="13.21">
+<h2 data-number="13.21" class="anchored" data-anchor-id="training-and-validation-curves"><span class="header-section-number">13.21</span> Training and Validation Curves</h2>
+<div id="cell-fig-learning-curves-concept" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>epochs<span class="op">=</span>np.arange(<span class="dv">1</span>,<span class="dv">81</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>train_loss<span class="op">=</span><span class="fl">.9</span><span class="op">*</span>np.exp(<span class="op">-</span>epochs<span class="op">/</span><span class="dv">25</span>)<span class="op">+</span><span class="fl">.08</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>validation_loss<span class="op">=</span><span class="fl">.8</span><span class="op">*</span>np.exp(<span class="op">-</span>epochs<span class="op">/</span><span class="dv">20</span>)<span class="op">+</span><span class="fl">.13</span><span class="op">+</span><span class="fl">.00008</span><span class="op">*</span>(epochs<span class="op">-</span><span class="dv">42</span>).clip(<span class="bu">min</span><span class="op">=</span><span class="dv">0</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.plot(epochs,train_loss,label<span class="op">=</span><span class="st">"Training loss"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.plot(epochs,validation_loss,label<span class="op">=</span><span class="st">"Validation loss"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Loss"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Training Versus Validation Loss"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-learning-curves-concept" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Conceptual training and validation learning curves illustrating how model performance changes with training.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-learning-curves-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="13-neural-networks_files/figure-html/fig-learning-curves-concept-output-1.png" alt="Conceptual training and validation learning curves illustrating how model performance changes with training." width="663" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-learning-curves-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.3: Conceptual learning curves illustrate how validation loss can worsen while training loss continues to decline.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These curves are simulated for instruction.</p>
+</section>
+<section id="build-an-mlp-with-scikit-learn" class="level2" data-number="13.22">
+<h2 data-number="13.22" class="anchored" data-anchor-id="build-an-mlp-with-scikit-learn"><span class="header-section-number">13.22</span> Build an MLP With scikit-learn</h2>
+<div id="24f86242" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPClassifier</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>data.data</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>(data.target<span class="op">==</span><span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>X_train,X_test,y_train,y_test<span class="op">=</span>train_test_split(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    X,y,test_size<span class="op">=</span><span class="fl">.25</span>,random_state<span class="op">=</span><span class="dv">42</span>,stratify<span class="op">=</span>y</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>mlp<span class="op">=</span>Pipeline([</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>,MLPClassifier(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        hidden_layer_sizes<span class="op">=</span>(<span class="dv">64</span>,<span class="dv">32</span>),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        activation<span class="op">=</span><span class="st">"relu"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        solver<span class="op">=</span><span class="st">"adam"</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">.001</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        learning_rate_init<span class="op">=</span><span class="fl">.001</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        max_iter<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        early_stopping<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        validation_fraction<span class="op">=</span><span class="fl">.15</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        n_iter_no_change<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>mlp.fit(X_train,y_train)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>mlp_prob<span class="op">=</span>mlp.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>roc_auc_score(y_test,mlp_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>np.float64(0.9972746331236897)</code></pre>
+</div>
+</div>
+</section>
+<section id="inspect-the-learned-architecture" class="level2" data-number="13.23">
+<h2 data-number="13.23" class="anchored" data-anchor-id="inspect-the-learned-architecture"><span class="header-section-number">13.23</span> Inspect the Learned Architecture</h2>
+<div id="0ded05e6" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fitted_mlp<span class="op">=</span>mlp.named_steps[<span class="st">"model"</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Layers"</span>:fitted_mlp.n_layers_,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outputs"</span>:fitted_mlp.n_outputs_,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Iterations"</span>:fitted_mlp.n_iter_,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Final training loss"</span>:fitted_mlp.loss_</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>{'Layers': 4,
+ 'Outputs': 1,
+ 'Iterations': 63,
+ 'Final training loss': np.float64(0.038450243636669365)}</code></pre>
+</div>
+</div>
+<div id="fdd81124" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>[weights.shape <span class="cf">for</span> weights <span class="kw">in</span> fitted_mlp.coefs_]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>[(30, 64), (64, 32), (32, 1)]</code></pre>
+</div>
+</div>
+</section>
+<section id="compare-with-a-simpler-baseline" class="level2" data-number="13.24">
+<h2 data-number="13.24" class="anchored" data-anchor-id="compare-with-a-simpler-baseline"><span class="header-section-number">13.24</span> Compare With a Simpler Baseline</h2>
+<div id="ca34790d" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>logit<span class="op">=</span>Pipeline([</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>,LogisticRegression(max_iter<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>logit.fit(X_train,y_train)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>logit_prob<span class="op">=</span>logit.predict_proba(X_test)[:,<span class="dv">1</span>]</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic regression"</span>:roc_auc_score(y_test,logit_prob),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neural network"</span>:roc_auc_score(y_test,mlp_prob)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>{'Logistic regression': np.float64(0.9962264150943396),
+ 'Neural network': np.float64(0.9972746331236897)}</code></pre>
+</div>
+</div>
+<p>A neural network should earn its added complexity.</p>
+</section>
+<section id="calibration" class="level2" data-number="13.25">
+<h2 data-number="13.25" class="anchored" data-anchor-id="calibration"><span class="header-section-number">13.25</span> Calibration</h2>
+<div id="cell-fig-mlp-calibration" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> brier_score_loss</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>frac_pos,mean_pred<span class="op">=</span>calibration_curve(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    y_test,mlp_prob,n_bins<span class="op">=</span><span class="dv">6</span>,strategy<span class="op">=</span><span class="st">"quantile"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>brier<span class="op">=</span>brier_score_loss(y_test,mlp_prob)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.plot(mean_pred,frac_pos,marker<span class="op">=</span><span class="st">"o"</span>,label<span class="op">=</span><span class="ss">f"MLP (Brier=</span><span class="sc">{</span>brier<span class="sc">:.3f}</span><span class="ss">)"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">1</span>],linestyle<span class="op">=</span><span class="st">"--"</span>,label<span class="op">=</span><span class="st">"Perfect calibration"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Mean predicted probability"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Observed positive fraction"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"MLP Calibration"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-mlp-calibration" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Calibration plot comparing predicted probabilities from a multilayer perceptron with observed outcome frequencies.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mlp-calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="13-neural-networks_files/figure-html/fig-mlp-calibration-output-1.png" alt="Calibration plot comparing predicted probabilities from a multilayer perceptron with observed outcome frequencies." width="589" height="449" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mlp-calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.4: Neural-network probabilities require calibration assessment when interpreted as risks.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="learned-representations" class="level2" data-number="13.26">
+<h2 data-number="13.26" class="anchored" data-anchor-id="learned-representations"><span class="header-section-number">13.26</span> Learned Representations</h2>
+<p>PCA constructs representations that preserve predictor variance under linear constraints.</p>
+<p>A supervised neural network learns representations optimized for a task-specific loss:</p>
+<p><span class="math display">\[
+\boxed{\text{PCA: representation for variance}}
+\]</span></p>
+<p>versus</p>
+<p><span class="math display">\[
+\boxed{\text{neural network: representation for predictive loss}}.
+\]</span></p>
+</section>
+<section id="representation-learning-does-not-eliminate-feature-engineering" class="level2" data-number="13.27">
+<h2 data-number="13.27" class="anchored" data-anchor-id="representation-learning-does-not-eliminate-feature-engineering"><span class="header-section-number">13.27</span> Representation Learning Does Not Eliminate Feature Engineering</h2>
+<p>Humans still choose what data are collected, the target, sampling frame, architecture, loss, optimization, evaluation metrics, stopping rules, and deployment criteria.</p>
+<p>Representation learning relocates some feature construction from explicit human design to optimization.</p>
+</section>
+<section id="universal-approximationcarefully-interpreted" class="level2" data-number="13.28">
+<h2 data-number="13.28" class="anchored" data-anchor-id="universal-approximationcarefully-interpreted"><span class="header-section-number">13.28</span> Universal Approximation—Carefully Interpreted</h2>
+<p>Approximation capacity does not imply that:</p>
+<ul>
+<li>optimization will find the desired function;</li>
+<li>finite data are sufficient;</li>
+<li>generalization is guaranteed;</li>
+<li>the learned relationship is causal;</li>
+<li>deeper is always better.</li>
+</ul>
+<p>Capacity and successful learning are different questions.</p>
+</section>
+<section id="neural-networks-for-regression" class="level2" data-number="13.29">
+<h2 data-number="13.29" class="anchored" data-anchor-id="neural-networks-for-regression"><span class="header-section-number">13.29</span> Neural Networks for Regression</h2>
+<div id="e9a775d1" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPRegressor</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>diabetes<span class="op">=</span>load_diabetes(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>Xr_train,Xr_test,yr_train,yr_test<span class="op">=</span>train_test_split(</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    diabetes.data,diabetes.target,test_size<span class="op">=</span><span class="fl">.25</span>,random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>mlp_reg<span class="op">=</span>Pipeline([</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>,StandardScaler()),</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>,MLPRegressor(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>        hidden_layer_sizes<span class="op">=</span>(<span class="dv">64</span>,<span class="dv">32</span>),</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        activation<span class="op">=</span><span class="st">"relu"</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">.001</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        learning_rate_init<span class="op">=</span><span class="fl">.001</span>,</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        max_iter<span class="op">=</span><span class="dv">1500</span>,</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        early_stopping<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>mlp_reg.fit(Xr_train,yr_train)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>reg_pred<span class="op">=</span>mlp_reg.predict(Xr_test)</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(yr_test,reg_pred))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>np.float64(56.33537572573954)</code></pre>
+</div>
+</div>
+</section>
+<section id="when-should-we-use-deep-learning" class="level2" data-number="13.30">
+<h2 data-number="13.30" class="anchored" data-anchor-id="when-should-we-use-deep-learning"><span class="header-section-number">13.30</span> When Should We Use Deep Learning?</h2>
+<p>Neural networks are especially influential for images, audio, natural language, video, high-dimensional signals, and multimodal data.</p>
+<p>For small and medium tabular datasets, simpler models and boosted trees can be highly competitive.</p>
+<blockquote class="blockquote">
+<p><strong>Use neural networks when representational capacity addresses a real property of the problem—not because “deep learning” sounds advanced.</strong></p>
+</blockquote>
+</section>
+<section id="deep-learning-ecosystem" class="level2" data-number="13.31">
+<h2 data-number="13.31" class="anchored" data-anchor-id="deep-learning-ecosystem"><span class="header-section-number">13.31</span> Deep Learning Ecosystem</h2>
+<p>The core chapter uses scikit-learn to preserve the book’s lightweight environment.</p>
+<p>Modern research commonly uses frameworks such as PyTorch, JAX, and TensorFlow/Keras.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Optional Advanced Path
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A companion lab can later rebuild the network in PyTorch so students explicitly write the architecture, forward pass, loss, optimizer, training loop, backpropagation, and parameter update.</p>
+</div>
+</div>
+</section>
+<section id="computer-vision-learning-experience-from-pixels-to-a-neural-classifier" class="level2" data-number="13.32">
+<h2 data-number="13.32" class="anchored" data-anchor-id="computer-vision-learning-experience-from-pixels-to-a-neural-classifier"><span class="header-section-number">13.32</span> Computer Vision Learning Experience: From Pixels to a Neural Classifier</h2>
+<p>The recurring handwritten-digits workload now reaches an important transition.</p>
+<p>Earlier chapters treated each (8) image as a (64)-feature vector and used logistic regression, trees, ensembles, and kernel methods. A neural network can learn nonlinear intermediate representations from those pixel features.</p>
+<div id="aa84524b" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"LOKY_MAX_CPU_COUNT"</span>] <span class="op">=</span> <span class="st">"1"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPClassifier</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>digits_nn_cv <span class="op">=</span> load_digits()</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>X_nn_cv <span class="op">=</span> digits_nn_cv.data</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>y_nn_cv <span class="op">=</span> digits_nn_cv.target</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>X_train_nn_cv, X_test_nn_cv, y_train_nn_cv, y_test_nn_cv <span class="op">=</span> train_test_split(</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    X_nn_cv,</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    y_nn_cv,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y_nn_cv</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>vision_mlp <span class="op">=</span> Pipeline([</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, MLPClassifier(</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>        hidden_layer_sizes<span class="op">=</span>(<span class="dv">64</span>, <span class="dv">32</span>),</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>        activation<span class="op">=</span><span class="st">"relu"</span>,</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>        max_iter<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>        early_stopping<span class="op">=</span><span class="va">True</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>vision_mlp.fit(X_train_nn_cv, y_train_nn_cv)</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>pred_nn_cv <span class="op">=</span> vision_mlp.predict(X_test_nn_cv)</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>accuracy_score(y_test_nn_cv, pred_nn_cv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>0.96</code></pre>
+</div>
+</div>
+<p>This is a neural computer-vision model, but it is <strong>not yet a convolutional neural network</strong>. Flattening removes the image’s explicit two-dimensional structure before learning begins.</p>
+<section id="why-convolution-changed-computer-vision" class="level3" data-number="13.32.1">
+<h3 data-number="13.32.1" class="anchored" data-anchor-id="why-convolution-changed-computer-vision"><span class="header-section-number">13.32.1</span> Why Convolution Changed Computer Vision</h3>
+<p>Convolutional neural networks (CNNs) exploit spatial structure more directly. Local filters can detect patterns such as edges and textures across image locations; influential early CNN systems demonstrated how gradient-based learning could learn hierarchical visual features for document recognition <span class="citation" data-cites="lecunEtAl1998">(<a href="../references.html#ref-lecunEtAl1998" role="doc-biblioref">LeCun et al. 1998</a>)</span>.</p>
+<p><span class="math display">\[
+\text{Image}\rightarrow\text{Local Features}\rightarrow\text{Higher-Level Features}\rightarrow\text{Prediction}.
+\]</span></p>
+<p>Modern vision architectures also include vision transformers and multimodal systems. The architectural details are beyond this chapter’s core scope, but the conceptual lesson is central:</p>
+<p><span class="math display">\[
+\boxed{\text{Architecture Encodes Assumptions About Useful Representation}}
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond the Algorithm: Seeing Is Not Merely Classifying Pixels
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A model that classifies an image accurately has demonstrated task performance, not human-like seeing. The distinction between <strong>successful representation</strong> and <strong>human understanding</strong> remains essential.</p>
+</div>
+</div>
+<p>The vision thread now connects image arrays, flattened pixels, classical models, kernel geometry, learned representations, and spatial architectures.</p>
+</section>
+</section>
+<section id="three-tracks" class="level2" data-number="13.33">
+<h2 data-number="13.33" class="anchored" data-anchor-id="three-tracks"><span class="header-section-number">13.33</span> Three Tracks</h2>
+<section id="health-track" class="level3" data-number="13.33.1">
+<h3 data-number="13.33.1" class="anchored" data-anchor-id="health-track"><span class="header-section-number">13.33.1</span> Health Track</h3>
+<p>Neural networks can model nonlinear relationships in physiological signals, imaging, longitudinal measurements, and multimodal data. Research-grade work still requires calibration, external validation, subgroup analysis, leakage prevention, and meaningful baselines.</p>
+</section>
+<section id="education-track" class="level3" data-number="13.33.2">
+<h3 data-number="13.33.2" class="anchored" data-anchor-id="education-track"><span class="header-section-number">13.33.2</span> Education Track</h3>
+<p>Applications include multimodal learning analytics, sequence modeling, text analysis, and behavioral traces. Predictive accuracy must not convert opaque representations into deterministic labels about student ability or potential.</p>
+</section>
+<section id="open-ml-benchmark-track" class="level3" data-number="13.33.3">
+<h3 data-number="13.33.3" class="anchored" data-anchor-id="open-ml-benchmark-track"><span class="header-section-number">13.33.3</span> Open ML Benchmark Track</h3>
+<p>Benchmarks support controlled experiments with width, depth, learning rate, regularization, convergence, and comparison against simpler models.</p>
+</section>
+</section>
+<section id="beyond-the-algorithm-where-did-human-judgment-go" class="level2" data-number="13.34">
+<h2 data-number="13.34" class="anchored" data-anchor-id="beyond-the-algorithm-where-did-human-judgment-go"><span class="header-section-number">13.34</span> Beyond the Algorithm: Where Did Human Judgment Go?</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Automation Does Not Remove Choice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Representation learning can make feature construction less visible.</p>
+<p>It is tempting to say:</p>
+<blockquote class="blockquote">
+<p>“The network discovered the features objectively.”</p>
+</blockquote>
+<p>But someone determined what could be measured, defined the target, selected observations, chose the loss, architecture, and evaluation criteria.</p>
+<p>The network optimized within that designed world.</p>
+<blockquote class="blockquote">
+<p><strong>Automation often changes the location of human judgment rather than eliminating it.</strong></p>
+</blockquote>
+<p>The responsible question is:</p>
+<p><strong>Which human and institutional choices shaped what the system was capable of learning?</strong></p>
+</div>
+</div>
+</section>
+<section id="ai-pair-programmer-make-it-deeper" class="level2" data-number="13.35">
+<h2 data-number="13.35" class="anchored" data-anchor-id="ai-pair-programmer-make-it-deeper"><span class="header-section-number">13.35</span> AI Pair Programmer: Make It Deeper</h2>
+<p>Ask an AI assistant:</p>
+<blockquote class="blockquote">
+<p>“My neural network has two hidden layers and 95% validation accuracy. Make it much more powerful by adding as many layers as possible.”</p>
+</blockquote>
+<p>Audit whether it asks about sample size, modality, baseline, train/validation gap, test isolation, calibration, learning curves, regularization, and whether added capacity is justified.</p>
+<p>Then request the <strong>simplest architecture that could answer the problem well</strong>.</p>
+</section>
+<section id="hands-on-lab-from-neuron-to-network" class="level2" data-number="13.36">
+<h2 data-number="13.36" class="anchored" data-anchor-id="hands-on-lab-from-neuron-to-network"><span class="header-section-number">13.36</span> Hands-On Lab: From Neuron to Network</h2>
 <ol type="1">
-<li>What does an activation function do?</li>
-<li>What is backpropagation?</li>
-<li>What does the learning rate control?</li>
-<li>Why can early stopping improve generalization?</li>
+<li>Define the target and prediction time.</li>
+<li>Establish a non-neural baseline.</li>
+<li>Standardize features in a pipeline.</li>
+<li>Build a one-hidden-layer MLP.</li>
+<li>Inspect convergence.</li>
+<li>Build a two-hidden-layer MLP.</li>
+<li>Vary width and regularization.</li>
+<li>Compare learning rates.</li>
+<li>Use early stopping.</li>
+<li>Compare task-relevant metrics.</li>
+<li>Assess calibration where probabilities matter.</li>
+<li>Compare computational cost.</li>
+<li>Examine relevant subgroups.</li>
+<li>Determine whether added complexity earns its place.</li>
+<li>Document unsupported claims.</li>
 </ol>
 </section>
-<section id="real-world-case-study" class="level2" data-number="13.10">
-<h2 data-number="13.10" class="anchored" data-anchor-id="real-world-case-study"><span class="header-section-number">13.10</span> Real-World Case Study</h2>
-<section id="classical-ml-versus-neural-networks" class="level3" data-number="13.10.1">
-<h3 data-number="13.10.1" class="anchored" data-anchor-id="classical-ml-versus-neural-networks"><span class="header-section-number">13.10.1</span> Classical ML Versus Neural Networks</h3>
-<p>Compare model families on a structured dataset and justify the preferred model.</p>
+<section id="practitioner-track" class="level2" data-number="13.37">
+<h2 data-number="13.37" class="anchored" data-anchor-id="practitioner-track"><span class="header-section-number">13.37</span> Practitioner Track</h2>
+<p>A practitioner should understand architecture, activations, losses, optimization, scaling, regularization, early stopping, and evaluation well enough to diagnose an MLP without treating it as magic.</p>
 </section>
+<section id="researcher-track" class="level2" data-number="13.38">
+<h2 data-number="13.38" class="anchored" data-anchor-id="researcher-track"><span class="header-section-number">13.38</span> Researcher Track</h2>
+<p>A researcher should additionally justify architecture and loss, separate tuning from final evaluation, quantify uncertainty, examine calibration and subgroup behavior, compare against strong baselines, document compute, and avoid causal interpretations without supporting designs.</p>
 </section>
-<section id="professors-challenge" class="level2" data-number="13.11">
-<h2 data-number="13.11" class="anchored" data-anchor-id="professors-challenge"><span class="header-section-number">13.11</span> Professor’s Challenge</h2>
-<p>A neural network improves accuracy by 0.5% but requires 50 times more computation. Is it better?</p>
+<section id="research-studio" class="level2" data-number="13.39">
+<h2 data-number="13.39" class="anchored" data-anchor-id="research-studio"><span class="header-section-number">13.39</span> Research Studio</h2>
+<p>Design a neural-network study specifying the problem, modality, target, sample size, baselines, architecture, activations, loss, optimizer, learning rate, batch size, regularization, early stopping, tuning design, final test boundary, calibration, subgroup analysis, external validation, compute plan, interpretive limits, and scholarly contribution.</p>
 </section>
-<section id="research-extension" class="level2" data-number="13.12">
-<h2 data-number="13.12" class="anchored" data-anchor-id="research-extension"><span class="header-section-number">13.12</span> Research Extension</h2>
-<p>Investigate architecture, regularization, or transferability under a rigorous experimental design.</p>
+<section id="professors-challenge-deep-learning-must-be-better" class="level2" data-number="13.40">
+<h2 data-number="13.40" class="anchored" data-anchor-id="professors-challenge-deep-learning-must-be-better"><span class="header-section-number">13.40</span> Professor’s Challenge: Deep Learning Must Be Better</h2>
+<p>A university has 3,200 student records with 45 tabular predictors.</p>
+<p>Researchers fit a six-hidden-layer network with more than 500,000 trainable parameters. After trying dozens of architectures, they select the model with the highest test-set accuracy.</p>
+<p>The network achieves 88.2% accuracy. Logistic regression achieves 87.9%.</p>
+<p>They conclude:</p>
+<blockquote class="blockquote">
+<p>“Deep learning discovered complex latent learning patterns inaccessible to traditional statistical models and therefore provides a fundamentally superior understanding of student success.”</p>
+</blockquote>
+<p>Critique model capacity, architecture rationale, test reuse, the 0.3-point difference, calibration, class imbalance, baseline comparison, representation claims, prediction versus understanding, subgroup performance, reproducibility, compute, and external validity.</p>
+<p>Redesign the experiment.</p>
 </section>
-<section id="reproducibility-check" class="level2" data-number="13.13">
-<h2 data-number="13.13" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">13.13</span> Reproducibility Check</h2>
-<p>Record architecture, initialization, seeds, hardware, software versions, epochs, and stopping criteria.</p>
+<section id="knowledge-check" class="level2" data-number="13.41">
+<h2 data-number="13.41" class="anchored" data-anchor-id="knowledge-check"><span class="header-section-number">13.41</span> Knowledge Check</h2>
+<ol type="1">
+<li>How is a neuron related to logistic regression?</li>
+<li>What do weights and bias do?</li>
+<li>Why are nonlinear activations necessary?</li>
+<li>What is forward propagation?</li>
+<li>How do sigmoid and ReLU differ?</li>
+<li>When is softmax commonly used?</li>
+<li>What role does a loss function play?</li>
+<li>What is gradient descent?</li>
+<li>What does learning rate control?</li>
+<li>What is the chain rule?</li>
+<li>What is backpropagation?</li>
+<li>What is an epoch?</li>
+<li>How do batch, stochastic, and mini-batch learning differ?</li>
+<li>What are vanishing gradients?</li>
+<li>Why does initialization matter?</li>
+<li>What is L2 regularization?</li>
+<li>What is dropout?</li>
+<li>What is early stopping?</li>
+<li>Why compare neural networks with simpler baselines?</li>
+<li>What is representation learning?</li>
+<li>How does it differ from PCA?</li>
+<li>Why does representation learning not eliminate human judgment?</li>
+<li>Why does approximation capacity not guarantee successful learning?</li>
+<li>When might a neural network be unnecessary?</li>
+<li>How does representation learning differ from hand-crafted feature engineering?</li>
+<li>How do SVM kernels provide a conceptual bridge to neural networks?</li>
+<li>Why does a useful learned representation not necessarily have a simple human interpretation?</li>
+<li>How can the training objective shape what a network learns to represent?</li>
+</ol>
 </section>
-<section id="key-takeaways" class="level2" data-number="13.14">
-<h2 data-number="13.14" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">13.14</span> Key Takeaways</h2>
+<section id="reproducibility-check" class="level2" data-number="13.42">
+<h2 data-number="13.42" class="anchored" data-anchor-id="reproducibility-check"><span class="header-section-number">13.42</span> Reproducibility Check</h2>
+<p>Record the question, data version, sample, target, prediction time, train/validation/test design, preprocessing, architecture, activations, loss, optimizer, learning rate, batch size, epochs, initialization, regularization, early stopping, hyperparameter search, seeds, baselines, metrics, calibration, subgroup analyses, training time, hardware, software versions, saved configuration, and code.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="13.43">
+<h2 data-number="13.43" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">13.43</span> Key Takeaways</h2>
 <ul>
-<li>Neural networks learn layered representations through optimization.</li>
-<li>Deep learning is powerful but not automatically superior.</li>
-<li>Reproducible training requires unusually careful documentation.</li>
+<li>Neural networks compose weighted sums and nonlinear transformations.</li>
+<li>Logistic regression provides a bridge to understanding a neuron.</li>
+<li>Without nonlinear activations, stacked linear layers remain linear.</li>
+<li>Hidden layers learn intermediate representations.</li>
+<li>Loss functions define the optimization objective.</li>
+<li>Gradient descent uses local gradients to update parameters.</li>
+<li>Backpropagation efficiently applies the chain rule.</li>
+<li>Architecture, learning rate, initialization, and regularization influence optimization.</li>
+<li>Neural-network probabilities still require calibration assessment.</li>
+<li>Learned representations optimize an objective, not scientific meaning.</li>
+<li>High capacity does not guarantee better generalization.</li>
+<li>Strong simpler baselines remain essential.</li>
+<li>Automation relocates human judgment; it does not eliminate it.</li>
+<li>Hidden layers learn intermediate representations that support prediction.</li>
+<li>Neural networks extend the idea that changing representation can simplify a learning problem.</li>
+<li>Predictive usefulness does not guarantee human interpretability or conceptual validity.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-bengioEtAl2013" class="csl-entry" role="listitem">
+Bengio, Yoshua, Aaron Courville, and Pascal Vincent. 2013. <span>“Representation Learning: A Review and New Perspectives.”</span> <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em> 35 (8): 1798–828. <a href="https://doi.org/10.1109/TPAMI.2013.50">https://doi.org/10.1109/TPAMI.2013.50</a>.
+</div>
+<div id="ref-glorot2010understanding" class="csl-entry" role="listitem">
+Glorot, Xavier, and Yoshua Bengio. 2010. <span>“Understanding the Difficulty of Training Deep Feedforward Neural Networks.”</span> <em>Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics</em>.
+</div>
+<div id="ref-goodfellow2016" class="csl-entry" role="listitem">
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep Learning</em>. Cambridge, MA: MIT Press.
+</div>
+<div id="ref-lecunEtAl1998" class="csl-entry" role="listitem">
+LeCun, Yann, Léon Bottou, Yoshua Bengio, and Patrick Haffner. 1998. <span>“Gradient-Based Learning Applied to Document Recognition.”</span> <em>Proceedings of the IEEE</em> 86 (11): 2278–2324. <a href="https://doi.org/10.1109/5.726791">https://doi.org/10.1109/5.726791</a>.
+</div>
+<div id="ref-rumelhartEtAl1986" class="csl-entry" role="listitem">
+Rumelhart, David E., Geoffrey E. Hinton, and Ronald J. Williams. 1986. <span>“Learning Representations by Back-Propagating Errors.”</span> <em>Nature</em> 323: 533–36. <a href="https://doi.org/10.1038/323533a0">https://doi.org/10.1038/323533a0</a>.
+</div>
+<div id="ref-srivastava2014dropout" class="csl-entry" role="listitem">
+Srivastava, Nitish, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. 2014. <span>“Dropout: A Simple Way to Prevent Neural Networks from Overfitting.”</span> <em>Journal of Machine Learning Research</em> 15: 1929–58.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -579,7 +1629,7 @@ z=w^Tx+b
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/amightyo\.github\.io\/machine-learning-using-python-2e\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -908,13 +1958,13 @@ z=w^Tx+b
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="pagination-link" aria-label="Dimensionality Reduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction</span></span>
+      <a href="../part-04-unsupervised/12-dimensionality-reduction.html" class="pagination-link" aria-label="Dimensionality Reduction: Compressing Data Without Losing the Story">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dimensionality Reduction: Compressing Data Without Losing the Story</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part-05-modern-ml/14-natural-language-processing.html" class="pagination-link" aria-label="Natural Language Processing">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../part-05-modern-ml/14-natural-language-processing.html" class="pagination-link" aria-label="Natural Language Processing: From Words to Meaningful Representations">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Natural Language Processing: From Words to Meaningful Representations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
